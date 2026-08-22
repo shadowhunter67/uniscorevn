@@ -336,9 +336,9 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
   huaf: {
     sourceId: 'huaf-admission-2026',
     title: 'HUAF undergraduate admission information 2026',
-    url: 'https://tuyensinh.huaf.edu.vn/',
+    url: 'https://tuyensinh.huaf.edu.vn/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2025-cua-truong-dai-hoc-nong-lam-dai-hoc-hue-chinh-thuc-2/',
     checkedAt: '2026-08-22',
-    note: 'Official HUAF 2026 admission portal and faculty pages list regular admission updates, supplemental admission, and threshold leads; full school-level program table needs extraction.',
+    note: 'Official HUAF 2026 article lists four admission method groups, 19 undergraduate programs with quotas and subject combinations, THPT/transcript/combined formula skeletons, transcript 15/30 threshold, two-decimal rounding, and bonus cap. Runtime remains researched-only until linked conversion, bonus, priority, and threshold details are normalized and evaluator tests are added.',
   },
   hueedu: {
     sourceId: 'hueedu-admission-2026',
