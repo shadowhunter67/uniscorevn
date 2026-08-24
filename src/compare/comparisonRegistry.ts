@@ -66,6 +66,7 @@ import { vguComparisonAdapter } from '../schools/vgu/comparison';
 import { hpu2ComparisonAdapter } from '../schools/hpu2/comparison';
 import { fptuComparisonAdapter } from '../schools/fptu/comparison';
 import { hubtComparisonAdapter } from '../schools/hubt/comparison';
+import { vaaComparisonAdapter } from '../schools/vaa/comparison';
 import { southernCatalogComparisonAdapters } from '../schools/southernCatalog';
 import { remainingCatalogComparisonAdapters } from '../schools/remainingCatalog';
 import { finalCatalogComparisonAdapters } from '../schools/finalCatalog';
@@ -151,6 +152,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   hpu2ComparisonAdapter,
   fptuComparisonAdapter,
   hubtComparisonAdapter,
+  vaaComparisonAdapter,
   ...southernCatalogComparisonAdapters,
   ...remainingCatalogComparisonAdapters.filter(
     (adapter) =>

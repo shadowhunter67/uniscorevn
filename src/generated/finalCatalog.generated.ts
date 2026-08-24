@@ -83,6 +83,55 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Cổng tuyển sinh chính thức RMIT Việt Nam (rmit.edu.vn) fetch được nhưng chỉ là trang portal điều hướng: yêu cầu tiếng Anh chung (IELTS Academic 6.5, không kỹ năng nào dưới 6.0) được nêu rõ, nhưng ngưỡng điểm THPT/học bạ cụ thể được trang này dẫn sang từng trang ngành riêng lẻ (hàng chục ngành, không fetch hết trong 1 lượt). Không đủ cấu trúc để mô hình hoá eligibility trong batch này; do-not-guess-formula áp dụng.',
   },
+  // Batch expand-16 (2026-08-24):
+  vnam: {
+    sourceId: 'vnam-admission-2026',
+    title: 'Học viện Âm nhạc Quốc gia Việt Nam thông báo phương án tuyển sinh đại học chính quy năm 2026',
+    url: 'https://www.vnam.edu.vn/index.aspx?lang=VN',
+    checkedAt: '2026-08-24',
+    note:
+      'Xác nhận qua tìm kiếm 2 phương thức 2026: (1) xét tuyển thẳng theo đúng chuyên ngành đã tốt nghiệp trung cấp/cao đẳng âm nhạc, (2) xét kết hợp môn Ngữ văn (học bạ hoặc điểm thi TN THPT) với thi các môn năng khiếu chuyên ngành (kiến thức âm nhạc tổng hợp, Piano phổ thông là môn điều kiện một số ngành), chấm bởi hội đồng giám khảo — không có công thức điểm số công khai dạng số có thể mô hình hoá. Khoảng 200 chỉ tiêu, nhận hồ sơ 13/4-16/5/2026. Chưa fetch trực tiếp được trang thông báo chi tiết (chỉ trang chủ vnam.edu.vn); không đủ cấu trúc số liệu để nâng lên eligibility-only.',
+  },
+  vnad: {
+    sourceId: 'vnad-admission-2026',
+    title: 'Thông báo tuyển sinh trình độ đại học năm 2026 — Học viện Múa Việt Nam',
+    url: 'https://www.vnad.edu.vn/tuy%E1%BB%83n-sinh/%C4%91%E1%BA%A1i-h%E1%BB%8Dc/t%C4%912026/t%C4%912026',
+    checkedAt: '2026-08-24',
+    note:
+      'Trang thông báo tuyển sinh đại học 2026 chính thức tồn tại trên vnad.edu.vn (xác nhận qua tìm kiếm), mô tả 2 vòng thi năng khiếu (sơ tuyển: độ mềm dẻo/dẻo dai cơ thể, cảm âm/tiết tấu; chung tuyển: 2 môn năng khiếu múa và âm nhạc) kết hợp xét học bạ, chấm điểm bởi giám khảo — không công bố thang điểm/ngưỡng số cụ thể để mô hình hoá. Không fetch trực tiếp được nội dung đầy đủ trang thông báo trong lượt research này; để ở researched, tránh suy diễn ngưỡng.',
+  },
+  vnufa: {
+    sourceId: 'vnufa-admission-2026',
+    title: 'Tuyển sinh 2026 — Trường Đại học Mỹ thuật Việt Nam',
+    url: 'https://mythuatvietnam.edu.vn/tuyen-sinh-2026/',
+    checkedAt: '2026-08-24',
+    note:
+      'Cổng tuyển sinh chính thức (mythuatvietnam.edu.vn) fetch được nhưng chỉ là trang danh sách thông báo/liên kết, không có nội dung ngưỡng điểm chi tiết trong lần fetch này. Các nguồn tổng hợp bên thứ ba (vietjack, tuyensinh247) báo cáo ngưỡng 16,5/30 THPT (hoặc học lực lớp 12 xếp loại giỏi + học bạ tương đương 6,5) và năng khiếu >=6,5, nhưng KHÔNG xác minh được trực tiếp từ trang chính thức trong lượt này — theo nguyên tắc do-not-guess-formula, không nhập số liệu chưa xác minh trực tiếp; cần fetch lại thông báo tuyển sinh gốc (PDF/trang con) trước khi nâng lên eligibility-only.',
+  },
+  vhs: {
+    sourceId: 'vhs-admission-2026',
+    title: 'Tuyển sinh — Trường Đại học Văn hóa TP.HCM',
+    url: 'https://www.hcmuc.edu.vn/tuyen-sinh/',
+    checkedAt: '2026-08-24',
+    note:
+      'Cổng tuyển sinh chính thức (hcmuc.edu.vn) xác nhận qua tìm kiếm: 1.300 chỉ tiêu, 3 phương thức (điểm thi TN THPT, học bạ THPT, kết hợp thi năng khiếu cho chuyên ngành Tổ chức - dàn dựng chương trình văn hóa nghệ thuật), tổ hợp môn đa dạng theo ngành (Ngữ văn, Lịch sử, Địa lý, Toán, tiếng Anh, tiếng Trung, Tin học, GDKTPL). Không có ngưỡng điểm sàn công khai dạng số duy nhất áp dụng chung; tổ hợp/ngưỡng thay đổi theo từng ngành nên chưa đủ cấu trúc để mô hình hoá trong batch này.',
+  },
+  vmmu: {
+    sourceId: 'vmmu-admission-2026',
+    title: 'Tuyển sinh Học viện Quân y 2026 — Chi tiết 4 phương thức xét tuyển và điều kiện sức khỏe đặc thù',
+    url: 'https://vmmu.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Học viện Quân y (Bộ Quốc phòng, tên dân sự Trường Đại học Y Dược Lê Hữu Trác) có sơ tuyển bắt buộc (tuổi, chiều cao/cân nặng, thị lực, lý lịch chính trị theo tiêu chuẩn quân đội) là điều kiện tiên quyết trước khi được xét theo 4 phương thức (tuyển thẳng, ưu tiên nữ hệ quân đội, ĐGNL ĐHQGHN/ĐHQG TPHCM, thi TN THPT/ĐGNL do Bộ Quốc phòng tổ chức). Điểm chuẩn 2026 công bố theo giới tính/miền/chỉ tiêu quân sự (27,75-29,76/30 ngành Y khoa), không phải điểm sàn chung. `ApplicantProfile` hiện không có trường tuổi/chiều cao/cân nặng/thị lực nên không mô hình hoá được điều kiện sơ tuyển; để ở researched.',
+  },
+  vmuvinh: {
+    sourceId: 'vmuvinh-admission-2026',
+    title: 'VMU - Đại học Y Khoa Vinh > Tuyển sinh - Đào tạo > Đại học chính quy > Tuyển sinh',
+    url: 'https://www.vmu.edu.vn/tuyen-sinh-dao-tao/dai-hoc-chinh-quy/tuyen-sinh',
+    checkedAt: '2026-08-24',
+    note:
+      'Cổng tuyển sinh chính thức (vmu.edu.vn) xác nhận qua tìm kiếm: 1.060 chỉ tiêu, 4 phương thức (mã 301 tuyển thẳng, 100 thi TN THPT, 200 học bạ THPT, 500 khác). Trường công bố "ngưỡng đảm bảo chất lượng đầu vào" và bảng quy đổi tương đương học bạ/THPT trước 17h00 10/7/2026, nhưng số liệu ngưỡng cụ thể theo ngành (5 ngành: Y khoa, Dược, Y học dự phòng, Điều dưỡng, Kỹ thuật xét nghiệm y học) không trích xuất được có cấu trúc trong lượt research này. Để ở researched, không suy diễn số liệu.',
+  },
 };
 
 function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {

@@ -136,6 +136,15 @@ export const collegeCatalogSchools: readonly CollegeCatalogSchool[] = [
     region: 'hanoi',
     entityLevel: 'vocational_college',
     aliases: ['Cao đẳng nghề Kỹ thuật công nghệ'],
+    catalogSources: [
+      MOET_PUBLIC_UNIT_SOURCE,
+      {
+        title: 'Thông tin tuyển sinh - Trường Cao đẳng Nghề Kỹ Thuật Công Nghệ',
+        url: 'http://httc.edu.vn/thong-tin-tuyen-sinh.html',
+        type: 'official-institution',
+        checkedAt: '2026-08-24',
+      },
+    ],
   },
   {
     id: 'dungquatcollege',
@@ -200,6 +209,15 @@ export const collegeCatalogSchools: readonly CollegeCatalogSchool[] = [
     region: 'other',
     entityLevel: 'vocational_college',
     aliases: ['Cao đẳng nghề Việt Xô số 1'],
+    catalogSources: [
+      MOET_PUBLIC_UNIT_SOURCE,
+      {
+        title: 'Trường Cao đẳng nghề Việt - Xô số 1',
+        url: 'https://vixo.edu.vn/',
+        type: 'official-institution',
+        checkedAt: '2026-08-24',
+      },
+    ],
   },
   {
     id: 'lilama2',

@@ -81,6 +81,15 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Official 2026 UTH admission notice confirms 2 methods (priority admission per school rules, and a combined-assessment method using a proprietary "UTH120" 120-point-equivalent scale). The admission portal itself (tuyensinh.ut.edu.vn) returns HTTP 403 on direct fetch; a per-program cutoff table (64 program codes, non-30-point scale, e.g. 600-999) is available via secondary government-portal coverage (xaydungchinhsach.chinhphu.vn), but no official floor-score/ngưỡng đảm bảo chất lượng đầu vào notice or documentation of the UTH120 conversion formula was located. Left at researched: the non-standard scale and blocked primary source make eligibility modeling unsafe without further extraction.',
   },
+  // Batch expand-16 (2026-08-24):
+  vnkgu: {
+    sourceId: 'vnkgu-admission-2026',
+    title: 'Tuyển sinh - Trường Đại học Kiên Giang',
+    url: 'https://tuyensinh.vnkgu.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Cổng tuyển sinh chính thức (tuyensinh.vnkgu.edu.vn) xác nhận qua tìm kiếm 6 phương thức 2026 (học bạ THPT, kết quả thi TN THPT, tuyển thẳng/ưu tiên, ĐGNL ĐHQG TP.HCM, V-SAT, xét bảng điểm TC/CĐ/ĐH liên thông). Điểm sàn/điểm chuẩn dao động rất rộng theo ngành (thi TN THPT 15-28,55/30, học bạ 16-28,88/30, ĐGNL 500-1131/1200, V-SAT 200-285/450, Sư phạm Toán cao nhất). WebFetch trực tiếp trang chủ tuyensinh.vnkgu.edu.vn không trả về bảng ngưỡng theo ngành có cấu trúc (chỉ điều hướng). Không đủ dữ liệu per-major xác minh để mô hình hoá; để ở researched.',
+  },
 };
 
 function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {
@@ -323,8 +332,9 @@ export const southernCatalogKnowledgeGap = {
 /** Batch 10 (2026-08-24): 'pntu' and 'uah' graduated to dedicated eligibility-only runtime modules
  * (`normalized/runtime-source-snapshot/{pntu,uah}/`) — excluded here from the generated method/module/
  * adapter arrays the same way `remainingCatalog.ts` excludes its `explicitRuntimeSchoolIds`. They
- * stay listed in `southernCatalogSchools` above for identity/location metadata only. */
-const explicitRuntimeSchoolIds = new Set(['pntu', 'uah']);
+ * stay listed in `southernCatalogSchools` above for identity/location metadata only.
+ * Batch expand-16 (2026-08-24): 'vaa' graduated the same way (`normalized/runtime-source-snapshot/vaa/`). */
+const explicitRuntimeSchoolIds = new Set(['pntu', 'uah', 'vaa']);
 const southernCatalogRuntimeSchools = southernCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const southernCatalogMethods: AdmissionMethodDescriptor[] = southernCatalogRuntimeSchools.map((school) => ({
