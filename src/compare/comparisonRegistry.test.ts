@@ -70,6 +70,8 @@ import { vguAdmissionMethods } from '../schools/vgu/methods';
 import { hpu2AdmissionMethods } from '../schools/hpu2/methods';
 import { fptuAdmissionMethods } from '../schools/fptu/methods';
 import { hubtAdmissionMethods } from '../schools/hubt/methods';
+import { nctuAdmissionMethods } from '../schools/nctu/methods';
+import { ntuhnAdmissionMethods } from '../schools/ntuhn/methods';
 import { southernCatalogMethods } from '../schools/southernCatalog';
 import { remainingCatalogMethods } from '../schools/remainingCatalog';
 import { finalCatalogMethods } from '../schools/finalCatalog';
@@ -154,6 +156,8 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   hpu2: hpu2AdmissionMethods,
   fptu: fptuAdmissionMethods,
   hubt: hubtAdmissionMethods,
+  nctu: nctuAdmissionMethods,
+  ntuhn: ntuhnAdmissionMethods,
 };
 
 /** Pure helper — trả danh sách schoolId bị trùng trong 1 mảng adapter. Test cả trên registry thật

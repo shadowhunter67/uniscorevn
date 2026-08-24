@@ -334,6 +334,22 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Official thanglong.edu.vn 2026 admission guide (plus the linked official Quyết định ban hành thông tin tuyển sinh 2026, thanglong.edu.vn, dated 2026-02-11) confirms 6 admission methods (THPT exam; THPT exam + international language certificate; HSA/TSA/SPT aptitude tests; THPT exam + grade-12 transcript for Nursing/Tourism/Hotel Management; grade-12 transcript + talent test for Vocal/Graphic Design; direct admission), 37 subject combinations, and 25 programs across 8 faculties, quota 3,000. No 2026 numeric threshold (điểm chuẩn/điểm sàn) had been published as of this research pass — the article only cites 2025 reference scores (16.0-23.75/30) — and the official Quyết định PDF text itself was not extractable via WebFetch (page shell only). Runtime stays researched-only; do not use 2025 cutoffs as 2026 thresholds.',
   },
+  pctu: {
+    sourceId: 'pctu-admission-2026',
+    title: 'Thông tin tuyển sinh đại học năm 2026 — Trường Đại học Phan Châu Trinh',
+    url: 'https://pctu.edu.vn/vn/thong-tin-tuyen-sinh-dai-hoc-nam-2026.html',
+    checkedAt: '2026-08-24',
+    note:
+      'Official pctu.edu.vn 2026 admission page fetched directly (own primary domain, readable text): confirms 5 admission methods and a full per-major THPT-exam floor table (Điểm xét tuyển = 3 môn thi + điểm ưu tiên) — Y khoa/Răng-Hàm-Mặt >=20,00/30 (hoặc điểm xét tốt nghiệp >=8,5); Điều dưỡng/Kỹ thuật xét nghiệm y học >=16,5/30 (hoặc >=6,5); Tâm lý học/Quản lý bệnh viện >=15,0/30. Every bucket is ALSO gated by a grade-12 academic-rank condition (Tốt for Y khoa/RHM, Khá for Điều dưỡng/KTXNYH, Đạt for the rest) with no matching applicant-profile field in this runtime, so no bucket can be safely modeled as a plain threshold check. Do-not-guess-formula (academic-rank-gated floors): stays researched.',
+  },
+  pdu: {
+    sourceId: 'pdu-admission-2026',
+    title: 'Ngưỡng đảm bảo chất lượng đầu vào — Cổng thông tin tuyển sinh Đại học Phạm Văn Đồng',
+    url: 'https://tuyensinh.pdu.edu.vn/nguong-dam-bao-chat-luong-dau/',
+    checkedAt: '2026-08-24',
+    note:
+      'Official tuyensinh.pdu.edu.vn admission-info page confirms the general shape (non-teacher-training majors use a flat combined-3-subject THPT-exam floor around 15,0/30 zone-3; Giáo dục Mầm non teacher-training uses a separate higher floor with a Toán/Văn sub-condition), matching secondary press coverage (baoquangngai.vn 2026 admission-score article) of an existing PDU notice, but the fetched threshold page itself is titled/dated for the 2025 cycle and no distinct primary 2026-dated numeric notice could be located in this pass — reusing its numbers for 2026 risked citing stale data. Do-not-guess-formula (year-of-source ambiguous): stays researched pending a confirmed 2026-dated primary notice.',
+  },
 };
 
 export const remainingCatalogSchools: readonly RemainingCatalogSchool[] = [

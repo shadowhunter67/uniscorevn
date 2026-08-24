@@ -83,6 +83,40 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Cổng tuyển sinh chính thức RMIT Việt Nam (rmit.edu.vn) fetch được nhưng chỉ là trang portal điều hướng: yêu cầu tiếng Anh chung (IELTS Academic 6.5, không kỹ năng nào dưới 6.0) được nêu rõ, nhưng ngưỡng điểm THPT/học bạ cụ thể được trang này dẫn sang từng trang ngành riêng lẻ (hàng chục ngành, không fetch hết trong 1 lượt). Không đủ cấu trúc để mô hình hoá eligibility trong batch này; do-not-guess-formula áp dụng.',
   },
+  navalacademy: {
+    sourceId: 'navalacademy-admission-2026',
+    title: 'Điểm chuẩn 2026 Học viện Hải quân (xaydungchinhsach.chinhphu.vn) + ngưỡng đảm bảo chất lượng đầu vào khối trường Quân đội',
+    url: 'https://xaydungchinhsach.chinhphu.vn/diem-chuan-2026-hoc-vien-hai-quan-216-thi-sinh-do-den-tu-1-tinh-119260812103240437.htm',
+    checkedAt: '2026-08-24',
+    publishedAt: '2026-08-12',
+    note:
+      'Xác nhận qua Cổng thông tin điện tử Chính phủ: Học viện Hải quân tuyển theo 4 phương thức (xét thẳng/ưu tiên, thi TN THPT, ĐGNL ĐHQG HN/TPHCM, ĐGNL Bộ Quốc phòng), ngưỡng sơ tuyển chung 15,00/30 (thi TN THPT). Điểm chuẩn thực tế 2026 đã công bố (24,75 nam miền Bắc, 24,07 nam miền Nam) gate theo GIỚI TÍNH + MIỀN TUYỂN + tiêu chuẩn chính trị/sức khỏe qua sơ tuyển tại địa phương (Bộ Chỉ huy Quân sự tỉnh) — hồ sơ ứng viên hiện không có các trường dữ liệu này nên không mô hình hoá được ngay cả ngưỡng sơ tuyển 15/30 (đạt ngưỡng không đồng nghĩa đủ điều kiện dự tuyển nếu chưa qua sơ tuyển). Do-not-guess-formula: giữ ở researched.',
+  },
+  nda: {
+    sourceId: 'nda-admission-2026',
+    title: 'Các trường đại học quân đội năm 2026: Danh sách, chỉ tiêu và phương thức tuyển sinh (Học viện Quốc phòng)',
+    url: 'https://huongnghiep.hocmai.vn/cac-truong-dai-hoc-quan-doi-nam-2026-danh-sach-chi-tieu-va-phuong-thuc-tuyen-sinh',
+    checkedAt: '2026-08-24',
+    note:
+      'Học viện Quốc phòng là 1 trong 17 trường Quân đội (10 học viện + 7 trường sĩ quan) tuyển sinh theo Đề án tuyển sinh đại học/cao đẳng quân sự 2023-2030, chung khung 4 phương thức của Bộ Quốc phòng (xét thẳng, thi TN THPT, ĐGNL ĐHQG, ĐGNL Bộ Quốc phòng); mức điểm sơ tuyển tối thiểu 18-22/30 cộng tiêu chuẩn chính trị/sức khỏe/độ tuổi (17-21, hoặc đã qua quân ngũ) qua sơ tuyển địa phương. Không tìm được trang tuyển sinh riêng (không có domain public riêng cho hệ dân sự) và điểm chuẩn/ngưỡng đều gate theo giới tính/miền/đối tượng không có trong hồ sơ ứng viên. Do-not-guess-formula: giữ ở researched.',
+  },
+  ocp: {
+    sourceId: 'ocp-admission-2026',
+    title: 'Trường Sĩ quan Chính trị công bố điểm chuẩn 2026, cao nhất gần 25 điểm (xaydungchinhsach.chinhphu.vn)',
+    url: 'https://xaydungchinhsach.chinhphu.vn/truong-si-quan-chinh-tri-cong-bo-diem-chuan-2026-cao-nhat-gan-25-diem-119260812162306565.htm',
+    checkedAt: '2026-08-24',
+    publishedAt: '2026-08-12',
+    note:
+      'Xác nhận qua Cổng thông tin điện tử Chính phủ: Trường Đại học Sĩ quan Chính trị (Bắc Ninh) công bố điểm chuẩn 2026 theo 4 phương thức (xét thẳng/ưu tiên, thi TN THPT, ĐGNL ĐHQG, ĐGNL Bộ Quốc phòng). Điểm chuẩn thực tế (24,75 nam miền Bắc, 21,50 nam miền Nam) kèm điều kiện phụ (điểm ưu tiên <=0,5, hoặc điểm ĐGNL Bộ Quốc phòng >=78, hoặc điểm Ngữ văn >=6,25) gate theo GIỚI TÍNH + MIỀN TUYỂN + sơ tuyển chính trị/sức khỏe — không có trường dữ liệu tương ứng trong hồ sơ ứng viên. Do-not-guess-formula: giữ ở researched.',
+  },
+  nuae: {
+    sourceId: 'nuae-admission-2026',
+    title: 'Trường ĐHSP Nghệ thuật TW công bố điểm sàn xét tuyển đại học chính quy năm 2026',
+    url: 'https://spnttw.edu.vn/truong-dhsp-nghe-thuat-tw-cong-bo-diem-san-xet-tuyen-dai-hoc-chinh-quy-nam-2026/',
+    checkedAt: '2026-08-24',
+    note:
+      'Cổng thông tin chính thức NUAE (spnttw.edu.vn) xác nhận có công bố điểm sàn (ngưỡng đảm bảo chất lượng đầu vào) 2026 theo phương thức thi TN THPT, có thay đổi theo ngành, nhưng bảng số liệu cụ thể theo ngành được nhúng dưới dạng hình ảnh (Picture2.png), không trích xuất được bằng văn bản qua WebFetch. Điểm chuẩn thực tế 2026 đã công bố (19,0-24,7/30) là điểm trúng tuyển hồi cứu, không dùng được để mô hình hoá ngưỡng xét tuyển tương lai. Do-not-guess-formula (image-embedded table): giữ ở researched.',
+  },
 };
 
 function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {
@@ -262,7 +296,7 @@ export const finalCatalogKnowledgeGap = {
 
 // 'vgu' and 'hpu2' moved to dedicated runtime modules (normalized/runtime-source-snapshot/<id>/) —
 // eligibility-only, excluded here to avoid duplicate methodId/comparisonAdapter entries.
-const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2']);
+const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'ntuhn']);
 const finalCatalogRuntimeSchools = finalCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const finalCatalogMethods: AdmissionMethodDescriptor[] = finalCatalogRuntimeSchools.map((school) => ({
