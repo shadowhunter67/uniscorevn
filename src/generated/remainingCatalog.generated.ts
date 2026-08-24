@@ -275,56 +275,11 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     title: 'University of Danang regular undergraduate admission 2026',
     url: 'https://ts.udn.vn/DHCD/Chinhquy/DHTbao/19360',
     publishedAt: '2026-06-11',
-    checkedAt: '2026-08-22',
-    note: 'Official 2026 UDN notice covers member schools, programs, quotas, methods, subject combinations, and scoring information via linked documents; member-level extraction required.',
+    checkedAt: '2026-08-24',
+    note: 'Official 2026 UDN notice re-verified live on 2026-08-24 (full text fetched): it is a system-level umbrella notice pointing to each member school (DUT, DUE, UED, UFLS, UTE, VKU) admission page for methods, thresholds, and scores. UDN itself does not run an independent admission formula, so it stays at researched rather than eligibility-only; the 6 member schools now have dedicated eligibility-only runtime modules under normalized/runtime-source-snapshot/<id>/.',
   },
-  dut: {
-    sourceId: 'dut-admission-2026',
-    title: 'DUT admission portal 2026',
-    url: 'https://tuyensinh.dut.udn.vn/bai-viet-tuyen-sinh?page=1',
-    checkedAt: '2026-08-22',
-    note: 'Official DUT 2026 portal lists threshold, direct admission, bonus/reward, and talent engineer program notices; formula and program scope need extraction.',
-  },
-  dueudn: {
-    sourceId: 'dueudn-admission-2026',
-    title: 'University of Danang regular undergraduate admission 2026 - DUE scope',
-    url: 'https://ts.udn.vn/DHCD/Chinhquy/DHTbao/19360',
-    publishedAt: '2026-06-11',
-    checkedAt: '2026-08-22',
-    note: 'Official UDN 2026 system notice includes member-school program/method documents; DUE-specific programs and thresholds need extraction.',
-  },
-  uedudn: {
-    sourceId: 'uedudn-admission-2026',
-    title: 'UED-UDN undergraduate admission information 2026',
-    url: 'https://tuyensinh.ued.udn.vn/index.php/2026/02/15/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026/',
-    publishedAt: '2026-02-15',
-    checkedAt: '2026-08-22',
-    note: 'Official 2026 UED page lists school code, expected seats, methods, updates, and links to detailed admission/method documents; teacher-training thresholds need normalization.',
-  },
-  uflsudn: {
-    sourceId: 'uflsudn-admission-2026',
-    title: 'University of Danang regular undergraduate admission 2026 - UFLS scope',
-    url: 'https://ts.udn.vn/DHCD/Chinhquy/DHTbao/19360',
-    publishedAt: '2026-06-11',
-    checkedAt: '2026-08-22',
-    note: 'Official UDN 2026 system notice includes UFLS member-school scope through linked program/method documents; language certificate and program rules need extraction.',
-  },
-  uteudn: {
-    sourceId: 'uteudn-admission-2026',
-    title: 'University of Danang regular undergraduate admission 2026 - UTE scope',
-    url: 'https://ts.udn.vn/DHCD/Chinhquy/DHTbao/19360',
-    publishedAt: '2026-06-11',
-    checkedAt: '2026-08-22',
-    note: 'Official UDN 2026 system notice includes UTE member-school program/method documents; thresholds and method conversion need extraction.',
-  },
-  vku: {
-    sourceId: 'vku-admission-2026',
-    title: 'University of Danang regular undergraduate admission 2026 - VKU scope',
-    url: 'https://ts.udn.vn/DHCD/Chinhquy/DHTbao/19360',
-    publishedAt: '2026-06-11',
-    checkedAt: '2026-08-22',
-    note: 'Official UDN 2026 system notice includes VKU scope via linked member-school documents; ICT program and conversion details need extraction.',
-  },
+  // dut/dueudn/uedudn/uflsudn/uteudn/vku moved to dedicated runtime modules
+  // (normalized/runtime-source-snapshot/<id>/) — see explicitRuntimeSchoolIds above.
   husc: {
     sourceId: 'husc-admission-2026',
     title: 'Hue University regular undergraduate admission 2026 - HUSC scope',
@@ -433,7 +388,7 @@ export const remainingCatalogKnowledgeGap = {
   impact: 'exact-final-score-blocking' as const,
 };
 
-const explicitRuntimeSchoolIds = new Set(['huce', 'dav']);
+const explicitRuntimeSchoolIds = new Set(['huce', 'dav', 'dut', 'dueudn', 'uedudn', 'uflsudn', 'uteudn', 'vku']);
 const remainingCatalogRuntimeSchools = remainingCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {
