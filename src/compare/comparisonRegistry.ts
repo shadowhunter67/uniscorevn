@@ -37,6 +37,10 @@ import { utcComparisonAdapter } from '../schools/utc/comparison';
 import { vnuaComparisonAdapter } from '../schools/vnua/comparison';
 import { huceComparisonAdapter } from '../schools/huce/comparison';
 import { davComparisonAdapter } from '../schools/dav/comparison';
+import { hluComparisonAdapter } from '../schools/hlu/comparison';
+import { humgComparisonAdapter } from '../schools/humg/comparison';
+import { hduComparisonAdapter } from '../schools/hdu/comparison';
+import { vmuComparisonAdapter } from '../schools/vmu/comparison';
 import { southernCatalogComparisonAdapters } from '../schools/southernCatalog';
 import { remainingCatalogComparisonAdapters } from '../schools/remainingCatalog';
 import { finalCatalogComparisonAdapters } from '../schools/finalCatalog';
@@ -93,8 +97,14 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   vnuaComparisonAdapter,
   huceComparisonAdapter,
   davComparisonAdapter,
+  hluComparisonAdapter,
+  humgComparisonAdapter,
+  hduComparisonAdapter,
+  vmuComparisonAdapter,
   ...southernCatalogComparisonAdapters,
-  ...remainingCatalogComparisonAdapters.filter((adapter) => adapter.schoolId !== 'huce' && adapter.schoolId !== 'dav'),
+  ...remainingCatalogComparisonAdapters.filter(
+    (adapter) => !['huce', 'dav', 'hlu', 'humg', 'hdu', 'vmu'].includes(adapter.schoolId)
+  ),
   ...finalCatalogComparisonAdapters,
   ...collegeCatalogComparisonAdapters,
 ];
