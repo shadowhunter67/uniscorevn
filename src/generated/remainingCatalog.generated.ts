@@ -334,6 +334,22 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Official thanglong.edu.vn 2026 admission guide (plus the linked official Quyết định ban hành thông tin tuyển sinh 2026, thanglong.edu.vn, dated 2026-02-11) confirms 6 admission methods (THPT exam; THPT exam + international language certificate; HSA/TSA/SPT aptitude tests; THPT exam + grade-12 transcript for Nursing/Tourism/Hotel Management; grade-12 transcript + talent test for Vocal/Graphic Design; direct admission), 37 subject combinations, and 25 programs across 8 faculties, quota 3,000. No 2026 numeric threshold (điểm chuẩn/điểm sàn) had been published as of this research pass — the article only cites 2025 reference scores (16.0-23.75/30) — and the official Quyết định PDF text itself was not extractable via WebFetch (page shell only). Runtime stays researched-only; do not use 2025 cutoffs as 2026 thresholds.',
   },
+  ukh: {
+    sourceId: 'ukh-admission-2026',
+    title: 'Trường Đại học Khánh Hòa — thông báo tuyển sinh và ngưỡng đảm bảo chất lượng đầu vào năm 2026',
+    url: 'https://tuyensinh.ukh.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-15 (2026-08-24): official admission portal (tuyensinh.ukh.edu.vn) exists and 4 admission methods (THPT exam, transcript, V-ACT, direct admission) are confirmed via secondary press, but two independent search passes returned CONFLICTING numbers for the general THPT-exam floor score — one reports 15.00/30, another reports 18.00/30 (or 8.50 graduation-exam-score alternative) — with the 18.00 figure possibly applying only to the teacher-training group rather than all majors. Neither figure could be confirmed against the primary tuyensinh.ukh.edu.vn page in this pass (WebFetch/WebSearch did not surface the specific notice text). Do-not-guess-formula rule applied: left at researched rather than picking one of the conflicting numbers.',
+  },
+  upt: {
+    sourceId: 'upt-admission-2026',
+    title: 'Trường Đại học Phan Thiết — thông tin tuyển sinh năm 2026',
+    url: 'https://upt.edu.vn/tuyen-sinh-dai-hoc/thong-tin-tuyen-sinh-nam-2026/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-15 (2026-08-24): official upt.edu.vn 2026 admission page was fetched directly but explicitly defers all numeric floor scores ("Thí sinh phải đạt điểm đảm bảo chất lượng đầu vào do Nhà trường thông báo sau khi có kết quả Kỳ thi tốt nghiệp THPT 2026") to a later notice not linked/extractable from this page. Secondary aggregators (giaoducthoidai.vn, thi.tuyensinh247.com) report a 15-20/30 range for the THPT-exam and transcript methods, but this could not be cross-checked against a primary source with a specific per-major breakdown in this pass. Riêng Kỹ thuật xét nghiệm y học, Luật, Luật kinh tế follow MOET-set health/law thresholds (unspecified number). Left at researched; do not fabricate the exact band.',
+  },
 };
 
 export const remainingCatalogSchools: readonly RemainingCatalogSchool[] = [
@@ -448,6 +464,7 @@ const explicitRuntimeSchoolIds = new Set([
   'dtu',
   'fptu',
   'hubt',
+  'uda',
 ]);
 const remainingCatalogRuntimeSchools = remainingCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 

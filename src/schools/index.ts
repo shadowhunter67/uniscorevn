@@ -71,6 +71,11 @@ import { dtuModule } from './dtu';
 import { uahModule } from './uah';
 import { vguModule } from './vgu';
 import { hpu2Module } from './hpu2';
+import { udaModule } from './uda';
+import { uhdModule } from './uhd';
+import { umtModule } from './umt';
+import { utmModule } from './utm';
+import { uttModule } from './utt';
 import { southernCatalogModules } from './southernCatalog';
 import { remainingCatalogModules } from './remainingCatalog';
 import { finalCatalogModules } from './finalCatalog';
@@ -193,4 +198,9 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   hpu2: hpu2Module,
   fptu: fptuModule,
   hubt: hubtModule,
+  uda: udaModule,
+  uhd: uhdModule,
+  umt: umtModule,
+  utm: utmModule,
+  utt: uttModule,
 };

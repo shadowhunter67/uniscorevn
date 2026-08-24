@@ -83,6 +83,47 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Cổng tuyển sinh chính thức RMIT Việt Nam (rmit.edu.vn) fetch được nhưng chỉ là trang portal điều hướng: yêu cầu tiếng Anh chung (IELTS Academic 6.5, không kỹ năng nào dưới 6.0) được nêu rõ, nhưng ngưỡng điểm THPT/học bạ cụ thể được trang này dẫn sang từng trang ngành riêng lẻ (hàng chục ngành, không fetch hết trong 1 lượt). Không đủ cấu trúc để mô hình hoá eligibility trong batch này; do-not-guess-formula áp dụng.',
   },
+  uad: {
+    sourceId: 'uad-admission-2026',
+    title: 'Trường Đại học Mỹ thuật Công nghiệp (UAD/MTCN) — thông tin tuyển sinh năm 2026',
+    url: 'https://vietjack.com/thong-tin-tuyen-sinh/truong-dai-hoc-my-thuat-cong-nghiep.jsp',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-15 (2026-08-24): UAD tuyển sinh bằng DUY NHẤT 1 phương thức (kết hợp học bạ THPT với điểm thi năng khiếu bắt buộc: Bố cục màu + Hình họa, điểm năng khiếu tối thiểu 5.0/10). ApplicantProfile của UniscoreVN KHÔNG có field điểm năng khiếu (đã kiểm tra core/applicantProfile.ts và các trường talent-test khác như VLU đều để ngoài phạm vi mô hình hoá), nên không thể tính eligibility mà không tự bịa input. WebFetch trực tiếp tới uad.edu.vn/mythuatcongnghiep.edu.vn không lấy được nội dung chi tiết; số liệu trên dựa vào trang tổng hợp vietjack đã index. Để nguyên researched.',
+  },
+  upes1: {
+    sourceId: 'upes1-admission-2026',
+    title: 'Trường Đại học Thể dục Thể thao Bắc Ninh — ngưỡng đảm bảo chất lượng đầu vào đại học chính quy năm 2026',
+    url: 'https://tuyensinh.upes.edu.vn/2026/07/13/nguong-dam-bao-chat-luong-dau-vao-dai-hoc-chinh-quy-nam-2026/',
+    publishedAt: '2026-07-13',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-15 (2026-08-24): official tuyensinh.upes.edu.vn portal confirms 2 admission methods (both requiring a mandatory năng khiếu/talent test, minimum 5.0/10, weighted x2 in the combined score) plus a combined cultural+talent threshold around 15.00/30 for some majors. ApplicantProfile has no talent-test score field (confirmed same gap as UAD/VLU), so eligibility cannot be evaluated without fabricating an input. Left at researched.',
+  },
+  ush: {
+    sourceId: 'ush-admission-2026',
+    title: 'Trường Đại học Thể dục Thể thao TP.HCM — thông tin tuyển sinh đại học chính quy năm 2026',
+    url: 'https://ush.edu.vn/thong-bao/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026-1500.html',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-15 (2026-08-24): official ush.edu.vn portal confirms 2 admission methods (THPT exam or transcript, both combined with a mandatory năng khiếu/talent test organized by the school, minimum 5.0/10) plus a MOET-set quality threshold for the cultural-score component. Same structural gap as UAD/UPES1: ApplicantProfile has no talent-test score field. Left at researched.',
+  },
+  usth: {
+    sourceId: 'usth-admission-2026',
+    title: 'USTH (Trường Đại học Khoa học và Công nghệ Hà Nội) — thông báo tuyển sinh trình độ đại học năm 2026',
+    url: 'https://tuyensinh.usth.edu.vn/usth-thong-bao-tuyen-sinh-trinh-do-dai-hoc-nam-2026-3717/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-15 (2026-08-24): official tuyensinh.usth.edu.vn page confirms 4 admission methods (PT1 in-house aptitude test, PT2 academic-record + interview, PT3 talent admission, PT4 THPT exam result), but PT4 has NO published numeric floor score — it defers to "kế hoạch tuyển sinh của Bộ GDĐT" (competitive/ministry-set selection), except Pharmacy (health-group MOET threshold) and Semiconductor Engineering (Quyết định 1314/QĐ-BGDĐT threshold), neither of which has a stated number in this pass. No fixed threshold to model without fabricating a number; left at researched.',
+  },
+  ulsa: {
+    sourceId: 'ulsa-admission-2026',
+    title: 'Trường Đại học Lao động - Xã hội — công bố phương thức, chỉ tiêu tuyển sinh năm 2026',
+    url: 'https://ldxh.edu.vn/truong-dai-hoc-lao-dong-xa-hoi-cong-bo-phuong-thuc-chi-tieu-tuyen-sinh-nam-2026.html',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-15 (2026-08-24): official ldxh.edu.vn 2026 admission page was fetched directly and confirms 5 admission methods and per-method quotas, but does NOT state numeric floor scores in the fetched content. Secondary aggregators (thi.tuyensinh247.com, khoahoc.vietjack.com) report a 15/30 general baseline with 2 program-code exceptions (7220201 needs English >=5; 7380107/law needs "Khá" academic rank, unmodeled field), but this single-source secondary figure could not be cross-checked against the primary page in this pass. Left at researched; do not fabricate the exact number.',
+  },
 };
 
 function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {
@@ -262,7 +303,7 @@ export const finalCatalogKnowledgeGap = {
 
 // 'vgu' and 'hpu2' moved to dedicated runtime modules (normalized/runtime-source-snapshot/<id>/) —
 // eligibility-only, excluded here to avoid duplicate methodId/comparisonAdapter entries.
-const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2']);
+const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'uhd', 'umt', 'utm', 'utt']);
 const finalCatalogRuntimeSchools = finalCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const finalCatalogMethods: AdmissionMethodDescriptor[] = finalCatalogRuntimeSchools.map((school) => ({
