@@ -81,6 +81,15 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Official 2026 UTH admission notice confirms 2 methods (priority admission per school rules, and a combined-assessment method using a proprietary "UTH120" 120-point-equivalent scale). The admission portal itself (tuyensinh.ut.edu.vn) returns HTTP 403 on direct fetch; a per-program cutoff table (64 program codes, non-30-point scale, e.g. 600-999) is available via secondary government-portal coverage (xaydungchinhsach.chinhphu.vn), but no official floor-score/ngưỡng đảm bảo chất lượng đầu vào notice or documentation of the UTH120 conversion formula was located. Left at researched: the non-standard scale and blocked primary source make eligibility modeling unsafe without further extraction.',
   },
+  hcmunre: {
+    sourceId: 'hcmunre-admission-2026',
+    title: 'Thông tin tuyển sinh hệ đại học chính quy năm 2026 - Trường Đại học Tài nguyên và Môi trường TP.HCM',
+    url: 'https://hcmunre.edu.vn/thong-tin-tuyen-sinh-he-dai-hoc-chinh-quy-nam-2026',
+    publishedAt: '2026-01-17',
+    checkedAt: '2026-08-24',
+    note:
+      'Official HCMUNRE (hcmunre.edu.vn) 2026 admission notice confirmed to exist, but the floor-score/method detail is published entirely as two embedded images (TuyenSinhDaiHocChinhQuy202601.jpg, 202602.jpg), not readable text. Secondary press (tuoitre.vn, tuyensinh247) reports 3 methods with floors of 15/30 (16/30 for CNTT) on THPT exam, 18/30 on transcript, and 450-550 on the VNU-HCM aptitude test, but these numbers could not be independently confirmed against the primary source in this round. Left at researched per the image-embedded-table rule; do not fabricate the per-program floor table.',
+  },
 };
 
 function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {

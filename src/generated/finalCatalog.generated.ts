@@ -83,6 +83,57 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Cổng tuyển sinh chính thức RMIT Việt Nam (rmit.edu.vn) fetch được nhưng chỉ là trang portal điều hướng: yêu cầu tiếng Anh chung (IELTS Academic 6.5, không kỹ năng nào dưới 6.0) được nêu rõ, nhưng ngưỡng điểm THPT/học bạ cụ thể được trang này dẫn sang từng trang ngành riêng lẻ (hàng chục ngành, không fetch hết trong 1 lượt). Không đủ cấu trúc để mô hình hoá eligibility trong batch này; do-not-guess-formula áp dụng.',
   },
+  /* Batch expand-08 (2026-08-24): hcmcons, hcmufa, hcmupes, hnmu, hluv, hdiu. */
+  hcmcons: {
+    sourceId: 'hcmcons-admission-2026',
+    title: 'Thông báo Tuyển sinh Đại học chính quy và Hệ vừa làm vừa học ngành Sư phạm âm nhạc - Nhạc viện TP.HCM',
+    url: 'https://hcmcons.vn/tin-tuc/thong-bao-tuyen-sinh-dai-hoc-chinh-quy-va-he-vua-lam-vua-hoc-nganh-su-pham-am-nhac-nhac-vien-tp-ho-chi-minh-552.html',
+    publishedAt: '2026-04-13',
+    checkedAt: '2026-08-24',
+    note:
+      'Official 2026 HCMCONS (hcmcons.vn) undergraduate admission notice confirmed to exist, with registration window 13/04/2026-16/05/2026 and exam dates 04-05/06/2026. All method/threshold/subject-exam detail is embedded in numbered announcement images (1-7), not readable text. Left at researched; do not fabricate aptitude-exam thresholds from an unreadable image set.',
+  },
+  hcmufa: {
+    sourceId: 'hcmufa-admission-2026',
+    title: 'Thông tin tuyển sinh đại học năm 2026 - Trường Đại học Mỹ thuật TP.HCM',
+    url: 'https://hcmufa.edu.vn/news_detail/id/620',
+    checkedAt: '2026-08-24',
+    note:
+      'Official HCMUFA (hcmufa.edu.vn) 2026 notice confirms a combined aptitude-exam admission method (vẽ, bố cục, điêu khắc with 2x weighting on some subjects, plus a Ngữ văn condition-check) with a flat 5/10 minimum per exam subject, registered via reg.finearts.vn (30/03-29/05/2026). The aptitude subjects (vẽ, bố cục, điêu khắc) are not modeled fields in the shared ApplicantProfile/subject schema, and Ngữ văn is condition-only (không cộng điểm rõ ràng) rather than summed into a standard 30-point total, so an eligibility module would require new non-standard profile fields UniScoreVN does not have yet. Left at researched to avoid guessing the scoring/weighting mechanics.',
+  },
+  hcmupes: {
+    sourceId: 'hcmupes-admission-2026',
+    title: 'Thông tin tuyển sinh đại học chính quy năm 2026 - Trường Đại học Sư phạm Thể dục Thể thao TP.HCM',
+    url: 'https://upes.edu.vn/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026/',
+    checkedAt: '2026-08-24',
+    note:
+      'Official UPES (upes.edu.vn) 2026 notice confirms 3 programs (7140206, 7810301, 7810302) admitted via a combined score of a Thể dục Thể thao aptitude test (thể hình, chạy 30m, bật xa tại chỗ, fee 400,000 VND, exam 15/06/2026) plus 2 cultural subjects from 7 named combinations (T00/T01/T02/T05/T08/T09/T10). Secondary press (chinhphu.vn) reports 2026 cut-offs of 22.30-25.37, but the aptitude test score is not a field in the shared ApplicantProfile schema and no official floor/conversion table was located on the primary source. Left at researched: modeling would require guessing the aptitude-to-30-point conversion.',
+  },
+  hnmu: {
+    sourceId: 'hnmu-admission-2026',
+    title: 'Tuyển sinh - Trường Đại học Thủ đô Hà Nội',
+    url: 'https://hnmu.edu.vn/tuyen-sinh',
+    checkedAt: '2026-08-24',
+    note:
+      'Official HNMU (hnmu.edu.vn) admission portal confirmed reachable, listing regular undergraduate, liên thông, and văn bằng 2 admission tracks and referencing a 2026 "Quyết định phê duyệt điểm trúng tuyển" decision, but no floor score, subject-combination table, or per-program threshold is present as readable text on the fetched page (detail lives in linked announcement documents not retrieved this round). Left at researched; do not fabricate thresholds.',
+  },
+  hluv: {
+    sourceId: 'hluv-admission-2026',
+    title: 'Thông tin tuyển sinh đại học chính quy năm 2026 - Trường Đại học Hoa Lư',
+    url: 'http://hluv.edu.vn/vi/tuyen-sinh/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026/62429',
+    checkedAt: '2026-08-24',
+    note:
+      'Official HLUV (hluv.edu.vn) 2026 admission page confirmed to exist, with a companion "Quy chế tuyển sinh năm 2026" page and 4 named methods (100/200/301 direct-admission, etc.). Secondary press (vietjack/tuyensinh247) reports a flat 15/30 floor for non-pedagogy programs, but the primary hluv.edu.vn pages were not fetchable as clean structured text in this round (news-portal template), so the floor and its program scope were not independently confirmed from the official source. Left at researched pending a direct successful fetch.',
+  },
+  hdiu: {
+    sourceId: 'hdiu-admission-2026',
+    title: 'Tuyển sinh 2026 - Trường Đại học Đông Đô',
+    url: 'https://tuyensinh.hdiu.edu.vn/',
+    publishedAt: '2026-06-01',
+    checkedAt: '2026-08-24',
+    note:
+      'Official HDIU (tuyensinh.hdiu.edu.vn) 2026 admission portal confirms 4 methods (THPT exam floor 15/30, academic-transcript floor 16.5/30, competency-assessment floor 15/30, direct admission), open for applications 01/06-31/08/2026. Secondary press (vietnamnet) reports the THPT floor varies by program group (healthcare 16.5/30, Pharmacy 20.0/30) which conflicts with the primary source describing a single flat 15/30 THPT floor with "no score difference between subject combinations" — the two sources disagree on whether program-specific floors exist. Left at researched per the conflicting-sources rule; do not guess which floor set is authoritative.',
+  },
 };
 
 function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {
