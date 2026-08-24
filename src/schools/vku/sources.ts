@@ -1,6 +1,6 @@
 import type { AdmissionSource } from '../../core/sourceRegistry';
 
-export const vkuSources: Omit<AdmissionSource, 'schoolId'>[] = [
+export const vkuSources: (Omit<AdmissionSource, 'schoolId'> & { note?: string })[] = [
   {
     id: 'vku-udn-system-notice-2026',
     publisher: 'Đại học Đà Nẵng (ĐHĐN)',

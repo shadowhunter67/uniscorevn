@@ -1,6 +1,6 @@
 import type { AdmissionSource } from '../../core/sourceRegistry';
 
-export const uteudnSources: Omit<AdmissionSource, 'schoolId'>[] = [
+export const uteudnSources: (Omit<AdmissionSource, 'schoolId'> & { note?: string })[] = [
   {
     id: 'uteudn-udn-system-notice-2026',
     publisher: 'Đại học Đà Nẵng (ĐHĐN)',

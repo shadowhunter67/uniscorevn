@@ -62,8 +62,8 @@ describe('institution coverage statistics', () => {
       researched: 74,
       admissionDataAvailable: 74,
       eligibilitySupported: 38,
-      calculatorSupported: 18,
-      partialCalculator: 4,
+      calculatorSupported: 19,
+      partialCalculator: 5,
       fullyVerified: 14,
       catalogOnly: 193,
     });
@@ -74,7 +74,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(18);
+    expect(researchedOnly).toBe(17);
     for (const schoolId of [
       'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'hust', 'tmu', 'haui', 'aof', 'bav', 'hanu', 'hou',
       'ntu', 'qnu', 'hueu',
