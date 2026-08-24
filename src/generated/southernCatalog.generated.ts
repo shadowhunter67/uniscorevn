@@ -81,6 +81,14 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Official 2026 UTH admission notice confirms 2 methods (priority admission per school rules, and a combined-assessment method using a proprietary "UTH120" 120-point-equivalent scale). The admission portal itself (tuyensinh.ut.edu.vn) returns HTTP 403 on direct fetch; a per-program cutoff table (64 program codes, non-30-point scale, e.g. 600-999) is available via secondary government-portal coverage (xaydungchinhsach.chinhphu.vn), but no official floor-score/ngưỡng đảm bảo chất lượng đầu vào notice or documentation of the UTH120 conversion formula was located. Left at researched: the non-standard scale and blocked primary source make eligibility modeling unsafe without further extraction.',
   },
+  mku: {
+    sourceId: 'mku-admission-2026',
+    title: 'Trường Đại học Cửu Long - Cổng thông tin tuyển sinh 2026',
+    url: 'https://tuyensinh.mku.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-10 (2026-08-24): official tuyensinh.mku.edu.vn portal fetched successfully and confirms 4 admission methods (THPT exam, học bạ transcript, V-SAT, ĐGNL ĐHQG-HCM) plus a results-lookup tool. A secondary aggregator states a >=6.0 three-subject/12-semester transcript average floor for the học bạ method, but the primary portal page fetched in this pass did not itself state that number, so it is not independently confirmed. Left at researched; do not model the unconfirmed threshold.',
+  },
 };
 
 function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {

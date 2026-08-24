@@ -334,6 +334,14 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Official thanglong.edu.vn 2026 admission guide (plus the linked official Quyết định ban hành thông tin tuyển sinh 2026, thanglong.edu.vn, dated 2026-02-11) confirms 6 admission methods (THPT exam; THPT exam + international language certificate; HSA/TSA/SPT aptitude tests; THPT exam + grade-12 transcript for Nursing/Tourism/Hotel Management; grade-12 transcript + talent test for Vocal/Graphic Design; direct admission), 37 subject combinations, and 25 programs across 8 faculties, quota 3,000. No 2026 numeric threshold (điểm chuẩn/điểm sàn) had been published as of this research pass — the article only cites 2025 reference scores (16.0-23.75/30) — and the official Quyết định PDF text itself was not extractable via WebFetch (page shell only). Runtime stays researched-only; do not use 2025 cutoffs as 2026 thresholds.',
   },
+  muce: {
+    sourceId: 'muce-admission-2026',
+    title: 'Trường Đại học Xây dựng Miền Trung (MUCE) - Cổng thông tin tuyển sinh',
+    url: 'https://tuyensinh.muce.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-10 (2026-08-24): official domain tuyensinh.muce.edu.vn (and muce.edu.vn) confirmed via search results (Tuy Hòa, Phú Yên campus) but both returned HTTP 403 (WAF) on direct WebFetch in this pass. Secondary aggregators report ~7 admission methods (THPT exam, học bạ, direct admission, ĐGNL, talent-combination exams) for 2025/2026 but no confirmed 2026 numeric threshold. Left at researched; retry direct fetch from a different network path before extracting a formula.',
+  },
 };
 
 export const remainingCatalogSchools: readonly RemainingCatalogSchool[] = [

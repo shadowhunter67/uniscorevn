@@ -83,6 +83,78 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Cổng tuyển sinh chính thức RMIT Việt Nam (rmit.edu.vn) fetch được nhưng chỉ là trang portal điều hướng: yêu cầu tiếng Anh chung (IELTS Academic 6.5, không kỹ năng nào dưới 6.0) được nêu rõ, nhưng ngưỡng điểm THPT/học bạ cụ thể được trang này dẫn sang từng trang ngành riêng lẻ (hàng chục ngành, không fetch hết trong 1 lượt). Không đủ cấu trúc để mô hình hoá eligibility trong batch này; do-not-guess-formula áp dụng.',
   },
+  logacademy: {
+    sourceId: 'logacademy-admission-2026',
+    title: 'Học viện Hậu cần - Một số thông tin tuyển sinh trình độ đại học quân sự và dân sự năm 2026',
+    url: 'https://hocvienhaucan.edu.vn/bai-viet/mot-so-thong-tin-tuyen-sinh-trinh-do-dai-hoc-quan-su-va-dan-su-nam-2026',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-10 (2026-08-24): official hocvienhaucan.edu.vn page confirms 4 admission methods (direct/priority, ĐGNL VNU Hà Nội/HCM, THPT exam, Bộ Quốc phòng ĐGNL) for both military and civilian tracks, plus civilian-track program quotas (Tài chính-Ngân hàng, Kế toán, Kỹ thuật xây dựng). Military track requires Ministry of Defense sơ tuyển (age/health/political vetting) with no matching applicant-profile field; the page does not state an explicit 2026 numeric threshold for either track (references separate ngưỡng đảm bảo chất lượng and conversion-table announcements not fetched in this pass). Left at researched; do not fabricate thresholds or model military-only screening as a generic eligibility rule.',
+  },
+  ltvuni: {
+    sourceId: 'ltvuni-admission-2026',
+    title: 'Trường Đại học Lương Thế Vinh - Thông báo ngưỡng đảm bảo chất lượng và bảng quy đổi điểm tương đương năm 2026',
+    url: 'https://ltvu.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      "Batch expand-10 (2026-08-24): official domain is ltvu.edu.vn (not ltvuni.edu.vn); homepage links a dedicated 2026 threshold/conversion notice (\"Ngưỡng đảm bảo chất lượng, độ chênh giữa các tổ hợp xét tuyển theo phương thức xét điểm thi THPT và bảng quy đổi điểm tương đương giữa các phương thức xét tuyển năm 2026\"), but the notice's numeric content was not extracted from the primary page in this pass -- only a secondary aggregator states a generic >=15.0/30 floor, unconfirmed on ltvu.edu.vn itself. Left at researched; do not use the unconfirmed secondary figure.",
+  },
+  mdu: {
+    sourceId: 'mdu-admission-2026',
+    title: 'Trường Đại học Công nghệ Miền Đông (MIT) - Công bố các phương thức xét tuyển năm 2026',
+    url: 'https://mit.vn/cong-bo-cac-phuong-thuc-xet-tuyen-nam-2026/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-10 (2026-08-24): catalog id mdu ("Trường Đại học Miền Đông", Đồng Nai) is the former name of this school; it was renamed Trường Đại học Công nghệ Miền Đông (MIT/MUT) around 2021 and mdu.edu.vn no longer resolves as a distinct admissions portal. Current official domain mit.vn is confirmed via multiple independent secondary sources (search-result snippets citing a >=15.0/30 THPT-exam floor for most majors, >=18 for Luật), but direct WebFetch of mit.vn admission pages returned HTTP 403 (WAF) in this pass, so the numeric floor could not be independently verified from the primary source. Left at researched; do not model the unverified threshold.',
+  },
+  mpa: {
+    sourceId: 'mpa-admission-2026',
+    title: 'Trường Đại học Chính trị (trước đây là Học viện Chính trị, Bộ Quốc phòng) - Hướng dẫn xét tuyển đại học quân sự hệ chính quy năm 2026',
+    url: 'http://daihocchinhtri.edu.vn/vi/tuyen-sinh-dao-tao/Thong-tin-tuyen-sinh/HUONG-DAN-Cong-tac-xet-tuyen-vao-dao-tao-dai-hoc-quan-su-he-chinh-quy-tai-Truong-Dai-hoc-Chinh-tri-nam-2026-192/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-10 (2026-08-24): catalog id mpa ("Học viện Chính trị Quân đội Nhân dân Việt Nam") is now Trường Đại học Chính trị (renamed institution), official domain daihocchinhtri.edu.vn, confirmed via search results including a 2026 admission-guidance page and a separate 2026 cutoff-announcement page on the same domain. This school only admits a military track requiring Ministry of Defense sơ tuyển (age/health/political vetting, Feb 10 - Apr 15 2026) with no matching applicant-profile field; do not model as generic eligibility. Left at researched.',
+  },
+  msa: {
+    sourceId: 'msa-admission-2026',
+    title: 'Học viện Khoa học Quân sự - Thông báo tuyển sinh đào tạo hệ quân sự và dân sự trình độ đại học năm 2026',
+    url: 'https://hvkhqs.edu.vn/thong-bao-tuyen-sinh-dao-tao-he-quan-su-va-dan-su-trinh-do-dai-hoc-nam-2026-tai-hoc-vien-khoa-hoc-quan-su/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-10 (2026-08-24): official hvkhqs.edu.vn page fetched successfully and confirms 4 admission methods (direct/priority, ĐGNL VNU Hà Nội/HCM, THPT exam, Bộ Quốc phòng ĐGNL for military track only). Civilian track (hệ dân sự) explicitly needs no Ministry sơ tuyển and follows standard MOET registration (Jul 2-14 2026), closer to a normal civilian admission than other military schools, but the page only references 2025 scores and states 2026 thresholds are pending post-exam publication -- no 2026 numeric floor available yet. Left at researched; revisit once the academy publishes its 2026 threshold.',
+  },
+  mta: {
+    sourceId: 'mta-admission-2026',
+    title: 'Học viện Kỹ thuật Quân sự (MTA) - official site',
+    url: 'http://mta.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-10 (2026-08-24): official domain mta.edu.vn confirmed via search (236 Hoàng Quốc Việt, Bắc Từ Liêm, Hà Nội) but not directly fetched in this pass. Secondary press (vnexpress, vietnamnet, qdnd) reports already-published 2026 civilian-track (hệ dân sự) cutoff results of 21.75-26.96/30 across majors and a 720 civilian quota, plus a military track requiring Ministry of Defense sơ tuyển. These are final cutoff results, not a checkable input eligibility rule, and the military track has no matching applicant-profile field. Left at researched; do not model published cutoffs as a formula.',
+  },
+  naem: {
+    sourceId: 'naem-admission-2026',
+    title: 'Học viện Quản lý giáo dục (NAEM) - Điểm trúng tuyển đại học chính quy năm 2026',
+    url: 'https://naem.edu.vn/vi/tin-tuc/diem-trung-tuyen-dai-hoc-chinh-quy-nam-2026-vao-hoc-vien-quan-ly-giao-duc',
+    checkedAt: '2026-08-24',
+    note:
+      "Batch expand-10 (2026-08-24): official naem.edu.vn page fetched successfully and confirms 2026 admission cutoff results were published 2026-08-09 as a linked PDF (not extracted in this pass) and 4 methods (THPT exam, học bạ transcript, tuyển thẳng, ĐGNL/ĐGTD). A separate faculty subdomain (khoaquanly.naem.edu.vn) states a >=15.00/30 THPT-exam-based floor with an M1+M2+M3+ưu tiên+cộng formula, but this is a lower-confidence faculty page rather than the main admissions portal and was not cross-checked against the main site's PDF. Left at researched; do not model the unverified subdomain figure as the school-wide rule.",
+  },
+  napa: {
+    sourceId: 'napa-admission-2026',
+    title: 'Học viện Hành chính và Quản trị công (kế thừa Học viện Hành chính Quốc gia / NAPA) - Thông tin tuyển sinh 2026 tại Phân hiệu TP.HCM',
+    url: 'https://apaghcm.edu.vn/thong-tin-tuyen-sinh-tai-phan-hieu-hoc-vien-hanh-chinh-va-quan-tri-cong-tai-tp-ho-chi-minh',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-10 (2026-08-24): important identity change -- catalog id napa ("Học viện Hành chính Quốc gia") was merged (Quyết định 214-QĐ/TW, Jan 2025) into Học viện Chính trị Quốc gia Hồ Chí Minh and renamed Học viện Hành chính và Quản trị công; napa.edu.vn no longer resolves (DNS failure confirmed in this pass). Successor domain apaghcm.edu.vn (TP.HCM branch) is reachable and links a 2026 admission-info PDF and a score-calculation tool, but the PDF content itself was not extracted. A secondary aggregator states an unconfirmed >=18.0/30 floor (>=18.00 for Luật/Thanh tra with Toán or Văn >=6.0) not independently verified on the primary site. Left at researched; do not model the unverified threshold, and note the institutional rename for future maintainers.',
+  },
+  naue: {
+    sourceId: 'naue-admission-2026',
+    title: 'Trường Đại học Kinh tế Nghệ An - Cổng thông tin tuyển sinh 2026',
+    url: 'https://naue.edu.vn/tuyensinh',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-10 (2026-08-24): official naue.edu.vn/tuyensinh page fetched successfully and confirms 3 admission methods (học bạ THPT, kết quả thi THPT, kết hợp) across combinations A00/A01/D01/B00 and programs including CNTT, Kế toán, Kinh tế, Nông nghiệp công nghệ cao, Thú y, Tài chính-Ngân hàng, Fintech. No 2026 numeric minimum score threshold is stated on the fetched page. Left at researched; revisit once the school publishes its 2026 threshold notice.',
+  },
 };
 
 function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {
