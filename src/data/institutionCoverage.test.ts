@@ -63,13 +63,13 @@ describe('institution coverage statistics', () => {
       vocationalColleges: 26,
       otherIndependentInstitutions: 0,
       internalUnitEntries: 10,
-      researched: 74,
-      admissionDataAvailable: 74,
-      eligibilitySupported: 38,
+      researched: 92,
+      admissionDataAvailable: 92,
+      eligibilitySupported: 48,
       calculatorSupported: 19,
       partialCalculator: 5,
       fullyVerified: 14,
-      catalogOnly: 193,
+      catalogOnly: 175,
     });
   });
 
@@ -78,13 +78,17 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(17);
+    expect(researchedOnly).toBe(25);
     for (const schoolId of [
       'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'hust', 'tmu', 'haui', 'aof', 'bav', 'hanu', 'hou',
       'ntu', 'qnu', 'hueu',
       'hpmu', 'udn',
+      'hmu', 'tlu', 'nlu', 'uth', 'phenikaa', 'thanglong', 'rmitvn', 'vinuni',
     ]) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('researched');
+    }
+    for (const schoolId of ['hup', 'ajc', 'pntu', 'vnuf', 'dtu', 'uah', 'vgu', 'hpu2', 'fptu', 'hubt']) {
+      expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
     }
     // UDN cluster batch (2026-08-24): udn stays a system-level umbrella (researched, no
     // independent admission formula); the 6 member schools now carry dedicated eligibility-only

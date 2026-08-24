@@ -1,6 +1,6 @@
 import type { AdmissionSource } from '../../core/sourceRegistry';
 
-export const pntuSources: Omit<AdmissionSource, 'schoolId'>[] = [
+export const pntuSources: (Omit<AdmissionSource, 'schoolId'> & { note?: string })[] = [
   {
     id: 'pntu-admission-2026',
     publisher: 'Trường Đại học Y khoa Phạm Ngọc Thạch',

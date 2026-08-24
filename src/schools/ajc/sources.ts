@@ -1,6 +1,6 @@
 import type { AdmissionSource } from '../../core/sourceRegistry';
 
-export const ajcSources: Omit<AdmissionSource, 'schoolId'>[] = [
+export const ajcSources: (Omit<AdmissionSource, 'schoolId'> & { note?: string })[] = [
   {
     id: 'ajc-admission-2026',
     publisher: 'Học viện Báo chí và Tuyên truyền',

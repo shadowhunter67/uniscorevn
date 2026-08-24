@@ -1,6 +1,6 @@
 import type { AdmissionSource } from '../../core/sourceRegistry';
 
-export const fptuSources: Omit<AdmissionSource, 'schoolId'>[] = [
+export const fptuSources: (Omit<AdmissionSource, 'schoolId'> & { note?: string })[] = [
   {
     id: 'fptu-admission-portal-2026',
     publisher: 'Trường Đại học FPT - Cổng thông tin tuyển sinh',

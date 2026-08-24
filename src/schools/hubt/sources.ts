@@ -1,6 +1,6 @@
 import type { AdmissionSource } from '../../core/sourceRegistry';
 
-export const hubtSources: Omit<AdmissionSource, 'schoolId'>[] = [
+export const hubtSources: (Omit<AdmissionSource, 'schoolId'> & { note?: string })[] = [
   {
     id: 'hubt-admission-portal-2026',
     publisher: 'Trường Đại học Kinh doanh và Công nghệ Hà Nội',
