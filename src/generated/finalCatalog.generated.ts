@@ -83,6 +83,39 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Cổng tuyển sinh chính thức RMIT Việt Nam (rmit.edu.vn) fetch được nhưng chỉ là trang portal điều hướng: yêu cầu tiếng Anh chung (IELTS Academic 6.5, không kỹ năng nào dưới 6.0) được nêu rõ, nhưng ngưỡng điểm THPT/học bạ cụ thể được trang này dẫn sang từng trang ngành riêng lẻ (hàng chục ngành, không fetch hết trong 1 lượt). Không đủ cấu trúc để mô hình hoá eligibility trong batch này; do-not-guess-formula áp dụng.',
   },
+  hupes: {
+    sourceId: 'hupes-admission-2026',
+    title: 'Trường Đại học Sư phạm Thể dục Thể thao Hà Nội - Cổng tuyển sinh 2026',
+    url: 'https://tuyensinhdaihoc.hupes.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch 11 (2026-08-24): official tuyensinhdaihoc.hupes.edu.vn portal fetched directly, confirming 4 admission methods (direct admission for elite athletes; priority admission for national-tournament medalists; THPT exam + năng khiếu talent test; học bạ + năng khiếu talent test) and two subject combinations (T11: Toán + Năng khiếu 1 + Năng khiếu 2; T12: Ngữ văn + Năng khiếu 1 + Năng khiếu 2), plus non-numeric conditions (lớp-12 hạnh kiểm "khá trở lên" for Sư phạm majors, height minimums for GDTC/GDQPAN). No numeric THPT/học bạ floor score was stated in extractable text, and the năng khiếu talent-test score has no matching applicant-profile field. Left at researched; do not fabricate a floor score or model the talent-test component.',
+  },
+  huc: {
+    sourceId: 'huc-admission-2026',
+    title: 'Trường Đại học Văn hóa Hà Nội - Thông tin tuyển sinh đại học chính quy năm 2026',
+    url: 'https://huc.edu.vn/a/269351/THONG-TIN-TUYEN-SINH-DAI-HOC-CHINH-QUY-NAM-2026',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch 11 (2026-08-24): official huc.edu.vn domain confirmed live with a 2026 admission-info article and a separate 10/07/2026 "điểm sàn" notice, but WebFetch only returned the page title, not body text, so no numeric threshold could be confirmed from the primary source. A search-engine summary claimed a 17/30 floor for health-related majors (Điều dưỡng, Y tế dự phòng, etc.), but HUC is a văn hóa/nghệ thuật school with no such majors in its catalog entry, so that figure looks like cross-contamination from an unrelated school and was not trusted. Left at researched; do not fabricate numbers.',
+  },
+  kinhbac: {
+    sourceId: 'kinhbac-admission-2026',
+    title: 'Trường Đại học Kinh Bắc - Cổng thông tin',
+    url: 'https://daihockinhbac.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch 11 (2026-08-24): official daihockinhbac.edu.vn domain confirmed live, but the homepage only surfaces 2024 admission notices and thresholds ("Ngưỡng đảm bảo đầu vào - Điểm trúng tuyển năm 2024"); no 2026 admission plan or threshold notice was located in this research pass. Left at researched pending a located 2026 notice; do not reuse the 2024 figures as 2026 data.',
+  },
+  hunre: {
+    sourceId: 'hunre-admission-2026',
+    title: 'Trường Đại học Tài nguyên và Môi trường Hà Nội - Thông báo nguồn xét tuyển, ngưỡng đảm bảo chất lượng đầu vào và quy tắc quy đổi tương đương các phương thức tuyển sinh đại học chính quy năm 2026',
+    url: 'https://hunre.edu.vn/thong-bao-nguon-xet-tuyen-dau-vao-nguong-dam-bao-chat-luong-dau-vao-va-quy-tac-quy-doi-tuong-duong-cac-phuong-thuc-tuyen-sinh-dai-hoc-chinh-quy-nam-2026.html',
+    publishedAt: '2026-07-03',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch 11 (2026-08-24): official hunre.edu.vn notice confirmed live (published 03/07/2026) with an attached document titled "Điểm ngưỡng và quy đổi TĐ giữa các PTTS năm 2026", but the per-major/per-method threshold table is delivered as 9 embedded images plus an attached PDF, not text-extractable via WebFetch in this pass. Left at researched; do not fabricate the per-major table.',
+  },
 };
 
 function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {

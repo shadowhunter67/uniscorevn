@@ -81,6 +81,14 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Official 2026 UTH admission notice confirms 2 methods (priority admission per school rules, and a combined-assessment method using a proprietary "UTH120" 120-point-equivalent scale). The admission portal itself (tuyensinh.ut.edu.vn) returns HTTP 403 on direct fetch; a per-program cutoff table (64 program codes, non-30-point scale, e.g. 600-999) is available via secondary government-portal coverage (xaydungchinhsach.chinhphu.vn), but no official floor-score/ngưỡng đảm bảo chất lượng đầu vào notice or documentation of the UTH120 conversion formula was located. Left at researched: the non-standard scale and blocked primary source make eligibility modeling unsafe without further extraction.',
   },
+  lhu: {
+    sourceId: 'lhu-admission-2026',
+    title: 'Trường Đại học Lạc Hồng - Cổng tuyển sinh 2026',
+    url: 'https://tuyensinh.lhu.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch 11 (2026-08-24): official tuyensinh.lhu.edu.vn portal fetched directly, confirming 5 admission methods (THPT exam; học bạ THPT; ĐGNL; V-SAT computer-based test >= 250; direct admission) exist for 2026, but the portal page itself does not expose numeric thresholds or subject combinations in extractable text. Secondary press (search-engine summary) reports a general 15/30 THPT floor with Dược/Luật/Luật kinh tế instead following the MOET-published health/law ngưỡng đảm bảo chất lượng đầu vào (announced 08/07/2026), but this was not cross-verified against lhu.edu.vn primary text, and the MOET-governed floor has no matching runtime rule yet. Left at researched; do not fabricate numbers.',
+  },
 };
 
 function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {

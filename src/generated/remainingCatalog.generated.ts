@@ -334,6 +334,38 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Official thanglong.edu.vn 2026 admission guide (plus the linked official Quyết định ban hành thông tin tuyển sinh 2026, thanglong.edu.vn, dated 2026-02-11) confirms 6 admission methods (THPT exam; THPT exam + international language certificate; HSA/TSA/SPT aptitude tests; THPT exam + grade-12 transcript for Nursing/Tourism/Hotel Management; grade-12 transcript + talent test for Vocal/Graphic Design; direct admission), 37 subject combinations, and 25 programs across 8 faculties, quota 3,000. No 2026 numeric threshold (điểm chuẩn/điểm sàn) had been published as of this research pass — the article only cites 2025 reference scores (16.0-23.75/30) — and the official Quyết định PDF text itself was not extractable via WebFetch (page shell only). Runtime stays researched-only; do not use 2025 cutoffs as 2026 thresholds.',
   },
+  htu: {
+    sourceId: 'htu-admission-2026',
+    title: 'Trường Đại học Hà Tĩnh - Thông tin tuyển sinh đại học chính quy năm 2026',
+    url: 'https://ts.htu.edu.vn/ts-dh/tuyen-sinh-dh-2026',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch 11 (2026-08-24): official ts.htu.edu.vn page fetched directly and text-extractable, confirming 5 admission methods (mã 100 THPT exam, mã 200 học bạ, mã 402 ĐGNL/ĐGTD, mã 411 foreign-THPT graduates, mã 301 direct/priority admission) and two THPT floors: 15,00/30 for most programs vs 18,00/30 (or lớp-12 academic rank "giỏi trở lên") for Sư phạm and Luật programs, plus a 18,0/30 học bạ floor. The page does not list which specific programs fall in the Sư phạm/Luật tier vs the general tier as a structured, extractable table, so a program-to-tier mapping cannot be built without guessing. Left at researched; do not fabricate the program-tier mapping.',
+  },
+  hvu: {
+    sourceId: 'hvu-admission-2026',
+    title: 'Trường Đại học Hùng Vương (Phú Thọ) - Trang tin tuyển sinh 2026',
+    url: 'https://www.hvu.edu.vn/tin-tuc/tuyen-sinh.hvu',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch 11 (2026-08-24): official hvu.edu.vn admission page confirmed live, but its 2026 admission-information document is only linked as an external Google Drive file, not extractable as page text via WebFetch. Secondary press (baomoi.com, citing an official Trường ĐH Hùng Vương announcement) reports a per-major-group ngưỡng đảm bảo chất lượng đầu vào table (17-21/30: 21 for Tiểu học/Toán/Ngữ văn/Tiếng Anh sư phạm, 20 for KHTN/Lịch sử-Địa lí sư phạm/Mầm non, 19 for GDTC/Âm nhạc/Mỹ thuật sư phạm, 18 for Điều dưỡng, 17 for the remaining majors), but this was not cross-verified against the primary hvu.edu.vn document text in this pass. Left at researched; do not fabricate the per-major table from secondary press alone.',
+  },
+  hump: {
+    sourceId: 'hump-admission-2026',
+    title: 'Trường Đại học Y Dược, Đại học Huế - Cổng tuyển sinh 2026',
+    url: 'https://tuyensinh.huemed-univ.edu.vn/home/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch 11 (2026-08-24): official tuyensinh.huemed-univ.edu.vn portal confirmed live, recruiting 11 undergraduate and 6 associate-degree programs for 2026 per Quyết định 979/QĐ-ĐHYD (24/02/2026), but the numeric thresholds/subject combinations sit in separate linked decision documents not text-extractable via WebFetch in this pass. Y Dược majors are additionally gated by MOET-published health-sector floor rules with no matching applicant-profile field yet. Left at researched; do not fabricate numbers.',
+  },
+  hufl: {
+    sourceId: 'hufl-admission-2026',
+    title: 'Trường Đại học Ngoại ngữ, Đại học Huế - Thông tin tuyển sinh đại học chính quy 2026',
+    url: 'https://tuyensinh.huflis.edu.vn/tin-tuc/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026_20251231114356',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch 11 (2026-08-24): official tuyensinh.huflis.edu.vn page fetched directly, confirming 5 admission methods (THPT exam; học bạ; xét tuyển thẳng cho giải Olympic quốc gia/quốc tế; THPT exam + chứng chỉ ngoại ngữ quốc tế; học bạ + chứng chỉ ngoại ngữ) and a 3-subject combination requirement, but it explicitly defers the per-program ngưỡng đảm bảo chất lượng đầu vào to a separate notice ("theo quy định của Bộ GD&ĐT và của Đại học Huế"). That linked threshold notice (huflis.edu.vn, published 2026, same Đại học Huế Phụ lục 1 pattern as the already-finished hce/hul/husc/huaf/hueedu schools) was not text-extractable via WebFetch in this pass (page shell only). Left at researched; do not fabricate the Phụ lục numbers without a successful extraction.',
+  },
 };
 
 export const remainingCatalogSchools: readonly RemainingCatalogSchool[] = [
