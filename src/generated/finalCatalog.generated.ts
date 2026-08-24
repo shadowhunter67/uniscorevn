@@ -12,6 +12,7 @@ import type { AdmissionEvaluation } from '../core/admissionEvaluation';
 import type { AdmissionMethodDescriptor } from '../core/admissionMethod';
 import type { ApplicantProfile } from '../core/applicantProfile';
 import type { SchoolModule } from '../core/schoolModule';
+import type { RuleEvidence } from '../core/evidence';
 import type { SchoolComparisonAdapter, SchoolComparisonResult } from '../compare/schoolComparisonAdapter';
 
 interface FinalCatalogSchool {
@@ -22,6 +23,15 @@ interface FinalCatalogSchool {
   ownership: SchoolModule['ownership'];
   region: SchoolModule['region'];
   entityLevel?: SchoolModule['entityLevel'];
+}
+
+interface ResearchedAdmissionSource {
+  title: string;
+  url: string;
+  sourceId: string;
+  checkedAt: string;
+  publishedAt?: string;
+  note: string;
 }
 
 const unsupportedCapabilities = {
@@ -40,6 +50,82 @@ const catalogOnlyCapabilities = {
   scoreConversion: false,
   exactCalculator: false,
 } satisfies NonNullable<SchoolModule['capabilities']>;
+
+const researchedCatalogCapabilities = {
+  admissionInfo: true,
+  programs: true,
+  eligibility: false,
+  cutoffs: false,
+  scoreConversion: false,
+  exactCalculator: false,
+} satisfies NonNullable<SchoolModule['capabilities']>;
+
+/**
+ * Batch expand-03 (2026-08-24): trường đã có nguồn tuyển sinh chính thức 2026 xác minh được
+ * (URL/publisher/note thật), nhưng chưa trích xuất được ngưỡng/công thức đủ cấu trúc để nâng lên
+ * eligibility-only/partial. Có mặt ở đây => summary/capabilities/catalogSources đổi từ
+ * catalog-only phẳng sang "researched". Copy nguyên mẫu từ remainingCatalog.ts.
+ */
+const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
+  vinuni: {
+    sourceId: 'vinuni-admission-2026',
+    title: 'VinUniversity Officially Announces the 2026 Undergraduate Admissions Plan',
+    url: 'https://admissions.vinuni.edu.vn/vinuniversity-officially-announces-the-2026-undergraduate-admissions-plan/',
+    checkedAt: '2026-08-24',
+    note:
+      'Cổng tuyển sinh chính thức VinUniversity (admissions.vinuni.edu.vn) xác nhận tồn tại qua kết quả tìm kiếm và trích dẫn (kế hoạch tuyển sinh đại học 2026, yêu cầu IELTS 6.5 từ 2026, học bổng/hỗ trợ học phí). WebFetch trực tiếp tới admissions.vinuni.edu.vn và vinuni.edu.vn bị chặn (HTTP 403) trong lượt research này nên KHÔNG trích xuất được ngưỡng điểm THPT/hồ sơ có cấu trúc; cần thử lại từ môi trường mạng khác trước khi nâng lên eligibility-only.',
+  },
+  rmitvn: {
+    sourceId: 'rmitvn-admission-2026',
+    title: 'RMIT Vietnam — Nhập học RMIT Việt Nam / Quy trình nhập học chương trình cử nhân',
+    url: 'https://www.rmit.edu.vn/vi/hoc-tap-tai-rmit/nhap-hoc-rmit-viet-nam',
+    checkedAt: '2026-08-24',
+    note:
+      'Cổng tuyển sinh chính thức RMIT Việt Nam (rmit.edu.vn) fetch được nhưng chỉ là trang portal điều hướng: yêu cầu tiếng Anh chung (IELTS Academic 6.5, không kỹ năng nào dưới 6.0) được nêu rõ, nhưng ngưỡng điểm THPT/học bạ cụ thể được trang này dẫn sang từng trang ngành riêng lẻ (hàng chục ngành, không fetch hết trong 1 lượt). Không đủ cấu trúc để mô hình hoá eligibility trong batch này; do-not-guess-formula áp dụng.',
+  },
+};
+
+function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {
+  return researchedAdmissionSources[schoolId];
+}
+
+function finalCatalogCapabilitiesFor(schoolId: string): NonNullable<SchoolModule['capabilities']> {
+  return getResearchedAdmissionSource(schoolId) ? researchedCatalogCapabilities : catalogOnlyCapabilities;
+}
+
+function finalCatalogSummaryFor(school: FinalCatalogSchool): string {
+  const source = getResearchedAdmissionSource(school.id);
+  if (!source) {
+    return 'Đã đưa vào roster 238 theo catalog toàn quốc; cần research nguồn tuyển sinh chính thức trước khi tính điều kiện hoặc điểm.';
+  }
+  return `Đã xác minh nguồn tuyển sinh chính thức 2026 (${source.title}); chưa nâng lên eligibility/calculator vì còn thiếu ngưỡng/công thức đủ cấu trúc.`;
+}
+
+function finalCatalogSourcesFor(schoolId: string): SchoolModule['catalogSources'] | undefined {
+  const source = getResearchedAdmissionSource(schoolId);
+  if (!source) return undefined;
+  return [{ title: source.title, url: source.url, type: 'official-institution', checkedAt: source.checkedAt }];
+}
+
+function finalCatalogEvidenceFor(schoolId: string): RuleEvidence[] {
+  const source = getResearchedAdmissionSource(schoolId);
+  if (!source) return [];
+  return [
+    {
+      sourceId: source.sourceId,
+      sourceUrl: source.url,
+      sourceTitle: source.title,
+      sourceType: 'official-school',
+      verification: 'official-source-available',
+      effectiveYear: 2026,
+      publishedAt: source.publishedAt,
+      criticality: 'informational',
+      verifiedAt: source.checkedAt,
+      lastReviewedAt: source.checkedAt,
+      note: source.note,
+    },
+  ];
+}
 
 export const finalCatalogSchools: readonly FinalCatalogSchool[] = [
   { id: 'vnusis', shortName: 'VNU-SIS', name: 'Trường Khoa học liên ngành và Nghệ thuật - ĐHQG Hà Nội', location: 'Hà Nội', ownership: 'public', region: 'hanoi' },
@@ -198,8 +284,9 @@ export const finalCatalogModules: Record<string, SchoolModule> = Object.fromEntr
       region: school.region,
       entityLevel: resolveFinalCatalogEntityLevel(school),
       vnuhcm: false,
-      summary: 'Đã đưa vào roster 238 theo catalog toàn quốc; cần research nguồn tuyển sinh chính thức trước khi tính điều kiện hoặc điểm.',
-      capabilities: catalogOnlyCapabilities,
+      summary: finalCatalogSummaryFor(school),
+      capabilities: finalCatalogCapabilitiesFor(school.id),
+      catalogSources: finalCatalogSourcesFor(school.id),
     },
   ])
 );
@@ -218,7 +305,7 @@ function evaluateCatalogOnlySchool(school: FinalCatalogSchool): AdmissionEvaluat
     missingRules: [finalCatalogKnowledgeGap.label],
     missingRequirements: [{ kind: 'unsupported', code: finalCatalogKnowledgeGap.id, label: finalCatalogKnowledgeGap.label }],
     explanation: [],
-    evidence: [],
+    evidence: finalCatalogEvidenceFor(school.id),
   };
 }
 
