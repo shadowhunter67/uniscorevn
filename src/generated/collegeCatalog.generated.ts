@@ -142,9 +142,19 @@ export const collegeCatalogSchools: readonly CollegeCatalogSchool[] = [
     shortName: 'DQC',
     name: 'Trường Cao đẳng Kỹ nghệ Dung Quất',
     location: 'Quảng Ngãi',
+    province: 'Quảng Ngãi',
     ownership: 'public',
     region: 'other',
     entityLevel: 'vocational_college',
+    catalogSources: [
+      MOET_PUBLIC_UNIT_SOURCE,
+      {
+        title: 'Trường Cao đẳng Kỹ nghệ Dung Quất thông báo tuyển sinh năm 2026',
+        url: 'https://dungquat.edu.vn/tin-tuc/thong-tin-thong-bao/truong-cao-dang-ky-nghe-dung-quat-thong-bao-tuyen-sinh-nam-2026.html',
+        type: 'official-institution',
+        checkedAt: '2026-08-24',
+      },
+    ],
   },
   {
     id: 'hvct',

@@ -83,6 +83,30 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Cổng tuyển sinh chính thức RMIT Việt Nam (rmit.edu.vn) fetch được nhưng chỉ là trang portal điều hướng: yêu cầu tiếng Anh chung (IELTS Academic 6.5, không kỹ năng nào dưới 6.0) được nêu rõ, nhưng ngưỡng điểm THPT/học bạ cụ thể được trang này dẫn sang từng trang ngành riêng lẻ (hàng chục ngành, không fetch hết trong 1 lượt). Không đủ cấu trúc để mô hình hoá eligibility trong batch này; do-not-guess-formula áp dụng.',
   },
+  dhv: {
+    sourceId: 'dhv-admission-2026',
+    title: 'Trang tuyển sinh Trường Đại học Hùng Vương TP.HCM',
+    url: 'https://tuyensinh.dhv.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-06 (2026-08-24): cổng tuyển sinh chính thức tuyensinh.dhv.edu.vn fetch được trực tiếp, liệt kê 5 phương thức (thi TN THPT theo tổ hợp; học bạ với công thức "Điểm xét tuyển = Toán hoặc Ngữ văn + (Trung bình cả năm THPT × 2)"; ĐGNL ĐHQG-HCM ngưỡng nhận hồ sơ dự kiến từ 600 điểm; kỳ thi đánh giá năng lực chuyên biệt H-SCA (Đại học Sư phạm TP.HCM) kết hợp học bạ; xét tuyển bằng trung cấp nghề liên quan). Công thức học bạ khác thường (chọn Toán HOẶC Văn, chưa rõ quy tắc chọn môn nào) và không có ngưỡng sàn cho phương thức 1; chưa đủ cấu trúc để model eligibility trong batch này — do-not-guess-formula áp dụng cho cách chọn môn trong công thức phương thức 2.',
+  },
+  dsu: {
+    sourceId: 'dsu-admission-2026',
+    title: 'Cổng thông tin chính thức Trường Đại học Thể dục Thể thao Đà Nẵng',
+    url: 'https://dsu.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-06 (2026-08-24): domain chính thức dsu.edu.vn xác nhận qua WebFetch, có 4 phương thức tuyển sinh 2026 (thi TN THPT, học bạ, kết hợp điểm thi/học bạ với điểm thi năng khiếu TDTT, xét tuyển thẳng) cho 3 ngành/900 chỉ tiêu, cùng các thông báo "Ngưỡng đảm bảo chất lượng đầu vào" (đăng 22/07/2026) và "Điểm chuẩn trúng tuyển" (đăng 11/08/2026) đã xác nhận tồn tại, nhưng nội dung số liệu cụ thể không được WebFetch trích xuất trong lượt này (chỉ thấy tiêu đề thông báo). Runtime giữ researched-only; chưa fetch được trang con chứa bảng điểm.',
+  },
+  eaut: {
+    sourceId: 'eaut-admission-2026',
+    title: 'Trường ĐH Công nghệ Đông Á công bố 4 phương thức tuyển sinh năm 2026',
+    url: 'https://eaut.edu.vn/tin-tuc/truong-dh-cong-nghe-dong-a-cong-bo-phuong-thuc-tuyen-sinh-nam-2026/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-06 (2026-08-24): bài đăng chính thức eaut.edu.vn fetch được trực tiếp, xác nhận 4 phương thức tuyển sinh 2026 cho 9.800 chỉ tiêu/34 ngành — (1) xét học bạ: "điểm trung bình theo tổ hợp 3 môn xét tuyển đạt từ 18 điểm trở lên" VÀ điểm thi TN THPT 2026 ≥15/30; (2) xét điểm thi TN THPT (ngưỡng cụ thể chưa nêu trong bài); (3) kết hợp điểm thi TN THPT và học bạ (trừ khối ngành VI); (4) các kỳ thi đánh giá năng lực/tư duy (ĐHQG Hà Nội, ĐHBK Hà Nội, ĐH Sư phạm Hà Nội). Phương thức học bạ có ngưỡng khá rõ nhưng ngưỡng phương thức thi TN THPT (phương thức chính) chưa công bố số cụ thể trong bài — chưa đủ để model một eligibility nhất quán trong batch này; do-not-guess-formula áp dụng.',
+  },
 };
 
 function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {
@@ -260,9 +284,9 @@ export const finalCatalogKnowledgeGap = {
   impact: 'exact-final-score-blocking' as const,
 };
 
-// 'vgu' and 'hpu2' moved to dedicated runtime modules (normalized/runtime-source-snapshot/<id>/) —
+// 'vgu', 'hpu2', and 'eiu' moved to dedicated runtime modules (normalized/runtime-source-snapshot/<id>/) —
 // eligibility-only, excluded here to avoid duplicate methodId/comparisonAdapter entries.
-const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2']);
+const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'eiu']);
 const finalCatalogRuntimeSchools = finalCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const finalCatalogMethods: AdmissionMethodDescriptor[] = finalCatalogRuntimeSchools.map((school) => ({

@@ -81,6 +81,30 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Official 2026 UTH admission notice confirms 2 methods (priority admission per school rules, and a combined-assessment method using a proprietary "UTH120" 120-point-equivalent scale). The admission portal itself (tuyensinh.ut.edu.vn) returns HTTP 403 on direct fetch; a per-program cutoff table (64 program codes, non-30-point scale, e.g. 600-999) is available via secondary government-portal coverage (xaydungchinhsach.chinhphu.vn), but no official floor-score/ngưỡng đảm bảo chất lượng đầu vào notice or documentation of the UTH120 conversion formula was located. Left at researched: the non-standard scale and blocked primary source make eligibility modeling unsafe without further extraction.',
   },
+  dnu: {
+    sourceId: 'dnu-admission-2026',
+    title: 'Thông tin tuyển sinh Cao đẳng, Đại học năm 2026 — Trường Đại học Đồng Nai',
+    url: 'https://dongnaiuni.edu.vn/thong-tin-tuyen-sinh-nam-2026/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-06 (2026-08-24): official domain dongnaiuni.edu.vn (also reachable via dnpu.edu.vn, which 301-redirects to it) confirmed to host a dedicated 2026 admission-information page via search-engine indexing, but direct WebFetch to dongnaiuni.edu.vn returns HTTP 403 in this pass, so no numeric threshold could be extracted and verbatim-quoted from the primary source itself. Secondary aggregator search snippets (not independently WebFetch-verified) suggest a THPT-exam floor of 15,0/30 and a transcript-based route requiring lớp 12 "Giỏi" ranking plus either a 18,0/30 THPT-exam total or an 8,50+ graduation-recognition score, but per the do-not-guess-formula rule this is not modeled without a direct fetch confirming the exact wording. Left at researched; retry direct fetch from a different network path before upgrading.',
+  },
+  dthu: {
+    sourceId: 'dthu-admission-2026',
+    title: 'Thông báo ngưỡng bảo đảm chất lượng đầu vào đại học, cao đẳng chính quy năm 2026 — Trường Đại học Đồng Tháp',
+    url: 'https://tuyensinh.dthu.edu.vn/thong-bao-nguong-bao-dam-chat-luong-dau-vao-dai-hoc-cao-dang-chinh-quy-theo-phuong-thuc-ket-qua-thi-tot-nghiep-thpt-nam-2026-va-cac-dieu-kien-dang-ky-072818.html',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-06 (2026-08-24): official tuyensinh.dthu.edu.vn 2026 threshold-notice page confirmed live via WebFetch, referencing an attached PDF ("20260709123157D_THONG BAO DIEM SAN VA NHAN HO SO TUYEN SINH 2026-3.pdf", published 09/07/2026) that was not text-extractable in this pass. A separate official page (qao.dthu.edu.vn/tuyen-sinh/diem-trung-tuyen) lists actual 2026 per-program cutoff scores (range observed 15-27.99/30, e.g. Giáo dục Mầm non 23.55, Sư phạm Toán học 25.65) rather than a single quality-assurance floor, and does not cover every program in one place. Runtime stays researched-only; per-program cutoff table is out of scope for this batch, not a single eligibility formula.',
+  },
+  due: {
+    sourceId: 'due-admission-2026',
+    title: 'Trường Đại học Kinh tế Công nghiệp Long An (DLA) công bố các phương thức tuyển sinh năm 2026',
+    url: 'https://tuyensinh.daihoclongan.edu.vn/tin-tuc-tuyen-sinh/742-truong-dai-hoc-kinh-te-cong-nghiep-long-an-dla-cong-bo-cac-phuong-thuc-tuyen-sinh-nam-2026.html',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-06 (2026-08-24): official tuyensinh.daihoclongan.edu.vn 2026 announcement confirmed live via WebFetch, listing 4 admission methods (THPT exam results, học bạ/transcript GPA, ĐHQG TP.HCM aptitude test, and direct admission per current regulations) with a reference to subject-combination tables per program, but no numeric threshold/floor score for any method was present in the extracted page content. Runtime stays researched-only; do not fabricate threshold numbers.',
+  },
 };
 
 function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {
