@@ -72,7 +72,43 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Official NLU (ts.hcmuaf.edu.vn) 2026 threshold notice confirmed to exist (28/06/2026, "Ngưỡng đảm bảo chất lượng đầu vào (điểm sàn)..."), cross-checked via chinhphu.vn: aggregate ranges only (16-18/30 THPT exam, 18-20/30 transcript, 601-650 ĐGNL), no per-program breakdown extracted — the official per-program table is an embedded image (nguong-dam-bao-chat-luong-2026.jpg), and 4 methods (ĐGNL, THPT, THPT+transcript, transcript-only) apply different scopes per program (Sư phạm kỹ thuật nông nghiệp follows a separate MOET-governed threshold). Left at researched; do not fabricate per-program numbers.',
   },
+  uth: {
+    sourceId: 'uth-admission-2026',
+    title: 'UTH undergraduate admission portal 2026',
+    url: 'https://tuyensinh.ut.edu.vn/',
+    publishedAt: '2026-06-11',
+    checkedAt: '2026-08-24',
+    note:
+      'Official 2026 UTH admission notice confirms 2 methods (priority admission per school rules, and a combined-assessment method using a proprietary "UTH120" 120-point-equivalent scale). The admission portal itself (tuyensinh.ut.edu.vn) returns HTTP 403 on direct fetch; a per-program cutoff table (64 program codes, non-30-point scale, e.g. 600-999) is available via secondary government-portal coverage (xaydungchinhsach.chinhphu.vn), but no official floor-score/ngưỡng đảm bảo chất lượng đầu vào notice or documentation of the UTH120 conversion formula was located. Left at researched: the non-standard scale and blocked primary source make eligibility modeling unsafe without further extraction.',
+  },
 };
+
+function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {
+  return researchedAdmissionSources[schoolId];
+}
+
+function capabilitiesForSchool(schoolId: string): NonNullable<SchoolModule['capabilities']> {
+  return getResearchedAdmissionSource(schoolId) ? researchedCatalogCapabilities : catalogOnlyCapabilities;
+}
+
+function summaryForSchool(school: SouthernCatalogSchool): string {
+  const source = getResearchedAdmissionSource(school.id);
+  if (!source) return school.summary;
+  return `Da xac minh nguon tuyen sinh chinh thuc 2026 (${source.title}); chua nang len eligibility/calculator vi con thieu normalized formula, threshold, conversion hoac program-scope rules.`;
+}
+
+function catalogSourcesForSchool(schoolId: string): SchoolModule['catalogSources'] | undefined {
+  const source = getResearchedAdmissionSource(schoolId);
+  if (!source) return undefined;
+  return [
+    {
+      title: source.title,
+      url: source.url,
+      type: 'official-institution',
+      checkedAt: source.checkedAt,
+    },
+  ];
+}
 
 export const southernCatalogSchools: readonly SouthernCatalogSchool[] = [
   {
@@ -284,52 +320,12 @@ export const southernCatalogKnowledgeGap = {
   impact: 'exact-final-score-blocking' as const,
 };
 
-/** Batch 10 (2026-08-24): 'pntu' graduated to a dedicated eligibility-only runtime module
- * (`normalized/runtime-source-snapshot/pntu/`) — excluded here from the generated method/module/
- * adapter arrays the same way `remainingCatalog.ts` excludes its `explicitRuntimeSchoolIds`. It
- * stays listed in `southernCatalogSchools` above for identity/location metadata only. */
-const explicitRuntimeSchoolIds = new Set(['pntu']);
+/** Batch 10 (2026-08-24): 'pntu' and 'uah' graduated to dedicated eligibility-only runtime modules
+ * (`normalized/runtime-source-snapshot/{pntu,uah}/`) — excluded here from the generated method/module/
+ * adapter arrays the same way `remainingCatalog.ts` excludes its `explicitRuntimeSchoolIds`. They
+ * stay listed in `southernCatalogSchools` above for identity/location metadata only. */
+const explicitRuntimeSchoolIds = new Set(['pntu', 'uah']);
 const southernCatalogRuntimeSchools = southernCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
-
-function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {
-  return researchedAdmissionSources[schoolId];
-}
-
-function capabilitiesFor(schoolId: string): NonNullable<SchoolModule['capabilities']> {
-  return getResearchedAdmissionSource(schoolId) ? researchedCatalogCapabilities : catalogOnlyCapabilities;
-}
-
-function summaryFor(school: SouthernCatalogSchool): string {
-  const source = getResearchedAdmissionSource(school.id);
-  if (!source) return school.summary;
-  return `Da xac minh nguon tuyen sinh chinh thuc 2026 (${source.title}); chua nang len eligibility/calculator vi con thieu normalized formula, threshold, conversion hoac program-scope rules.`;
-}
-
-function catalogSourcesFor(schoolId: string): SchoolModule['catalogSources'] | undefined {
-  const source = getResearchedAdmissionSource(schoolId);
-  if (!source) return undefined;
-  return [{ title: source.title, url: source.url, type: 'official-institution', checkedAt: source.checkedAt }];
-}
-
-function evidenceFor(schoolId: string): RuleEvidence[] {
-  const source = getResearchedAdmissionSource(schoolId);
-  if (!source) return [];
-  return [
-    {
-      sourceId: source.sourceId,
-      sourceUrl: source.url,
-      sourceTitle: source.title,
-      sourceType: 'official-school',
-      verification: 'official-source-available',
-      effectiveYear: 2026,
-      publishedAt: source.publishedAt,
-      criticality: 'informational',
-      verifiedAt: source.checkedAt,
-      lastReviewedAt: source.checkedAt,
-      note: source.note,
-    },
-  ];
-}
 
 export const southernCatalogMethods: AdmissionMethodDescriptor[] = southernCatalogRuntimeSchools.map((school) => ({
   id: `${school.id}-catalog-2026`,
@@ -354,12 +350,32 @@ export const southernCatalogModules: Record<string, SchoolModule> = Object.fromE
       ownership: school.ownership,
       region: school.location === 'TP.HCM' ? 'hcm' : 'other',
       vnuhcm: false,
-      summary: summaryFor(school),
-      capabilities: capabilitiesFor(school.id),
-      catalogSources: catalogSourcesFor(school.id),
+      summary: summaryForSchool(school),
+      capabilities: capabilitiesForSchool(school.id),
+      catalogSources: catalogSourcesForSchool(school.id),
     },
   ])
 );
+
+function evidenceForSchool(schoolId: string): RuleEvidence[] {
+  const source = getResearchedAdmissionSource(schoolId);
+  if (!source) return [];
+  return [
+    {
+      sourceId: source.sourceId,
+      sourceUrl: source.url,
+      sourceTitle: source.title,
+      sourceType: 'official-school',
+      verification: 'official-source-available',
+      effectiveYear: 2026,
+      publishedAt: source.publishedAt,
+      criticality: 'informational',
+      verifiedAt: source.checkedAt,
+      lastReviewedAt: source.checkedAt,
+      note: source.note,
+    },
+  ];
+}
 
 function evaluateCatalogOnlySchool(school: SouthernCatalogSchool): AdmissionEvaluation {
   const methodId = `${school.id}-catalog-2026`;
@@ -376,7 +392,7 @@ function evaluateCatalogOnlySchool(school: SouthernCatalogSchool): AdmissionEval
     missingRules: [southernCatalogKnowledgeGap.label],
     missingRequirements: [{ kind: 'unsupported', code: southernCatalogKnowledgeGap.id, label: southernCatalogKnowledgeGap.label }],
     explanation: [],
-    evidence: evidenceFor(school.id),
+    evidence: evidenceForSchool(school.id),
   };
 }
 

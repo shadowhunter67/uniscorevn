@@ -317,6 +317,23 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     checkedAt: '2026-08-24',
     note: 'Batch 10 (2026-08-24): official ts.tlu.edu.vn/tlu.edu.vn notice page confirmed live with the correct 2026 title ("Ngưỡng bảo đảm chất lượng đầu vào Đại học chính quy năm 2026 tại Hà Nội"), but the page is a DotNetNuke SPA shell that loads its threshold table via an internal AJAX API (CategoryService.getBySettings) not reachable through direct fetch/curl in this pass. Secondary press confirms only an aggregate range (điểm sàn 16-20/30, điểm chuẩn 19-24.64/30 across ~46 programs) without a per-program breakdown matching the primary source. Left at researched; do not fabricate the per-program table.',
   },
+  phenikaa: {
+    sourceId: 'phenikaa-admission-2026',
+    title: 'Đại học Phenikaa công bố ngưỡng điểm nhận hồ sơ xét tuyển đại học hệ chính quy đợt 1 năm 2026',
+    url: 'https://phenikaa-uni.edu.vn/vi/post/tuyen-sinh/tin-tuyen-sinh/dai-hoc-phenikaa-cong-bo-nguong-diem-nhan-ho-so-xet-tuyen-dai-hoc-he-chinh-quy-dot-1-nam-2026',
+    checkedAt: '2026-08-24',
+    publishedAt: '2026-03-17',
+    note:
+      'Official Phenikaa 2026 threshold notice (cross-checked via secondary reports thuvienphapluat.vn and baolamdong.vn, both citing the same official announcement) lists 5 admission methods with numeric floors per method: HSA (ĐGNL) 57-80/150, HUST thinking test (ĐGTD) 40-56/100, V-SAT 202-240/450, and a special condition for Y khoa/Dược/Luật (THPT exam 3-subject total >= 20,00/30 with Excellent grade-12 academic rank, or graduation score >= 8,50). The general THPT-exam-only floor for non-specialized majors is not stated as a single flat number in this pass; the "Excellent academic rank" condition also has no matching applicant-profile field yet. Runtime stays researched-only until a clean single-method threshold can be isolated without fabricating scope.',
+  },
+  thanglong: {
+    sourceId: 'thanglong-admission-2026',
+    title: 'Đăng ký xét tuyển Trường Đại học Thăng Long 2026: Hướng dẫn đầy đủ từ A-Z',
+    url: 'https://thanglong.edu.vn/dang-ky-xet-tuyen-dai-hoc-thang-long-2026',
+    checkedAt: '2026-08-24',
+    note:
+      'Official thanglong.edu.vn 2026 admission guide (plus the linked official Quyết định ban hành thông tin tuyển sinh 2026, thanglong.edu.vn, dated 2026-02-11) confirms 6 admission methods (THPT exam; THPT exam + international language certificate; HSA/TSA/SPT aptitude tests; THPT exam + grade-12 transcript for Nursing/Tourism/Hotel Management; grade-12 transcript + talent test for Vocal/Graphic Design; direct admission), 37 subject combinations, and 25 programs across 8 faculties, quota 3,000. No 2026 numeric threshold (điểm chuẩn/điểm sàn) had been published as of this research pass — the article only cites 2025 reference scores (16.0-23.75/30) — and the official Quyết định PDF text itself was not extractable via WebFetch (page shell only). Runtime stays researched-only; do not use 2025 cutoffs as 2026 thresholds.',
+  },
 };
 
 export const remainingCatalogSchools: readonly RemainingCatalogSchool[] = [
@@ -427,6 +444,10 @@ const explicitRuntimeSchoolIds = new Set([
   'vku',
   'ajc',
   'hup',
+  'vnuf',
+  'dtu',
+  'fptu',
+  'hubt',
 ]);
 const remainingCatalogRuntimeSchools = remainingCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 

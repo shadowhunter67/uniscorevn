@@ -10,11 +10,10 @@ import {
 } from './institutionCoverage';
 import { collegeCatalogSchools } from '../schools/collegeCatalog';
 
-// TODO: update institutionCoverage.test.ts counts in final consolidation pass — batch 10
-// (2026-08-24) moved hmu/tlu/nlu catalog-only -> researched and ajc/hup/pntu catalog-only ->
-// eligibility-only, which shifts totalCatalogEntries/researched/eligibilitySupported/catalogOnly
-// below. Not recomputed here to avoid guessing wrong numbers; run stats:coverage to get exact
-// counts before updating the assertions.
+// TODO: update institutionCoverage.test.ts counts in final consolidation pass — batch-expand-01/02/03
+// moved several schools from catalog-only to researched or eligibility-only, which shifts
+// totalCatalogEntries/researched/eligibilitySupported/catalogOnly below. Not recomputed here to
+// avoid guessing wrong numbers; run stats:coverage to get exact counts before updating assertions.
 describe('institution coverage statistics', () => {
   it('separates catalog coverage from institution KPI coverage', () => {
     expect(institutionCoverage.totalCatalogEntries).toBe(267);
