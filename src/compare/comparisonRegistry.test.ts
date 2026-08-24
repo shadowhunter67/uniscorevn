@@ -54,6 +54,12 @@ import { hulAdmissionMethods } from '../schools/hul/methods';
 import { huscAdmissionMethods } from '../schools/husc/methods';
 import { huafAdmissionMethods } from '../schools/huaf/methods';
 import { hueeduAdmissionMethods } from '../schools/hueedu/methods';
+import { dutAdmissionMethods } from '../schools/dut/methods';
+import { dueudnAdmissionMethods } from '../schools/dueudn/methods';
+import { uedudnAdmissionMethods } from '../schools/uedudn/methods';
+import { uflsudnAdmissionMethods } from '../schools/uflsudn/methods';
+import { uteudnAdmissionMethods } from '../schools/uteudn/methods';
+import { vkuAdmissionMethods } from '../schools/vku/methods';
 import { southernCatalogMethods } from '../schools/southernCatalog';
 import { remainingCatalogMethods } from '../schools/remainingCatalog';
 import { finalCatalogMethods } from '../schools/finalCatalog';
@@ -122,6 +128,12 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   husc: huscAdmissionMethods,
   huaf: huafAdmissionMethods,
   hueedu: hueeduAdmissionMethods,
+  dut: dutAdmissionMethods,
+  dueudn: dueudnAdmissionMethods,
+  uedudn: uedudnAdmissionMethods,
+  uflsudn: uflsudnAdmissionMethods,
+  uteudn: uteudnAdmissionMethods,
+  vku: vkuAdmissionMethods,
 };
 
 /** Pure helper — trả danh sách schoolId bị trùng trong 1 mảng adapter. Test cả trên registry thật

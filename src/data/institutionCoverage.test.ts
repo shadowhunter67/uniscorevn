@@ -61,7 +61,7 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 10,
       researched: 74,
       admissionDataAvailable: 74,
-      eligibilitySupported: 29,
+      eligibilitySupported: 38,
       calculatorSupported: 18,
       partialCalculator: 4,
       fullyVerified: 14,
@@ -74,13 +74,19 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(27);
+    expect(researchedOnly).toBe(18);
     for (const schoolId of [
       'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'hust', 'tmu', 'haui', 'aof', 'bav', 'hanu', 'hou',
       'ntu', 'qnu', 'hueu',
       'hpmu', 'udn',
     ]) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('researched');
+    }
+    // UDN cluster batch (2026-08-24): udn stays a system-level umbrella (researched, no
+    // independent admission formula); the 6 member schools now carry dedicated eligibility-only
+    // runtime modules (see normalized/runtime-source-snapshot/<id>/ in the private repo).
+    for (const schoolId of ['dut', 'dueudn', 'uedudn', 'uflsudn', 'uteudn', 'vku']) {
+      expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
     }
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnua)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.huce)).toBe('eligibility-only');

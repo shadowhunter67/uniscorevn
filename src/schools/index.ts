@@ -55,6 +55,12 @@ import { hulModule } from './hul';
 import { huscModule } from './husc';
 import { huafModule } from './huaf';
 import { hueeduModule } from './hueedu';
+import { dutModule } from './dut';
+import { dueudnModule } from './dueudn';
+import { uedudnModule } from './uedudn';
+import { uflsudnModule } from './uflsudn';
+import { uteudnModule } from './uteudn';
+import { vkuModule } from './vku';
 import { southernCatalogModules } from './southernCatalog';
 import { remainingCatalogModules } from './remainingCatalog';
 import { finalCatalogModules } from './finalCatalog';
@@ -161,4 +167,10 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   husc: huscModule,
   huaf: huafModule,
   hueedu: hueeduModule,
+  dut: dutModule,
+  dueudn: dueudnModule,
+  uedudn: uedudnModule,
+  uflsudn: uflsudnModule,
+  uteudn: uteudnModule,
+  vku: vkuModule,
 };
