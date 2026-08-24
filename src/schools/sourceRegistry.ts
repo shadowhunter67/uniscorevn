@@ -34,6 +34,11 @@ import { sguSources } from './sgu/sources';
 import { hnueSources } from './hnue/sources';
 import { vinhuniSources } from './vinhuni/sources';
 import { utcSources } from './utc/sources';
+import { hceSources } from './hce/sources';
+import { hulSources } from './hul/sources';
+import { huscSources } from './husc/sources';
+import { huafSources } from './huaf/sources';
+import { hueeduSources } from './hueedu/sources';
 
 function withSchoolId(schoolId: string, sources: Omit<AdmissionSource, 'schoolId'>[]): AdmissionSource[] {
   return sources.map((source) => ({ ...source, schoolId }));
@@ -74,6 +79,11 @@ export const sguSourceRegistry: AdmissionSource[] = withSchoolId('sgu', sguSourc
 export const hnueSourceRegistry: AdmissionSource[] = withSchoolId('hnue', hnueSources);
 export const vinhuniSourceRegistry: AdmissionSource[] = withSchoolId('vinhuni', vinhuniSources);
 export const utcSourceRegistry: AdmissionSource[] = withSchoolId('utc', utcSources);
+export const hceSourceRegistry: AdmissionSource[] = withSchoolId('hce', hceSources);
+export const hulSourceRegistry: AdmissionSource[] = withSchoolId('hul', hulSources);
+export const huscSourceRegistry: AdmissionSource[] = withSchoolId('husc', huscSources);
+export const huafSourceRegistry: AdmissionSource[] = withSchoolId('huaf', huafSources);
+export const hueeduSourceRegistry: AdmissionSource[] = withSchoolId('hueedu', hueeduSources);
 
 export const schoolSourceRegistries: Record<string, AdmissionSource[]> = {
   hcmut: hcmutSourceRegistry,
@@ -111,6 +121,11 @@ export const schoolSourceRegistries: Record<string, AdmissionSource[]> = {
   hnue: hnueSourceRegistry,
   vinhuni: vinhuniSourceRegistry,
   utc: utcSourceRegistry,
+  hce: hceSourceRegistry,
+  hul: hulSourceRegistry,
+  husc: huscSourceRegistry,
+  huaf: huafSourceRegistry,
+  hueedu: hueeduSourceRegistry,
 };
 
 export const allAdmissionSources: AdmissionSource[] = [
@@ -149,4 +164,9 @@ export const allAdmissionSources: AdmissionSource[] = [
   ...hnueSourceRegistry,
   ...vinhuniSourceRegistry,
   ...utcSourceRegistry,
+  ...hceSourceRegistry,
+  ...hulSourceRegistry,
+  ...huscSourceRegistry,
+  ...huafSourceRegistry,
+  ...hueeduSourceRegistry,
 ];

@@ -236,8 +236,8 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     title: 'Hue University undergraduate admission methods 2026',
     url: 'https://tuyensinh.hueuni.edu.vn/News/Detail/cac-phuong-thuc-tuyen-sinh-dai-hoc-he-chinh-quy-cua-dai-hoc-hue-nam-2026_20260226073154',
     publishedAt: '2026-02-27',
-    checkedAt: '2026-08-22',
-    note: 'Official Hue University page lists five common 2026 admission methods; member-school and program-specific thresholds/scopes need extraction before executable support.',
+    checkedAt: '2026-08-24',
+    note: 'Official Hue University system-level page lists 5 shared methods (direct/priority, THPT, transcript for select member schools, ability assessment, combined) and explicitly defers all numeric thresholds/bonus/conversion tables to each member-school page. Đại học Huế also co-signs Thông báo 42/TB-HĐTSĐH ngày 10/7/2026 with a per-program threshold appendix (https://tuyensinh.hueuni.edu.vn/News/Download/10676) covering every member school; HUEU itself has no distinct program catalog or numeric eligibility rule of its own, so runtime eligibility content now lives in the member-school modules (hce, hul, husc, huaf, hueedu), which are exported as dedicated eligibility-only schools rather than through this catalog-only path.',
   },
   hce: {
     sourceId: 'hce-admission-2026',
@@ -433,7 +433,7 @@ export const remainingCatalogKnowledgeGap = {
   impact: 'exact-final-score-blocking' as const,
 };
 
-const explicitRuntimeSchoolIds = new Set(['huce', 'dav']);
+const explicitRuntimeSchoolIds = new Set(['huce', 'dav', 'hce', 'hul', 'husc', 'huaf', 'hueedu']);
 const remainingCatalogRuntimeSchools = remainingCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {
