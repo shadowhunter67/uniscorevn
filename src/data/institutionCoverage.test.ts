@@ -10,6 +10,9 @@ import {
 } from './institutionCoverage';
 import { collegeCatalogSchools } from '../schools/collegeCatalog';
 
+// TODO: update institutionCoverage.test.ts counts in final consolidation pass (batch-expand-02
+// upgraded vnuf/dtu/uah/vgu/hpu2 from catalog-only to eligibility-only; researchedOnly count also
+// changed since uth moved from catalog-only to researched).
 describe('institution coverage statistics', () => {
   it('separates catalog coverage from institution KPI coverage', () => {
     expect(institutionCoverage.totalCatalogEntries).toBe(267);

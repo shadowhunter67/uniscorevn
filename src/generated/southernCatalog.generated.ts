@@ -12,6 +12,7 @@ import type { AdmissionEvaluation } from '../core/admissionEvaluation';
 import type { AdmissionMethodDescriptor } from '../core/admissionMethod';
 import type { ApplicantProfile } from '../core/applicantProfile';
 import type { SchoolModule } from '../core/schoolModule';
+import type { RuleEvidence } from '../core/evidence';
 import type { SchoolComparisonAdapter, SchoolComparisonResult } from '../compare/schoolComparisonAdapter';
 
 interface SouthernCatalogSchool {
@@ -39,6 +40,63 @@ const catalogOnlyCapabilities = {
   scoreConversion: false,
   exactCalculator: false,
 } satisfies NonNullable<SchoolModule['capabilities']>;
+
+const researchedCatalogCapabilities = {
+  admissionInfo: true,
+  programs: false,
+  eligibility: false,
+  cutoffs: false,
+  scoreConversion: false,
+  exactCalculator: false,
+} satisfies NonNullable<SchoolModule['capabilities']>;
+
+interface ResearchedAdmissionSource {
+  title: string;
+  url: string;
+  sourceId: string;
+  checkedAt: string;
+  publishedAt?: string;
+  note: string;
+}
+
+const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
+  uth: {
+    sourceId: 'uth-admission-2026',
+    title: 'UTH undergraduate admission portal 2026',
+    url: 'https://tuyensinh.ut.edu.vn/',
+    publishedAt: '2026-06-11',
+    checkedAt: '2026-08-24',
+    note:
+      'Official 2026 UTH admission notice confirms 2 methods (priority admission per school rules, and a combined-assessment method using a proprietary "UTH120" 120-point-equivalent scale). The admission portal itself (tuyensinh.ut.edu.vn) returns HTTP 403 on direct fetch; a per-program cutoff table (64 program codes, non-30-point scale, e.g. 600-999) is available via secondary government-portal coverage (xaydungchinhsach.chinhphu.vn), but no official floor-score/ngưỡng đảm bảo chất lượng đầu vào notice or documentation of the UTH120 conversion formula was located. Left at researched: the non-standard scale and blocked primary source make eligibility modeling unsafe without further extraction.',
+  },
+};
+
+function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {
+  return researchedAdmissionSources[schoolId];
+}
+
+function capabilitiesForSchool(schoolId: string): NonNullable<SchoolModule['capabilities']> {
+  return getResearchedAdmissionSource(schoolId) ? researchedCatalogCapabilities : catalogOnlyCapabilities;
+}
+
+function summaryForSchool(school: SouthernCatalogSchool): string {
+  const source = getResearchedAdmissionSource(school.id);
+  if (!source) return school.summary;
+  return `Da xac minh nguon tuyen sinh chinh thuc 2026 (${source.title}); chua nang len eligibility/calculator vi con thieu normalized formula, threshold, conversion hoac program-scope rules.`;
+}
+
+function catalogSourcesForSchool(schoolId: string): SchoolModule['catalogSources'] | undefined {
+  const source = getResearchedAdmissionSource(schoolId);
+  if (!source) return undefined;
+  return [
+    {
+      title: source.title,
+      url: source.url,
+      type: 'official-institution',
+      checkedAt: source.checkedAt,
+    },
+  ];
+}
 
 export const southernCatalogSchools: readonly SouthernCatalogSchool[] = [
   {
@@ -250,7 +308,11 @@ export const southernCatalogKnowledgeGap = {
   impact: 'exact-final-score-blocking' as const,
 };
 
-export const southernCatalogMethods: AdmissionMethodDescriptor[] = southernCatalogSchools.map((school) => ({
+// 'uah' moved to a dedicated runtime module (normalized/runtime-source-snapshot/uah/) — eligibility-only.
+const explicitRuntimeSchoolIds = new Set(['uah']);
+const southernCatalogRuntimeSchools = southernCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
+
+export const southernCatalogMethods: AdmissionMethodDescriptor[] = southernCatalogRuntimeSchools.map((school) => ({
   id: `${school.id}-catalog-2026`,
   schoolId: school.id,
   name: 'Thông tin tuyển sinh 2026 đang chờ research',
@@ -261,7 +323,7 @@ export const southernCatalogMethods: AdmissionMethodDescriptor[] = southernCatal
 }));
 
 export const southernCatalogModules: Record<string, SchoolModule> = Object.fromEntries(
-  southernCatalogSchools.map((school) => [
+  southernCatalogRuntimeSchools.map((school) => [
     school.id,
     {
       id: school.id,
@@ -273,11 +335,32 @@ export const southernCatalogModules: Record<string, SchoolModule> = Object.fromE
       ownership: school.ownership,
       region: school.location === 'TP.HCM' ? 'hcm' : 'other',
       vnuhcm: false,
-      summary: school.summary,
-      capabilities: catalogOnlyCapabilities,
+      summary: summaryForSchool(school),
+      capabilities: capabilitiesForSchool(school.id),
+      catalogSources: catalogSourcesForSchool(school.id),
     },
   ])
 );
+
+function evidenceForSchool(schoolId: string): RuleEvidence[] {
+  const source = getResearchedAdmissionSource(schoolId);
+  if (!source) return [];
+  return [
+    {
+      sourceId: source.sourceId,
+      sourceUrl: source.url,
+      sourceTitle: source.title,
+      sourceType: 'official-school',
+      verification: 'official-source-available',
+      effectiveYear: 2026,
+      publishedAt: source.publishedAt,
+      criticality: 'informational',
+      verifiedAt: source.checkedAt,
+      lastReviewedAt: source.checkedAt,
+      note: source.note,
+    },
+  ];
+}
 
 function evaluateCatalogOnlySchool(school: SouthernCatalogSchool): AdmissionEvaluation {
   const methodId = `${school.id}-catalog-2026`;
@@ -294,11 +377,11 @@ function evaluateCatalogOnlySchool(school: SouthernCatalogSchool): AdmissionEval
     missingRules: [southernCatalogKnowledgeGap.label],
     missingRequirements: [{ kind: 'unsupported', code: southernCatalogKnowledgeGap.id, label: southernCatalogKnowledgeGap.label }],
     explanation: [],
-    evidence: [],
+    evidence: evidenceForSchool(school.id),
   };
 }
 
-export const southernCatalogComparisonAdapters: readonly SchoolComparisonAdapter[] = southernCatalogSchools.map((school) => ({
+export const southernCatalogComparisonAdapters: readonly SchoolComparisonAdapter[] = southernCatalogRuntimeSchools.map((school) => ({
   schoolId: school.id,
   methodId: `${school.id}-catalog-2026`,
   methodName: 'Thông tin tuyển sinh 2026 đang chờ research',

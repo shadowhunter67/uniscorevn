@@ -174,7 +174,12 @@ export const finalCatalogKnowledgeGap = {
   impact: 'exact-final-score-blocking' as const,
 };
 
-export const finalCatalogMethods: AdmissionMethodDescriptor[] = finalCatalogSchools.map((school) => ({
+// 'vgu' and 'hpu2' moved to dedicated runtime modules (normalized/runtime-source-snapshot/<id>/) —
+// eligibility-only, excluded here to avoid duplicate methodId/comparisonAdapter entries.
+const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2']);
+const finalCatalogRuntimeSchools = finalCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
+
+export const finalCatalogMethods: AdmissionMethodDescriptor[] = finalCatalogRuntimeSchools.map((school) => ({
   id: `${school.id}-catalog-2026`,
   schoolId: school.id,
   name: 'Thông tin tuyển sinh 2026 đang chờ research',
@@ -185,7 +190,7 @@ export const finalCatalogMethods: AdmissionMethodDescriptor[] = finalCatalogScho
 }));
 
 export const finalCatalogModules: Record<string, SchoolModule> = Object.fromEntries(
-  finalCatalogSchools.map((school) => [
+  finalCatalogRuntimeSchools.map((school) => [
     school.id,
     {
       id: school.id,
@@ -222,7 +227,7 @@ function evaluateCatalogOnlySchool(school: FinalCatalogSchool): AdmissionEvaluat
   };
 }
 
-export const finalCatalogComparisonAdapters: readonly SchoolComparisonAdapter[] = finalCatalogSchools.map((school) => ({
+export const finalCatalogComparisonAdapters: readonly SchoolComparisonAdapter[] = finalCatalogRuntimeSchools.map((school) => ({
   schoolId: school.id,
   methodId: `${school.id}-catalog-2026`,
   methodName: 'Thông tin tuyển sinh 2026 đang chờ research',

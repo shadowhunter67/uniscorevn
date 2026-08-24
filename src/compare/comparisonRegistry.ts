@@ -56,6 +56,11 @@ import { uedudnComparisonAdapter } from '../schools/uedudn/comparison';
 import { uflsudnComparisonAdapter } from '../schools/uflsudn/comparison';
 import { uteudnComparisonAdapter } from '../schools/uteudn/comparison';
 import { vkuComparisonAdapter } from '../schools/vku/comparison';
+import { vnufComparisonAdapter } from '../schools/vnuf/comparison';
+import { dtuComparisonAdapter } from '../schools/dtu/comparison';
+import { uahComparisonAdapter } from '../schools/uah/comparison';
+import { vguComparisonAdapter } from '../schools/vgu/comparison';
+import { hpu2ComparisonAdapter } from '../schools/hpu2/comparison';
 import { southernCatalogComparisonAdapters } from '../schools/southernCatalog';
 import { remainingCatalogComparisonAdapters } from '../schools/remainingCatalog';
 import { finalCatalogComparisonAdapters } from '../schools/finalCatalog';
@@ -131,6 +136,11 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   uflsudnComparisonAdapter,
   uteudnComparisonAdapter,
   vkuComparisonAdapter,
+  vnufComparisonAdapter,
+  dtuComparisonAdapter,
+  uahComparisonAdapter,
+  vguComparisonAdapter,
+  hpu2ComparisonAdapter,
   ...southernCatalogComparisonAdapters,
   ...remainingCatalogComparisonAdapters.filter(
     (adapter) =>

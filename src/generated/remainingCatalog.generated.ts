@@ -410,6 +410,8 @@ const explicitRuntimeSchoolIds = new Set([
   'uflsudn',
   'uteudn',
   'vku',
+  'vnuf',
+  'dtu',
 ]);
 const remainingCatalogRuntimeSchools = remainingCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
