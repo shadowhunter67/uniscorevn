@@ -63,6 +63,15 @@ const researchedCatalogCapabilities = {
  * structured numbers extracted yet — same "researched" tier pattern as `remainingCatalog.ts`
  * (`researchedAdmissionSources`), replicated here for the southern roster. */
 const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
+  tvu: {
+    sourceId: 'tvu-admission-2026',
+    title: 'TVU official 2026 admission plan announcement',
+    url: 'https://tuyensinh.tvu.edu.vn/thong-bao-tuyen-sinh-dai-hoc-he-chinh-quy-dot-1-nam-2026-nguoi-co-bang-tot-nghiep-trung-hoc-pho-thong/',
+    checkedAt: '2026-08-24',
+    publishedAt: '2026-06-18',
+    note:
+      'Batch expand-14 (2026-08-24): official tuyensinh.tvu.edu.vn / tvu.edu.vn (Truong Dai hoc Tra Vinh) 2026 Round-1 notice confirms 7,415 seats across 49 programs and 4 methods. Floor thresholds are tiered and academic-rank-gated in parts: Medicine/Dentistry/Pharmacy requires grade-12 rank "Gioi" (Excellent) plus THPT total >= 20/30 (or graduation-exam average >= 8.5); other health-science majors require rank "Kha" (Good) or higher plus THPT total >= 16.5/30 (or average >= 6.5); Law requires rank "Gioi" plus THPT total >= 18/30 with Math/Van >= 6 each; other majors require rank "Trung binh" (Average) or higher, or THPT graduation score >= 5.0. Every tier mixes an academic-rank condition with no matching applicant-profile field alongside a numeric floor. Left at researched per the academic-rank-gating rule; do not model eligibility without the rank field.',
+  },
   nlu: {
     sourceId: 'nlu-admission-2026',
     title: 'Điểm sàn tuyển sinh Trường Đại học Nông Lâm TPHCM 2026',
@@ -323,8 +332,10 @@ export const southernCatalogKnowledgeGap = {
 /** Batch 10 (2026-08-24): 'pntu' and 'uah' graduated to dedicated eligibility-only runtime modules
  * (`normalized/runtime-source-snapshot/{pntu,uah}/`) — excluded here from the generated method/module/
  * adapter arrays the same way `remainingCatalog.ts` excludes its `explicitRuntimeSchoolIds`. They
- * stay listed in `southernCatalogSchools` above for identity/location metadata only. */
-const explicitRuntimeSchoolIds = new Set(['pntu', 'uah']);
+ * stay listed in `southernCatalogSchools` above for identity/location metadata only.
+ * Batch expand-14 (2026-08-24): 'ttu' graduated the same way (dedicated eligibility-only module at
+ * `normalized/runtime-source-snapshot/ttu/`). */
+const explicitRuntimeSchoolIds = new Set(['pntu', 'uah', 'ttu']);
 const southernCatalogRuntimeSchools = southernCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const southernCatalogMethods: AdmissionMethodDescriptor[] = southernCatalogRuntimeSchools.map((school) => ({

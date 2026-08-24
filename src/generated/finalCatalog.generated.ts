@@ -67,6 +67,64 @@ const researchedCatalogCapabilities = {
  * catalog-only phẳng sang "researched". Copy nguyên mẫu từ remainingCatalog.ts.
  */
 const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
+  tnut: {
+    sourceId: 'tnut-admission-2026',
+    title: 'TNUT undergraduate admission guide 2026',
+    url: 'https://tnut.edu.vn/huong-dan-xet-tuyen-dai-hoc-nam-2026-tai-truong-dai-hoc-ky-thuat-cong-nghiep-dai-hoc-thai-nguyen-dz22289.html',
+    checkedAt: '2026-08-24',
+    publishedAt: '2026-07-01',
+    note:
+      'Batch expand-14 (2026-08-24): official tnut.edu.vn 2026 admission guide (its own domain, Thai Nguyen University member school) confirms method process (THPT exam, transcript, V-SAT, direct admission) and states floor thresholds "will be determined and announced per Ministry regulation" once 2026 exam results are in - no numeric threshold is published in this document itself. The system-level TNU notice (tnu.edu.vn, 08/07/2026) states a general 16,00/30 floor for "most programs" but explicitly differentiates Teacher Education/Medicine/Semiconductor/Law categories without confirming TNUT falls under the general floor; TNUT program-to-category mapping not verified. Left at researched; do not assume the 16/30 system floor applies without confirmation.',
+  },
+  tqt: {
+    sourceId: 'tqt-admission-2026',
+    title: 'Truong Dai hoc Tran Quoc Tuan (Si quan Luc quan 1) official site',
+    url: 'http://sqlq1.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-14 (2026-08-24): official domain sqlq1.edu.vn confirmed via search (Facebook-linked, school code LAH). This is a Ministry of Defense military officer school: eligibility is gated by gender (male only for combat-officer training), age (<=31, or 17-21 for candidates with no prior military service), political/health vetting, and a preliminary military screening score (so-tuyen) separate from the THPT exam - none of these map to UniScoreVN\'s applicant-profile fields, and admission also runs through a district/regiment-level military recruitment process rather than the standard national online portal. Left at researched; the THPT/exam-combination floor (reported secondarily as 18-22) is not modeled because the surrounding eligibility gates cannot be represented.',
+  },
+  tueba: {
+    sourceId: 'tueba-admission-2026',
+    title: 'TUEBA official site (Truong Dai hoc Kinh te va Quan tri Kinh doanh - Dai hoc Thai Nguyen)',
+    url: 'https://tueba.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-14 (2026-08-24): tueba.edu.vn confirmed as the official Thai Nguyen University member-school domain with an admission-threshold notice pattern (own 2025 notice found: "Thong bao Nguong Dam Bao Chat Luong Dau Vao..."), but the equivalent 2026 notice with numeric thresholds could not be located via search (only a 2025 dated article surfaced: floor ~17/30 most majors, Luat Kinh te 18/30 - not confirmed for 2026). Press coverage cites a 2026 THPT-exam cutoff range of 17.0-19.5 for admitted students, not the floor score. Left at researched; do not reuse 2025 numbers as 2026 thresholds.',
+  },
+  tump: {
+    sourceId: 'tump-admission-2026',
+    title: 'TUMP admission portal 2026 (tuyensinh.tump.edu.vn)',
+    url: 'https://tuyensinh.tump.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-14 (2026-08-24): official TUMP (Thai Nguyen University of Medicine and Pharmacy) admission portal tuyensinh.tump.edu.vn confirmed live via search (score-calculation tool page, applicant-document notices for 2026 found), but direct WebFetch failed (TLS certificate verification error) and no numeric floor-score/ngưỡng đảm bảo chất lượng đầu vào table was extracted. Secondary press confirms 2026 admitted cutoffs range 19.75 (Y hoc du phong) to 26.80 (Rang-Ham-Mat) across ~8 health programs, but these are cutoffs (diem chuan), not the input floor, and multi-program THPT/transcript/HSA/V-SAT method scoping is not resolved. Left at researched; do not fabricate the floor table.',
+  },
+  tuu: {
+    sourceId: 'tuu-admission-2026',
+    title: 'Truong Dai hoc Cong doan 2026 floor-score press coverage (VietNamNet)',
+    url: 'https://vietnamnet.vn/truong-dh-cong-doan-cong-bo-diem-san-xet-tuyen-nam-2026-2534559.html',
+    checkedAt: '2026-08-24',
+    publishedAt: '2026-07-10',
+    note:
+      'Batch expand-14 (2026-08-24): VietNamNet (state-run press) confirms Truong Dai hoc Cong doan (TUU) published its 2026 floor-score notice on 10/07/2026 covering 2,989 undergraduate seats across 5 methods, with a stated minimum THPT 3-subject total of 15,00/30 for at least some majors, but the article\'s actual per-major threshold table is embedded as images that failed to load in this pass, and no direct daihoccongdoan.edu.vn/dhcd URL for the primary notice was located. Left at researched; do not assume 15/30 is the uniform floor for every major without the primary table.',
+  },
+  trungvuong: {
+    sourceId: 'trungvuong-admission-2026',
+    title: 'Truong Dai hoc Trung Vuong 2026 admission portal (tuyensinh.tv-uni.edu.vn)',
+    url: 'https://tuyensinh.tv-uni.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-14 (2026-08-24): official tv-uni.edu.vn admission portal confirmed live for 2026 (4 methods: transcript, THPT exam, direct admission, aptitude assessment). Transcript method states a common floor of 3-subject total >= 15/30, but the Nursing major requires grade-12 academic ranking "Gioi" (Excellent) AND a 3-subject total >= 19.5/30 - the academic-rank condition has no matching applicant-profile field. THPT-exam-method numeric threshold was not confirmed separately from the transcript-method number in this pass. Left at researched per the academic-rank-gating rule; do not model eligibility without the rank field.',
+  },
+  tucst: {
+    sourceId: 'tucst-admission-2026',
+    title: 'TUCST 2026 admission methods announcement (qldt.tucst.edu.vn)',
+    url: 'http://qldt.tucst.edu.vn/web/tin-tuc-su-kien/truong-dai-hoc-van-hoa-the-thao-va-du-lich-thanh-hoa-cong-bo-4-phuong-thuc-tuyen-sinh-dai-hoc-chinh-quy-nam-2026.html',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-14 (2026-08-24): official TUCST (Truong Dai hoc Van hoa, The thao va Du lich Thanh Hoa) subdomain qldt.tucst.edu.vn confirms 4 admission methods (code 100 THPT exam, 200 transcript, 301 direct/priority, 402 aptitude assessment) and a registration window (01/04-20/06/2026), but no numeric floor-score/ngưỡng đảm bảo chất lượng đầu vào table was located in this pass - the announcement covers only method identity and equivalent-conversion policy in general terms. Left at researched; do not fabricate threshold numbers.',
+  },
   vinuni: {
     sourceId: 'vinuni-admission-2026',
     title: 'VinUniversity Officially Announces the 2026 Undergraduate Admissions Plan',
@@ -262,7 +320,9 @@ export const finalCatalogKnowledgeGap = {
 
 // 'vgu' and 'hpu2' moved to dedicated runtime modules (normalized/runtime-source-snapshot/<id>/) —
 // eligibility-only, excluded here to avoid duplicate methodId/comparisonAdapter entries.
-const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2']);
+// Batch expand-14 (2026-08-24): 'tuaf' graduated the same way (dedicated eligibility-only module at
+// normalized/runtime-source-snapshot/tuaf/).
+const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'tuaf']);
 const finalCatalogRuntimeSchools = finalCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const finalCatalogMethods: AdmissionMethodDescriptor[] = finalCatalogRuntimeSchools.map((school) => ({

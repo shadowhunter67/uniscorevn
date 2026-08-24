@@ -60,6 +60,14 @@ const researchedCatalogCapabilities = {
 } satisfies NonNullable<SchoolModule['capabilities']>;
 
 const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
+  tqu: {
+    sourceId: 'tqu-admission-2026',
+    title: 'TQU official admission information page 2026',
+    url: 'https://daihoctantrao.edu.vn/thong-tin-tuyen-sinh.html',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-14 (2026-08-24): official daihoctantrao.edu.vn (Truong Dai hoc Tan Trao, Tuyen Quang) admission-information page confirmed live with 2026 notices (4 methods: direct admission, 2026 THPT exam results, prior-year THPT exam results, grade-12 transcript; planned quota 1,300; document deadlines through 20/05/2026 and 30/05/2026). No numeric floor-score/ngưỡng đảm bảo chất lượng đầu vào table was located in this pass. Left at researched; do not fabricate threshold numbers.',
+  },
   vnuuet: {
     sourceId: 'vnuuet-admission-2026',
     title: 'VNU-UET admission portal and 2026 admission information',
