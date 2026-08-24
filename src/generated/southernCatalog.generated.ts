@@ -12,6 +12,7 @@ import type { AdmissionEvaluation } from '../core/admissionEvaluation';
 import type { AdmissionMethodDescriptor } from '../core/admissionMethod';
 import type { ApplicantProfile } from '../core/applicantProfile';
 import type { SchoolModule } from '../core/schoolModule';
+import type { RuleEvidence } from '../core/evidence';
 import type { SchoolComparisonAdapter, SchoolComparisonResult } from '../compare/schoolComparisonAdapter';
 
 interface SouthernCatalogSchool {
@@ -21,6 +22,15 @@ interface SouthernCatalogSchool {
   location: string;
   ownership: SchoolModule['ownership'];
   summary: string;
+}
+
+interface ResearchedAdmissionSource {
+  title: string;
+  url: string;
+  sourceId: string;
+  checkedAt: string;
+  publishedAt?: string;
+  note: string;
 }
 
 const unsupportedCapabilities = {
@@ -39,6 +49,30 @@ const catalogOnlyCapabilities = {
   scoreConversion: false,
   exactCalculator: false,
 } satisfies NonNullable<SchoolModule['capabilities']>;
+
+const researchedCatalogCapabilities = {
+  admissionInfo: true,
+  programs: true,
+  eligibility: false,
+  cutoffs: false,
+  scoreConversion: false,
+  exactCalculator: false,
+} satisfies NonNullable<SchoolModule['capabilities']>;
+
+/** Batch 10 (2026-08-24): schools with a verified official 2026 admission source but no clean
+ * structured numbers extracted yet — same "researched" tier pattern as `remainingCatalog.ts`
+ * (`researchedAdmissionSources`), replicated here for the southern roster. */
+const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
+  nlu: {
+    sourceId: 'nlu-admission-2026',
+    title: 'Điểm sàn tuyển sinh Trường Đại học Nông Lâm TPHCM 2026',
+    url: 'https://xaydungchinhsach.chinhphu.vn/tuyen-sinh-2026-diem-san-truong-dai-hoc-nong-lam-tphcm-119260701215344015.htm',
+    publishedAt: '2026-07-05',
+    checkedAt: '2026-08-24',
+    note:
+      'Official NLU (ts.hcmuaf.edu.vn) 2026 threshold notice confirmed to exist (28/06/2026, "Ngưỡng đảm bảo chất lượng đầu vào (điểm sàn)..."), cross-checked via chinhphu.vn: aggregate ranges only (16-18/30 THPT exam, 18-20/30 transcript, 601-650 ĐGNL), no per-program breakdown extracted — the official per-program table is an embedded image (nguong-dam-bao-chat-luong-2026.jpg), and 4 methods (ĐGNL, THPT, THPT+transcript, transcript-only) apply different scopes per program (Sư phạm kỹ thuật nông nghiệp follows a separate MOET-governed threshold). Left at researched; do not fabricate per-program numbers.',
+  },
+};
 
 export const southernCatalogSchools: readonly SouthernCatalogSchool[] = [
   {
@@ -250,7 +284,54 @@ export const southernCatalogKnowledgeGap = {
   impact: 'exact-final-score-blocking' as const,
 };
 
-export const southernCatalogMethods: AdmissionMethodDescriptor[] = southernCatalogSchools.map((school) => ({
+/** Batch 10 (2026-08-24): 'pntu' graduated to a dedicated eligibility-only runtime module
+ * (`normalized/runtime-source-snapshot/pntu/`) — excluded here from the generated method/module/
+ * adapter arrays the same way `remainingCatalog.ts` excludes its `explicitRuntimeSchoolIds`. It
+ * stays listed in `southernCatalogSchools` above for identity/location metadata only. */
+const explicitRuntimeSchoolIds = new Set(['pntu']);
+const southernCatalogRuntimeSchools = southernCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
+
+function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {
+  return researchedAdmissionSources[schoolId];
+}
+
+function capabilitiesFor(schoolId: string): NonNullable<SchoolModule['capabilities']> {
+  return getResearchedAdmissionSource(schoolId) ? researchedCatalogCapabilities : catalogOnlyCapabilities;
+}
+
+function summaryFor(school: SouthernCatalogSchool): string {
+  const source = getResearchedAdmissionSource(school.id);
+  if (!source) return school.summary;
+  return `Da xac minh nguon tuyen sinh chinh thuc 2026 (${source.title}); chua nang len eligibility/calculator vi con thieu normalized formula, threshold, conversion hoac program-scope rules.`;
+}
+
+function catalogSourcesFor(schoolId: string): SchoolModule['catalogSources'] | undefined {
+  const source = getResearchedAdmissionSource(schoolId);
+  if (!source) return undefined;
+  return [{ title: source.title, url: source.url, type: 'official-institution', checkedAt: source.checkedAt }];
+}
+
+function evidenceFor(schoolId: string): RuleEvidence[] {
+  const source = getResearchedAdmissionSource(schoolId);
+  if (!source) return [];
+  return [
+    {
+      sourceId: source.sourceId,
+      sourceUrl: source.url,
+      sourceTitle: source.title,
+      sourceType: 'official-school',
+      verification: 'official-source-available',
+      effectiveYear: 2026,
+      publishedAt: source.publishedAt,
+      criticality: 'informational',
+      verifiedAt: source.checkedAt,
+      lastReviewedAt: source.checkedAt,
+      note: source.note,
+    },
+  ];
+}
+
+export const southernCatalogMethods: AdmissionMethodDescriptor[] = southernCatalogRuntimeSchools.map((school) => ({
   id: `${school.id}-catalog-2026`,
   schoolId: school.id,
   name: 'Thông tin tuyển sinh 2026 đang chờ research',
@@ -261,7 +342,7 @@ export const southernCatalogMethods: AdmissionMethodDescriptor[] = southernCatal
 }));
 
 export const southernCatalogModules: Record<string, SchoolModule> = Object.fromEntries(
-  southernCatalogSchools.map((school) => [
+  southernCatalogRuntimeSchools.map((school) => [
     school.id,
     {
       id: school.id,
@@ -273,8 +354,9 @@ export const southernCatalogModules: Record<string, SchoolModule> = Object.fromE
       ownership: school.ownership,
       region: school.location === 'TP.HCM' ? 'hcm' : 'other',
       vnuhcm: false,
-      summary: school.summary,
-      capabilities: catalogOnlyCapabilities,
+      summary: summaryFor(school),
+      capabilities: capabilitiesFor(school.id),
+      catalogSources: catalogSourcesFor(school.id),
     },
   ])
 );
@@ -294,11 +376,11 @@ function evaluateCatalogOnlySchool(school: SouthernCatalogSchool): AdmissionEval
     missingRules: [southernCatalogKnowledgeGap.label],
     missingRequirements: [{ kind: 'unsupported', code: southernCatalogKnowledgeGap.id, label: southernCatalogKnowledgeGap.label }],
     explanation: [],
-    evidence: [],
+    evidence: evidenceFor(school.id),
   };
 }
 
-export const southernCatalogComparisonAdapters: readonly SchoolComparisonAdapter[] = southernCatalogSchools.map((school) => ({
+export const southernCatalogComparisonAdapters: readonly SchoolComparisonAdapter[] = southernCatalogRuntimeSchools.map((school) => ({
   schoolId: school.id,
   methodId: `${school.id}-catalog-2026`,
   methodName: 'Thông tin tuyển sinh 2026 đang chờ research',

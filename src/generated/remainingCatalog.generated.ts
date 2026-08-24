@@ -302,6 +302,21 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     checkedAt: '2026-08-22',
     note: 'Official 2026 Hue education admission page lists methods and active teacher-training programs; aptitude and pedagogical threshold details need extraction.',
   },
+  hmu: {
+    sourceId: 'hmu-admission-2026',
+    title: 'HMU (Hanoi Medical University) undergraduate admission plan 2026',
+    url: 'https://apiwebhmu.hmu.edu.vn/Upload/Images/d4f307a9-4f5c-4dba-817e-f2cccc285844.pdf',
+    publishedAt: '2026-01-26',
+    checkedAt: '2026-08-24',
+    note: 'Batch 10 (2026-08-24): official Kế hoạch tuyển sinh 306/KH-ĐHYHN (26/01/2026, letterhead + signature verified via direct PDF fetch) confirms hmu.edu.vn/tuyensinh.hmu.edu.vn as the live official domain and the full 2026 admission calendar (3 methods: direct admission, THPT exam, HANOI university-of-education aptitude test), but this document only contains dates/process, not numeric thresholds. The actual ngưỡng đảm bảo chất lượng đầu vào table (published 10/07/2026 per this plan) sits on tuyensinh.hmu.edu.vn as a JS-rendered page not text-extractable in this pass; press aggregators only give inconsistent secondary figures (một số nguồn nói 19-24, một số nói 24 là cao nhất). Left at researched; do not fabricate per-program numbers.',
+  },
+  tlu: {
+    sourceId: 'tlu-admission-2026',
+    title: 'TLU (Thuyloi University) quality threshold notice 2026',
+    url: 'https://ts.tlu.edu.vn/tuy%E1%BB%83n-sinh-%C4%91h/nguong-bao-dam-chat-luong-dau-vao-dai-31502',
+    checkedAt: '2026-08-24',
+    note: 'Batch 10 (2026-08-24): official ts.tlu.edu.vn/tlu.edu.vn notice page confirmed live with the correct 2026 title ("Ngưỡng bảo đảm chất lượng đầu vào Đại học chính quy năm 2026 tại Hà Nội"), but the page is a DotNetNuke SPA shell that loads its threshold table via an internal AJAX API (CategoryService.getBySettings) not reachable through direct fetch/curl in this pass. Secondary press confirms only an aggregate range (điểm sàn 16-20/30, điểm chuẩn 19-24.64/30 across ~46 programs) without a per-program breakdown matching the primary source. Left at researched; do not fabricate the per-program table.',
+  },
 };
 
 export const remainingCatalogSchools: readonly RemainingCatalogSchool[] = [
@@ -410,6 +425,8 @@ const explicitRuntimeSchoolIds = new Set([
   'uflsudn',
   'uteudn',
   'vku',
+  'ajc',
+  'hup',
 ]);
 const remainingCatalogRuntimeSchools = remainingCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 

@@ -61,6 +61,9 @@ import { uedudnModule } from './uedudn';
 import { uflsudnModule } from './uflsudn';
 import { uteudnModule } from './uteudn';
 import { vkuModule } from './vku';
+import { hupModule } from './hup';
+import { ajcModule } from './ajc';
+import { pntuModule } from './pntu';
 import { southernCatalogModules } from './southernCatalog';
 import { remainingCatalogModules } from './remainingCatalog';
 import { finalCatalogModules } from './finalCatalog';
@@ -173,4 +176,7 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   uflsudn: uflsudnModule,
   uteudn: uteudnModule,
   vku: vkuModule,
+  hup: hupModule,
+  ajc: ajcModule,
+  pntu: pntuModule,
 };

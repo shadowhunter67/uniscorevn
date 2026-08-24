@@ -60,6 +60,9 @@ import { uedudnAdmissionMethods } from '../schools/uedudn/methods';
 import { uflsudnAdmissionMethods } from '../schools/uflsudn/methods';
 import { uteudnAdmissionMethods } from '../schools/uteudn/methods';
 import { vkuAdmissionMethods } from '../schools/vku/methods';
+import { hupAdmissionMethods } from '../schools/hup/methods';
+import { ajcAdmissionMethods } from '../schools/ajc/methods';
+import { pntuAdmissionMethods } from '../schools/pntu/methods';
 import { southernCatalogMethods } from '../schools/southernCatalog';
 import { remainingCatalogMethods } from '../schools/remainingCatalog';
 import { finalCatalogMethods } from '../schools/finalCatalog';
@@ -134,6 +137,9 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   uflsudn: uflsudnAdmissionMethods,
   uteudn: uteudnAdmissionMethods,
   vku: vkuAdmissionMethods,
+  hup: hupAdmissionMethods,
+  ajc: ajcAdmissionMethods,
+  pntu: pntuAdmissionMethods,
 };
 
 /** Pure helper — trả danh sách schoolId bị trùng trong 1 mảng adapter. Test cả trên registry thật
