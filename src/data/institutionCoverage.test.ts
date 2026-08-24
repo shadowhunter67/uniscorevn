@@ -61,9 +61,9 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 10,
       researched: 74,
       admissionDataAvailable: 74,
-      eligibilitySupported: 20,
-      calculatorSupported: 18,
-      partialCalculator: 4,
+      eligibilitySupported: 23,
+      calculatorSupported: 19,
+      partialCalculator: 5,
       fullyVerified: 14,
       catalogOnly: 193,
     });
@@ -74,17 +74,21 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(36);
+    expect(researchedOnly).toBe(32);
     for (const schoolId of [
       'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'hust', 'tmu', 'haui', 'aof', 'bav', 'hanu', 'hou',
-      'vnuulis', 'humg', 'hlu', 'hdu', 'vmu', 'ntu', 'dlu', 'qnu', 'ttn', 'hueu', 'hce', 'hul',
-      'tnu', 'hpmu', 'udn', 'dut', 'dueudn', 'uedudn', 'uflsudn', 'uteudn', 'vku', 'husc', 'huaf', 'hueedu',
+      'humg', 'hlu', 'hdu', 'vmu', 'ntu', 'qnu', 'hueu', 'hce', 'hul',
+      'hpmu', 'udn', 'dut', 'dueudn', 'uedudn', 'uflsudn', 'uteudn', 'vku', 'husc', 'huaf', 'hueedu',
     ]) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('researched');
     }
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnua)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.huce)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.dav)).toBe('partial-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.ttn)).toBe('eligibility-only');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.tnu)).toBe('eligibility-only');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.dlu)).toBe('eligibility-only');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.vnuulis)).toBe('partial-calculator');
   });
 
   it('requires catalog source metadata for college identity entries', () => {

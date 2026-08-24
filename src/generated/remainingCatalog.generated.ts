@@ -206,22 +206,22 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     sourceId: 'ntu-admission-2026',
     title: 'NTU undergraduate admission 2026',
     url: 'https://tuyensinh.ntu.edu.vn/',
-    checkedAt: '2026-08-22',
-    note: 'Official 2026 admission portal lists methods including THPT on scale 40 and HSA/V-ACT scores; formulas, threshold mapping, and program scope need extraction.',
+    checkedAt: '2026-08-24',
+    note: 'Batch central-cluster re-check (2026-08-24): tuyensinh.ntu.edu.vn is still a JS-rendered SPA shell on direct fetch. Secondary cutoff coverage (xaydungchinhsach.chinhphu.vn) shows admitted scores like 20.73-27.66 that are consistent with a /30 scale but does not state the scale explicitly, so the scale-30-vs-40 conflict from the earlier attempt is not resolved from a primary source. No official floor-score (nguong dam bao chat luong dau vao) notice with numeric values was located via search. Left at researched; formulas, threshold mapping, and program scope still need extraction from a primary, text-readable source.',
   },
   dlu: {
     sourceId: 'dlu-admission-2026',
     title: 'DLU admission portal 2026',
     url: 'https://tuyensinh.dlu.edu.vn/',
     checkedAt: '2026-08-22',
-    note: 'Official 2026 portal lists admission information, threshold, equivalent conversion tool, and cutoffs; conversion table and formula details need normalization before executable support.',
+    note: 'Official 2026 portal lists admission information, threshold, equivalent conversion tool, and cutoffs; conversion table and formula details need normalization before executable support. Superseded by dedicated dlu module (2026-08-24 batch): eligibility-only upgrade shipped using cross-checked press coverage of the official 2026-07-09 floor-score notice, since dlu.edu.vn/tuyensinh.dlu.edu.vn still fail direct fetch (TLS/WAF). See normalized/runtime-source-snapshot/dlu/sources.ts.',
   },
   qnu: {
     sourceId: 'qnu-admission-2026',
     title: 'QNU undergraduate admission 2026',
     url: 'https://www.qnu.edu.vn/vi/dai-hoc-chinh-quy-1764/tb263-thong-bao-tuyen-sinh-dai-hoc-nam-2026',
-    checkedAt: '2026-08-22',
-    note: 'Official 2026 announcement lists five methods, 4500 expected seats, programs, and notes conversion will be announced separately; threshold/conversion follow-ups need extraction.',
+    checkedAt: '2026-08-24',
+    note: 'Batch central-cluster re-check (2026-08-24): TB263 explicitly defers thresholds/conversion to a later Ministry-timed announcement. Confirmed via secondary press (khoahoc.vietjack.com, thuvienphapluat.vn) that QNU published a later notice (referenced as 121/TB-HDTS, dated 2026-07-09) covering the input quality threshold for 4 methods, and that tuyensinh.qnu.edu.vn hosts a TB141 final-cutoff notice for 2026 - but the numeric threshold table itself could not be fetched (thuvienphapluat.vn returned 403; tuyensinh.qnu.edu.vn search did not surface the 121/TB-HDTS notice directly). Note: tuyensinh.qui.edu.vn is a DIFFERENT school (Quang Ninh University of Industry), not used here. Left at researched; numeric thresholds still need extraction from a primary source.',
   },
   ttn: {
     sourceId: 'ttn-admission-2026',
@@ -433,7 +433,7 @@ export const remainingCatalogKnowledgeGap = {
   impact: 'exact-final-score-blocking' as const,
 };
 
-const explicitRuntimeSchoolIds = new Set(['huce', 'dav']);
+const explicitRuntimeSchoolIds = new Set(['huce', 'dav', 'ttn', 'tnu', 'dlu', 'vnuulis']);
 const remainingCatalogRuntimeSchools = remainingCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {

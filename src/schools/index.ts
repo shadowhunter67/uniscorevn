@@ -42,6 +42,10 @@ import { hcmuteModule } from './hcmute';
 import { vnuaModule } from './vnua';
 import { huceModule } from './huce';
 import { davModule } from './dav';
+import { ttnModule } from './ttn';
+import { tnuModule } from './tnu';
+import { dluModule } from './dlu';
+import { vnuulisModule } from './vnuulis';
 import { southernCatalogModules } from './southernCatalog';
 import { remainingCatalogModules } from './remainingCatalog';
 import { finalCatalogModules } from './finalCatalog';
@@ -135,4 +139,8 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   ...collegeCatalogModules,
   huce: huceModule,
   dav: davModule,
+  ttn: ttnModule,
+  tnu: tnuModule,
+  dlu: dluModule,
+  vnuulis: vnuulisModule,
 };
