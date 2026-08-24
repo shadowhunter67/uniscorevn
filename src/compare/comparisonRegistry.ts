@@ -66,6 +66,13 @@ import { vguComparisonAdapter } from '../schools/vgu/comparison';
 import { hpu2ComparisonAdapter } from '../schools/hpu2/comparison';
 import { fptuComparisonAdapter } from '../schools/fptu/comparison';
 import { hubtComparisonAdapter } from '../schools/hubt/comparison';
+import { tbduComparisonAdapter } from '../schools/tbdu/comparison';
+import { tduComparisonAdapter } from '../schools/tdu/comparison';
+import { tguComparisonAdapter } from '../schools/tgu/comparison';
+import { thanhdoComparisonAdapter } from '../schools/thanhdo/comparison';
+import { tnueComparisonAdapter } from '../schools/tnue/comparison';
+import { tnuflComparisonAdapter } from '../schools/tnufl/comparison';
+import { tnusComparisonAdapter } from '../schools/tnus/comparison';
 import { southernCatalogComparisonAdapters } from '../schools/southernCatalog';
 import { remainingCatalogComparisonAdapters } from '../schools/remainingCatalog';
 import { finalCatalogComparisonAdapters } from '../schools/finalCatalog';
@@ -151,6 +158,13 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   hpu2ComparisonAdapter,
   fptuComparisonAdapter,
   hubtComparisonAdapter,
+  tbduComparisonAdapter,
+  tduComparisonAdapter,
+  tguComparisonAdapter,
+  thanhdoComparisonAdapter,
+  tnueComparisonAdapter,
+  tnuflComparisonAdapter,
+  tnusComparisonAdapter,
   ...southernCatalogComparisonAdapters,
   ...remainingCatalogComparisonAdapters.filter(
     (adapter) =>

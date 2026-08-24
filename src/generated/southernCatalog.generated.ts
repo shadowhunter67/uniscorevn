@@ -81,6 +81,15 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Official 2026 UTH admission notice confirms 2 methods (priority admission per school rules, and a combined-assessment method using a proprietary "UTH120" 120-point-equivalent scale). The admission portal itself (tuyensinh.ut.edu.vn) returns HTTP 403 on direct fetch; a per-program cutoff table (64 program codes, non-30-point scale, e.g. 600-999) is available via secondary government-portal coverage (xaydungchinhsach.chinhphu.vn), but no official floor-score/ngưỡng đảm bảo chất lượng đầu vào notice or documentation of the UTH120 conversion formula was located. Left at researched: the non-standard scale and blocked primary source make eligibility modeling unsafe without further extraction.',
   },
+  stu: {
+    sourceId: 'stu-admission-2026',
+    title: 'Công bố thông tin tuyển sinh đại học năm 2026 của Trường Đại học Công nghệ Sài Gòn',
+    url: 'https://www.stu.edu.vn/cong-bo-thong-tin-tuyen-sinh-dai-hoc-nam-2026-cua-truong-dai-hoc-cong-nghe-sai-gon.html',
+    publishedAt: '2026-08-10',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-13 (2026-08-24): trang chính thức stu.edu.vn xác nhận 4 phương thức và công thức khung (ĐXT = tổng 3 môn thi TN THPT/30, hoặc TB lớp 10+11+12/30) cùng quy tắc "điểm Toán/Văn >= 1/3 điểm chuẩn chưa ưu tiên" cho nhóm Kinh tế/Luật, nhưng KHÔNG công bố số điểm ngưỡng cụ thể trên trang chính thức. Hai nguồn thứ cấp độc lập đưa ra số khác nhau cho ngành Luật kinh tế (18 điểm và 20 điểm) — mâu thuẫn không giải quyết được trong lượt research này. Giữ ở mức researched theo quy tắc không đoán khi nguồn xung đột.',
+  },
 };
 
 function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {
@@ -323,8 +332,10 @@ export const southernCatalogKnowledgeGap = {
 /** Batch 10 (2026-08-24): 'pntu' and 'uah' graduated to dedicated eligibility-only runtime modules
  * (`normalized/runtime-source-snapshot/{pntu,uah}/`) — excluded here from the generated method/module/
  * adapter arrays the same way `remainingCatalog.ts` excludes its `explicitRuntimeSchoolIds`. They
- * stay listed in `southernCatalogSchools` above for identity/location metadata only. */
-const explicitRuntimeSchoolIds = new Set(['pntu', 'uah']);
+ * stay listed in `southernCatalogSchools` above for identity/location metadata only.
+ * Batch expand-13 (2026-08-24): 'tdu' and 'tgu' likewise graduated to dedicated eligibility-only
+ * runtime modules; excluded here for the same reason. */
+const explicitRuntimeSchoolIds = new Set(['pntu', 'uah', 'tdu', 'tgu']);
 const southernCatalogRuntimeSchools = southernCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const southernCatalogMethods: AdmissionMethodDescriptor[] = southernCatalogRuntimeSchools.map((school) => ({

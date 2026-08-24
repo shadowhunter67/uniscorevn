@@ -71,6 +71,13 @@ import { dtuModule } from './dtu';
 import { uahModule } from './uah';
 import { vguModule } from './vgu';
 import { hpu2Module } from './hpu2';
+import { tbduModule } from './tbdu';
+import { tduModule } from './tdu';
+import { tguModule } from './tgu';
+import { thanhdoModule } from './thanhdo';
+import { tnueModule } from './tnue';
+import { tnuflModule } from './tnufl';
+import { tnusModule } from './tnus';
 import { southernCatalogModules } from './southernCatalog';
 import { remainingCatalogModules } from './remainingCatalog';
 import { finalCatalogModules } from './finalCatalog';
@@ -193,4 +200,11 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   hpu2: hpu2Module,
   fptu: fptuModule,
   hubt: hubtModule,
+  tbdu: tbduModule,
+  tdu: tduModule,
+  tgu: tguModule,
+  thanhdo: thanhdoModule,
+  tnue: tnueModule,
+  tnufl: tnuflModule,
+  tnus: tnusModule,
 };

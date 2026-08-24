@@ -83,6 +83,30 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Cổng tuyển sinh chính thức RMIT Việt Nam (rmit.edu.vn) fetch được nhưng chỉ là trang portal điều hướng: yêu cầu tiếng Anh chung (IELTS Academic 6.5, không kỹ năng nào dưới 6.0) được nêu rõ, nhưng ngưỡng điểm THPT/học bạ cụ thể được trang này dẫn sang từng trang ngành riêng lẻ (hàng chục ngành, không fetch hết trong 1 lượt). Không đủ cấu trúc để mô hình hoá eligibility trong batch này; do-not-guess-formula áp dụng.',
   },
+  skda: {
+    sourceId: 'skda-admission-2026',
+    title: 'Thông báo tuyển sinh đại học chính quy năm 2026 - Trường Đại học Sân khấu - Điện ảnh Hà Nội',
+    url: 'https://skda.edu.vn/2026/05/22/thong-bao-tuyen-sinh-dai-hoc-chinh-quy-nam-2026/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-13 (2026-08-24): trang tuyển sinh chính thức skda.edu.vn tồn tại và xác nhận thông báo 2026 (đăng 22/05/2026), nhưng nội dung điều kiện/công thức chỉ nằm trong các file PDF/ảnh đính kèm (Thong bao tuyen sinh DHCQ 2026.pdf, Phieu 1/2), không trích xuất được thành văn bản. Hai nguồn thứ cấp mâu thuẫn nhau về điều kiện văn hoá (một nói tổng 3 môn thi TN THPT >=15/30, một nói điểm trung bình học bạ >=5,0/10) và không nguồn nào dẫn trực tiếp tới văn bản gốc — theo quy tắc không đoán công thức, giữ ở mức researched thay vì eligibility-only.',
+  },
+  skdahcm: {
+    sourceId: 'skdahcm-admission-2026',
+    title: 'Thông báo tuyển sinh đại học chính quy năm 2026 (chính thức) - Trường Đại học Sân khấu - Điện ảnh Thành phố Hồ Chí Minh',
+    url: 'https://skdahcm.edu.vn/thong-bao-tuyen-sinh-dai-hoc-chinh-quy-nam-2026/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-13 (2026-08-24): trang tuyển sinh chính thức skdahcm.edu.vn xác nhận tồn tại thông báo 2026 (thi năng khiếu hệ số 2 kết hợp điểm học bạ môn Ngữ văn), nhưng WebFetch chỉ lấy được khung điều hướng, không lấy được bảng điều kiện/ngưỡng cụ thể (nội dung nằm trong tài liệu đính kèm qua Google Drive). Không tìm được số liệu ngưỡng đầu vào có thể kiểm chứng độc lập; giữ ở mức researched.',
+  },
+  tbu: {
+    sourceId: 'tbu-admission-2026',
+    title: 'Thông báo Thông tin tuyển sinh đại học chính quy năm 2026 - Trường Đại học Thái Bình',
+    url: 'https://tbu.edu.vn/thong-bao-thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026.html',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-13 (2026-08-24): trang tuyển sinh chính thức tbu.edu.vn (và tuyensinh.tbu.edu.vn) xác nhận tồn tại, liệt kê 5 phương thức xét tuyển (PT1-PT5: thi TN THPT/giải thưởng, học bạ 3 năm, ĐGNL ĐHQG Hà Nội, ĐGTD ĐHBK Hà Nội, ĐGNL ĐH Sư phạm Hà Nội), nhưng ngưỡng điểm/công thức cụ thể chỉ nằm trong file đính kèm "THÔNG BÁO SỐ 565.pdf", không trích xuất được thành văn bản trong lượt research này. Giữ ở mức researched; không đoán số liệu.',
+  },
 };
 
 function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {
@@ -262,7 +286,10 @@ export const finalCatalogKnowledgeGap = {
 
 // 'vgu' and 'hpu2' moved to dedicated runtime modules (normalized/runtime-source-snapshot/<id>/) —
 // eligibility-only, excluded here to avoid duplicate methodId/comparisonAdapter entries.
-const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2']);
+// Batch expand-13 (2026-08-24): 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus' likewise graduated to
+// dedicated eligibility-only runtime modules; excluded here for the same reason. They stay listed
+// in `finalCatalogSchools` above for identity/location metadata only.
+const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus']);
 const finalCatalogRuntimeSchools = finalCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const finalCatalogMethods: AdmissionMethodDescriptor[] = finalCatalogRuntimeSchools.map((school) => ({
