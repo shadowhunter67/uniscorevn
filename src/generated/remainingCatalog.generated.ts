@@ -326,6 +326,14 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Official Phenikaa 2026 threshold notice (cross-checked via secondary reports thuvienphapluat.vn and baolamdong.vn, both citing the same official announcement) lists 5 admission methods with numeric floors per method: HSA (ĐGNL) 57-80/150, HUST thinking test (ĐGTD) 40-56/100, V-SAT 202-240/450, and a special condition for Y khoa/Dược/Luật (THPT exam 3-subject total >= 20,00/30 with Excellent grade-12 academic rank, or graduation score >= 8,50). The general THPT-exam-only floor for non-specialized majors is not stated as a single flat number in this pass; the "Excellent academic rank" condition also has no matching applicant-profile field yet. Runtime stays researched-only until a clean single-method threshold can be isolated without fabricating scope.',
   },
+  hat: {
+    sourceId: 'hat-admission-2026',
+    title: 'HUHT tuyển sinh 2026 - Trường Du lịch - Đại học Huế',
+    url: 'http://huht.hueuni.edu.vn/tuyensinh/index.php/tin-tuc/sinh-vien-huht-thong-tin-tuyen-sinh-2026-277',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-07 (2026-08-24): official HUHT admission subdomain (huht.hueuni.edu.vn, part of the already-trusted Đại học Huế domain family used for hce/hul/husc/huaf/hueedu) identified with a dedicated 2026 admission page, but direct fetch returned "connection refused" twice in this pass. Secondary aggregators (vietjack.com, tuyensinhso.vn) report a >=18/30 THPT-exam floor and a transcript floor of 19/30 (25/30 for Hotel/Tourism Management), but a later search pass found conflicting signal that the 2026-specific numbers "will be updated" and some cited figures trace back to 2022/2024 data rather than a confirmed 2026 notice. Left at researched rather than eligibility-only because the 2026 number is not cleanly confirmed; do-not-guess-formula rule applied.',
+  },
   thanglong: {
     sourceId: 'thanglong-admission-2026',
     title: 'Đăng ký xét tuyển Trường Đại học Thăng Long 2026: Hướng dẫn đầy đủ từ A-Z',
@@ -448,6 +456,7 @@ const explicitRuntimeSchoolIds = new Set([
   'dtu',
   'fptu',
   'hubt',
+  'halongu',
 ]);
 const remainingCatalogRuntimeSchools = remainingCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 

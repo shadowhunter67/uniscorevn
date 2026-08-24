@@ -324,7 +324,7 @@ export const southernCatalogKnowledgeGap = {
  * (`normalized/runtime-source-snapshot/{pntu,uah}/`) — excluded here from the generated method/module/
  * adapter arrays the same way `remainingCatalog.ts` excludes its `explicitRuntimeSchoolIds`. They
  * stay listed in `southernCatalogSchools` above for identity/location metadata only. */
-const explicitRuntimeSchoolIds = new Set(['pntu', 'uah']);
+const explicitRuntimeSchoolIds = new Set(['pntu', 'uah', 'gdu']);
 const southernCatalogRuntimeSchools = southernCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const southernCatalogMethods: AdmissionMethodDescriptor[] = southernCatalogRuntimeSchools.map((school) => ({

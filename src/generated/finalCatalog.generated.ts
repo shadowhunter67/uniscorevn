@@ -83,6 +83,55 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Cổng tuyển sinh chính thức RMIT Việt Nam (rmit.edu.vn) fetch được nhưng chỉ là trang portal điều hướng: yêu cầu tiếng Anh chung (IELTS Academic 6.5, không kỹ năng nào dưới 6.0) được nêu rõ, nhưng ngưỡng điểm THPT/học bạ cụ thể được trang này dẫn sang từng trang ngành riêng lẻ (hàng chục ngành, không fetch hết trong 1 lượt). Không đủ cấu trúc để mô hình hoá eligibility trong batch này; do-not-guess-formula áp dụng.',
   },
+  hau: {
+    sourceId: 'hau-admission-2026',
+    title: 'Điểm trúng tuyển và danh sách thí sinh trúng tuyển đại học hình thức chính quy năm 2026 - Trường Đại học Kiến trúc Hà Nội',
+    url: 'https://hau.edu.vn/Diem-trung-tuyen-va-danh-sach-thi-sinh-trung-tuyen-dai-hoc-hinh-thuc-chinh-quy-nam-2026-cua-Truong-Dai-hoc-Kien-truc-Ha-Noi_n4798.html',
+    checkedAt: '2026-08-24',
+    publishedAt: '2026-08-11',
+    note:
+      'Batch expand-07 (2026-08-24): official hau.edu.vn decision (11/08/2026) confirming 2026 admission thresholds/results exists and was fetched live, plus an earlier official floor-score notice (baoxaydung.vn, 08/07/2026, "ngưỡng nhận hồ sơ xét tuyển", range 15-22/30 depending on program). Both times the actual per-program numeric table sits in an embedded image or a linked Google Drive PDF, not extractable as text in this pass. Left at researched; do-not-guess-formula rule applied.',
+  },
+  hbu: {
+    sourceId: 'hbu-admission-2026',
+    title: 'Trường Đại học Hòa Bình công bố Thông báo tuyển sinh trình độ Đại học chính quy năm 2026',
+    url: 'https://tuyensinh.daihochoabinh.edu.vn/truong-dai-hoc-hoa-binh-cong-bo-thong-bao-tuyen-sinh-trinh-do-dai-hoc-chinh-quy-nam-2026/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-07 (2026-08-24): official HBU 2026 admission notice page confirmed live, listing 4 methods (thi TN THPT, học bạ/tốt nghiệp trung cấp-cao đẳng-đại học cùng nhóm ngành, xét tuyển thẳng, học tập THPT + năng khiếu), but the fetched page text does not itself state a numeric threshold — it points to a linked PDF ("Thông báo tuyển sinh hệ chính quy năm 2026") not extracted in this pass. A generic aggregator claim of "15/30 minimum" could not be confirmed as HBU-specific (it may reflect only the nationwide 2026 MOET floor). Left at researched; do-not-guess-formula rule applied.',
+  },
+  hca: {
+    sourceId: 'hca-admission-2026',
+    title: 'Học viện Cán bộ TPHCM công bố điểm chuẩn trúng tuyển năm 2026',
+    url: 'https://vietnamnet.vn/hoc-vien-can-bo-tphcm-cong-bo-diem-chuan-trung-tuyen-nam-2026-2544036.html',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-07 (2026-08-24): HCA official admission portal (tuyensinh.hcmca.edu.vn) identified and referenced in secondary coverage, but direct fetch failed (connection refused) in this pass. VietnamNet reports actual 2026 admitted cutoffs (điểm chuẩn, post-result) per major: 22.45-24.8/30 (thi TN THPT), 24.43-26.84/30 (học bạ), 829-937 (ĐGNL ĐHQG TPHCM) — these are realized cutoffs that vary by major/method, not a flat floor score, so they cannot be modeled as a single eligibility threshold without fabricating per-program scope. Left at researched; do-not-guess-formula rule applied.',
+  },
+  ham: {
+    sourceId: 'ham-admission-2026',
+    title: 'Thông tin tuyển sinh - Học viện Âm nhạc Huế',
+    url: 'https://hocvienamnhachue.edu.vn/vi/dao-tao-tuyen-sinh/tuyen-sinh-dao-tao-tuyen-sinh/thong-tin-tuyen-sinh/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-07 (2026-08-24): official Học viện Âm nhạc Huế domain confirmed to exist and host a dedicated admission-info section (hocvienamnhachue.edu.vn). Secondary aggregation reports thresholds of 20,0 điểm for performance majors (Thanh nhạc, Biểu diễn nhạc cụ phương Tây, Piano, Biểu diễn nhạc cụ truyền thống) and 30,0 điểm for Âm nhạc học/Sáng tác âm nhạc, but the scale these totals are measured on (culture-subject score vs specialized talent-test score, and whether 30,0 is even the same 30-point scale used elsewhere) is not stated cleanly in this pass, so modeling eligibility risks silently using the wrong scale. Left at researched; do-not-guess-formula rule applied.',
+  },
+  fuv: {
+    sourceId: 'fuv-admission-2026',
+    title: 'How To Apply To Us - Fulbright University Vietnam',
+    url: 'https://fulbright.edu.vn/apply-to-us/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-07 (2026-08-24): official Fulbright University Vietnam admission portal confirmed (2026-2030 intake application window 05/01/2026-06/04/2026). FUV explicitly uses holistic, non-numeric-threshold admissions (no THPT-score cutoff or fixed formula by design) — there is no admission formula to model as eligibility/partial without misrepresenting the process. Left at researched; do-not-guess-formula rule applied (not a knowledge gap to close, but a genuinely formula-free admissions process).',
+  },
+  gass: {
+    sourceId: 'gass-admission-2026',
+    title: 'Học viện Khoa học xã hội - Cổng thông tin điện tử (Tuyển sinh)',
+    url: 'https://gass.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-07 (2026-08-24): official GASS site (gass.edu.vn) confirmed live; its Tuyển sinh navigation lists only Tiến sĩ (doctoral), Thạc sĩ (master), and short-term/bổ sung kiến thức programs — no đại học chính quy (undergraduate) admission track exists at this institution (cross-checked against Vietnamese Wikipedia, which also states GASS trains only thạc sĩ/tiến sĩ). This is a genuine "no undergraduate program" finding, not a research gap — GASS should not be modeled as an undergraduate eligibility/calculator target. Left at researched to document the finding without fabricating an undergraduate rule.',
+  },
 };
 
 function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {
@@ -260,9 +309,10 @@ export const finalCatalogKnowledgeGap = {
   impact: 'exact-final-score-blocking' as const,
 };
 
-// 'vgu' and 'hpu2' moved to dedicated runtime modules (normalized/runtime-source-snapshot/<id>/) —
-// eligibility-only, excluded here to avoid duplicate methodId/comparisonAdapter entries.
-const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2']);
+// 'vgu', 'hpu2', 'fbu', and 'fpfu' moved to dedicated runtime modules
+// (normalized/runtime-source-snapshot/<id>/) — eligibility-only, excluded here to avoid duplicate
+// methodId/comparisonAdapter entries.
+const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'fbu', 'fpfu']);
 const finalCatalogRuntimeSchools = finalCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const finalCatalogMethods: AdmissionMethodDescriptor[] = finalCatalogRuntimeSchools.map((school) => ({
