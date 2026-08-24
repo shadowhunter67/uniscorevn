@@ -61,7 +61,7 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 10,
       researched: 74,
       admissionDataAvailable: 74,
-      eligibilitySupported: 24,
+      eligibilitySupported: 29,
       calculatorSupported: 18,
       partialCalculator: 4,
       fullyVerified: 14,
@@ -74,7 +74,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(32);
+    expect(researchedOnly).toBe(27);
     for (const schoolId of [
       'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'hust', 'tmu', 'haui', 'aof', 'bav', 'hanu', 'hou',
       'ntu', 'qnu', 'hueu',
@@ -93,17 +93,9 @@ describe('institution coverage statistics', () => {
     expect(deriveInstitutionSupportStatus(schoolRegistry.tnu)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.dlu)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnuulis)).toBe('partial-calculator');
-    expect(deriveInstitutionSupportStatus(schoolRegistry.hce)).toBe('eligibility-only');
-    expect(deriveInstitutionSupportStatus(schoolRegistry.hul)).toBe('eligibility-only');
-    expect(deriveInstitutionSupportStatus(schoolRegistry.husc)).toBe('eligibility-only');
-    expect(deriveInstitutionSupportStatus(schoolRegistry.huaf)).toBe('eligibility-only');
-    expect(deriveInstitutionSupportStatus(schoolRegistry.hueedu)).toBe('eligibility-only');
-    expect(deriveInstitutionSupportStatus(schoolRegistry.dut)).toBe('eligibility-only');
-    expect(deriveInstitutionSupportStatus(schoolRegistry.dueudn)).toBe('eligibility-only');
-    expect(deriveInstitutionSupportStatus(schoolRegistry.uedudn)).toBe('eligibility-only');
-    expect(deriveInstitutionSupportStatus(schoolRegistry.uflsudn)).toBe('eligibility-only');
-    expect(deriveInstitutionSupportStatus(schoolRegistry.uteudn)).toBe('eligibility-only');
-    expect(deriveInstitutionSupportStatus(schoolRegistry.vku)).toBe('eligibility-only');
+    for (const schoolId of ['hce', 'hul', 'husc', 'huaf', 'hueedu', 'dut', 'dueudn', 'uedudn', 'uflsudn', 'uteudn', 'vku']) {
+      expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
+    }
   });
 
   it('requires catalog source metadata for college identity entries', () => {

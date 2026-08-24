@@ -50,6 +50,11 @@ import { ttnModule } from './ttn';
 import { tnuModule } from './tnu';
 import { dluModule } from './dlu';
 import { vnuulisModule } from './vnuulis';
+import { hceModule } from './hce';
+import { hulModule } from './hul';
+import { huscModule } from './husc';
+import { huafModule } from './huaf';
+import { hueeduModule } from './hueedu';
 import { southernCatalogModules } from './southernCatalog';
 import { remainingCatalogModules } from './remainingCatalog';
 import { finalCatalogModules } from './finalCatalog';
@@ -151,4 +156,9 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   tnu: tnuModule,
   dlu: dluModule,
   vnuulis: vnuulisModule,
+  hce: hceModule,
+  hul: hulModule,
+  husc: huscModule,
+  huaf: huafModule,
+  hueedu: hueeduModule,
 };
