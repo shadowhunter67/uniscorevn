@@ -75,6 +75,46 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Cổng tuyển sinh chính thức VinUniversity (admissions.vinuni.edu.vn) xác nhận tồn tại qua kết quả tìm kiếm và trích dẫn (kế hoạch tuyển sinh đại học 2026, yêu cầu IELTS 6.5 từ 2026, học bổng/hỗ trợ học phí). WebFetch trực tiếp tới admissions.vinuni.edu.vn và vinuni.edu.vn bị chặn (HTTP 403) trong lượt research này nên KHÔNG trích xuất được ngưỡng điểm THPT/hồ sơ có cấu trúc; cần thử lại từ môi trường mạng khác trước khi nâng lên eligibility-only.',
   },
+  ppa: {
+    sourceId: 'ppa-admission-2026',
+    title: 'Học viện CSND thông báo thông tin tuyển sinh trình độ đại học năm 2026',
+    url: 'https://hvcsnd.edu.vn/hoc-vien-csnd-thong-bao-thong-tin-tuyen-sinh-trinh-do-dai-hoc-nam-2026-13781',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch-expand-12 (2026-08-24): official hvcsnd.edu.vn 2026 undergraduate admission notice confirms Ministry of Public Security direct-admission/exam-assessment methods with gender-split regional quotas (nationwide security-tech track plus a North-only combat-police track). Eligibility depends on a political/health/background pre-screening (so tuyen) at the local police office with no matching applicant-profile field in this app, so left at researched rather than guessing an eligibility check.',
+  },
+  psa: {
+    sourceId: 'psa-admission-2026',
+    title: 'Thông tin tuyển sinh năm 2026 đào tạo đại học chính quy hệ dân sự - Học viện An ninh nhân dân',
+    url: 'https://hvannd.edu.vn/thong-tin-tuyen-sinh-nam-2026-dao-tao-dai-hoc-chinh-quy-he-dan-su',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch-expand-12 (2026-08-24): official hvannd.edu.vn 2026 notice confirms 400 total quota (250 security-operations gender-split North-only, 150 information-security/cybercrime nationwide) plus a September 2026 Ministry-run assessment exam. Same political/health pre-screening barrier as other CAND schools applies, no matching profile field, so left at researched.',
+  },
+  ppu: {
+    sourceId: 'ppu-admission-2026',
+    title: 'Thông tin tuyển sinh năm 2026 (Đào tạo trình độ đại học) - Trường Đại học Cảnh sát nhân dân',
+    url: 'https://dhcsnd.edu.vn/article/thong-tin-tuyen-sinh-nam-2026-hinh-thuc-dao-tao-dao-tao-trinh-do-dai-hoc',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch-expand-12 (2026-08-24): official dhcsnd.edu.vn 2026 notice confirms 300-quota, 3-method admission (direct admission; foreign-language-certificate + Ministry assessment combined; THPT exam + Ministry assessment combined) restricted to the southern region (Đà Nẵng southward). Same political/health/regional pre-screening barrier applies, no matching profile field, so left at researched.',
+  },
+  psu: {
+    sourceId: 'psu-admission-2026',
+    title: 'Thông báo tuyển sinh tuyển mới đào tạo trình độ đại học chính quy năm 2026 - Trường Đại học An ninh nhân dân',
+    url: 'https://dhannd.bocongan.gov.vn/thong-bao-tuyen-sinh-tuyen-moi-dao-tao-trinh-do-dai-hoc-chinh-quy-nam-2026-a-4201',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch-expand-12 (2026-08-24): official dhannd.bocongan.gov.vn 2026 regular undergraduate admission notice confirms a Ministry-run entrance exam (180 minutes, held 20-21/6/2026) at the school. Same political/health pre-screening barrier as other CAND schools, no matching profile field, so left at researched.',
+  },
+  sigo: {
+    sourceId: 'sigo-admission-2026',
+    title: 'Trường Đại học Thông tin liên lạc (Sĩ quan Thông tin) - trang tuyển sinh chính thức',
+    url: 'https://tcu.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch-expand-12 (2026-08-24): official tcu.edu.vn site confirms separate military-system and civilian-system admission tracks; the 2026 military-system plan (100 quota, 4 methods including a Ministry of Defense assessment exam, registration 10/2-15/4/2026) is announced through dedicated "Tuyển sinh hệ quân sự"/"hệ dân sự" pages. Military-track admission requires Ministry of Defense political/health pre-screening with no matching applicant-profile field, so left at researched; civilian-track threshold table not yet extracted.',
+  },
   rmitvn: {
     sourceId: 'rmitvn-admission-2026',
     title: 'RMIT Vietnam — Nhập học RMIT Việt Nam / Quy trình nhập học chương trình cử nhân',

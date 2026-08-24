@@ -81,6 +81,14 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Official 2026 UTH admission notice confirms 2 methods (priority admission per school rules, and a combined-assessment method using a proprietary "UTH120" 120-point-equivalent scale). The admission portal itself (tuyensinh.ut.edu.vn) returns HTTP 403 on direct fetch; a per-program cutoff table (64 program codes, non-30-point scale, e.g. 600-999) is available via secondary government-portal coverage (xaydungchinhsach.chinhphu.vn), but no official floor-score/ngưỡng đảm bảo chất lượng đầu vào notice or documentation of the UTH120 conversion formula was located. Left at researched: the non-standard scale and blocked primary source make eligibility modeling unsafe without further extraction.',
   },
+  pvu: {
+    sourceId: 'pvu-admission-2026',
+    title: 'Tuyển sinh 2026 - Trường Đại học Dầu khí Việt Nam',
+    url: 'https://pvu.edu.vn/tuyen-sinh/tuyen-sinh-2026',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch-expand-12 (2026-08-24): official pvu.edu.vn 2026 admission section confirms nationwide THPT-exam-based admission for Kỹ thuật Hóa học (Lọc-Hóa dầu) and Kỹ thuật Địa chất (Địa chất - Địa vật lý Dầu khí), and references a "khung quy đổi điểm tương đương" covering THPT transcript, THPT exam, and VNU-HCM aptitude-test routes. Third-party aggregators (vietjack, tuyensinh247) claim a flat 15/30 THPT-exam floor, but the official page itself only shows announcement titles with the numeric conversion table behind a linked article not retrievable in this pass, so the floor is unconfirmed at the primary source. Left at researched rather than modeling an unverified threshold.',
+  },
 };
 
 function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {

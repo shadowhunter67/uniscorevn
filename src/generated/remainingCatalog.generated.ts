@@ -60,6 +60,41 @@ const researchedCatalogCapabilities = {
 } satisfies NonNullable<SchoolModule['capabilities']>;
 
 const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
+  pxu: {
+    sourceId: 'pxu-admission-2026',
+    title: 'Đăng ký xét tuyển - Trường đại học Phú Xuân',
+    url: 'https://pxu.edu.vn/dang-ky-xet-tuyen/',
+    checkedAt: '2026-08-24',
+    note: 'Batch-expand-12 (2026-08-24): official pxu.edu.vn page confirms 5 admission methods for 2026 (transcript/học bạ average across grades 10-12 plus interview, THPT exam results, combined exam-or-transcript with foreign-language certificate, and university aptitude-test results). No single clean numeric floor or per-major subject-combination table was extracted, so left at researched.',
+  },
+  qtu: {
+    sourceId: 'qtu-admission-2026',
+    title: 'Thông tin tuyển sinh Đại học chính quy năm 2026 (Dự kiến) - Trường Đại học Quang Trung',
+    url: 'https://qtu.edu.vn/de-an-tuyen-sinh-dai-hoc-chinh-quy-nam-2026/',
+    checkedAt: '2026-08-24',
+    note: 'Batch-expand-12 (2026-08-24): official qtu.edu.vn 2026 admission plan confirms 1,058-quota, 4-method admission (3-subject transcript combination, 2026 THPT exam results, national-university aptitude-test results, direct admission) across 11 majors with reported cutoffs in the 13-18/30 range. No official per-major floor table was extracted (only third-party cutoff summaries), so left at researched rather than modeling an unverified threshold.',
+  },
+  pyu: {
+    sourceId: 'pyu-admission-2026',
+    title: 'Trường Đại học Phú Yên - Cổng thông tin tuyển sinh',
+    url: 'https://tuyensinh.pyu.edu.vn/',
+    checkedAt: '2026-08-24',
+    note: 'Batch-expand-12 (2026-08-24): official tuyensinh.pyu.edu.vn confirms 2026 admission runs 4 methods (direct admission, THPT exam results, transcript-based, combined THPT-exam + aptitude-test for arts/PE majors). Registration flows through the national MOET system. No numeric threshold or per-major subject-combination table was extracted from this pass, so left at researched.',
+  },
+  qbu: {
+    sourceId: 'qbu-admission-2026',
+    title: 'Thông tin tuyển sinh đại học chính quy năm 2026 (dự kiến) - QBU: Tuyển sinh',
+    url: 'http://tuyensinh.qbu.edu.vn/thong-tin-tuyen-sinh-nam-2026-du-kien/',
+    checkedAt: '2026-08-24',
+    note: 'Batch-expand-12 (2026-08-24): official tuyensinh.qbu.edu.vn 2026 (projected) admission page confirms 3 methods (direct admission, THPT exam results, THPT transcript results) across pedagogy/language/economics/technology/agriculture/tourism programs; teacher-training majors additionally require permanent residence in Quảng Trị province (post-merger administrative scope, a condition not modeled by this app). No numeric floor score was extracted, so left at researched.',
+  },
+  qnamu: {
+    sourceId: 'qnamu-admission-2026',
+    title: 'Thông tin tuyển sinh – Trường Đại học Quảng Nam',
+    url: 'http://qnamuni.edu.vn/chuyen-muc/tuyen-sinh/thong-tin-tuyen-sinh/',
+    checkedAt: '2026-08-24',
+    note: 'Batch-expand-12 (2026-08-24): official qnamuni.edu.vn admissions page confirms 2026 admission covers THPT exam results, 3-year THPT transcript results, direct admission, and aptitude-test results from VNU-HCM/Hanoi Pedagogical University routes; teacher-training majors require permanent residence in Đà Nẵng (post-merger administrative scope, a condition not modeled by this app). No numeric floor score was extracted, so left at researched.',
+  },
   vnuuet: {
     sourceId: 'vnuuet-admission-2026',
     title: 'VNU-UET admission portal and 2026 admission information',
