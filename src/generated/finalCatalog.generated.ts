@@ -67,6 +67,48 @@ const researchedCatalogCapabilities = {
  * catalog-only phẳng sang "researched". Copy nguyên mẫu từ remainingCatalog.ts.
  */
 const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
+  actvn: {
+    sourceId: 'actvn-admission-2026',
+    title: 'Thông báo Điểm chuẩn trúng tuyển vào đại học hệ chính quy năm 2026 - Học viện Kỹ thuật Mật mã',
+    url: 'https://tuyensinh.actvn.edu.vn/thong-bao-diem-chuan-trung-tuyen-vao-dai-hoc-he-chinh-quy-nam-2026/',
+    publishedAt: '2026-08-13',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch-expand-04 (2026-08-24): researched from scratch (Học viện Kỹ thuật Mật mã, Bộ Quốc phòng, đào tạo dân sự lẫn quân sự). Official tuyensinh.actvn.edu.vn 2026 cutoff notice fetched live: confirms 3 programs (An toàn thông tin, Công nghệ thông tin, Kỹ thuật Điện tử-Viễn thông), a 2026-new aptitude-assessment intake (HSA/TSA/APT/SPT scores now accepted alongside THPT exam), and that cutoffs are quy đổi tương đương về thang 30 đã gồm điểm ưu tiên/cộng — but the actual score table is embedded as an image and not extractable as text. Note this page publishes điểm chuẩn (competitive admitted-cutoff results), not a floor/eligibility formula, so even with numbers it would not be safe to model as an eligibility threshold. Left at researched; do-not-guess-formula rule applied.',
+  },
+  aadaa: {
+    sourceId: 'aadaa-admission-2026',
+    title: 'Phương án tuyển sinh và điểm chuẩn Học viện Phòng không - Không quân năm 2026',
+    url: 'https://khoahoc.vietjack.com/school/119/hoc-vien-phong-khong-khong-quan-pkh-de-an-tuyen-sinh-2026-moi-nhat',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch-expand-04 (2026-08-24): researched from scratch (Học viện Phòng không - Không quân, Bộ Quốc phòng, tuyển nam giới, quota theo miền Bắc/Nam/khu vực và tiêu chí phụ sức khỏe/chính trị theo quy định riêng ngành quân sự). No dedicated public .edu.vn admission domain for this academy was located (searches surfaced only third-party aggregators and a JS-heavy vietjack profile page); recruitment is administered centrally through the Ministry of National Defense portal tuyensinhquandoi.com, which candidates must use to register, alongside secondary press coverage confirming 4 methods (direct/priority admission, THPT exam, aptitude-assessment scores from VNU-Hanoi/VNU-HCM, and a Ministry of Defense-specific aptitude test) and a 350-seat 2026 quota. No structured, school-published floor-score table was extractable. Left at researched given the confirmed-but-unstructured official recruitment channel; the restricted/quota-based nature of military-academy admission (gender, khu vực, sức khỏe, chính trị) also makes a plain 30-point eligibility check unsafe to model even if a headline number were found.',
+  },
+  aoc: {
+    sourceId: 'aoc-admission-2026',
+    title: 'Chỉ tiêu, phương thức tuyển sinh của Trường Sĩ quan Pháo binh',
+    url: 'https://xaydungchinhsach.chinhphu.vn/tuyen-sinh-quan-su-nam-2023-chi-tieu-phuong-thuc-tuyen-sinh-cua-truong-si-quan-phao-binh-119230306110118033.htm',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch-expand-04 (2026-08-24): researched from scratch (Trường Đại học Sĩ quan Pháo binh / Trường Sĩ quan Pháo binh, Bộ Quốc phòng, tuyển nam giới toàn quốc, miễn học phí). No dedicated public .edu.vn admission domain located; the government policy-news portal (xaydungchinhsach.chinhphu.vn) carries the clearest structural admission-method description found (3 methods: direct/priority admission, aptitude-assessment scores from VNU-Hanoi/VNU-HCM, THPT exam results), and centralized registration runs through tuyensinhquandoi.com like other military academies. Secondary press gives only a prior-year (2025) cutoff reference (24,40 Bắc / 22,25 Nam) with no 2026 official floor-score notice located. Left at researched; do-not-guess-formula rule applied, and khu-vực/gender-quota structure makes a plain eligibility model unsafe regardless.',
+  },
+  bga: {
+    sourceId: 'bga-admission-2026',
+    title: 'Điểm chuẩn 2026 Học viện Biên phòng, hướng dẫn xác nhận nhập học',
+    url: 'https://xaydungchinhsach.chinhphu.vn/diem-chuan-2026-hoc-vien-bien-phong-huong-dan-xac-nhan-nhap-hoc-119260812142531373.htm',
+    publishedAt: '2026-08-12',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch-expand-04 (2026-08-24): researched from scratch (Học viện Biên phòng, Bộ Quốc phòng, tuyển 150 chỉ tiêu nam giới năm 2026, tổ hợp C03/C04/D01). Government policy-news portal (xaydungchinhsach.chinhphu.vn) article confirms the 2026 admitted cutoffs are split by quân khu (Quân khu 4: 24,68; miền Bắc: 23,96; Quân khu 7: 22,75; Quân khu 9: 22,50; Quân khu 5: 21,75, kèm tiêu chí phụ ở 2 mức biên) — these are competitive admitted-cutoff results (điểm chuẩn), not a published floor/eligibility formula, and vary by quân khu quota rather than a flat national threshold. The academy\'s own domain (hvbp.edu.vn, referenced by secondary sources) could not be reached in this pass. Left at researched; do-not-guess-formula rule applied — quân-khu-based quota competition is not safely modeled as a flat eligibility check.',
+  },
+  buv: {
+    sourceId: 'buv-admission-2026',
+    title: 'British University Vietnam - Tuyển sinh / Admission',
+    url: 'https://www.buv.edu.vn/admission/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch-expand-04 (2026-08-24): researched from scratch (Trường Đại học Anh Quốc Việt Nam, BUV, liên kết đào tạo với các đại học Anh Quốc). Official buv.edu.vn admission page confirmed live: BUV explicitly does NOT use a THPT-graduation-exam cutoff score; admission is holistic (academic transcript review, personal essay, interview) gated by an English-proficiency requirement (IELTS >= 6.0 overall / no skill below 5.5, or equivalent PTE/TOEFL) that varies by specific degree-awarding partner institution and program. There is no single numeric floor-score formula of the kind this codebase models (THPT-exam-total or transcript-average against a school-wide threshold), so eligibility-only support is not a safe fit even though the official source is clear and fully readable. Left at researched; do-not-guess-formula rule applied (no formula exists to guess, but no compatible formula shape to model either).',
+  },
   vinuni: {
     sourceId: 'vinuni-admission-2026',
     title: 'VinUniversity Officially Announces the 2026 Undergraduate Admissions Plan',
@@ -262,7 +304,8 @@ export const finalCatalogKnowledgeGap = {
 
 // 'vgu' and 'hpu2' moved to dedicated runtime modules (normalized/runtime-source-snapshot/<id>/) —
 // eligibility-only, excluded here to avoid duplicate methodId/comparisonAdapter entries.
-const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2']);
+// Batch-expand-04 (2026-08-24): 'apd' moved the same way.
+const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd']);
 const finalCatalogRuntimeSchools = finalCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const finalCatalogMethods: AdmissionMethodDescriptor[] = finalCatalogRuntimeSchools.map((school) => ({

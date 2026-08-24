@@ -60,6 +60,15 @@ const researchedCatalogCapabilities = {
 } satisfies NonNullable<SchoolModule['capabilities']>;
 
 const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
+  bmtu: {
+    sourceId: 'bmtu-admission-2026',
+    title: 'Trường Đại học Y Dược Buôn Ma Thuột - Tuyển sinh đại học 2026',
+    url: 'https://bmu.edu.vn/ds/tuyen-sinh-dai-hoc',
+    publishedAt: '2026-07-08',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch-expand-04 (2026-08-24): researched from scratch (Trường Đại học Y Dược Buôn Ma Thuột, chỉ đào tạo khối sức khỏe: Y khoa, Dược học, Điều dưỡng, Y học cổ truyền, Kỹ thuật xét nghiệm y học). Official domain bmu.edu.vn confirmed (own tuyển sinh section) with the Bộ GD&ĐT 2026 health-sector ngưỡng đảm bảo chất lượng đầu vào (thresholds published 08/07/2026): Y khoa/Y học cổ truyền/Dược học require grade-12 academic rank "Giỏi" AND raw THPT-exam 3-subject total >= 20,00/30 (or assessment score >= 8,50/10) — a dual AND-gate on rank plus score. ApplicantProfile has no academic-rank field (same gap documented for hubt), and since 100% of BMTU programs are health-licensed majors under this gate (unlike hubt which had non-health majors too), there is no safe flat-numeric subset to ship as eligibility-only without silently dropping the rank requirement. Left at researched; do-not-guess/do-not-drop-a-required-condition rule applied.',
+  },
   vnuuet: {
     sourceId: 'vnuuet-admission-2026',
     title: 'VNU-UET admission portal and 2026 admission information',

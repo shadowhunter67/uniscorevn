@@ -68,6 +68,9 @@ import { dtuAdmissionMethods } from '../schools/dtu/methods';
 import { uahAdmissionMethods } from '../schools/uah/methods';
 import { vguAdmissionMethods } from '../schools/vgu/methods';
 import { hpu2AdmissionMethods } from '../schools/hpu2/methods';
+import { apdAdmissionMethods } from '../schools/apd/methods';
+import { bduAdmissionMethods } from '../schools/bdu/methods';
+import { bvuAdmissionMethods } from '../schools/bvu/methods';
 import { fptuAdmissionMethods } from '../schools/fptu/methods';
 import { hubtAdmissionMethods } from '../schools/hubt/methods';
 import { southernCatalogMethods } from '../schools/southernCatalog';
@@ -152,6 +155,9 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   uah: uahAdmissionMethods,
   vgu: vguAdmissionMethods,
   hpu2: hpu2AdmissionMethods,
+  apd: apdAdmissionMethods,
+  bdu: bduAdmissionMethods,
+  bvu: bvuAdmissionMethods,
   fptu: fptuAdmissionMethods,
   hubt: hubtAdmissionMethods,
 };

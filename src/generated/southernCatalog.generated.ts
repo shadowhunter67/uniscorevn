@@ -63,6 +63,15 @@ const researchedCatalogCapabilities = {
  * structured numbers extracted yet — same "researched" tier pattern as `remainingCatalog.ts`
  * (`researchedAdmissionSources`), replicated here for the southern roster. */
 const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
+  blu: {
+    sourceId: 'blu-admission-2026',
+    title: 'Công bố ngưỡng đảm bảo chất lượng đầu vào năm 2026 - Trường Đại học Bạc Liêu',
+    url: 'https://tuyensinh.blu.edu.vn/cong-bo-nguong-dam-bao-chat-luong-dau-vao-nam-2026-11286',
+    publishedAt: '2026-07-10',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch-expand-04 (2026-08-24): researched from scratch (Trường Đại học Bạc Liêu). Official tuyensinh.blu.edu.vn 2026 floor-score notice fetched live: confirms scope (all bachelor programs + associate-level Giáo dục Mầm non, khu vực 3, no coefficient/priority-point inflation) and structural rules for 3 method families (THPT exam/transcript on a 30-point scale, V-ACT aptitude test on a 1200-point scale, and one special combined-method formula for the associate Mầm non track: Toán + Ngữ văn + điểm ưu tiên*2/3 >= 11,33). The actual per-program/per-combination numeric floor table is embedded as an image on the official page and could not be extracted as text in this pass. Left at researched; do-not-guess-formula rule applied.',
+  },
   nlu: {
     sourceId: 'nlu-admission-2026',
     title: 'Điểm sàn tuyển sinh Trường Đại học Nông Lâm TPHCM 2026',
@@ -323,8 +332,10 @@ export const southernCatalogKnowledgeGap = {
 /** Batch 10 (2026-08-24): 'pntu' and 'uah' graduated to dedicated eligibility-only runtime modules
  * (`normalized/runtime-source-snapshot/{pntu,uah}/`) — excluded here from the generated method/module/
  * adapter arrays the same way `remainingCatalog.ts` excludes its `explicitRuntimeSchoolIds`. They
- * stay listed in `southernCatalogSchools` above for identity/location metadata only. */
-const explicitRuntimeSchoolIds = new Set(['pntu', 'uah']);
+ * stay listed in `southernCatalogSchools` above for identity/location metadata only.
+ * Batch-expand-04 (2026-08-24): 'bdu' and 'bvu' graduated the same way (dedicated eligibility-only
+ * runtime modules at `normalized/runtime-source-snapshot/{bdu,bvu}/`). */
+const explicitRuntimeSchoolIds = new Set(['pntu', 'uah', 'bdu', 'bvu']);
 const southernCatalogRuntimeSchools = southernCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const southernCatalogMethods: AdmissionMethodDescriptor[] = southernCatalogRuntimeSchools.map((school) => ({

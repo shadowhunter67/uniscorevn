@@ -64,6 +64,9 @@ import { dtuComparisonAdapter } from '../schools/dtu/comparison';
 import { uahComparisonAdapter } from '../schools/uah/comparison';
 import { vguComparisonAdapter } from '../schools/vgu/comparison';
 import { hpu2ComparisonAdapter } from '../schools/hpu2/comparison';
+import { apdComparisonAdapter } from '../schools/apd/comparison';
+import { bduComparisonAdapter } from '../schools/bdu/comparison';
+import { bvuComparisonAdapter } from '../schools/bvu/comparison';
 import { fptuComparisonAdapter } from '../schools/fptu/comparison';
 import { hubtComparisonAdapter } from '../schools/hubt/comparison';
 import { southernCatalogComparisonAdapters } from '../schools/southernCatalog';
@@ -149,6 +152,9 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   uahComparisonAdapter,
   vguComparisonAdapter,
   hpu2ComparisonAdapter,
+  apdComparisonAdapter,
+  bduComparisonAdapter,
+  bvuComparisonAdapter,
   fptuComparisonAdapter,
   hubtComparisonAdapter,
   ...southernCatalogComparisonAdapters,
