@@ -83,6 +83,15 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Cổng tuyển sinh chính thức RMIT Việt Nam (rmit.edu.vn) fetch được nhưng chỉ là trang portal điều hướng: yêu cầu tiếng Anh chung (IELTS Academic 6.5, không kỹ năng nào dưới 6.0) được nêu rõ, nhưng ngưỡng điểm THPT/học bạ cụ thể được trang này dẫn sang từng trang ngành riêng lẻ (hàng chục ngành, không fetch hết trong 1 lượt). Không đủ cấu trúc để mô hình hoá eligibility trong batch này; do-not-guess-formula áp dụng.',
   },
+  cmcu: {
+    sourceId: 'cmcu-admission-2026',
+    title: 'Điểm chuẩn trúng tuyển theo các phương thức xét tuyển của Trường Đại học CMC năm 2026',
+    url: 'https://cmcu.edu.vn/diem-chuan-trung-tuyen-theo-cac-phuong-thuc-xet-tuyen-cua-truong-dai-hoc-cmc-nam-2026/',
+    publishedAt: '2026-08-09',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch-expand-05 (2026-08-24): trang tuyển sinh chính thức cmcu.edu.vn fetch được, xác nhận 4 phương thức (CMC-TEST đánh giá năng lực riêng, học bạ THPT, điểm thi TN THPT, xét tuyển thẳng) và phân biệt rõ "ngưỡng đảm bảo chất lượng" (theo quy định Bộ GD&ĐT) với "điểm chuẩn" (do Hội đồng tuyển sinh CMC tự quyết). Điểm chuẩn 2026 công bố trên thang /40 (22,7-26,9 cho phương thức THPT/học bạ), nhưng KHÔNG có ngưỡng đầu vào /30 hoặc /40 cụ thể riêng của trường được nêu bằng text — bảng điểm theo ngành nằm trong ảnh đính kèm không trích xuất được. Do-not-guess-formula áp dụng: chưa đủ cấu trúc để nâng lên eligibility-only.',
+  },
 };
 
 function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {

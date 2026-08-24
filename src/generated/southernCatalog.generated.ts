@@ -81,6 +81,24 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Official 2026 UTH admission notice confirms 2 methods (priority admission per school rules, and a combined-assessment method using a proprietary "UTH120" 120-point-equivalent scale). The admission portal itself (tuyensinh.ut.edu.vn) returns HTTP 403 on direct fetch; a per-program cutoff table (64 program codes, non-30-point scale, e.g. 600-999) is available via secondary government-portal coverage (xaydungchinhsach.chinhphu.vn), but no official floor-score/ngưỡng đảm bảo chất lượng đầu vào notice or documentation of the UTH120 conversion formula was located. Left at researched: the non-standard scale and blocked primary source make eligibility modeling unsafe without further extraction.',
   },
+  ctuet: {
+    sourceId: 'ctuet-admission-2026',
+    title: 'Điểm sàn xét tuyển vào Trường Đại học Kỹ thuật - Công nghệ Cần Thơ từ 15-20 điểm',
+    url: 'https://baocantho.com.vn/diem-san-xet-tuyen-vao-truong-dai-hoc-ky-thuat-cong-nghe-can-tho-tu-15-20-diem-a209350.html',
+    publishedAt: '2026-07-10',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch-expand-05 (2026-08-24): official admission portal tuyensinh.ctuet.edu.vn confirmed live (lists 22 programs, 4 methods, and a point-conversion tool at quanlytuyensinh.ctuet.edu.vn/pointconversion). The 2026 điểm sàn notice itself (cross-checked via xaydungchinhsach.chinhphu.vn, 2026-08-11) states a 15-20/30 range with Luật cited as the highest band, but the actual per-program breakdown table is embedded as an image on both the primary and secondary pages and could not be reliably extracted as structured text in this pass. Do-not-guess-formula applied: left at researched rather than eligibility-only.',
+  },
+  ctump: {
+    sourceId: 'ctump-admission-2026',
+    title: 'Trường ĐH Y Dược Cần Thơ công bố điểm sàn năm 2026 từ 15 đến 22',
+    url: 'https://vietnamnet.vn/truong-dh-y-duoc-can-tho-cong-bo-diem-san-nam-2026-tu-15-den-22-2534143.html',
+    publishedAt: '2026-07-09',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch-expand-05 (2026-08-24): official admission notice (ngưỡng đảm bảo chất lượng đầu vào, 2026-07-09) confirmed to exist for Trường Đại học Y Dược Cần Thơ, cross-checked across 3 independent press outlets (vietnamnet.vn, tuoitre.vn, baocantho.com.vn) which agree on the aggregate range (15-22/30 across 14 programs) and name Y khoa + Răng Hàm Mặt as the 22/30 ceiling, but none reproduce the full per-program table as extractable text (the primary notice table is image-embedded) and no mã ngành could be confirmed for any individual program. Do-not-guess-formula applied: left at researched rather than eligibility-only.',
+  },
 };
 
 function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {
