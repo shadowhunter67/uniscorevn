@@ -109,6 +109,64 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Batch-expand-04 (2026-08-24): researched from scratch (Trường Đại học Anh Quốc Việt Nam, BUV, liên kết đào tạo với các đại học Anh Quốc). Official buv.edu.vn admission page confirmed live: BUV explicitly does NOT use a THPT-graduation-exam cutoff score; admission is holistic (academic transcript review, personal essay, interview) gated by an English-proficiency requirement (IELTS >= 6.0 overall / no skill below 5.5, or equivalent PTE/TOEFL) that varies by specific degree-awarding partner institution and program. There is no single numeric floor-score formula of the kind this codebase models (THPT-exam-total or transcript-average against a school-wide threshold), so eligibility-only support is not a safe fit even though the official source is clear and fully readable. Left at researched; do-not-guess-formula rule applied (no formula exists to guess, but no compatible formula shape to model either).',
   },
+  tnut: {
+    sourceId: 'tnut-admission-2026',
+    title: 'TNUT undergraduate admission guide 2026',
+    url: 'https://tnut.edu.vn/huong-dan-xet-tuyen-dai-hoc-nam-2026-tai-truong-dai-hoc-ky-thuat-cong-nghiep-dai-hoc-thai-nguyen-dz22289.html',
+    checkedAt: '2026-08-24',
+    publishedAt: '2026-07-01',
+    note:
+      'Batch expand-14 (2026-08-24): official tnut.edu.vn 2026 admission guide (its own domain, Thai Nguyen University member school) confirms method process (THPT exam, transcript, V-SAT, direct admission) and states floor thresholds "will be determined and announced per Ministry regulation" once 2026 exam results are in - no numeric threshold is published in this document itself. The system-level TNU notice (tnu.edu.vn, 08/07/2026) states a general 16,00/30 floor for "most programs" but explicitly differentiates Teacher Education/Medicine/Semiconductor/Law categories without confirming TNUT falls under the general floor; TNUT program-to-category mapping not verified. Left at researched; do not assume the 16/30 system floor applies without confirmation.',
+  },
+  tqt: {
+    sourceId: 'tqt-admission-2026',
+    title: 'Truong Dai hoc Tran Quoc Tuan (Si quan Luc quan 1) official site',
+    url: 'http://sqlq1.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-14 (2026-08-24): official domain sqlq1.edu.vn confirmed via search (Facebook-linked, school code LAH). This is a Ministry of Defense military officer school: eligibility is gated by gender (male only for combat-officer training), age (<=31, or 17-21 for candidates with no prior military service), political/health vetting, and a preliminary military screening score (so-tuyen) separate from the THPT exam - none of these map to UniScoreVN\'s applicant-profile fields, and admission also runs through a district/regiment-level military recruitment process rather than the standard national online portal. Left at researched; the THPT/exam-combination floor (reported secondarily as 18-22) is not modeled because the surrounding eligibility gates cannot be represented.',
+  },
+  tueba: {
+    sourceId: 'tueba-admission-2026',
+    title: 'TUEBA official site (Truong Dai hoc Kinh te va Quan tri Kinh doanh - Dai hoc Thai Nguyen)',
+    url: 'https://tueba.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-14 (2026-08-24): tueba.edu.vn confirmed as the official Thai Nguyen University member-school domain with an admission-threshold notice pattern (own 2025 notice found: "Thong bao Nguong Dam Bao Chat Luong Dau Vao..."), but the equivalent 2026 notice with numeric thresholds could not be located via search (only a 2025 dated article surfaced: floor ~17/30 most majors, Luat Kinh te 18/30 - not confirmed for 2026). Press coverage cites a 2026 THPT-exam cutoff range of 17.0-19.5 for admitted students, not the floor score. Left at researched; do not reuse 2025 numbers as 2026 thresholds.',
+  },
+  tump: {
+    sourceId: 'tump-admission-2026',
+    title: 'TUMP admission portal 2026 (tuyensinh.tump.edu.vn)',
+    url: 'https://tuyensinh.tump.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-14 (2026-08-24): official TUMP (Thai Nguyen University of Medicine and Pharmacy) admission portal tuyensinh.tump.edu.vn confirmed live via search (score-calculation tool page, applicant-document notices for 2026 found), but direct WebFetch failed (TLS certificate verification error) and no numeric floor-score/ngưỡng đảm bảo chất lượng đầu vào table was extracted. Secondary press confirms 2026 admitted cutoffs range 19.75 (Y hoc du phong) to 26.80 (Rang-Ham-Mat) across ~8 health programs, but these are cutoffs (diem chuan), not the input floor, and multi-program THPT/transcript/HSA/V-SAT method scoping is not resolved. Left at researched; do not fabricate the floor table.',
+  },
+  tuu: {
+    sourceId: 'tuu-admission-2026',
+    title: 'Truong Dai hoc Cong doan 2026 floor-score press coverage (VietNamNet)',
+    url: 'https://vietnamnet.vn/truong-dh-cong-doan-cong-bo-diem-san-xet-tuyen-nam-2026-2534559.html',
+    checkedAt: '2026-08-24',
+    publishedAt: '2026-07-10',
+    note:
+      'Batch expand-14 (2026-08-24): VietNamNet (state-run press) confirms Truong Dai hoc Cong doan (TUU) published its 2026 floor-score notice on 10/07/2026 covering 2,989 undergraduate seats across 5 methods, with a stated minimum THPT 3-subject total of 15,00/30 for at least some majors, but the article\'s actual per-major threshold table is embedded as images that failed to load in this pass, and no direct daihoccongdoan.edu.vn/dhcd URL for the primary notice was located. Left at researched; do not assume 15/30 is the uniform floor for every major without the primary table.',
+  },
+  trungvuong: {
+    sourceId: 'trungvuong-admission-2026',
+    title: 'Truong Dai hoc Trung Vuong 2026 admission portal (tuyensinh.tv-uni.edu.vn)',
+    url: 'https://tuyensinh.tv-uni.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-14 (2026-08-24): official tv-uni.edu.vn admission portal confirmed live for 2026 (4 methods: transcript, THPT exam, direct admission, aptitude assessment). Transcript method states a common floor of 3-subject total >= 15/30, but the Nursing major requires grade-12 academic ranking "Gioi" (Excellent) AND a 3-subject total >= 19.5/30 - the academic-rank condition has no matching applicant-profile field. THPT-exam-method numeric threshold was not confirmed separately from the transcript-method number in this pass. Left at researched per the academic-rank-gating rule; do not model eligibility without the rank field.',
+  },
+  tucst: {
+    sourceId: 'tucst-admission-2026',
+    title: 'TUCST 2026 admission methods announcement (qldt.tucst.edu.vn)',
+    url: 'http://qldt.tucst.edu.vn/web/tin-tuc-su-kien/truong-dai-hoc-van-hoa-the-thao-va-du-lich-thanh-hoa-cong-bo-4-phuong-thuc-tuyen-sinh-dai-hoc-chinh-quy-nam-2026.html',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-14 (2026-08-24): official TUCST (Truong Dai hoc Van hoa, The thao va Du lich Thanh Hoa) subdomain qldt.tucst.edu.vn confirms 4 admission methods (code 100 THPT exam, 200 transcript, 301 direct/priority, 402 aptitude assessment) and a registration window (01/04-20/06/2026), but no numeric floor-score/ngưỡng đảm bảo chất lượng đầu vào table was located in this pass - the announcement covers only method identity and equivalent-conversion policy in general terms. Left at researched; do not fabricate threshold numbers.',
+  },
   vinuni: {
     sourceId: 'vinuni-admission-2026',
     title: 'VinUniversity Officially Announces the 2026 Undergraduate Admissions Plan',
@@ -173,6 +231,422 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     checkedAt: '2026-08-24',
     note:
       'Batch-expand-05 (2026-08-24): trang tuyển sinh chính thức cmcu.edu.vn fetch được, xác nhận 4 phương thức (CMC-TEST đánh giá năng lực riêng, học bạ THPT, điểm thi TN THPT, xét tuyển thẳng) và phân biệt rõ "ngưỡng đảm bảo chất lượng" (theo quy định Bộ GD&ĐT) với "điểm chuẩn" (do Hội đồng tuyển sinh CMC tự quyết). Điểm chuẩn 2026 công bố trên thang /40 (22,7-26,9 cho phương thức THPT/học bạ), nhưng KHÔNG có ngưỡng đầu vào /30 hoặc /40 cụ thể riêng của trường được nêu bằng text — bảng điểm theo ngành nằm trong ảnh đính kèm không trích xuất được. Do-not-guess-formula áp dụng: chưa đủ cấu trúc để nâng lên eligibility-only.',
+  },
+  dhv: {
+    sourceId: 'dhv-admission-2026',
+    title: 'Trang tuyển sinh Trường Đại học Hùng Vương TP.HCM',
+    url: 'https://tuyensinh.dhv.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-06 (2026-08-24): cổng tuyển sinh chính thức tuyensinh.dhv.edu.vn fetch được trực tiếp, liệt kê 5 phương thức (thi TN THPT theo tổ hợp; học bạ với công thức "Điểm xét tuyển = Toán hoặc Ngữ văn + (Trung bình cả năm THPT × 2)"; ĐGNL ĐHQG-HCM ngưỡng nhận hồ sơ dự kiến từ 600 điểm; kỳ thi đánh giá năng lực chuyên biệt H-SCA (Đại học Sư phạm TP.HCM) kết hợp học bạ; xét tuyển bằng trung cấp nghề liên quan). Công thức học bạ khác thường (chọn Toán HOẶC Văn, chưa rõ quy tắc chọn môn nào) và không có ngưỡng sàn cho phương thức 1; chưa đủ cấu trúc để model eligibility trong batch này — do-not-guess-formula áp dụng cho cách chọn môn trong công thức phương thức 2.',
+  },
+  dsu: {
+    sourceId: 'dsu-admission-2026',
+    title: 'Cổng thông tin chính thức Trường Đại học Thể dục Thể thao Đà Nẵng',
+    url: 'https://dsu.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-06 (2026-08-24): domain chính thức dsu.edu.vn xác nhận qua WebFetch, có 4 phương thức tuyển sinh 2026 (thi TN THPT, học bạ, kết hợp điểm thi/học bạ với điểm thi năng khiếu TDTT, xét tuyển thẳng) cho 3 ngành/900 chỉ tiêu, cùng các thông báo "Ngưỡng đảm bảo chất lượng đầu vào" (đăng 22/07/2026) và "Điểm chuẩn trúng tuyển" (đăng 11/08/2026) đã xác nhận tồn tại, nhưng nội dung số liệu cụ thể không được WebFetch trích xuất trong lượt này (chỉ thấy tiêu đề thông báo). Runtime giữ researched-only; chưa fetch được trang con chứa bảng điểm.',
+  },
+  eaut: {
+    sourceId: 'eaut-admission-2026',
+    title: 'Trường ĐH Công nghệ Đông Á công bố 4 phương thức tuyển sinh năm 2026',
+    url: 'https://eaut.edu.vn/tin-tuc/truong-dh-cong-nghe-dong-a-cong-bo-phuong-thuc-tuyen-sinh-nam-2026/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-06 (2026-08-24): bài đăng chính thức eaut.edu.vn fetch được trực tiếp, xác nhận 4 phương thức tuyển sinh 2026 cho 9.800 chỉ tiêu/34 ngành — (1) xét học bạ: "điểm trung bình theo tổ hợp 3 môn xét tuyển đạt từ 18 điểm trở lên" VÀ điểm thi TN THPT 2026 ≥15/30; (2) xét điểm thi TN THPT (ngưỡng cụ thể chưa nêu trong bài); (3) kết hợp điểm thi TN THPT và học bạ (trừ khối ngành VI); (4) các kỳ thi đánh giá năng lực/tư duy (ĐHQG Hà Nội, ĐHBK Hà Nội, ĐH Sư phạm Hà Nội). Phương thức học bạ có ngưỡng khá rõ nhưng ngưỡng phương thức thi TN THPT (phương thức chính) chưa công bố số cụ thể trong bài — chưa đủ để model một eligibility nhất quán trong batch này; do-not-guess-formula áp dụng.',
+  },
+  hau: {
+    sourceId: 'hau-admission-2026',
+    title: 'Điểm trúng tuyển và danh sách thí sinh trúng tuyển đại học hình thức chính quy năm 2026 - Trường Đại học Kiến trúc Hà Nội',
+    url: 'https://hau.edu.vn/Diem-trung-tuyen-va-danh-sach-thi-sinh-trung-tuyen-dai-hoc-hinh-thuc-chinh-quy-nam-2026-cua-Truong-Dai-hoc-Kien-truc-Ha-Noi_n4798.html',
+    checkedAt: '2026-08-24',
+    publishedAt: '2026-08-11',
+    note:
+      'Batch expand-07 (2026-08-24): official hau.edu.vn decision (11/08/2026) confirming 2026 admission thresholds/results exists and was fetched live, plus an earlier official floor-score notice (baoxaydung.vn, 08/07/2026, "ngưỡng nhận hồ sơ xét tuyển", range 15-22/30 depending on program). Both times the actual per-program numeric table sits in an embedded image or a linked Google Drive PDF, not extractable as text in this pass. Left at researched; do-not-guess-formula rule applied.',
+  },
+  hbu: {
+    sourceId: 'hbu-admission-2026',
+    title: 'Trường Đại học Hòa Bình công bố Thông báo tuyển sinh trình độ Đại học chính quy năm 2026',
+    url: 'https://tuyensinh.daihochoabinh.edu.vn/truong-dai-hoc-hoa-binh-cong-bo-thong-bao-tuyen-sinh-trinh-do-dai-hoc-chinh-quy-nam-2026/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-07 (2026-08-24): official HBU 2026 admission notice page confirmed live, listing 4 methods (thi TN THPT, học bạ/tốt nghiệp trung cấp-cao đẳng-đại học cùng nhóm ngành, xét tuyển thẳng, học tập THPT + năng khiếu), but the fetched page text does not itself state a numeric threshold — it points to a linked PDF ("Thông báo tuyển sinh hệ chính quy năm 2026") not extracted in this pass. A generic aggregator claim of "15/30 minimum" could not be confirmed as HBU-specific (it may reflect only the nationwide 2026 MOET floor). Left at researched; do-not-guess-formula rule applied.',
+  },
+  hca: {
+    sourceId: 'hca-admission-2026',
+    title: 'Học viện Cán bộ TPHCM công bố điểm chuẩn trúng tuyển năm 2026',
+    url: 'https://vietnamnet.vn/hoc-vien-can-bo-tphcm-cong-bo-diem-chuan-trung-tuyen-nam-2026-2544036.html',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-07 (2026-08-24): HCA official admission portal (tuyensinh.hcmca.edu.vn) identified and referenced in secondary coverage, but direct fetch failed (connection refused) in this pass. VietnamNet reports actual 2026 admitted cutoffs (điểm chuẩn, post-result) per major: 22.45-24.8/30 (thi TN THPT), 24.43-26.84/30 (học bạ), 829-937 (ĐGNL ĐHQG TPHCM) — these are realized cutoffs that vary by major/method, not a flat floor score, so they cannot be modeled as a single eligibility threshold without fabricating per-program scope. Left at researched; do-not-guess-formula rule applied.',
+  },
+  ham: {
+    sourceId: 'ham-admission-2026',
+    title: 'Thông tin tuyển sinh - Học viện Âm nhạc Huế',
+    url: 'https://hocvienamnhachue.edu.vn/vi/dao-tao-tuyen-sinh/tuyen-sinh-dao-tao-tuyen-sinh/thong-tin-tuyen-sinh/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-07 (2026-08-24): official Học viện Âm nhạc Huế domain confirmed to exist and host a dedicated admission-info section (hocvienamnhachue.edu.vn). Secondary aggregation reports thresholds of 20,0 điểm for performance majors (Thanh nhạc, Biểu diễn nhạc cụ phương Tây, Piano, Biểu diễn nhạc cụ truyền thống) and 30,0 điểm for Âm nhạc học/Sáng tác âm nhạc, but the scale these totals are measured on (culture-subject score vs specialized talent-test score, and whether 30,0 is even the same 30-point scale used elsewhere) is not stated cleanly in this pass, so modeling eligibility risks silently using the wrong scale. Left at researched; do-not-guess-formula rule applied.',
+  },
+  fuv: {
+    sourceId: 'fuv-admission-2026',
+    title: 'How To Apply To Us - Fulbright University Vietnam',
+    url: 'https://fulbright.edu.vn/apply-to-us/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-07 (2026-08-24): official Fulbright University Vietnam admission portal confirmed (2026-2030 intake application window 05/01/2026-06/04/2026). FUV explicitly uses holistic, non-numeric-threshold admissions (no THPT-score cutoff or fixed formula by design) — there is no admission formula to model as eligibility/partial without misrepresenting the process. Left at researched; do-not-guess-formula rule applied (not a knowledge gap to close, but a genuinely formula-free admissions process).',
+  },
+  gass: {
+    sourceId: 'gass-admission-2026',
+    title: 'Học viện Khoa học xã hội - Cổng thông tin điện tử (Tuyển sinh)',
+    url: 'https://gass.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-07 (2026-08-24): official GASS site (gass.edu.vn) confirmed live; its Tuyển sinh navigation lists only Tiến sĩ (doctoral), Thạc sĩ (master), and short-term/bổ sung kiến thức programs — no đại học chính quy (undergraduate) admission track exists at this institution (cross-checked against Vietnamese Wikipedia, which also states GASS trains only thạc sĩ/tiến sĩ). This is a genuine "no undergraduate program" finding, not a research gap — GASS should not be modeled as an undergraduate eligibility/calculator target. Left at researched to document the finding without fabricating an undergraduate rule.',
+  /* Batch expand-08 (2026-08-24): hcmcons, hcmufa, hcmupes, hnmu, hluv, hdiu. */
+  hcmcons: {
+    sourceId: 'hcmcons-admission-2026',
+    title: 'Thông báo Tuyển sinh Đại học chính quy và Hệ vừa làm vừa học ngành Sư phạm âm nhạc - Nhạc viện TP.HCM',
+    url: 'https://hcmcons.vn/tin-tuc/thong-bao-tuyen-sinh-dai-hoc-chinh-quy-va-he-vua-lam-vua-hoc-nganh-su-pham-am-nhac-nhac-vien-tp-ho-chi-minh-552.html',
+    publishedAt: '2026-04-13',
+    checkedAt: '2026-08-24',
+    note:
+      'Official 2026 HCMCONS (hcmcons.vn) undergraduate admission notice confirmed to exist, with registration window 13/04/2026-16/05/2026 and exam dates 04-05/06/2026. All method/threshold/subject-exam detail is embedded in numbered announcement images (1-7), not readable text. Left at researched; do not fabricate aptitude-exam thresholds from an unreadable image set.',
+  },
+  hcmufa: {
+    sourceId: 'hcmufa-admission-2026',
+    title: 'Thông tin tuyển sinh đại học năm 2026 - Trường Đại học Mỹ thuật TP.HCM',
+    url: 'https://hcmufa.edu.vn/news_detail/id/620',
+    checkedAt: '2026-08-24',
+    note:
+      'Official HCMUFA (hcmufa.edu.vn) 2026 notice confirms a combined aptitude-exam admission method (vẽ, bố cục, điêu khắc with 2x weighting on some subjects, plus a Ngữ văn condition-check) with a flat 5/10 minimum per exam subject, registered via reg.finearts.vn (30/03-29/05/2026). The aptitude subjects (vẽ, bố cục, điêu khắc) are not modeled fields in the shared ApplicantProfile/subject schema, and Ngữ văn is condition-only (không cộng điểm rõ ràng) rather than summed into a standard 30-point total, so an eligibility module would require new non-standard profile fields UniScoreVN does not have yet. Left at researched to avoid guessing the scoring/weighting mechanics.',
+  },
+  hcmupes: {
+    sourceId: 'hcmupes-admission-2026',
+    title: 'Thông tin tuyển sinh đại học chính quy năm 2026 - Trường Đại học Sư phạm Thể dục Thể thao TP.HCM',
+    url: 'https://upes.edu.vn/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026/',
+    checkedAt: '2026-08-24',
+    note:
+      'Official UPES (upes.edu.vn) 2026 notice confirms 3 programs (7140206, 7810301, 7810302) admitted via a combined score of a Thể dục Thể thao aptitude test (thể hình, chạy 30m, bật xa tại chỗ, fee 400,000 VND, exam 15/06/2026) plus 2 cultural subjects from 7 named combinations (T00/T01/T02/T05/T08/T09/T10). Secondary press (chinhphu.vn) reports 2026 cut-offs of 22.30-25.37, but the aptitude test score is not a field in the shared ApplicantProfile schema and no official floor/conversion table was located on the primary source. Left at researched: modeling would require guessing the aptitude-to-30-point conversion.',
+  },
+  hnmu: {
+    sourceId: 'hnmu-admission-2026',
+    title: 'Tuyển sinh - Trường Đại học Thủ đô Hà Nội',
+    url: 'https://hnmu.edu.vn/tuyen-sinh',
+    checkedAt: '2026-08-24',
+    note:
+      'Official HNMU (hnmu.edu.vn) admission portal confirmed reachable, listing regular undergraduate, liên thông, and văn bằng 2 admission tracks and referencing a 2026 "Quyết định phê duyệt điểm trúng tuyển" decision, but no floor score, subject-combination table, or per-program threshold is present as readable text on the fetched page (detail lives in linked announcement documents not retrieved this round). Left at researched; do not fabricate thresholds.',
+  },
+  hluv: {
+    sourceId: 'hluv-admission-2026',
+    title: 'Thông tin tuyển sinh đại học chính quy năm 2026 - Trường Đại học Hoa Lư',
+    url: 'http://hluv.edu.vn/vi/tuyen-sinh/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026/62429',
+    checkedAt: '2026-08-24',
+    note:
+      'Official HLUV (hluv.edu.vn) 2026 admission page confirmed to exist, with a companion "Quy chế tuyển sinh năm 2026" page and 4 named methods (100/200/301 direct-admission, etc.). Secondary press (vietjack/tuyensinh247) reports a flat 15/30 floor for non-pedagogy programs, but the primary hluv.edu.vn pages were not fetchable as clean structured text in this round (news-portal template), so the floor and its program scope were not independently confirmed from the official source. Left at researched pending a direct successful fetch.',
+  },
+  hdiu: {
+    sourceId: 'hdiu-admission-2026',
+    title: 'Tuyển sinh 2026 - Trường Đại học Đông Đô',
+    url: 'https://tuyensinh.hdiu.edu.vn/',
+    publishedAt: '2026-06-01',
+    checkedAt: '2026-08-24',
+    note:
+      'Official HDIU (tuyensinh.hdiu.edu.vn) 2026 admission portal confirms 4 methods (THPT exam floor 15/30, academic-transcript floor 16.5/30, competency-assessment floor 15/30, direct admission), open for applications 01/06-31/08/2026. Secondary press (vietnamnet) reports the THPT floor varies by program group (healthcare 16.5/30, Pharmacy 20.0/30) which conflicts with the primary source describing a single flat 15/30 THPT floor with "no score difference between subject combinations" — the two sources disagree on whether program-specific floors exist. Left at researched per the conflicting-sources rule; do not guess which floor set is authoritative.',
+  },
+  hupes: {
+    sourceId: 'hupes-admission-2026',
+    title: 'Trường Đại học Sư phạm Thể dục Thể thao Hà Nội - Cổng tuyển sinh 2026',
+    url: 'https://tuyensinhdaihoc.hupes.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch 11 (2026-08-24): official tuyensinhdaihoc.hupes.edu.vn portal fetched directly, confirming 4 admission methods (direct admission for elite athletes; priority admission for national-tournament medalists; THPT exam + năng khiếu talent test; học bạ + năng khiếu talent test) and two subject combinations (T11: Toán + Năng khiếu 1 + Năng khiếu 2; T12: Ngữ văn + Năng khiếu 1 + Năng khiếu 2), plus non-numeric conditions (lớp-12 hạnh kiểm "khá trở lên" for Sư phạm majors, height minimums for GDTC/GDQPAN). No numeric THPT/học bạ floor score was stated in extractable text, and the năng khiếu talent-test score has no matching applicant-profile field. Left at researched; do not fabricate a floor score or model the talent-test component.',
+  },
+  huc: {
+    sourceId: 'huc-admission-2026',
+    title: 'Trường Đại học Văn hóa Hà Nội - Thông tin tuyển sinh đại học chính quy năm 2026',
+    url: 'https://huc.edu.vn/a/269351/THONG-TIN-TUYEN-SINH-DAI-HOC-CHINH-QUY-NAM-2026',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch 11 (2026-08-24): official huc.edu.vn domain confirmed live with a 2026 admission-info article and a separate 10/07/2026 "điểm sàn" notice, but WebFetch only returned the page title, not body text, so no numeric threshold could be confirmed from the primary source. A search-engine summary claimed a 17/30 floor for health-related majors (Điều dưỡng, Y tế dự phòng, etc.), but HUC is a văn hóa/nghệ thuật school with no such majors in its catalog entry, so that figure looks like cross-contamination from an unrelated school and was not trusted. Left at researched; do not fabricate numbers.',
+  },
+  kinhbac: {
+    sourceId: 'kinhbac-admission-2026',
+    title: 'Trường Đại học Kinh Bắc - Cổng thông tin',
+    url: 'https://daihockinhbac.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch 11 (2026-08-24): official daihockinhbac.edu.vn domain confirmed live, but the homepage only surfaces 2024 admission notices and thresholds ("Ngưỡng đảm bảo đầu vào - Điểm trúng tuyển năm 2024"); no 2026 admission plan or threshold notice was located in this research pass. Left at researched pending a located 2026 notice; do not reuse the 2024 figures as 2026 data.',
+  },
+  hunre: {
+    sourceId: 'hunre-admission-2026',
+    title: 'Trường Đại học Tài nguyên và Môi trường Hà Nội - Thông báo nguồn xét tuyển, ngưỡng đảm bảo chất lượng đầu vào và quy tắc quy đổi tương đương các phương thức tuyển sinh đại học chính quy năm 2026',
+    url: 'https://hunre.edu.vn/thong-bao-nguon-xet-tuyen-dau-vao-nguong-dam-bao-chat-luong-dau-vao-va-quy-tac-quy-doi-tuong-duong-cac-phuong-thuc-tuyen-sinh-dai-hoc-chinh-quy-nam-2026.html',
+    publishedAt: '2026-07-03',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch 11 (2026-08-24): official hunre.edu.vn notice confirmed live (published 03/07/2026) with an attached document titled "Điểm ngưỡng và quy đổi TĐ giữa các PTTS năm 2026", but the per-major/per-method threshold table is delivered as 9 embedded images plus an attached PDF, not text-extractable via WebFetch in this pass. Left at researched; do not fabricate the per-major table.',
+  },
+  logacademy: {
+    sourceId: 'logacademy-admission-2026',
+    title: 'Học viện Hậu cần - Một số thông tin tuyển sinh trình độ đại học quân sự và dân sự năm 2026',
+    url: 'https://hocvienhaucan.edu.vn/bai-viet/mot-so-thong-tin-tuyen-sinh-trinh-do-dai-hoc-quan-su-va-dan-su-nam-2026',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-10 (2026-08-24): official hocvienhaucan.edu.vn page confirms 4 admission methods (direct/priority, ĐGNL VNU Hà Nội/HCM, THPT exam, Bộ Quốc phòng ĐGNL) for both military and civilian tracks, plus civilian-track program quotas (Tài chính-Ngân hàng, Kế toán, Kỹ thuật xây dựng). Military track requires Ministry of Defense sơ tuyển (age/health/political vetting) with no matching applicant-profile field; the page does not state an explicit 2026 numeric threshold for either track (references separate ngưỡng đảm bảo chất lượng and conversion-table announcements not fetched in this pass). Left at researched; do not fabricate thresholds or model military-only screening as a generic eligibility rule.',
+  },
+  ltvuni: {
+    sourceId: 'ltvuni-admission-2026',
+    title: 'Trường Đại học Lương Thế Vinh - Thông báo ngưỡng đảm bảo chất lượng và bảng quy đổi điểm tương đương năm 2026',
+    url: 'https://ltvu.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      "Batch expand-10 (2026-08-24): official domain is ltvu.edu.vn (not ltvuni.edu.vn); homepage links a dedicated 2026 threshold/conversion notice (\"Ngưỡng đảm bảo chất lượng, độ chênh giữa các tổ hợp xét tuyển theo phương thức xét điểm thi THPT và bảng quy đổi điểm tương đương giữa các phương thức xét tuyển năm 2026\"), but the notice's numeric content was not extracted from the primary page in this pass -- only a secondary aggregator states a generic >=15.0/30 floor, unconfirmed on ltvu.edu.vn itself. Left at researched; do not use the unconfirmed secondary figure.",
+  },
+  mdu: {
+    sourceId: 'mdu-admission-2026',
+    title: 'Trường Đại học Công nghệ Miền Đông (MIT) - Công bố các phương thức xét tuyển năm 2026',
+    url: 'https://mit.vn/cong-bo-cac-phuong-thuc-xet-tuyen-nam-2026/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-10 (2026-08-24): catalog id mdu ("Trường Đại học Miền Đông", Đồng Nai) is the former name of this school; it was renamed Trường Đại học Công nghệ Miền Đông (MIT/MUT) around 2021 and mdu.edu.vn no longer resolves as a distinct admissions portal. Current official domain mit.vn is confirmed via multiple independent secondary sources (search-result snippets citing a >=15.0/30 THPT-exam floor for most majors, >=18 for Luật), but direct WebFetch of mit.vn admission pages returned HTTP 403 (WAF) in this pass, so the numeric floor could not be independently verified from the primary source. Left at researched; do not model the unverified threshold.',
+  },
+  mpa: {
+    sourceId: 'mpa-admission-2026',
+    title: 'Trường Đại học Chính trị (trước đây là Học viện Chính trị, Bộ Quốc phòng) - Hướng dẫn xét tuyển đại học quân sự hệ chính quy năm 2026',
+    url: 'http://daihocchinhtri.edu.vn/vi/tuyen-sinh-dao-tao/Thong-tin-tuyen-sinh/HUONG-DAN-Cong-tac-xet-tuyen-vao-dao-tao-dai-hoc-quan-su-he-chinh-quy-tai-Truong-Dai-hoc-Chinh-tri-nam-2026-192/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-10 (2026-08-24): catalog id mpa ("Học viện Chính trị Quân đội Nhân dân Việt Nam") is now Trường Đại học Chính trị (renamed institution), official domain daihocchinhtri.edu.vn, confirmed via search results including a 2026 admission-guidance page and a separate 2026 cutoff-announcement page on the same domain. This school only admits a military track requiring Ministry of Defense sơ tuyển (age/health/political vetting, Feb 10 - Apr 15 2026) with no matching applicant-profile field; do not model as generic eligibility. Left at researched.',
+  },
+  msa: {
+    sourceId: 'msa-admission-2026',
+    title: 'Học viện Khoa học Quân sự - Thông báo tuyển sinh đào tạo hệ quân sự và dân sự trình độ đại học năm 2026',
+    url: 'https://hvkhqs.edu.vn/thong-bao-tuyen-sinh-dao-tao-he-quan-su-va-dan-su-trinh-do-dai-hoc-nam-2026-tai-hoc-vien-khoa-hoc-quan-su/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-10 (2026-08-24): official hvkhqs.edu.vn page fetched successfully and confirms 4 admission methods (direct/priority, ĐGNL VNU Hà Nội/HCM, THPT exam, Bộ Quốc phòng ĐGNL for military track only). Civilian track (hệ dân sự) explicitly needs no Ministry sơ tuyển and follows standard MOET registration (Jul 2-14 2026), closer to a normal civilian admission than other military schools, but the page only references 2025 scores and states 2026 thresholds are pending post-exam publication -- no 2026 numeric floor available yet. Left at researched; revisit once the academy publishes its 2026 threshold.',
+  },
+  mta: {
+    sourceId: 'mta-admission-2026',
+    title: 'Học viện Kỹ thuật Quân sự (MTA) - official site',
+    url: 'http://mta.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-10 (2026-08-24): official domain mta.edu.vn confirmed via search (236 Hoàng Quốc Việt, Bắc Từ Liêm, Hà Nội) but not directly fetched in this pass. Secondary press (vnexpress, vietnamnet, qdnd) reports already-published 2026 civilian-track (hệ dân sự) cutoff results of 21.75-26.96/30 across majors and a 720 civilian quota, plus a military track requiring Ministry of Defense sơ tuyển. These are final cutoff results, not a checkable input eligibility rule, and the military track has no matching applicant-profile field. Left at researched; do not model published cutoffs as a formula.',
+  },
+  naem: {
+    sourceId: 'naem-admission-2026',
+    title: 'Học viện Quản lý giáo dục (NAEM) - Điểm trúng tuyển đại học chính quy năm 2026',
+    url: 'https://naem.edu.vn/vi/tin-tuc/diem-trung-tuyen-dai-hoc-chinh-quy-nam-2026-vao-hoc-vien-quan-ly-giao-duc',
+    checkedAt: '2026-08-24',
+    note:
+      "Batch expand-10 (2026-08-24): official naem.edu.vn page fetched successfully and confirms 2026 admission cutoff results were published 2026-08-09 as a linked PDF (not extracted in this pass) and 4 methods (THPT exam, học bạ transcript, tuyển thẳng, ĐGNL/ĐGTD). A separate faculty subdomain (khoaquanly.naem.edu.vn) states a >=15.00/30 THPT-exam-based floor with an M1+M2+M3+ưu tiên+cộng formula, but this is a lower-confidence faculty page rather than the main admissions portal and was not cross-checked against the main site's PDF. Left at researched; do not model the unverified subdomain figure as the school-wide rule.",
+  },
+  napa: {
+    sourceId: 'napa-admission-2026',
+    title: 'Học viện Hành chính và Quản trị công (kế thừa Học viện Hành chính Quốc gia / NAPA) - Thông tin tuyển sinh 2026 tại Phân hiệu TP.HCM',
+    url: 'https://apaghcm.edu.vn/thong-tin-tuyen-sinh-tai-phan-hieu-hoc-vien-hanh-chinh-va-quan-tri-cong-tai-tp-ho-chi-minh',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-10 (2026-08-24): important identity change -- catalog id napa ("Học viện Hành chính Quốc gia") was merged (Quyết định 214-QĐ/TW, Jan 2025) into Học viện Chính trị Quốc gia Hồ Chí Minh and renamed Học viện Hành chính và Quản trị công; napa.edu.vn no longer resolves (DNS failure confirmed in this pass). Successor domain apaghcm.edu.vn (TP.HCM branch) is reachable and links a 2026 admission-info PDF and a score-calculation tool, but the PDF content itself was not extracted. A secondary aggregator states an unconfirmed >=18.0/30 floor (>=18.00 for Luật/Thanh tra with Toán or Văn >=6.0) not independently verified on the primary site. Left at researched; do not model the unverified threshold, and note the institutional rename for future maintainers.',
+  },
+  naue: {
+    sourceId: 'naue-admission-2026',
+    title: 'Trường Đại học Kinh tế Nghệ An - Cổng thông tin tuyển sinh 2026',
+    url: 'https://naue.edu.vn/tuyensinh',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-10 (2026-08-24): official naue.edu.vn/tuyensinh page fetched successfully and confirms 3 admission methods (học bạ THPT, kết quả thi THPT, kết hợp) across combinations A00/A01/D01/B00 and programs including CNTT, Kế toán, Kinh tế, Nông nghiệp công nghệ cao, Thú y, Tài chính-Ngân hàng, Fintech. No 2026 numeric minimum score threshold is stated on the fetched page. Left at researched; revisit once the school publishes its 2026 threshold notice.',
+  },
+  navalacademy: {
+    sourceId: 'navalacademy-admission-2026',
+    title: 'Điểm chuẩn 2026 Học viện Hải quân (xaydungchinhsach.chinhphu.vn) + ngưỡng đảm bảo chất lượng đầu vào khối trường Quân đội',
+    url: 'https://xaydungchinhsach.chinhphu.vn/diem-chuan-2026-hoc-vien-hai-quan-216-thi-sinh-do-den-tu-1-tinh-119260812103240437.htm',
+    checkedAt: '2026-08-24',
+    publishedAt: '2026-08-12',
+    note:
+      'Xác nhận qua Cổng thông tin điện tử Chính phủ: Học viện Hải quân tuyển theo 4 phương thức (xét thẳng/ưu tiên, thi TN THPT, ĐGNL ĐHQG HN/TPHCM, ĐGNL Bộ Quốc phòng), ngưỡng sơ tuyển chung 15,00/30 (thi TN THPT). Điểm chuẩn thực tế 2026 đã công bố (24,75 nam miền Bắc, 24,07 nam miền Nam) gate theo GIỚI TÍNH + MIỀN TUYỂN + tiêu chuẩn chính trị/sức khỏe qua sơ tuyển tại địa phương (Bộ Chỉ huy Quân sự tỉnh) — hồ sơ ứng viên hiện không có các trường dữ liệu này nên không mô hình hoá được ngay cả ngưỡng sơ tuyển 15/30 (đạt ngưỡng không đồng nghĩa đủ điều kiện dự tuyển nếu chưa qua sơ tuyển). Do-not-guess-formula: giữ ở researched.',
+  },
+  nda: {
+    sourceId: 'nda-admission-2026',
+    title: 'Các trường đại học quân đội năm 2026: Danh sách, chỉ tiêu và phương thức tuyển sinh (Học viện Quốc phòng)',
+    url: 'https://huongnghiep.hocmai.vn/cac-truong-dai-hoc-quan-doi-nam-2026-danh-sach-chi-tieu-va-phuong-thuc-tuyen-sinh',
+    checkedAt: '2026-08-24',
+    note:
+      'Học viện Quốc phòng là 1 trong 17 trường Quân đội (10 học viện + 7 trường sĩ quan) tuyển sinh theo Đề án tuyển sinh đại học/cao đẳng quân sự 2023-2030, chung khung 4 phương thức của Bộ Quốc phòng (xét thẳng, thi TN THPT, ĐGNL ĐHQG, ĐGNL Bộ Quốc phòng); mức điểm sơ tuyển tối thiểu 18-22/30 cộng tiêu chuẩn chính trị/sức khỏe/độ tuổi (17-21, hoặc đã qua quân ngũ) qua sơ tuyển địa phương. Không tìm được trang tuyển sinh riêng (không có domain public riêng cho hệ dân sự) và điểm chuẩn/ngưỡng đều gate theo giới tính/miền/đối tượng không có trong hồ sơ ứng viên. Do-not-guess-formula: giữ ở researched.',
+  },
+  ocp: {
+    sourceId: 'ocp-admission-2026',
+    title: 'Trường Sĩ quan Chính trị công bố điểm chuẩn 2026, cao nhất gần 25 điểm (xaydungchinhsach.chinhphu.vn)',
+    url: 'https://xaydungchinhsach.chinhphu.vn/truong-si-quan-chinh-tri-cong-bo-diem-chuan-2026-cao-nhat-gan-25-diem-119260812162306565.htm',
+    checkedAt: '2026-08-24',
+    publishedAt: '2026-08-12',
+    note:
+      'Xác nhận qua Cổng thông tin điện tử Chính phủ: Trường Đại học Sĩ quan Chính trị (Bắc Ninh) công bố điểm chuẩn 2026 theo 4 phương thức (xét thẳng/ưu tiên, thi TN THPT, ĐGNL ĐHQG, ĐGNL Bộ Quốc phòng). Điểm chuẩn thực tế (24,75 nam miền Bắc, 21,50 nam miền Nam) kèm điều kiện phụ (điểm ưu tiên <=0,5, hoặc điểm ĐGNL Bộ Quốc phòng >=78, hoặc điểm Ngữ văn >=6,25) gate theo GIỚI TÍNH + MIỀN TUYỂN + sơ tuyển chính trị/sức khỏe — không có trường dữ liệu tương ứng trong hồ sơ ứng viên. Do-not-guess-formula: giữ ở researched.',
+  },
+  nuae: {
+    sourceId: 'nuae-admission-2026',
+    title: 'Trường ĐHSP Nghệ thuật TW công bố điểm sàn xét tuyển đại học chính quy năm 2026',
+    url: 'https://spnttw.edu.vn/truong-dhsp-nghe-thuat-tw-cong-bo-diem-san-xet-tuyen-dai-hoc-chinh-quy-nam-2026/',
+    checkedAt: '2026-08-24',
+    note:
+      'Cổng thông tin chính thức NUAE (spnttw.edu.vn) xác nhận có công bố điểm sàn (ngưỡng đảm bảo chất lượng đầu vào) 2026 theo phương thức thi TN THPT, có thay đổi theo ngành, nhưng bảng số liệu cụ thể theo ngành được nhúng dưới dạng hình ảnh (Picture2.png), không trích xuất được bằng văn bản qua WebFetch. Điểm chuẩn thực tế 2026 đã công bố (19,0-24,7/30) là điểm trúng tuyển hồi cứu, không dùng được để mô hình hoá ngưỡng xét tuyển tương lai. Do-not-guess-formula (image-embedded table): giữ ở researched.',
+  },
+  skda: {
+    sourceId: 'skda-admission-2026',
+    title: 'Thông báo tuyển sinh đại học chính quy năm 2026 - Trường Đại học Sân khấu - Điện ảnh Hà Nội',
+    url: 'https://skda.edu.vn/2026/05/22/thong-bao-tuyen-sinh-dai-hoc-chinh-quy-nam-2026/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-13 (2026-08-24): trang tuyển sinh chính thức skda.edu.vn tồn tại và xác nhận thông báo 2026 (đăng 22/05/2026), nhưng nội dung điều kiện/công thức chỉ nằm trong các file PDF/ảnh đính kèm (Thong bao tuyen sinh DHCQ 2026.pdf, Phieu 1/2), không trích xuất được thành văn bản. Hai nguồn thứ cấp mâu thuẫn nhau về điều kiện văn hoá (một nói tổng 3 môn thi TN THPT >=15/30, một nói điểm trung bình học bạ >=5,0/10) và không nguồn nào dẫn trực tiếp tới văn bản gốc — theo quy tắc không đoán công thức, giữ ở mức researched thay vì eligibility-only.',
+  },
+  skdahcm: {
+    sourceId: 'skdahcm-admission-2026',
+    title: 'Thông báo tuyển sinh đại học chính quy năm 2026 (chính thức) - Trường Đại học Sân khấu - Điện ảnh Thành phố Hồ Chí Minh',
+    url: 'https://skdahcm.edu.vn/thong-bao-tuyen-sinh-dai-hoc-chinh-quy-nam-2026/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-13 (2026-08-24): trang tuyển sinh chính thức skdahcm.edu.vn xác nhận tồn tại thông báo 2026 (thi năng khiếu hệ số 2 kết hợp điểm học bạ môn Ngữ văn), nhưng WebFetch chỉ lấy được khung điều hướng, không lấy được bảng điều kiện/ngưỡng cụ thể (nội dung nằm trong tài liệu đính kèm qua Google Drive). Không tìm được số liệu ngưỡng đầu vào có thể kiểm chứng độc lập; giữ ở mức researched.',
+  },
+  tbu: {
+    sourceId: 'tbu-admission-2026',
+    title: 'Thông báo Thông tin tuyển sinh đại học chính quy năm 2026 - Trường Đại học Thái Bình',
+    url: 'https://tbu.edu.vn/thong-bao-thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026.html',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-13 (2026-08-24): trang tuyển sinh chính thức tbu.edu.vn (và tuyensinh.tbu.edu.vn) xác nhận tồn tại, liệt kê 5 phương thức xét tuyển (PT1-PT5: thi TN THPT/giải thưởng, học bạ 3 năm, ĐGNL ĐHQG Hà Nội, ĐGTD ĐHBK Hà Nội, ĐGNL ĐH Sư phạm Hà Nội), nhưng ngưỡng điểm/công thức cụ thể chỉ nằm trong file đính kèm "THÔNG BÁO SỐ 565.pdf", không trích xuất được thành văn bản trong lượt research này. Giữ ở mức researched; không đoán số liệu.',
+  },
+  uad: {
+    sourceId: 'uad-admission-2026',
+    title: 'Trường Đại học Mỹ thuật Công nghiệp (UAD/MTCN) — thông tin tuyển sinh năm 2026',
+    url: 'https://vietjack.com/thong-tin-tuyen-sinh/truong-dai-hoc-my-thuat-cong-nghiep.jsp',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-15 (2026-08-24): UAD tuyển sinh bằng DUY NHẤT 1 phương thức (kết hợp học bạ THPT với điểm thi năng khiếu bắt buộc: Bố cục màu + Hình họa, điểm năng khiếu tối thiểu 5.0/10). ApplicantProfile của UniscoreVN KHÔNG có field điểm năng khiếu (đã kiểm tra core/applicantProfile.ts và các trường talent-test khác như VLU đều để ngoài phạm vi mô hình hoá), nên không thể tính eligibility mà không tự bịa input. WebFetch trực tiếp tới uad.edu.vn/mythuatcongnghiep.edu.vn không lấy được nội dung chi tiết; số liệu trên dựa vào trang tổng hợp vietjack đã index. Để nguyên researched.',
+  },
+  upes1: {
+    sourceId: 'upes1-admission-2026',
+    title: 'Trường Đại học Thể dục Thể thao Bắc Ninh — ngưỡng đảm bảo chất lượng đầu vào đại học chính quy năm 2026',
+    url: 'https://tuyensinh.upes.edu.vn/2026/07/13/nguong-dam-bao-chat-luong-dau-vao-dai-hoc-chinh-quy-nam-2026/',
+    publishedAt: '2026-07-13',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-15 (2026-08-24): official tuyensinh.upes.edu.vn portal confirms 2 admission methods (both requiring a mandatory năng khiếu/talent test, minimum 5.0/10, weighted x2 in the combined score) plus a combined cultural+talent threshold around 15.00/30 for some majors. ApplicantProfile has no talent-test score field (confirmed same gap as UAD/VLU), so eligibility cannot be evaluated without fabricating an input. Left at researched.',
+  },
+  ush: {
+    sourceId: 'ush-admission-2026',
+    title: 'Trường Đại học Thể dục Thể thao TP.HCM — thông tin tuyển sinh đại học chính quy năm 2026',
+    url: 'https://ush.edu.vn/thong-bao/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026-1500.html',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-15 (2026-08-24): official ush.edu.vn portal confirms 2 admission methods (THPT exam or transcript, both combined with a mandatory năng khiếu/talent test organized by the school, minimum 5.0/10) plus a MOET-set quality threshold for the cultural-score component. Same structural gap as UAD/UPES1: ApplicantProfile has no talent-test score field. Left at researched.',
+  },
+  usth: {
+    sourceId: 'usth-admission-2026',
+    title: 'USTH (Trường Đại học Khoa học và Công nghệ Hà Nội) — thông báo tuyển sinh trình độ đại học năm 2026',
+    url: 'https://tuyensinh.usth.edu.vn/usth-thong-bao-tuyen-sinh-trinh-do-dai-hoc-nam-2026-3717/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-15 (2026-08-24): official tuyensinh.usth.edu.vn page confirms 4 admission methods (PT1 in-house aptitude test, PT2 academic-record + interview, PT3 talent admission, PT4 THPT exam result), but PT4 has NO published numeric floor score — it defers to "kế hoạch tuyển sinh của Bộ GDĐT" (competitive/ministry-set selection), except Pharmacy (health-group MOET threshold) and Semiconductor Engineering (Quyết định 1314/QĐ-BGDĐT threshold), neither of which has a stated number in this pass. No fixed threshold to model without fabricating a number; left at researched.',
+  },
+  ulsa: {
+    sourceId: 'ulsa-admission-2026',
+    title: 'Trường Đại học Lao động - Xã hội — công bố phương thức, chỉ tiêu tuyển sinh năm 2026',
+    url: 'https://ldxh.edu.vn/truong-dai-hoc-lao-dong-xa-hoi-cong-bo-phuong-thuc-chi-tieu-tuyen-sinh-nam-2026.html',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-15 (2026-08-24): official ldxh.edu.vn 2026 admission page was fetched directly and confirms 5 admission methods and per-method quotas, but does NOT state numeric floor scores in the fetched content. Secondary aggregators (thi.tuyensinh247.com, khoahoc.vietjack.com) report a 15/30 general baseline with 2 program-code exceptions (7220201 needs English >=5; 7380107/law needs "Khá" academic rank, unmodeled field), but this single-source secondary figure could not be cross-checked against the primary page in this pass. Left at researched; do not fabricate the exact number.',
+  },
+  // Batch expand-16 (2026-08-24):
+  vnam: {
+    sourceId: 'vnam-admission-2026',
+    title: 'Học viện Âm nhạc Quốc gia Việt Nam thông báo phương án tuyển sinh đại học chính quy năm 2026',
+    url: 'https://www.vnam.edu.vn/index.aspx?lang=VN',
+    checkedAt: '2026-08-24',
+    note:
+      'Xác nhận qua tìm kiếm 2 phương thức 2026: (1) xét tuyển thẳng theo đúng chuyên ngành đã tốt nghiệp trung cấp/cao đẳng âm nhạc, (2) xét kết hợp môn Ngữ văn (học bạ hoặc điểm thi TN THPT) với thi các môn năng khiếu chuyên ngành (kiến thức âm nhạc tổng hợp, Piano phổ thông là môn điều kiện một số ngành), chấm bởi hội đồng giám khảo — không có công thức điểm số công khai dạng số có thể mô hình hoá. Khoảng 200 chỉ tiêu, nhận hồ sơ 13/4-16/5/2026. Chưa fetch trực tiếp được trang thông báo chi tiết (chỉ trang chủ vnam.edu.vn); không đủ cấu trúc số liệu để nâng lên eligibility-only.',
+  },
+  vnad: {
+    sourceId: 'vnad-admission-2026',
+    title: 'Thông báo tuyển sinh trình độ đại học năm 2026 — Học viện Múa Việt Nam',
+    url: 'https://www.vnad.edu.vn/tuy%E1%BB%83n-sinh/%C4%91%E1%BA%A1i-h%E1%BB%8Dc/t%C4%912026/t%C4%912026',
+    checkedAt: '2026-08-24',
+    note:
+      'Trang thông báo tuyển sinh đại học 2026 chính thức tồn tại trên vnad.edu.vn (xác nhận qua tìm kiếm), mô tả 2 vòng thi năng khiếu (sơ tuyển: độ mềm dẻo/dẻo dai cơ thể, cảm âm/tiết tấu; chung tuyển: 2 môn năng khiếu múa và âm nhạc) kết hợp xét học bạ, chấm điểm bởi giám khảo — không công bố thang điểm/ngưỡng số cụ thể để mô hình hoá. Không fetch trực tiếp được nội dung đầy đủ trang thông báo trong lượt research này; để ở researched, tránh suy diễn ngưỡng.',
+  },
+  vnufa: {
+    sourceId: 'vnufa-admission-2026',
+    title: 'Tuyển sinh 2026 — Trường Đại học Mỹ thuật Việt Nam',
+    url: 'https://mythuatvietnam.edu.vn/tuyen-sinh-2026/',
+    checkedAt: '2026-08-24',
+    note:
+      'Cổng tuyển sinh chính thức (mythuatvietnam.edu.vn) fetch được nhưng chỉ là trang danh sách thông báo/liên kết, không có nội dung ngưỡng điểm chi tiết trong lần fetch này. Các nguồn tổng hợp bên thứ ba (vietjack, tuyensinh247) báo cáo ngưỡng 16,5/30 THPT (hoặc học lực lớp 12 xếp loại giỏi + học bạ tương đương 6,5) và năng khiếu >=6,5, nhưng KHÔNG xác minh được trực tiếp từ trang chính thức trong lượt này — theo nguyên tắc do-not-guess-formula, không nhập số liệu chưa xác minh trực tiếp; cần fetch lại thông báo tuyển sinh gốc (PDF/trang con) trước khi nâng lên eligibility-only.',
+  },
+  vhs: {
+    sourceId: 'vhs-admission-2026',
+    title: 'Tuyển sinh — Trường Đại học Văn hóa TP.HCM',
+    url: 'https://www.hcmuc.edu.vn/tuyen-sinh/',
+    checkedAt: '2026-08-24',
+    note:
+      'Cổng tuyển sinh chính thức (hcmuc.edu.vn) xác nhận qua tìm kiếm: 1.300 chỉ tiêu, 3 phương thức (điểm thi TN THPT, học bạ THPT, kết hợp thi năng khiếu cho chuyên ngành Tổ chức - dàn dựng chương trình văn hóa nghệ thuật), tổ hợp môn đa dạng theo ngành (Ngữ văn, Lịch sử, Địa lý, Toán, tiếng Anh, tiếng Trung, Tin học, GDKTPL). Không có ngưỡng điểm sàn công khai dạng số duy nhất áp dụng chung; tổ hợp/ngưỡng thay đổi theo từng ngành nên chưa đủ cấu trúc để mô hình hoá trong batch này.',
+  },
+  vmmu: {
+    sourceId: 'vmmu-admission-2026',
+    title: 'Tuyển sinh Học viện Quân y 2026 — Chi tiết 4 phương thức xét tuyển và điều kiện sức khỏe đặc thù',
+    url: 'https://vmmu.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Học viện Quân y (Bộ Quốc phòng, tên dân sự Trường Đại học Y Dược Lê Hữu Trác) có sơ tuyển bắt buộc (tuổi, chiều cao/cân nặng, thị lực, lý lịch chính trị theo tiêu chuẩn quân đội) là điều kiện tiên quyết trước khi được xét theo 4 phương thức (tuyển thẳng, ưu tiên nữ hệ quân đội, ĐGNL ĐHQGHN/ĐHQG TPHCM, thi TN THPT/ĐGNL do Bộ Quốc phòng tổ chức). Điểm chuẩn 2026 công bố theo giới tính/miền/chỉ tiêu quân sự (27,75-29,76/30 ngành Y khoa), không phải điểm sàn chung. `ApplicantProfile` hiện không có trường tuổi/chiều cao/cân nặng/thị lực nên không mô hình hoá được điều kiện sơ tuyển; để ở researched.',
+  },
+  vmuvinh: {
+    sourceId: 'vmuvinh-admission-2026',
+    title: 'VMU - Đại học Y Khoa Vinh > Tuyển sinh - Đào tạo > Đại học chính quy > Tuyển sinh',
+    url: 'https://www.vmu.edu.vn/tuyen-sinh-dao-tao/dai-hoc-chinh-quy/tuyen-sinh',
+    checkedAt: '2026-08-24',
+    note:
+      'Cổng tuyển sinh chính thức (vmu.edu.vn) xác nhận qua tìm kiếm: 1.060 chỉ tiêu, 4 phương thức (mã 301 tuyển thẳng, 100 thi TN THPT, 200 học bạ THPT, 500 khác). Trường công bố "ngưỡng đảm bảo chất lượng đầu vào" và bảng quy đổi tương đương học bạ/THPT trước 17h00 10/7/2026, nhưng số liệu ngưỡng cụ thể theo ngành (5 ngành: Y khoa, Dược, Y học dự phòng, Điều dưỡng, Kỹ thuật xét nghiệm y học) không trích xuất được có cấu trúc trong lượt research này. Để ở researched, không suy diễn số liệu.',
+  },
+  vnusis: {
+    sourceId: 'vnusis-admission-2026',
+    title: 'VNU-SIS (Truong Khoa hoc lien nganh va Nghe thuat, DHQGHN) tuyen sinh dai hoc chinh quy nam 2026',
+    url: 'https://sis.vnu.edu.vn/chi-tiet-tin/Tuyen-sinh-dai-hoc-chinh-quy-nam-2026-Phuong-thuc-xet-tuyen-chuong-trinh-dao-tao-chi-tieu-va-to-hop-xet-tuyen-du-kien_1154.html',
+    checkedAt: '2026-08-25',
+    note:
+      'Official 2026 page (fetched directly, text-readable) lists 5 methods (100/301/401/405/409), 1200 chi tieu across 12 programs, and an unusual weighted-subject scoring scheme (subjects ranked 1-7 in the combination weighted x2, subjects 8-12 weighted x1), but does not state an explicit minimum total-score threshold in this pass (a separate "Diem trung tuyen" notice is referenced but not fetched). The non-standard weighting scheme and missing floor make eligibility modeling unsafe without further extraction. Left at researched.',
+  },
+  vwa: {
+    sourceId: 'vwa-admission-2026',
+    title: 'Hoc vien Phu nu Viet Nam cong bo nguong diem xet tuyen dai hoc nam 2026',
+    url: 'https://tuyensinh.hvpnvn.edu.vn/thong-bao/tuyen-sinh-dai-hoc/hoc-vien-phu-nu-viet-nam-cong-bo-nguong-diem-xet-tuyen-dai-hoc-nam-2026-phu-hop-pho-diem-mo-rong-co-hoi-cho-thi-sinh/',
+    checkedAt: '2026-08-25',
+    note:
+      'Official 2026 threshold notice (fetched directly, text-readable) publishes per-major THPT floor scores (19/30 Truyen thong da phuong tien; 18/30 Quan tri kinh doanh/Du lich/Tam ly hoc/Truyen thong xa hoi; 16/30 the remaining majors), plus a linear-interpolation conversion table between THPT/hoc ba/HSA/SPT methods. A separate search (hvpnvn.edu.vn) confirms subject combinations used school-wide (A00, A01, C00, C03, D01, D14, D15) but does not give a clean per-major combo-to-floor mapping, so the exact combo set per floor tier cannot be modeled without guessing. Left at researched.',
+  },
+  vya: {
+    sourceId: 'vya-admission-2026',
+    title: 'Hoc vien Thanh thieu nien Viet Nam thong bao tuyen sinh 2026',
+    url: 'https://tuyensinh.vya.edu.vn/thong-bao-tuyen-sinh-2026-vya',
+    checkedAt: '2026-08-25',
+    note:
+      'Official 2026 notice confirms 4 methods (truc tiep, hoc ba, thi TN THPT, ket hop) and a 30-point THPT total-score formula, but the numeric floor scores found (Luat 20/30 THPT, 21/30 hoc ba; Xay dung Dang & Chinh quyen Nha nuoc + Cong tac Thanh thieu nien 16/30 and 19/30) were published by the Phan hieu TP.HCM branch specifically (giaoduc.net.vn), not confirmed for the main Ha Noi campus catalogued here. Applying branch-specific floors to the main-campus schoolId risks inaccuracy. Left at researched pending a main-campus-specific threshold notice.',
+  },
+  vttu: {
+    sourceId: 'vttu-admission-2026',
+    title: 'Truong Dai hoc Vo Truong Toan tuyen sinh trinh do dai hoc he chinh quy nam 2026',
+    url: 'https://vttu.edu.vn/truong-dai-hoc-vo-truong-toan-tuyen-sinh-trinh-do-dai-hoc-he-chinh-quy-nam-2026/',
+    checkedAt: '2026-08-25',
+    note:
+      'Official 2026 page confirms 5 methods (100 thi TN THPT, 200 hoc ba, 407 ket hop thi+hoc ba for Y khoa/Rang Ham Mat/Duoc hoc/Luat, DGNL, THPT nuoc ngoai) and the general formula (3-subject total + regional/subject priority points), but only a partial subject-combination list surfaced (A00 for Quan tri kinh doanh/Tai chinh-Ngan hang/Ke toan); the full per-major combination table and numeric floor scores were not extractable in this pass. Left at researched; do not fabricate the remaining combos or thresholds.',
+  },
+  ydlu: {
+    sourceId: 'ydlu-admission-2026',
+    title: 'YersinUni cong bo thong tin tuyen sinh nam 2026',
+    url: 'https://yersin.edu.vn/thong-tin-tuyen-sinh-2026/',
+    checkedAt: '2026-08-25',
+    note:
+      'Official 2026 page publishes 2 hoc-ba (transcript-average) formulas with published per-major floors (18.0 general; 19.0 Dieu duong/Luat kinh te; 22.0 Y khoa/Duoc hoc, all on a 30-point scale derived from 3-year subject GPA averages) plus a Toan/Ngu van >= 1/3 total condition, alongside separate THPT-exam and DGNL (ability assessment) methods. The hoc-ba formula requires 3-year (lop 10/11/12) per-subject GPA averages, which is not a field UniscoreVN currently collects in ApplicantProfile.transcript at per-subject granularity across years in a way cross-checked for this school, and the THPT-exam-only floor was not separately confirmed. Modeling would require either fabricating scope or adding unverified transcript-averaging logic; left at researched.',
   },
 };
 
@@ -351,10 +825,14 @@ export const finalCatalogKnowledgeGap = {
   impact: 'exact-final-score-blocking' as const,
 };
 
-// 'vgu' and 'hpu2' moved to dedicated runtime modules (normalized/runtime-source-snapshot/<id>/) —
-// eligibility-only, excluded here to avoid duplicate methodId/comparisonAdapter entries.
-// Batch-expand-04 (2026-08-24): 'apd' moved the same way.
-const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd']);
+// 'vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus',
+// 'tuaf', 'uhd', 'umt', 'utm', and 'utt' moved to dedicated runtime modules
+// (normalized/runtime-source-snapshot/<id>/) — eligibility-only, excluded here to avoid duplicate
+// methodId/comparisonAdapter entries. (Batch-expand-04: apd. Batch-expand-06: eiu. Batch-expand-07:
+// fbu, fpfu. Batch-expand-11: ntuhn. Batch-expand-13: tbdu, thanhdo, tnue, tnufl, tnus.
+// Batch-expand-14: tuaf. Batch-expand-15: uhd, umt, utm, utt.) They stay listed in
+// `finalCatalogSchools` above for identity/location metadata only.
+const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus', 'tuaf', 'uhd', 'umt', 'utm', 'utt']);
 const finalCatalogRuntimeSchools = finalCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const finalCatalogMethods: AdmissionMethodDescriptor[] = finalCatalogRuntimeSchools.map((school) => ({

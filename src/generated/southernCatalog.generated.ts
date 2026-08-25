@@ -72,6 +72,15 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Batch-expand-04 (2026-08-24): researched from scratch (Trường Đại học Bạc Liêu). Official tuyensinh.blu.edu.vn 2026 floor-score notice fetched live: confirms scope (all bachelor programs + associate-level Giáo dục Mầm non, khu vực 3, no coefficient/priority-point inflation) and structural rules for 3 method families (THPT exam/transcript on a 30-point scale, V-ACT aptitude test on a 1200-point scale, and one special combined-method formula for the associate Mầm non track: Toán + Ngữ văn + điểm ưu tiên*2/3 >= 11,33). The actual per-program/per-combination numeric floor table is embedded as an image on the official page and could not be extracted as text in this pass. Left at researched; do-not-guess-formula rule applied.',
   },
+  tvu: {
+    sourceId: 'tvu-admission-2026',
+    title: 'TVU official 2026 admission plan announcement',
+    url: 'https://tuyensinh.tvu.edu.vn/thong-bao-tuyen-sinh-dai-hoc-he-chinh-quy-dot-1-nam-2026-nguoi-co-bang-tot-nghiep-trung-hoc-pho-thong/',
+    checkedAt: '2026-08-24',
+    publishedAt: '2026-06-18',
+    note:
+      'Batch expand-14 (2026-08-24): official tuyensinh.tvu.edu.vn / tvu.edu.vn (Truong Dai hoc Tra Vinh) 2026 Round-1 notice confirms 7,415 seats across 49 programs and 4 methods. Floor thresholds are tiered and academic-rank-gated in parts: Medicine/Dentistry/Pharmacy requires grade-12 rank "Gioi" (Excellent) plus THPT total >= 20/30 (or graduation-exam average >= 8.5); other health-science majors require rank "Kha" (Good) or higher plus THPT total >= 16.5/30 (or average >= 6.5); Law requires rank "Gioi" plus THPT total >= 18/30 with Math/Van >= 6 each; other majors require rank "Trung binh" (Average) or higher, or THPT graduation score >= 5.0. Every tier mixes an academic-rank condition with no matching applicant-profile field alongside a numeric floor. Left at researched per the academic-rank-gating rule; do not model eligibility without the rank field.',
+  },
   nlu: {
     sourceId: 'nlu-admission-2026',
     title: 'Điểm sàn tuyển sinh Trường Đại học Nông Lâm TPHCM 2026',
@@ -107,6 +116,81 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     checkedAt: '2026-08-24',
     note:
       'Batch-expand-05 (2026-08-24): official admission notice (ngưỡng đảm bảo chất lượng đầu vào, 2026-07-09) confirmed to exist for Trường Đại học Y Dược Cần Thơ, cross-checked across 3 independent press outlets (vietnamnet.vn, tuoitre.vn, baocantho.com.vn) which agree on the aggregate range (15-22/30 across 14 programs) and name Y khoa + Răng Hàm Mặt as the 22/30 ceiling, but none reproduce the full per-program table as extractable text (the primary notice table is image-embedded) and no mã ngành could be confirmed for any individual program. Do-not-guess-formula applied: left at researched rather than eligibility-only.',
+  },
+  dnu: {
+    sourceId: 'dnu-admission-2026',
+    title: 'Thông tin tuyển sinh Cao đẳng, Đại học năm 2026 — Trường Đại học Đồng Nai',
+    url: 'https://dongnaiuni.edu.vn/thong-tin-tuyen-sinh-nam-2026/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-06 (2026-08-24): official domain dongnaiuni.edu.vn (also reachable via dnpu.edu.vn, which 301-redirects to it) confirmed to host a dedicated 2026 admission-information page via search-engine indexing, but direct WebFetch to dongnaiuni.edu.vn returns HTTP 403 in this pass, so no numeric threshold could be extracted and verbatim-quoted from the primary source itself. Secondary aggregator search snippets (not independently WebFetch-verified) suggest a THPT-exam floor of 15,0/30 and a transcript-based route requiring lớp 12 "Giỏi" ranking plus either a 18,0/30 THPT-exam total or an 8,50+ graduation-recognition score, but per the do-not-guess-formula rule this is not modeled without a direct fetch confirming the exact wording. Left at researched; retry direct fetch from a different network path before upgrading.',
+  },
+  dthu: {
+    sourceId: 'dthu-admission-2026',
+    title: 'Thông báo ngưỡng bảo đảm chất lượng đầu vào đại học, cao đẳng chính quy năm 2026 — Trường Đại học Đồng Tháp',
+    url: 'https://tuyensinh.dthu.edu.vn/thong-bao-nguong-bao-dam-chat-luong-dau-vao-dai-hoc-cao-dang-chinh-quy-theo-phuong-thuc-ket-qua-thi-tot-nghiep-thpt-nam-2026-va-cac-dieu-kien-dang-ky-072818.html',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-06 (2026-08-24): official tuyensinh.dthu.edu.vn 2026 threshold-notice page confirmed live via WebFetch, referencing an attached PDF ("20260709123157D_THONG BAO DIEM SAN VA NHAN HO SO TUYEN SINH 2026-3.pdf", published 09/07/2026) that was not text-extractable in this pass. A separate official page (qao.dthu.edu.vn/tuyen-sinh/diem-trung-tuyen) lists actual 2026 per-program cutoff scores (range observed 15-27.99/30, e.g. Giáo dục Mầm non 23.55, Sư phạm Toán học 25.65) rather than a single quality-assurance floor, and does not cover every program in one place. Runtime stays researched-only; per-program cutoff table is out of scope for this batch, not a single eligibility formula.',
+  },
+  due: {
+    sourceId: 'due-admission-2026',
+    title: 'Trường Đại học Kinh tế Công nghiệp Long An (DLA) công bố các phương thức tuyển sinh năm 2026',
+    url: 'https://tuyensinh.daihoclongan.edu.vn/tin-tuc-tuyen-sinh/742-truong-dai-hoc-kinh-te-cong-nghiep-long-an-dla-cong-bo-cac-phuong-thuc-tuyen-sinh-nam-2026.html',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-06 (2026-08-24): official tuyensinh.daihoclongan.edu.vn 2026 announcement confirmed live via WebFetch, listing 4 admission methods (THPT exam results, học bạ/transcript GPA, ĐHQG TP.HCM aptitude test, and direct admission per current regulations) with a reference to subject-combination tables per program, but no numeric threshold/floor score for any method was present in the extracted page content. Runtime stays researched-only; do not fabricate threshold numbers.',
+  },
+  hcmunre: {
+    sourceId: 'hcmunre-admission-2026',
+    title: 'Thông tin tuyển sinh hệ đại học chính quy năm 2026 - Trường Đại học Tài nguyên và Môi trường TP.HCM',
+    url: 'https://hcmunre.edu.vn/thong-tin-tuyen-sinh-he-dai-hoc-chinh-quy-nam-2026',
+    publishedAt: '2026-01-17',
+    checkedAt: '2026-08-24',
+    note:
+      'Official HCMUNRE (hcmunre.edu.vn) 2026 admission notice confirmed to exist, but the floor-score/method detail is published entirely as two embedded images (TuyenSinhDaiHocChinhQuy202601.jpg, 202602.jpg), not readable text. Secondary press (tuoitre.vn, tuyensinh247) reports 3 methods with floors of 15/30 (16/30 for CNTT) on THPT exam, 18/30 on transcript, and 450-550 on the VNU-HCM aptitude test, but these numbers could not be independently confirmed against the primary source in this round. Left at researched per the image-embedded-table rule; do not fabricate the per-program floor table.',
+  },
+  lhu: {
+    sourceId: 'lhu-admission-2026',
+    title: 'Trường Đại học Lạc Hồng - Cổng tuyển sinh 2026',
+    url: 'https://tuyensinh.lhu.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch 11 (2026-08-24): official tuyensinh.lhu.edu.vn portal fetched directly, confirming 5 admission methods (THPT exam; học bạ THPT; ĐGNL; V-SAT computer-based test >= 250; direct admission) exist for 2026, but the portal page itself does not expose numeric thresholds or subject combinations in extractable text. Secondary press (search-engine summary) reports a general 15/30 THPT floor with Dược/Luật/Luật kinh tế instead following the MOET-published health/law ngưỡng đảm bảo chất lượng đầu vào (announced 08/07/2026), but this was not cross-verified against lhu.edu.vn primary text, and the MOET-governed floor has no matching runtime rule yet. Left at researched; do not fabricate numbers.',
+  },
+  mku: {
+    sourceId: 'mku-admission-2026',
+    title: 'Trường Đại học Cửu Long - Cổng thông tin tuyển sinh 2026',
+    url: 'https://tuyensinh.mku.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-10 (2026-08-24): official tuyensinh.mku.edu.vn portal fetched successfully and confirms 4 admission methods (THPT exam, học bạ transcript, V-SAT, ĐGNL ĐHQG-HCM) plus a results-lookup tool. A secondary aggregator states a >=6.0 three-subject/12-semester transcript average floor for the học bạ method, but the primary portal page fetched in this pass did not itself state that number, so it is not independently confirmed. Left at researched; do not model the unconfirmed threshold.',
+  },
+  pvu: {
+    sourceId: 'pvu-admission-2026',
+    title: 'Tuyển sinh 2026 - Trường Đại học Dầu khí Việt Nam',
+    url: 'https://pvu.edu.vn/tuyen-sinh/tuyen-sinh-2026',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch-expand-12 (2026-08-24): official pvu.edu.vn 2026 admission section confirms nationwide THPT-exam-based admission for Kỹ thuật Hóa học (Lọc-Hóa dầu) and Kỹ thuật Địa chất (Địa chất - Địa vật lý Dầu khí), and references a "khung quy đổi điểm tương đương" covering THPT transcript, THPT exam, and VNU-HCM aptitude-test routes. Third-party aggregators (vietjack, tuyensinh247) claim a flat 15/30 THPT-exam floor, but the official page itself only shows announcement titles with the numeric conversion table behind a linked article not retrievable in this pass, so the floor is unconfirmed at the primary source. Left at researched rather than modeling an unverified threshold.',
+  },
+  stu: {
+    sourceId: 'stu-admission-2026',
+    title: 'Công bố thông tin tuyển sinh đại học năm 2026 của Trường Đại học Công nghệ Sài Gòn',
+    url: 'https://www.stu.edu.vn/cong-bo-thong-tin-tuyen-sinh-dai-hoc-nam-2026-cua-truong-dai-hoc-cong-nghe-sai-gon.html',
+    publishedAt: '2026-08-10',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-13 (2026-08-24): trang chính thức stu.edu.vn xác nhận 4 phương thức và công thức khung (ĐXT = tổng 3 môn thi TN THPT/30, hoặc TB lớp 10+11+12/30) cùng quy tắc "điểm Toán/Văn >= 1/3 điểm chuẩn chưa ưu tiên" cho nhóm Kinh tế/Luật, nhưng KHÔNG công bố số điểm ngưỡng cụ thể trên trang chính thức. Hai nguồn thứ cấp độc lập đưa ra số khác nhau cho ngành Luật kinh tế (18 điểm và 20 điểm) — mâu thuẫn không giải quyết được trong lượt research này. Giữ ở mức researched theo quy tắc không đoán khi nguồn xung đột.',
+  },
+  // Batch expand-16 (2026-08-24):
+  vnkgu: {
+    sourceId: 'vnkgu-admission-2026',
+    title: 'Tuyển sinh - Trường Đại học Kiên Giang',
+    url: 'https://tuyensinh.vnkgu.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Cổng tuyển sinh chính thức (tuyensinh.vnkgu.edu.vn) xác nhận qua tìm kiếm 6 phương thức 2026 (học bạ THPT, kết quả thi TN THPT, tuyển thẳng/ưu tiên, ĐGNL ĐHQG TP.HCM, V-SAT, xét bảng điểm TC/CĐ/ĐH liên thông). Điểm sàn/điểm chuẩn dao động rất rộng theo ngành (thi TN THPT 15-28,55/30, học bạ 16-28,88/30, ĐGNL 500-1131/1200, V-SAT 200-285/450, Sư phạm Toán cao nhất). WebFetch trực tiếp trang chủ tuyensinh.vnkgu.edu.vn không trả về bảng ngưỡng theo ngành có cấu trúc (chỉ điều hướng). Không đủ dữ liệu per-major xác minh để mô hình hoá; để ở researched.',
   },
 };
 
@@ -352,8 +436,10 @@ export const southernCatalogKnowledgeGap = {
  * adapter arrays the same way `remainingCatalog.ts` excludes its `explicitRuntimeSchoolIds`. They
  * stay listed in `southernCatalogSchools` above for identity/location metadata only.
  * Batch-expand-04 (2026-08-24): 'bdu' and 'bvu' graduated the same way (dedicated eligibility-only
- * runtime modules at `normalized/runtime-source-snapshot/{bdu,bvu}/`). */
-const explicitRuntimeSchoolIds = new Set(['pntu', 'uah', 'bdu', 'bvu']);
+ * runtime modules at `normalized/runtime-source-snapshot/{bdu,bvu}/`). Batch-expand-07: 'gdu' too.
+ * Batch-expand-11: 'nctu' too. Batch expand-13: 'tdu' and 'tgu' too. Batch expand-14: 'ttu' too.
+ * Batch expand-16: 'vaa' too. */
+const explicitRuntimeSchoolIds = new Set(['pntu', 'uah', 'bdu', 'bvu', 'gdu', 'nctu', 'tdu', 'tgu', 'ttu', 'vaa']);
 const southernCatalogRuntimeSchools = southernCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const southernCatalogMethods: AdmissionMethodDescriptor[] = southernCatalogRuntimeSchools.map((school) => ({
