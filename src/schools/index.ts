@@ -97,6 +97,8 @@ import { umtModule } from './umt';
 import { utmModule } from './utm';
 import { uttModule } from './utt';
 import { vaaModule } from './vaa';
+import { vnulawModule } from './vnulaw';
+import { vnuumpModule } from './vnuump';
 import { southernCatalogModules } from './southernCatalog';
 import { remainingCatalogModules } from './remainingCatalog';
 import { finalCatalogModules } from './finalCatalog';
@@ -245,4 +247,6 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   utm: utmModule,
   utt: uttModule,
   vaa: vaaModule,
+  vnulaw: vnulawModule,
+  vnuump: vnuumpModule,
 };

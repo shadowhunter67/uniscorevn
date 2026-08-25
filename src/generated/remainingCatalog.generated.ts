@@ -167,6 +167,38 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     checkedAt: '2026-08-22',
     note: 'Official portal lists 2026 admission information, quality thresholds, and first-round cutoffs; normalization required before eligibility/cutoff comparison.',
   },
+  vnuhsb: {
+    sourceId: 'vnuhsb-admission-2026',
+    title: 'HSB (Truong Quan tri va Kinh doanh, DHQGHN) thong tin tuyen sinh dai hoc 2026 (du kien)',
+    url: 'https://www.hsb.edu.vn/news/thong-tin-tuyen-sinh-dai-hoc-nam-2026-cua-hsb-du-kien',
+    checkedAt: '2026-08-25',
+    note:
+      'Official HSB 2026 preliminary notice (fetched directly, text-readable) confirms HSB will drop hoc ba as a 2026 method, lists 4 methods (301 truc tiep/uu tien, 100 thi TN THPT + IELTS conversion, 401 HSA, 500 phong van EQ + thi TN THPT), 10 subject combinations, and an EQ-interview bonus, but explicitly defers the numeric quality threshold/score-adjustment formula to a later Ministry-timed announcement ("du kien"). Left at researched; do not fabricate a floor score.',
+  },
+  vnuis: {
+    sourceId: 'vnuis-admission-2026',
+    title: 'VNU-IS (Truong Quoc te, DHQGHN) thong tin tuyen sinh dai hoc chinh quy nam 2026',
+    url: 'https://www.is.vnu.edu.vn/truong-quoc-te-thong-bao-thong-tin-du-kien-tuyen-sinh-dhcq-nam-2026/',
+    checkedAt: '2026-08-25',
+    note:
+      'Official VNU-IS 2026 notice (fetched directly, text-readable) lists 1350 chi tieu across 15 programs, 4 methods (301/100/409/401), 11 subject combinations, per-program English-score gating conditions (THPT English >=6.0 or >=5.0 for STEM programs, or GPA/HSA/certificate alternatives), the score formula (3-subject total + bonus + priority), and a bonus-point table for national competitions. No overall minimum total-score floor is published; eligibility depends on combined per-program English gating plus an unpublished quality threshold, which is too composite to model without guessing. Left at researched.',
+  },
+  vnulaw: {
+    sourceId: 'vnulaw-superseded-2026',
+    title: 'VNU-Luat (Truong Dai hoc Luat, DHQGHN) - superseded by dedicated eligibility-only module',
+    url: 'https://law.vnu.edu.vn/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026/',
+    checkedAt: '2026-08-25',
+    note:
+      'Superseded (2026-08-25 batch): eligibility-only upgrade shipped using the official 2026 admission page (common 18/30 threshold + Toan/Ngu van >=6/10 condition, THPT-exam method only). See normalized/runtime-source-snapshot/vnulaw/sources.ts. This entry is unused because vnulaw is now in explicitRuntimeSchoolIds; kept only as a research trail.',
+  },
+  vnuump: {
+    sourceId: 'vnuump-superseded-2026',
+    title: 'VNU-UMP (Truong Dai hoc Y Duoc, DHQGHN) - superseded by dedicated eligibility-only module',
+    url: 'https://ump.vnu.edu.vn/article-thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026-(hinh-thuc-dao-tao-chinh-quy)-19647-3439.html',
+    checkedAt: '2026-08-25',
+    note:
+      'Superseded (2026-08-25 batch): eligibility-only upgrade shipped using the official 2026 admission page (uniform 15/30 THPT-exam floor across all 6 majors). See normalized/runtime-source-snapshot/vnuump/sources.ts. This entry is unused because vnuump is now in explicitRuntimeSchoolIds; kept only as a research trail.',
+  },
   vnuulis: {
     sourceId: 'vnuulis-admission-2026',
     title: 'VNU-ULIS undergraduate admission 2026',
@@ -456,6 +488,8 @@ export const remainingCatalogKnowledgeGap = {
 };
 
 const explicitRuntimeSchoolIds = new Set([
+  'vnulaw',
+  'vnuump',
   'huce',
   'dav',
   'hlu',
