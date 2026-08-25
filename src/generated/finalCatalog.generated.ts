@@ -304,6 +304,7 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     checkedAt: '2026-08-24',
     note:
       'Batch expand-07 (2026-08-24): official GASS site (gass.edu.vn) confirmed live; its Tuyển sinh navigation lists only Tiến sĩ (doctoral), Thạc sĩ (master), and short-term/bổ sung kiến thức programs — no đại học chính quy (undergraduate) admission track exists at this institution (cross-checked against Vietnamese Wikipedia, which also states GASS trains only thạc sĩ/tiến sĩ). This is a genuine "no undergraduate program" finding, not a research gap — GASS should not be modeled as an undergraduate eligibility/calculator target. Left at researched to document the finding without fabricating an undergraduate rule.',
+  },
   /* Batch expand-08 (2026-08-24): hcmcons, hcmufa, hcmupes, hnmu, hluv, hdiu. */
   hcmcons: {
     sourceId: 'hcmcons-admission-2026',
