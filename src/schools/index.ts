@@ -76,6 +76,10 @@ import { apdModule } from './apd';
 import { bduModule } from './bdu';
 import { bvuModule } from './bvu';
 import { eiuModule } from './eiu';
+import { fbuModule } from './fbu';
+import { fpfuModule } from './fpfu';
+import { gduModule } from './gdu';
+import { halonguModule } from './halongu';
 import { southernCatalogModules } from './southernCatalog';
 import { remainingCatalogModules } from './remainingCatalog';
 import { finalCatalogModules } from './finalCatalog';
@@ -203,4 +207,8 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   fptu: fptuModule,
   hubt: hubtModule,
   dainam: dainamModule,
+  fbu: fbuModule,
+  fpfu: fpfuModule,
+  gdu: gduModule,
+  halongu: halonguModule,
 };

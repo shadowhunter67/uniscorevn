@@ -71,6 +71,10 @@ import { eiuComparisonAdapter } from '../schools/eiu/comparison';
 import { fptuComparisonAdapter } from '../schools/fptu/comparison';
 import { hubtComparisonAdapter } from '../schools/hubt/comparison';
 import { dainamComparisonAdapter } from '../schools/dainam/comparison';
+import { fbuComparisonAdapter } from '../schools/fbu/comparison';
+import { fpfuComparisonAdapter } from '../schools/fpfu/comparison';
+import { gduComparisonAdapter } from '../schools/gdu/comparison';
+import { halonguComparisonAdapter } from '../schools/halongu/comparison';
 import { southernCatalogComparisonAdapters } from '../schools/southernCatalog';
 import { remainingCatalogComparisonAdapters } from '../schools/remainingCatalog';
 import { finalCatalogComparisonAdapters } from '../schools/finalCatalog';
@@ -161,6 +165,10 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   fptuComparisonAdapter,
   hubtComparisonAdapter,
   dainamComparisonAdapter,
+  fbuComparisonAdapter,
+  fpfuComparisonAdapter,
+  gduComparisonAdapter,
+  halonguComparisonAdapter,
   ...southernCatalogComparisonAdapters,
   ...remainingCatalogComparisonAdapters.filter(
     (adapter) =>
