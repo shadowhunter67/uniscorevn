@@ -106,6 +106,15 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     checkedAt: '2026-08-22',
     note: 'Official 2026 page lists programs, HSA/SAT/THPT/interview methods, language conditions, and certificate conversion; needs extraction to decide eligibility/partial scope.',
   },
+  // Batch expand-16 (2026-08-24):
+  vnued: {
+    sourceId: 'vnued-admission-2026',
+    title: 'Mở cổng đăng ký hồ sơ xét tuyển đại học chính quy năm 2026 — Trường Đại học Giáo dục, ĐHQGHN',
+    url: 'https://education.vnu.edu.vn/tuyen-sinh/dai-hoc-chinh-quy/mo-cong-dang-ky-ho-so-xet-tuyen-dai-hoc-chinh-quy-nam-2026/',
+    checkedAt: '2026-08-24',
+    note:
+      'Official 2026 admission page (education.vnu.edu.vn) fetched directly: confirms 2,000 quota across 16 programs and states the portal opened for "Đối tượng Xét tuyển thẳng, ưu tiên xét tuyển, xét tuyển theo HSA, SAT" — direct admission, priority admission, HSA aptitude test, and SAT are the named 2026 pathways; a plain THPT-exam-score route (the only method the shared applicant profile can evaluate, unlike sibling VNU-Hanoi schools such as ULIS) is not prominently listed for this cycle. A separate "Ngưỡng đảm bảo chất lượng đầu vào" (quality-assurance threshold) notice is referenced but its numeric content was not present in the fetched excerpt. Left at researched: no confirmed THPT-exam floor was located, and HSA/SAT routes have no matching ApplicantProfile fields to evaluate.',
+  },
   hust: {
     sourceId: 'hust-admission-2026',
     title: 'HUST undergraduate admission 2026',

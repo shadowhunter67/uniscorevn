@@ -91,6 +91,7 @@ import { uhdComparisonAdapter } from '../schools/uhd/comparison';
 import { umtComparisonAdapter } from '../schools/umt/comparison';
 import { utmComparisonAdapter } from '../schools/utm/comparison';
 import { uttComparisonAdapter } from '../schools/utt/comparison';
+import { vaaComparisonAdapter } from '../schools/vaa/comparison';
 import { southernCatalogComparisonAdapters } from '../schools/southernCatalog';
 import { remainingCatalogComparisonAdapters } from '../schools/remainingCatalog';
 import { finalCatalogComparisonAdapters } from '../schools/finalCatalog';
@@ -201,6 +202,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   umtComparisonAdapter,
   utmComparisonAdapter,
   uttComparisonAdapter,
+  vaaComparisonAdapter,
   ...southernCatalogComparisonAdapters,
   ...remainingCatalogComparisonAdapters.filter(
     (adapter) =>
