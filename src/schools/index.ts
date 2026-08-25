@@ -60,6 +60,7 @@ import { dueudnModule } from './dueudn';
 import { uedudnModule } from './uedudn';
 import { fptuModule } from './fptu';
 import { hubtModule } from './hubt';
+import { dainamModule } from './dainam';
 import { uflsudnModule } from './uflsudn';
 import { uteudnModule } from './uteudn';
 import { vkuModule } from './vku';
@@ -199,4 +200,5 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   bvu: bvuModule,
   fptu: fptuModule,
   hubt: hubtModule,
+  dainam: dainamModule,
 };

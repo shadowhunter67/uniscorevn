@@ -163,6 +163,15 @@ export const collegeCatalogSchools: readonly CollegeCatalogSchool[] = [
     ownership: 'public',
     region: 'hanoi',
     entityLevel: 'vocational_college',
+    catalogSources: [
+      MOET_PUBLIC_UNIT_SOURCE,
+      {
+        title: 'Trường Cao đẳng Xây dựng số 1 (CTC1)',
+        url: 'https://ctc1.edu.vn/',
+        type: 'official-institution',
+        checkedAt: '2026-08-24',
+      },
+    ],
   },
   {
     id: 'hcmcc',
@@ -190,6 +199,15 @@ export const collegeCatalogSchools: readonly CollegeCatalogSchool[] = [
     ownership: 'public',
     region: 'hanoi',
     entityLevel: 'vocational_college',
+    catalogSources: [
+      MOET_PUBLIC_UNIT_SOURCE,
+      {
+        title: 'Trường Cao đẳng Xây dựng Công trình đô thị (CUWC)',
+        url: 'https://cuwc.edu.vn/',
+        type: 'official-institution',
+        checkedAt: '2026-08-24',
+      },
+    ],
   },
   {
     id: 'vietxo1',
@@ -218,6 +236,15 @@ export const collegeCatalogSchools: readonly CollegeCatalogSchool[] = [
     ownership: 'public',
     region: 'other',
     entityLevel: 'vocational_college',
+    catalogSources: [
+      MOET_PUBLIC_UNIT_SOURCE,
+      {
+        title: 'Trường Cao đẳng Cơ giới Xây dựng',
+        url: 'https://caodangcogioixaydung.edu.vn/',
+        type: 'official-institution',
+        checkedAt: '2026-08-24',
+      },
+    ],
   },
   {
     id: 'ccst',
@@ -227,6 +254,15 @@ export const collegeCatalogSchools: readonly CollegeCatalogSchool[] = [
     ownership: 'public',
     region: 'other',
     entityLevel: 'vocational_college',
+    catalogSources: [
+      MOET_PUBLIC_UNIT_SOURCE,
+      {
+        title: 'Trường Cao đẳng Xây dựng và Công nghệ - Xã hội',
+        url: 'https://caodangxaydungvacongnghe-xahoi.edu.vn/',
+        type: 'official-institution',
+        checkedAt: '2026-08-24',
+      },
+    ],
   },
   {
     id: 'hctb',
