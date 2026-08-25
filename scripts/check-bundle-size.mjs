@@ -11,13 +11,21 @@
  * đổi nhỏ hợp lý (thêm 1-2 trường không-Page/mở rộng core logic dùng chung), không chọn cao tùy
  * tiện để "cho qua". Nếu bundle initial thật sự cần vượt ngưỡng này (vd core logic dùng chung phình
  * đáng kể), sửa THRESHOLD_BYTES ở đây kèm giải thích rõ trong commit message — không âm thầm nới.
+ *
+ * Cập nhật 2026-08-25 (batch mở rộng catalog): thêm ~28 trường eligibility-only mới (48→76) vào
+ * nhóm "14 trường không có Page" — mỗi trường là module dữ liệu thật (methods/sources/eligibility
+ * text tiếng Việt), tăng initial bundle đo được lên ~671kB. Đây là data thật, không phải bloat/
+ * regression kỹ thuật, nhưng nhóm "không-Page" giờ đã lớn hơn nhiều so với lúc đặt ngưỡng ban đầu
+ * (14 → ~40+ trường) — nới ngưỡng lên 750kB (margin ~12% trên mức đo được) thay vì chỉ nhích đủ
+ * qua ngưỡng, để còn dư địa cho vài batch mở rộng catalog tiếp theo trước khi cần đo lại. Nếu bundle
+ * tiếp tục phình nhanh ở các batch sau, cân nhắc tách nhóm "không-Page" sang lazy-load theo route
+ * tương tự nhóm "có-Page" thay vì tiếp tục nới ngưỡng.
  */
 import { readFileSync, statSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-// After lazy-loading /compare, the initial bundle is ~386kB; keep a 650kB budget to catch regressions.
-const THRESHOLD_BYTES = 650 * 1024;
+const THRESHOLD_BYTES = 750 * 1024;
 
 const projectRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const distDir = join(projectRoot, 'dist');
