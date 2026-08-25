@@ -52,7 +52,7 @@ Nguồn nhóm đại học 238 ban đầu là số liệu tổng hợp thứ c�
 
 ## Trạng thái hỗ trợ
 
-Danh sách đầy đủ 267 trường theo từng mức hỗ trợ đổi thường xuyên (mỗi batch nghiên cứu mới lại nâng hạng một số trường) nên README không liệt kê tên — chạy `npm run stats:coverage` để xem số liệu mới nhất, hoặc xem chi tiết từng trường/nguồn trong [docs/data-methodology.md](docs/data-methodology.md).
+Danh sách đầy đủ 267 trường theo từng mức hỗ trợ đổi thường xuyên (mỗi batch nghiên cứu mới lại nâng hạng một số trường) nên README không liệt kê tên — xem danh sách chi tiết theo trường tại [docs/school-status.md](docs/school-status.md), phương pháp/nguồn tại [docs/data-methodology.md](docs/data-methodology.md), hoặc chạy `npm run stats:coverage` để xem số liệu mới nhất.
 
 | Mức hỗ trợ | Số trường | Ý nghĩa |
 |---|---:|---|

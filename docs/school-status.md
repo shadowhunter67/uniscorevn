@@ -1,0 +1,286 @@
+# Trạng thái hỗ trợ theo trường
+
+File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
+
+## Calculator đã xác minh (14)
+
+- **FTU** — Trường Đại học Ngoại thương
+- **HCMULAW** — Trường Đại học Luật Thành phố Hồ Chí Minh
+- **HCMUS** — Trường Đại học Khoa học Tự nhiên - ĐHQG TP.HCM
+- **HCMUT** — Trường Đại học Bách khoa – ĐHQG TP.HCM
+- **HUFLIT** — Trường Đại học Ngoại ngữ - Tin học TP. Hồ Chí Minh
+- **HUTECH** — Trường Đại học Công nghệ TP. Hồ Chí Minh
+- **IU** — Trường Đại học Quốc tế – ĐHQG TP.HCM
+- **IUH** — Trường Đại học Công nghiệp Thành phố Hồ Chí Minh
+- **TDTU** — Trường Đại học Tôn Đức Thắng
+- **UEH** — Trường Đại học Kinh tế TP.HCM
+- **UEL** — Trường Đại học Kinh tế - Luật – ĐHQG TP.HCM
+- **UFM** — Trường Đại học Tài chính – Marketing
+- **UMP** — Trường Đại học Y Dược Thành phố Hồ Chí Minh
+- **USSH** — Trường Đại học Khoa học Xã hội và Nhân văn – ĐHQG TP.HCM
+
+## Calculator một phần (5)
+
+- **DAV** — Hoc vien Ngoai giao
+- **HCMUTE** — Trường Đại học Công nghệ Kỹ thuật TP. Hồ Chí Minh
+- **NEU** — Trường Đại học Kinh tế Quốc dân
+- **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
+- **VNU-ULIS** — Truong Dai hoc Ngoai ngu - Dai hoc Quoc gia Ha Noi
+
+## Chỉ kiểm tra điều kiện/ngưỡng (76)
+
+- **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
+- **AJC** — Học viện Báo chí và Tuyên truyền
+- **APD** — Hoc vien Chinh sach va Phat trien
+- **BDU** — Truong Dai hoc Binh Duong
+- **BVU** — Truong Dai hoc Ba Ria - Vung Tau
+- **CTU** — Trường Đại học Cần Thơ
+- **DLU** — Truong Dai hoc Da Lat
+- **DNU** — Trường Đại học Đại Nam
+- **DTU** — Truong Dai hoc Duy Tan
+- **DUE** — Trường Đại học Kinh tế - Đại học Đà Nẵng
+- **DUT** — Trường Đại học Bách khoa - Đại học Đà Nẵng
+- **EIU** — Trường Đại học Quốc tế Miền Đông
+- **FBU** — Trường Đại học Tài chính - Ngân hàng Hà Nội
+- **FPFU** — Trường Đại học Phòng cháy Chữa cháy
+- **FPTU** — Trường Đại học FPT
+- **GDU** — Trường Đại học Gia Định
+- **HALONGU** — Trường Đại học Hạ Long
+- **HCE** — Trường Đại học Kinh tế, Đại học Huế
+- **HCMUE** — Trường Đại học Sư phạm Thành phố Hồ Chí Minh (HCMUE, TPHCM)
+- **HDU** — Trường Đại học Hồng Đức
+- **HIU** — Trường Đại học Quốc tế Hồng Bàng
+- **HLU** — Trường Đại học Luật Hà Nội
+- **HNUE** — Trường Đại học Sư phạm Hà Nội
+- **HPU2** — Truong Dai hoc Su pham Ha Noi 2
+- **HSU** — Trường Đại học Hoa Sen
+- **HUAF** — Trường Đại học Nông Lâm, Đại học Huế
+- **HUB** — Trường Đại học Ngân hàng TP. Hồ Chí Minh
+- **HUBT** — Trường Đại học Kinh doanh và Công nghệ Hà Nội
+- **HUCE** — Truong Dai hoc Xay dung Ha Noi
+- **HUED** — Trường Đại học Sư phạm, Đại học Huế
+- **HUIT** — Trường Đại học Công Thương TP.HCM
+- **HUL** — Trường Đại học Luật, Đại học Huế
+- **HUMG** — Trường Đại học Mỏ - Địa chất
+- **HUP** — Trường Đại học Dược Hà Nội
+- **HUSC** — Trường Đại học Khoa học, Đại học Huế
+- **NCTU** — Truong Dai hoc Nam Can Tho
+- **NTTU** — Trường Đại học Nguyễn Tất Thành
+- **NTU-HN** — Truong Dai hoc Nguyen Trai
+- **OU** — Trường Đại học Mở Thành phố Hồ Chí Minh
+- **PNTU** — Trường Đại học Y khoa Phạm Ngọc Thạch
+- **PTIT** — Học viện Công nghệ Bưu chính Viễn thông
+- **SGU** — Trường Đại học Sài Gòn
+- **TBDU** — Truong Dai hoc Thai Binh Duong
+- **TDMU** — Trường Đại học Thủ Dầu Một
+- **TDU** — Truong Dai hoc Tay Do
+- **TGU** — Truong Dai hoc Tien Giang
+- **ThanhDo** — Truong Dai hoc Thanh Do
+- **TNU** — Dai hoc Thai Nguyen
+- **TNUE** — Truong Dai hoc Su pham - Dai hoc Thai Nguyen
+- **TNUFL** — Truong Ngoai ngu - Dai hoc Thai Nguyen
+- **TNUS** — Truong Dai hoc Khoa hoc - Dai hoc Thai Nguyen
+- **TTN** — Truong Dai hoc Tay Nguyen
+- **TTU** — Truong Dai hoc Tan Tao
+- **TUAF** — Truong Dai hoc Nong Lam - Dai hoc Thai Nguyen
+- **UAH** — Truong Dai hoc Kien truc TP.HCM
+- **UDA** — Trường Đại học Đông Á
+- **UED** — Trường Đại học Sư phạm - Đại học Đà Nẵng
+- **UEF** — Trường Đại học Kinh tế - Tài chính TP.HCM
+- **UFLS** — Trường Đại học Ngoại ngữ - Đại học Đà Nẵng
+- **UHD** — Trường Đại học Hải Dương
+- **UIT** — Trường Đại học Công nghệ Thông tin – ĐHQG TP.HCM
+- **UMT** — Trường Đại học Quản lý và Công nghệ TP.HCM
+- **UTC** — Trường Đại học Giao thông vận tải
+- **UTE** — Trường Đại học Sư phạm Kỹ thuật - Đại học Đà Nẵng
+- **UTM** — Trường Đại học Công nghệ và Quản lý hữu nghị
+- **UTT** — Trường Đại học Công nghệ Giao thông vận tải
+- **VAA** — Học viện Hàng không Việt Nam
+- **VGU** — Truong Dai hoc Viet Duc
+- **VinhUni** — Trường Đại học Vinh
+- **VKU** — Trường Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn
+- **VLU** — Trường Đại học Văn Lang
+- **VMU** — Trường Đại học Hàng hải Việt Nam
+- **VNU-LS** — Truong Dai hoc Luat - Dai hoc Quoc gia Ha Noi
+- **VNU-UMP** — Truong Dai hoc Y Duoc - Dai hoc Quoc gia Ha Noi
+- **VNUA** — Hoc vien Nong nghiep Viet Nam
+- **VNUF** — Truong Dai hoc Lam nghiep
+
+## Đã research, chưa đủ để tính (130)
+
+- **AADAA** — Học viện Phòng không - Không quân
+- **ACTVN** — Học viện Kỹ thuật Mật mã
+- **AOC** — Trường Đại học Sĩ quan Pháo binh
+- **AOF** — Học viện Tài chính
+- **BAV** — Học viện Ngân hàng
+- **BGA** — Học viện Biên phòng
+- **BLU** — Trường Đại học Bạc Liêu
+- **BMTU** — Trường Đại học Y Dược Buôn Ma Thuột
+- **BUV** — Trường Đại học Anh Quốc Việt Nam
+- **CĐSPTW-HCM** — Trường Cao đẳng Sư phạm Trung ương Thành phố Hồ Chí Minh
+- **CĐSPTW-NT** — Trường Cao đẳng Sư phạm Trung ương - Nha Trang
+- **CMCU** — Trường Đại học CMC
+- **CTUET** — Trường Đại học Kỹ thuật - Công nghệ Cần Thơ
+- **CTUMP** — Trường Đại học Y Dược Cần Thơ
+- **DHP** — Trường Đại học Hải Phòng
+- **DHV** — Trường Đại học Hùng Vương TP.HCM
+- **DLA** — Trường Đại học Kinh tế Công nghiệp Long An
+- **DNU** — Trường Đại học Đồng Nai
+- **DSU** — Trường Đại học Thể dục Thể thao Đà Nẵng
+- **DThU** — Trường Đại học Đồng Tháp
+- **DUMTP** — Trường Đại học Kỹ thuật Y Dược Đà Nẵng
+- **EAUT** — Trường Đại học Công nghệ Đông Á
+- **FUV** — Trường Đại học Fulbright Việt Nam
+- **GASS** — Học viện Khoa học xã hội
+- **HAM** — Học viện Âm nhạc Huế
+- **HANU** — Trường Đại học Hà Nội
+- **HAT** — Trường Du lịch - Đại học Huế
+- **HAU** — Trường Đại học Kiến trúc Hà Nội
+- **HaUI** — Trường Đại học Công nghiệp Hà Nội
+- **HBU** — Trường Đại học Hòa Bình
+- **HCA** — Học viện Cán bộ Thành phố Hồ Chí Minh
+- **HCMCONS** — Nhạc viện Thành phố Hồ Chí Minh
+- **HCMUFA** — Trường Đại học Mỹ thuật TP.HCM
+- **HCMUNRE** — Trường Đại học Tài nguyên và Môi trường TP.HCM
+- **HCMUPES** — Trường Đại học Sư phạm Thể dục Thể thao TP.HCM
+- **HDIU** — Trường Đại học Đông Đô
+- **HLUV** — Trường Đại học Hoa Lư
+- **HMU** — Trường Đại học Y Hà Nội
+- **HNMU** — Trường Đại học Thủ đô Hà Nội
+- **HOU** — Trường Đại học Mở Hà Nội
+- **HPMU** — Trường Đại học Y Dược Hải Phòng
+- **HTU** — Trường Đại học Hà Tĩnh
+- **HUC** — Trường Đại học Văn hóa Hà Nội
+- **HueU** — Đại học Huế
+- **HUFL** — Trường Đại học Ngoại ngữ - Đại học Huế
+- **HUMP** — Trường Đại học Y Dược - Đại học Huế
+- **HUNRE** — Trường Đại học Tài nguyên và Môi trường Hà Nội
+- **HUPES** — Trường Đại học Sư phạm Thể dục Thể thao Hà Nội
+- **HUST** — Đại học Bách khoa Hà Nội
+- **HVU** — Trường Đại học Hùng Vương
+- **KBU** — Trường Đại học Kinh Bắc
+- **LHU** — Trường Đại học Lạc Hồng
+- **LTVUni** — Trường Đại học Lương Thế Vinh
+- **MAL** — Học viện Hậu cần
+- **MDU** — Trường Đại học Miền Đông
+- **MKU** — Trường Đại học Cửu Long
+- **MPA** — Học viện Chính trị Quân đội Nhân dân Việt Nam
+- **MSA** — Học viện Khoa học Quân sự
+- **MTA** — Học viện Kỹ thuật Quân sự
+- **MUCE** — Trường Đại học Xây dựng Miền Trung
+- **NAEM** — Học viện Quản lý giáo dục
+- **NAPA** — Học viện Hành chính Quốc gia
+- **NAUE** — Trường Đại học Kinh tế Nghệ An
+- **NCC** — Trường Cao đẳng Xây dựng Nam Định
+- **NCE** — Trường Cao đẳng Sư phạm Trung ương
+- **NDA** — Học viện Quốc phòng
+- **NLU** — Trường Đại học Nông Lâm TP.HCM
+- **NTU** — Trường Đại học Nha Trang
+- **NUAE** — Trường Đại học Sư phạm Nghệ thuật Trung ương
+- **OCP** — Trường Đại học Sĩ quan Chính trị
+- **PCTU** — Trường Đại học Phan Châu Trinh
+- **PDU** — Trường Đại học Phạm Văn Đồng
+- **Phenikaa** — Trường Đại học Phenikaa
+- **PPA** — Học viện Cảnh sát Nhân dân
+- **PPU-CAND** — Trường Đại học Cảnh sát Nhân dân
+- **PSA** — Học viện An ninh Nhân dân
+- **PSU-CAND** — Trường Đại học An ninh Nhân dân
+- **PVU** — Trường Đại học Dầu khí Việt Nam
+- **PYU** — Trường Đại học Phú Yên
+- **QBU** — Trường Đại học Quảng Bình
+- **QNamU** — Trường Đại học Quảng Nam
+- **QNU** — Trường Đại học Quy Nhơn
+- **RMITVN** — Trường Đại học RMIT Việt Nam
+- **SIGO** — Trường Đại học Sĩ quan Thông tin liên lạc
+- **SKDA** — Trường Đại học Sân khấu - Điện ảnh Hà Nội
+- **SKDAHCM** — Trường Đại học Sân khấu - Điện ảnh TP.HCM
+- **STU** — Trường Đại học Công nghệ Sài Gòn
+- **TBU** — Trường Đại học Thái Bình
+- **TLU** — Trường Đại học Thủy lợi
+- **TLU-HN** — Trường Đại học Thăng Long
+- **TMU** — Trường Đại học Thương mại
+- **TNUT** — Trường Đại học Kỹ thuật Công nghiệp - Đại học Thái Nguyên
+- **TQT** — Trường Đại học Trần Quốc Tuấn - Sĩ quan Lục quân 1
+- **TQU** — Trường Đại học Tân Trào
+- **TUCST** — Trường Đại học Văn hóa, Thể thao và Du lịch Thanh Hóa
+- **TUEBA** — Trường Đại học Kinh tế và Quản trị kinh doanh - Đại học Thái Nguyên
+- **TUMP** — Trường Đại học Y Dược - Đại học Thái Nguyên
+- **TUU** — Trường Đại học Công đoàn
+- **TVU** — Trường Đại học Trà Vinh
+- **TVUni** — Trường Đại học Trưng Vương
+- **UAD** — Trường Đại học Mỹ thuật Công nghiệp
+- **UDN** — Đại học Đà Nẵng
+- **UKH** — Trường Đại học Khánh Hòa
+- **ULSA** — Trường Đại học Lao động - Xã hội
+- **UPES1** — Trường Đại học Thể dục Thể thao Bắc Ninh
+- **UPT** — Trường Đại học Phan Thiết
+- **USH** — Trường Đại học Thể dục Thể thao TP.HCM
+- **USTH** — Trường Đại học Khoa học và Công nghệ Hà Nội
+- **UTH** — Trường Đại học Giao thông vận tải TP.HCM
+- **VHS** — Trường Đại học Văn hóa TP.HCM
+- **VinUni** — Trường Đại học VinUni
+- **VJU** — Trường Đại học Việt Nhật - ĐHQG Hà Nội
+- **VMMU** — Học viện Quân y
+- **VMU-Vinh** — Trường Đại học Y khoa Vinh
+- **VNA-Navy** — Học viện Hải quân
+- **VNAD** — Học viện Múa Việt Nam
+- **VNAM** — Học viện Âm nhạc Quốc gia Việt Nam
+- **VNKGU** — Trường Đại học Kiên Giang
+- **VNU-HSB** — Trường Quản trị và Kinh doanh - ĐHQG Hà Nội
+- **VNU-HUS** — Trường Đại học Khoa học Tự nhiên - ĐHQG Hà Nội
+- **VNU-IS** — Trường Quốc tế - ĐHQG Hà Nội
+- **VNU-SIS** — Trường Khoa học liên ngành và Nghệ thuật - ĐHQG Hà Nội
+- **VNU-UEB** — Trường Đại học Kinh tế - ĐHQG Hà Nội
+- **VNU-UED** — Trường Đại học Giáo dục - ĐHQG Hà Nội
+- **VNU-UET** — Trường Đại học Công nghệ - ĐHQG Hà Nội
+- **VNU-USSH** — Trường Đại học Khoa học Xã hội và Nhân văn - ĐHQG Hà Nội
+- **VNUFA** — Trường Đại học Mỹ thuật Việt Nam
+- **VTTU** — Trường Đại học Võ Trường Toản
+- **VWA** — Học viện Phụ nữ Việt Nam
+- **VYA** — Học viện Thanh thiếu niên Việt Nam
+
+## Chỉ có trong danh mục (42)
+
+- **AIU** — Trường Đại học Quốc tế Á Châu
+- **BHU** — Trường Đại học Quốc tế Bắc Hà
+- **CCO** — Trường Đại học Sĩ quan Phòng hóa
+- **CCST** — Trường Cao đẳng Xây dựng và Công nghệ - Xã hội
+- **CFI** — Trường Cao đẳng Lương thực - Thực phẩm
+- **CIC1** — Trường Cao đẳng Xây dựng số 1
+- **CMC-CĐ** — Trường Cao đẳng Cơ giới Xây dựng
+- **COC** — Trường Cao đẳng Thương mại
+- **CUWC** — Trường Cao đẳng Xây dựng Công trình đô thị
+- **CVAUni** — Trường Đại học Chu Văn An
+- **DNC** — Trường Cao đẳng Đà Nẵng
+- **DQC** — Trường Cao đẳng Kỹ nghệ Dung Quất
+- **DVTC** — Trường Cao đẳng Du lịch Đà Nẵng
+- **HCE-CĐ** — Trường Cao đẳng Kinh tế Thành phố Hồ Chí Minh
+- **HCMCC** — Trường Cao đẳng Xây dựng Thành phố Hồ Chí Minh
+- **HCMCT** — Trường Cao đẳng Giao thông Vận tải TP.HCM
+- **HCTB** — Trường Cao đẳng Kỹ thuật và Nghiệp vụ Hà Nội
+- **HEPC** — Trường Cao đẳng Điện lực TP.HCM
+- **HOTEC** — Trường Cao đẳng Kinh tế - Kỹ thuật Thành phố Hồ Chí Minh
+- **HVCT** — Trường Cao đẳng Kỹ nghệ II
+- **KTXD-HCM** — Trường Cao đẳng Kiến trúc - Xây dựng Thành phố Hồ Chí Minh
+- **Lilama 2** — Trường Cao đẳng Công nghệ Quốc tế Lilama 2
+- **LTTC** — Trường Cao đẳng Lý Tự Trọng TP.HCM
+- **NCEPA** — Trường Kinh tế và Quản lý công - Đại học Kinh tế Quốc dân
+- **NCT-NEU** — Trường Công nghệ - Đại học Kinh tế Quốc dân
+- **NEU-CoB** — Trường Kinh doanh - Đại học Kinh tế Quốc dân
+- **NSPC** — Trường Cao đẳng Bách khoa Nam Sài Gòn
+- **PXU** — Trường Đại học Phú Xuân
+- **QTU** — Trường Đại học Quang Trung
+- **SCLS** — Trường Hóa và Khoa học sự sống - Đại học Bách khoa Hà Nội
+- **SEEE** — Trường Điện - Điện tử - Đại học Bách khoa Hà Nội
+- **SEM-HUST** — Trường Kinh tế - Đại học Bách khoa Hà Nội
+- **SME-HUST** — Trường Cơ khí - Đại học Bách khoa Hà Nội
+- **SMS-HUST** — Trường Vật liệu - Đại học Bách khoa Hà Nội
+- **SoICT** — Trường Công nghệ Thông tin và Truyền thông - Đại học Bách khoa Hà Nội
+- **TDC** — Trường Cao đẳng Công nghệ Thủ Đức
+- **TNU-IS** — Khoa Quốc tế - Đại học Thái Nguyên
+- **TTC** — Trường Cao đẳng Thủ Thiêm Thành phố Hồ Chí Minh
+- **VCTE** — Trường Cao đẳng nghề Kỹ thuật công nghệ
+- **VHNT-HCM** — Trường Cao đẳng Văn hóa Nghệ thuật TP.HCM
+- **Việt-Xô 1** — Trường Cao đẳng nghề Việt - Xô số 1
+- **YDLU** — Trường Đại học Yersin Đà Lạt
+

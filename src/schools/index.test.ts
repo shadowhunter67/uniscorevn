@@ -17,7 +17,7 @@ import { southernCatalogSchools } from './southernCatalog';
 import { remainingCatalogSchools } from './remainingCatalog';
 import { finalCatalogSchools } from './finalCatalog';
 import { collegeCatalogSchools } from './collegeCatalog';
-import readme from '../../README.md?raw';
+import schoolStatusDoc from '../../docs/school-status.md?raw';
 import type { SchoolModule } from '../core/schoolModule';
 
 /**
@@ -131,9 +131,9 @@ describe('schoolRegistry', () => {
     expect(ids).toHaveLength(267);
   });
 
-  it('README.md mục "Trường đang hỗ trợ" nhắc tên mọi trường trong registry (phát hiện drift)', () => {
+  it('docs/school-status.md nhắc tên mọi trường trong registry (phát hiện drift)', () => {
     for (const school of Object.values(schoolRegistry)) {
-      expect(readme, `README thiếu shortName "${school.shortName}"`).toContain(school.shortName);
+      expect(schoolStatusDoc, `docs/school-status.md thiếu shortName "${school.shortName}"`).toContain(school.shortName);
     }
   });
 });
