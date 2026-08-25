@@ -22,7 +22,7 @@ describe('TNUS THPT baseline eligibility 2026', () => {
     const result = evaluateTnusThptExamAdmission(profile, a00Context);
 
     expect(result.eligibility?.status).toBe('unknown');
-    expect(result.eligibility?.reasons.join(' ')).toContain('16.35');
+    expect(result.eligibility?.reasons.join(' ')).toContain('16,35');
   });
 
   it('requires a selected subject combination', () => {

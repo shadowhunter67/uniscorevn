@@ -10,15 +10,11 @@ import {
 } from './institutionCoverage';
 import { collegeCatalogSchools } from '../schools/collegeCatalog';
 
-// TODO: update institutionCoverage.test.ts counts in final consolidation pass — batch-expand-01/02/03
-// moved several schools from catalog-only to researched or eligibility-only, which shifts
-// totalCatalogEntries/researched/eligibilitySupported/catalogOnly below. Not recomputed here to
-// avoid guessing wrong numbers; run stats:coverage to get exact counts before updating assertions.
 describe('institution coverage statistics', () => {
   it('separates catalog coverage from institution KPI coverage', () => {
     expect(institutionCoverage.totalCatalogEntries).toBe(267);
     expect(institutionCoverage.institutionEntries).toBeLessThan(institutionCoverage.totalCatalogEntries);
-    expect(institutionCoverage.internalUnitEntries).toBe(10);
+    expect(institutionCoverage.internalUnitEntries).toBe(12);
     expect(institutionCoverage.institutionEntries + institutionCoverage.internalUnitEntries).toBe(institutionCoverage.totalCatalogEntries);
   });
 
@@ -39,12 +35,17 @@ describe('institution coverage statistics', () => {
   });
 
   it('keeps college catalog entries out of university KPI and calculator buckets', () => {
+    // Batch-expand-11 (2026-08-24): some colleges with a verified official 2026 admission source
+    // but no extractable formula graduated from flat 'catalog-only' to 'researched' (same pattern
+    // used for universities in finalCatalog.ts/remainingCatalog.ts/southernCatalog.ts) — see
+    // collegeCatalog.ts researchedAdmissionSources. Neither tier grants calculator/eligibility
+    // capabilities, so the KPI/capability invariants below still hold for both.
     for (const college of collegeCatalogSchools) {
       const school = schoolRegistry[college.id];
 
       expect(countsAsInstitutionEntry(school)).toBe(true);
       expect(countsAsUniversityInstitution(school)).toBe(false);
-      expect(deriveInstitutionSupportStatus(school)).toBe('catalog-only');
+      expect(['catalog-only', 'researched']).toContain(deriveInstitutionSupportStatus(school));
       expect(school.capabilities?.exactCalculator).toBe(false);
       expect(school.capabilities?.partialCalculator).not.toBe(true);
       expect(school.capabilities?.scoreConversion).toBe(false);
@@ -55,21 +56,21 @@ describe('institution coverage statistics', () => {
   it('derives stable public KPI counts from the registry', () => {
     expect(summarizeInstitutionCoverage()).toEqual({
       totalCatalogEntries: 267,
-      institutionEntries: 257,
-      independentEducationInstitutions: 257,
-      universityInstitutions: 206,
+      institutionEntries: 255,
+      independentEducationInstitutions: 255,
+      universityInstitutions: 204,
       academies: 22,
       pedagogicalColleges: 3,
       vocationalColleges: 26,
       otherIndependentInstitutions: 0,
-      internalUnitEntries: 10,
-      researched: 92,
-      admissionDataAvailable: 92,
-      eligibilitySupported: 48,
+      internalUnitEntries: 12,
+      researched: 225,
+      admissionDataAvailable: 225,
+      eligibilitySupported: 76,
       calculatorSupported: 19,
       partialCalculator: 5,
       fullyVerified: 14,
-      catalogOnly: 175,
+      catalogOnly: 42,
     });
   });
 
@@ -78,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(25);
+    expect(researchedOnly).toBe(130);
     for (const schoolId of [
       'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'hust', 'tmu', 'haui', 'aof', 'bav', 'hanu', 'hou',
       'ntu', 'qnu', 'hueu',
