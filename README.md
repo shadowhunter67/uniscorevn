@@ -28,7 +28,9 @@ Repo public này theo mô hình open-core: UI, generic engine, compare framework
 
 UniScoreVN xây dựng danh mục các cơ sở tuyển sinh đại học và cao đẳng tại Việt Nam. Calculator chỉ được kích hoạt đối với phương thức có đủ nguồn tuyển sinh chính thức. Cao đẳng thuộc giáo dục nghề nghiệp được phân loại riêng với nhóm đại học và cao đẳng ngành Giáo dục Mầm non; trung cấp không nằm trong scope iteration này.
 
-Snapshot hiện tại được tính từ `schoolRegistry` bằng `npm run stats:coverage`:
+![Độ phủ calculator UniScoreVN](docs/coverage-chart.svg)
+
+Snapshot hiện tại được tính từ `schoolRegistry` bằng `npm run stats:coverage` (ảnh trên sinh từ cùng nguồn số liệu bằng `npm run coverage:chart` — chạy lại sau mỗi lần coverage đổi để ảnh khớp số thật):
 
 | KPI | Số lượng |
 |---|---:|
@@ -74,6 +76,7 @@ npm run lint       # lint
 npm run build      # build production
 npm run audit:data # kiểm tra tính nhất quán/nguồn dữ liệu tuyển sinh
 npm run stats:coverage # in snapshot catalog/KPI/calculator
+npm run coverage:chart # sinh lại docs/coverage-chart.svg (biểu đồ nhúng trong README)
 ```
 
 Trên Windows có thể double-click [start-dev.bat](start-dev.bat) — tự cài dependency nếu thiếu rồi mở dev server.
