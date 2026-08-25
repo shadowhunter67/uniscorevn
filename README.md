@@ -33,18 +33,18 @@ Snapshot hiện tại được tính từ `schoolRegistry` bằng `npm run stats
 | KPI | Số lượng |
 |---|---:|
 | Mục trong danh mục/search/compare | 267 |
-| Cơ sở giáo dục độc lập trong danh mục | 257 |
-| Đơn vị nội bộ/không tính vào KPI cơ sở | 10 |
-| Đại học / cơ sở hệ đại học | 206 |
+| Cơ sở giáo dục độc lập trong danh mục | 255 |
+| Đơn vị nội bộ/không tính vào KPI cơ sở | 12 |
+| Đại học / cơ sở hệ đại học | 204 |
 | Học viện | 22 |
 | Cao đẳng sư phạm/GDMN | 3 |
 | Cao đẳng giáo dục nghề nghiệp | 26 |
 | Nhóm độc lập khác | 0 |
-| Có dữ liệu tuyển sinh hoặc capability cao hơn | 74 |
-| Chỉ kiểm tra điều kiện/ngưỡng | 18 |
-| Có calculator một phần | 3 |
+| Có dữ liệu tuyển sinh hoặc capability cao hơn | 225 |
+| Chỉ kiểm tra điều kiện/ngưỡng | 76 |
+| Có calculator một phần | 5 |
 | Calculator đã xác minh | 14 |
-| Chỉ có trong danh mục | 193 |
+| Chỉ có trong danh mục | 42 |
 
 Catalog coverage != calculator coverage. Con số danh mục là độ phủ search/compare, không phải 100% calculator. Một số mục trong danh mục là school/faculty nội bộ của hệ thống đại học lớn; các mục này vẫn có thể giữ cho navigation hoặc mapping chương trình, nhưng không làm tăng KPI "cơ sở đào tạo tuyển sinh độc lập".
 
@@ -52,18 +52,17 @@ Nguồn nhóm đại học 238 ban đầu là số liệu tổng hợp thứ c�
 
 ## Trạng thái hỗ trợ
 
-| Trường | Trạng thái |
-|---|---|
-| HCMUT, UEH, UEL, HCMUS, USSH, IU, TDTU, HUFLIT, UMP, UFM, IUH, FTU, HUTECH, HCMULAW | ✅ Calculator đã xác minh trong phạm vi đã công bố |
-| UHS, HCMUTE, NEU | 🟡 Calculator một phần hoặc quy đổi/logic hỗ trợ, chưa đủ toàn bộ phương thức |
-| UIT, AGU, HCMUE, VLU, PTIT, HUB, HUIT, NTTU, HSU, UEF, CTU, TDMU, HIU, OU, SGU, HNUE, VinhUni, UTC | 🟡 Kiểm tra điều kiện/ngưỡng, chưa có calculator chính xác |
-| GDU, STU, PNTU, BDU, LHU, NLU, UAH, UTH, VAA, HCMUNRE, CTUMP, CTUET, NCTU, TDU, TVU, DThU, TGU, VNKGU, BLU, DNU, BVU, MKU, TTU, DLA, PVU | ⚪ Có trong roster miền Nam, chưa đủ nguồn chính thức để tính |
-| VNU-UET, VNU-UEB, VNU-HUS, VNU-USSH, VNU-ULIS, VNU-UED, VNU-UMP, VJU, VNU-LS, VNU-HSB, VNU-IS, HUST, TMU, HUCE, HUMG, HOU, HANU, HaUI, AOF, BAV, VNUA, DAV, AJC, HLU, HMU, HUP, TLU, VNUF, TLU-HN, FPTU, HUBT, DNU-HN, Phenikaa, TNU, DHP, VMU, HPMU, HDU, HTU, HALOU, TQU, HVU, HueU, HUSC, HCE, HUL, HUAF, HUED, HUMP, HUFL, HAT, UDN, DUT, DUE-UDN, UED-UDN, UFLS-UDN, UTE-UDN, VKU, DTU, UDA, NTU, DLU, QNU, TTN, QNamU, QBU, PDU, PYU, UKH, MUCE, BMTU, DUMTP, PCTU, YDLU, UPT | ⚪ Có trong roster toàn quốc, chưa đủ nguồn chính thức để tính |
-| VNU-SIS, TNUS, TUEBA, TNUT, TUAF, TNUE, TUMP, TNU-IS, TNUFL, SoICT, SMS-HUST, SME-HUST, SCLS, SEEE, SEM-HUST, NEU-CoB, NCEPA, NCT-NEU, NAEM, UAD, NUAE, HUPES, HCMUPES, VGU, HPU2, VNAM, VNAD, HUC, VNUFA, SKDA, HCMCONS, SKDAHCM, HCMUFA, USH, VHS, HAM, UPES1, DSU, UTT, HALONGU, HAU, HNMU, HCA, UHD, NAUE, VMU-Vinh, HLUV, TBU, TUCST, CMCU, UTM, HDIU, HBU, NTU-HN, FBU, ThanhDo, VinUni, DHV, UMT, BHU, EAUT, CVAUni, LTVUni, TVUni, KBU, MDU, VTTU, EIU, AIU, QTU, TBDU, PXU, FUV, RMITVN, BUV, APD, NAPA, GASS, USTH, VWA, VYA, TUU, HUNRE, ULSA, MPA, MAL, MSA, ACTVN, MTA, AADAA, VMMU, NDA, OCP, TQT, SIGO, AOC, CCO, PSA, PPA, FPFU, PSU-CAND, PPU-CAND, BGA, VNA-Navy | ⚪ Có trong roster 238, chưa đủ nguồn chính thức để tính |
-| NCE, CĐSPTW-NT, CĐSPTW-HCM | ⚪ Cao đẳng sư phạm/GDMN catalog-only; chưa đủ đề án tuyển sinh chính thức để tính |
-| VCTE, DQC, HVCT, CIC1, HCMCC, NCC, CUWC, Việt-Xô 1, Lilama 2, CMC-CĐ, CCST, HCTB, DNC, DVTC, COC, CFI, TDC, HOTEC, HCE-CĐ, NSPC, TTC, HCMCT, KTXD-HCM, LTTC, HEPC, VHNT-HCM | ⚪ Cao đẳng giáo dục nghề nghiệp catalog-only; không dùng chung công thức đại học |
+Danh sách đầy đủ 267 trường theo từng mức hỗ trợ đổi thường xuyên (mỗi batch nghiên cứu mới lại nâng hạng một số trường) nên README không liệt kê tên — chạy `npm run stats:coverage` để xem số liệu mới nhất, hoặc xem chi tiết từng trường/nguồn trong [docs/data-methodology.md](docs/data-methodology.md).
 
-"Chính xác" nghĩa là công thức, ngưỡng, điểm cộng và điểm ưu tiên đều có nguồn chính thức xác minh trong phạm vi đã công bố — một số trường chỉ chính xác trong phạm vi cụ thể (ví dụ thí sinh không có thành tích cộng điểm). Nhóm roster catalog đã được nối vào registry/search/compare ở trạng thái `formula-incomplete`; UniScoreVN sẽ không kết luận đủ điều kiện hoặc tính điểm cho các trường này cho đến khi có nguồn chính thức. Methodology public xem [docs/data-methodology.md](docs/data-methodology.md).
+| Mức hỗ trợ | Số trường | Ý nghĩa |
+|---|---:|---|
+| ✅ Calculator đã xác minh | 14 | Công thức, ngưỡng, điểm cộng/ưu tiên đều có nguồn chính thức trong phạm vi đã công bố |
+| 🟡 Calculator một phần | 5 | Có công thức/quy đổi thật nhưng chưa phủ hết phương thức xét tuyển |
+| 🟡 Chỉ kiểm tra điều kiện/ngưỡng | 76 | Có ngưỡng điểm sàn/điều kiện thật, chưa tính được điểm xét tuyển đầy đủ |
+| ⚪ Đã research, chưa đủ để tính | 130 | Nguồn chính thức xác nhận tồn tại nhưng số liệu không trích xuất được (ảnh/PDF/SPA/chặn fetch) hoặc bị chặn bởi tiêu chí không có trong hồ sơ (hạnh kiểm, sơ tuyển quân đội/công an...) |
+| ⚪ Chỉ có trong danh mục | 42 | Chưa tìm được nguồn tuyển sinh chính thức nào |
+
+"Đã xác minh"/"chính xác" nghĩa là công thức, ngưỡng, điểm cộng và điểm ưu tiên đều có nguồn chính thức xác minh trong phạm vi đã công bố — một số trường chỉ chính xác trong phạm vi cụ thể (ví dụ thí sinh không có thành tích cộng điểm). Toàn bộ roster catalog đã được nối vào registry/search/compare; UniScoreVN sẽ không kết luận đủ điều kiện hoặc tính điểm cho một trường cho đến khi có nguồn chính thức đủ rõ ràng — không đoán công thức.
 
 ## Bắt đầu
 
