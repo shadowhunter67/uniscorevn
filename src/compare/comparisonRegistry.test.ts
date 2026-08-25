@@ -81,6 +81,13 @@ import { gduAdmissionMethods } from '../schools/gdu/methods';
 import { halonguAdmissionMethods } from '../schools/halongu/methods';
 import { nctuAdmissionMethods } from '../schools/nctu/methods';
 import { ntuhnAdmissionMethods } from '../schools/ntuhn/methods';
+import { tbduAdmissionMethods } from '../schools/tbdu/methods';
+import { tduAdmissionMethods } from '../schools/tdu/methods';
+import { tguAdmissionMethods } from '../schools/tgu/methods';
+import { thanhdoAdmissionMethods } from '../schools/thanhdo/methods';
+import { tnueAdmissionMethods } from '../schools/tnue/methods';
+import { tnuflAdmissionMethods } from '../schools/tnufl/methods';
+import { tnusAdmissionMethods } from '../schools/tnus/methods';
 import { southernCatalogMethods } from '../schools/southernCatalog';
 import { remainingCatalogMethods } from '../schools/remainingCatalog';
 import { finalCatalogMethods } from '../schools/finalCatalog';
@@ -176,6 +183,13 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   halongu: halonguAdmissionMethods,
   nctu: nctuAdmissionMethods,
   ntuhn: ntuhnAdmissionMethods,
+  tbdu: tbduAdmissionMethods,
+  tdu: tduAdmissionMethods,
+  tgu: tguAdmissionMethods,
+  thanhdo: thanhdoAdmissionMethods,
+  tnue: tnueAdmissionMethods,
+  tnufl: tnuflAdmissionMethods,
+  tnus: tnusAdmissionMethods,
 };
 
 /** Pure helper — trả danh sách schoolId bị trùng trong 1 mảng adapter. Test cả trên registry thật
