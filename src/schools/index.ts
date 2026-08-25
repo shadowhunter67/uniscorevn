@@ -91,6 +91,11 @@ import { tnuflModule } from './tnufl';
 import { tnusModule } from './tnus';
 import { tuafModule } from './tuaf';
 import { ttuModule } from './ttu';
+import { udaModule } from './uda';
+import { uhdModule } from './uhd';
+import { umtModule } from './umt';
+import { utmModule } from './utm';
+import { uttModule } from './utt';
 import { southernCatalogModules } from './southernCatalog';
 import { remainingCatalogModules } from './remainingCatalog';
 import { finalCatalogModules } from './finalCatalog';
@@ -233,4 +238,9 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   tnus: tnusModule,
   tuaf: tuafModule,
   ttu: ttuModule,
+  uda: udaModule,
+  uhd: uhdModule,
+  umt: umtModule,
+  utm: utmModule,
+  utt: uttModule,
 };
