@@ -28,6 +28,15 @@ interface CollegeCatalogSchool {
   catalogSources?: SchoolModule['catalogSources'];
 }
 
+interface ResearchedAdmissionSource {
+  title: string;
+  url: string;
+  sourceId: string;
+  checkedAt: string;
+  publishedAt?: string;
+  note: string;
+}
+
 const unsupportedCapabilities = {
   eligibility: false,
   scoreConversion: false,
@@ -44,6 +53,57 @@ const catalogOnlyCapabilities = {
   scoreConversion: false,
   exactCalculator: false,
 } satisfies NonNullable<SchoolModule['capabilities']>;
+
+const researchedCatalogCapabilities = {
+  admissionInfo: true,
+  programs: true,
+  eligibility: false,
+  cutoffs: false,
+  scoreConversion: false,
+  exactCalculator: false,
+} satisfies NonNullable<SchoolModule['capabilities']>;
+
+/** Batch-expand-11 (2026-08-24): trường cao đẳng đã có nguồn tuyển sinh chính thức 2026 xác minh
+ * được, nhưng chưa trích xuất đủ cấu trúc (ngưỡng/công thức) để nâng lên eligibility-only. Cùng
+ * pattern "researched" như `finalCatalog.ts`/`remainingCatalog.ts`/`southernCatalog.ts`. */
+const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
+  nce: {
+    sourceId: 'nce-admission-2026',
+    title: 'Thông tin tuyển sinh — Trường Cao đẳng Sư phạm Trung ương (cdsptw.edu.vn)',
+    url: 'https://cdsptw.edu.vn/content.aspx?sitepageid=730',
+    checkedAt: '2026-08-24',
+    note:
+      'Cổng thông tin chính thức NCE (cdsptw.edu.vn) xác nhận 2 phương thức tuyển sinh 2026, CẢ HAI đều kết hợp điểm thi năng khiếu do trường tự tổ chức (Phương thức 1: điểm thi TN THPT + năng khiếu; Phương thức 2: điểm trung bình 3 năm THPT môn Văn/Toán + năng khiếu, hạnh kiểm Khá trở lên, điểm năng khiếu >=5,00). Không có tuyến xét tuyển thuần THPT nào không đi kèm điểm năng khiếu, và hồ sơ ứng viên hiện không có trường điểm thi năng khiếu nên không thể mô hình hoá ngưỡng nào một cách an toàn. Do-not-guess-formula (điểm năng khiếu bắt buộc, không đo được): giữ ở researched.',
+  },
+  ncehcm: {
+    sourceId: 'ncehcm-admission-2026',
+    title: 'Trường Cao đẳng Sư phạm Trung ương Thành phố Hồ Chí Minh (ncehcm.edu.vn) — thông báo phương án tuyển sinh 2026',
+    url: 'https://ncehcm.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Cổng thông tin chính thức NCE-HCM (ncehcm.edu.vn, mã trường CM3) xác nhận 4 phương thức tuyển sinh 2026, tất cả đều kết hợp điểm thi/đánh giá năng khiếu do trường tự tổ chức (điểm thi TN THPT hoặc điểm trung bình 3 năm THPT môn Văn/Toán, cộng điểm năng khiếu). Không có tuyến xét tuyển thuần THPT nào không đi kèm điểm năng khiếu, và hồ sơ ứng viên hiện không có trường điểm thi năng khiếu nên không thể mô hình hoá ngưỡng nào một cách an toàn. Do-not-guess-formula (điểm năng khiếu bắt buộc, không đo được): giữ ở researched.',
+  },
+  ncspnt: {
+    sourceId: 'ncspnt-admission-2026',
+    title: 'Cổng thông tin tuyển sinh Trường Cao đẳng Sư phạm Trung ương - Nha Trang (tuyensinh.sptwnt.edu.vn)',
+    url: 'https://tuyensinh.sptwnt.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Cổng tuyển sinh chính thức NCSPNT (tuyensinh.sptwnt.edu.vn) xác nhận 2 phương thức tuyển sinh 2026, cả hai đều kết hợp kết quả văn hoá (thi TN THPT hoặc học bạ THPT môn Văn/Toán) với điểm thi năng khiếu do trường tự tổ chức; trường không tuyển thí sinh có tật nói ngọng/nói lắp. Không có tuyến xét tuyển thuần THPT nào không đi kèm điểm năng khiếu, và hồ sơ ứng viên hiện không có trường điểm thi năng khiếu nên không thể mô hình hoá ngưỡng nào một cách an toàn. Do-not-guess-formula (điểm năng khiếu bắt buộc, không đo được): giữ ở researched.',
+  },
+  ncc: {
+    sourceId: 'ncc-admission-2026',
+    title: 'Trường Cao Đẳng Xây Dựng Nam Định — thông tin tuyển sinh (cdxdnd.edu.vn)',
+    url: 'https://www.cdxdnd.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Cổng thông tin chính thức NCC (cdxdnd.edu.vn, mã trường CDT2502) xác nhận trường tuyển sinh trình độ cao đẳng theo hình thức XÉT TUYỂN THEO NGUYỆN VỌNG, nhận hồ sơ liên tục quanh năm (không có kỳ thi/ngưỡng điểm cạnh tranh công bố) — khác với các trường đại học trong catalog này. Do đó không có công thức/ngưỡng điểm nào để mô hình hoá (không phải do thiếu dữ liệu, mà do bản chất tuyển sinh mở); giữ ở researched thay vì catalog-only phẳng để phản ánh đã xác minh nguồn chính thức.',
+  },
+};
+
+function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {
+  return researchedAdmissionSources[schoolId];
+}
 
 export const collegeCatalogSources = [
   {
@@ -668,16 +728,27 @@ export const collegeCatalogModules: Record<string, SchoolModule> = Object.fromEn
       educationLevels: ['college'],
       aliases: school.aliases,
       catalogSources:
+        (getResearchedAdmissionSource(school.id)
+          ? [
+              {
+                title: getResearchedAdmissionSource(school.id)!.title,
+                url: getResearchedAdmissionSource(school.id)!.url,
+                type: 'official-institution' as const,
+                checkedAt: getResearchedAdmissionSource(school.id)!.checkedAt,
+              },
+            ]
+          : undefined) ??
         school.catalogSources ??
         (school.entityLevel === 'college_pedagogy' || ['vcte', 'dungquatcollege', 'hvct', 'cic1', 'hcmcc', 'ncc', 'cuwc', 'vietxo1', 'lilama2', 'cmc-college', 'ccst', 'hctb'].includes(school.id)
           ? [MOET_PUBLIC_UNIT_SOURCE]
           : undefined),
       vnuhcm: false,
-      summary:
-        school.entityLevel === 'college_pedagogy'
+      summary: getResearchedAdmissionSource(school.id)
+        ? `Đã xác minh nguồn tuyển sinh chính thức 2026 (${getResearchedAdmissionSource(school.id)!.title}); chưa nâng lên eligibility/calculator vì còn thiếu ngưỡng/công thức đủ cấu trúc (hoặc trường không có ngưỡng điểm cạnh tranh).`
+        : school.entityLevel === 'college_pedagogy'
           ? 'Có trong catalog cao đẳng sư phạm/Giáo dục Mầm non; cần đề án tuyển sinh chính thức trước khi kiểm tra điều kiện hoặc tính điểm.'
           : 'Có trong catalog cao đẳng giáo dục nghề nghiệp; không dùng chung công thức tuyển sinh đại học và cần nguồn chính thức riêng trước khi tính điểm.',
-      capabilities: catalogOnlyCapabilities,
+      capabilities: getResearchedAdmissionSource(school.id) ? researchedCatalogCapabilities : catalogOnlyCapabilities,
     },
   ])
 );

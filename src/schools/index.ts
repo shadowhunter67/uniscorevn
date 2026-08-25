@@ -80,6 +80,8 @@ import { fbuModule } from './fbu';
 import { fpfuModule } from './fpfu';
 import { gduModule } from './gdu';
 import { halonguModule } from './halongu';
+import { nctuModule } from './nctu';
+import { ntuhnModule } from './ntuhn';
 import { southernCatalogModules } from './southernCatalog';
 import { remainingCatalogModules } from './remainingCatalog';
 import { finalCatalogModules } from './finalCatalog';
@@ -211,4 +213,6 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   fpfu: fpfuModule,
   gdu: gduModule,
   halongu: halonguModule,
+  nctu: nctuModule,
+  ntuhn: ntuhnModule,
 };
