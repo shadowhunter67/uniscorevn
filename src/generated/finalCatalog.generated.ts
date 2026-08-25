@@ -83,6 +83,46 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Cổng tuyển sinh chính thức RMIT Việt Nam (rmit.edu.vn) fetch được nhưng chỉ là trang portal điều hướng: yêu cầu tiếng Anh chung (IELTS Academic 6.5, không kỹ năng nào dưới 6.0) được nêu rõ, nhưng ngưỡng điểm THPT/học bạ cụ thể được trang này dẫn sang từng trang ngành riêng lẻ (hàng chục ngành, không fetch hết trong 1 lượt). Không đủ cấu trúc để mô hình hoá eligibility trong batch này; do-not-guess-formula áp dụng.',
   },
+  vnusis: {
+    sourceId: 'vnusis-admission-2026',
+    title: 'VNU-SIS (Truong Khoa hoc lien nganh va Nghe thuat, DHQGHN) tuyen sinh dai hoc chinh quy nam 2026',
+    url: 'https://sis.vnu.edu.vn/chi-tiet-tin/Tuyen-sinh-dai-hoc-chinh-quy-nam-2026-Phuong-thuc-xet-tuyen-chuong-trinh-dao-tao-chi-tieu-va-to-hop-xet-tuyen-du-kien_1154.html',
+    checkedAt: '2026-08-25',
+    note:
+      'Official 2026 page (fetched directly, text-readable) lists 5 methods (100/301/401/405/409), 1200 chi tieu across 12 programs, and an unusual weighted-subject scoring scheme (subjects ranked 1-7 in the combination weighted x2, subjects 8-12 weighted x1), but does not state an explicit minimum total-score threshold in this pass (a separate "Diem trung tuyen" notice is referenced but not fetched). The non-standard weighting scheme and missing floor make eligibility modeling unsafe without further extraction. Left at researched.',
+  },
+  vwa: {
+    sourceId: 'vwa-admission-2026',
+    title: 'Hoc vien Phu nu Viet Nam cong bo nguong diem xet tuyen dai hoc nam 2026',
+    url: 'https://tuyensinh.hvpnvn.edu.vn/thong-bao/tuyen-sinh-dai-hoc/hoc-vien-phu-nu-viet-nam-cong-bo-nguong-diem-xet-tuyen-dai-hoc-nam-2026-phu-hop-pho-diem-mo-rong-co-hoi-cho-thi-sinh/',
+    checkedAt: '2026-08-25',
+    note:
+      'Official 2026 threshold notice (fetched directly, text-readable) publishes per-major THPT floor scores (19/30 Truyen thong da phuong tien; 18/30 Quan tri kinh doanh/Du lich/Tam ly hoc/Truyen thong xa hoi; 16/30 the remaining majors), plus a linear-interpolation conversion table between THPT/hoc ba/HSA/SPT methods. A separate search (hvpnvn.edu.vn) confirms subject combinations used school-wide (A00, A01, C00, C03, D01, D14, D15) but does not give a clean per-major combo-to-floor mapping, so the exact combo set per floor tier cannot be modeled without guessing. Left at researched.',
+  },
+  vya: {
+    sourceId: 'vya-admission-2026',
+    title: 'Hoc vien Thanh thieu nien Viet Nam thong bao tuyen sinh 2026',
+    url: 'https://tuyensinh.vya.edu.vn/thong-bao-tuyen-sinh-2026-vya',
+    checkedAt: '2026-08-25',
+    note:
+      'Official 2026 notice confirms 4 methods (truc tiep, hoc ba, thi TN THPT, ket hop) and a 30-point THPT total-score formula, but the numeric floor scores found (Luat 20/30 THPT, 21/30 hoc ba; Xay dung Dang & Chinh quyen Nha nuoc + Cong tac Thanh thieu nien 16/30 and 19/30) were published by the Phan hieu TP.HCM branch specifically (giaoduc.net.vn), not confirmed for the main Ha Noi campus catalogued here. Applying branch-specific floors to the main-campus schoolId risks inaccuracy. Left at researched pending a main-campus-specific threshold notice.',
+  },
+  vttu: {
+    sourceId: 'vttu-admission-2026',
+    title: 'Truong Dai hoc Vo Truong Toan tuyen sinh trinh do dai hoc he chinh quy nam 2026',
+    url: 'https://vttu.edu.vn/truong-dai-hoc-vo-truong-toan-tuyen-sinh-trinh-do-dai-hoc-he-chinh-quy-nam-2026/',
+    checkedAt: '2026-08-25',
+    note:
+      'Official 2026 page confirms 5 methods (100 thi TN THPT, 200 hoc ba, 407 ket hop thi+hoc ba for Y khoa/Rang Ham Mat/Duoc hoc/Luat, DGNL, THPT nuoc ngoai) and the general formula (3-subject total + regional/subject priority points), but only a partial subject-combination list surfaced (A00 for Quan tri kinh doanh/Tai chinh-Ngan hang/Ke toan); the full per-major combination table and numeric floor scores were not extractable in this pass. Left at researched; do not fabricate the remaining combos or thresholds.',
+  },
+  ydlu: {
+    sourceId: 'ydlu-admission-2026',
+    title: 'YersinUni cong bo thong tin tuyen sinh nam 2026',
+    url: 'https://yersin.edu.vn/thong-tin-tuyen-sinh-2026/',
+    checkedAt: '2026-08-25',
+    note:
+      'Official 2026 page publishes 2 hoc-ba (transcript-average) formulas with published per-major floors (18.0 general; 19.0 Dieu duong/Luat kinh te; 22.0 Y khoa/Duoc hoc, all on a 30-point scale derived from 3-year subject GPA averages) plus a Toan/Ngu van >= 1/3 total condition, alongside separate THPT-exam and DGNL (ability assessment) methods. The hoc-ba formula requires 3-year (lop 10/11/12) per-subject GPA averages, which is not a field UniscoreVN currently collects in ApplicantProfile.transcript at per-subject granularity across years in a way cross-checked for this school, and the THPT-exam-only floor was not separately confirmed. Modeling would require either fabricating scope or adding unverified transcript-averaging logic; left at researched.',
+  },
 };
 
 function getResearchedAdmissionSource(schoolId: string): ResearchedAdmissionSource | undefined {
