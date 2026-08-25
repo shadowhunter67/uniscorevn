@@ -89,6 +89,8 @@ import { thanhdoModule } from './thanhdo';
 import { tnueModule } from './tnue';
 import { tnuflModule } from './tnufl';
 import { tnusModule } from './tnus';
+import { tuafModule } from './tuaf';
+import { ttuModule } from './ttu';
 import { southernCatalogModules } from './southernCatalog';
 import { remainingCatalogModules } from './remainingCatalog';
 import { finalCatalogModules } from './finalCatalog';
@@ -229,4 +231,6 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   tnue: tnueModule,
   tnufl: tnuflModule,
   tnus: tnusModule,
+  tuaf: tuafModule,
+  ttu: ttuModule,
 };

@@ -553,6 +553,16 @@ export const collegeCatalogSchools: readonly CollegeCatalogSchool[] = [
         authority: 'Sở GD&ĐT TP.HCM',
         checkedAt: '2026-08-22',
       },
+      {
+        // Batch expand-14 (2026-08-24): official institution site confirms open, rolling admission
+        // (xét học bạ liên tục trong năm + xét điểm thi TN THPT 2026, mã xét tuyển D86); no
+        // selective numeric threshold published — vocational colleges are out of scope for the
+        // THPT-score calculator formula layer, so this stays catalog-only (enriched sources only).
+        title: 'Trường Cao đẳng Thủ Thiêm - Thành phố Hồ Chí Minh (official site, admission info)',
+        url: 'https://caodangthuthiem-hcm.edu.vn/tuyen-sinh/',
+        type: 'official-institution',
+        checkedAt: '2026-08-24',
+      },
     ],
   },
   {

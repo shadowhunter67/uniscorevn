@@ -84,6 +84,8 @@ import { thanhdoComparisonAdapter } from '../schools/thanhdo/comparison';
 import { tnueComparisonAdapter } from '../schools/tnue/comparison';
 import { tnuflComparisonAdapter } from '../schools/tnufl/comparison';
 import { tnusComparisonAdapter } from '../schools/tnus/comparison';
+import { tuafComparisonAdapter } from '../schools/tuaf/comparison';
+import { ttuComparisonAdapter } from '../schools/ttu/comparison';
 import { southernCatalogComparisonAdapters } from '../schools/southernCatalog';
 import { remainingCatalogComparisonAdapters } from '../schools/remainingCatalog';
 import { finalCatalogComparisonAdapters } from '../schools/finalCatalog';
@@ -187,6 +189,8 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   tnueComparisonAdapter,
   tnuflComparisonAdapter,
   tnusComparisonAdapter,
+  tuafComparisonAdapter,
+  ttuComparisonAdapter,
   ...southernCatalogComparisonAdapters,
   ...remainingCatalogComparisonAdapters.filter(
     (adapter) =>
