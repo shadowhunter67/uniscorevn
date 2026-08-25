@@ -67,6 +67,7 @@ import { hpu2ComparisonAdapter } from '../schools/hpu2/comparison';
 import { apdComparisonAdapter } from '../schools/apd/comparison';
 import { bduComparisonAdapter } from '../schools/bdu/comparison';
 import { bvuComparisonAdapter } from '../schools/bvu/comparison';
+import { eiuComparisonAdapter } from '../schools/eiu/comparison';
 import { fptuComparisonAdapter } from '../schools/fptu/comparison';
 import { hubtComparisonAdapter } from '../schools/hubt/comparison';
 import { dainamComparisonAdapter } from '../schools/dainam/comparison';
@@ -156,6 +157,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   apdComparisonAdapter,
   bduComparisonAdapter,
   bvuComparisonAdapter,
+  eiuComparisonAdapter,
   fptuComparisonAdapter,
   hubtComparisonAdapter,
   dainamComparisonAdapter,

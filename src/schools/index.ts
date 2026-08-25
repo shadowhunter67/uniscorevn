@@ -75,6 +75,7 @@ import { hpu2Module } from './hpu2';
 import { apdModule } from './apd';
 import { bduModule } from './bdu';
 import { bvuModule } from './bvu';
+import { eiuModule } from './eiu';
 import { southernCatalogModules } from './southernCatalog';
 import { remainingCatalogModules } from './remainingCatalog';
 import { finalCatalogModules } from './finalCatalog';
@@ -198,6 +199,7 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   apd: apdModule,
   bdu: bduModule,
   bvu: bvuModule,
+  eiu: eiuModule,
   fptu: fptuModule,
   hubt: hubtModule,
   dainam: dainamModule,

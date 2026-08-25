@@ -343,6 +343,23 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Official thanglong.edu.vn 2026 admission guide (plus the linked official Quyết định ban hành thông tin tuyển sinh 2026, thanglong.edu.vn, dated 2026-02-11) confirms 6 admission methods (THPT exam; THPT exam + international language certificate; HSA/TSA/SPT aptitude tests; THPT exam + grade-12 transcript for Nursing/Tourism/Hotel Management; grade-12 transcript + talent test for Vocal/Graphic Design; direct admission), 37 subject combinations, and 25 programs across 8 faculties, quota 3,000. No 2026 numeric threshold (điểm chuẩn/điểm sàn) had been published as of this research pass — the article only cites 2025 reference scores (16.0-23.75/30) — and the official Quyết định PDF text itself was not extractable via WebFetch (page shell only). Runtime stays researched-only; do not use 2025 cutoffs as 2026 thresholds.',
   },
+  dhp: {
+    sourceId: 'dhp-admission-2026',
+    title: 'Thông tin tuyển sinh Trường Đại học Hải Phòng năm 2026',
+    url: 'https://dhhp.edu.vn/post/thong-tin-tuyen-sinh-truong-dai-hoc-hai-phong-nam-2026-62395.html',
+    checkedAt: '2026-08-24',
+    publishedAt: '2026-02-14',
+    note:
+      'Batch expand-06 (2026-08-24): official dhhp.edu.vn 2026 admission post confirmed live (accessed via WebFetch, byline Nguyễn Đức Nghĩa, 14/02/2026). Page confirms 3,195-seat 2026 plan across multiple methods (transcript review, THPT exam, international qualifications, HSA/V-SAT, direct admission) and states quality-assurance thresholds/conversion tables exist, but the actual numeric threshold/conversion tables are only reachable via attached files (Tệp tin đính kèm) not extracted by WebFetch in this pass, and the dedicated portal tuyensinh.dhhp.edu.vn was not separately verified. Runtime stays researched-only; do not fabricate the threshold numbers.',
+  },
+  dumtp: {
+    sourceId: 'dumtp-admission-2026',
+    title: 'Trường Đại học Kỹ thuật Y - Dược Đà Nẵng — cổng thông tin chính thức',
+    url: 'https://ydn.edu.vn/',
+    checkedAt: '2026-08-24',
+    note:
+      'Batch expand-06 (2026-08-24): official domain confirmed via WebFetch (dhktyduocdn.edu.vn 301-redirects to ydn.edu.vn, page title "Trường Đại học Kỹ thuật Y Dược Đà Nẵng"). Site lists 2026 admission activity (6 xét tuyển methods per secondary aggregator corroboration, threshold/conversion notice dated 09/07/2026, official score announcement dated 13/08/2026), but the specific numeric threshold table itself was not extracted via WebFetch in this pass (news list only, no direct fetch of the threshold notice page). Runtime stays researched-only; do not fabricate per-method thresholds.',
+  },
 };
 
 export const remainingCatalogSchools: readonly RemainingCatalogSchool[] = [

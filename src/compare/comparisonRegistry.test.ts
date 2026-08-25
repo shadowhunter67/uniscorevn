@@ -71,6 +71,7 @@ import { hpu2AdmissionMethods } from '../schools/hpu2/methods';
 import { apdAdmissionMethods } from '../schools/apd/methods';
 import { bduAdmissionMethods } from '../schools/bdu/methods';
 import { bvuAdmissionMethods } from '../schools/bvu/methods';
+import { eiuAdmissionMethods } from '../schools/eiu/methods';
 import { fptuAdmissionMethods } from '../schools/fptu/methods';
 import { hubtAdmissionMethods } from '../schools/hubt/methods';
 import { dainamAdmissionMethods } from '../schools/dainam/methods';
@@ -159,6 +160,7 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   apd: apdAdmissionMethods,
   bdu: bduAdmissionMethods,
   bvu: bvuAdmissionMethods,
+  eiu: eiuAdmissionMethods,
   fptu: fptuAdmissionMethods,
   hubt: hubtAdmissionMethods,
   dainam: dainamAdmissionMethods,
