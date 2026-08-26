@@ -27,7 +27,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 - **VNU-ULIS** — Truong Dai hoc Ngoai ngu - Dai hoc Quoc gia Ha Noi
 
-## Chỉ kiểm tra điều kiện/ngưỡng (84)
+## Chỉ kiểm tra điều kiện/ngưỡng (85)
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
 - **AJC** — Học viện Báo chí và Tuyên truyền
@@ -76,6 +76,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **OU** — Trường Đại học Mở Thành phố Hồ Chí Minh
 - **PNTU** — Trường Đại học Y khoa Phạm Ngọc Thạch
 - **PTIT** — Học viện Công nghệ Bưu chính Viễn thông
+- **PYU** — Trường Đại học Phú Yên
 - **SGU** — Trường Đại học Sài Gòn
 - **TBDU** — Truong Dai hoc Thai Binh Duong
 - **TBU** — Trường Đại học Thái Bình
@@ -114,7 +115,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNUF** — Truong Dai hoc Lam nghiep
 - **VWA** — Học viện Phụ nữ Việt Nam
 
-## Đã research, chưa đủ để tính (122)
+## Đã research, chưa đủ để tính (121)
 
 - **AADAA** — Học viện Phòng không - Không quân
 - **ACTVN** — Học viện Kỹ thuật Mật mã
@@ -188,7 +189,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **PSA** — Học viện An ninh Nhân dân
 - **PSU-CAND** — Trường Đại học An ninh Nhân dân
 - **PVU** — Trường Đại học Dầu khí Việt Nam
-- **PYU** — Trường Đại học Phú Yên
 - **QBU** — Trường Đại học Quảng Bình
 - **QNamU** — Trường Đại học Quảng Nam
 - **QNU** — Trường Đại học Quy Nhơn

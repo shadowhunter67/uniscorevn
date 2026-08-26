@@ -83,13 +83,6 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     checkedAt: '2026-08-24',
     note: 'Batch-expand-12 (2026-08-24): official qtu.edu.vn 2026 admission plan confirms 1,058-quota, 4-method admission (3-subject transcript combination, 2026 THPT exam results, national-university aptitude-test results, direct admission) across 11 majors with reported cutoffs in the 13-18/30 range. No official per-major floor table was extracted (only third-party cutoff summaries), so left at researched rather than modeling an unverified threshold.',
   },
-  pyu: {
-    sourceId: 'pyu-admission-2026',
-    title: 'Trường Đại học Phú Yên - Cổng thông tin tuyển sinh',
-    url: 'https://tuyensinh.pyu.edu.vn/',
-    checkedAt: '2026-08-24',
-    note: 'Batch-expand-12 (2026-08-24): official tuyensinh.pyu.edu.vn confirms 2026 admission runs 4 methods (direct admission, THPT exam results, transcript-based, combined THPT-exam + aptitude-test for arts/PE majors). Registration flows through the national MOET system. No numeric threshold or per-major subject-combination table was extracted from this pass, so left at researched.',
-  },
   qbu: {
     sourceId: 'qbu-admission-2026',
     title: 'Thông tin tuyển sinh đại học chính quy năm 2026 (dự kiến) - QBU: Tuyển sinh',
@@ -643,6 +636,7 @@ const explicitRuntimeSchoolIds = new Set([
   'dainam',
   'halongu',
   'uda',
+  'pyu',
 ]);
 const remainingCatalogRuntimeSchools = remainingCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
