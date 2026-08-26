@@ -27,6 +27,36 @@ export const uefTranscriptStandardThresholdEvidence = {
   ],
 } satisfies SourcedRule<Record<'standard', number>>;
 
+/** Công thức điểm học lực (tổng thô 3 môn, thang 30, không hệ số, không điểm cộng) — mục 2 + 5.b
+ * Thông tin tuyển sinh 2026 (PDF gốc). */
+export const uefFormulaEvidence = {
+  value: { hasCoefficient: false, hasBonus: false },
+  evidence: [
+    {
+      sourceId: 'uef-de-an-tuyen-sinh-2026',
+      location: 'Mục 2 (bảng tổ hợp môn theo ngành, phương thức 100) + mục 5.b ("Điểm cộng: không")',
+      verification: 'verified' as const,
+      effectiveYear: 2026,
+      verifiedAt: '2026-08-26',
+    },
+  ],
+} satisfies SourcedRule<{ hasCoefficient: boolean; hasBonus: boolean }>;
+
+/** Chính sách ưu tiên khu vực/đối tượng theo Điều 7 — mục 7 Thông tin tuyển sinh 2026 (PDF gốc, tự
+ * công bố trực tiếp bảng số). */
+export const uefPriorityEvidence = {
+  value: { KV1: 0.75, 'KV2-NT': 0.5, KV2: 0.25, KV3: 0, UT1: 2, UT2: 1 },
+  evidence: [
+    {
+      sourceId: 'uef-de-an-tuyen-sinh-2026',
+      location: 'Mục 7 (Chính sách ưu tiên: khu vực, đối tượng, công thức giảm điểm ưu tiên khi tổng ≥22,50/30)',
+      verification: 'verified' as const,
+      effectiveYear: 2026,
+      verifiedAt: '2026-08-26',
+    },
+  ],
+} satisfies SourcedRule<Record<string, number>>;
+
 export const uefLawNonThptExtraRequirementEvidence = {
   value: { minRank: 'tot-gioi' as const, altThptTotal30: 18, altGraduationScore10: 8.5 },
   evidence: [

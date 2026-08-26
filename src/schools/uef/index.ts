@@ -22,7 +22,7 @@ export const uefModule: SchoolModule = {
   region: 'hcm',
   vnuhcm: false,
   summary:
-    'Mức điểm nhận hồ sơ phương thức thi TN THPT (15 chuẩn/20 khối Luật, thang 30) và học bạ 6 học kỳ (18 chuẩn; khối Luật cần học lực Tốt/Giỏi + điểm thay thế) đã xác minh từ 1 bài công bố chính thức trên uef.edu.vn · Calculator chính xác đang chờ danh mục ngành, bảng điểm ưu tiên/điểm cộng, và phương pháp tính điểm học bạ theo học kỳ',
+    'Tính chính xác điểm xét tuyển UEF 2026 theo thi TN THPT cho nhóm ngành ngoài Luật (ngưỡng 15/30, không hệ số môn, không điểm cộng, cộng điểm ưu tiên theo Điều 7 — Thông tin tuyển sinh 2026, PDF 91 trang, đọc trực tiếp qua Google Drive). Nhóm ngành Luật (ngưỡng 20/30) và phương thức học bạ/ĐGNL/V-SAT vẫn chỉ ở mức kiểm tra ngưỡng — chờ danh mục ngành đầy đủ và phương pháp tính điểm học bạ theo học kỳ.',
   capabilities: {
     admissionInfo: true,
     programs: false,

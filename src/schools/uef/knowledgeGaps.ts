@@ -27,12 +27,13 @@ export const uefKnowledgeGaps: KnowledgeGap[] = [
   },
   {
     id: 'uef-priority-bonus-table-not-found',
-    label: 'Bảng điểm ưu tiên khu vực/đối tượng theo Thông tư hiện hành (nếu UEF tự công bố lại) — không tìm thấy trong nguồn đã đọc.',
+    label:
+      'Batch 2026-08-26 đã đọc trực tiếp Đề án tuyển sinh 2026 (PDF gốc, `uef-de-an-tuyen-sinh-2026`, mục 7) và tìm thấy đầy đủ bảng điểm ưu tiên khu vực/đối tượng UEF tự công bố (dùng cho exact calculator nhóm ngành ngoài Luật, xem `uef-thpt-exam-standard-2026`). Gap này chỉ còn áp dụng cho phương thức học bạ nhóm ngành Luật (`evaluateUefTranscriptAdmission`) — chưa có công thức điểm học lực đầy đủ (xem `uef-transcript-methodology-unpublished`) nên chưa cần đến bảng ưu tiên ở nhánh đó.',
     status: 'incomplete',
-    sourceId: 'uef-quality-threshold-2026',
+    sourceId: 'uef-de-an-tuyen-sinh-2026',
     scoreAffecting: true,
     implemented: false,
-    impact: 'exact-final-score-blocking',
+    impact: 'method-out-of-scope',
   },
   {
     id: 'uef-program-catalog-not-imported',

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { ApplicantProfile } from '../../core/applicantProfile';
-import { evaluateUefThptExamAdmission, evaluateUefTranscriptAdmission } from './evaluate';
+import { evaluateUefThptExamAdmission, evaluateUefTranscriptAdmission, evaluateUefThptExamStandardAdmission } from './evaluate';
 
 const A01_SUBJECTS = ['math', 'physics', 'english'] as const;
 
@@ -78,5 +78,51 @@ describe('evaluateUefTranscriptAdmission', () => {
 
   it('methodId khớp phương thức học bạ', () => {
     expect(evaluateUefTranscriptAdmission(EMPTY_PROFILE, { transcriptTotal30: 18, thresholdGroup: 'standard' }).methodId).toBe('uef-transcript-2026');
+  });
+});
+
+const a01Context = { subjectContext: { combinationId: 'A01', subjects: A01_SUBJECTS } };
+
+describe('evaluateUefThptExamStandardAdmission (exact calculator, nhóm ngành ngoài Luật)', () => {
+  it('requires a selected subject combination', () => {
+    const evaluation = evaluateUefThptExamStandardAdmission(profileWithThpt({ math: 5, physics: 5, english: 5 }));
+
+    expect(evaluation.eligibility?.status).toBe('unknown');
+    expect(evaluation.missingRequirements).toContainEqual(expect.objectContaining({ kind: 'school-context', code: 'uef-standard-subject-combination' }));
+  });
+
+  it('reports missing THPT subject scores', () => {
+    const evaluation = evaluateUefThptExamStandardAdmission(profileWithThpt({ math: 5, physics: 5 }), a01Context);
+
+    expect(evaluation.missingRequirements).toContainEqual(expect.objectContaining({ kind: 'profile-input', code: 'uef-standard-thpt-english' }));
+  });
+
+  it('marks totals below 15/30 as ineligible, still returns exact score', () => {
+    const evaluation = evaluateUefThptExamStandardAdmission(profileWithThpt({ math: 4, physics: 4, english: 4 }), a01Context);
+
+    expect(evaluation.confidence).toBe('exact-verified');
+    expect(evaluation.eligibility?.status).toBe('ineligible');
+    expect(evaluation.score?.value).toBe(12);
+  });
+
+  it('marks totals at or above 15/30 as eligible with exact final score', () => {
+    const evaluation = evaluateUefThptExamStandardAdmission(profileWithThpt({ math: 5, physics: 5, english: 5 }), a01Context);
+
+    expect(evaluation.eligibility?.status).toBe('eligible');
+    expect(evaluation.score).toEqual({ value: 15, scale: 30 });
+  });
+
+  it('adds region/category priority to the final score', () => {
+    const profile: ApplicantProfile = { thpt: { scores: { math: 5, physics: 5, english: 5 } }, priority: { region: 'KV1', category: 'UT1' } };
+    const evaluation = evaluateUefThptExamStandardAdmission(profile, a01Context);
+
+    expect(evaluation.score).toEqual({ value: 17.75, scale: 30 });
+  });
+
+  it('caps the final score at 30', () => {
+    const profile: ApplicantProfile = { thpt: { scores: { math: 10, physics: 10, english: 9.9 } }, priority: { region: 'KV1', category: 'UT1' } };
+    const evaluation = evaluateUefThptExamStandardAdmission(profile, a01Context);
+
+    expect(evaluation.score!.value).toBeLessThanOrEqual(30);
   });
 });
