@@ -232,14 +232,6 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Batch-expand-05 (2026-08-24): trang tuyển sinh chính thức cmcu.edu.vn fetch được, xác nhận 4 phương thức (CMC-TEST đánh giá năng lực riêng, học bạ THPT, điểm thi TN THPT, xét tuyển thẳng) và phân biệt rõ "ngưỡng đảm bảo chất lượng" (theo quy định Bộ GD&ĐT) với "điểm chuẩn" (do Hội đồng tuyển sinh CMC tự quyết). Điểm chuẩn 2026 công bố trên thang /40 (22,7-26,9 cho phương thức THPT/học bạ), nhưng KHÔNG có ngưỡng đầu vào /30 hoặc /40 cụ thể riêng của trường được nêu bằng text — bảng điểm theo ngành nằm trong ảnh đính kèm không trích xuất được. Do-not-guess-formula áp dụng: chưa đủ cấu trúc để nâng lên eligibility-only.',
   },
-  dhv: {
-    sourceId: 'dhv-admission-2026',
-    title: 'Trang tuyển sinh Trường Đại học Hùng Vương TP.HCM',
-    url: 'https://tuyensinh.dhv.edu.vn/',
-    checkedAt: '2026-08-24',
-    note:
-      'Batch expand-06 (2026-08-24): cổng tuyển sinh chính thức tuyensinh.dhv.edu.vn fetch được trực tiếp, liệt kê 5 phương thức (thi TN THPT theo tổ hợp; học bạ với công thức "Điểm xét tuyển = Toán hoặc Ngữ văn + (Trung bình cả năm THPT × 2)"; ĐGNL ĐHQG-HCM ngưỡng nhận hồ sơ dự kiến từ 600 điểm; kỳ thi đánh giá năng lực chuyên biệt H-SCA (Đại học Sư phạm TP.HCM) kết hợp học bạ; xét tuyển bằng trung cấp nghề liên quan). Công thức học bạ khác thường (chọn Toán HOẶC Văn, chưa rõ quy tắc chọn môn nào) và không có ngưỡng sàn cho phương thức 1; chưa đủ cấu trúc để model eligibility trong batch này — do-not-guess-formula áp dụng cho cách chọn môn trong công thức phương thức 2.',
-  },
   dsu: {
     sourceId: 'dsu-admission-2026',
     title: 'Cổng thông tin chính thức Trường Đại học Thể dục Thể thao Đà Nẵng',
@@ -839,9 +831,11 @@ export const finalCatalogKnowledgeGap = {
 // 16/19 thang 30), sourced from Thông báo 96/TB-HVPNVN (07/07/2026). hau — shipped eligibility-only
 // for the 9/22 non-năng-khiếu majors (2 tiers, 15/18 thang 30), sourced from Quyết định
 // 406/QĐ-ĐHKT-ĐT (03/07/2026) by downloading the linked Google Drive PDF directly and reading it
-// (WebFetch alone cannot see Drive-hosted/embedded-image content).) They stay listed in
-// `finalCatalogSchools` above for identity/location metadata only.
-const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus', 'tuaf', 'uhd', 'umt', 'utm', 'utt', 'eaut', 'vwa', 'hau', 'tbu', 'ltvuni']);
+// (WebFetch alone cannot see Drive-hosted/embedded-image content). Batch (2026-08-26): dhv —
+// shipped eligibility-only, THPT-exam route flat 15/30 (trừ Luật/Tâm lý học chờ Bộ GD&ĐT), nguồn
+// đối chiếu qua Báo Tuổi Trẻ (04/07/2026) vì tuyensinh.dhv.edu.vn không trích được số liệu qua
+// WebFetch.) They stay listed in `finalCatalogSchools` above for identity/location metadata only.
+const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus', 'tuaf', 'uhd', 'umt', 'utm', 'utt', 'eaut', 'vwa', 'hau', 'tbu', 'ltvuni', 'dhv']);
 const finalCatalogRuntimeSchools = finalCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const finalCatalogMethods: AdmissionMethodDescriptor[] = finalCatalogRuntimeSchools.map((school) => ({

@@ -66,7 +66,7 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 225,
       admissionDataAvailable: 225,
-      eligibilitySupported: 83,
+      eligibilitySupported: 84,
       calculatorSupported: 19,
       partialCalculator: 5,
       fullyVerified: 14,
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(123);
+    expect(researchedOnly).toBe(122);
     for (const schoolId of [
       'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'hust', 'tmu', 'haui', 'aof', 'bav', 'hanu', 'hou',
       'ntu', 'qnu', 'hueu',
@@ -114,6 +114,7 @@ describe('institution coverage statistics', () => {
     expect(deriveInstitutionSupportStatus(schoolRegistry.tbu)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.dthu)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.ltvuni)).toBe('eligibility-only');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.dhv)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnuulis)).toBe('partial-calculator');
     for (const schoolId of ['hce', 'hul', 'husc', 'huaf', 'hueedu', 'dut', 'dueudn', 'uedudn', 'uflsudn', 'uteudn', 'vku']) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
