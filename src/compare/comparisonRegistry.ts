@@ -103,6 +103,7 @@ import { dthuComparisonAdapter } from '../schools/dthu/comparison';
 import { ltvuniComparisonAdapter } from '../schools/ltvuni/comparison';
 import { dhvComparisonAdapter } from '../schools/dhv/comparison';
 import { pyuComparisonAdapter } from '../schools/pyu/comparison';
+import { nluComparisonAdapter } from '../schools/nlu/comparison';
 import { southernCatalogComparisonAdapters } from '../schools/southernCatalog';
 import { remainingCatalogComparisonAdapters } from '../schools/remainingCatalog';
 import { finalCatalogComparisonAdapters } from '../schools/finalCatalog';
@@ -225,6 +226,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   ltvuniComparisonAdapter,
   dhvComparisonAdapter,
   pyuComparisonAdapter,
+  nluComparisonAdapter,
   ...southernCatalogComparisonAdapters,
   ...remainingCatalogComparisonAdapters.filter(
     (adapter) =>

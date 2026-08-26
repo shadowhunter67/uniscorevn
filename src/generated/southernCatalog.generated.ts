@@ -81,15 +81,6 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Batch expand-14 (2026-08-24): official tuyensinh.tvu.edu.vn / tvu.edu.vn (Truong Dai hoc Tra Vinh) 2026 Round-1 notice confirms 7,415 seats across 49 programs and 4 methods. Floor thresholds are tiered and academic-rank-gated in parts: Medicine/Dentistry/Pharmacy requires grade-12 rank "Gioi" (Excellent) plus THPT total >= 20/30 (or graduation-exam average >= 8.5); other health-science majors require rank "Kha" (Good) or higher plus THPT total >= 16.5/30 (or average >= 6.5); Law requires rank "Gioi" plus THPT total >= 18/30 with Math/Van >= 6 each; other majors require rank "Trung binh" (Average) or higher, or THPT graduation score >= 5.0. Every tier mixes an academic-rank condition with no matching applicant-profile field alongside a numeric floor. Left at researched per the academic-rank-gating rule; do not model eligibility without the rank field.',
   },
-  nlu: {
-    sourceId: 'nlu-admission-2026',
-    title: 'Điểm sàn tuyển sinh Trường Đại học Nông Lâm TPHCM 2026',
-    url: 'https://xaydungchinhsach.chinhphu.vn/tuyen-sinh-2026-diem-san-truong-dai-hoc-nong-lam-tphcm-119260701215344015.htm',
-    publishedAt: '2026-07-05',
-    checkedAt: '2026-08-24',
-    note:
-      'Official NLU (ts.hcmuaf.edu.vn) 2026 threshold notice confirmed to exist (28/06/2026, "Ngưỡng đảm bảo chất lượng đầu vào (điểm sàn)..."), cross-checked via chinhphu.vn: aggregate ranges only (16-18/30 THPT exam, 18-20/30 transcript, 601-650 ĐGNL), no per-program breakdown extracted — the official per-program table is an embedded image (nguong-dam-bao-chat-luong-2026.jpg), and 4 methods (ĐGNL, THPT, THPT+transcript, transcript-only) apply different scopes per program (Sư phạm kỹ thuật nông nghiệp follows a separate MOET-governed threshold). Left at researched; do not fabricate per-program numbers.',
-  },
   uth: {
     sourceId: 'uth-admission-2026',
     title: 'UTH undergraduate admission portal 2026',
@@ -443,7 +434,7 @@ export const southernCatalogKnowledgeGap = {
  * official PDF directly (Thông báo 197/TB-ĐHYDCT, 09/07/2026) — a real text-layer PDF, not a scan.
  * 'dthu' too — shipped eligibility-only for 53/59 majors (3 groups, 15/20/20 thang 30), sourced by
  * downloading and reading the linked official PDF (Phụ lục I, 09/07/2026) directly. */
-const explicitRuntimeSchoolIds = new Set(['pntu', 'uah', 'bdu', 'bvu', 'gdu', 'nctu', 'tdu', 'tgu', 'ttu', 'vaa', 'ctump', 'dthu']);
+const explicitRuntimeSchoolIds = new Set(['pntu', 'uah', 'bdu', 'bvu', 'gdu', 'nctu', 'tdu', 'tgu', 'ttu', 'vaa', 'ctump', 'dthu', 'nlu']);
 const southernCatalogRuntimeSchools = southernCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const southernCatalogMethods: AdmissionMethodDescriptor[] = southernCatalogRuntimeSchools.map((school) => ({

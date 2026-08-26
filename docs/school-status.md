@@ -27,7 +27,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 - **VNU-ULIS** — Truong Dai hoc Ngoai ngu - Dai hoc Quoc gia Ha Noi
 
-## Chỉ kiểm tra điều kiện/ngưỡng (85)
+## Chỉ kiểm tra điều kiện/ngưỡng (86)
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
 - **AJC** — Học viện Báo chí và Tuyên truyền
@@ -71,6 +71,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HUSC** — Trường Đại học Khoa học, Đại học Huế
 - **LTVUni** — Trường Đại học Lương Thế Vinh
 - **NCTU** — Truong Dai hoc Nam Can Tho
+- **NLU** — Trường Đại học Nông Lâm TP.HCM
 - **NTTU** — Trường Đại học Nguyễn Tất Thành
 - **NTU-HN** — Truong Dai hoc Nguyen Trai
 - **OU** — Trường Đại học Mở Thành phố Hồ Chí Minh
@@ -115,7 +116,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNUF** — Truong Dai hoc Lam nghiep
 - **VWA** — Học viện Phụ nữ Việt Nam
 
-## Đã research, chưa đủ để tính (121)
+## Đã research, chưa đủ để tính (120)
 
 - **AADAA** — Học viện Phòng không - Không quân
 - **ACTVN** — Học viện Kỹ thuật Mật mã
@@ -177,7 +178,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **NCC** — Trường Cao đẳng Xây dựng Nam Định
 - **NCE** — Trường Cao đẳng Sư phạm Trung ương
 - **NDA** — Học viện Quốc phòng
-- **NLU** — Trường Đại học Nông Lâm TP.HCM
 - **NTU** — Trường Đại học Nha Trang
 - **NUAE** — Trường Đại học Sư phạm Nghệ thuật Trung ương
 - **OCP** — Trường Đại học Sĩ quan Chính trị
