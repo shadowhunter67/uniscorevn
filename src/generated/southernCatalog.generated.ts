@@ -115,7 +115,7 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     publishedAt: '2026-07-09',
     checkedAt: '2026-08-24',
     note:
-      'Batch-expand-05 (2026-08-24): official admission notice (ngưỡng đảm bảo chất lượng đầu vào, 2026-07-09) confirmed to exist for Trường Đại học Y Dược Cần Thơ, cross-checked across 3 independent press outlets (vietnamnet.vn, tuoitre.vn, baocantho.com.vn) which agree on the aggregate range (15-22/30 across 14 programs) and name Y khoa + Răng Hàm Mặt as the 22/30 ceiling, but none reproduce the full per-program table as extractable text (the primary notice table is image-embedded) and no mã ngành could be confirmed for any individual program. Do-not-guess-formula applied: left at researched rather than eligibility-only.',
+      'Superseded (2026-08-25 batch): eligibility-only upgrade shipped for all 14 programs (4 tiers: 22/20/18/15 thang 30). The prior "image-embedded" finding was a misread of secondary press coverage — the OFFICIAL notice page (tuyensinh.ctump.edu.vn) links directly to a real text-layer PDF (Thông báo 197/TB-ĐHYDCT, hosted on media.ctump.edu.vn) which was downloaded and read directly as a file (not via WebFetch, which does not follow/render the linked PDF from that page). Full per-major table with mã ngành, tổ hợp, and mức điểm confirmed. Threshold already includes priority points (formula published); runtime only sums raw score. V-SAT conversion method (full table also in the PDF) not modeled. See normalized/runtime-source-snapshot/ctump/sources.ts. This entry is unused because ctump is now in explicitRuntimeSchoolIds; kept only as a research trail.',
   },
   dnu: {
     sourceId: 'dnu-admission-2026',
@@ -131,7 +131,7 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     url: 'https://tuyensinh.dthu.edu.vn/thong-bao-nguong-bao-dam-chat-luong-dau-vao-dai-hoc-cao-dang-chinh-quy-theo-phuong-thuc-ket-qua-thi-tot-nghiep-thpt-nam-2026-va-cac-dieu-kien-dang-ky-072818.html',
     checkedAt: '2026-08-24',
     note:
-      'Batch expand-06 (2026-08-24): official tuyensinh.dthu.edu.vn 2026 threshold-notice page confirmed live via WebFetch, referencing an attached PDF ("20260709123157D_THONG BAO DIEM SAN VA NHAN HO SO TUYEN SINH 2026-3.pdf", published 09/07/2026) that was not text-extractable in this pass. A separate official page (qao.dthu.edu.vn/tuyen-sinh/diem-trung-tuyen) lists actual 2026 per-program cutoff scores (range observed 15-27.99/30, e.g. Giáo dục Mầm non 23.55, Sư phạm Toán học 25.65) rather than a single quality-assurance floor, and does not cover every program in one place. Runtime stays researched-only; per-program cutoff table is out of scope for this batch, not a single eligibility formula.',
+      'Superseded (2026-08-25 batch): eligibility-only upgrade shipped. The attached PDF was downloaded directly from its FileManager link and read as a file (not via WebFetch, which only summarized the landing page) — full Phụ lục I table read: all 59 mã ngành, tổ hợp, and NĐV. Modeled 3 clean groups for phương thức 100 (thi TN THPT, no năng khiếu): teacherTraining 20/30 (16 majors), standard 15/30 (36 majors), law 20/30 (Luật, extra rank condition not modeled). 6 năng-khiếu-gated majors (Mầm non/GDTC/SP Âm nhạc/SP Mỹ thuật/Huấn luyện Thể thao) not modeled — no talent-score field. NĐV already includes priority points; runtime only sums raw score. See normalized/runtime-source-snapshot/dthu/sources.ts. This entry is unused because dthu is now in explicitRuntimeSchoolIds; kept only as a research trail.',
   },
   due: {
     sourceId: 'due-admission-2026',
@@ -438,8 +438,12 @@ export const southernCatalogKnowledgeGap = {
  * Batch-expand-04 (2026-08-24): 'bdu' and 'bvu' graduated the same way (dedicated eligibility-only
  * runtime modules at `normalized/runtime-source-snapshot/{bdu,bvu}/`). Batch-expand-07: 'gdu' too.
  * Batch-expand-11: 'nctu' too. Batch expand-13: 'tdu' and 'tgu' too. Batch expand-14: 'ttu' too.
- * Batch expand-16: 'vaa' too. */
-const explicitRuntimeSchoolIds = new Set(['pntu', 'uah', 'bdu', 'bvu', 'gdu', 'nctu', 'tdu', 'tgu', 'ttu', 'vaa']);
+ * Batch expand-16: 'vaa' too. Batch-expand-19 (2026-08-25): 'ctump' too — shipped eligibility-only
+ * for all 14 majors (4 tiers, 15/18/20/22 thang 30), sourced by downloading and reading the linked
+ * official PDF directly (Thông báo 197/TB-ĐHYDCT, 09/07/2026) — a real text-layer PDF, not a scan.
+ * 'dthu' too — shipped eligibility-only for 53/59 majors (3 groups, 15/20/20 thang 30), sourced by
+ * downloading and reading the linked official PDF (Phụ lục I, 09/07/2026) directly. */
+const explicitRuntimeSchoolIds = new Set(['pntu', 'uah', 'bdu', 'bvu', 'gdu', 'nctu', 'tdu', 'tgu', 'ttu', 'vaa', 'ctump', 'dthu']);
 const southernCatalogRuntimeSchools = southernCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const southernCatalogMethods: AdmissionMethodDescriptor[] = southernCatalogRuntimeSchools.map((school) => ({

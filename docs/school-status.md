@@ -27,7 +27,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 - **VNU-ULIS** — Truong Dai hoc Ngoai ngu - Dai hoc Quoc gia Ha Noi
 
-## Chỉ kiểm tra điều kiện/ngưỡng (76)
+## Chỉ kiểm tra điều kiện/ngưỡng (83)
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
 - **AJC** — Học viện Báo chí và Tuyên truyền
@@ -35,17 +35,21 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **BDU** — Truong Dai hoc Binh Duong
 - **BVU** — Truong Dai hoc Ba Ria - Vung Tau
 - **CTU** — Trường Đại học Cần Thơ
+- **CTUMP** — Trường Đại học Y Dược Cần Thơ
 - **DLU** — Truong Dai hoc Da Lat
 - **DNU** — Trường Đại học Đại Nam
+- **DTHU** — Trường Đại học Đồng Tháp
 - **DTU** — Truong Dai hoc Duy Tan
 - **DUE** — Trường Đại học Kinh tế - Đại học Đà Nẵng
 - **DUT** — Trường Đại học Bách khoa - Đại học Đà Nẵng
+- **EAUT** — Trường Đại học Công nghệ Đông Á
 - **EIU** — Trường Đại học Quốc tế Miền Đông
 - **FBU** — Trường Đại học Tài chính - Ngân hàng Hà Nội
 - **FPFU** — Trường Đại học Phòng cháy Chữa cháy
 - **FPTU** — Trường Đại học FPT
 - **GDU** — Trường Đại học Gia Định
 - **HALONGU** — Trường Đại học Hạ Long
+- **HAU** — Trường Đại học Kiến trúc Hà Nội
 - **HCE** — Trường Đại học Kinh tế, Đại học Huế
 - **HCMUE** — Trường Đại học Sư phạm Thành phố Hồ Chí Minh (HCMUE, TPHCM)
 - **HDU** — Trường Đại học Hồng Đức
@@ -64,6 +68,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HUMG** — Trường Đại học Mỏ - Địa chất
 - **HUP** — Trường Đại học Dược Hà Nội
 - **HUSC** — Trường Đại học Khoa học, Đại học Huế
+- **LTVUni** — Trường Đại học Lương Thế Vinh
 - **NCTU** — Truong Dai hoc Nam Can Tho
 - **NTTU** — Trường Đại học Nguyễn Tất Thành
 - **NTU-HN** — Truong Dai hoc Nguyen Trai
@@ -72,6 +77,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **PTIT** — Học viện Công nghệ Bưu chính Viễn thông
 - **SGU** — Trường Đại học Sài Gòn
 - **TBDU** — Truong Dai hoc Thai Binh Duong
+- **TBU** — Trường Đại học Thái Bình
 - **TDMU** — Trường Đại học Thủ Dầu Một
 - **TDU** — Truong Dai hoc Tay Do
 - **TGU** — Truong Dai hoc Tien Giang
@@ -105,8 +111,9 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-UMP** — Truong Dai hoc Y Duoc - Dai hoc Quoc gia Ha Noi
 - **VNUA** — Hoc vien Nong nghiep Viet Nam
 - **VNUF** — Truong Dai hoc Lam nghiep
+- **VWA** — Học viện Phụ nữ Việt Nam
 
-## Đã research, chưa đủ để tính (130)
+## Đã research, chưa đủ để tính (123)
 
 - **AADAA** — Học viện Phòng không - Không quân
 - **ACTVN** — Học viện Kỹ thuật Mật mã
@@ -121,21 +128,17 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **CĐSPTW-NT** — Trường Cao đẳng Sư phạm Trung ương - Nha Trang
 - **CMCU** — Trường Đại học CMC
 - **CTUET** — Trường Đại học Kỹ thuật - Công nghệ Cần Thơ
-- **CTUMP** — Trường Đại học Y Dược Cần Thơ
 - **DHP** — Trường Đại học Hải Phòng
 - **DHV** — Trường Đại học Hùng Vương TP.HCM
 - **DLA** — Trường Đại học Kinh tế Công nghiệp Long An
 - **DNU** — Trường Đại học Đồng Nai
 - **DSU** — Trường Đại học Thể dục Thể thao Đà Nẵng
-- **DThU** — Trường Đại học Đồng Tháp
 - **DUMTP** — Trường Đại học Kỹ thuật Y Dược Đà Nẵng
-- **EAUT** — Trường Đại học Công nghệ Đông Á
 - **FUV** — Trường Đại học Fulbright Việt Nam
 - **GASS** — Học viện Khoa học xã hội
 - **HAM** — Học viện Âm nhạc Huế
 - **HANU** — Trường Đại học Hà Nội
 - **HAT** — Trường Du lịch - Đại học Huế
-- **HAU** — Trường Đại học Kiến trúc Hà Nội
 - **HaUI** — Trường Đại học Công nghiệp Hà Nội
 - **HBU** — Trường Đại học Hòa Bình
 - **HCA** — Học viện Cán bộ Thành phố Hồ Chí Minh
@@ -160,7 +163,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HVU** — Trường Đại học Hùng Vương
 - **KBU** — Trường Đại học Kinh Bắc
 - **LHU** — Trường Đại học Lạc Hồng
-- **LTVUni** — Trường Đại học Lương Thế Vinh
 - **MAL** — Học viện Hậu cần
 - **MDU** — Trường Đại học Miền Đông
 - **MKU** — Trường Đại học Cửu Long
@@ -195,7 +197,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **SKDA** — Trường Đại học Sân khấu - Điện ảnh Hà Nội
 - **SKDAHCM** — Trường Đại học Sân khấu - Điện ảnh TP.HCM
 - **STU** — Trường Đại học Công nghệ Sài Gòn
-- **TBU** — Trường Đại học Thái Bình
 - **TLU** — Trường Đại học Thủy lợi
 - **TLU-HN** — Trường Đại học Thăng Long
 - **TMU** — Trường Đại học Thương mại
@@ -236,7 +237,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-USSH** — Trường Đại học Khoa học Xã hội và Nhân văn - ĐHQG Hà Nội
 - **VNUFA** — Trường Đại học Mỹ thuật Việt Nam
 - **VTTU** — Trường Đại học Võ Trường Toản
-- **VWA** — Học viện Phụ nữ Việt Nam
 - **VYA** — Học viện Thanh thiếu niên Việt Nam
 
 ## Chỉ có trong danh mục (42)

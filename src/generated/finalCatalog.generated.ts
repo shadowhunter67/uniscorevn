@@ -254,7 +254,7 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     url: 'https://eaut.edu.vn/tin-tuc/truong-dh-cong-nghe-dong-a-cong-bo-phuong-thuc-tuyen-sinh-nam-2026/',
     checkedAt: '2026-08-24',
     note:
-      'Batch expand-06 (2026-08-24): bài đăng chính thức eaut.edu.vn fetch được trực tiếp, xác nhận 4 phương thức tuyển sinh 2026 cho 9.800 chỉ tiêu/34 ngành — (1) xét học bạ: "điểm trung bình theo tổ hợp 3 môn xét tuyển đạt từ 18 điểm trở lên" VÀ điểm thi TN THPT 2026 ≥15/30; (2) xét điểm thi TN THPT (ngưỡng cụ thể chưa nêu trong bài); (3) kết hợp điểm thi TN THPT và học bạ (trừ khối ngành VI); (4) các kỳ thi đánh giá năng lực/tư duy (ĐHQG Hà Nội, ĐHBK Hà Nội, ĐH Sư phạm Hà Nội). Phương thức học bạ có ngưỡng khá rõ nhưng ngưỡng phương thức thi TN THPT (phương thức chính) chưa công bố số cụ thể trong bài — chưa đủ để model một eligibility nhất quán trong batch này; do-not-guess-formula áp dụng.',
+      'Superseded (2026-08-25 batch): eligibility-only upgrade shipped for method 1 (xét học bạ: trung bình tổ hợp 3 môn qua 6 học kỳ >=18/30 kèm điều kiện điểm thi TN THPT >=15/30), re-verified via eaut.edu.vn cross-checked with Congluan.vn (21/06/2026). Method 2 (thi TN THPT only) threshold still not published — kept as knowledge gap. See normalized/runtime-source-snapshot/eaut/sources.ts. This entry is unused because eaut is now in explicitRuntimeSchoolIds; kept only as a research trail.',
   },
   hau: {
     sourceId: 'hau-admission-2026',
@@ -263,7 +263,7 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     checkedAt: '2026-08-24',
     publishedAt: '2026-08-11',
     note:
-      'Batch expand-07 (2026-08-24): official hau.edu.vn decision (11/08/2026) confirming 2026 admission thresholds/results exists and was fetched live, plus an earlier official floor-score notice (baoxaydung.vn, 08/07/2026, "ngưỡng nhận hồ sơ xét tuyển", range 15-22/30 depending on program). Both times the actual per-program numeric table sits in an embedded image or a linked Google Drive PDF, not extractable as text in this pass. Left at researched; do-not-guess-formula rule applied.',
+      'Superseded (2026-08-25 batch): eligibility-only upgrade shipped for the 9/22 majors (2 grouped tiers, 15/30 and 18/30) that use standard cultural subject combinations (A00/A01/C01/C02/D01) — the linked Google Drive PDF (Quyết định 406/QĐ-ĐHKT-ĐT, 03/07/2026) WAS successfully read this batch by downloading it directly and reading the file (not via WebFetch, which cannot see embedded/linked images or Drive content) — full per-program Phụ lục table extracted. The other 13 majors (Kiến trúc, Quy hoạch, Điêu khắc, Thiết kế...) require năng khiếu talent-test scores with no ApplicantProfile field — remain unmodeled. Published floor already includes priority/bonus points; runtime only sums raw 3-subject score (documented knowledge gap). See normalized/runtime-source-snapshot/hau/sources.ts. This entry is unused because hau is now in explicitRuntimeSchoolIds; kept only as a research trail.',
   },
   hbu: {
     sourceId: 'hbu-admission-2026',
@@ -403,7 +403,7 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     url: 'https://ltvu.edu.vn/',
     checkedAt: '2026-08-24',
     note:
-      "Batch expand-10 (2026-08-24): official domain is ltvu.edu.vn (not ltvuni.edu.vn); homepage links a dedicated 2026 threshold/conversion notice (\"Ngưỡng đảm bảo chất lượng, độ chênh giữa các tổ hợp xét tuyển theo phương thức xét điểm thi THPT và bảng quy đổi điểm tương đương giữa các phương thức xét tuyển năm 2026\"), but the notice's numeric content was not extracted from the primary page in this pass -- only a secondary aggregator states a generic >=15.0/30 floor, unconfirmed on ltvu.edu.vn itself. Left at researched; do not use the unconfirmed secondary figure.",
+      "Superseded (2026-08-25 batch): eligibility-only upgrade shipped for all 11/11 majors. Downloaded and read the linked PDF directly (Thông báo 269/TB-ĐHLTV, 09/07/2026) — a real text-layer PDF. Full per-major table: Y học cổ truyền 20/30, Kỹ thuật phục hồi chức năng 18/30, 9 remaining majors 15/30. No subject-combination table published (knowledge gap). Threshold already includes priority points; runtime only sums raw score. Note: document letterhead says 'Ninh Bình' not 'Nam Định' (catalog location) — unresolved discrepancy, does not affect eligibility logic. See normalized/runtime-source-snapshot/ltvuni/sources.ts. This entry is unused because ltvuni is now in explicitRuntimeSchoolIds; kept only as a research trail.",
   },
   mdu: {
     sourceId: 'mdu-admission-2026',
@@ -517,7 +517,7 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     url: 'https://tbu.edu.vn/thong-bao-thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026.html',
     checkedAt: '2026-08-24',
     note:
-      'Batch expand-13 (2026-08-24): trang tuyển sinh chính thức tbu.edu.vn (và tuyensinh.tbu.edu.vn) xác nhận tồn tại, liệt kê 5 phương thức xét tuyển (PT1-PT5: thi TN THPT/giải thưởng, học bạ 3 năm, ĐGNL ĐHQG Hà Nội, ĐGTD ĐHBK Hà Nội, ĐGNL ĐH Sư phạm Hà Nội), nhưng ngưỡng điểm/công thức cụ thể chỉ nằm trong file đính kèm "THÔNG BÁO SỐ 565.pdf", không trích xuất được thành văn bản trong lượt research này. Giữ ở mức researched; không đoán số liệu.',
+      'Superseded (2026-08-25 batch): eligibility-only upgrade shipped. A DIFFERENT official page (tbu.edu.vn "ngưỡng đảm bảo chất lượng đầu vào, điểm trúng tuyển và quy đổi tương đương", 08/07/2026 — not the 565.pdf notice referenced in the prior note) was re-verified directly via WebFetch and states the entrance floor in plain readable text: "Luật: từ 18 điểm trở lên" / "Các ngành còn lại: từ 15 điểm trở lên" (thi TN THPT). This is explicitly the ngưỡng nhận hồ sơ, distinct from the final "điểm trúng tuyển = A+B+C" formula whose A/B/C breakdown is NOT explained on the page — left as a knowledge gap. See normalized/runtime-source-snapshot/tbu/sources.ts. This entry is unused because tbu is now in explicitRuntimeSchoolIds; kept only as a research trail.',
   },
   uad: {
     sourceId: 'uad-admission-2026',
@@ -623,7 +623,7 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     url: 'https://tuyensinh.hvpnvn.edu.vn/thong-bao/tuyen-sinh-dai-hoc/hoc-vien-phu-nu-viet-nam-cong-bo-nguong-diem-xet-tuyen-dai-hoc-nam-2026-phu-hop-pho-diem-mo-rong-co-hoi-cho-thi-sinh/',
     checkedAt: '2026-08-25',
     note:
-      'Official 2026 threshold notice (fetched directly, text-readable) publishes per-major THPT floor scores (19/30 Truyen thong da phuong tien; 18/30 Quan tri kinh doanh/Du lich/Tam ly hoc/Truyen thong xa hoi; 16/30 the remaining majors), plus a linear-interpolation conversion table between THPT/hoc ba/HSA/SPT methods. A separate search (hvpnvn.edu.vn) confirms subject combinations used school-wide (A00, A01, C00, C03, D01, D14, D15) but does not give a clean per-major combo-to-floor mapping, so the exact combo set per floor tier cannot be modeled without guessing. Left at researched.',
+      'Superseded (2026-08-25 batch): eligibility-only upgrade shipped for THPT-exam and transcript methods, grouped by 3 tiers (multimedia 19/23, business-tourism-psychology-social-media 18/21, remaining majors 16/19 — thang 30), re-verified via Thong bao 96/TB-HVPNVN (07/07/2026). Program-to-tier/subject-combination mapping and Luat/Kinh te Luat (deferred to MOET guidance per source) remain knowledge gaps; HSA/SPT aptitude-test methods not modeled (different scale). See normalized/runtime-source-snapshot/vwa/sources.ts. This entry is unused because vwa is now in explicitRuntimeSchoolIds; kept only as a research trail.',
   },
   vya: {
     sourceId: 'vya-admission-2026',
@@ -827,13 +827,21 @@ export const finalCatalogKnowledgeGap = {
 };
 
 // 'vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus',
-// 'tuaf', 'uhd', 'umt', 'utm', and 'utt' moved to dedicated runtime modules
+// 'tuaf', 'uhd', 'umt', 'utm', 'utt', 'eaut', 'vwa', and 'hau' moved to dedicated runtime modules
 // (normalized/runtime-source-snapshot/<id>/) — eligibility-only, excluded here to avoid duplicate
 // methodId/comparisonAdapter entries. (Batch-expand-04: apd. Batch-expand-06: eiu. Batch-expand-07:
 // fbu, fpfu. Batch-expand-11: ntuhn. Batch-expand-13: tbdu, thanhdo, tnue, tnufl, tnus.
-// Batch-expand-14: tuaf. Batch-expand-15: uhd, umt, utm, utt.) They stay listed in
+// Batch-expand-14: tuaf. Batch-expand-15: uhd, umt, utm, utt. Batch-expand-18 (2026-08-25): eaut —
+// shipped eligibility-only for method 1 (xét học bạ, ngưỡng 18/30 trung bình 6 học kỳ + điều kiện
+// điểm thi TN THPT >=15/30), sourced from eaut.edu.vn official 2026 admission post cross-checked
+// via Congluan.vn republish (21/06/2026). Methods 2-4 remain knowledge gaps. vwa — shipped
+// eligibility-only for THPT-exam + transcript methods, 3-tier group thresholds (19/23, 18/21,
+// 16/19 thang 30), sourced from Thông báo 96/TB-HVPNVN (07/07/2026). hau — shipped eligibility-only
+// for the 9/22 non-năng-khiếu majors (2 tiers, 15/18 thang 30), sourced from Quyết định
+// 406/QĐ-ĐHKT-ĐT (03/07/2026) by downloading the linked Google Drive PDF directly and reading it
+// (WebFetch alone cannot see Drive-hosted/embedded-image content).) They stay listed in
 // `finalCatalogSchools` above for identity/location metadata only.
-const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus', 'tuaf', 'uhd', 'umt', 'utm', 'utt']);
+const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus', 'tuaf', 'uhd', 'umt', 'utm', 'utt', 'eaut', 'vwa', 'hau', 'tbu', 'ltvuni']);
 const finalCatalogRuntimeSchools = finalCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const finalCatalogMethods: AdmissionMethodDescriptor[] = finalCatalogRuntimeSchools.map((school) => ({

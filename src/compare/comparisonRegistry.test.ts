@@ -97,6 +97,13 @@ import { utmAdmissionMethods } from '../schools/utm/methods';
 import { uttAdmissionMethods } from '../schools/utt/methods';
 import { vaaAdmissionMethods } from '../schools/vaa/methods';
 import { vnulawAdmissionMethods } from '../schools/vnulaw/methods';
+import { eautAdmissionMethods } from '../schools/eaut/methods';
+import { vwaAdmissionMethods } from '../schools/vwa/methods';
+import { hauAdmissionMethods } from '../schools/hau/methods';
+import { ctumpAdmissionMethods } from '../schools/ctump/methods';
+import { tbuAdmissionMethods } from '../schools/tbu/methods';
+import { dthuAdmissionMethods } from '../schools/dthu/methods';
+import { ltvuniAdmissionMethods } from '../schools/ltvuni/methods';
 import { vnuumpAdmissionMethods } from '../schools/vnuump/methods';
 import { southernCatalogMethods } from '../schools/southernCatalog';
 import { remainingCatalogMethods } from '../schools/remainingCatalog';
@@ -210,6 +217,13 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   vaa: vaaAdmissionMethods,
   vnulaw: vnulawAdmissionMethods,
   vnuump: vnuumpAdmissionMethods,
+  eaut: eautAdmissionMethods,
+  vwa: vwaAdmissionMethods,
+  hau: hauAdmissionMethods,
+  ctump: ctumpAdmissionMethods,
+  tbu: tbuAdmissionMethods,
+  dthu: dthuAdmissionMethods,
+  ltvuni: ltvuniAdmissionMethods,
 };
 
 /** Pure helper — trả danh sách schoolId bị trùng trong 1 mảng adapter. Test cả trên registry thật

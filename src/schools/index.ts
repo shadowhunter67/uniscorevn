@@ -99,6 +99,13 @@ import { uttModule } from './utt';
 import { vaaModule } from './vaa';
 import { vnulawModule } from './vnulaw';
 import { vnuumpModule } from './vnuump';
+import { eautModule } from './eaut';
+import { vwaModule } from './vwa';
+import { hauModule } from './hau';
+import { ctumpModule } from './ctump';
+import { tbuModule } from './tbu';
+import { dthuModule } from './dthu';
+import { ltvuniModule } from './ltvuni';
 import { southernCatalogModules } from './southernCatalog';
 import { remainingCatalogModules } from './remainingCatalog';
 import { finalCatalogModules } from './finalCatalog';
@@ -249,4 +256,11 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   vaa: vaaModule,
   vnulaw: vnulawModule,
   vnuump: vnuumpModule,
+  eaut: eautModule,
+  vwa: vwaModule,
+  hau: hauModule,
+  ctump: ctumpModule,
+  tbu: tbuModule,
+  dthu: dthuModule,
+  ltvuni: ltvuniModule,
 };
