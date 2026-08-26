@@ -2,9 +2,10 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (14)
+## Calculator đã xác minh (17)
 
 - **FTU** — Trường Đại học Ngoại thương
+- **GDU** — Trường Đại học Gia Định
 - **HCMULAW** — Trường Đại học Luật Thành phố Hồ Chí Minh
 - **HCMUS** — Trường Đại học Khoa học Tự nhiên - ĐHQG TP.HCM
 - **HCMUT** — Trường Đại học Bách khoa – ĐHQG TP.HCM
@@ -13,6 +14,8 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **IU** — Trường Đại học Quốc tế – ĐHQG TP.HCM
 - **IUH** — Trường Đại học Công nghiệp Thành phố Hồ Chí Minh
 - **TDTU** — Trường Đại học Tôn Đức Thắng
+- **UAH** — Truong Dai hoc Kien truc TP.HCM
+- **UEF** — Trường Đại học Kinh tế - Tài chính TP.HCM
 - **UEH** — Trường Đại học Kinh tế TP.HCM
 - **UEL** — Trường Đại học Kinh tế - Luật – ĐHQG TP.HCM
 - **UFM** — Trường Đại học Tài chính – Marketing
@@ -27,7 +30,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 - **VNU-ULIS** — Truong Dai hoc Ngoai ngu - Dai hoc Quoc gia Ha Noi
 
-## Chỉ kiểm tra điều kiện/ngưỡng (88)
+## Chỉ kiểm tra điều kiện/ngưỡng (85)
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
 - **AJC** — Học viện Báo chí và Tuyên truyền
@@ -48,7 +51,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **FBU** — Trường Đại học Tài chính - Ngân hàng Hà Nội
 - **FPFU** — Trường Đại học Phòng cháy Chữa cháy
 - **FPTU** — Trường Đại học FPT
-- **GDU** — Trường Đại học Gia Định
 - **HALONGU** — Trường Đại học Hạ Long
 - **HAU** — Trường Đại học Kiến trúc Hà Nội
 - **HCE** — Trường Đại học Kinh tế, Đại học Huế
@@ -93,10 +95,8 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **TTN** — Truong Dai hoc Tay Nguyen
 - **TTU** — Truong Dai hoc Tan Tao
 - **TUAF** — Truong Dai hoc Nong Lam - Dai hoc Thai Nguyen
-- **UAH** — Truong Dai hoc Kien truc TP.HCM
 - **UDA** — Trường Đại học Đông Á
 - **UED** — Trường Đại học Sư phạm - Đại học Đà Nẵng
-- **UEF** — Trường Đại học Kinh tế - Tài chính TP.HCM
 - **UFLS** — Trường Đại học Ngoại ngữ - Đại học Đà Nẵng
 - **UHD** — Trường Đại học Hải Dương
 - **UIT** — Trường Đại học Công nghệ Thông tin – ĐHQG TP.HCM
