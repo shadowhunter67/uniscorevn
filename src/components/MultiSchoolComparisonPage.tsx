@@ -3,6 +3,8 @@ import { Plus, Search, X } from 'lucide-react';
 import { useFocusTrap } from '../hooks/useFocusTrap';
 import { activeAdmissionConfig } from '../schools/hcmut/config/admission-2026';
 import { validateBonusComponent, validatePriorityRaw } from '../schools/hcmut/validation';
+import { validateRange } from '../core/rangeValidation';
+import { USH_SUBJECT_PAIRS, USH_TALENT_MAX_10 } from '../schools/ush/eligibility';
 import { ScoreInput } from './ScoreInput';
 import { buildSelectionFromDraft, EMPTY_DRAFT, SCHOOLS_REQUIRING_COMBINATION, selectionToDraft, type PickerDraft } from './compare/pickerDraft';
 import { useApplicantProfile } from '../core/applicantProfileContextCore';
@@ -164,33 +166,41 @@ function ComparePicker({
           <section className="overflow-y-auto p-4">
             {selectedSchool ? (
               <>
-                <label className="text-xs font-medium text-ink" htmlFor="program-search">
-                  Chọn ngành
-                </label>
-                <div className="mt-1 flex items-center gap-2 rounded-md border border-ink/10 bg-surface px-3 py-2">
-                  <Search size={14} className="text-muted" aria-hidden="true" />
-                  <input
-                    id="program-search"
-                    value={programQuery}
-                    onChange={(event) => setProgramQuery(event.target.value)}
-                    placeholder="7480101, khoa học máy tính, báo chí..."
-                    className="min-w-0 flex-1 bg-transparent text-sm outline-none"
-                  />
-                </div>
-                <div className="mt-3 max-h-56 space-y-2 overflow-y-auto rounded-md border border-ink/10 p-2">
-                  {programs.map((program) => (
-                    <button
-                      key={`${selectedSchool.schoolId}-${program.programId}`}
-                      type="button"
-                      onClick={() => onDraftChange({ ...draft, programId: program.programId })}
-                      className={`w-full rounded-md p-2 text-left text-sm hover:bg-surface-soft ${draft.programId === program.programId ? 'bg-accent/10 text-ink' : 'text-muted'}`}
-                    >
-                      <span className="font-medium text-ink">{program.code ? `${program.code} - ` : ''}</span>
-                      {program.name}
-                      {program.campus ? <span className="text-xs"> ({program.campus})</span> : null}
-                    </button>
-                  ))}
-                </div>
+                {selectedSchool.programs.length > 0 ? (
+                  <>
+                    <label className="text-xs font-medium text-ink" htmlFor="program-search">
+                      Chọn ngành
+                    </label>
+                    <div className="mt-1 flex items-center gap-2 rounded-md border border-ink/10 bg-surface px-3 py-2">
+                      <Search size={14} className="text-muted" aria-hidden="true" />
+                      <input
+                        id="program-search"
+                        value={programQuery}
+                        onChange={(event) => setProgramQuery(event.target.value)}
+                        placeholder="7480101, khoa học máy tính, báo chí..."
+                        className="min-w-0 flex-1 bg-transparent text-sm outline-none"
+                      />
+                    </div>
+                    <div className="mt-3 max-h-56 space-y-2 overflow-y-auto rounded-md border border-ink/10 p-2">
+                      {programs.map((program) => (
+                        <button
+                          key={`${selectedSchool.schoolId}-${program.programId}`}
+                          type="button"
+                          onClick={() => onDraftChange({ ...draft, programId: program.programId })}
+                          className={`w-full rounded-md p-2 text-left text-sm hover:bg-surface-soft ${draft.programId === program.programId ? 'bg-accent/10 text-ink' : 'text-muted'}`}
+                        >
+                          <span className="font-medium text-ink">{program.code ? `${program.code} - ` : ''}</span>
+                          {program.name}
+                          {program.campus ? <span className="text-xs"> ({program.campus})</span> : null}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <p className="rounded-md bg-surface-soft p-3 text-xs text-muted">
+                    Trường này chưa có danh mục ngành chi tiết trong UniScoreVN — vẫn thêm được vào so sánh, chỉ không chọn được ngành cụ thể.
+                  </p>
+                )}
 
                 {SCHOOLS_REQUIRING_COMBINATION.has(draft.schoolId) && (
                   <label className="mt-4 block text-xs font-medium text-ink">
@@ -248,6 +258,35 @@ function ComparePicker({
                   </div>
                 )}
 
+                {draft.schoolId === 'ush' && (
+                  <div className="mt-4 grid gap-2 sm:grid-cols-2">
+                    <label className="block text-xs font-medium text-ink">
+                      Tổ hợp USH
+                      <select
+                        value={draft.ushPairId}
+                        onChange={(event) => onDraftChange({ ...draft, ushPairId: event.target.value })}
+                        className="mt-1 w-full rounded-md border border-ink/10 bg-surface px-3 py-2 text-sm"
+                      >
+                        <option value="">Chưa chọn</option>
+                        {USH_SUBJECT_PAIRS.map((pair) => (
+                          <option key={pair.id} value={pair.id}>
+                            {pair.label}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <ScoreInput
+                      id="compare-ush-talent-score"
+                      label="Điểm năng khiếu TDTT"
+                      hint={`0 - ${USH_TALENT_MAX_10}`}
+                      value={draft.ushTalentScore10}
+                      error={validateRange(draft.ushTalentScore10, 0, USH_TALENT_MAX_10).error}
+                      onChange={(value) => onDraftChange({ ...draft, ushTalentScore10: value })}
+                      compact
+                    />
+                  </div>
+                )}
+
                 {draft.schoolId === 'ussh' && (
                   <label className="mt-4 flex items-center gap-2 text-xs font-medium text-ink">
                     <input
@@ -265,8 +304,12 @@ function ComparePicker({
                       Đang chọn: <span className="font-medium text-ink">{selectedSchool.shortName}</span> - {selectedProgram.code ? `${selectedProgram.code} ` : ''}
                       {selectedProgram.name}
                     </p>
-                  ) : (
+                  ) : selectedSchool.programs.length > 0 ? (
                     <p>Chọn một ngành để tiếp tục.</p>
+                  ) : (
+                    <p>
+                      Đang chọn: <span className="font-medium text-ink">{selectedSchool.shortName}</span> (chưa chọn ngành cụ thể).
+                    </p>
                   )}
                   {duplicate && <p className="mt-1 text-danger">Nguyện vọng này đã có trong danh sách.</p>}
                 </div>

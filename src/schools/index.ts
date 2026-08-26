@@ -109,6 +109,7 @@ import { ltvuniModule } from './ltvuni';
 import { dhvModule } from './dhv';
 import { pyuModule } from './pyu';
 import { nluModule } from './nlu';
+import { ushModule } from './ush';
 import { southernCatalogModules } from './southernCatalog';
 import { remainingCatalogModules } from './remainingCatalog';
 import { finalCatalogModules } from './finalCatalog';
@@ -269,4 +270,5 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   dhv: dhvModule,
   pyu: pyuModule,
   nlu: nluModule,
+  ush: ushModule,
 };

@@ -1,5 +1,6 @@
 import { COMMON_SUBJECT_COMBINATIONS } from '../core/subjects';
 import { safeGetItem, safeSetItem } from '../core/safeStorage';
+import { USH_SUBJECT_PAIRS, USH_TALENT_MAX_10 } from '../schools/ush/eligibility';
 
 export interface SchoolComparisonContext {
   combinationId?: string;
@@ -10,6 +11,10 @@ export interface SchoolComparisonContext {
     priorityRaw30Scale: number;
   };
   hasUsshBonusAchievement?: boolean;
+  /** USH (Đại học TDTT TP.HCM) — tổ hợp riêng (T00/T01/T04/T06) và điểm năng khiếu TDTT thang 10,
+   * không có trong ApplicantProfile chung vì chỉ USH dùng. Xem `schools/ush/eligibility.ts`. */
+  ushPairId?: string;
+  ushTalentScore10?: number;
 }
 
 export interface ComparisonSelection {
@@ -41,6 +46,8 @@ function stableContextSignature(context?: SchoolComparisonContext): string {
     combinationId: context.combinationId,
     hcmutBonus: context.hcmutBonus,
     hasUsshBonusAchievement: context.hasUsshBonusAchievement === true,
+    ushPairId: context.ushPairId,
+    ushTalentScore10: context.ushTalentScore10,
   });
 }
 
@@ -122,6 +129,13 @@ function isValidContext(value: unknown): value is SchoolComparisonContext {
     ) {
       return false;
     }
+  }
+  if (context.ushPairId !== undefined) {
+    if (typeof context.ushPairId !== 'string') return false;
+    if (!USH_SUBJECT_PAIRS.some((pair) => pair.id === context.ushPairId)) return false;
+  }
+  if (context.ushTalentScore10 !== undefined) {
+    if (!isFiniteNonNegativeNumber(context.ushTalentScore10) || context.ushTalentScore10 > USH_TALENT_MAX_10) return false;
   }
   return true;
 }

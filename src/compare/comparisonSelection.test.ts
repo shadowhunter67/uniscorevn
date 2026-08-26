@@ -130,4 +130,19 @@ describe('comparisonSelection context validation (parseStoredComparisonSelection
     const parsed = parseStoredComparisonSelections(withContext({ hcmutBonus: bonus }));
     expect(parsed).toEqual([{ id: 'one', schoolId: 'hcmus', context: { hcmutBonus: bonus } }]);
   });
+
+  it('accepts a valid ushPairId/ushTalentScore10 context', () => {
+    const parsed = parseStoredComparisonSelections(withContext({ ushPairId: 'T00', ushTalentScore10: 6.5 }));
+    expect(parsed).toEqual([{ id: 'one', schoolId: 'hcmus', context: { ushPairId: 'T00', ushTalentScore10: 6.5 } }]);
+  });
+
+  it('rejects an unknown ushPairId', () => {
+    expect(parseStoredComparisonSelections(withContext({ ushPairId: 'NOT-A-REAL-PAIR' }))).toEqual([]);
+  });
+
+  it('rejects an out-of-range or non-numeric ushTalentScore10', () => {
+    expect(parseStoredComparisonSelections(withContext({ ushTalentScore10: 10.5 }))).toEqual([]);
+    expect(parseStoredComparisonSelections(withContext({ ushTalentScore10: -1 }))).toEqual([]);
+    expect(parseStoredComparisonSelections(withContext({ ushTalentScore10: '5' }))).toEqual([]);
+  });
 });

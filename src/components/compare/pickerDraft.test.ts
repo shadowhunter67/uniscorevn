@@ -42,3 +42,42 @@ describe('buildSelectionFromDraft — ràng buộc HCMUT (P2.3, tái dùng valid
     expect(result?.context?.hcmutBonus).toBeUndefined();
   });
 });
+
+describe('buildSelectionFromDraft — trường không có program catalog (đa số eligibility-only) không bắt buộc chọn ngành', () => {
+  it('thêm được vào so sánh dù không có programId, khi trường không có catalog ngành (vd nlu)', () => {
+    const result = buildSelectionFromDraft({ ...EMPTY_DRAFT, schoolId: 'nlu', programId: '' });
+    expect(result).toEqual({ schoolId: 'nlu', programId: undefined, context: undefined });
+  });
+
+  it('trường CÓ program catalog (vd uel) vẫn bắt buộc chọn ngành như cũ', () => {
+    expect(buildSelectionFromDraft({ ...EMPTY_DRAFT, schoolId: 'uel', programId: '', combinationId: 'a01' })).toBeUndefined();
+  });
+});
+
+describe('buildSelectionFromDraft — USH (tổ hợp riêng T00/T01/T04/T06 + điểm năng khiếu TDTT)', () => {
+  const USH_DRAFT = { ...EMPTY_DRAFT, schoolId: 'ush', ushPairId: 'T00' };
+
+  it('bắt buộc chọn tổ hợp USH (không dùng combinationId chung)', () => {
+    expect(buildSelectionFromDraft({ ...EMPTY_DRAFT, schoolId: 'ush' })).toBeUndefined();
+  });
+
+  it('không nhập điểm năng khiếu vẫn thêm được (missing ≠ 0) — context.ushTalentScore10 không có mặt', () => {
+    const result = buildSelectionFromDraft(USH_DRAFT);
+    expect(result?.context?.ushPairId).toBe('T00');
+    expect(result?.context?.ushTalentScore10).toBeUndefined();
+    expect('ushTalentScore10' in (result?.context ?? {})).toBe(false);
+  });
+
+  it('điểm năng khiếu hợp lệ (0-10) được ghi vào context', () => {
+    const result = buildSelectionFromDraft({ ...USH_DRAFT, ushTalentScore10: '6.5' });
+    expect(result?.context?.ushTalentScore10).toBe(6.5);
+  });
+
+  it('điểm năng khiếu vượt 10 bị chặn submit, không âm thầm clamp', () => {
+    expect(buildSelectionFromDraft({ ...USH_DRAFT, ushTalentScore10: '11' })).toBeUndefined();
+  });
+
+  it('điểm năng khiếu âm bị chặn submit', () => {
+    expect(buildSelectionFromDraft({ ...USH_DRAFT, ushTalentScore10: '-1' })).toBeUndefined();
+  });
+});

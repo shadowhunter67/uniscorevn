@@ -107,6 +107,7 @@ import { ltvuniAdmissionMethods } from '../schools/ltvuni/methods';
 import { dhvAdmissionMethods } from '../schools/dhv/methods';
 import { pyuAdmissionMethods } from '../schools/pyu/methods';
 import { nluAdmissionMethods } from '../schools/nlu/methods';
+import { ushAdmissionMethods } from '../schools/ush/methods';
 import { vnuumpAdmissionMethods } from '../schools/vnuump/methods';
 import { southernCatalogMethods } from '../schools/southernCatalog';
 import { remainingCatalogMethods } from '../schools/remainingCatalog';
@@ -230,6 +231,7 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   dhv: dhvAdmissionMethods,
   pyu: pyuAdmissionMethods,
   nlu: nluAdmissionMethods,
+  ush: ushAdmissionMethods,
 };
 
 /** Pure helper — trả danh sách schoolId bị trùng trong 1 mảng adapter. Test cả trên registry thật

@@ -27,7 +27,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 - **VNU-ULIS** — Truong Dai hoc Ngoai ngu - Dai hoc Quoc gia Ha Noi
 
-## Chỉ kiểm tra điều kiện/ngưỡng (86)
+## Chỉ kiểm tra điều kiện/ngưỡng (87)
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
 - **AJC** — Học viện Báo chí và Tuyên truyền
@@ -100,6 +100,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **UHD** — Trường Đại học Hải Dương
 - **UIT** — Trường Đại học Công nghệ Thông tin – ĐHQG TP.HCM
 - **UMT** — Trường Đại học Quản lý và Công nghệ TP.HCM
+- **USH** — Trường Đại học Thể dục Thể thao TP.HCM
 - **UTC** — Trường Đại học Giao thông vận tải
 - **UTE** — Trường Đại học Sư phạm Kỹ thuật - Đại học Đà Nẵng
 - **UTM** — Trường Đại học Công nghệ và Quản lý hữu nghị
@@ -116,7 +117,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNUF** — Truong Dai hoc Lam nghiep
 - **VWA** — Học viện Phụ nữ Việt Nam
 
-## Đã research, chưa đủ để tính (120)
+## Đã research, chưa đủ để tính (119)
 
 - **AADAA** — Học viện Phòng không - Không quân
 - **ACTVN** — Học viện Kỹ thuật Mật mã
@@ -215,7 +216,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **ULSA** — Trường Đại học Lao động - Xã hội
 - **UPES1** — Trường Đại học Thể dục Thể thao Bắc Ninh
 - **UPT** — Trường Đại học Phan Thiết
-- **USH** — Trường Đại học Thể dục Thể thao TP.HCM
 - **USTH** — Trường Đại học Khoa học và Công nghệ Hà Nội
 - **UTH** — Trường Đại học Giao thông vận tải TP.HCM
 - **VHS** — Trường Đại học Văn hóa TP.HCM

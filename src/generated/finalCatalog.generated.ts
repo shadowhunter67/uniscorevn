@@ -528,14 +528,6 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Batch expand-15 (2026-08-24): official tuyensinh.upes.edu.vn portal confirms 2 admission methods (both requiring a mandatory năng khiếu/talent test, minimum 5.0/10, weighted x2 in the combined score) plus a combined cultural+talent threshold around 15.00/30 for some majors. ApplicantProfile has no talent-test score field (confirmed same gap as UAD/VLU), so eligibility cannot be evaluated without fabricating an input. Left at researched.',
   },
-  ush: {
-    sourceId: 'ush-admission-2026',
-    title: 'Trường Đại học Thể dục Thể thao TP.HCM — thông tin tuyển sinh đại học chính quy năm 2026',
-    url: 'https://ush.edu.vn/thong-bao/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026-1500.html',
-    checkedAt: '2026-08-24',
-    note:
-      'Batch expand-15 (2026-08-24): official ush.edu.vn portal confirms 2 admission methods (THPT exam or transcript, both combined with a mandatory năng khiếu/talent test organized by the school, minimum 5.0/10) plus a MOET-set quality threshold for the cultural-score component. Same structural gap as UAD/UPES1: ApplicantProfile has no talent-test score field. Left at researched.',
-  },
   usth: {
     sourceId: 'usth-admission-2026',
     title: 'USTH (Trường Đại học Khoa học và Công nghệ Hà Nội) — thông báo tuyển sinh trình độ đại học năm 2026',
@@ -835,7 +827,7 @@ export const finalCatalogKnowledgeGap = {
 // shipped eligibility-only, THPT-exam route flat 15/30 (trừ Luật/Tâm lý học chờ Bộ GD&ĐT), nguồn
 // đối chiếu qua Báo Tuổi Trẻ (04/07/2026) vì tuyensinh.dhv.edu.vn không trích được số liệu qua
 // WebFetch.) They stay listed in `finalCatalogSchools` above for identity/location metadata only.
-const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus', 'tuaf', 'uhd', 'umt', 'utm', 'utt', 'eaut', 'vwa', 'hau', 'tbu', 'ltvuni', 'dhv']);
+const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus', 'tuaf', 'uhd', 'umt', 'utm', 'utt', 'eaut', 'vwa', 'hau', 'tbu', 'ltvuni', 'dhv', 'ush']);
 const finalCatalogRuntimeSchools = finalCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const finalCatalogMethods: AdmissionMethodDescriptor[] = finalCatalogRuntimeSchools.map((school) => ({
