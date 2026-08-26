@@ -13,7 +13,7 @@ export const gduModule: SchoolModule = {
   region: 'hcm',
   vnuhcm: false,
   summary:
-    'Đã xác minh trực tiếp (giadinh.edu.vn) điểm sàn GDU 2026 theo thi TN THPT: 15,0/30 cho nhóm ngành IT/truyền thông/quản trị/kinh doanh/tài chính-ngân hàng/khoa học xã hội/ngôn ngữ quốc tế. Khối Sức khỏe (Răng Hàm Mặt, Điều dưỡng, Kỹ thuật phục hồi chức năng) và Luật có ngưỡng riêng cao hơn, CHƯA nằm trong runtime — module chỉ áp dụng đúng cho nhóm ngành phổ thông đã nêu.',
+    'Tính chính xác điểm xét tuyển GDU 2026 theo thi TN THPT cho nhóm ngành IT/truyền thông/quản trị/kinh doanh/tài chính-ngân hàng/khoa học xã hội/ngôn ngữ quốc tế (ngưỡng sàn 15,0/30, không hệ số môn, cộng điểm ưu tiên theo Điều 7 Bộ GDĐT — Đề án tuyển sinh 2026, Số 01/2026/DA-GDU). Khối Sức khỏe (Răng Hàm Mặt, Điều dưỡng, Kỹ thuật phục hồi chức năng) và Luật theo ngưỡng riêng của Bộ GDĐT, CHƯA nằm trong runtime.',
   capabilities: {
     admissionInfo: true,
     programs: false,
@@ -32,6 +32,12 @@ export const gduModule: SchoolModule = {
       url: 'https://giadinh.edu.vn/truong-dai-hoc-gia-dinh-cong-bo-05-phuong-thuc-tuyen-sinh-dai-hoc-chinh-quy-nam-2026',
       type: 'official-institution',
       checkedAt: '2026-08-24',
+    },
+    {
+      title: 'Đề án tuyển sinh năm 2026 (Số 01/2026/DA-GDU)',
+      url: 'https://giadinh.edu.vn/gt-ck-de-an-tuyen-sinh',
+      type: 'official-institution',
+      checkedAt: '2026-08-26',
     },
   ],
 };

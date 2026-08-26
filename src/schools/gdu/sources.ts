@@ -21,4 +21,14 @@ export const gduSources: Omit<AdmissionSource, 'schoolId'>[] = [
     verification: 'verified',
     lifecycle: { effectiveYear: 2026, status: 'current' },
   },
+  {
+    id: 'gdu-de-an-tuyen-sinh-2026',
+    publisher: 'Trường Đại học Gia Định',
+    title: 'Đề án tuyển sinh năm 2026 (Số 01/2026/DA-GDU, ký 18/03/2026) — Thông tin tuyển sinh năm 2026 (Hình thức đào tạo: Đại học chính quy)',
+    url: 'https://giadinh.edu.vn/gt-ck-de-an-tuyen-sinh',
+    accessedAt: '2026-08-26',
+    sourceType: 'official-admission',
+    verification: 'verified',
+    lifecycle: { effectiveYear: 2026, status: 'current' },
+  },
 ];
