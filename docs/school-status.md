@@ -27,7 +27,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 - **VNU-ULIS** — Truong Dai hoc Ngoai ngu - Dai hoc Quoc gia Ha Noi
 
-## Chỉ kiểm tra điều kiện/ngưỡng (87)
+## Chỉ kiểm tra điều kiện/ngưỡng (88)
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
 - **AJC** — Học viện Báo chí và Tuyên truyền
@@ -53,6 +53,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HAU** — Trường Đại học Kiến trúc Hà Nội
 - **HCE** — Trường Đại học Kinh tế, Đại học Huế
 - **HCMUE** — Trường Đại học Sư phạm Thành phố Hồ Chí Minh (HCMUE, TPHCM)
+- **HCMUPES** — Trường Đại học Sư phạm Thể dục Thể thao TP.HCM
 - **HDU** — Trường Đại học Hồng Đức
 - **HIU** — Trường Đại học Quốc tế Hồng Bàng
 - **HLU** — Trường Đại học Luật Hà Nội
@@ -117,7 +118,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNUF** — Truong Dai hoc Lam nghiep
 - **VWA** — Học viện Phụ nữ Việt Nam
 
-## Đã research, chưa đủ để tính (119)
+## Đã research, chưa đủ để tính (118)
 
 - **AADAA** — Học viện Phòng không - Không quân
 - **ACTVN** — Học viện Kỹ thuật Mật mã
@@ -148,7 +149,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HCMCONS** — Nhạc viện Thành phố Hồ Chí Minh
 - **HCMUFA** — Trường Đại học Mỹ thuật TP.HCM
 - **HCMUNRE** — Trường Đại học Tài nguyên và Môi trường TP.HCM
-- **HCMUPES** — Trường Đại học Sư phạm Thể dục Thể thao TP.HCM
 - **HDIU** — Trường Đại học Đông Đô
 - **HLUV** — Trường Đại học Hoa Lư
 - **HMU** — Trường Đại học Y Hà Nội

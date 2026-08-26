@@ -5,6 +5,7 @@ import { activeAdmissionConfig } from '../schools/hcmut/config/admission-2026';
 import { validateBonusComponent, validatePriorityRaw } from '../schools/hcmut/validation';
 import { validateRange } from '../core/rangeValidation';
 import { USH_SUBJECT_PAIRS, USH_TALENT_MAX_10 } from '../schools/ush/eligibility';
+import { HCMUPES_SUBJECT_PAIRS, HCMUPES_TALENT_MAX_10 } from '../schools/hcmupes/eligibility';
 import { ScoreInput } from './ScoreInput';
 import { buildSelectionFromDraft, EMPTY_DRAFT, SCHOOLS_REQUIRING_COMBINATION, selectionToDraft, type PickerDraft } from './compare/pickerDraft';
 import { useApplicantProfile } from '../core/applicantProfileContextCore';
@@ -284,6 +285,38 @@ function ComparePicker({
                       onChange={(value) => onDraftChange({ ...draft, ushTalentScore10: value })}
                       compact
                     />
+                  </div>
+                )}
+
+                {draft.schoolId === 'hcmupes' && (
+                  <div className="mt-4 grid gap-2 sm:grid-cols-2">
+                    <label className="block text-xs font-medium text-ink">
+                      Tổ hợp HCMUPES
+                      <select
+                        value={draft.hcmupesPairId}
+                        onChange={(event) => onDraftChange({ ...draft, hcmupesPairId: event.target.value })}
+                        className="mt-1 w-full rounded-md border border-ink/10 bg-surface px-3 py-2 text-sm"
+                      >
+                        <option value="">Chưa chọn</option>
+                        {HCMUPES_SUBJECT_PAIRS.map((pair) => (
+                          <option key={pair.id} value={pair.id}>
+                            {pair.label}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <ScoreInput
+                      id="compare-hcmupes-talent-score"
+                      label="Điểm năng khiếu TDTT"
+                      hint={`0 - ${HCMUPES_TALENT_MAX_10}`}
+                      value={draft.hcmupesTalentScore10}
+                      error={validateRange(draft.hcmupesTalentScore10, 0, HCMUPES_TALENT_MAX_10).error}
+                      onChange={(value) => onDraftChange({ ...draft, hcmupesTalentScore10: value })}
+                      compact
+                    />
+                    <p className="text-xs text-muted sm:col-span-2">
+                      Ngưỡng HCMUPES phụ thuộc khu vực ưu tiên — chọn khu vực ở mục "Điểm ưu tiên khu vực/đối tượng" trong hồ sơ dùng chung.
+                    </p>
                   </div>
                 )}
 

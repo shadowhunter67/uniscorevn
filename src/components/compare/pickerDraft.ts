@@ -2,6 +2,7 @@ import { activeAdmissionConfig } from '../../schools/hcmut/config/admission-2026
 import { validateBonusComponent, validatePriorityRaw } from '../../schools/hcmut/validation';
 import { validateRange } from '../../core/rangeValidation';
 import { USH_TALENT_MAX_10 } from '../../schools/ush/eligibility';
+import { HCMUPES_TALENT_MAX_10 } from '../../schools/hcmupes/eligibility';
 import { programCatalogBySchool } from '../../compare/programCatalog';
 import type { ComparisonSelection } from '../../compare/comparisonSelection';
 
@@ -24,6 +25,8 @@ export interface PickerDraft {
   hasUsshBonusAchievement: boolean;
   ushPairId: string;
   ushTalentScore10: string;
+  hcmupesPairId: string;
+  hcmupesTalentScore10: string;
 }
 
 export const EMPTY_DRAFT: PickerDraft = {
@@ -37,6 +40,8 @@ export const EMPTY_DRAFT: PickerDraft = {
   hasUsshBonusAchievement: false,
   ushPairId: '',
   ushTalentScore10: '',
+  hcmupesPairId: '',
+  hcmupesTalentScore10: '',
 };
 
 export const SCHOOLS_REQUIRING_COMBINATION = new Set(['hcmut', 'uel', 'hcmus', 'ussh', 'uhs', 'iu', 'agu', 'hcmue']);
@@ -54,6 +59,8 @@ export function selectionToDraft(selection: ComparisonSelection): PickerDraft {
     hasUsshBonusAchievement: selection.context?.hasUsshBonusAchievement === true,
     ushPairId: selection.context?.ushPairId ?? '',
     ushTalentScore10: selection.context?.ushTalentScore10 !== undefined ? String(selection.context.ushTalentScore10) : '',
+    hcmupesPairId: selection.context?.hcmupesPairId ?? '',
+    hcmupesTalentScore10: selection.context?.hcmupesTalentScore10 !== undefined ? String(selection.context.hcmupesTalentScore10) : '',
   };
 }
 
@@ -68,6 +75,7 @@ export function buildSelectionFromDraft(draft: PickerDraft): Omit<ComparisonSele
   if (requiresProgramSelection(draft.schoolId) && !draft.programId) return undefined;
   if (SCHOOLS_REQUIRING_COMBINATION.has(draft.schoolId) && !draft.combinationId) return undefined;
   if (draft.schoolId === 'ush' && !draft.ushPairId) return undefined;
+  if (draft.schoolId === 'hcmupes' && !draft.hcmupesPairId) return undefined;
 
   const context: ComparisonSelection['context'] = {};
   if (draft.combinationId) context.combinationId = draft.combinationId;
@@ -78,6 +86,12 @@ export function buildSelectionFromDraft(draft: PickerDraft): Omit<ComparisonSele
     if (talentScore.error !== null) return undefined;
     // "missing ≠ 0": ô trống nghĩa là CHƯA nhập, không phải điểm 0 — không ghi 0 vào context.
     if (!talentScore.isEmpty) context.ushTalentScore10 = talentScore.value;
+  }
+  if (draft.schoolId === 'hcmupes') {
+    if (draft.hcmupesPairId) context.hcmupesPairId = draft.hcmupesPairId;
+    const talentScore = validateRange(draft.hcmupesTalentScore10, 0, HCMUPES_TALENT_MAX_10);
+    if (talentScore.error !== null) return undefined;
+    if (!talentScore.isEmpty) context.hcmupesTalentScore10 = talentScore.value;
   }
   if (draft.schoolId === 'hcmut') {
     const reward = validateBonusComponent(draft.hcmutReward);

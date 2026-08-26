@@ -1,6 +1,7 @@
 import { COMMON_SUBJECT_COMBINATIONS } from '../core/subjects';
 import { safeGetItem, safeSetItem } from '../core/safeStorage';
 import { USH_SUBJECT_PAIRS, USH_TALENT_MAX_10 } from '../schools/ush/eligibility';
+import { HCMUPES_SUBJECT_PAIRS, HCMUPES_TALENT_MAX_10 } from '../schools/hcmupes/eligibility';
 
 export interface SchoolComparisonContext {
   combinationId?: string;
@@ -15,6 +16,10 @@ export interface SchoolComparisonContext {
    * không có trong ApplicantProfile chung vì chỉ USH dùng. Xem `schools/ush/eligibility.ts`. */
   ushPairId?: string;
   ushTalentScore10?: number;
+  /** HCMUPES (ĐH Sư phạm TDTT TP.HCM) — cùng cấu trúc tổ hợp T-series + năng khiếu TDTT như USH,
+   * xem `schools/hcmupes/eligibility.ts`. */
+  hcmupesPairId?: string;
+  hcmupesTalentScore10?: number;
 }
 
 export interface ComparisonSelection {
@@ -48,6 +53,8 @@ function stableContextSignature(context?: SchoolComparisonContext): string {
     hasUsshBonusAchievement: context.hasUsshBonusAchievement === true,
     ushPairId: context.ushPairId,
     ushTalentScore10: context.ushTalentScore10,
+    hcmupesPairId: context.hcmupesPairId,
+    hcmupesTalentScore10: context.hcmupesTalentScore10,
   });
 }
 
@@ -136,6 +143,13 @@ function isValidContext(value: unknown): value is SchoolComparisonContext {
   }
   if (context.ushTalentScore10 !== undefined) {
     if (!isFiniteNonNegativeNumber(context.ushTalentScore10) || context.ushTalentScore10 > USH_TALENT_MAX_10) return false;
+  }
+  if (context.hcmupesPairId !== undefined) {
+    if (typeof context.hcmupesPairId !== 'string') return false;
+    if (!HCMUPES_SUBJECT_PAIRS.some((pair) => pair.id === context.hcmupesPairId)) return false;
+  }
+  if (context.hcmupesTalentScore10 !== undefined) {
+    if (!isFiniteNonNegativeNumber(context.hcmupesTalentScore10) || context.hcmupesTalentScore10 > HCMUPES_TALENT_MAX_10) return false;
   }
   return true;
 }

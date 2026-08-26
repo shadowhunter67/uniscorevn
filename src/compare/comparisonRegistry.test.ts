@@ -108,6 +108,7 @@ import { dhvAdmissionMethods } from '../schools/dhv/methods';
 import { pyuAdmissionMethods } from '../schools/pyu/methods';
 import { nluAdmissionMethods } from '../schools/nlu/methods';
 import { ushAdmissionMethods } from '../schools/ush/methods';
+import { hcmupesAdmissionMethods } from '../schools/hcmupes/methods';
 import { vnuumpAdmissionMethods } from '../schools/vnuump/methods';
 import { southernCatalogMethods } from '../schools/southernCatalog';
 import { remainingCatalogMethods } from '../schools/remainingCatalog';
@@ -232,6 +233,7 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   pyu: pyuAdmissionMethods,
   nlu: nluAdmissionMethods,
   ush: ushAdmissionMethods,
+  hcmupes: hcmupesAdmissionMethods,
 };
 
 /** Pure helper — trả danh sách schoolId bị trùng trong 1 mảng adapter. Test cả trên registry thật

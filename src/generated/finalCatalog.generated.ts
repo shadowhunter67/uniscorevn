@@ -315,14 +315,6 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Official HCMUFA (hcmufa.edu.vn) 2026 notice confirms a combined aptitude-exam admission method (vẽ, bố cục, điêu khắc with 2x weighting on some subjects, plus a Ngữ văn condition-check) with a flat 5/10 minimum per exam subject, registered via reg.finearts.vn (30/03-29/05/2026). The aptitude subjects (vẽ, bố cục, điêu khắc) are not modeled fields in the shared ApplicantProfile/subject schema, and Ngữ văn is condition-only (không cộng điểm rõ ràng) rather than summed into a standard 30-point total, so an eligibility module would require new non-standard profile fields UniScoreVN does not have yet. Left at researched to avoid guessing the scoring/weighting mechanics.',
   },
-  hcmupes: {
-    sourceId: 'hcmupes-admission-2026',
-    title: 'Thông tin tuyển sinh đại học chính quy năm 2026 - Trường Đại học Sư phạm Thể dục Thể thao TP.HCM',
-    url: 'https://upes.edu.vn/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026/',
-    checkedAt: '2026-08-24',
-    note:
-      'Official UPES (upes.edu.vn) 2026 notice confirms 3 programs (7140206, 7810301, 7810302) admitted via a combined score of a Thể dục Thể thao aptitude test (thể hình, chạy 30m, bật xa tại chỗ, fee 400,000 VND, exam 15/06/2026) plus 2 cultural subjects from 7 named combinations (T00/T01/T02/T05/T08/T09/T10). Secondary press (chinhphu.vn) reports 2026 cut-offs of 22.30-25.37, but the aptitude test score is not a field in the shared ApplicantProfile schema and no official floor/conversion table was located on the primary source. Left at researched: modeling would require guessing the aptitude-to-30-point conversion.',
-  },
   hnmu: {
     sourceId: 'hnmu-admission-2026',
     title: 'Tuyển sinh - Trường Đại học Thủ đô Hà Nội',
@@ -827,7 +819,7 @@ export const finalCatalogKnowledgeGap = {
 // shipped eligibility-only, THPT-exam route flat 15/30 (trừ Luật/Tâm lý học chờ Bộ GD&ĐT), nguồn
 // đối chiếu qua Báo Tuổi Trẻ (04/07/2026) vì tuyensinh.dhv.edu.vn không trích được số liệu qua
 // WebFetch.) They stay listed in `finalCatalogSchools` above for identity/location metadata only.
-const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus', 'tuaf', 'uhd', 'umt', 'utm', 'utt', 'eaut', 'vwa', 'hau', 'tbu', 'ltvuni', 'dhv', 'ush']);
+const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus', 'tuaf', 'uhd', 'umt', 'utm', 'utt', 'eaut', 'vwa', 'hau', 'tbu', 'ltvuni', 'dhv', 'ush', 'hcmupes']);
 const finalCatalogRuntimeSchools = finalCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const finalCatalogMethods: AdmissionMethodDescriptor[] = finalCatalogRuntimeSchools.map((school) => ({
