@@ -13,7 +13,7 @@ export const hluModule: SchoolModule = {
   region: 'hanoi',
   vnuhcm: false,
   summary:
-    'Đã xác minh Thông báo 1010/TB-ĐHLHN (08/07/2026): ngưỡng bảo đảm chất lượng đầu vào từ điểm thi TN THPT 2026 là 20,0/30 điểm, áp dụng chung cho mọi chương trình lĩnh vực pháp luật (khu vực 3). Module hiện chỉ kiểm tra ngưỡng chung này, chưa có bảng mã ngành/tổ hợp và điểm ưu tiên khu vực/đối tượng khác.',
+    'Tính chính xác Điểm xét tuyển HLU 2026 (phương thức thi TN THPT, lĩnh vực pháp luật) cho tổ hợp D01/A00/A01/C00: ĐXT (quy về tổ hợp gốc D01) = min(30, tổng thô 3 môn − độ chênh tổ hợp + điểm ưu tiên); độ chênh tổ hợp (A00 +1,48 / A01 +0,26 / C00 0) trích Thông báo 1029, điểm ưu tiên trích nguyên văn Điều 7 Quy chế HLU (QĐ 633), ngưỡng ĐBCL 20,0/30 (KV3) trích Thông báo 1010 · Đối chiếu điểm trúng tuyển 2026 theo mã ngành (Luật 24,12 · Luật KT 25,95 · Luật TMQT 24,22 · Ngôn ngữ Anh 23,09 · Luật Đắk Lắk 20,00) · Ngoài phạm vi: tổ hợp ngoại ngữ D02-D06 và phương thức học bạ.',
   capabilities: {
     admissionInfo: true,
     programs: false,
