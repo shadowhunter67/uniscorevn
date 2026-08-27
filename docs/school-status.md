@@ -2,7 +2,7 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (25)
+## Calculator đã xác minh (30)
 
 - **FTU** — Trường Đại học Ngoại thương
 - **GDU** — Trường Đại học Gia Định
@@ -11,9 +11,13 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HCMUS** — Trường Đại học Khoa học Tự nhiên - ĐHQG TP.HCM
 - **HCMUT** — Trường Đại học Bách khoa – ĐHQG TP.HCM
 - **HCMUTE** — Trường Đại học Công nghệ Kỹ thuật TP. Hồ Chí Minh
+- **HUAF** — Trường Đại học Nông Lâm, Đại học Huế
+- **HUED** — Trường Đại học Sư phạm, Đại học Huế
 - **HUFLIT** — Trường Đại học Ngoại ngữ - Tin học TP. Hồ Chí Minh
 - **HUL** — Trường Đại học Luật, Đại học Huế
+- **HUMG** — Trường Đại học Mỏ - Địa chất
 - **HUP** — Trường Đại học Dược Hà Nội
+- **HUSC** — Trường Đại học Khoa học, Đại học Huế
 - **HUTECH** — Trường Đại học Công nghệ TP. Hồ Chí Minh
 - **IU** — Trường Đại học Quốc tế – ĐHQG TP.HCM
 - **IUH** — Trường Đại học Công nghiệp Thành phố Hồ Chí Minh
@@ -28,6 +32,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **USSH** — Trường Đại học Khoa học Xã hội và Nhân văn – ĐHQG TP.HCM
 - **UTC** — Trường Đại học Giao thông vận tải
 - **VKU** — Trường Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn
+- **VMU** — Trường Đại học Hàng hải Việt Nam
 - **VNU-ULIS** — Truong Dai hoc Ngoai ngu - Dai hoc Quoc gia Ha Noi
 
 ## Calculator một phần (3)
@@ -36,7 +41,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **NEU** — Trường Đại học Kinh tế Quốc dân
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 
-## Chỉ kiểm tra điều kiện/ngưỡng (79)
+## Chỉ kiểm tra điều kiện/ngưỡng (74)
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
 - **AJC** — Học viện Báo chí và Tuyên truyền
@@ -67,14 +72,10 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HNUE** — Trường Đại học Sư phạm Hà Nội
 - **HPU2** — Truong Dai hoc Su pham Ha Noi 2
 - **HSU** — Trường Đại học Hoa Sen
-- **HUAF** — Trường Đại học Nông Lâm, Đại học Huế
 - **HUB** — Trường Đại học Ngân hàng TP. Hồ Chí Minh
 - **HUBT** — Trường Đại học Kinh doanh và Công nghệ Hà Nội
 - **HUCE** — Truong Dai hoc Xay dung Ha Noi
-- **HUED** — Trường Đại học Sư phạm, Đại học Huế
 - **HUIT** — Trường Đại học Công Thương TP.HCM
-- **HUMG** — Trường Đại học Mỏ - Địa chất
-- **HUSC** — Trường Đại học Khoa học, Đại học Huế
 - **LTVUni** — Trường Đại học Lương Thế Vinh
 - **NLU** — Trường Đại học Nông Lâm TP.HCM
 - **NTTU** — Trường Đại học Nguyễn Tất Thành
@@ -111,7 +112,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VGU** — Truong Dai hoc Viet Duc
 - **VinhUni** — Trường Đại học Vinh
 - **VLU** — Trường Đại học Văn Lang
-- **VMU** — Trường Đại học Hàng hải Việt Nam
 - **VNU-LS** — Truong Dai hoc Luat - Dai hoc Quoc gia Ha Noi
 - **VNU-UMP** — Truong Dai hoc Y Duoc - Dai hoc Quoc gia Ha Noi
 - **VNUA** — Hoc vien Nong nghiep Viet Nam
