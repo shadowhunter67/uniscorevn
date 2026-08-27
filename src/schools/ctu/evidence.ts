@@ -38,3 +38,54 @@ export const ctuAltPathEvidence = {
     },
   ],
 } satisfies SourcedRule<{ totalScoreAltPath30: number; graduationScoreAltPath10: number }>;
+
+/** Phương thức 2 (thi TN THPT) — công thức Điểm xét tuyển. Footnote [2] thông báo ngưỡng: điểm ưu
+ * tiên gồm Khu vực + Đối tượng (thang 30 theo quy chế hiện hành), phương thức thi THPT không có
+ * điểm cộng thành tích ⇒ ĐXT = tổng thô 3 môn tổ hợp (không hệ số) + điểm ưu tiên. Bảng mức KV/ĐT
+ * và công thức giảm ≥ 22,5 áp Điều 7 Thông tư 08/2022/TT-BGDĐT (còn hiệu lực 2026). */
+export const ctuThptExamFormulaEvidence = {
+  ruleId: 'ctu-thpt-exam-formula-2026',
+  evidence: [
+    {
+      sourceId: 'ctu-quality-threshold-2026',
+      location:
+        'Footnote [2] — "Điểm ưu tiên bao gồm: Khu vực tuyển sinh và Đối tượng ưu tiên"; mục 2.2.1 quy đổi thang 30 theo tổ hợp không nhân hệ số. Phương thức xét điểm thi TN THPT không có điểm cộng thành tích ⇒ Điểm xét tuyển = tổng 3 môn thi (thô) + điểm ưu tiên. Mức KV/ĐT + công thức giảm ≥ 22,5 theo Điều 7 Thông tư 08/2022/TT-BGDĐT.',
+      verification: 'verified' as const,
+      effectiveYear: 2026,
+      verifiedAt: '2026-08-27',
+    },
+  ],
+};
+
+/** Điều kiện 2 (mục 2.2.1) — điểm sàn ĐKXT theo TỪNG MÃ XÉT TUYỂN (thang 30, so với tổng 3 môn
+ * thô theo tổ hợp). Đọc từ phụ lục PDF 9 trang (`ctu-appendix-threshold-2026`) bằng OCR
+ * 2026-08-27. */
+export const ctuPerMajorThresholdEvidence = {
+  ruleId: 'ctu-per-major-threshold-2026',
+  evidence: [
+    {
+      sourceId: 'ctu-appendix-threshold-2026',
+      location:
+        'Phụ lục "ĐIỂM SÀN ĐĂNG KÝ XÉT TUYỂN VÀO ĐẠI HỌC CHÍNH QUY NĂM 2026" — bảng theo từng mã xét tuyển (9 trang): nhóm đào tạo giáo viên 20 (Giáo dục Thể chất 19); nhóm pháp luật 20 + điều kiện tổ hợp; các ngành còn lại 15-16 (mã 7480106 VMBD: 22,75 + Toán ≥ 7,5).',
+      verification: 'verified' as const,
+      effectiveYear: 2026,
+      verifiedAt: '2026-08-27',
+    },
+  ],
+};
+
+/** Nhóm pháp luật — điều kiện tổ hợp môn (mọi phương thức). Với phương thức thi TN THPT dùng
+ * điểm thi thô, đọc trực tiếp, KHÔNG cần bảng quy đổi V-SAT/học bạ. */
+export const ctuLawComboThptEvidence = {
+  ruleId: 'ctu-law-combo-thpt-2026',
+  evidence: [
+    {
+      sourceId: 'ctu-appendix-threshold-2026',
+      location:
+        'Nhóm ngành lĩnh vực pháp luật — điểm sàn "20 và: đối với tổ hợp C00: Ngữ văn ≥ 6,0 điểm; đối với các tổ hợp còn lại: Toán + Ngữ văn ≥ 12,0 điểm".',
+      verification: 'verified' as const,
+      effectiveYear: 2026,
+      verifiedAt: '2026-08-27',
+    },
+  ],
+};

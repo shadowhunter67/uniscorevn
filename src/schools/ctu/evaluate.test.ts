@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { ApplicantProfile } from '../../core/applicantProfile';
-import { evaluateCtuThptExamAdmission, evaluateCtuTranscriptAdmission, evaluateCtuVsatAdmission } from './evaluate';
+import { evaluateCtuThptExamAdmission, evaluateCtuThptExamExactAdmission, evaluateCtuTranscriptAdmission, evaluateCtuVsatAdmission } from './evaluate';
 
 const A01_SUBJECTS = ['math', 'physics', 'english'] as const;
 
@@ -53,9 +53,114 @@ describe('evaluateCtuThptExamAdmission', () => {
     expect(evaluation.score).toBeUndefined();
   });
 
-  it('missingRules chứa gap phụ lục PDF điểm sàn theo mã xét tuyển', () => {
+  it('missingRules chứa gap điểm sàn theo mã xét tuyển', () => {
     const evaluation = evaluateCtuThptExamAdmission(profileWithThpt({}));
-    expect(evaluation.missingRules.some((label) => label.includes('mã xét tuyển'))).toBe(true);
+    expect(evaluation.missingRules.some((label) => label.toLowerCase().includes('mã xét tuyển'))).toBe(true);
+  });
+});
+
+describe('evaluateCtuThptExamExactAdmission (Phương thức 2 — Điểm xét tuyển theo mã xét tuyển)', () => {
+  it('chưa chọn mã xét tuyển -> partial + missingRequirement ctu-program-code', () => {
+    const evaluation = evaluateCtuThptExamExactAdmission(profileWithThpt({ math: 8, physics: 8, english: 8 }));
+    expect(evaluation.confidence).toBe('partial');
+    expect(evaluation.missingRequirements?.some((r) => r.code === 'ctu-program-code')).toBe(true);
+  });
+
+  it('mã ngành năng khiếu (Giáo dục Mầm non) -> partial out-of-scope', () => {
+    const evaluation = evaluateCtuThptExamExactAdmission(profileWithThpt({ math: 8, literature: 8, english: 8 }), {
+      programCode: '7140201',
+      combinationId: 'M11',
+    });
+    expect(evaluation.confidence).toBe('partial');
+    expect(evaluation.missingRequirements?.some((r) => r.code === 'ctu-program-out-of-scope')).toBe(true);
+  });
+
+  it('tổ hợp không thuộc mã ngành -> partial + missingRequirement ctu-subject-combination', () => {
+    const evaluation = evaluateCtuThptExamExactAdmission(profileWithThpt({ math: 8, physics: 8, english: 8 }), {
+      programCode: '7480101',
+      combinationId: 'C00',
+    });
+    expect(evaluation.confidence).toBe('partial');
+    expect(evaluation.missingRequirements?.some((r) => r.code === 'ctu-subject-combination')).toBe(true);
+  });
+
+  it('thiếu điểm 1 môn -> partial + profile-input', () => {
+    const evaluation = evaluateCtuThptExamExactAdmission(profileWithThpt({ math: 8, physics: 8 }), {
+      programCode: '7480101',
+      combinationId: 'A01',
+    });
+    expect(evaluation.confidence).toBe('partial');
+    expect(evaluation.missingRequirements?.some((r) => r.code === 'ctu-thpt-english')).toBe(true);
+  });
+
+  it('đủ điều kiện ngành standard (KHMT, sàn 15) -> exact-verified + eligible + score', () => {
+    const evaluation = evaluateCtuThptExamExactAdmission(profileWithThpt({ math: 8, physics: 7.5, english: 7 }), {
+      programCode: '7480101',
+      combinationId: 'A01',
+    });
+    expect(evaluation.confidence).toBe('exact-verified');
+    expect(evaluation.eligibility?.status).toBe('eligible');
+    expect(evaluation.score).toEqual({ value: 22.5, scale: 30 });
+  });
+
+  it('cộng điểm ưu tiên KV1 khi tổng < 22,5 -> cộng nguyên mức', () => {
+    const evaluation = evaluateCtuThptExamExactAdmission(
+      { thpt: { scores: { math: 7, physics: 7, english: 7 } }, priority: { region: 'KV1' } },
+      { programCode: '7480101', combinationId: 'A01' }
+    );
+    expect(evaluation.score).toEqual({ value: 21.75, scale: 30 });
+  });
+
+  it('giảm điểm ưu tiên khi tổng thô ≥ 22,5', () => {
+    const evaluation = evaluateCtuThptExamExactAdmission(
+      { thpt: { scores: { math: 9, physics: 9, english: 6 } }, priority: { region: 'KV1' } },
+      { programCode: '7480101', combinationId: 'A01' }
+    );
+    // raw 24; ((30-24)/7.5)*0.75 = 0.6 -> 24.6
+    expect(evaluation.score).toEqual({ value: 24.6, scale: 30 });
+  });
+
+  it('tổng dưới điểm sàn ngành (Du lịch sàn 16, tổng 15) -> ineligible nhưng vẫn có score', () => {
+    const evaluation = evaluateCtuThptExamExactAdmission(profileWithThpt({ math: 5, literature: 5, english: 5 }), {
+      programCode: '7810101',
+      combinationId: 'D01',
+    });
+    expect(evaluation.confidence).toBe('exact-verified');
+    expect(evaluation.eligibility?.status).toBe('ineligible');
+    expect(evaluation.score).toEqual({ value: 15, scale: 30 });
+  });
+
+  it('có môn ≤ 1,0 -> ineligible dù tổng đủ', () => {
+    const evaluation = evaluateCtuThptExamExactAdmission(profileWithThpt({ math: 1, physics: 10, english: 10 }), {
+      programCode: '7480101',
+      combinationId: 'A01',
+    });
+    expect(evaluation.eligibility?.status).toBe('ineligible');
+  });
+
+  it('nhóm pháp luật C00: Ngữ văn ≥ 6 thỏa -> eligible', () => {
+    const evaluation = evaluateCtuThptExamExactAdmission(profileWithThpt({ literature: 8, history: 7, geography: 6 }), {
+      programCode: '7380101',
+      combinationId: 'C00',
+    });
+    expect(evaluation.eligibility?.status).toBe('eligible');
+    expect(evaluation.score).toEqual({ value: 21, scale: 30 });
+  });
+
+  it('nhóm pháp luật tổ hợp D01: Toán + Ngữ văn < 12 -> ineligible', () => {
+    const evaluation = evaluateCtuThptExamExactAdmission(profileWithThpt({ literature: 3, math: 8, english: 10 }), {
+      programCode: '7380101',
+      combinationId: 'D01',
+    });
+    expect(evaluation.eligibility?.status).toBe('ineligible');
+  });
+
+  it('methodId khớp nhánh exact', () => {
+    const evaluation = evaluateCtuThptExamExactAdmission(profileWithThpt({ math: 8, physics: 8, english: 8 }), {
+      programCode: '7480101',
+      combinationId: 'A01',
+    });
+    expect(evaluation.methodId).toBe('ctu-thpt-exam-exact-2026');
   });
 });
 

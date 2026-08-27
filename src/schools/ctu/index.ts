@@ -23,7 +23,7 @@ export const ctuModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'Điều kiện 1 (tổng 3 môn thi TN THPT 2026 ≥15/30, không môn nào ≤1,0) đã xác minh từ thông báo chính thức tuyensinh.ctu.edu.vn (08/7/2026), áp dụng chung mọi ngành/phương thức — điều kiện CẦN, chưa phải ĐỦ · Điểm sàn chi tiết theo mã xét tuyển (điều kiện 2, Phương thức 2) nằm trong phụ lục PDF ảnh scan chưa đọc được · Nhóm pháp luật/sư phạm (trừ Giáo dục Mầm non/Thể chất) có đường thay thế qua học lực lớp 12 + điểm thi TN THPT/điểm xét tốt nghiệp THPT (Phương thức 3/4) — nhóm sư phạm kết luận được eligible chắc chắn qua đường này, nhóm pháp luật còn vướng điều kiện tổ hợp môn cần bảng quy đổi V-SAT/học bạ chưa có.',
+    'Tính chính xác Điểm xét tuyển CTU 2026 — Phương thức 2 (xét điểm thi TN THPT) theo mã xét tuyển: ĐXT = tổng thô 3 môn tổ hợp + điểm ưu tiên (Điều 7 Thông tư 08/2022, công thức giảm ≥ 22,5), so với điểm sàn ĐKXT theo mã ngành (nhóm giáo viên 20, Giáo dục Thể chất 19, nhóm pháp luật 20 + điều kiện tổ hợp, ngành khác 15-16) + điều kiện không môn nào ≤ 1,0 — công thức từ footnote thông báo ngưỡng 08/7/2026, bảng điểm sàn 127 mã đọc từ phụ lục PDF bằng OCR · Ngoài phạm vi nhánh exact: ngành năng khiếu (Giáo dục Mầm non/Thể chất/Kiến trúc, Thiết kế vi mạch bán dẫn), tổ hợp Tiếng Pháp/năng khiếu, và Phương thức 3 (học bạ)/4 (V-SAT) vẫn cần bảng quy đổi · Phương thức 3/4 nhóm pháp luật/sư phạm có đường thay thế qua học lực lớp 12 + điểm thi/điểm xét tốt nghiệp THPT.',
   capabilities: {
     admissionInfo: true,
     programs: false,

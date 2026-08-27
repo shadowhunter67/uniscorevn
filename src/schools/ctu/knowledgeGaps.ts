@@ -10,14 +10,12 @@ export const ctuKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'ctu-per-major-threshold-pdf-unparsed',
     label:
-      'Điểm sàn (điều kiện 2, mục 2.2.1) theo TỪNG MÃ XÉT TUYỂN cụ thể — "Điểm sàn được xác định theo thang điểm 30 ứng với từng mã xét tuyển", nằm trong Phụ lục PDF riêng (nút "XEM TẠI ĐÂY"). File PDF này là ảnh scan (JPEG nhúng trong PDF, không có text layer) — không đọc được bằng công cụ hiện có, không có OCR trên máy. Điều kiện 1 (15,0/30) chỉ là ngưỡng SÀN CHUNG tối thiểu, một số mã xét tuyển có thể có điểm sàn cao hơn.',
+      'Điểm sàn (điều kiện 2, mục 2.2.1) theo TỪNG MÃ XÉT TUYỂN — batch 2026-08-27: đã đọc trực tiếp phụ lục PDF 9 trang bằng OCR (poppler render + vision, xem `sources.ts:ctu-appendix-threshold-2026`) và nhập đủ 127 mã vào `thresholds.ts`, mở nhánh exact `ctu-thpt-exam-exact-2026` (Phương thức 2). Còn ngoài phạm vi nhánh exact: nhóm ngành năng khiếu (Giáo dục Mầm non/Thể chất/Kiến trúc, mã 7480106 Thiết kế vi mạch bán dẫn) và tổ hợp chứa môn không có trong taxonomy (Tiếng Pháp, các môn năng khiếu); Phương thức 3 (học bạ)/4 (V-SAT) vẫn cần bảng quy đổi.',
     status: 'official-but-unparsed',
-    sourceId: 'ctu-quality-threshold-2026',
-    scoreAffecting: true,
+    sourceId: 'ctu-appendix-threshold-2026',
+    scoreAffecting: false,
     implemented: false,
-    attemptedSources: ['https://tuyensinh.ctu.edu.vn/images/upload/TT_TS/2026/Phu-luc-TB_Nguong-bao-dam-chat-luong-dau-vao-dai-hoc-chinh-quy-nam-2026.pdf — PDF ảnh scan, không có text layer, không OCR được.'],
-    whyNotInferred: 'Không suy đoán điểm sàn riêng từng mã xét tuyển từ ngưỡng chung 15,0 — có thể có mã cao hơn, sai lệch sẽ khiến kết luận "eligible" sai.',
-    impact: 'exact-final-score-blocking',
+    impact: 'method-out-of-scope',
   },
   {
     id: 'ctu-hocba-vsat-conversion-table-unparsed',
@@ -48,7 +46,7 @@ export const ctuKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'ctu-priority-bonus-table-not-found',
     label:
-      'Bảng điểm ưu tiên khu vực/đối tượng cụ thể áp dụng cho CTU (footnote [2] chỉ nêu "Điểm ưu tiên bao gồm: Khu vực tuyển sinh và Đối tượng ưu tiên" mà không có bảng số riêng — có thể trùng bảng chuẩn Bộ GD&ĐT nhưng chưa cross-check) và bảng điểm cộng thành tích (nếu có) chưa tìm được nguồn CTU tự công bố.',
+      'Điểm ưu tiên KV/ĐT: footnote [2] chỉ nêu "Điểm ưu tiên bao gồm: Khu vực tuyển sinh và Đối tượng ưu tiên" (thang 30 theo quy chế hiện hành) ⇒ áp Điều 7 Thông tư 08/2022/TT-BGDĐT + công thức giảm ≥ 22,5 (judgment call, `priority.ts`), đã dùng cho nhánh exact Phương thức 2 (`ctu-thpt-exam-exact-2026`). Phương thức thi TN THPT không có điểm cộng thành tích nên nhánh exact không bị chặn; bảng điểm cộng cho Phương thức khác (nếu có) vẫn chưa tìm được nguồn CTU tự công bố.',
     status: 'incomplete',
     sourceId: 'ctu-quality-threshold-2026',
     scoreAffecting: true,

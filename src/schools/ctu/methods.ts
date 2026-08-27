@@ -52,4 +52,32 @@ export const ctuAdmissionMethods: AdmissionMethodDescriptor[] = [
     capabilities: { eligibility: true, scoreConversion: false, bonus: false, priority: false, exactCalculator: false },
     knowledgeGaps: vsatGaps,
   },
+  /**
+   * Nhánh HẸP tính đủ Điểm xét tuyển (exact), Phương thức 2 (xét điểm thi TN THPT). Trích từ thông
+   * báo ngưỡng đầu vào CTU 2026 (`sources.ts:ctu-quality-threshold-2026` + phụ lục
+   * `ctu-appendix-threshold-2026`):
+   *  - Công thức: ĐXT = tổng thô 3 môn tổ hợp (không hệ số) + Điểm ưu tiên (KV/ĐT). Footnote [2]:
+   *    "Điểm ưu tiên bao gồm: Khu vực tuyển sinh và Đối tượng ưu tiên" — không có điểm cộng thành
+   *    tích cho phương thức thi THPT. Điểm ưu tiên áp Điều 7 quy chế hiện hành + công thức giảm
+   *    ≥ 22,5 (`priority.ts`), judgment call như `schools/utc`/`schools/hub`.
+   *  - Điều kiện đủ: (1) tổng thô ≥ 15/30 và không môn nào ≤ 1,0 ; (2) tổng thô ≥ điểm sàn theo
+   *    mã xét tuyển (`thresholds.ts`, 9 trang phụ lục đọc bằng OCR) ; nhóm pháp luật thêm điều
+   *    kiện tổ hợp (C00: Ngữ văn ≥ 6,0 ; tổ hợp khác: Toán + Ngữ văn ≥ 12,0) — với phương thức thi
+   *    THPT các điều kiện này dùng ĐIỂM THI THÔ, đọc trực tiếp, không cần bảng quy đổi.
+   *  - Ngưỡng "điểm sàn ĐKXT" so với tổng THÔ (không cộng ưu tiên) theo đúng văn bản; ĐXT (gồm ưu
+   *    tiên) chỉ dùng để hiển thị điểm — điểm chuẩn trúng tuyển thực tế cao hơn.
+   * Phạm vi: chỉ mã xét tuyển `modellable` (loại GDMN/GDTC/Kiến trúc — có điều kiện năng khiếu;
+   * mã 7480106 VMBD — điều kiện Toán ≥ 7,5 + ngưỡng theo phổ điểm; tổ hợp chứa môn Tiếng Pháp /
+   * năng khiếu không có trong taxonomy môn). KHÔNG gắn `knowledgeGaps`.
+   */
+  {
+    id: 'ctu-thpt-exam-exact-2026',
+    schoolId: 'ctu',
+    name: 'Xét điểm thi TN THPT (Phương thức 2) — Điểm xét tuyển theo mã xét tuyển (trừ ngành năng khiếu)',
+    year: 2026,
+    applicantTypes: [
+      'Thí sinh xét Phương thức 2 (điểm thi TN THPT 2026) vào một mã xét tuyển CTU ngoài nhóm ngành năng khiếu (Giáo dục Mầm non, Giáo dục Thể chất, Kiến trúc, Thiết kế vi mạch bán dẫn)',
+    ],
+    capabilities: { eligibility: true, scoreConversion: false, bonus: false, priority: true, exactCalculator: true },
+  },
 ];
