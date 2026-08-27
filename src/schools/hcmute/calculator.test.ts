@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  calculateHcmuteFinalScore,
   calculateHcmuteAcademicScoreThptOnly,
   calculateHcmuteHly1English,
   calculateHcmuteHly1Design,
@@ -126,5 +127,15 @@ describe('Design/architecture formula group (Kiến trúc/Kiến trúc Nội th�
   it('HLy.3 = 0.8×tổng THPT(2 môn) + 0.2×(ĐG/60) + M_NK', () => {
     const result = calculateHcmuteHly3Design({ thpt: { subject1Score: 8, subject2Score: 8 }, dgnlRawScore: 1200, aptitudeScore: 7 });
     expect(result).toBe(23.8);
+  });
+});
+
+describe('calculateHcmuteFinalScore — ĐXT = ĐHL + ĐXTCN + ĐUT', () => {
+  it('cộng 3 thành phần, làm tròn 2 chữ số', () => {
+    expect(calculateHcmuteFinalScore({ academicScore30: 26.025, bonus30: 1.0, effectivePriority30: 0.1 })).toBe(27.13);
+  });
+
+  it('kẹp trần 30,00', () => {
+    expect(calculateHcmuteFinalScore({ academicScore30: 29, bonus30: 2, effectivePriority30: 1 })).toBe(30);
   });
 });

@@ -9,9 +9,11 @@ import { hcmuteAdmissionMethods } from './methods';
  * Re-audit 2026-08-18 (batch 2): hệ số tương quan a=0,8/b=0,8 đã được công bố chính thức (Thông
  * báo 2092/TB-ĐHCNKT, 07/7/2026) — HLy.1/HLy.2/HLy.3/HLy.max đều tính được (HLy.2 vẫn cần ĐXTT cho
  * thí sinh khai học bạ, xem `knowledgeGaps.ts`). Ngưỡng đầu vào chung, bảng điểm ưu tiên + công
- * thức giảm, ĐXTCN (2/4 mục) đã verified. Chưa đủ để unlock exact calculator ở mức method (còn 3
- * blocker: ĐXTT, ngưỡng riêng SP tiếng Anh/SP công nghệ/Luật chưa wire theo ngành, ĐXTCN mục
- * 1/4-7) — xem `knowledgeGaps.ts`. Chưa có `Page` riêng (chỉ data/audit layer, giống AGU).
+ * thức giảm, ĐXTCN (2 mục chung) đã verified. 2026-08-27: unlock `exactCalculator` cho nhánh HẸP
+ * `hcmute-thpt-exam-standard-2026` (xét THPT độc lập, nhóm ngành thường) theo pattern NCTU/USSH
+ * "exact cho supported scope" — các nhánh còn lại (HLy.2/HLy.3, nhóm công thức khác, ngưỡng riêng,
+ * ĐXTCN mục 1/4-7) vẫn partial trên `hcmute-combined-2026`, xem `methods.ts`/`knowledgeGaps.ts`.
+ * Chưa có `Page` riêng (chỉ data/audit layer, giống AGU).
  */
 export const hcmuteModule: SchoolModule = {
   id: 'hcmute',
@@ -25,7 +27,7 @@ export const hcmuteModule: SchoolModule = {
   region: 'hcm',
   vnuhcm: false,
   summary:
-    'Ngưỡng đầu vào chung, bảng điểm ưu tiên khu vực/đối tượng + công thức giảm, và điểm học lực HLy.1/HLy.2/HLy.3/HLy.max (hệ số tương quan a=b=0,8 công bố chính thức 07/7/2026) đã xác minh từ văn bản chính thức đã ký · HLy.2 (nhánh học bạ) vẫn chờ ĐXTT theo nhóm trường (Bảng 3, phụ lục chưa import); ngưỡng riêng SP tiếng Anh/SP công nghệ/Luật và ĐXTCN mục 1/4-7 chưa wire',
+    'Tính đủ Điểm xét tuyển (exact) cho nhánh xét ĐIỂM THI TN THPT ĐỘC LẬP, nhóm ngành thường (ĐHL = HLy.1 có ví dụ minh họa chính thức Phụ lục 4, ĐXTCN 2 mục chung, điểm ưu tiên + công thức giảm — đều verified từ văn bản đã ký) · Các nhánh khác vẫn partial: HLy.2 (học bạ) chờ ĐXTT theo nhóm trường (Bảng 3), HLy.3 (ĐGNL) và nhóm công thức Ngôn ngữ Anh/Kiến trúc-Thiết kế, ngưỡng riêng SP tiếng Anh/SP công nghệ/Luật, ĐXTCN mục 1/4-7',
   capabilities: {
     admissionInfo: true,
     programs: false,

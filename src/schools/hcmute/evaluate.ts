@@ -17,6 +17,7 @@ import {
   calculateHcmuteHly2Design,
   calculateHcmuteHly3Design,
   calculateHcmuteHlyMax,
+  calculateHcmuteFinalScore,
   type HcmuteHlyBranchWinner,
 } from './calculator';
 import { calculateHcmuteBonus, type HcmuteBonusInput } from './bonus';
@@ -82,13 +83,21 @@ function partialResult(input: {
  * nếu `context.dgnlRoute` được khai (không phụ thuộc ĐXTT) — rồi HLy.max = max{HLy.1, HLy.2, HLy.3}
  * dùng làm Học lực cho bước tính Điểm ưu tiên (xem `calculator.ts`). Formula group ('standard' /
  * 'english' / 'design-architecture') suy từ `context.programId` qua `formulaGroups.ts` — KHÔNG
- * parse tên ngành. `confidence` CỐ Ý giữ `'partial'` (không trả `score`) dù hệ số a/b đã verified
- * (`knowledgeGaps.ts` re-audit 2026-08-18) — lý do CHƯA cho phép claim exact: (1) ĐXTCN mục 1 và
- * mục 4-7 chưa implement (`bonus.ts`); (2) ĐHL chỉ tính cho 1 tổ hợp/lần gọi — ĐHL thật là max qua
- * MỌI tổ hợp hợp lệ của ngành, ngoài phạm vi 1 lần evaluate hiện tại. Ngưỡng đầu vào riêng SP tiếng
- * Anh/SP công nghệ/Luật (`eligibility.ts:checkHcmuteTeacherOrLawThreshold`) giờ ĐÃ wire cho nhóm
- * 'english' (SP tiếng Anh) — xem nhánh bên dưới; Luật/SP công nghệ vẫn dùng ngưỡng chung vì 2 ngành
- * này thuộc nhóm 'standard' và UniscoreVN chưa phân biệt được ngành cụ thể trong nhóm đó.
+ * parse tên ngành.
+ *
+ * `confidence`:
+ * - `'exact-verified'` + `score` (ĐXT) CHỈ ở nhánh HẸP `hcmute-thpt-exam-standard-2026`: nhóm
+ *   'standard', `context.programId === undefined`, KHÔNG khai học bạ/ĐGNL. Trong phạm vi này ĐHL =
+ *   HLy.1 (worked example Phụ lục 4), ĐXTCN chỉ còn 2 mục áp dụng chung mọi ngành (đã implement),
+ *   ưu tiên verified → ĐXT = HLy.1 + ĐXTCN + ĐUT đầy đủ. Xem `isExactScope` bên dưới.
+ * - `'partial'` (không trả `score`) cho mọi nhánh còn lại — blocker tùy nhánh: (1) ĐXTT chặn HLy.2
+ *   khi khai học bạ; (2) ĐXTCN mục 1/4-7 (thành tích theo ngành đặc thù); (3) ĐHL "max qua mọi tổ
+ *   hợp" khi có nhiều tổ hợp; (4) ngưỡng riêng SP tiếng Anh/SP công nghệ/Luật + nhóm công thức
+ *   'english'/'design-architecture' — xem `knowledgeGaps.ts`.
+ *
+ * Ngưỡng đầu vào riêng SP tiếng Anh/SP công nghệ/Luật (`eligibility.ts:checkHcmuteTeacherOrLawThreshold`)
+ * đã wire cho nhóm 'english' (SP tiếng Anh) — xem nhánh bên dưới; Luật/SP công nghệ vẫn dùng ngưỡng
+ * chung vì 2 ngành này thuộc nhóm 'standard' và UniscoreVN chưa phân biệt được ngành cụ thể.
  */
 export function evaluateHcmuteAdmission(profile: ApplicantProfile, context: HcmuteEvaluationContext = {}): AdmissionEvaluation {
   const explanation: CalculationStep[] = [];
@@ -355,6 +364,49 @@ export function evaluateHcmuteAdmission(profile: ApplicantProfile, context: Hcmu
     scale: 30,
     formula: priority.reduced ? '[(30,00 – Học lực – Cộng)/7,50] × Mức ưu tiên' : 'Mức điểm ưu tiên quy đổi',
   });
+
+  // --- Nhánh EXACT: xét THPT độc lập, nhóm 'standard', không programId hẹp, không học bạ/ĐGNL ---
+  // Trong phạm vi này ĐHL = HLy.1 (có worked example Phụ lục 4), ĐXTCN chỉ còn 2 mục áp dụng chung
+  // mọi ngành (đã implement), ưu tiên verified → ĐXT = HLy.1 + ĐXTCN + ĐUT tính được đầy đủ.
+  const isExactScope =
+    formulaGroup === 'standard' &&
+    context.programId === undefined &&
+    !context.transcriptRoute &&
+    !context.dgnlRoute &&
+    eligibilityStatus !== 'unknown' &&
+    missingInputs.length === 0;
+
+  if (isExactScope) {
+    const finalScore = calculateHcmuteFinalScore({
+      academicScore30: hlyMax.value,
+      bonus30: bonus,
+      effectivePriority30: priority.effectivePriority30,
+    });
+    explanation.push({
+      id: 'hcmute-final-score',
+      label: 'Điểm xét tuyển (ĐXT)',
+      output: finalScore,
+      scale: 30,
+      formula: 'ĐXT = HLy.1 + ĐXTCN + ĐUT (kẹp trần 30,00, làm tròn 2 chữ số)',
+    });
+    return {
+      schoolId: 'hcmute',
+      year: hcmuteAdmissionMethods[1].year,
+      methodId: hcmuteAdmissionMethods[1].id,
+      confidence: 'exact-verified',
+      eligibility: { status: eligibilityStatus, reasons: [eligibilityReason] },
+      score: { value: finalScore, scale: 30 },
+      missingInputs: [],
+      missingRules: [],
+      missingRequirements,
+      explanation,
+      evidence: [
+        { sourceId: 'hcmute-admission-info-2026', location: 'Bảng 4/5, công thức HLy.1 + Phụ lục 4 ví dụ minh họa 1', verification: 'verified', effectiveYear: 2026, verifiedAt: '2026-08-18' },
+        { sourceId: 'hcmute-admission-info-2026', location: 'Bảng 2 mục 2/3 (ĐXTCN)', verification: 'verified', effectiveYear: 2026, verifiedAt: '2026-08-18' },
+        { sourceId: 'hcmute-priority-appendix-2026', location: 'Phụ lục 1/2 + công thức giảm điểm ưu tiên (mục 2.2.2)', verification: 'verified', effectiveYear: 2026, verifiedAt: '2026-08-18' },
+      ],
+    };
+  }
 
   missingRequirements.push(...hcmuteKnowledgeGaps.map((gap) => ({ kind: 'official-rule' as const, code: gap.id, label: gap.label })));
 

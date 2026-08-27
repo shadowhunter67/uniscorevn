@@ -17,25 +17,46 @@ describe('evaluateHcmuteAdmission', () => {
     expect(result.missingRequirements?.some((req) => req.code === 'hcmute-thpt-math')).toBe(true);
   });
 
-  it('computes HLy.1, bonus, priority and eligibility for a complete profile (Tier A worked example)', () => {
+  it('computes an exact ĐXT for a pure-THPT standard-group profile (HLy.1 anchored to Phụ lục 4)', () => {
     const profile: ApplicantProfile = {
       thpt: { scores: { math: 8.5, physics: 8.0, english: 9.7 } },
       priority: { region: 'KV2' },
     };
     const result = evaluateHcmuteAdmission(profile, { subjectContext: a01Combination, bonus: { provincialRank: 'nhi' } });
-    expect(result.confidence).toBe('partial');
+    expect(result.confidence).toBe('exact-verified');
+    expect(result.methodId).toBe('hcmute-thpt-exam-standard-2026');
     expect(result.eligibility?.status).toBe('eligible');
     const academicStep = result.explanation.find((step) => step.id === 'hcmute-academic-score-hly1');
-    expect(academicStep?.output).toBe(26.025);
+    expect(academicStep?.output).toBe(26.025); // Phụ lục 4 ví dụ minh họa 1: ((8,5×2+8,0+9,7)/4)×3
     const bonusStep = result.explanation.find((step) => step.id === 'hcmute-bonus');
     expect(bonusStep?.output).toBe(1.0);
     const priorityStep = result.explanation.find((step) => step.id === 'hcmute-priority');
-    // Học lực dùng ở đây là HLy.1 (26,025), khác ĐHL=26,850 trong ví dụ gốc (lấy từ HLy.2, công
-    // thức evaluator này chưa tính được — xem knowledgeGaps.ts) nên điểm ưu tiên khác ví dụ gốc:
-    // (30 - (26,025+1,00))/7,50 × 0,25 = 0,10.
+    // ĐUT giảm: (30 - (26,025+1,00))/7,50 × 0,25 = 0,10.
     expect(priorityStep?.output).toBe(0.1);
-    expect(result.score).toBeUndefined();
+    // ĐXT = 26,025 + 1,00 + 0,10 = 27,125 → làm tròn 2 chữ số.
+    expect(result.score?.scale).toBe(30);
+    expect(result.score?.value).toBe(27.13);
+    expect(result.missingRules).toEqual([]);
     expect(result.evidence.length).toBeGreaterThan(0);
+  });
+
+  it('stays partial (no score) once the transcript route is declared — ĐXTT gap in play', () => {
+    const result = evaluateHcmuteAdmission(
+      { thpt: { scores: { math: 8.5, physics: 8.0, english: 9.7 } } },
+      { subjectContext: a01Combination, transcriptRoute: { scores: { math: 9, physics: 8.5, english: 9 }, dxtt30: 0 } }
+    );
+    expect(result.confidence).toBe('partial');
+    expect(result.methodId).toBe('hcmute-combined-2026');
+    expect(result.score).toBeUndefined();
+  });
+
+  it('stays partial for a narrower programId (special threshold / formula group out of exact scope)', () => {
+    const result = evaluateHcmuteAdmission(
+      { thpt: { scores: { math: 9, physics: 9, english: 9 } } },
+      { subjectContext: a01Combination, programId: 'su-pham-tieng-anh', grade12Excellent: true }
+    );
+    expect(result.confidence).toBe('partial');
+    expect(result.score).toBeUndefined();
   });
 
   it('reports ineligible below the general 15/30 threshold', () => {

@@ -1,3 +1,5 @@
+import { round2 } from '../../core/round2';
+
 /**
  * Điểm học lực HLy.1 — phương thức kết hợp (mã 500), công thức (1) "Điểm TN THPT độc lập" (Bảng
  * 4 văn bản 1691/ĐHCNKT-ĐT, `evidence.ts:hcmuteAcademicFormulaEvidence`). Đây là công thức DUY
@@ -140,4 +142,14 @@ export function calculateHcmuteHlyMax(branches: { hly1: number; hly2?: number; h
     winner = 'HLy.3';
   }
   return { value: round3(value), winner };
+}
+
+/**
+ * Điểm xét tuyển cuối cùng (ĐXT) = ĐHL + ĐC (ĐXTCN) + ĐUT, kẹp trần 30,00, làm tròn 2 chữ số thập
+ * phân — cấu trúc cộng chuẩn Bộ GDĐT, xác nhận gián tiếp bởi chính công thức giảm điểm ưu tiên của
+ * HCMUTE (`priority.ts`) vốn tham chiếu "(ĐHL + ĐC)". Chỉ dùng cho nhánh xét THPT độc lập nhóm
+ * 'standard' (ĐHL = HLy.1) — xem `evaluate.ts` và `methods.ts:hcmute-thpt-exam-standard-2026`.
+ */
+export function calculateHcmuteFinalScore(input: { academicScore30: number; bonus30: number; effectivePriority30: number }): number {
+  return round2(Math.min(30, input.academicScore30 + input.bonus30 + input.effectivePriority30));
 }

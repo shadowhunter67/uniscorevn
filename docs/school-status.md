@@ -2,7 +2,7 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (20)
+## Calculator đã xác minh (21)
 
 - **FTU** — Trường Đại học Ngoại thương
 - **GDU** — Trường Đại học Gia Định
@@ -10,6 +10,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HCMULAW** — Trường Đại học Luật Thành phố Hồ Chí Minh
 - **HCMUS** — Trường Đại học Khoa học Tự nhiên - ĐHQG TP.HCM
 - **HCMUT** — Trường Đại học Bách khoa – ĐHQG TP.HCM
+- **HCMUTE** — Trường Đại học Công nghệ Kỹ thuật TP. Hồ Chí Minh
 - **HUFLIT** — Trường Đại học Ngoại ngữ - Tin học TP. Hồ Chí Minh
 - **HUL** — Trường Đại học Luật, Đại học Huế
 - **HUTECH** — Trường Đại học Công nghệ TP. Hồ Chí Minh
@@ -25,10 +26,9 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **UMP** — Trường Đại học Y Dược Thành phố Hồ Chí Minh
 - **USSH** — Trường Đại học Khoa học Xã hội và Nhân văn – ĐHQG TP.HCM
 
-## Calculator một phần (5)
+## Calculator một phần (4)
 
 - **DAV** — Hoc vien Ngoai giao
-- **HCMUTE** — Trường Đại học Công nghệ Kỹ thuật TP. Hồ Chí Minh
 - **NEU** — Trường Đại học Kinh tế Quốc dân
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 - **VNU-ULIS** — Truong Dai hoc Ngoai ngu - Dai hoc Quoc gia Ha Noi

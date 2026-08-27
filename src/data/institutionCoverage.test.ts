@@ -68,8 +68,8 @@ describe('institution coverage statistics', () => {
       admissionDataAvailable: 225,
       eligibilitySupported: 82,
       calculatorSupported: 25,
-      partialCalculator: 5,
-      fullyVerified: 20,
+      partialCalculator: 4,
+      fullyVerified: 21,
       catalogOnly: 42,
     });
   });
@@ -123,6 +123,7 @@ describe('institution coverage statistics', () => {
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnuulis)).toBe('partial-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hce)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hul)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.hcmute)).toBe('verified-calculator');
     for (const schoolId of ['husc', 'huaf', 'hueedu', 'dut', 'dueudn', 'uedudn', 'uflsudn', 'uteudn', 'vku']) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
     }
