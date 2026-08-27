@@ -13,7 +13,7 @@ export const tuafModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'TUAF 2026 THPT floor score is modeled from the official 727/TB-DHNL notice (07/07/2026): a flat 16,0/30 threshold (including priority points) applies uniformly across all majors for Round 1 THPT-exam admission. Transcript, V-SAT, and direct-admission routes are not modeled yet.',
+    'Tính chính xác Điểm xét tuyển TUAF 2026 (phương thức thi TN THPT, đợt 1): ĐXT = round2(tổng thô 3 môn + điểm ưu tiên KV/ĐT theo Điều 7 TT 06/2026) — công thức trích nguyên văn Thông báo 727/TB-ĐHNL (07/07/2026); ĐXT ≥ 16,0/30 (đồng nhất cho tất cả 23 ngành) là đủ điều kiện xét tuyển. Phương thức học bạ / V-SAT / xét tuyển thẳng chưa mô hình hoá.',
   capabilities: {
     admissionInfo: true,
     programs: false,

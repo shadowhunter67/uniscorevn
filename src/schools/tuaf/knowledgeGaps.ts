@@ -4,9 +4,9 @@ export const tuafKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'tuaf-other-methods-not-modeled',
     label:
-      'TUAF 2026 con 3 phuong thuc khac ngoai thi TN THPT: xet hoc ba lop 12, xet ket qua V-SAT, va xet tuyen thang theo quy dinh cua Bo GD&DT; chi phuong thuc thi TN THPT duoc mo hinh hoa.',
+      'TUAF 2026 con 3 phuong thuc khac ngoai thi TN THPT: xet hoc ba lop 12, xet ket qua V-SAT (quy doi piecewise ve THPT — muc II.2.2 Thong bao 727), va xet tuyen thang; chi phuong thuc thi TN THPT (nhanh exact `tuaf-thpt-exam-exact-2026`) duoc mo hinh hoa.',
     status: 'official-but-unparsed',
-    sourceId: 'tuaf-admission-info-2026',
+    sourceId: 'tuaf-thpt-threshold-2026',
   },
   {
     id: 'tuaf-round-2-plus-not-modeled',
