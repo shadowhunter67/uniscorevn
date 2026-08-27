@@ -13,7 +13,7 @@ export const hulModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'Nguồn tuyển sinh HUL 2026 chính thức đã xác minh mức điểm sàn 20,0/30 (không nhân hệ số) cho phương thức xét điểm thi TN THPT, áp dụng chung cho cả 2 ngành. Công thức xét học bạ, điểm cộng/ưu tiên chưa được chuẩn hóa vào runtime.',
+    'Tính chính xác điểm xét tuyển HUL 2026 theo thi TN THPT cho cả 2 ngành Luật và Luật Kinh tế (ngưỡng 20/30 chung, không hệ số môn, cộng điểm ưu tiên theo Bảng 1 — Thông tin tuyển sinh 2026 của Đại học Huế, PDF 77 trang). Phương thức xét học bạ vẫn chỉ ở mức kiểm tra ngưỡng.',
   capabilities: {
     admissionInfo: true,
     programs: true,
@@ -32,6 +32,12 @@ export const hulModule: SchoolModule = {
       url: 'https://hul.edu.vn/vi/news/detail/nguong-dam-bao-chat-luong-dau-vao-va-diem-chuan-nam-2026',
       type: 'official-institution',
       checkedAt: '2026-08-24',
+    },
+    {
+      title: 'Thông tin tuyển sinh đại học hệ chính quy năm 2026 của Đại học Huế',
+      url: 'https://tuyensinh.hueuni.edu.vn/News/Detail/thong-tin-tuyen-sinh-dai-hoc-cao-dang-he-chinh-quy-nam-2026-cua-dai-hoc-hue_20260501150542',
+      type: 'official-institution',
+      checkedAt: '2026-08-26',
     },
   ],
 };
