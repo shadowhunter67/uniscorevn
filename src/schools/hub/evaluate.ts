@@ -257,3 +257,116 @@ export function evaluateHubComprehensiveAdmission(profile: ApplicantProfile, con
 export function evaluateHubVsatAdmission(profile: ApplicantProfile, context: HubComprehensiveVsatEvaluationContext = {}): AdmissionEvaluation {
   return evaluateHubComprehensiveVsatFamilyAdmission(hubAdmissionMethods[2], profile, context);
 }
+
+import { round2 } from '../../core/round2';
+import { calculateHubEffectivePriority30, lookupHubStandardPriority30 } from './priority';
+import { hubLawFormulaEvidence, hubLawThresholdEvidence } from './evidence';
+
+const HUB_LAW_EXACT_METHOD = hubAdmissionMethods[3];
+
+export interface HubLawExactEvaluationContext {
+  subjectContext?: HubSubjectContext;
+}
+
+function hubLawExactPartial(input: { missingInputs: string[]; missingRequirements: MissingRequirement[]; explanation: CalculationStep[]; reason: string }): AdmissionEvaluation {
+  return {
+    schoolId: 'hub',
+    year: HUB_LAW_EXACT_METHOD.year,
+    methodId: HUB_LAW_EXACT_METHOD.id,
+    confidence: 'partial',
+    eligibility: { status: 'unknown', reasons: [input.reason] },
+    missingInputs: input.missingInputs,
+    missingRules: [],
+    missingRequirements: input.missingRequirements,
+    explanation: input.explanation,
+    evidence: [],
+  };
+}
+
+/**
+ * HUB 2026 — Phương thức 1 (thi TN THPT), khối Luật, thí sinh khu vực 3, tính đủ Điểm xét tuyển
+ * (thang 30): ĐXT = round2((M1 + M2 + M3) + Điểm ưu tiên). Ngưỡng 20/30 so với (tổng thô + điểm
+ * ưu tiên), kèm điều kiện Toán/Ngữ văn theo tổ hợp.
+ */
+export function evaluateHubLawThptExamExactAdmission(profile: ApplicantProfile, context: HubLawExactEvaluationContext = {}): AdmissionEvaluation {
+  const explanation: CalculationStep[] = [];
+  const missingRequirements: MissingRequirement[] = [];
+
+  const region = profile.priority?.region;
+  if (region !== undefined && region !== 'KV3') {
+    missingRequirements.push({ kind: 'official-rule', code: 'hub-law-non-kv3-threshold-unknown', label: 'HUB chỉ công bố ngưỡng khối Luật (20/30) cho thí sinh khu vực 3; ngưỡng khu vực khác chưa có nguồn.' });
+    return hubLawExactPartial({ missingInputs: [], missingRequirements, explanation, reason: 'Nhánh exact khối Luật HUB chỉ áp dụng cho thí sinh khu vực 3.' });
+  }
+  if (region === undefined) {
+    missingRequirements.push({ kind: 'profile-input', code: 'hub-priority-zone', label: 'Khu vực ưu tiên tuyển sinh (nhánh exact khối Luật HUB chỉ xác định được cho khu vực 3).' });
+    return hubLawExactPartial({ missingInputs: ['Chưa có khu vực ưu tiên.'], missingRequirements, explanation, reason: 'Cần biết khu vực ưu tiên để áp ngưỡng khối Luật HUB.' });
+  }
+
+  if (!context.subjectContext || context.subjectContext.subjects.length !== 3) {
+    missingRequirements.push({ kind: 'school-context', code: 'hub-subject-combination', label: 'Chọn tổ hợp 3 môn xét tuyển khối Luật HUB (A00/A01/D07 hoặc C01/C02/D01).' });
+    return hubLawExactPartial({ missingInputs: ['Chọn tổ hợp 3 môn.'], missingRequirements, explanation, reason: 'Cần chọn tổ hợp để tính điểm.' });
+  }
+
+  const { total30, missingSubjects } = sumSubjectTotal(profile, context.subjectContext.subjects);
+  if (missingSubjects.length > 0) {
+    missingRequirements.push(...missingSubjects.map((s) => ({ kind: 'profile-input' as const, code: `hub-thpt-${s}`, label: `Điểm thi TN THPT môn ${SUBJECT_LABELS[s]} cho tổ hợp HUB.` })));
+    return hubLawExactPartial({ missingInputs: ['Chưa đủ điểm 3 môn thi TN THPT theo tổ hợp HUB.'], missingRequirements, explanation, reason: 'Cần đủ điểm 3 môn để tính điểm xét tuyển.' });
+  }
+  const raw30 = total30 as number;
+
+  const combinationId = context.subjectContext.combinationId;
+  const HUB_LAW_COMBOS = ['A00', 'A01', 'D07', 'C01', 'C02', 'D01'];
+  const HUB_LAW_MATH_VAN_COMBOS = ['C01', 'C02', 'D01'];
+  if (combinationId === undefined || !HUB_LAW_COMBOS.includes(combinationId)) {
+    missingRequirements.push({ kind: 'school-context', code: 'hub-law-combination', label: 'Chọn tổ hợp khối Luật HUB: A00/A01/D07 (Toán ≥ 6) hoặc C01/C02/D01 (Toán ≥ 6 và Ngữ văn ≥ 6).' });
+    return hubLawExactPartial({ missingInputs: ['Chọn tổ hợp khối Luật HUB.'], missingRequirements, explanation, reason: 'Nhánh exact khối Luật HUB chỉ áp dụng cho các tổ hợp A00/A01/D07/C01/C02/D01.' });
+  }
+  const needsLiterature = HUB_LAW_MATH_VAN_COMBOS.includes(combinationId);
+  if (profile.thpt?.scores?.math === undefined || (needsLiterature && profile.thpt?.scores?.literature === undefined)) {
+    if (profile.thpt?.scores?.math === undefined) missingRequirements.push({ kind: 'profile-input', code: 'hub-thpt-math', label: 'Điểm thi TN THPT môn Toán (điều kiện tối thiểu ≥ 6 khối Luật HUB).' });
+    if (needsLiterature && profile.thpt?.scores?.literature === undefined) missingRequirements.push({ kind: 'profile-input', code: 'hub-thpt-literature', label: 'Điểm thi TN THPT môn Ngữ văn (điều kiện tối thiểu ≥ 6 tổ hợp có Văn).' });
+    return hubLawExactPartial({ missingInputs: ['Chưa đủ điểm môn điều kiện.'], missingRequirements, explanation, reason: 'Cần điểm Toán (và Ngữ văn nếu tổ hợp có Văn) để kiểm tra điều kiện tối thiểu khối Luật HUB.' });
+  }
+
+  const standardPriority30 = lookupHubStandardPriority30(region, profile.priority?.category);
+  const priority = calculateHubEffectivePriority30({ academicScore30: raw30, standardPriority30 });
+  const scoreForThreshold = round2(raw30 + priority.effectivePriority30);
+  const finalScore = scoreForThreshold;
+
+  const thresholdCheck = checkHubLawThptExamThreshold({
+    totalScore30: scoreForThreshold,
+    combinationId,
+    mathScore: profile.thpt?.scores?.math,
+    literatureScore: profile.thpt?.scores?.literature,
+    priorityZone: 'KV3',
+  });
+
+  const eligibilityStatus: 'eligible' | 'ineligible' = thresholdCheck.pass ? 'eligible' : 'ineligible';
+  const eligibilityReason = `${thresholdCheck.requiredText} — điểm xét tuyển ${scoreForThreshold}/30. Điểm chuẩn trúng tuyển thực tế có thể cao hơn.`;
+
+  explanation.push({ id: 'hub-law-exact-threshold', label: 'Ngưỡng đảm bảo chất lượng — khối Luật (KV3)', output: scoreForThreshold, scale: 30, formula: eligibilityReason, evidence: hubLawThresholdEvidence.evidence });
+  explanation.push({ id: 'hub-law-exact-academic', label: 'Điểm thi (tổng thô 3 môn)', output: raw30, scale: 30, formula: 'M1 + M2 + M3', evidence: hubLawFormulaEvidence.evidence });
+  explanation.push({
+    id: 'hub-law-exact-priority',
+    label: priority.reduced ? 'Điểm ưu tiên (đã giảm)' : 'Điểm ưu tiên',
+    output: priority.effectivePriority30,
+    scale: 30,
+    formula: priority.reduced ? '[(30 − Tổng điểm đạt được)/7,5] × Mức điểm ưu tiên' : 'Mức điểm ưu tiên KV/ĐT (Điều 7 Thông tư 06/2026)',
+    evidence: hubLawFormulaEvidence.evidence,
+  });
+  explanation.push({ id: 'hub-law-exact-final', label: 'Điểm xét tuyển', output: finalScore, scale: 30, formula: 'Tổng điểm 3 môn + Điểm ưu tiên', evidence: hubLawFormulaEvidence.evidence });
+
+  return {
+    schoolId: 'hub',
+    year: HUB_LAW_EXACT_METHOD.year,
+    methodId: HUB_LAW_EXACT_METHOD.id,
+    confidence: 'exact-verified',
+    eligibility: { status: eligibilityStatus, reasons: [eligibilityReason] },
+    score: { value: finalScore, scale: 30 },
+    missingInputs: [],
+    missingRules: [],
+    missingRequirements,
+    explanation,
+    evidence: [...hubLawThresholdEvidence.evidence, ...hubLawFormulaEvidence.evidence],
+  };
+}

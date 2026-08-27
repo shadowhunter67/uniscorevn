@@ -13,7 +13,7 @@ export const vinhuniModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'Đã xác minh thông báo ngưỡng đầu vào và quy tắc quy đổi tương đương 2026 của Trường Đại học Vinh · Hiện chỉ kiểm tra ngưỡng THPT tối thiểu 15/30; bảng ngành, học bạ, quy đổi và năng khiếu cần nhập tiếp.',
+    'Tính chính xác Điểm xét tuyển VinhUni 2026 (Phương thức 100 - thi TN THPT) cho 55 mã ngành ngoài nhóm năng khiếu: Điểm xét tuyển = [tổng thô 3 môn + điểm thưởng] + điểm ưu tiên (công thức giảm ≥ 22,5), so với ngưỡng theo mã ngành (nhóm sư phạm 21-23, ngoài sư phạm 15-20) + điều kiện không môn nào ≤ 1,0 và điều kiện phụ theo môn (Luật: Ngữ văn ≥ 6; Ngôn ngữ Anh: Tiếng Anh ≥ 6) — công thức và bảng ngưỡng trích nguyên văn Phụ lục 1 Thông báo ngưỡng 2026. Điểm thưởng do người dùng cung cấp; phương thức học bạ / ĐGNL / năng khiếu và các trường thành viên chưa mô hình hoá.',
   capabilities: {
     admissionInfo: true,
     programs: false,

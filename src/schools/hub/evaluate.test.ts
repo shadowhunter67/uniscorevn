@@ -164,3 +164,46 @@ describe('evaluateHubVsatAdmission (Phương thức V-SAT)', () => {
     expect(evaluation.missingRules.some((label) => label.includes('Phụ lục I'))).toBe(true);
   });
 });
+
+describe('evaluateHubLawThptExamExactAdmission', () => {
+  const C01 = { subjectContext: { combinationId: 'C01', subjects: ['literature', 'math', 'physics'] as const } };
+  const A01 = { subjectContext: { combinationId: 'A01', subjects: ['math', 'physics', 'english'] as const } };
+  const kv3 = (scores: Record<string, number>, extra: Record<string, unknown> = {}): ApplicantProfile => ({ thpt: { scores }, priority: { region: 'KV3', ...extra } });
+
+  it('non-KV3 applicant -> partial (threshold for other zones unknown)', async () => {
+    const { evaluateHubLawThptExamExactAdmission } = await import('./evaluate');
+    const result = evaluateHubLawThptExamExactAdmission({ thpt: { scores: { literature: 8, math: 8, physics: 8 } }, priority: { region: 'KV1' } }, C01);
+    expect(result.confidence).toBe('partial');
+    expect(result.missingRequirements?.some((r) => r.code === 'hub-law-non-kv3-threshold-unknown')).toBe(true);
+  });
+
+  it('KV3, C01, total 21 with Toán/Văn >= 6 -> eligible, exact score', async () => {
+    const { evaluateHubLawThptExamExactAdmission } = await import('./evaluate');
+    const result = evaluateHubLawThptExamExactAdmission(kv3({ literature: 7, math: 7, physics: 7 }), C01);
+    expect(result.confidence).toBe('exact-verified');
+    expect(result.eligibility?.status).toBe('eligible');
+    expect(result.score).toEqual({ value: 21, scale: 30 });
+  });
+
+  it('KV3, C01, Ngữ văn below 6 -> ineligible, still exact score', async () => {
+    const { evaluateHubLawThptExamExactAdmission } = await import('./evaluate');
+    const result = evaluateHubLawThptExamExactAdmission(kv3({ literature: 5.5, math: 8, physics: 8 }), C01);
+    expect(result.eligibility?.status).toBe('ineligible');
+    expect(result.score).toEqual({ value: 21.5, scale: 30 });
+  });
+
+  it('KV3, total below 20 -> ineligible', async () => {
+    const { evaluateHubLawThptExamExactAdmission } = await import('./evaluate');
+    const result = evaluateHubLawThptExamExactAdmission(kv3({ literature: 6, math: 6, physics: 7 }), C01);
+    expect(result.eligibility?.status).toBe('ineligible');
+    expect(result.score).toEqual({ value: 19, scale: 30 });
+  });
+
+  it('KV3 + đối tượng ưu tiên: priority is added toward the 20/30 threshold', async () => {
+    const { evaluateHubLawThptExamExactAdmission } = await import('./evaluate');
+    const result = evaluateHubLawThptExamExactAdmission(kv3({ math: 7, physics: 6, english: 7 }, { category: 'UT2' }), A01);
+    // raw 20 + priority 1.0 (KV3 region 0 + UT2 1.0, pivot 20 < 22.5) = 21 >= 20
+    expect(result.eligibility?.status).toBe('eligible');
+    expect(result.score).toEqual({ value: 21, scale: 30 });
+  });
+});

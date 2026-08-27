@@ -41,7 +41,7 @@ export const hubKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'hub-priority-bonus-table-not-found',
     label:
-      'Bảng điểm ưu tiên khu vực/đối tượng cụ thể áp dụng cho HUB (dù có thể trùng bảng chuẩn Bộ GD&ĐT thang 30, chưa có nguồn HUB tự công bố lại để cross-check riêng) và bảng điểm cộng thành tích/chứng chỉ khác (ngoài IELTS Elite Class) nếu có — thông báo chỉ nêu công thức tổng quát "Điểm xét tuyển cuối = y + điểm ưu tiên khu vực/đối tượng (thang 30 theo quy định chung)" cho Phương thức Tổng hợp, không có bảng số hay xác nhận riêng cho Phương thức 1 (thi TN THPT).',
+      'Điểm ưu tiên KV/ĐT: thông báo ghi "điểm ưu tiên (khu vực, đối tượng, thang 30 theo quy định)" ⇒ áp Điều 7 quy chế hiện hành (judgment call), đã dùng cho nhánh exact khối Luật KV3 (`hub-law-thpt-exam-exact-2026`). Bảng điểm cộng thành tích/chứng chỉ khác (ngoài IELTS Elite Class) nếu có vẫn chưa tìm được nguồn HUB tự công bố; nhánh exact khối Luật không có điểm cộng nên không bị chặn.',
     status: 'incomplete',
     sourceId: 'hub-quality-threshold-2026',
     scoreAffecting: true,

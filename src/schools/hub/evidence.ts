@@ -29,6 +29,20 @@ export const hubLawThresholdEvidence = {
   ],
 } satisfies SourcedRule<{ thptExamThreshold30: number; comprehensiveVsatRankPathThreshold30: number; graduationScoreThreshold10: number }>;
 
+export const hubLawFormulaEvidence = {
+  ruleId: 'hub-law-thpt-formula-2026',
+  evidence: [
+    {
+      sourceId: 'hub-quality-threshold-2026',
+      location:
+        'Mục II — "Điểm xét tuyển = Tổng điểm + điểm ưu tiên (khu vực, đối tượng, thang 30 theo quy định)"; khối Luật không có điểm cộng ⇒ ĐXT = tổng thô 3 môn (không hệ số) + điểm ưu tiên. Bảng mức KV/ĐT + công thức giảm ≥ 22,5 áp theo Điều 7 Thông tư 06/2026/TT-BGDĐT.',
+      verification: 'verified' as const,
+      effectiveYear: 2026,
+      verifiedAt: '2026-08-27',
+    },
+  ],
+};
+
 export const hubEliteIeltsRequirementEvidence = {
   value: { ieltsMin: 5.5 },
   evidence: [

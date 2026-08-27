@@ -3,11 +3,12 @@ import type { KnowledgeGap } from '../../core/knowledgeStatus';
 export const vinhuniKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'vinhuni-per-program-threshold-table-not-imported',
-    label: 'Bảng điểm sàn theo từng ngành/chương trình Trường Đại học Vinh 2026 chưa được nhập.',
+    label:
+      'Batch 2026-08-27: đã đọc trực tiếp Phụ lục 1 PDF và nhập bảng ngưỡng Phương thức 100 cho 55 mã ngành (nhóm sư phạm 21-23, ngoài sư phạm 15-20) — mở nhánh exact `vinhuni-thpt-exam-exact-2026`. Còn lại ngoài phạm vi: nhóm ngành năng khiếu (GDMN/GDTC/Kiến trúc), Sư phạm Tiếng Anh và Ngôn ngữ Trung Quốc (điều kiện ngoại ngữ nhiều lựa chọn).',
     status: 'official-but-unparsed',
     sourceId: 'vinhuni-quality-threshold-conversion-2026',
-    scoreAffecting: true,
-    impact: 'Compare chỉ kiểm tra ngưỡng tối thiểu phổ thông 15/30; chưa kết luận cho từng ngành/chương trình.',
+    scoreAffecting: false,
+    impact: 'method-out-of-scope',
   },
   {
     id: 'vinhuni-transcript-and-conversion-rules-not-modeled',
