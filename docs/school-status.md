@@ -2,7 +2,7 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (23)
+## Calculator đã xác minh (24)
 
 - **FTU** — Trường Đại học Ngoại thương
 - **GDU** — Trường Đại học Gia Định
@@ -25,6 +25,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **UFM** — Trường Đại học Tài chính – Marketing
 - **UMP** — Trường Đại học Y Dược Thành phố Hồ Chí Minh
 - **USSH** — Trường Đại học Khoa học Xã hội và Nhân văn – ĐHQG TP.HCM
+- **UTC** — Trường Đại học Giao thông vận tải
 - **VKU** — Trường Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn
 - **VNU-ULIS** — Truong Dai hoc Ngoai ngu - Dai hoc Quoc gia Ha Noi
 
@@ -34,7 +35,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **NEU** — Trường Đại học Kinh tế Quốc dân
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 
-## Chỉ kiểm tra điều kiện/ngưỡng (81)
+## Chỉ kiểm tra điều kiện/ngưỡng (80)
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
 - **AJC** — Học viện Báo chí và Tuyên truyền
@@ -103,7 +104,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **UIT** — Trường Đại học Công nghệ Thông tin – ĐHQG TP.HCM
 - **UMT** — Trường Đại học Quản lý và Công nghệ TP.HCM
 - **USH** — Trường Đại học Thể dục Thể thao TP.HCM
-- **UTC** — Trường Đại học Giao thông vận tải
 - **UTE** — Trường Đại học Sư phạm Kỹ thuật - Đại học Đà Nẵng
 - **UTM** — Trường Đại học Công nghệ và Quản lý hữu nghị
 - **UTT** — Trường Đại học Công nghệ Giao thông vận tải

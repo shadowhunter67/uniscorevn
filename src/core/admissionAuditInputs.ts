@@ -68,7 +68,7 @@ import { hnueThptExamThresholdEvidence } from '../schools/hnue/evidence';
 import { vinhuniAdmissionMethods } from '../schools/vinhuni/methods';
 import { vinhuniThptExamThresholdEvidence } from '../schools/vinhuni/evidence';
 import { utcAdmissionMethods } from '../schools/utc/methods';
-import { utcThptExamThresholdEvidence } from '../schools/utc/evidence';
+import { utcThptExamThresholdEvidence, utcFormulaEvidence, utcBonusEvidence, utcPriorityEvidence, utcProgramThresholdEvidence } from '../schools/utc/evidence';
 import { southernCatalogMethods } from '../schools/southernCatalog';
 import { remainingCatalogMethods } from '../schools/remainingCatalog';
 import { finalCatalogMethods } from '../schools/finalCatalog';
@@ -166,6 +166,10 @@ export function verifiedRuntimeEvidence(): RuleEvidence[] {
     ...hnueThptExamThresholdEvidence.evidence,
     ...vinhuniThptExamThresholdEvidence.evidence,
     ...utcThptExamThresholdEvidence.evidence,
+    ...utcFormulaEvidence.evidence,
+    ...utcBonusEvidence.evidence,
+    ...utcPriorityEvidence.evidence,
+    ...utcProgramThresholdEvidence.evidence,
   ];
 }
 

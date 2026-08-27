@@ -1,27 +1,28 @@
 import type { KnowledgeGap } from '../../core/knowledgeStatus';
 
+/**
+ * RE-AUDIT 2026-08-27: đã fetch trực tiếp trang "Thông tin tuyển sinh 2026" + trang "Ngưỡng đảm
+ * bảo chất lượng đầu vào 2026" của UTC. Công thức (Toán×2 + 2 môn)×3/4 / nhánh Ngôn ngữ Anh, bảng
+ * điểm cộng (giải HSG tỉnh + IELTS) và bảng ngưỡng theo ngành đều verified nguyên văn → nhánh
+ * `utc-thpt-exam-exact-2026` (`methods.ts`) tính đủ Tổng điểm xét tuyển. Gap
+ * `utc-weighted-math-context-not-modeled` và `utc-program-threshold-table-not-imported` đã RESOLVED
+ * (bỏ khỏi mảng). Còn lại là các nhánh ngoài phương thức thi TN THPT.
+ */
 export const utcKnowledgeGaps: KnowledgeGap[] = [
   {
-    id: 'utc-program-threshold-table-not-imported',
-    label: 'Bảng ngưỡng UTC 2026 theo từng mã xét tuyển ở Hà Nội và Phân hiệu TP.HCM chưa được nhập đầy đủ.',
+    id: 'utc-hsa-tsa-vact-conversion-not-modeled',
+    label: 'Các phương thức xét HSA (ĐGNL ĐHQGHN) / TSA (ĐGTD Bách khoa HN) / ĐGNL ĐHQG-HCM và công thức quy đổi về thang THPT chưa được mô hình hoá.',
     status: 'official-but-unparsed',
     sourceId: 'utc-quality-threshold-2026',
     scoreAffecting: true,
-    knownData: ['Hà Nội: nhiều ngành 18/30, Logistics 21/30', 'Phân hiệu TP.HCM: nhiều ngành 17/30, một số ngành 18-20/30'],
-    impact: 'Compare chỉ loại chắc chắn hồ sơ dưới 17/30; chưa kết luận đạt cho ngành/cơ sở cụ thể.',
+    impact: 'partial-for-aptitude-test-routes',
   },
   {
-    id: 'utc-weighted-math-context-not-modeled',
-    label: 'Công thức UTC có nhánh Toán x2 và nhánh riêng ngành Ngôn ngữ Anh, nhưng context ngành/tổ hợp chưa được model hóa.',
+    id: 'utc-combined-transcript-method-not-modeled',
+    label: 'Phương thức xét kết hợp học bạ THPT với điều kiện điểm thi TN THPT (dùng cùng công thức Toán×2) chưa được mô hình hoá — cần điểm học bạ theo học kỳ/năm và bảng điều kiện riêng.',
     status: 'official-but-unparsed',
-    sourceId: 'utc-quality-threshold-2026',
+    sourceId: 'utc-admission-info-2026',
     scoreAffecting: true,
-  },
-  {
-    id: 'utc-hsa-tsa-vact-conversion-not-imported',
-    label: 'Quy đổi HSA/TSA/ĐGNL ĐHQG-HCM về thang THPT 2026 chưa được nhập.',
-    status: 'official-but-unparsed',
-    sourceId: 'utc-quality-threshold-2026',
-    scoreAffecting: true,
+    impact: 'partial-for-combined-transcript-route',
   },
 ];

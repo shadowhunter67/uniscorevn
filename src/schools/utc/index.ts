@@ -13,7 +13,7 @@ export const utcModule: SchoolModule = {
   region: 'hanoi',
   vnuhcm: false,
   summary:
-    'Đã xác minh thông báo ngưỡng đầu vào UTC 2026 chính thức · Nguồn có bảng ngưỡng theo Hà Nội/Phân hiệu TP.HCM và nhánh HSA/TSA/ĐGNL, nhưng module hiện chỉ kiểm tra ngưỡng THPT tối thiểu.',
+    'Tính đủ Tổng điểm xét tuyển (exact) cho phương thức xét kết quả thi TN THPT: điểm học lực `(Toán×2 + 2 môn còn lại)×3/4` (ngành Ngôn ngữ Anh: tổng thô 3 môn) + điểm cộng IELTS + điểm ưu tiên KV/ĐT (công thức giảm khi ≥ 22,5), so với ngưỡng đảm bảo chất lượng theo ngành (Hà Nội 16-21/30, Phân hiệu TP.HCM 16-20/30) — đều trích nguyên văn từ trang tuyển sinh chính thức 2026 · Chưa mô hình hoá: phương thức HSA/TSA/ĐGNL, phương thức kết hợp học bạ, điểm cộng giải HSG cấp tỉnh.',
   capabilities: {
     admissionInfo: true,
     programs: false,
