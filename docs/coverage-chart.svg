@@ -6,15 +6,15 @@
     
     <text x="0" y="76" font-size="13" font-weight="600" fill="#0b0b0b">Calculator đã xác minh</text>
     <line x1="240" y1="84" x2="550" y2="84" stroke="#e1e0d9" stroke-width="1" />
-    <rect x="240" y="62" width="55.16949152542373" height="20" rx="4" fill="#2a78d6" />
-    <text x="560" y="76" font-size="13" font-weight="600" fill="#0b0b0b" text-anchor="start">21</text>
-    <text x="640" y="76" font-size="11" fill="#898781" text-anchor="end">7.9%</text>
+    <rect x="240" y="62" width="57.79661016949153" height="20" rx="4" fill="#2a78d6" />
+    <text x="560" y="76" font-size="13" font-weight="600" fill="#0b0b0b" text-anchor="start">22</text>
+    <text x="640" y="76" font-size="11" fill="#898781" text-anchor="end">8.2%</text>
   
     <text x="0" y="110" font-size="13" font-weight="600" fill="#0b0b0b">Calculator một phần</text>
     <line x1="240" y1="118" x2="550" y2="118" stroke="#e1e0d9" stroke-width="1" />
-    <rect x="240" y="96" width="10.508474576271187" height="20" rx="4" fill="#eb6834" />
-    <text x="560" y="110" font-size="13" font-weight="600" fill="#0b0b0b" text-anchor="start">4</text>
-    <text x="640" y="110" font-size="11" fill="#898781" text-anchor="end">1.5%</text>
+    <rect x="240" y="96" width="7.88135593220339" height="20" rx="4" fill="#eb6834" />
+    <text x="560" y="110" font-size="13" font-weight="600" fill="#0b0b0b" text-anchor="start">3</text>
+    <text x="640" y="110" font-size="11" fill="#898781" text-anchor="end">1.1%</text>
   
     <text x="0" y="144" font-size="13" font-weight="600" fill="#0b0b0b">Chỉ kiểm tra điều kiện/ngưỡng</text>
     <line x1="240" y1="152" x2="550" y2="152" stroke="#e1e0d9" stroke-width="1" />

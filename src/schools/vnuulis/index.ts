@@ -13,12 +13,11 @@ export const vnuulisModule: SchoolModule = {
   region: 'hanoi',
   vnuhcm: false,
   summary:
-    'Official 2026 VNU-ULIS sources give a real conversion rule (foreign-language subject coefficient 2, /40 to /30 rescale) and published thresholds (19/30 regular, 15/30 international-partnership exam-route, 18/30 international-partnership transcript-route). Runtime support checks the THPT exam-route and international-partnership transcript-route thresholds for English-language combinations only; HSA-route and certificate-combined eligibility are not executable yet, and non-English language combinations are not modeled by the shared subject taxonomy.',
+    'Tính đủ Điểm xét tuyển (exact) cho phương thức xét điểm thi TN THPT với tổ hợp có tiếng Anh hệ số 2: quy đổi tổng /40 về /30, cộng điểm ưu tiên KV/ĐT (KV1 0,75... UT1 2,0..., trần 3,0) và công thức giảm khi ≥ 22,5 — đều trích nguyên văn từ thông báo tuyển sinh chính thức; phương thức này không có điểm khuyến khích/thưởng. Ngưỡng đảm bảo chất lượng: 19/30 chương trình chuẩn, 15/30 chương trình liên kết quốc tế. Các nhánh còn lại vẫn partial: tổ hợp ngoại ngữ khác tiếng Anh (taxonomy chưa model), route HSA, route kết hợp chứng chỉ, route học bạ liên kết quốc tế.',
   capabilities: {
     admissionInfo: true,
     programs: false,
     cutoffs: false,
-    partialCalculator: true,
     ...aggregateSchoolCapabilities(vnuulisAdmissionMethods),
   },
   catalogSources: [

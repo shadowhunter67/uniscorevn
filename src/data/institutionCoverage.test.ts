@@ -68,8 +68,8 @@ describe('institution coverage statistics', () => {
       admissionDataAvailable: 225,
       eligibilitySupported: 82,
       calculatorSupported: 25,
-      partialCalculator: 4,
-      fullyVerified: 21,
+      partialCalculator: 3,
+      fullyVerified: 22,
       catalogOnly: 42,
     });
   });
@@ -120,7 +120,7 @@ describe('institution coverage statistics', () => {
     expect(deriveInstitutionSupportStatus(schoolRegistry.nlu)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.ush)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hcmupes)).toBe('eligibility-only');
-    expect(deriveInstitutionSupportStatus(schoolRegistry.vnuulis)).toBe('partial-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.vnuulis)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hce)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hul)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hcmute)).toBe('verified-calculator');

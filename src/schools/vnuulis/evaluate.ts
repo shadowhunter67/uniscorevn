@@ -3,7 +3,9 @@ import type { ApplicantProfile } from '../../core/applicantProfile';
 import type { CalculationStep } from '../../core/calculationStep';
 import { SUBJECT_LABELS } from '../../core/subjects';
 import type { ThptSubjectContext } from '../thptThresholdOnly';
+import { round2 } from '../../core/round2';
 import { convertVnuulisExamScore, convertVnuulisTranscriptScore } from './conversion';
+import { calculateVnuulisEffectivePriority30, lookupVnuulisStandardPriority30 } from './priority';
 import { vnuulisAdmissionMethods, type VnuulisMethodId } from './methods';
 
 export type VnuulisProgramTrack = 'regular' | 'international-partnership';
@@ -91,34 +93,65 @@ function evaluateExamMethod(profile: ApplicantProfile, context: VnuulisEvaluatio
   }
 
   const threshold = examThresholdFor(track);
+  const academic30 = converted.total30;
+  const standardPriority30 = lookupVnuulisStandardPriority30(profile.priority?.region, profile.priority?.category);
+  const priority = calculateVnuulisEffectivePriority30({ academicScore30: academic30, standardPriority30 });
+  const finalScore = round2(Math.min(30, academic30 + priority.effectivePriority30));
+
   const explanation: CalculationStep[] = [
     {
       id: 'vnuulis-exam-conversion',
       label: 'VNU-ULIS 2026 THPT exam-route conversion',
-      output: converted.total30,
+      output: academic30,
       scale: 30,
       formula: 'English score counts coefficient 2; total out of 40 is rescaled to /30 (total40 * 0.75).',
       evidence: [{ sourceId: 'vnuulis-admission-notice-2026', location: 'Official 2026 admission announcement, scoring section', verification: 'verified', effectiveYear: 2026 }],
     },
+    {
+      id: 'vnuulis-exam-priority',
+      label: priority.reduced ? 'Điểm ưu tiên (đã giảm)' : 'Điểm ưu tiên',
+      output: priority.effectivePriority30,
+      scale: 30,
+      formula: priority.reduced
+        ? '[(30 − điểm quy đổi) / 7,5] × mức điểm ưu tiên KV/ĐT'
+        : 'Mức điểm ưu tiên KV/ĐT (KV1 0,75 / KV2-NT 0,5 / KV2 0,25; UT1 2,0 / UT2 1,0), trần 3,0',
+      evidence: [{ sourceId: 'vnuulis-admission-notice-2026', location: 'Official 2026 admission announcement, priority-points section', verification: 'verified', effectiveYear: 2026 }],
+    },
+    {
+      id: 'vnuulis-exam-final',
+      label: 'Điểm xét tuyển (thang 30)',
+      output: finalScore,
+      scale: 30,
+      formula: 'min(30, điểm quy đổi + điểm ưu tiên)',
+      evidence: [{ sourceId: 'vnuulis-admission-notice-2026', location: 'Official 2026 admission announcement, scoring section', verification: 'verified', effectiveYear: 2026 }],
+    },
   ];
 
-  if (converted.total30 < threshold) {
-    return buildResult({
-      methodId: 'vnuulis-thpt-exam-2026',
-      status: 'ineligible',
-      reasons: [`Converted score ${converted.total30}/30 is below the ${track} threshold ${threshold}/30.`],
-      explanation,
-    });
-  }
-  return buildResult({
-    methodId: 'vnuulis-thpt-exam-2026',
-    status: 'eligible',
-    reasons: [
-      `Converted score ${converted.total30}/30 meets the ${track} threshold ${threshold}/30.`,
-      'This confirms the quality-assurance input threshold only; it is not a final admission-score guarantee (program-level cutoffs may be higher).',
-    ],
+  const status: 'eligible' | 'ineligible' = academic30 < threshold ? 'ineligible' : 'eligible';
+  return {
+    schoolId: 'vnuulis',
+    year: 2026,
+    methodId: 'vnuulis-thpt-exam-exact-2026',
+    confidence: 'exact-verified',
+    eligibility: {
+      status,
+      reasons: [
+        status === 'eligible'
+          ? `Điểm quy đổi ${academic30}/30 đạt ngưỡng đảm bảo chất lượng ${threshold}/30 (chương trình ${track === 'international-partnership' ? 'liên kết quốc tế' : 'chuẩn'}).`
+          : `Điểm quy đổi ${academic30}/30 dưới ngưỡng đảm bảo chất lượng ${threshold}/30 (chương trình ${track === 'international-partnership' ? 'liên kết quốc tế' : 'chuẩn'}).`,
+        'Ngưỡng này là điểm sàn đảm bảo chất lượng; điểm chuẩn trúng tuyển theo ngành có thể cao hơn.',
+      ],
+    },
+    score: { value: finalScore, scale: 30 },
+    missingInputs: [],
+    missingRules: [],
+    missingRequirements: [],
     explanation,
-  });
+    evidence: [
+      { sourceId: 'vnuulis-admission-notice-2026', location: 'Official 2026 admission announcement — scoring formula + priority-points table + 3.0 cap; "không có điểm khuyến khích hoặc điểm thưởng riêng cho phương thức xét tuyển bằng kết quả thi tốt nghiệp THPT"', verification: 'verified', effectiveYear: 2026 },
+      { sourceId: 'vnuulis-threshold-notice-2026', location: THRESHOLD_LOCATION, verification: 'verified', effectiveYear: 2026 },
+    ],
+  };
 }
 
 function evaluateTranscriptMethod(profile: ApplicantProfile, context: VnuulisEvaluationContext): AdmissionEvaluation {

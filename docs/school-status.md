@@ -2,7 +2,7 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (21)
+## Calculator đã xác minh (22)
 
 - **FTU** — Trường Đại học Ngoại thương
 - **GDU** — Trường Đại học Gia Định
@@ -25,13 +25,13 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **UFM** — Trường Đại học Tài chính – Marketing
 - **UMP** — Trường Đại học Y Dược Thành phố Hồ Chí Minh
 - **USSH** — Trường Đại học Khoa học Xã hội và Nhân văn – ĐHQG TP.HCM
+- **VNU-ULIS** — Truong Dai hoc Ngoai ngu - Dai hoc Quoc gia Ha Noi
 
-## Calculator một phần (4)
+## Calculator một phần (3)
 
 - **DAV** — Hoc vien Ngoai giao
 - **NEU** — Trường Đại học Kinh tế Quốc dân
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
-- **VNU-ULIS** — Truong Dai hoc Ngoai ngu - Dai hoc Quoc gia Ha Noi
 
 ## Chỉ kiểm tra điều kiện/ngưỡng (82)
 
