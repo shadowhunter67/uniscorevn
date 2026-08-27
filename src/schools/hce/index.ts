@@ -13,7 +13,7 @@ export const hceModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'Nguồn tuyển sinh HCE 2026 chính thức đã xác minh 5 phương thức xét tuyển và điểm sàn thi TN THPT 15-17/30 tùy ngành (22 ngành). UniscoreVN mới kiểm tra được ngưỡng theo khoảng, chưa có bảng ngưỡng từng ngành cụ thể.',
+    'Tính chính xác điểm xét tuyển HCE 2026 theo thi TN THPT cho toàn bộ 18 ngành Trường Đại học Kinh tế (ngưỡng 15/30 hoặc 17/30 tùy ngành, không hệ số môn, cộng điểm ưu tiên theo Bảng 1 — Thông tin tuyển sinh 2026 của Đại học Huế, PDF 77 trang). Các phương thức khác (xét tuyển thẳng, học bạ, ĐGNL, kết hợp) và các trường thành viên khác của Đại học Huế vẫn chỉ ở mức kiểm tra ngưỡng.',
   capabilities: {
     admissionInfo: true,
     programs: true,
@@ -32,6 +32,12 @@ export const hceModule: SchoolModule = {
       url: 'https://tuyensinh.hce.edu.vn/diem-san-xet-tuyen-dai-hoc-nam-2026/',
       type: 'official-institution',
       checkedAt: '2026-08-24',
+    },
+    {
+      title: 'Thông tin tuyển sinh đại học hệ chính quy năm 2026 của Đại học Huế',
+      url: 'https://tuyensinh.hueuni.edu.vn/News/Detail/thong-tin-tuyen-sinh-dai-hoc-cao-dang-he-chinh-quy-nam-2026-cua-dai-hoc-hue_20260501150542',
+      type: 'official-institution',
+      checkedAt: '2026-08-26',
     },
   ],
 };

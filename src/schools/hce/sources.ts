@@ -32,4 +32,15 @@ export const hceSources: Omit<AdmissionSource, 'schoolId'>[] = [
     verification: 'verified',
     lifecycle: { effectiveYear: 2026, status: 'current' },
   },
+  {
+    id: 'hce-hueuni-ttts-2026',
+    publisher: 'Đại học Huế',
+    title: 'THÔNG TIN TUYỂN SINH ĐẠI HỌC HỆ CHÍNH QUY NĂM 2026 (77 trang, Quyết định 630/QĐ-HĐTSĐH, 29/04/2026)',
+    url: 'https://tuyensinh.hueuni.edu.vn/News/Detail/thong-tin-tuyen-sinh-dai-hoc-cao-dang-he-chinh-quy-nam-2026-cua-dai-hoc-hue_20260501150542',
+    accessedAt: '2026-08-26',
+    publishedAt: '2026-04-29',
+    sourceType: 'official-admission',
+    verification: 'verified',
+    lifecycle: { effectiveYear: 2026, status: 'current' },
+  },
 ];
