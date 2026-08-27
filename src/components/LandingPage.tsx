@@ -12,6 +12,7 @@ import {
   institutionCoverage,
   type InstitutionSupportStatus,
 } from '../data/institutionCoverage';
+import { UNIVERSITY_SYSTEMS } from '../data/universitySystems';
 import { SharedProfileEditor } from './SharedProfileEditor';
 import {
   filterSchoolsForLanding,
@@ -106,10 +107,14 @@ export function LandingPage({ onSelectSchool, onOpenCompare }: LandingPageProps)
   const [regionFilter, setRegionFilter] = useState<OptionalLandingFilter<SchoolRegion>>('all');
   const [tierFilter, setTierFilter] = useState<OptionalLandingFilter<CapabilityTier>>('all');
   const [entityFilter, setEntityFilter] = useState<LandingEntityFilter>('all');
+  const [systemFilter, setSystemFilter] = useState<OptionalLandingFilter<string>>('all');
   const [sortMode, setSortMode] = useState<LandingSortMode>('useful');
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_SCHOOL_COUNT);
   const schools = useMemo(() => Object.values(schoolRegistry), []);
-  const filters = useMemo(() => ({ query, entityFilter, regionFilter, tierFilter, sortMode }), [query, entityFilter, regionFilter, tierFilter, sortMode]);
+  const filters = useMemo(
+    () => ({ query, entityFilter, regionFilter, tierFilter, systemFilter, sortMode }),
+    [query, entityFilter, regionFilter, tierFilter, systemFilter, sortMode]
+  );
   const filteredSchools = useMemo(() => filterSchoolsForLanding(schools, filters), [schools, filters]);
   const visibleSchools = filteredSchools.slice(0, visibleCount);
   const hasMore = visibleCount < filteredSchools.length;
@@ -132,13 +137,14 @@ export function LandingPage({ onSelectSchool, onOpenCompare }: LandingPageProps)
 
   useEffect(() => {
     setVisibleCount(INITIAL_VISIBLE_SCHOOL_COUNT);
-  }, [query, entityFilter, regionFilter, tierFilter, sortMode]);
+  }, [query, entityFilter, regionFilter, tierFilter, systemFilter, sortMode]);
 
   function resetFilters() {
     setQuery('');
     setEntityFilter('all');
     setRegionFilter('all');
     setTierFilter('all');
+    setSystemFilter('all');
     setSortMode('useful');
   }
 
@@ -297,6 +303,12 @@ export function LandingPage({ onSelectSchool, onOpenCompare }: LandingPageProps)
               value,
               label,
             }))}
+          />
+          <FilterSelect
+            label="Cụm ĐH"
+            value={systemFilter}
+            onChange={setSystemFilter}
+            options={UNIVERSITY_SYSTEMS.map((system) => ({ value: system.id, label: system.shortLabel }))}
           />
           <label className="flex items-center gap-1.5 text-xs text-muted">
             <span className="shrink-0">Sắp xếp</span>

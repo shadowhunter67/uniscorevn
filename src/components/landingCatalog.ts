@@ -4,6 +4,7 @@ import {
   getSchoolEntityLevel,
   type InstitutionSupportStatus,
 } from '../data/institutionCoverage';
+import { getUniversitySystemId } from '../data/universitySystems';
 
 export type LandingEntityFilter = 'university' | 'academy' | 'college' | 'college_pedagogy' | 'vocational_college' | 'all';
 export type LandingSortMode = 'useful' | 'az';
@@ -14,6 +15,8 @@ export interface LandingFilters {
   entityFilter: LandingEntityFilter;
   regionFilter: OptionalLandingFilter<SchoolRegion>;
   tierFilter: OptionalLandingFilter<InstitutionSupportStatus>;
+  /** id cụm đại học (`universitySystems.ts`) hoặc 'all'. */
+  systemFilter: OptionalLandingFilter<string>;
   sortMode: LandingSortMode;
 }
 
@@ -77,7 +80,8 @@ export function filterSchoolsForLanding(schools: readonly SchoolModule[], filter
     })
     .filter((school) => matchesLandingEntityFilter(school, filters.entityFilter))
     .filter((school) => filters.regionFilter === 'all' || school.region === filters.regionFilter)
-    .filter((school) => filters.tierFilter === 'all' || deriveInstitutionSupportStatus(school) === filters.tierFilter);
+    .filter((school) => filters.tierFilter === 'all' || deriveInstitutionSupportStatus(school) === filters.tierFilter)
+    .filter((school) => filters.systemFilter === 'all' || getUniversitySystemId(school.id) === filters.systemFilter);
 }
 
 export function getVisibleSchoolCountAfterReset(totalResults: number): number {
@@ -90,6 +94,7 @@ export function hasActiveLandingFilters(filters: LandingFilters): boolean {
     filters.entityFilter !== 'all' ||
     filters.regionFilter !== 'all' ||
     filters.tierFilter !== 'all' ||
+    filters.systemFilter !== 'all' ||
     filters.sortMode !== 'useful'
   );
 }

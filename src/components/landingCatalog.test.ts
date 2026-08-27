@@ -17,6 +17,7 @@ const defaultFilters: LandingFilters = {
   entityFilter: 'all',
   regionFilter: 'all',
   tierFilter: 'all',
+  systemFilter: 'all',
   sortMode: 'useful',
 };
 
@@ -99,6 +100,22 @@ describe('landing catalog helpers', () => {
     expect(hasActiveLandingFilters(defaultFilters)).toBe(false);
     expect(hasActiveLandingFilters({ ...defaultFilters, query: 'ueh' })).toBe(true);
     expect(hasActiveLandingFilters({ ...defaultFilters, sortMode: 'az' })).toBe(true);
+    expect(hasActiveLandingFilters({ ...defaultFilters, systemFilter: 'hue' })).toBe(true);
+  });
+
+  it('systemFilter narrows the catalog to one university system', () => {
+    const all = Object.values(schoolRegistry);
+    const hue = filterSchoolsForLanding(all, { ...defaultFilters, systemFilter: 'hue' }).map((s) => s.id);
+    expect(hue).toEqual(expect.arrayContaining(['hueu', 'hce', 'hul', 'huaf', 'husc', 'hueedu']));
+    expect(hue).not.toContain('vnua');
+    expect(hue).not.toContain('hcmut');
+
+    const vnuHcm = filterSchoolsForLanding(all, { ...defaultFilters, systemFilter: 'vnu-hcm' }).map((s) => s.id);
+    expect(vnuHcm).toEqual(expect.arrayContaining(['hcmut', 'hcmus', 'ussh', 'uel', 'uit', 'iu', 'uhs', 'agu']));
+    expect(vnuHcm).not.toContain('ueh');
+
+    const unknown = filterSchoolsForLanding(all, { ...defaultFilters, systemFilter: 'not-a-system' });
+    expect(unknown).toHaveLength(0);
   });
 
   it('badge color is stable for the same school regardless of sort/filter position', () => {
