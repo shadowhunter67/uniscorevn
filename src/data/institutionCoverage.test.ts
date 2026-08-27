@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 225,
       admissionDataAvailable: 225,
-      eligibilitySupported: 66,
-      calculatorSupported: 41,
+      eligibilitySupported: 65,
+      calculatorSupported: 42,
       partialCalculator: 3,
-      fullyVerified: 38,
+      fullyVerified: 39,
       catalogOnly: 42,
     });
   });
@@ -108,7 +108,7 @@ describe('institution coverage statistics', () => {
     expect(deriveInstitutionSupportStatus(schoolRegistry.hub)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.ctu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vinhuni)).toBe('verified-calculator');
-    expect(deriveInstitutionSupportStatus(schoolRegistry.ttn)).toBe('eligibility-only');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.ttn)).toBe("verified-calculator");
     expect(deriveInstitutionSupportStatus(schoolRegistry.tnu)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.dlu)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.eaut)).toBe('eligibility-only');

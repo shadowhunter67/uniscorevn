@@ -13,7 +13,7 @@ export const ttnModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'Official 2026 TTN sources are normalized for THPT eligibility: the common 15/30 baseline is modeled, with the highest published program-specific floors (Nursing/Medical Lab 18, teacher-training 20, Medicine 22) documented as knowledge gaps. Transcript, VNU aptitude-test, and combined-aptitude routes are not modeled yet.',
+    'Tính chính xác Điểm xét tuyển TTN 2026 (phương thức 100 — thi TN THPT) theo nhóm ngưỡng: ĐXT = round2(tổng thô 3 môn + điểm ưu tiên KV/ĐT theo Điều 7 TT 06/2026); đủ điều kiện xét tuyển ⟺ ĐXT ≥ ngưỡng nhóm (Y khoa 22 / sư phạm 20 / Điều dưỡng-KTXN y học 18 / còn lại 15) — bảng ngưỡng trích nguyên văn Thông báo mức điểm nhận hồ sơ 2026 (37 mã xét tuyển); công thức tổng thô + ưu tiên là judgment call vì thông báo không in công thức tường minh · Ngoài phạm vi: Giáo dục Mầm non / Giáo dục Thể chất (phương thức 405 năng khiếu), phương thức học bạ / ĐGNL.',
   capabilities: {
     admissionInfo: true,
     programs: false,

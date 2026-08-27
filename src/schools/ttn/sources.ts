@@ -34,12 +34,12 @@ export const ttnSources: TtnSource[] = [
     publisher: 'Tay Nguyen University',
     title: 'Official 2026 application receipt threshold notice (muc diem nhan ho so xet tuyen)',
     url: 'https://tuyensinh.ttn.edu.vn/2026/07/10/tbmdnhsxtdh2026/',
-    accessedAt: '2026-08-24',
+    accessedAt: '2026-08-27',
     publishedAt: '2026-07-10',
     sourceType: 'official-admission',
     verification: 'verified',
     lifecycle: { effectiveYear: 2026, status: 'current' },
     note:
-      'Official TTN 2026 threshold notice. States a common baseline of total three THPT exam subjects >= 15.00/30 for most programs, with higher published floors for Medicine (22), teacher-training programs (20), and Nursing/Medical Laboratory Technology (18). Also references transcript (PT200) and VNU aptitude-test (PT402) alternative criteria and a combined-aptitude route (PT405) with a separate core-subject minimum, which are not modeled in this runtime yet.',
+      'Official TTN 2026 threshold notice — trang HTML đọc trực tiếp 2026-08-27, mục 1.2 có bảng đủ 37 mã xét tuyển với mức điểm nhận hồ sơ phương thức 100. Mục 3.1: ngưỡng KV3 theo nhóm — Giáo viên 20, Y khoa 22, Điều dưỡng / Kỹ thuật xét nghiệm y học 18, còn lại 15 (tổng thô 3 môn, không điểm cộng); thí sinh khu vực khác cộng điểm ưu tiên vào trước khi so ngưỡng. Không in công thức Điểm xét tuyển tường minh. Giáo dục Mầm non (7140201) / Giáo dục Thể chất (7140206) chỉ tuyển qua phương thức 405 (năng khiếu). Transcript (PT200), VNU aptitude (PT402), combined-aptitude (PT405) chưa model.',
   },
 ];
