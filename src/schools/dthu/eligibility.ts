@@ -40,4 +40,12 @@ export function checkDthuThptExamThreshold(totalScore30: number, group: DthuProg
   };
 }
 
+/** Nhóm dùng được cho nhánh exact (loại `law` — điều kiện phụ về học lực chưa model). */
+export type DthuExactGroup = 'teacherTraining' | 'standard';
+
+/** NĐV = round2(tổng thô 3 môn + điểm ưu tiên hiệu dụng). Trích mục 1.3 Thông báo điểm sàn. */
+export function calculateDthuThptExamScore30(rawTotal30: number, effectivePriority30: number): number {
+  return Math.round((rawTotal30 + effectivePriority30) * 100) / 100;
+}
+
 export { GROUP_LABELS as DTHU_PROGRAM_GROUP_LABELS };

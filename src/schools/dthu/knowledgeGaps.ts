@@ -30,10 +30,10 @@ export const dthuKnowledgeGaps: KnowledgeGap[] = [
   },
   {
     id: 'dthu-priority-not-modeled',
-    label: 'NĐV công bố = tổng điểm 3 môn (thang 30) + điểm ưu tiên khu vực/đối tượng (công thức giảm dần công bố sẵn khi tổng điểm ≥22,5/30). Runtime hiện chỉ cộng điểm thô 3 môn.',
+    label: 'Batch 2026-08-27: công thức NĐV = tổng thô 3 môn + điểm ưu tiên KV/ĐT (Điều 7 TT 06/2026 + công thức giảm ≥ 22,5) đã model đầy đủ trong nhánh exact `dthu-thpt-exam-exact-2026` (nhóm standard + teacherTraining). Phương thức eligibility rộng (`dthu-thpt-exam-2026`) vẫn chỉ cộng điểm thô 3 môn.',
     status: 'incomplete',
     sourceId: 'dthu-quality-threshold-2026',
-    scoreAffecting: true,
-    impact: 'Thí sinh thuộc diện ưu tiên khu vực/đối tượng cần tự cộng điểm ưu tiên vào tổng điểm trước khi so với ngưỡng.',
+    scoreAffecting: false,
+    impact: 'method-out-of-scope',
   },
 ];

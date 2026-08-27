@@ -13,7 +13,7 @@ export const dthuModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'Đã xác minh trực tiếp Thông báo 09/07/2026 (Phụ lục I, đọc từ file PDF đính kèm bài đăng chính thức, đủ 59/59 ngành): ngưỡng đầu vào phương thức thi TN THPT — 20,0/30 cho 16 ngành sư phạm (không năng khiếu), 15,0/30 cho 36 ngành khác, 20,0/30 cho Luật (kèm điều kiện phụ chưa model). 6 ngành có môn năng khiếu (Mầm non/GDTC/SP Âm nhạc/SP Mỹ thuật/Huấn luyện Thể thao) chưa model do thiếu field điểm năng khiếu. NĐV đã bao gồm điểm ưu tiên, runtime hiện chỉ so điểm thô 3 môn.',
+    'Tính chính xác Ngưỡng đầu vào / điểm xét DThU 2026 (Phương thức 100 — thi TN THPT) cho nhóm sư phạm (đại học) và ngành không sư phạm: NĐV = round2(tổng thô 3 môn + điểm ưu tiên KV/ĐT) — công thức và mức ưu tiên (Điều 7 TT 06/2026, công thức giảm ≥ 22,5) trích nguyên văn Thông báo điểm sàn 09/07/2026; đạt NĐV ≥ 20/30 (sư phạm) hoặc ≥ 15/30 (ngành khác) là đủ điều kiện xét tuyển · Ngoài phạm vi: 6 ngành năng khiếu (công thức 2 môn / 1 môn + ưu tiên nhân hệ số) và ngành Luật (điều kiện phụ về học lực lớp 12 / điểm xét tốt nghiệp).',
   capabilities: {
     admissionInfo: true,
     programs: false,
