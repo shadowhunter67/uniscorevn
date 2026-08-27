@@ -2,7 +2,7 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (32)
+## Calculator đã xác minh (34)
 
 - **FTU** — Trường Đại học Ngoại thương
 - **GDU** — Trường Đại học Gia Định
@@ -13,6 +13,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HCMUTE** — Trường Đại học Công nghệ Kỹ thuật TP. Hồ Chí Minh
 - **HDU** — Trường Đại học Hồng Đức
 - **HUAF** — Trường Đại học Nông Lâm, Đại học Huế
+- **HUB** — Trường Đại học Ngân hàng TP. Hồ Chí Minh
 - **HUED** — Trường Đại học Sư phạm, Đại học Huế
 - **HUFLIT** — Trường Đại học Ngoại ngữ - Tin học TP. Hồ Chí Minh
 - **HUL** — Trường Đại học Luật, Đại học Huế
@@ -34,6 +35,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **USSH** — Trường Đại học Khoa học Xã hội và Nhân văn – ĐHQG TP.HCM
 - **UTC** — Trường Đại học Giao thông vận tải
 - **VKU** — Trường Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn
+- **VinhUni** — Trường Đại học Vinh
 - **VMU** — Trường Đại học Hàng hải Việt Nam
 - **VNU-ULIS** — Truong Dai hoc Ngoai ngu - Dai hoc Quoc gia Ha Noi
 
@@ -43,7 +45,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **NEU** — Trường Đại học Kinh tế Quốc dân
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 
-## Chỉ kiểm tra điều kiện/ngưỡng (72)
+## Chỉ kiểm tra điều kiện/ngưỡng (70)
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
 - **AJC** — Học viện Báo chí và Tuyên truyền
@@ -73,7 +75,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HNUE** — Trường Đại học Sư phạm Hà Nội
 - **HPU2** — Truong Dai hoc Su pham Ha Noi 2
 - **HSU** — Trường Đại học Hoa Sen
-- **HUB** — Trường Đại học Ngân hàng TP. Hồ Chí Minh
 - **HUBT** — Trường Đại học Kinh doanh và Công nghệ Hà Nội
 - **HUCE** — Truong Dai hoc Xay dung Ha Noi
 - **HUIT** — Trường Đại học Công Thương TP.HCM
@@ -110,7 +111,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **UTT** — Trường Đại học Công nghệ Giao thông vận tải
 - **VAA** — Học viện Hàng không Việt Nam
 - **VGU** — Truong Dai hoc Viet Duc
-- **VinhUni** — Trường Đại học Vinh
 - **VLU** — Trường Đại học Văn Lang
 - **VNU-LS** — Truong Dai hoc Luat - Dai hoc Quoc gia Ha Noi
 - **VNU-UMP** — Truong Dai hoc Y Duoc - Dai hoc Quoc gia Ha Noi
