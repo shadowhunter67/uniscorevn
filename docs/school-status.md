@@ -2,17 +2,20 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (17)
+## Calculator đã xác minh (20)
 
 - **FTU** — Trường Đại học Ngoại thương
 - **GDU** — Trường Đại học Gia Định
+- **HCE** — Trường Đại học Kinh tế, Đại học Huế
 - **HCMULAW** — Trường Đại học Luật Thành phố Hồ Chí Minh
 - **HCMUS** — Trường Đại học Khoa học Tự nhiên - ĐHQG TP.HCM
 - **HCMUT** — Trường Đại học Bách khoa – ĐHQG TP.HCM
 - **HUFLIT** — Trường Đại học Ngoại ngữ - Tin học TP. Hồ Chí Minh
+- **HUL** — Trường Đại học Luật, Đại học Huế
 - **HUTECH** — Trường Đại học Công nghệ TP. Hồ Chí Minh
 - **IU** — Trường Đại học Quốc tế – ĐHQG TP.HCM
 - **IUH** — Trường Đại học Công nghiệp Thành phố Hồ Chí Minh
+- **NCTU** — Truong Dai hoc Nam Can Tho
 - **TDTU** — Trường Đại học Tôn Đức Thắng
 - **UAH** — Truong Dai hoc Kien truc TP.HCM
 - **UEF** — Trường Đại học Kinh tế - Tài chính TP.HCM
@@ -30,7 +33,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 - **VNU-ULIS** — Truong Dai hoc Ngoai ngu - Dai hoc Quoc gia Ha Noi
 
-## Chỉ kiểm tra điều kiện/ngưỡng (85)
+## Chỉ kiểm tra điều kiện/ngưỡng (82)
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
 - **AJC** — Học viện Báo chí và Tuyên truyền
@@ -53,7 +56,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **FPTU** — Trường Đại học FPT
 - **HALONGU** — Trường Đại học Hạ Long
 - **HAU** — Trường Đại học Kiến trúc Hà Nội
-- **HCE** — Trường Đại học Kinh tế, Đại học Huế
 - **HCMUE** — Trường Đại học Sư phạm Thành phố Hồ Chí Minh (HCMUE, TPHCM)
 - **HCMUPES** — Trường Đại học Sư phạm Thể dục Thể thao TP.HCM
 - **HDU** — Trường Đại học Hồng Đức
@@ -68,12 +70,10 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HUCE** — Truong Dai hoc Xay dung Ha Noi
 - **HUED** — Trường Đại học Sư phạm, Đại học Huế
 - **HUIT** — Trường Đại học Công Thương TP.HCM
-- **HUL** — Trường Đại học Luật, Đại học Huế
 - **HUMG** — Trường Đại học Mỏ - Địa chất
 - **HUP** — Trường Đại học Dược Hà Nội
 - **HUSC** — Trường Đại học Khoa học, Đại học Huế
 - **LTVUni** — Trường Đại học Lương Thế Vinh
-- **NCTU** — Truong Dai hoc Nam Can Tho
 - **NLU** — Trường Đại học Nông Lâm TP.HCM
 - **NTTU** — Trường Đại học Nguyễn Tất Thành
 - **NTU-HN** — Truong Dai hoc Nguyen Trai
