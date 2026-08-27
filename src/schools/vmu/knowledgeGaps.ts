@@ -3,12 +3,13 @@ import type { KnowledgeGap } from '../../core/knowledgeStatus';
 export const vmuKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'vmu-program-mapping-not-imported',
-    label: 'VMU 2026 công bố ngưỡng theo 3 khối ngành (Kỹ thuật/Công nghệ, Kinh tế/Ngôn ngữ, Luật); danh sách 55 chương trình cụ thể chưa được ánh xạ vào từng khối.',
+    label:
+      'Batch 2026-08-27: công thức PT1 (ĐXT = tổng 3 môn + ưu tiên) đọc trực tiếp Thông báo 1329/TB-ĐHHHVN mục 2.2.1 và mở nhánh exact `vmu-thpt-exam-exact-2026`. Thông báo chỉ công bố nguyên văn ngưỡng sàn chung 15,00/30 (mục 2.1); mức 17/19/20 theo khối ngành đến từ nguồn nghiên cứu cũ, chưa đối chiếu lại nguồn 2026 nên nhánh exact trả eligibility "unknown" khi ≥ 15 (score vẫn chính xác).',
     status: 'official-but-unparsed',
     sourceId: 'vmu-admission-2026',
     scoreAffecting: false,
-    knownData: ['Kỹ thuật/Công nghệ: 17/30', 'Kinh tế/Ngôn ngữ: 19/30', 'Luật: 20/30'],
-    impact: 'Người dùng phải tự chọn đúng khối ngành; runtime chưa suy được khối ngành từ tên chương trình cụ thể.',
+    knownData: ['Ngưỡng sàn chung PT1: 15,00/30 (đã xác minh)', 'Mức theo khối ngành (chưa đối chiếu 2026): Kỹ thuật/Công nghệ 17, Kinh tế/Ngôn ngữ 19, Luật 20'],
+    impact: 'method-out-of-scope',
   },
   {
     id: 'vmu-conversion-table-not-imported',

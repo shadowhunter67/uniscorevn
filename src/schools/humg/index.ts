@@ -13,7 +13,7 @@ export const humgModule: SchoolModule = {
   region: 'hanoi',
   vnuhcm: false,
   summary:
-    'Đã xác minh thông báo ngưỡng điểm xét tuyển đợt 1 năm 2026 (04/07/2026, mục 7106). Bảng ngưỡng đầy đủ có khoảng 53 chương trình (15-21/30), nhưng module hiện chỉ nhập được 7 mã ngành có tên tiếng Việt + mã ngành xác nhận chắc chắn; các mã ngành khác chưa được nhập để tránh suy diễn sai.',
+    'Tính chính xác Điểm Xét HUMG 2026 theo thi TN THPT cho toàn bộ 53 mã xét tuyển: Điểm Xét = Min[(3 môn tổng thô) + điểm cộng, 30] + điểm ưu tiên; ngưỡng theo mã 15-21/30 — công thức, công thức giảm điểm ưu tiên và bảng ngưỡng đều trích nguyên văn từ Thông báo ngưỡng điểm xét tuyển đợt 1 năm 2026 (04/07/2026, mục 7106). Mức điểm ưu tiên KV/ĐT áp theo Điều 7 Thông tư 08/2022 (nguồn chỉ nêu "gồm Khu vực, Đối tượng"). Điểm cộng (QĐ 674/QĐ-MĐC) do người dùng tự cung cấp; các phương thức quy đổi (học bạ/TSA/HSA) chưa mô hình hoá.',
   capabilities: {
     admissionInfo: true,
     programs: false,

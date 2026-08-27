@@ -3,12 +3,13 @@ import type { KnowledgeGap } from '../../core/knowledgeStatus';
 export const huscKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'husc-program-threshold-table-not-imported',
-    label: 'Bảng điểm sàn HUSC 2026 theo từng ngành (15,00-22,75/30) chưa được nhập đầy đủ theo từng mã ngành.',
+    label:
+      'Batch 2026-08-27 đã đọc trực tiếp Phụ lục 1 (Thông báo 42/TB-HĐTSĐH, `husc-hueu-threshold-appendix-2026`) và đóng gap này cho 26 mã ngành DHT xét điểm thi TN THPT (đều 15,00/30, cùng công thức Đại học Huế — xem `husc-thpt-exam-exact-2026`). Gap chỉ còn cho 3 mã có điều kiện phụ ngoài phạm vi: 7440102SC / 7510302IC (22,75/30 + nhóm 20% Toán toàn quốc) và 7580101 Kiến trúc (phải thi năng khiếu).',
     status: 'official-but-unparsed',
-    sourceId: 'husc-threshold-2026',
-    scoreAffecting: true,
-    knownData: ['Phần lớn ngành: 15,00/30', 'Vật lý (CN Bán dẫn), Kỹ thuật điện tử (Thiết kế vi mạch): 22,75/30 + Toán top 20% cả nước'],
-    impact: 'Compare chỉ loại chắc chắn hồ sơ dưới 15/30 và công nhận đạt chắc chắn từ 22,75/30 trở lên; hồ sơ trong khoảng 15-22,75/30 chưa kết luận được vì chưa rõ ngưỡng của ngành cụ thể.',
+    sourceId: 'husc-hueu-threshold-appendix-2026',
+    scoreAffecting: false,
+    knownData: ['26 mã ngành xét điểm thi TN THPT: 15,00/30', 'Vật lý học CN bán dẫn (7440102SC), Điện tử - viễn thông thiết kế vi mạch (7510302IC): 22,75/30 + Toán top 20% cả nước', 'Kiến trúc (7580101): 15,00/30 + thi năng khiếu Vẽ mỹ thuật ≥ 5,0'],
+    impact: 'method-out-of-scope',
   },
   {
     id: 'husc-other-methods-not-modeled',

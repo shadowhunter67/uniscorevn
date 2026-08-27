@@ -15,8 +15,9 @@ export const humgSources: Omit<AdmissionSource, 'schoolId'>[] = [
 ];
 
 /**
- * Thông báo chính thức có bảng ngưỡng THPT đầy đủ khoảng 53 chương trình (15-21/30 theo thang 30)
- * kèm mã ngành. Do trích xuất tự động (không đọc được ảnh/bảng đầy đủ), chỉ xác nhận chắc chắn
- * được tên ngành tiếng Việt + mã ngành cho 7 chương trình trong HUMG_PROGRAM_THRESHOLDS_2026; các
- * chương trình còn lại KHÔNG được nhập để tránh sai lệch, xem humgKnowledgeGaps.
+ * Thông báo chính thức (đọc trực tiếp trang HTML 04/07/2026) chứa đầy đủ: Bảng 1 ngưỡng theo 53
+ * mã xét tuyển (15-21/30); công thức "Điểm Xét = Min[(Môn 1 + Môn 2 + Môn 3) + Điểm Cộng, 30] +
+ * Điểm ưu tiên"; công thức giảm điểm ưu tiên khi tổng tổ hợp ≥ 22,5; mục 3 hướng dẫn điểm cộng
+ * (QĐ 674/QĐ-MĐC); bảng tổ hợp và bảng ngành-tổ hợp. Toàn bộ 53 mã đã nhập vào
+ * HUMG_PROGRAM_THRESHOLDS_2026 (`thresholds.ts`).
  */

@@ -13,7 +13,7 @@ export const vmuModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'Đã xác minh thông báo VMU 2026: ngưỡng đảm bảo chất lượng đầu vào PT1 (thi TN THPT) chia theo 3 khối ngành - Kỹ thuật/Công nghệ 17/30, Kinh tế/Ngôn ngữ 19/30, Luật 20/30. Bảng quy đổi tương đương giữa 6 phương thức và ánh xạ 55 chương trình theo khối ngành chưa trích xuất được nên chưa hỗ trợ.',
+    'Tính chính xác Điểm xét tuyển VMU 2026 cho Phương thức 1 (thi TN THPT): ĐXT = tổng thô 3 môn tổ hợp + điểm ưu tiên (công thức trích nguyên văn Thông báo 1329/TB-ĐHHHVN, mục 2.2.1) — điểm ưu tiên KV/ĐT theo Điều 7 quy chế TT 06/2026 (công thức giảm ≥ 22,5). Thông báo chỉ công bố ngưỡng sàn chung 15,00/30 nên evaluator trả điểm chính xác kèm trạng thái đủ điều kiện "chưa kết luận" khi ≥ 15. Loại trừ D127 (sơ tuyển Vẽ mỹ thuật); các phương thức khác (kết hợp, học bạ, ĐGNL/ĐGTD, chứng chỉ) chưa mô hình hoá.',
   capabilities: {
     admissionInfo: true,
     programs: false,

@@ -3,7 +3,7 @@ import type { KnowledgeGap } from '../../core/knowledgeStatus';
 export const hueeduKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'hueedu-program-threshold-table-not-fully-mapped',
-    label: 'Bảng điểm xét tuyển HUEEDU 2026 theo từng ngành/mã xét tuyển (22 ngành, Phụ lục 1 Đại học Huế) đã xác minh nhưng chưa nhập theo từng mã ngành cụ thể vào runtime; hệ thống mới kiểm tra được theo khoảng 16,00-22,75/30.',
+    label: 'Batch 2026-08-27: đã nhập ngưỡng theo mã ngành cho 2 ngành ngoài đào tạo giáo viên (Tâm lý học giáo dục 7310403, Hệ thống thông tin 7480104 — cùng 16,00/30) và mở nhánh exact `hueedu-thpt-exam-exact-2026`. Các ngành còn lại (đào tạo giáo viên 20,00/30, Vật lý kỹ thuật, Sư phạm Âm nhạc, GDMN, INSA CVL) vẫn chỉ kiểm tra ngưỡng theo khoảng 16,00-22,75/30.',
     status: 'official-but-unparsed',
     sourceId: 'hueedu-hueu-threshold-appendix-2026',
     scoreAffecting: true,

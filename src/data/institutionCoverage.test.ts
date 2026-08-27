@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 225,
       admissionDataAvailable: 225,
-      eligibilitySupported: 79,
-      calculatorSupported: 28,
+      eligibilitySupported: 74,
+      calculatorSupported: 33,
       partialCalculator: 3,
-      fullyVerified: 25,
+      fullyVerified: 30,
       catalogOnly: 42,
     });
   });
@@ -103,9 +103,7 @@ describe('institution coverage statistics', () => {
     expect(deriveInstitutionSupportStatus(schoolRegistry.huce)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.dav)).toBe('partial-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hlu)).toBe('eligibility-only');
-    expect(deriveInstitutionSupportStatus(schoolRegistry.humg)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hdu)).toBe('eligibility-only');
-    expect(deriveInstitutionSupportStatus(schoolRegistry.vmu)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.ttn)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.tnu)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.dlu)).toBe('eligibility-only');
@@ -128,7 +126,10 @@ describe('institution coverage statistics', () => {
     expect(deriveInstitutionSupportStatus(schoolRegistry.vku)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.utc)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hup)).toBe('verified-calculator');
-    for (const schoolId of ['husc', 'huaf', 'hueedu', 'dut', 'dueudn', 'uedudn', 'uflsudn', 'uteudn']) {
+    for (const schoolId of ['husc', 'huaf', 'hueedu', 'humg', 'vmu']) {
+      expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('verified-calculator');
+    }
+    for (const schoolId of ['dut', 'dueudn', 'uedudn', 'uflsudn', 'uteudn']) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
     }
   });

@@ -13,7 +13,7 @@ export const hueeduModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'Nguồn tuyển sinh HUEEDU 2026 chính thức (Phụ lục 1 kèm Thông báo 42/TB-HĐTSĐH ngày 10/7/2026 của Đại học Huế) đã xác minh 22 ngành và mức điểm xét tuyển thi TN THPT từ 16,00/30 đến 22,75/30 tùy ngành. UniscoreVN mới kiểm tra được ngưỡng theo khoảng, chưa có bảng ngưỡng từng ngành cụ thể; ngưỡng khối sư phạm theo Thông tư 06/2026/TT-BGDĐT áp dụng song song cũng chưa được đối chiếu.',
+    'Tính chính xác Điểm xét tuyển HUED 2026 theo thi TN THPT cho 2 ngành ngoài đào tạo giáo viên (Tâm lý học giáo dục, Hệ thống thông tin — ngưỡng 16,00/30): tổng thô 3 môn (không hệ số) + điểm cộng (tùy chọn) + điểm ưu tiên theo Bảng 1 của Đại học Huế. Các ngành đào tạo giáo viên vẫn chỉ kiểm tra ngưỡng do phải đạt đồng thời ngưỡng khối đào tạo giáo viên theo Điều 9 Thông tư 06/2026/TT-BGDĐT (chưa đối chiếu); Vật lý kỹ thuật, Sư phạm Âm nhạc, GDMN, INSA CVL có điều kiện phụ nên ngoài phạm vi.',
   capabilities: {
     admissionInfo: true,
     programs: true,

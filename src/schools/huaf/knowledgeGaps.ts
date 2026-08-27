@@ -19,10 +19,11 @@ export const huafKnowledgeGaps: KnowledgeGap[] = [
   },
   {
     id: 'huaf-bonus-priority-not-modeled',
-    label: 'HUAF bonus (up to 3/30) and priority points are documented (achievement/merit/certificate incentives) but not modeled in runtime.',
+    label:
+      'Điểm ưu tiên KV/ĐT (Bảng 1 Đại học Huế) đã được mô hình hoá trong nhánh THPT exact (`huaf-thpt-exam-exact-2026`). Bảng điểm cộng thành tích (Phụ lục 2, tối đa 3/30) vẫn chưa nhập thành bảng tra cứu tự động — caller tự cung cấp giá trị nếu đã tính. Phương thức học bạ vẫn chỉ kiểm tra ngưỡng đồng thời.',
     status: 'incomplete',
-    sourceId: 'huaf-official-admission-info-2026',
+    sourceId: 'huaf-hueuni-ttts-2026',
     scoreAffecting: true,
-    impact: 'Eligibility checks compare raw available scores to the published minimum threshold without adding bonus or priority adjustments.',
+    impact: 'Nhánh học bạ và điểm cộng thành tích của nhánh THPT chưa tự cộng; điểm ưu tiên KV/ĐT đã tính đủ trong nhánh THPT exact.',
   },
 ];

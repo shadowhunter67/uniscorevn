@@ -13,7 +13,7 @@ export const huscModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'Nguồn tuyển sinh HUSC 2026 chính thức (Thông báo 42/TB-HĐTSĐH) đã xác minh mức điểm xét tuyển thi TN THPT từ 15,00/30 (phần lớn ngành) đến 22,75/30 (ngành đặc thù). UniscoreVN mới kiểm tra được ngưỡng theo khoảng, chưa có bảng ngưỡng từng ngành cụ thể.',
+    'Tính chính xác Điểm xét tuyển HUSC 2026 theo thi TN THPT cho 26 mã ngành Trường Đại học Khoa học (mã DHT) có ngưỡng 15,00/30: tổng thô 3 môn (không hệ số) + điểm cộng (tùy chọn) + điểm ưu tiên theo Bảng 1 của Đại học Huế (công thức giảm khi tổng ≥ 22,5) — công thức và bảng ưu tiên trích nguyên văn từ Thông tin tuyển sinh 2026 của Đại học Huế (PDF 77 trang), ngưỡng từ Phụ lục 1 Thông báo 42/TB-HĐTSĐH. Ngoài phạm vi: 3 chương trình vi mạch bán dẫn / Kiến trúc có điều kiện phụ, các phương thức khác (tuyển thẳng, học bạ, ĐGNL, kết hợp).',
   capabilities: {
     admissionInfo: true,
     programs: true,

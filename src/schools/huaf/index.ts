@@ -13,7 +13,7 @@ export const huafModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'Nguồn tuyển sinh HUAF 2026 chính thức đã xác minh 19 ngành, 4 phương thức xét tuyển và ngưỡng tổng điểm 3 môn thi TN THPT tối thiểu 15/30 (điều kiện chung cho phương thức xét học bạ). Quy đổi chứng chỉ ngoại ngữ, điểm cộng/ưu tiên và bảng ngưỡng theo từng ngành chưa được chuẩn hóa vào runtime.',
+    'Tính chính xác Điểm xét tuyển HUAF 2026 theo thi TN THPT cho toàn bộ 19 mã ngành Trường Đại học Nông Lâm (mã DHL): tổng thô 3 môn (không hệ số) + điểm cộng (tùy chọn) + điểm ưu tiên theo Bảng 1 của Đại học Huế (công thức giảm khi tổng ≥ 22,5), so với ngưỡng theo ngành 15/16/17 trên thang 30 — công thức và bảng ưu tiên trích từ Thông tin tuyển sinh 2026 của Đại học Huế, ngưỡng từ Phụ lục 1 Thông báo 42/TB-HĐTSĐH. Phương thức học bạ vẫn chỉ kiểm tra ngưỡng đồng thời; quy đổi chứng chỉ ngoại ngữ và điểm cộng thành tích chưa nhập.',
   capabilities: {
     admissionInfo: true,
     programs: true,
