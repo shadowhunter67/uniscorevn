@@ -13,7 +13,7 @@ export const hduModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'HDU 2026 công bố 4 phương thức xét tuyển, nhưng chỉ ngành Luật/Luật Kinh tế có ngưỡng cụ thể (tổng 3 môn >= 18,0/30, Ngữ văn >= 6,0). Các ngành khác ghi "công bố sau khi có kết quả thi" và nhóm ngành sư phạm theo ngưỡng Bộ GDĐT chưa công bố, nên module chỉ kiểm tra được điều kiện cho ngành Luật/Luật Kinh tế.',
+    'Tính chính xác Điểm xét tuyển HDU 2026 (PT1 - thi TN THPT) cho ngành Luật và Luật Kinh tế: Điểm xét tuyển = min(30, tổng thô 3 môn + điểm khuyến khích) + điểm ưu tiên (công thức giảm [(30 − A − B)/7,5] × mức khi tổng > 22,5) — công thức mục 7.5.b và ngưỡng 18,00/30 + Ngữ văn ≥ 6,0 đều trích nguyên văn Thông tin tuyển sinh 2026. Điểm khuyến khích (giải HSG tỉnh / lớp chuyên) chưa có mức chính thức nên nhánh exact áp dụng cho thí sinh không có điểm khuyến khích. Các ngành khác và nhóm sư phạm vẫn chưa có ngưỡng để kiểm tra.',
   capabilities: {
     admissionInfo: true,
     programs: false,

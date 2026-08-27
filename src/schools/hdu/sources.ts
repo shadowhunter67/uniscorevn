@@ -6,7 +6,7 @@ export const hduSources: Omit<AdmissionSource, 'schoolId'>[] = [
     publisher: 'Trường Đại học Hồng Đức',
     title: 'Thông tin tuyển sinh đào tạo trình độ đại học năm 2026',
     url: 'https://tuyensinh.hdu.edu.vn/thong-tin-tuyen-sinh-dao-tao-trinh-do-dai-hoc-nam-2026',
-    accessedAt: '2026-08-24',
+    accessedAt: '2026-08-27',
     publishedAt: '2026-01-17',
     sourceType: 'official-admission',
     verification: 'verified',

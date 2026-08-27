@@ -13,7 +13,7 @@ export const ptitModule: SchoolModule = {
   region: 'hanoi',
   vnuhcm: false,
   summary:
-    'Phương thức xét tuyển bằng kết quả ĐGNL/ĐGTD trong nước có ngưỡng đầu vào chính thức (V-ACT ≥600, HSA ≥75, TSA ≥50, SPT ≥15) và biết dạng công thức thô. Điểm xét tuyển chính xác cuối cùng còn bị chặn bởi quy đổi tương đương giữa phương thức và ngữ cảnh ngành/tổ hợp.',
+    'Tính chính xác Điểm xét tuyển PTIT 2026 cho Phương thức 5 (xét thi TN THPT): ĐXT = tổng thô 3 môn + điểm cộng (bảng IELTS + điểm thành tích) + điểm ưu tiên (Điều 7 Thông tư 06/2026, công thức giảm ≥ 22,5), so với ngưỡng đảm bảo chất lượng đầu vào theo cơ sở đào tạo (BVH 20,00 / BVS 16,50) — công thức và bảng điểm cộng trích nguyên văn TB493, ngưỡng từ thông báo ĐBCL 06/07/2026. Phương thức ĐGNL/ĐGTD có ngưỡng chính thức (V-ACT ≥600, HSA ≥75, TSA ≥50, SPT ≥15) nhưng điểm xét cuối còn bị chặn bởi quy đổi tương đương; chương trình thạc sĩ tài năng / Vi mạch bán dẫn chưa công bố ngưỡng.',
   capabilities: {
     admissionInfo: true,
     programs: false,

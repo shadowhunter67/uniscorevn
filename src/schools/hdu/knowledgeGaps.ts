@@ -4,7 +4,7 @@ export const hduKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'hdu-non-law-thresholds-not-published',
     label:
-      'HDU 2026 chỉ công bố ngưỡng cụ thể cho ngành Luật/Luật Kinh tế; các ngành ngoài sư phạm khác được ghi "xác định và công bố sau khi có kết quả thi TN THPT", nên chưa có số liệu để nhập.',
+      'HDU 2026 chỉ công bố ngưỡng cụ thể cho ngành Luật/Luật Kinh tế (18,00/30 + Ngữ văn ≥ 6,0) — đã mở nhánh exact `hdu-thpt-exam-exact-2026` cho 2 ngành này (công thức mục 7.5.b trích nguyên văn). Các ngành ngoài sư phạm khác được ghi "xác định và công bố sau khi có kết quả thi TN THPT" nên chưa có số liệu để nhập.',
     status: 'incomplete',
     sourceId: 'hdu-admission-2026',
     scoreAffecting: true,

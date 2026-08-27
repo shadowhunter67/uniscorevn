@@ -84,13 +84,15 @@ describe('landing catalog helpers', () => {
 
   it('result counts and batching are based on the full filtered data', () => {
     const allResults = filterSchoolsForLanding(Object.values(schoolRegistry), defaultFilters);
-    const exactResults = filterSchoolsForLanding(Object.values(schoolRegistry), { ...defaultFilters, tierFilter: 'verified-calculator' });
+    // Partial-calculator schools are a small subset that fits inside the initial visible window.
+    const smallSubset = filterSchoolsForLanding(Object.values(schoolRegistry), { ...defaultFilters, tierFilter: 'partial-calculator' });
 
     expect(allResults).toHaveLength(267);
     expect(getVisibleSchoolCountAfterReset(allResults.length)).toBe(INITIAL_VISIBLE_SCHOOL_COUNT);
-    // Verified-calculator schools fit within the initial visible window, so no batching cap applies.
-    expect(exactResults.length).toBeLessThanOrEqual(INITIAL_VISIBLE_SCHOOL_COUNT);
-    expect(getVisibleSchoolCountAfterReset(exactResults.length)).toBe(exactResults.length);
+    expect(smallSubset.length).toBeGreaterThan(0);
+    expect(smallSubset.length).toBeLessThan(INITIAL_VISIBLE_SCHOOL_COUNT);
+    // A filtered subset smaller than the window is shown in full — no batching cap applies.
+    expect(getVisibleSchoolCountAfterReset(smallSubset.length)).toBe(smallSubset.length);
   });
 
   it('active filter detection ignores the default useful sort only', () => {
