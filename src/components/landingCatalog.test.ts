@@ -88,7 +88,7 @@ describe('landing catalog helpers', () => {
 
     expect(allResults).toHaveLength(267);
     expect(getVisibleSchoolCountAfterReset(allResults.length)).toBe(INITIAL_VISIBLE_SCHOOL_COUNT);
-    expect(exactResults.length).toBeLessThanOrEqual(INITIAL_VISIBLE_SCHOOL_COUNT);
+    expect(exactResults.length).toBeLessThan(INITIAL_VISIBLE_SCHOOL_COUNT);
     expect(getVisibleSchoolCountAfterReset(exactResults.length)).toBe(exactResults.length);
   });
 

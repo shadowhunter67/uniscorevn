@@ -2,7 +2,7 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (24)
+## Calculator đã xác minh (25)
 
 - **FTU** — Trường Đại học Ngoại thương
 - **GDU** — Trường Đại học Gia Định
@@ -13,6 +13,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HCMUTE** — Trường Đại học Công nghệ Kỹ thuật TP. Hồ Chí Minh
 - **HUFLIT** — Trường Đại học Ngoại ngữ - Tin học TP. Hồ Chí Minh
 - **HUL** — Trường Đại học Luật, Đại học Huế
+- **HUP** — Trường Đại học Dược Hà Nội
 - **HUTECH** — Trường Đại học Công nghệ TP. Hồ Chí Minh
 - **IU** — Trường Đại học Quốc tế – ĐHQG TP.HCM
 - **IUH** — Trường Đại học Công nghiệp Thành phố Hồ Chí Minh
@@ -35,7 +36,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **NEU** — Trường Đại học Kinh tế Quốc dân
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 
-## Chỉ kiểm tra điều kiện/ngưỡng (80)
+## Chỉ kiểm tra điều kiện/ngưỡng (79)
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
 - **AJC** — Học viện Báo chí và Tuyên truyền
@@ -73,7 +74,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HUED** — Trường Đại học Sư phạm, Đại học Huế
 - **HUIT** — Trường Đại học Công Thương TP.HCM
 - **HUMG** — Trường Đại học Mỏ - Địa chất
-- **HUP** — Trường Đại học Dược Hà Nội
 - **HUSC** — Trường Đại học Khoa học, Đại học Huế
 - **LTVUni** — Trường Đại học Lương Thế Vinh
 - **NLU** — Trường Đại học Nông Lâm TP.HCM

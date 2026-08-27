@@ -12,7 +12,7 @@ export const hupSources: (Omit<AdmissionSource, 'schoolId'> & { note?: string })
     verification: 'verified',
     lifecycle: { effectiveYear: 2026, status: 'current' },
     note:
-      'Trang chính thức nêu đủ 6 phương thức (PT1-PT4), 4 ngành + chỉ tiêu + tổ hợp, và bảng cộng điểm IELTS/giải học sinh giỏi (tối đa 3 điểm). Không công bố ngưỡng điểm ở trang này.',
+      'Trang chính thức nêu đủ 6 phương thức (PT1-PT4), 4 ngành + chỉ tiêu + tổ hợp. Trích nguyên văn cho nhánh exact: công thức PT4 "ĐXT = M1 + M2 + M3 + ĐKK (nếu có) + ĐƯT quy đổi (nếu có)" (không hệ số); bảng ĐKK — IELTS 5.5/6.0/6.5/7.0/7.5/≥8.0 → 0,25/0,50/0,75/1,00/1,25/1,50; giải HSG tỉnh Ba/Nhì/Nhất 0,5/1,0/1,25, QG khuyến khích 1,5; "tối đa 03 (ba) điểm cộng khuyến khích"; ĐƯT "quy đổi theo quy định của Bộ GDĐT". Không công bố ngưỡng điểm ở trang này.',
   },
   {
     id: 'hup-threshold-notice-2026',

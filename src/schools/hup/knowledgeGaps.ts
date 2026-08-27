@@ -18,11 +18,11 @@ export const hupKnowledgeGaps: KnowledgeGap[] = [
     sourceId: 'hup-threshold-notice-2026',
   },
   {
-    id: 'hup-bonus-priority-not-modeled',
+    id: 'hup-hsg-prize-bonus-not-in-shared-profile',
     label:
-      'Bảng cộng điểm chứng chỉ tiếng Anh quốc tế (IELTS 5.5-7.0+) và giải học sinh giỏi cấp tỉnh/quốc gia (tối đa 3 điểm) đã xác minh nhưng chưa nhập vào evaluator.',
+      'Điểm cộng giải học sinh giỏi cấp tỉnh/quốc gia (Ba 0,5 / Nhì 1,0 / Nhất 1,25 / QG khuyến khích 1,5) đã xác minh nhưng hồ sơ dùng chung không có field thành tích — nhánh exact chỉ áp dụng cho thí sinh không có giải HSG (điểm cộng IELTS đã mô hình hoá).',
     status: 'incomplete',
-    impact: 'Runtime chưa cộng điểm khuyến khích/ưu tiên vào kết quả xét tuyển.',
+    impact: 'Thí sinh có giải HSG => evaluator trả partial thay vì exact.',
     sourceId: 'hup-admission-2026',
   },
 ];

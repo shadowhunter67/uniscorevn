@@ -65,6 +65,8 @@ import { sguAdmissionMethods } from '../schools/sgu/methods';
 import { sguThptExamThresholdEvidence } from '../schools/sgu/evidence';
 import { hnueAdmissionMethods } from '../schools/hnue/methods';
 import { hnueThptExamThresholdEvidence } from '../schools/hnue/evidence';
+import { hupThptExamThresholdEvidence, hupFormulaEvidence, hupBonusEvidence, hupPriorityEvidence } from '../schools/hup/evidence';
+import { hupAdmissionMethods } from '../schools/hup/methods';
 import { vinhuniAdmissionMethods } from '../schools/vinhuni/methods';
 import { vinhuniThptExamThresholdEvidence } from '../schools/vinhuni/evidence';
 import { utcAdmissionMethods } from '../schools/utc/methods';
@@ -164,6 +166,10 @@ export function verifiedRuntimeEvidence(): RuleEvidence[] {
     ...ouThptExamThresholdEvidence.evidence,
     ...sguThptExamThresholdEvidence.evidence,
     ...hnueThptExamThresholdEvidence.evidence,
+    ...hupThptExamThresholdEvidence.evidence,
+    ...hupFormulaEvidence.evidence,
+    ...hupBonusEvidence.evidence,
+    ...hupPriorityEvidence.evidence,
     ...vinhuniThptExamThresholdEvidence.evidence,
     ...utcThptExamThresholdEvidence.evidence,
     ...utcFormulaEvidence.evidence,
@@ -211,6 +217,7 @@ export const allAdmissionMethods: AdmissionMethodDescriptor[] = [
   ...sguAdmissionMethods,
   ...hnueAdmissionMethods,
   ...vinhuniAdmissionMethods,
+  ...hupAdmissionMethods,
   ...utcAdmissionMethods,
   ...southernCatalogMethods,
   ...remainingCatalogMethods,
@@ -249,6 +256,7 @@ export const allMethodKnowledgeGaps: Array<KnowledgeGap & { schoolId?: string; m
   ...methodGaps(sguAdmissionMethods),
   ...methodGaps(hnueAdmissionMethods),
   ...methodGaps(vinhuniAdmissionMethods),
+  ...methodGaps(hupAdmissionMethods),
   ...methodGaps(utcAdmissionMethods),
   ...methodGaps(southernCatalogMethods),
   ...methodGaps(remainingCatalogMethods),

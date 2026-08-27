@@ -34,6 +34,7 @@ import { sguSources } from './sgu/sources';
 import { hnueSources } from './hnue/sources';
 import { vinhuniSources } from './vinhuni/sources';
 import { utcSources } from './utc/sources';
+import { hupSources } from './hup/sources';
 import { vkuSources } from './vku/sources';
 import { hceSources } from './hce/sources';
 import { hulSources } from './hul/sources';
@@ -80,6 +81,7 @@ export const sguSourceRegistry: AdmissionSource[] = withSchoolId('sgu', sguSourc
 export const hnueSourceRegistry: AdmissionSource[] = withSchoolId('hnue', hnueSources);
 export const vinhuniSourceRegistry: AdmissionSource[] = withSchoolId('vinhuni', vinhuniSources);
 export const utcSourceRegistry: AdmissionSource[] = withSchoolId('utc', utcSources);
+export const hupSourceRegistry: AdmissionSource[] = withSchoolId('hup', hupSources);
 export const vkuSourceRegistry: AdmissionSource[] = withSchoolId('vku', vkuSources);
 export const hceSourceRegistry: AdmissionSource[] = withSchoolId('hce', hceSources);
 export const hulSourceRegistry: AdmissionSource[] = withSchoolId('hul', hulSources);
@@ -124,6 +126,7 @@ export const schoolSourceRegistries: Record<string, AdmissionSource[]> = {
   vinhuni: vinhuniSourceRegistry,
   utc: utcSourceRegistry,
   vku: vkuSourceRegistry,
+  hup: hupSourceRegistry,
   hce: hceSourceRegistry,
   hul: hulSourceRegistry,
   husc: huscSourceRegistry,
@@ -168,6 +171,7 @@ export const allAdmissionSources: AdmissionSource[] = [
   ...vinhuniSourceRegistry,
   ...utcSourceRegistry,
   ...vkuSourceRegistry,
+  ...hupSourceRegistry,
   ...hceSourceRegistry,
   ...hulSourceRegistry,
   ...huscSourceRegistry,

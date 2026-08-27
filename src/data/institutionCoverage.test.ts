@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 225,
       admissionDataAvailable: 225,
-      eligibilitySupported: 80,
-      calculatorSupported: 27,
+      eligibilitySupported: 79,
+      calculatorSupported: 28,
       partialCalculator: 3,
-      fullyVerified: 24,
+      fullyVerified: 25,
       catalogOnly: 42,
     });
   });
@@ -89,7 +89,7 @@ describe('institution coverage statistics', () => {
     ]) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('researched');
     }
-    for (const schoolId of ['hup', 'ajc', 'pntu', 'vnuf', 'dtu', 'vgu', 'hpu2', 'fptu', 'hubt']) {
+    for (const schoolId of ['ajc', 'pntu', 'vnuf', 'dtu', 'vgu', 'hpu2', 'fptu', 'hubt']) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
     }
     // UDN cluster batch (2026-08-24): udn stays a system-level umbrella (researched, no
@@ -127,6 +127,7 @@ describe('institution coverage statistics', () => {
     expect(deriveInstitutionSupportStatus(schoolRegistry.hcmute)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vku)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.utc)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.hup)).toBe('verified-calculator');
     for (const schoolId of ['husc', 'huaf', 'hueedu', 'dut', 'dueudn', 'uedudn', 'uflsudn', 'uteudn']) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
     }

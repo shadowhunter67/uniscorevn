@@ -17,7 +17,7 @@ export interface LandingFilters {
   sortMode: LandingSortMode;
 }
 
-export const INITIAL_VISIBLE_SCHOOL_COUNT = 24;
+export const INITIAL_VISIBLE_SCHOOL_COUNT = 30;
 export const VISIBLE_SCHOOL_INCREMENT = 24;
 
 export const SUPPORT_TIER_ORDER: readonly InstitutionSupportStatus[] = [

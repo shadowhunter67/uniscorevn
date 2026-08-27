@@ -13,7 +13,7 @@ export const hupModule: SchoolModule = {
   region: 'hanoi',
   vnuhcm: false,
   summary:
-    'Đã xác minh thông báo ngưỡng đầu vào 2026 chính thức (10/07/2026): ngưỡng PT4 (thi TN THPT) theo từng ngành trong 4 ngành đào tạo (Dược học 22.00, Hoá dược 20.00, Hoá học 19.00, Công nghệ sinh học 19.00, thang 30). Các phương thức khác (PT1-PT3), công thức quy đổi tương đương, và bảng cộng điểm chưa được model hoá.',
+    'Tính đủ Điểm xét tuyển (exact) cho Phương thức 4 (xét thi TN THPT): ĐXT = M1 + M2 + M3 + điểm cộng IELTS + điểm ưu tiên KV/ĐT (công thức giảm khi ≥ 22,5), so với ngưỡng PT4 theo ngành (Dược học 22 / Hoá dược 20 / Hoá học 19 / CNSH 19, thang 30) — công thức, bảng ĐKK và ngưỡng đều trích nguyên văn từ nguồn chính thức 2026 · Chưa mô hình hoá: PT1-PT3, quy đổi tương đương giữa các phương thức, điểm cộng giải HSG (không có field trong hồ sơ dùng chung).',
   capabilities: {
     admissionInfo: true,
     programs: true,
