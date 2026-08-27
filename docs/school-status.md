@@ -2,7 +2,7 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (22)
+## Calculator đã xác minh (23)
 
 - **FTU** — Trường Đại học Ngoại thương
 - **GDU** — Trường Đại học Gia Định
@@ -25,6 +25,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **UFM** — Trường Đại học Tài chính – Marketing
 - **UMP** — Trường Đại học Y Dược Thành phố Hồ Chí Minh
 - **USSH** — Trường Đại học Khoa học Xã hội và Nhân văn – ĐHQG TP.HCM
+- **VKU** — Trường Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn
 - **VNU-ULIS** — Truong Dai hoc Ngoai ngu - Dai hoc Quoc gia Ha Noi
 
 ## Calculator một phần (3)
@@ -33,7 +34,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **NEU** — Trường Đại học Kinh tế Quốc dân
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 
-## Chỉ kiểm tra điều kiện/ngưỡng (82)
+## Chỉ kiểm tra điều kiện/ngưỡng (81)
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
 - **AJC** — Học viện Báo chí và Tuyên truyền
@@ -109,7 +110,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VAA** — Học viện Hàng không Việt Nam
 - **VGU** — Truong Dai hoc Viet Duc
 - **VinhUni** — Trường Đại học Vinh
-- **VKU** — Trường Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn
 - **VLU** — Trường Đại học Văn Lang
 - **VMU** — Trường Đại học Hàng hải Việt Nam
 - **VNU-LS** — Truong Dai hoc Luat - Dai hoc Quoc gia Ha Noi

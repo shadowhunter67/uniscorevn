@@ -13,7 +13,7 @@ export const vkuModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'Đã xác minh lại nguồn tuyển sinh chính thức 2026 (thông báo hệ thống ĐHĐN + trang/tài liệu tuyển sinh riêng của VKU) · Ngưỡng đảm bảo chất lượng đầu vào (thi TN THPT) khoảng 17-21/30 theo ngành · Chưa nhập bảng ngành chi tiết, phụ lục quy đổi và bảng điểm cộng/ưu tiên.',
+    'Tính đủ Điểm xét tuyển (exact) cho Phương thức 2 - xét tuyển kết hợp: học bạ (tổng TB 3 năm, 3 môn) × 60% + thi TN THPT (tổng 3 môn) × 40% + điểm cộng chứng chỉ (Phụ lục II) + điểm ưu tiên KV/ĐT (công thức giảm khi ≥ 22,5) — đều trích nguyên văn từ PDF thông tin tuyển sinh 2026 · Lưu ý: VKU CHƯA công bố ngưỡng đảm bảo chất lượng đầu vào PT2 nên kết quả không kết luận đạt/không đạt · Chưa mô hình hoá: Phương thức 3 (ĐGNL), quy đổi chứng chỉ thay điểm môn, điểm thưởng thành tích ngoài chứng chỉ.',
   capabilities: {
     admissionInfo: true,
     programs: false,

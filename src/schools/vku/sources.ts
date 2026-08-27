@@ -25,7 +25,7 @@ export const vkuSources: (Omit<AdmissionSource, 'schoolId'> & { note?: string })
     verification: 'verified',
     lifecycle: { effectiveYear: 2026, status: 'current' },
     note:
-      'Đã tải và đọc trực tiếp file PDF chính thức ngày 2026-08-24: xác nhận VKU có phương thức 2 - xét tuyển kết hợp với công thức "Điểm xét tuyển = Điểm học bạ x 60% + Điểm thi TN THPT x 40% + điểm cộng + điểm ưu tiên" trên thang 30, cùng danh mục ngành/tổ hợp môn cụ thể (A00, A01, C00, D01, D07, D09, D10, D66, X06, X26, X78...) và phương thức 3 dùng điểm ĐGNL ĐHQG TP.HCM (trọng số công bố sau theo kế hoạch Bộ GDĐT).',
+      'Đã tải & đọc trực tiếp TOÀN VĂN (38 trang) file PDF chính thức — lần đầu 2026-08-24, đọc đầy đủ Phụ lục 2026-08-27. Trích nguyên văn dùng cho nhánh exact: (1) Mục 2.2.c — "Điểm xét tuyển = Điểm học bạ * 60% + Điểm thi TN THPT* 40% + Điểm cộng (nếu có) + Điểm ưu tiên (nếu có)"; điểm học bạ = tổng 3 môn TB cả năm lớp 10/11/12, điểm thi = tổng 3 môn, cả hai thang 30, không hệ số; ĐXT làm tròn 2 chữ số, kẹp trần 30. (2) Phụ lục II "Điểm khuyến khích": SAT ≥1200 / ACT ≥26 = 1,25; IELTS 5.0=0,5 / 5.5=0,75 / 6.0=1,0 / 6.5=1,25 / ≥7.0=1,5; trần tổng điểm cộng 3,0 (Mục 5.2). (3) Mục 5.2.b — "Điểm ưu tiên = [(30 - (Điểm quy đổi + Điểm cộng))/7,5] x Mức điểm ưu tiên theo quy định" khi tổng ≥ 22,50; mức KV/ĐT theo Thông tư 06/2026/TT-BGDĐT. CHƯA công bố: ngưỡng ĐBCL PT2 ("Trường sẽ công bố theo kế hoạch của Bộ GDĐT" - Mục 3.1); công thức quy đổi ĐGNL (PT3). Danh mục ngành/tổ hợp (D00/D09/X26/D10/X78/D66/C00; A00/A01/D01/D07/X06/C01) ở Mục 2.2.d.',
   },
   {
     id: 'vku-quality-threshold-2026',

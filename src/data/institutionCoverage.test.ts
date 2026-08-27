@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 225,
       admissionDataAvailable: 225,
-      eligibilitySupported: 82,
-      calculatorSupported: 25,
+      eligibilitySupported: 81,
+      calculatorSupported: 26,
       partialCalculator: 3,
-      fullyVerified: 22,
+      fullyVerified: 23,
       catalogOnly: 42,
     });
   });
@@ -93,9 +93,10 @@ describe('institution coverage statistics', () => {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
     }
     // UDN cluster batch (2026-08-24): udn stays a system-level umbrella (researched, no
-    // independent admission formula); the 6 member schools now carry dedicated eligibility-only
-    // runtime modules (see normalized/runtime-source-snapshot/<id>/ in the private repo).
-    for (const schoolId of ['dut', 'dueudn', 'uedudn', 'uflsudn', 'uteudn', 'vku']) {
+    // independent admission formula); its member schools carry dedicated runtime modules. Five
+    // stay eligibility-only; VKU graduated to a verified exact calculator (2026-08-27, combined
+    // method) and is asserted separately below.
+    for (const schoolId of ['dut', 'dueudn', 'uedudn', 'uflsudn', 'uteudn']) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
     }
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnua)).toBe('eligibility-only');
@@ -124,7 +125,8 @@ describe('institution coverage statistics', () => {
     expect(deriveInstitutionSupportStatus(schoolRegistry.hce)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hul)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hcmute)).toBe('verified-calculator');
-    for (const schoolId of ['husc', 'huaf', 'hueedu', 'dut', 'dueudn', 'uedudn', 'uflsudn', 'uteudn', 'vku']) {
+    expect(deriveInstitutionSupportStatus(schoolRegistry.vku)).toBe('verified-calculator');
+    for (const schoolId of ['husc', 'huaf', 'hueedu', 'dut', 'dueudn', 'uedudn', 'uflsudn', 'uteudn']) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
     }
   });
