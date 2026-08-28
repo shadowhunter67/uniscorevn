@@ -2,8 +2,9 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (69)
+## Calculator đã xác minh (73)
 
+- **AJC** — Học viện Báo chí và Tuyên truyền
 - **APD** — Hoc vien Chinh sach va Phat trien
 - **BDU** — Truong Dai hoc Binh Duong
 - **BVU** — Truong Dai hoc Ba Ria - Vung Tau
@@ -12,6 +13,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **DLU** — Truong Dai hoc Da Lat
 - **DTHU** — Trường Đại học Đồng Tháp
 - **DTU** — Truong Dai hoc Duy Tan
+- **FBU** — Trường Đại học Tài chính - Ngân hàng Hà Nội
 - **FPTU** — Trường Đại học FPT
 - **FTU** — Trường Đại học Ngoại thương
 - **GDU** — Trường Đại học Gia Định
@@ -65,12 +67,14 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **UHD** — Trường Đại học Hải Dương
 - **UMP** — Trường Đại học Y Dược Thành phố Hồ Chí Minh
 - **UMT** — Trường Đại học Quản lý và Công nghệ TP.HCM
+- **USH** — Trường Đại học Thể dục Thể thao TP.HCM
 - **USSH** — Trường Đại học Khoa học Xã hội và Nhân văn – ĐHQG TP.HCM
 - **UTC** — Trường Đại học Giao thông vận tải
 - **VKU** — Trường Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn
 - **VinhUni** — Trường Đại học Vinh
 - **VMU** — Trường Đại học Hàng hải Việt Nam
 - **VNU-ULIS** — Truong Dai hoc Ngoai ngu - Dai hoc Quoc gia Ha Noi
+- **VNU-UMP** — Truong Dai hoc Y Duoc - Dai hoc Quoc gia Ha Noi
 - **VNUA** — Hoc vien Nong nghiep Viet Nam
 - **VWA** — Học viện Phụ nữ Việt Nam
 
@@ -80,17 +84,15 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **NEU** — Trường Đại học Kinh tế Quốc dân
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 
-## Chỉ kiểm tra điều kiện/ngưỡng (35)
+## Chỉ kiểm tra điều kiện/ngưỡng (31)
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
-- **AJC** — Học viện Báo chí và Tuyên truyền
 - **DHV** — Trường Đại học Hùng Vương TP.HCM
 - **DNU** — Trường Đại học Đại Nam
 - **DUE** — Trường Đại học Kinh tế - Đại học Đà Nẵng
 - **DUT** — Trường Đại học Bách khoa - Đại học Đà Nẵng
 - **EAUT** — Trường Đại học Công nghệ Đông Á
 - **EIU** — Trường Đại học Quốc tế Miền Đông
-- **FBU** — Trường Đại học Tài chính - Ngân hàng Hà Nội
 - **FPFU** — Trường Đại học Phòng cháy Chữa cháy
 - **HCMUPES** — Trường Đại học Sư phạm Thể dục Thể thao TP.HCM
 - **HNUE** — Trường Đại học Sư phạm Hà Nội
@@ -107,7 +109,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **UED** — Trường Đại học Sư phạm - Đại học Đà Nẵng
 - **UFLS** — Trường Đại học Ngoại ngữ - Đại học Đà Nẵng
 - **UIT** — Trường Đại học Công nghệ Thông tin – ĐHQG TP.HCM
-- **USH** — Trường Đại học Thể dục Thể thao TP.HCM
 - **UTE** — Trường Đại học Sư phạm Kỹ thuật - Đại học Đà Nẵng
 - **UTM** — Trường Đại học Công nghệ và Quản lý hữu nghị
 - **UTT** — Trường Đại học Công nghệ Giao thông vận tải
@@ -115,7 +116,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VGU** — Truong Dai hoc Viet Duc
 - **VLU** — Trường Đại học Văn Lang
 - **VNU-LS** — Truong Dai hoc Luat - Dai hoc Quoc gia Ha Noi
-- **VNU-UMP** — Truong Dai hoc Y Duoc - Dai hoc Quoc gia Ha Noi
 - **VNUF** — Truong Dai hoc Lam nghiep
 
 ## Đã research, chưa đủ để tính (118)

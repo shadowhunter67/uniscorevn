@@ -24,4 +24,12 @@ export const dhvKnowledgeGaps: KnowledgeGap[] = [
     sourceId: 'dhv-admission-score-2026',
     scoreAffecting: true,
   },
+  {
+    id: 'dhv-priority-formula-source-not-found',
+    label:
+      'Batch 5 (2026-08-28) thử tìm nguồn chính thức DHV tự xác nhận công thức điểm xét tuyển đầy đủ (có cộng điểm ưu tiên/điểm cộng hay không, theo văn bản nào) qua tuyensinh.dhv.edu.vn, dhv.edu.vn/en/enrollment/tuyen-sinh-dai-hoc-chinh-quy và nhiều tìm kiếm web — KHÔNG tìm được Đề án/Thông báo/Quyết định tuyển sinh 2026 dạng PDF hoặc trang đọc được của DHV nêu rõ công thức. Giữ nguyên eligibility-only, không suy đoán.',
+    status: 'incomplete',
+    sourceId: 'dhv-admission-score-2026',
+    scoreAffecting: false,
+  },
 ];

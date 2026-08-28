@@ -13,7 +13,7 @@ export const fbuModule: SchoolModule = {
   region: 'hanoi',
   vnuhcm: false,
   summary:
-    'Đã xác minh ngưỡng đảm bảo chất lượng đầu vào FBU 2026 (thi TN THPT) là 17,0/30 điểm cho mọi ngành, qua phát biểu công khai của Phó Hiệu trưởng FBU (báo Dân Việt) đối chiếu điểm trúng tuyển thực tế 17,0-21,5/30 (báo Tiền Phong). Thông báo tuyển sinh chính thức số 99/TB-ĐHTCNH xác nhận 3 phương thức nhưng chưa đọc được bảng ngưỡng bằng số trong văn bản gốc ở lượt research này. Module hiện chỉ kiểm tra ngưỡng chung theo thi TN THPT, chưa có bảng ngành/tổ hợp, ngưỡng học bạ/ĐGNL, hoặc điểm cộng.',
+    'Calculator exact cho Phương thức 1 (mã 100, xét kết quả thi TN THPT, nhóm ngành chung trừ Luật kinh tế): ngưỡng 17,0/30, đọc trực tiếp Quyết định 99/QĐ-ĐHTNH (05/03/2026, PDF chính thức FBU) xác nhận công thức Điểm xét tuyển = [((Điểm môn 1 × 2) + Điểm môn 2 + Điểm môn 3)/4] × 3 + ĐKK + ĐXT + ĐƯT (tối đa 30). Mức điểm ưu tiên KV/ĐT cụ thể dùng chuẩn toàn quốc (judgment call, trường chỉ dẫn chiếu "Quy chế tuyển sinh của Bộ GD&ĐT và của Trường"). Điểm cộng model được nhánh IELTS (bảng cụ thể); TOEFL iBT/TOEIC/HSK và giải HSG cấp tỉnh/thành chưa model. Ngành Luật kinh tế có ngưỡng riêng (18,0/30 + điều kiện môn Toán) chưa mô hình hoá. Phương thức 2 (học bạ) và 3 (ĐGNL ĐHQGHN) chưa mô hình hoá.',
   capabilities: {
     admissionInfo: true,
     programs: false,
@@ -32,6 +32,12 @@ export const fbuModule: SchoolModule = {
       url: 'https://danviet.vn/lanh-dao-truong-dai-hoc-tai-chinh-ngan-hang-ha-noi-du-bao-diem-chuan-va-nganh-hot-nam-2026-d1440933.html',
       type: 'secondary',
       checkedAt: '2026-08-24',
+    },
+    {
+      title: 'Quyết định 99/QĐ-ĐHTNH (05/03/2026): Thông tin tuyển sinh đại học năm 2026',
+      url: 'https://vienngonngunuocngoai.fbu.edu.vn/wp-content/uploads/2026/05/QD-so.-99.-Vv-Ban-hanh-Thong-tin-tuyen-sinh-trinh-do-dai-hoc-nam-2026-cua-truong-DH-Tai-chinh-Ngan-hang-Ha-Noi_0001-1.pdf',
+      type: 'official-institution',
+      checkedAt: '2026-08-28',
     },
   ],
 };

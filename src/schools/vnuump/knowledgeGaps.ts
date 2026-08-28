@@ -16,12 +16,11 @@ export const vnuumpKnowledgeGaps: KnowledgeGap[] = [
     sourceId: 'vnuump-admission-notice-2026',
   },
   {
-    id: 'vnuump-bonus-priority-formula-not-modeled',
+    id: 'vnuump-achievement-bonus-not-modeled',
     label:
-      'Cong thuc diem xet tuyen chinh thuc: Tong diem 3 mon thi + diem cong (neu co) + diem uu tien khu vuc/doi tuong (neu co), toi da 30 diem. Runtime chua cong diem cong/uu tien vao tong diem.',
-    status: 'official-but-unparsed',
+      'Trang tuyển sinh 2026 mô tả điểm cộng cho thí sinh có thành tích xuất sắc (giải HSG quốc gia/quốc tế/cấp ĐHQGHN/cấp tỉnh, giải khoa học kỹ thuật) tối đa 10% thang điểm xét tuyển (3,0/30) — KHÔNG có input field tương ứng trong ApplicantProfile cho các loại thành tích này, mặc định = 0. Thông báo 2468/TB-ĐHYD mục 1 xác nhận ngưỡng đầu vào theo ngành KHÔNG tính điểm cộng (chỉ điểm ưu tiên KV/ĐT mới cộng vào ngưỡng) nên gap này KHÔNG ảnh hưởng kết quả đạt/chưa đạt ngưỡng, chỉ ảnh hưởng điểm xét tuyển cạnh tranh cuối cùng.',
+    status: 'incomplete',
     sourceId: 'vnuump-admission-notice-2026',
-    scoreAffecting: true,
-    impact: 'Ket qua eligibility chi dua tren tong 3 mon THPT tho, chua cong diem uu tien khu vuc/doi tuong (neu co) cua thi sinh.',
+    scoreAffecting: false,
   },
 ];

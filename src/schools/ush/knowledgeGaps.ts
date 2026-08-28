@@ -16,10 +16,12 @@ export const ushKnowledgeGaps: KnowledgeGap[] = [
     scoreAffecting: false,
   },
   {
-    id: 'ush-priority-bonus-not-modeled',
-    label: 'Điểm ưu tiên khu vực/đối tượng theo Điều 7 Quy chế tuyển sinh của trường chưa được cộng vào tổng điểm trước khi so sánh với ngưỡng.',
+    id: 'ush-bonus-not-modeled',
+    label:
+      'Quyết định 58/QĐ-TDTTHCM mục 8.b xác nhận có "Điểm cộng (nếu có)" do Trường tự quy định và công bố riêng trên cổng thông tin trước thời điểm xét tuyển — chưa tìm được bảng cụ thể, chưa mô hình hoá (mặc định = 0 trong ĐXT tham khảo).',
     status: 'incomplete',
-    sourceId: 'ush-admission-notice-2026',
+    sourceId: 'ush-quyetdinh-58-2026',
     scoreAffecting: true,
+    impact: 'ĐXT (điểm xét tuyển tham khảo) hiện thiếu điểm cộng nếu thí sinh có thành tích được cộng điểm — không ảnh hưởng tới kết quả đạt/chưa đạt ngưỡng đầu vào (ngưỡng đầu vào không cộng điểm cộng/ưu tiên).',
   },
 ];

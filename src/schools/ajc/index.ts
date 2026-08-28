@@ -13,7 +13,7 @@ export const ajcModule: SchoolModule = {
   region: 'hanoi',
   vnuhcm: false,
   summary:
-    'Đã xác minh Thông báo 293/TB-HVBCTT-ĐT (10/07/2026) ngưỡng đảm bảo chất lượng đầu vào theo 2 nhóm ngành: Báo chí-Xuất bản 25/40 (Văn nhân hệ số 2), các nhóm còn lại 18/30. Bảng phân bổ chi tiết từng chuyên ngành vào nhóm, điều kiện học bạ/hạnh kiểm, và công thức cộng điểm ưu tiên chưa được model hoá.',
+    'Calculator exact cho 2 nhóm ngành có ngưỡng công bố (Thông báo 293/TB-HVBCTT-ĐT, 10/07/2026): Báo chí-Xuất bản 25/40 (Văn nhân hệ số 2, Điểm xét tuyển = tổng hệ số + [(cộng+ưu tiên)×4/3]); các nhóm còn lại 18/30 (Điểm xét tuyển = tổng + cộng + ưu tiên). Công thức đối chiếu chéo qua báo chí (PDF gốc host nội bộ AJC không truy cập công khai được). Mức điểm ưu tiên KV/ĐT cụ thể dùng chuẩn toàn quốc (judgment call). Điểm cộng (giải HSG/SAT) chưa model. Bảng phân bổ chi tiết ~30 chuyên ngành vào nhóm và điều kiện học bạ/hạnh kiểm chưa mô hình hoá.',
   capabilities: {
     admissionInfo: true,
     programs: false,

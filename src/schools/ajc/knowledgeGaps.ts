@@ -18,11 +18,20 @@ export const ajcKnowledgeGaps: KnowledgeGap[] = [
     impact: 'Runtime chỉ kiểm tra ngưỡng điểm thi, không xác minh điều kiện học bạ/hạnh kiểm.',
   },
   {
-    id: 'ajc-bonus-formula-not-modeled',
+    id: 'ajc-bonus-not-modeled',
     label:
-      'Công thức điểm xét tuyển đầy đủ (Tổng điểm 3 môn nhân hệ số theo tổ hợp + {[Điểm cộng + Điểm ưu tiên]*4/3}) đã xác minh nhưng điểm cộng/ưu tiên chưa được nhập vào runtime.',
+      'Điểm cộng (giải HSG quốc gia/cấp tỉnh, chứng chỉ SAT, tối đa 10% thang điểm — 3,0/30 hoặc 4,0/40) đã xác nhận qua đối chiếu chéo là 1 thành phần của công thức điểm xét tuyển nhưng KHÔNG có input field tương ứng trong ApplicantProfile cho các loại thành tích này, mặc định = 0.',
     status: 'incomplete',
     sourceId: 'ajc-admission-2026',
-    impact: 'Runtime chỉ so ngưỡng thô, chưa cộng điểm khuyến khích/ưu tiên vào kết quả.',
+    scoreAffecting: true,
+    impact: 'Thí sinh có giải HSG quốc gia/cấp tỉnh hoặc chứng chỉ SAT cần tự cộng thêm điểm cộng tương ứng — calculator hiện chỉ tính điểm ưu tiên khu vực/đối tượng.',
+  },
+  {
+    id: 'ajc-priority-and-formula-source-quality',
+    label:
+      'File PDF gốc Thông báo 293/TB-HVBCTT-ĐT (đính kèm trên ajc.hcma.vn) trỏ tới host nội bộ (ajc-app:1002), không truy cập công khai được — công thức điểm xét tuyển và mức điểm ưu tiên KV/ĐT dùng trong nhánh exact dựa trên đối chiếu chéo báo chí (tuyensinh247) + khung điểm ưu tiên chuẩn toàn quốc (judgment call, không phải số AJC tự công bố riêng).',
+    status: 'official-but-unparsed',
+    sourceId: 'ajc-admission-2026',
+    scoreAffecting: true,
   },
 ];

@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 225,
       admissionDataAvailable: 225,
-      eligibilitySupported: 35,
-      calculatorSupported: 72,
+      eligibilitySupported: 31,
+      calculatorSupported: 76,
       partialCalculator: 3,
-      fullyVerified: 69,
+      fullyVerified: 73,
       catalogOnly: 42,
     });
   });
@@ -89,7 +89,7 @@ describe('institution coverage statistics', () => {
     ]) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('researched');
     }
-    for (const schoolId of ['ajc', 'vnuf', 'vgu', 'hpu2']) {
+    for (const schoolId of ['vnuf', 'vgu', 'hpu2']) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
     }
     // Batch (2026-08-28): FPTU (điều kiện tổ hợp thô, mọi ngành) and HCMUE (ngưỡng theo ngành, 47
@@ -148,7 +148,15 @@ describe('institution coverage statistics', () => {
     expect(deriveInstitutionSupportStatus(schoolRegistry.dhv)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.pyu)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.nlu)).toBe('verified-calculator');
-    expect(deriveInstitutionSupportStatus(schoolRegistry.ush)).toBe('eligibility-only');
+    // Batch 5 (2026-08-28): AJC/FBU/USH/VNU-UMP graduated to verified-calculator — mỗi trường đọc
+    // trực tiếp 1 văn bản/PDF chính thức (hoặc đối chiếu chéo báo chí cho AJC, PDF gốc host nội bộ
+    // không truy cập công khai được) xác nhận công thức điểm xét tuyển + ngưỡng đầy đủ. DHV vẫn
+    // eligibility-only (không tìm được nguồn DHV tự xác nhận công thức điểm ưu tiên/điểm cộng, dù
+    // đã thử tuyensinh.dhv.edu.vn, dhv.edu.vn/en/enrollment và nhiều tìm kiếm khác).
+    expect(deriveInstitutionSupportStatus(schoolRegistry.ajc)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.fbu)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.ush)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.vnuump)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hcmupes)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnuulis)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hce)).toBe('verified-calculator');
