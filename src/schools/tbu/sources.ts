@@ -12,4 +12,15 @@ export const tbuSources: Omit<AdmissionSource, 'schoolId'>[] = [
     verification: 'verified',
     lifecycle: { effectiveYear: 2026, status: 'current' },
   },
+  {
+    id: 'tbu-thongbao-565-2026',
+    publisher: 'Trường Đại học Thái Bình',
+    title: 'Thông báo số 565/TB-ĐHTB (19/3/2026): Thông tin tuyển sinh đại học chính quy năm 2026',
+    url: 'https://media.tbu.edu.vn//Media/1_TH1062/FolderFunc/202603/Documents/thong-bao-so-565-20260324051114-e.pdf',
+    accessedAt: '2026-08-28',
+    publishedAt: '2026-03-19',
+    sourceType: 'official-admission',
+    verification: 'verified',
+    lifecycle: { effectiveYear: 2026, status: 'current' },
+  },
 ];

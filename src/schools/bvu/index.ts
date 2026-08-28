@@ -13,7 +13,7 @@ export const bvuModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'BVU 2026 transcript (học bạ) eligibility is modeled from the official admission-portal page: a common 18,0/30 baseline (grade-12 3-subject average + priority points), with higher published (provisional) floors for Duoc hoc (24,0/30) and Dieu duong (19,5/30) documented as a knowledge gap until program selection is modeled. THPT-exam and other admission methods are not modeled yet.',
+    'Calculator exact cho phương thức xét điểm thi TN THPT: đọc trực tiếp bài đăng chính thức BVU (10/08/2026, công bố điểm trúng tuyển) xác nhận ngưỡng theo 4 nhóm ngành (Dược học 20,0/30; Điều dưỡng 18,0/30; Luật 20,0/30; các ngành khác 15,0/30) và KHÔNG cộng điểm ưu tiên khu vực/đối tượng cho phương thức này. Phương thức học bạ vẫn partial (ngưỡng theo nhóm ngành đã cập nhật 18,0/20,0/18,0/20,0, nhưng chưa rõ có cộng điểm ưu tiên hay không do trang mô tả công thức cũ đã 404). Xét tuyển thẳng và các phương thức khác chưa mô hình hoá.',
   capabilities: {
     admissionInfo: true,
     programs: false,
@@ -26,6 +26,12 @@ export const bvuModule: SchoolModule = {
       url: 'https://tuyensinh.bvu.edu.vn/phuong-thuc-tuyen-sinh/',
       type: 'official-institution',
       checkedAt: '2026-08-24',
+    },
+    {
+      title: 'Trường Đại học Bà Rịa - Vũng Tàu công bố điểm trúng tuyển đại học chính quy và xét tuyển bổ sung năm 2026',
+      url: 'https://bvu.edu.vn/truong-dai-hoc-ba-ria-vung-tau-cong-bo-diem-trung-tuyen-dai-hoc-chinh-quy-va-xet-tuyen-bo-sung-nam-2026/',
+      type: 'official-institution',
+      checkedAt: '2026-08-28',
     },
   ],
 };

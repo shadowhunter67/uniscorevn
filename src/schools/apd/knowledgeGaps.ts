@@ -23,10 +23,12 @@ export const apdKnowledgeGaps: KnowledgeGap[] = [
     sourceId: 'apd-admission-2026',
   },
   {
-    id: 'apd-bonus-priority-not-modeled',
-    label: 'Diem uu tien khu vuc/doi tuong theo Thong tu 06 duoc de cap nhung chua duoc trien khai trong bo tinh diem.',
+    id: 'apd-bonus-points-value-unknown',
+    label:
+      'Thông báo 180/TB-HVCSPT xác nhận ngưỡng đã bao gồm điểm cộng (nếu có) nhưng không công bố bảng mức điểm cộng cụ thể cho 2026 — nhánh exact (apd-thpt-exam-exact-2026) model điểm cộng = 0 do thiếu số liệu, không phải trường không áp dụng.',
     status: 'incomplete',
-    sourceId: 'apd-admission-2026',
-    impact: 'Bo tinh diem chua tinh duoc diem xet tuyen cuoi cung, chi kiem tra nguong dau vao.',
+    sourceId: 'apd-threshold-notice-180-2026',
+    scoreAffecting: true,
+    impact: 'Thí sinh có điểm cộng thực tế (nếu APD có áp dụng) sẽ được tính thấp hơn điểm xét tuyển thật.',
   },
 ];

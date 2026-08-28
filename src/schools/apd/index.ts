@@ -14,7 +14,7 @@ export const apdModule: SchoolModule = {
   entityLevel: 'academy',
   vnuhcm: false,
   summary:
-    'APD 2026 THPT eligibility is modeled from a government-portal republishing of the official nguong dam bao chat luong dau vao announcement: 19,0/30 at the Hanoi main campus, 16,0/30 at both new branch campuses (Bac Ninh, Da Nang), applied uniformly across subject combinations. Transcript-based admission, the exact per-campus selection, and priority-point calculation remain unresolved.',
+    'Calculator exact cho phương thức xét kết quả thi TN THPT, theo cơ sở đào tạo (Trụ sở chính Hà Nội 19,0/30; Phân hiệu Bắc Ninh và Đà Nẵng 16,0/30, đồng nhất mọi tổ hợp): đọc trực tiếp Thông báo 180/TB-HVCSPT (02/07/2026, PDF chính thức APD) xác nhận nguyên văn ngưỡng đã bao gồm điểm cộng + điểm ưu tiên khu vực/đối tượng (điểm ưu tiên CỘNG vào tổng trước khi so ngưỡng). Mức điểm ưu tiên KV/ĐT cụ thể dùng chuẩn toàn quốc (judgment call); điểm cộng cụ thể 2026 chưa công bố, model = 0. Xét học bạ và các phương thức khác chưa mô hình hoá.',
   capabilities: {
     admissionInfo: true,
     programs: false,
@@ -27,6 +27,12 @@ export const apdModule: SchoolModule = {
       url: 'https://xaydungchinhsach.chinhphu.vn/du-kien-diem-san-diem-chuan-hoc-vien-chinh-sach-va-phat-trien-apd-nam-2026-11926070213145361.htm',
       type: 'official-institution',
       checkedAt: '2026-08-24',
+    },
+    {
+      title: 'Thông báo 180/TB-HVCSPT (02/07/2026): Về ngưỡng đảm bảo chất lượng và phương án quy đổi mức điểm chuẩn tương đương giữa các phương thức tuyển sinh đại học chính quy năm 2026',
+      url: 'https://tuyensinh.apd.edu.vn/wp-content/uploads/2026/07/Tb-180-dam-bao-nguong-diem.pdf',
+      type: 'official-institution',
+      checkedAt: '2026-08-28',
     },
   ],
 };

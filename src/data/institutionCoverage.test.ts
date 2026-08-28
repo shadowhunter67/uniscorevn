@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 225,
       admissionDataAvailable: 225,
-      eligibilitySupported: 39,
-      calculatorSupported: 68,
+      eligibilitySupported: 35,
+      calculatorSupported: 72,
       partialCalculator: 3,
-      fullyVerified: 65,
+      fullyVerified: 69,
       catalogOnly: 42,
     });
   });
@@ -132,7 +132,17 @@ describe('institution coverage statistics', () => {
     // Batch (2026-08-28): CTUMP graduated to verified-calculator — mức điểm nhận hồ sơ đợt 1 (4
     // nhóm ngành) đã gồm điểm ưu tiên theo đúng công thức giảm dần trích từ chính TB 197/TB-ĐHYDCT.
     expect(deriveInstitutionSupportStatus(schoolRegistry.ctump)).toBe('verified-calculator');
-    expect(deriveInstitutionSupportStatus(schoolRegistry.tbu)).toBe('eligibility-only');
+    // Batch 4 (2026-08-28): APD/BVU/TBU/UHD graduated to verified-calculator — mỗi trường đọc
+    // trực tiếp 1 văn bản/PDF chính thức xác nhận công thức điểm ưu tiên (hoặc xác nhận rõ KHÔNG
+    // cộng ưu tiên, trường hợp BVU) + ngưỡng đầy đủ. TBU: sửa lại giả định cũ (Luật PT1 = 18,0 là
+    // SAI — ngưỡng Luật ở PT1 do Bộ GD&ĐT phối hợp Bộ Tư pháp quyết định hàng năm, không cố định;
+    // exact chỉ phủ nhóm "các ngành khác"). EIU vẫn eligibility-only (không tìm được nguồn EIU tự
+    // xác nhận cách áp dụng điểm ưu tiên/điểm cộng).
+    expect(deriveInstitutionSupportStatus(schoolRegistry.apd)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.bvu)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.tbu)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.uhd)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.eiu)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.dthu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.ltvuni)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.dhv)).toBe('eligibility-only');

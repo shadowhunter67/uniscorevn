@@ -32,4 +32,25 @@ export const uhdSources: Omit<AdmissionSource, 'schoolId'>[] = [
     verification: 'verified',
     lifecycle: { effectiveYear: 2026, status: 'current' },
   },
+  {
+    id: 'uhd-quyet-dinh-289-2026',
+    publisher: 'Trường Đại học Hải Dương',
+    title: 'Quyết định 289/QĐ-ĐHHD (02/04/2026) - Thông tin tuyển sinh năm 2026',
+    url: 'https://uhd.edu.vn/tin-tuc/thong-tin-tuyen-sinh-nam-2026-postrLJ9g9Q3ANsYWpaprpzY',
+    accessedAt: '2026-08-28',
+    publishedAt: '2026-04-02',
+    sourceType: 'official-admission',
+    verification: 'verified',
+    lifecycle: { effectiveYear: 2026, status: 'current' },
+  },
 ];
+
+/**
+ * `uhd-quyet-dinh-289-2026` (PDF chính thức UHD, bản scan, đọc trực tiếp qua vision từng trang -
+ * không phải secondary): trang 4 công thức Điểm xét tuyển = Môn1+Môn2+Môn3+Điểm UT (PT100, thi TN
+ * THPT) và tương tự cho PT200 (học bạ). Mục 5.2: "Điểm cộng: Nhà trường không áp dụng". Mục 5.3:
+ * ngưỡng sàn nhận hồ sơ 15,00/30 cho nhóm ngành ngoài Sư phạm/Giáo dục thể chất. Mục 5.5.d: áp
+ * dụng điểm ưu tiên khu vực/đối tượng thống nhất, đồng bộ quy định Bộ GD&ĐT (không tự công bố bảng
+ * mức điểm riêng). Nhóm ngành Sư phạm dẫn chiếu ngưỡng do Bộ GD&ĐT quyết định hàng năm (không phải
+ * số cố định do UHD tự quy định) - ngoài phạm vi model của batch này.
+ */

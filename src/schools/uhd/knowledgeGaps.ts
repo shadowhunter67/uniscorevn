@@ -12,11 +12,12 @@ export const uhdKnowledgeGaps: KnowledgeGap[] = [
     impact: 'Thí sinh chọn ngành Sư phạm hoặc Giáo dục thể chất sẽ nhận kết quả không xác định thay vì áp nhầm ngưỡng 15/30.',
   },
   {
-    id: 'uhd-other-region-not-modeled',
-    label: 'Ngưỡng 15/30 chỉ áp dụng cho thí sinh khu vực 3 (không cộng điểm ưu tiên khu vực/đối tượng); UniscoreVN chưa tự động trừ lại điểm ưu tiên khi so ngưỡng.',
-    status: 'official-but-unparsed',
-    sourceId: 'uhd-threshold-2026-crosscheck-1',
+    id: 'uhd-supham-moet-threshold-not-modeled',
+    label:
+      'Nhóm ngành Sư phạm dùng ngưỡng do Bộ GD&ĐT quyết định hàng năm (không phải số cố định UHD tự công bố, Quyết định 289/QĐ-ĐHHD mục 5.4) - chưa model trong batch này (chỉ nhánh exact nhóm ngành Kinh tế/Kỹ thuật/KHXH&NV).',
+    status: 'incomplete',
+    sourceId: 'uhd-quyet-dinh-289-2026',
     scoreAffecting: true,
-    impact: 'Thí sinh thuộc khu vực ưu tiên có thể được đánh giá thận trọng hơn thực tế.',
+    impact: 'Thí sinh chọn ngành Sư phạm/Giáo dục thể chất chưa có calculator exact ở UHD trên UniScoreVN.',
   },
 ];

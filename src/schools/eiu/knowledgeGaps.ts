@@ -20,7 +20,7 @@ export const eiuKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'eiu-priority-bonus-table-not-found',
     label:
-      'Ngưỡng công bố ở đây là điểm SÀN NHẬN HỒ SƠ (ngưỡng đảm bảo chất lượng đầu vào), KHÔNG PHẢI điểm chuẩn trúng tuyển cuối cùng — bảng điểm ưu tiên khu vực/đối tượng và điểm cộng thành tích/chứng chỉ riêng của EIU (nếu có) chưa tìm được nguồn trường tự công bố dạng bảng số.',
+      'Ngưỡng công bố ở đây là điểm SÀN NHẬN HỒ SƠ (ngưỡng đảm bảo chất lượng đầu vào), KHÔNG PHẢI điểm chuẩn trúng tuyển cuối cùng. Trang đề án chỉ có 1 câu chung chung "Chính sách ưu tiên": thực hiện theo Quy chế tuyển sinh hiện hành (không tự xác nhận điểm ưu tiên CỘNG vào điểm xét tuyển như thế nào — khác PNTU/HCMUE/CTUMP/VNUA/UHD/APD/TBU đều tự trích rõ công thức). "Điểm cộng: Thực hiện theo quy định của Bộ Giáo dục và Đào tạo" (không có bảng số riêng của EIU). Recheck 2026-08-28: có 1 bảng quy đổi IELTS (5,0=8 điểm ... 7,0+=10 điểm) trong mục "Thông tin cần thiết khác" nhưng KHÔNG rõ áp dụng cho phương thức nào (thay thế điểm 1 môn? cộng điểm? kênh xét tuyển riêng?) — không đủ căn cứ để model, cần fetch thêm `eiu.edu.vn/tuyen-sinh/tuyen-sinh-2026/thong-tin-tuyen-sinh/` ở batch sau.',
     status: 'incomplete',
     sourceId: 'eiu-admission-scheme-2026',
     scoreAffecting: true,

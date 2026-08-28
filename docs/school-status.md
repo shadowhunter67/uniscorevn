@@ -2,9 +2,11 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (65)
+## Calculator đã xác minh (69)
 
+- **APD** — Hoc vien Chinh sach va Phat trien
 - **BDU** — Truong Dai hoc Binh Duong
+- **BVU** — Truong Dai hoc Ba Ria - Vung Tau
 - **CTU** — Trường Đại học Cần Thơ
 - **CTUMP** — Trường Đại học Y Dược Cần Thơ
 - **DLU** — Truong Dai hoc Da Lat
@@ -46,6 +48,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **PTIT** — Học viện Công nghệ Bưu chính Viễn thông
 - **SGU** — Trường Đại học Sài Gòn
 - **TBDU** — Truong Dai hoc Thai Binh Duong
+- **TBU** — Trường Đại học Thái Bình
 - **TDMU** — Trường Đại học Thủ Dầu Một
 - **TDTU** — Trường Đại học Tôn Đức Thắng
 - **TDU** — Truong Dai hoc Tay Do
@@ -59,6 +62,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **UEH** — Trường Đại học Kinh tế TP.HCM
 - **UEL** — Trường Đại học Kinh tế - Luật – ĐHQG TP.HCM
 - **UFM** — Trường Đại học Tài chính – Marketing
+- **UHD** — Trường Đại học Hải Dương
 - **UMP** — Trường Đại học Y Dược Thành phố Hồ Chí Minh
 - **UMT** — Trường Đại học Quản lý và Công nghệ TP.HCM
 - **USSH** — Trường Đại học Khoa học Xã hội và Nhân văn – ĐHQG TP.HCM
@@ -76,12 +80,10 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **NEU** — Trường Đại học Kinh tế Quốc dân
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 
-## Chỉ kiểm tra điều kiện/ngưỡng (39)
+## Chỉ kiểm tra điều kiện/ngưỡng (35)
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
 - **AJC** — Học viện Báo chí và Tuyên truyền
-- **APD** — Hoc vien Chinh sach va Phat trien
-- **BVU** — Truong Dai hoc Ba Ria - Vung Tau
 - **DHV** — Trường Đại học Hùng Vương TP.HCM
 - **DNU** — Trường Đại học Đại Nam
 - **DUE** — Trường Đại học Kinh tế - Đại học Đà Nẵng
@@ -97,7 +99,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **LTVUni** — Trường Đại học Lương Thế Vinh
 - **NTTU** — Trường Đại học Nguyễn Tất Thành
 - **PYU** — Trường Đại học Phú Yên
-- **TBU** — Trường Đại học Thái Bình
 - **ThanhDo** — Truong Dai hoc Thanh Do
 - **TNU** — Dai hoc Thai Nguyen
 - **TNUE** — Truong Dai hoc Su pham - Dai hoc Thai Nguyen
@@ -105,7 +106,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **TNUS** — Truong Dai hoc Khoa hoc - Dai hoc Thai Nguyen
 - **UED** — Trường Đại học Sư phạm - Đại học Đà Nẵng
 - **UFLS** — Trường Đại học Ngoại ngữ - Đại học Đà Nẵng
-- **UHD** — Trường Đại học Hải Dương
 - **UIT** — Trường Đại học Công nghệ Thông tin – ĐHQG TP.HCM
 - **USH** — Trường Đại học Thể dục Thể thao TP.HCM
 - **UTE** — Trường Đại học Sư phạm Kỹ thuật - Đại học Đà Nẵng

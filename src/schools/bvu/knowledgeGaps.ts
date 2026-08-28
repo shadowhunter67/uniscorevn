@@ -4,30 +4,32 @@ export const bvuKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'bvu-program-threshold-table-not-imported',
     label:
-      'BVU 2026 cong bo nguong hoc ba rieng theo nganh (da so nganh 18,0/30; Duoc hoc 24,0/30 du kien; Dieu duong 19,5/30 du kien; chuong trinh Cu nhan tai nang loai tru khoi phuong phap nay); chua chon duoc nganh cu the de ap dung dung muc, va chua nhap danh muc ~60 nganh/chuyen nganh.',
+      'BVU 2026 cong bo nguong theo 4 nhom nganh (Duoc hoc, Dieu duong, Luat, cac nganh khac — bang cap nhat 10/08/2026, thay so "du kien" truoc do) nhung chua nhap danh muc day du ~60 nganh/chuyen nganh -> to hop nao thuoc nhom nao (nguoi dung tu chon nhom).',
     status: 'official-but-unparsed',
-    sourceId: 'bvu-admission-2026',
-    scoreAffecting: true,
+    sourceId: 'bvu-diem-trung-tuyen-2026',
+    scoreAffecting: false,
     knownData: [
-      'Da so nganh: >= 18,0/30 (hoc ba, TB lop 12 3 mon to hop)',
-      'Duoc hoc: >= 24,0/30 (du kien)',
-      'Dieu duong: >= 19,5/30 (du kien)',
-      'Chuong trinh Cu nhan tai nang: >= 22,0/30 (du kien) — khong thuoc pham vi mo hinh hoa nay',
+      'Duoc hoc: 20,0/30 (hoc ba va thi THPT)',
+      'Dieu duong: 18,0/30 (hoc ba va thi THPT)',
+      'Luat: 20,0/30 (hoc ba va thi THPT)',
+      'Cac nganh khac: 18,0/30 (hoc ba) / 15,0/30 (thi THPT)',
     ],
-    impact: 'Runtime chi kiem tra duoc ngoai le duoi nguong thap nhat (18/30 = ineligible chac chan); tu 18/30 den 24/30 can chon nganh de ket luan chinh xac.',
+    impact: 'Nguoi dung phai tu chon nhom nganh dung thay vi he thong tu suy ra tu ten nganh.',
   },
   {
     id: 'bvu-other-methods-not-modeled',
     label:
-      'BVU 2026 tuyen sinh qua 5 phuong thuc doc lap (xet tuyen thang, ket qua thi TN THPT, va cac phuong thuc khac); chi phuong thuc hoc ba duoc mo hinh hoa vi day la phuong thuc duy nhat co so lieu ro rang trong nguon da fetch duoc.',
+      'BVU 2026 tuyen sinh qua 5 phuong thuc doc lap (xet tuyen thang va cac phuong thuc khac ngoai hoc ba/thi THPT); chi 2 phuong thuc hoc ba va thi TN THPT duoc mo hinh hoa.',
     status: 'official-but-unparsed',
-    sourceId: 'bvu-admission-2026',
+    sourceId: 'bvu-diem-trung-tuyen-2026',
   },
   {
-    id: 'bvu-bonus-priority-not-modeled',
-    label: 'Diem uu tien khu vuc/doi tuong theo Thong tu 06 duoc de cap nhung chua duoc trien khai trong bo tinh diem.',
+    id: 'bvu-transcript-priority-unclear',
+    label:
+      'Bai dang 10/08/2026 xac nhan RO phuong thuc thi THPT KHONG cong diem uu tien khu vuc/doi tuong, nhung KHONG xac nhan lai quy tac nay cho phuong thuc hoc ba (trang cu mo ta cong thuc hoc ba co "+ diem uu tien" nhung trang do da 404) — phuong thuc hoc ba giu partial/unknown, khong nang exact vi thieu can cu hien tai cho ca 2 huong (co hoac khong cong uu tien).',
     status: 'incomplete',
-    sourceId: 'bvu-admission-2026',
-    impact: 'Bo tinh diem chua tinh duoc diem xet tuyen cuoi cung, chi kiem tra nguong dau vao.',
+    sourceId: 'bvu-diem-trung-tuyen-2026',
+    scoreAffecting: true,
+    impact: 'Phuong thuc hoc ba van chi kiem tra duoc nguong tho, khong tinh duoc diem xet tuyen cuoi cung.',
   },
 ];
