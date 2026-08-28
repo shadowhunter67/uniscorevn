@@ -13,7 +13,7 @@ export const ntuhnModule: SchoolModule = {
   region: 'hanoi',
   vnuhcm: false,
   summary:
-    'Da xac minh diem trung tuyen dot 1 nam 2026 cua NTU-HN qua bao chi nha nuoc (Bao Dau tu): nguong dong nhat 15/30 (thi TN THPT) cho ca 11 nganh, khong phan biet nganh. Phuong thuc hoc ba (18/30) va cac phuong thuc ket hop diem nang khieu chua duoc mo hinh hoa.',
+    'Tinh chinh xac Diem xet tuyen NTU-HN 2026 (phuong thuc thi TN THPT): DXT = round2(tong tho 3 mon + diem uu tien KV/DT theo Dieu 7 TT 06/2026) — nguong 15/30 dong nhat ca 11 nganh, trich nguyen van Thong bao diem san chinh thuc 29/06/2026 (PDF Google Drive, doc bang OCR). Cong thuc tong tho + uu tien la judgment call vi thong bao khong in cong thuc tuong minh. Phuong thuc hoc ba (18/30) va cac phuong thuc ket hop diem nang khieu chua duoc mo hinh hoa.',
   capabilities: {
     admissionInfo: true,
     programs: false,

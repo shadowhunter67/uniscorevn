@@ -17,6 +17,19 @@ export interface NtuhnSource {
 
 export const ntuhnSources: NtuhnSource[] = [
   {
+    id: 'ntuhn-threshold-notice-2026',
+    publisher: 'Trường Đại học Nguyễn Trãi - Hội đồng tuyển sinh',
+    title: 'Thông báo điểm sàn xét tuyển theo kết quả học tập bậc THPT & kết quả kỳ thi tốt nghiệp THPT Quốc gia năm 2026',
+    url: 'https://daihocnguyentrai.edu.vn/thong-bao-diem-san-xet-tuyen-theo-ket-qua-hoc-tap-bac-thpt-va-ket-qua-ky-thi-tot-nghiep-thpt-quoc-gia-nam-2026/',
+    accessedAt: '2026-08-28',
+    publishedAt: '2026-06-29',
+    sourceType: 'official-admission',
+    verification: 'verified',
+    lifecycle: { effectiveYear: 2026, status: 'current' },
+    note:
+      'Bài đăng nhúng PDF chính thức qua Google Drive (drive.google.com/file/d/1GjTBb4DJqR582Sd3N0oEpNtvBOfPrmVe), reach qua chrome-devtools (trang có gtranslate, nội dung bài viết là ảnh không lộ qua fetch tĩnh) — tải trực tiếp 2026-08-28 (PDF scan 2 trang, đọc bằng OCR). Bảng đủ 11 ngành: điểm sàn phương thức điểm thi = 15/30, phương thức học bạ = 18/30, ĐỒNG NHẤT mọi ngành (không phân biệt). Không in công thức Điểm xét tuyển tường minh.',
+  },
+  {
     id: 'ntuhn-admission-score-2026',
     publisher: 'Bao Dau tu (Vietnam Investment Review) — dua tren cong bo cua Truong Dai hoc Nguyen Trai',
     title: 'Dai hoc Nguyen Trai cong bo diem chuan 2026: Xet diem thi tu 15, hoc ba tu 18 diem',

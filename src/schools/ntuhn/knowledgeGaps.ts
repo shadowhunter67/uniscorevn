@@ -10,9 +10,10 @@ export const ntuhnKnowledgeGaps: KnowledgeGap[] = [
   },
   {
     id: 'ntuhn-priority-bonus-not-modeled',
-    label: 'Diem uu tien khu vuc/doi tuong theo Quy che tuyen sinh cua Bo GDDT chua duoc cong vao tong diem truoc khi so sanh voi nguong.',
+    label: 'Batch 2026-08-28: da tim duoc thong bao chinh thuc (khong chi bao chi thu cap) va model diem uu tien (Dieu 7 TT 06/2026, judgment call) trong nhanh exact `ntuhn-thpt-exam-exact-2026`. Phuong thuc eligibility rong (`ntuhn-thpt-exam-2026`) van chi cong diem tho 3 mon.',
     status: 'incomplete',
-    sourceId: 'ntuhn-admission-score-2026',
-    scoreAffecting: true,
+    sourceId: 'ntuhn-threshold-notice-2026',
+    scoreAffecting: false,
+    impact: 'method-out-of-scope',
   },
 ];
