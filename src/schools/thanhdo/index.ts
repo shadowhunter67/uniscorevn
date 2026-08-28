@@ -13,7 +13,7 @@ export const thanhdoModule: SchoolModule = {
   region: 'hanoi',
   vnuhcm: false,
   summary:
-    'ThanhDo 2026 THPT-exam-route thresholds are modeled directly from the official cutoff announcement: 16,0-20,0/30 across 14 majors. Runtime models the band conservatively (ineligible below 16, unresolved above); per-major mapping, transcript route, and aptitude/critical-thinking-test route are not modeled yet.',
+    'Calculator exact cho phương thức thi TN THPT: trang chính thức thanhdo.edu.vn xác nhận công thức điểm trúng tuyển (tổng 3 môn, không nhân hệ số, không tính điểm cộng) và bảng ngưỡng đầy đủ theo 14/14 ngành (6 mức: 16,0/16,5/17,0/17,5/18,0/20,0). Điểm ưu tiên KV/ĐT dùng mức chuẩn toàn quốc (judgment call — nguồn chỉ loại trừ điểm cộng, im lặng về điểm ưu tiên). Cần chọn đúng nhóm ngành/tổ hợp môn; phương thức học bạ và thi đánh giá năng lực/tư duy chưa mô hình hoá.',
   capabilities: {
     admissionInfo: true,
     programs: false,

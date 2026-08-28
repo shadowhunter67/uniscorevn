@@ -26,7 +26,7 @@ export const thanhdoSources: ThanhdoSource[] = [
     verification: 'verified',
     lifecycle: { effectiveYear: 2026, status: 'current' },
     note:
-      'Trang chinh thuc thanhdo.edu.vn cong bo diem chuan 2026 theo 4 phuong thuc: thi TN THPT (16,0-20,0/30 tuy nganh, 14 nganh), hoc ba (18,0/30 cho 13 nganh, 20,0 Duoc hoc), danh gia nang luc/tu duy (HSA >=75/150, TSA >=50/100), va chuong trinh lien ket quoc te.',
+      'Trang chinh thuc thanhdo.edu.vn cong bo diem chuan 2026 theo 4 phuong thuc: thi TN THPT (16,0-20,0/30 tuy nganh, 14 nganh), hoc ba (18,0/30 cho 13 nganh, 20,0 Duoc hoc), danh gia nang luc/tu duy (HSA >=75/150, TSA >=50/100), va chuong trinh lien ket quoc te. Xac nhan lai 2026-08-28 (WebFetch): trich nguyen van "Muc diem trung tuyen ap dung doi voi thi sinh thuoc Khu vuc 3, duoc xac dinh theo tong diem cua 03 bai thi/mon thi trong to hop xet tuyen, theo thang diem 30, khong nhan he so, khong tinh diem cong" — CHI loai tru diem cong (bonus), KHONG de cap diem uu tien khu vuc/doi tuong (xem priority.ts cho judgment call). Bang diem chuan day du 14/14 nganh (6 muc: 16,0/16,5/17,0/17,5/18,0/20,0) xac nhan khop knowledgeGaps da ghi truoc do.',
   },
   {
     id: 'thanhdo-admission-info-2026',

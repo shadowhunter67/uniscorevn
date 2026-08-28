@@ -30,6 +30,7 @@ import { ltvuniAdmissionMethods } from '../schools/ltvuni/methods';
 import { fpfuAdmissionMethods } from '../schools/fpfu/methods';
 import { uflsudnAdmissionMethods } from '../schools/uflsudn/methods';
 import { hcmupesAdmissionMethods } from '../schools/hcmupes/methods';
+import { thanhdoAdmissionMethods } from '../schools/thanhdo/methods';
 
 import { hcmutGoldenCases, hcmutNoDgnlGoldenCase } from '../schools/hcmut/__fixtures__/officialExamples2026';
 import { uehGoldenCases, uehOfficialFinalConversionCase } from '../schools/ueh/__fixtures__/officialExamples2026';
@@ -58,6 +59,7 @@ import { ltvuniThptExamExactGoldenCases } from '../schools/ltvuni/__fixtures__/o
 import { fpfuThptExamExactGoldenCases } from '../schools/fpfu/__fixtures__/officialExamples2026';
 import { uflsudnTeacherTrainingExactGoldenCases } from '../schools/uflsudn/__fixtures__/officialExamples2026';
 import { hcmupesGdtcExactGoldenCases } from '../schools/hcmupes/__fixtures__/officialExamples2026';
+import { thanhdoThptExamExactGoldenCases } from '../schools/thanhdo/__fixtures__/officialExamples2026';
 
 /**
  * Invariant CI bắt buộc: MỌI method có `capabilities.exactCalculator === true` phải có ÍT NHẤT 1
@@ -102,6 +104,7 @@ const allMethodsBySchool = {
   fpfu: fpfuAdmissionMethods,
   uflsudn: uflsudnAdmissionMethods,
   hcmupes: hcmupesAdmissionMethods,
+  thanhdo: thanhdoAdmissionMethods,
 };
 
 function methodKey(schoolId: string, methodId: string): string {
@@ -155,6 +158,7 @@ const allGoldenCases = [
   ...fpfuThptExamExactGoldenCases,
   ...uflsudnTeacherTrainingExactGoldenCases,
   ...hcmupesGdtcExactGoldenCases,
+  ...thanhdoThptExamExactGoldenCases,
 ];
 
 const coveredMethods = new Set(allGoldenCases.map((goldenCase) => methodKey(goldenCase.schoolId, goldenCase.methodId)));
@@ -219,6 +223,7 @@ describe('exact method golden coverage invariant', () => {
         'fpfu:fpfu-thpt-exam-exact-2026',
         'uflsudn:uflsudn-teacher-training-exact-2026',
         'hcmupes:hcmupes-thpt-plus-talent-2026',
+        'thanhdo:thanhdo-thpt-exam-exact-2026',
       ].sort()
     );
   });

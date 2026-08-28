@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 225,
       admissionDataAvailable: 225,
-      eligibilitySupported: 27,
-      calculatorSupported: 80,
+      eligibilitySupported: 26,
+      calculatorSupported: 81,
       partialCalculator: 3,
-      fullyVerified: 77,
+      fullyVerified: 78,
       catalogOnly: 42,
     });
   });
@@ -164,6 +164,10 @@ describe('institution coverage statistics', () => {
     // Batch (2026-08-28): HCMUPES graduated to verified-calculator — Thông báo 05/TB-HĐTS công bố
     // ĐẦY ĐỦ bảng ngưỡng theo khu vực ưu tiên (KV1-KV3), không cần judgment call cho điểm ưu tiên.
     expect(deriveInstitutionSupportStatus(schoolRegistry.hcmupes)).toBe('verified-calculator');
+    // Batch (2026-08-28): ThanhDo graduated to verified-calculator — thanhdo.edu.vn xác nhận công
+    // thức (tổng 3 môn, không tính điểm cộng) + bảng ngưỡng đầy đủ 14/14 ngành (6 mức); điểm ưu
+    // tiên KV/ĐT dùng judgment call (nguồn im lặng đúng 1 điểm này, không loại trừ như điểm cộng).
+    expect(deriveInstitutionSupportStatus(schoolRegistry.thanhdo)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnuulis)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hce)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hul)).toBe('verified-calculator');

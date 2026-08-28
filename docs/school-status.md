@@ -2,7 +2,7 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (77)
+## Calculator đã xác minh (78)
 
 - **AJC** — Học viện Báo chí và Tuyên truyền
 - **APD** — Hoc vien Chinh sach va Phat trien
@@ -58,6 +58,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **TDTU** — Trường Đại học Tôn Đức Thắng
 - **TDU** — Truong Dai hoc Tay Do
 - **TGU** — Truong Dai hoc Tien Giang
+- **ThanhDo** — Truong Dai hoc Thanh Do
 - **TTN** — Truong Dai hoc Tay Nguyen
 - **TTU** — Truong Dai hoc Tan Tao
 - **TUAF** — Truong Dai hoc Nong Lam - Dai hoc Thai Nguyen
@@ -88,7 +89,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **NEU** — Trường Đại học Kinh tế Quốc dân
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 
-## Chỉ kiểm tra điều kiện/ngưỡng (27)
+## Chỉ kiểm tra điều kiện/ngưỡng (26)
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
 - **DHV** — Trường Đại học Hùng Vương TP.HCM
@@ -102,7 +103,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HUIT** — Trường Đại học Công Thương TP.HCM
 - **NTTU** — Trường Đại học Nguyễn Tất Thành
 - **PYU** — Trường Đại học Phú Yên
-- **ThanhDo** — Truong Dai hoc Thanh Do
 - **TNU** — Dai hoc Thai Nguyen
 - **TNUE** — Truong Dai hoc Su pham - Dai hoc Thai Nguyen
 - **TNUFL** — Truong Ngoai ngu - Dai hoc Thai Nguyen
