@@ -13,25 +13,19 @@ export const dluModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'DLU 2026 THPT thresholds are cross-checked from two independent press reports of the official 2026-07-09 notice (primary dlu.edu.vn site blocked by TLS/WAF): a 16/30 baseline for social sciences, with higher published group floors (Engineering/Technology 17-18, Law 18, teacher-training majors 21) documented as knowledge gaps. Program-specific subject conditions (Law English transcript, Nuclear Engineering Math/Physics minimums) and the aptitude-test admission route are not modeled yet.',
+    'Tính chính xác Điểm xét tuyển DLU 2026 (thi TN THPT) theo 41 mã ngành: ĐXT = round2(tổng thô 3 môn, không hệ số, không phân biệt tổ hợp + điểm ưu tiên KV/ĐT theo Điều 7 TT 06/2026) — điểm sàn theo mã ngành trích nguyên văn Thông báo 1145/TB-ĐHĐL (09/07/2026, OCR qua chrome-devtools vì dlu.edu.vn chặn curl bằng TLS/WAF), ghi rõ ngưỡng đã gồm điểm ưu tiên. Điều kiện phụ: Ngôn ngữ Anh/Sư phạm Tiếng Anh (Anh ≥6,0), Kỹ thuật hạt nhân (Toán và Lý mỗi môn ≥6,5). Phương thức học bạ và ĐGNL chưa mô hình hoá.',
   capabilities: {
     admissionInfo: true,
-    programs: false,
+    programs: true,
     cutoffs: false,
     ...aggregateSchoolCapabilities(dluAdmissionMethods),
   },
   catalogSources: [
     {
-      title: 'Official 2026 admission floor score notice',
+      title: 'Thông báo 1145/TB-ĐHĐL: Mức điểm sàn đăng ký xét tuyển đại học chính quy 2026',
       url: 'https://dlu.edu.vn/thong-bao-muc-diem-san-dang-ky-xet-tuyen-dai-hoc-he-chinh-quy-nam-2026-truong-dai-hoc-da-lat/',
       type: 'official-institution',
-      checkedAt: '2026-08-24',
-    },
-    {
-      title: 'Press coverage of the 2026 admission floor score announcement (Thanh Nien)',
-      url: 'https://thanhnien.vn/truong-dh-da-lat-cong-bo-diem-san-2026-cac-nganh-su-pham-cao-nhat-185260709110001808.htm',
-      type: 'secondary',
-      checkedAt: '2026-08-24',
+      checkedAt: '2026-08-28',
     },
   ],
 };
