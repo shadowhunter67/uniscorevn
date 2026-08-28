@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { ApplicantProfile } from '../../core/applicantProfile';
-import { evaluateHiuThptExamAdmission, evaluateHiuVactAdmission } from './evaluate';
+import { evaluateSchool, evaluateSchools } from '../../evaluation/schoolEvaluation';
+import { evaluateHiuThptExamAdmission, evaluateHiuThptExamExactAdmission, evaluateHiuVactAdmission } from './evaluate';
 
 const A01_SUBJECTS = ['math', 'physics', 'english'] as const;
 
@@ -49,6 +50,58 @@ describe('evaluateHiuThptExamAdmission', () => {
     });
     expect(evaluation.confidence).toBe('partial');
     expect(evaluation.score).toBeUndefined();
+  });
+
+  it('routes through generic evaluateSchool and evaluateSchools adapters (reclassified to partial once exact exists)', () => {
+    const profile = profileWithThpt({ math: 8, physics: 8, english: 8 });
+    const context = { subjectContext: { combinationId: 'A01', subjects: A01_SUBJECTS }, group: 'standard' as const };
+
+    // HIU đã có phương thức exact → classifyEvaluation phân loại lại kết quả threshold-only này
+    // thành 'partial' (cùng tiền lệ VinhUni/HUB/HLU/CTU/TGU/TDMU/HALONGU/SGU/HUBT/HSU/...).
+    expect(evaluateSchool(profile, 'hiu', { context }).status).toBe('partial');
+    expect(evaluateSchools(profile, ['hiu'], { hiu: context })[0].status).toBe('partial');
+  });
+});
+
+describe('evaluateHiuThptExamExactAdmission', () => {
+  it('tổng thô 15 -> eligible (so tổng thô)', () => {
+    const evaluation = evaluateHiuThptExamExactAdmission(profileWithThpt({ math: 5, physics: 5, english: 5 }), {
+      subjectContext: { combinationId: 'A01', subjects: A01_SUBJECTS },
+    });
+
+    expect(evaluation.confidence).toBe('exact-verified');
+    expect(evaluation.score?.value).toBe(15);
+    expect(evaluation.eligibility?.status).toBe('eligible');
+  });
+
+  it('tổng thô 14.99 + ưu tiên vẫn ineligible (so tổng thô, không phải ĐXT tham khảo)', () => {
+    const profile: ApplicantProfile = {
+      thpt: { scores: { math: 5, physics: 5, english: 4.99 } },
+      priority: { region: 'KV1', category: 'UT1' },
+    };
+
+    const evaluation = evaluateHiuThptExamExactAdmission(profile, {
+      subjectContext: { combinationId: 'A01', subjects: A01_SUBJECTS },
+    });
+
+    expect(evaluation.eligibility?.status).toBe('ineligible');
+    expect(evaluation.score?.value).toBe(17.74);
+  });
+
+  it('báo thiếu điểm khi hồ sơ chưa đủ 3 môn', () => {
+    const evaluation = evaluateHiuThptExamExactAdmission(profileWithThpt({ math: 6, physics: 6 }), {
+      subjectContext: { combinationId: 'A01', subjects: A01_SUBJECTS },
+    });
+
+    expect(evaluation.confidence).toBe('partial');
+    expect(evaluation.missingRequirements).toContainEqual(expect.objectContaining({ kind: 'profile-input', code: 'hiu-thpt-english' }));
+  });
+
+  it('yêu cầu chọn tổ hợp môn khi context rỗng', () => {
+    const evaluation = evaluateHiuThptExamExactAdmission(profileWithThpt({ math: 6, physics: 6, english: 6 }));
+
+    expect(evaluation.confidence).toBe('partial');
+    expect(evaluation.missingRequirements).toContainEqual(expect.objectContaining({ kind: 'school-context', code: 'hiu-subject-combination' }));
   });
 });
 

@@ -13,7 +13,7 @@ export const hubtModule: SchoolModule = {
   region: 'hanoi',
   vnuhcm: false,
   summary:
-    'Đã xác minh trang tuyển sinh chính thức HUBT 2026 (hubt.edu.vn/tuyen-sinh): ngưỡng chung phương thức xét điểm thi TN THPT là 15,0/30 cho ngành đại trà. Nhóm ngành sức khoẻ (Y khoa/Dược/RHM/Điều dưỡng) có ngưỡng kép học lực + điểm cao hơn, chưa mô hình hoá; các phương thức khác (học bạ, TSA/HSA, năng khiếu) và bảng mã ngành/tổ hợp cũng chưa được nhập.',
+    'Đã xác minh trang tuyển sinh chính thức HUBT 2026 (hubt.edu.vn/tuyen-sinh): công thức "ĐXT = Tổng điểm 3 môn tổ hợp + Điểm ưu tiên + Điểm cộng" (trích nguyên văn), ngưỡng 15,0/30 cho ngành đại trà. Có nhánh exact cho ngành đại trà (trừ nhóm sức khoẻ), scope không điểm cộng, điểm ưu tiên judgment call Điều 7 TT 06/2026. Nhóm ngành sức khoẻ (Y khoa/Dược/RHM/Điều dưỡng) có ngưỡng kép học lực + điểm cao hơn, chưa mô hình hoá; các phương thức khác (học bạ, TSA/HSA, năng khiếu), bảng điểm cộng và bảng mã ngành/tổ hợp cũng chưa được nhập.',
   capabilities: {
     admissionInfo: true,
     programs: false,

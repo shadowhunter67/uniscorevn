@@ -47,4 +47,20 @@ export const hiuAdmissionMethods: AdmissionMethodDescriptor[] = [
     capabilities: { eligibility: true, scoreConversion: false, bonus: false, priority: false, exactCalculator: false },
     knowledgeGaps: vactGaps,
   },
+  /**
+   * Nhánh HẸP tính đủ Điểm xét tuyển (exact), phương thức thi TN THPT, CHỈ nhóm `standard` (nhóm
+   * pháp luật/sức khỏe cấp phép hành nghề không có số cụ thể — xem `hiu-health-license-law-threshold-not-found`).
+   * Trích nguyên văn `evidence.ts:hiuThptExamExactThresholdEvidence`: ngưỡng 15/30, tổng điểm THÔ
+   * theo tổ hợp — nguồn im lặng về việc gồm ưu tiên hay không → so TỔNG THÔ (thận trọng). Điểm ưu
+   * tiên judgment call Điều 7 TT 06/2026 (`priority.ts`) chỉ cho ĐXT hiển thị tham khảo. KHÔNG gắn
+   * `knowledgeGaps`.
+   */
+  {
+    id: 'hiu-thpt-exam-exact-2026',
+    schoolId: 'hiu',
+    name: 'Xét kết quả thi TN THPT — Điểm xét tuyển (nhóm ngành thường)',
+    year: 2026,
+    applicantTypes: ['Thí sinh xét kết quả thi TN THPT 2026 vào một ngành HIU thuộc nhóm ngành thường (ngoài pháp luật/sức khỏe cấp phép hành nghề)'],
+    capabilities: { eligibility: true, scoreConversion: false, bonus: false, priority: true, exactCalculator: true },
+  },
 ];

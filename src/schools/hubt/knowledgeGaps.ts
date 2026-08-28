@@ -21,10 +21,11 @@ export const hubtKnowledgeGaps: KnowledgeGap[] = [
   },
   {
     id: 'hubt-priority-bonus-not-modeled',
-    label: 'Điểm ưu tiên khu vực/đối tượng và điểm cộng theo Quy chế tuyển sinh chưa được cộng vào tổng điểm trước khi so với ngưỡng.',
+    label:
+      'Nhánh exact (evaluateHubtThptExamExactAdmission, ngành đại trà) ĐÃ cộng điểm ưu tiên khu vực/đối tượng (judgment call Điều 7 TT 06/2026, `priority.ts`) vào ĐXT trước khi so ngưỡng. Điểm cộng (ĐC) riêng theo Quy chế tuyển sinh HUBT vẫn CHƯA có bảng — scope ĐC=0 (thí sinh không có điểm cộng).',
     status: 'incomplete',
     sourceId: 'hubt-admission-portal-2026',
-    scoreAffecting: true,
-    impact: 'Thí sinh có điểm ưu tiên/điểm cộng cần tự cộng thêm trước khi so với ngưỡng 15,0/30 đã công bố.',
+    scoreAffecting: false,
+    impact: 'method-out-of-scope',
   },
 ];

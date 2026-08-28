@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 225,
       admissionDataAvailable: 225,
-      eligibilitySupported: 54,
-      calculatorSupported: 53,
+      eligibilitySupported: 49,
+      calculatorSupported: 58,
       partialCalculator: 3,
-      fullyVerified: 50,
+      fullyVerified: 55,
       catalogOnly: 42,
     });
   });
@@ -89,10 +89,14 @@ describe('institution coverage statistics', () => {
     ]) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('researched');
     }
-    for (const schoolId of ['ajc', 'pntu', 'vnuf', 'vgu', 'hpu2', 'fptu', 'hubt']) {
+    for (const schoolId of ['ajc', 'pntu', 'vnuf', 'vgu', 'hpu2', 'fptu']) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
     }
     expect(deriveInstitutionSupportStatus(schoolRegistry.dtu)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.hubt)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.hsu)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.hiu)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.tdu)).toBe('verified-calculator');
     // UDN cluster batch (2026-08-24): udn stays a system-level umbrella (researched, no
     // independent admission formula); its member schools carry dedicated runtime modules. Five
     // stay eligibility-only; VKU graduated to a verified exact calculator (2026-08-27, combined
@@ -143,6 +147,7 @@ describe('institution coverage statistics', () => {
     expect(deriveInstitutionSupportStatus(schoolRegistry.tgu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.tdmu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.halongu)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.sgu)).toBe('verified-calculator');
   });
 
   it('requires catalog source metadata for college identity entries', () => {

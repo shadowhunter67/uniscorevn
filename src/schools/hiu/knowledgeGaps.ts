@@ -31,10 +31,11 @@ export const hiuKnowledgeGaps: KnowledgeGap[] = [
   },
   {
     id: 'hiu-priority-bonus-table-not-found',
-    label: 'Bảng điểm ưu tiên khu vực/đối tượng cụ thể áp dụng cho HIU và bảng điểm cộng thành tích/chứng chỉ (nếu có) chưa tìm được nguồn HIU tự công bố riêng — điểm sàn công bố ở đây là điều kiện đăng ký, không phải điểm chuẩn trúng tuyển cuối.',
+    label:
+      'Bảng điểm ưu tiên khu vực/đối tượng cụ thể của HIU và bảng điểm cộng thành tích/chứng chỉ (nếu có) chưa tìm được nguồn HIU tự công bố riêng. Nhánh exact (evaluateHiuThptExamExactAdmission, nhóm standard) so ngưỡng đầu vào với TỔNG THÔ (không cần bảng ưu tiên vì nguồn im lặng) và áp dụng Điều 7 TT 06/2026 (judgment call) chỉ cho Điểm xét tuyển hiển thị tham khảo — chưa dùng được để tính điểm CHUẨN trúng tuyển cuối cùng.',
     status: 'incomplete',
     sourceId: 'hiu-quality-threshold-2026',
-    scoreAffecting: true,
+    scoreAffecting: false,
     implemented: false,
     impact: 'exact-final-score-blocking',
   },

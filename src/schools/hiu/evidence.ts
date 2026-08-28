@@ -17,6 +17,22 @@ export const hiuThptExamThresholdEvidence = {
   ],
 } satisfies SourcedRule<{ standard: number }>;
 
+/** HIU 2026 — nhánh exact (thi TN THPT, nhóm standard). Cùng trích dẫn với `hiuThptExamThresholdEvidence`,
+ * tách riêng ruleId cho nhánh exact. */
+export const hiuThptExamExactThresholdEvidence = {
+  ruleId: 'hiu-thpt-exam-exact-threshold-2026',
+  evidence: [
+    {
+      sourceId: 'hiu-quality-threshold-2026',
+      location:
+        '"đối với phương thức xét kết quả thi tốt nghiệp THPT, mức điểm sàn áp dụng cho phần lớn các ngành là 15 điểm" — "Mức điểm được tính theo tổng điểm ba môn thuộc tổ hợp xét tuyển tương ứng với ngành đào tạo".',
+      verification: 'verified' as const,
+      effectiveYear: 2026,
+      verifiedAt: '2026-08-28',
+    },
+  ],
+};
+
 /** Ngưỡng đầu vào phương thức ĐGNL ĐHQG-HCM — thang 1200, điểm thô, khớp trực tiếp
  * `ApplicantProfile.exams.vact.total`. 3 nhóm đều có số cụ thể trong nguồn. */
 export const hiuVactThresholdEvidence = {

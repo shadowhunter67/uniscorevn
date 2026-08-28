@@ -33,4 +33,19 @@ export const hsuAdmissionMethods: AdmissionMethodDescriptor[] = [
     capabilities: { eligibility: true, scoreConversion: false, bonus: false, priority: false, exactCalculator: false },
     knowledgeGaps: transcriptGaps,
   },
+  /**
+   * Nhánh HẸP tính đủ Điểm xét tuyển (exact), phương thức thi TN THPT, cả 2 nhóm `standard`/`law`.
+   * Trích nguyên văn 2 bài công bố chính thức (`evidence.ts:hsuThptExamExactFormulaEvidence`):
+   * nhóm `law` ngưỡng 20 "đã bao gồm điểm ưu tiên nếu có" → so ĐXT; nhóm `standard` ngưỡng 15,
+   * nguồn im lặng về ưu tiên → so TỔNG THÔ (thận trọng). Điểm ưu tiên judgment call Điều 7 TT
+   * 06/2026 (`priority.ts` — trường không công bố bảng riêng). KHÔNG gắn `knowledgeGaps`.
+   */
+  {
+    id: 'hsu-thpt-exam-exact-2026',
+    schoolId: 'hsu',
+    name: 'Xét kết quả thi TN THPT — Điểm xét tuyển',
+    year: 2026,
+    applicantTypes: ['Thí sinh xét kết quả thi TN THPT 2026 vào HSU (nhóm standard hoặc khối Pháp luật)'],
+    capabilities: { eligibility: true, scoreConversion: false, bonus: false, priority: true, exactCalculator: true },
+  },
 ];

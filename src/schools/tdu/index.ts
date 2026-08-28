@@ -13,7 +13,7 @@ export const tduModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'TDU 2026 THPT thresholds are cross-checked from state-press coverage of the official announcement: a 15,0-20,0/30 band across 29 majors, with Duoc hoc/Luat/Luat kinh te/Luat quoc te at the top (20,0). Runtime models the band conservatively (ineligible below 15, unresolved above); per-major mapping, transcript, V-SAT, and aptitude-assessment routes are not modeled yet.',
+    'TDU 2026 official Thong bao 725/TB-DHTD (08/7/2026) verified: full per-major threshold table for Phuong thuc 1 (thi TN THPT), 15,0-20,0/30 band across 29 majors. Exact branch covers 24 majors outside Duoc hoc/Dieu duong/Luat/Luat kinh te/Luat quoc te (flat 15/30 threshold, compared against raw total since the notice does not state priority inclusion; priority points applied via judgment call, Dieu 7 TT 06/2026). Transcript, V-SAT, and aptitude-assessment routes are not modeled yet.',
   capabilities: {
     admissionInfo: true,
     programs: false,

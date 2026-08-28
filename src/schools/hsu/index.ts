@@ -22,7 +22,7 @@ export const hsuModule: SchoolModule = {
   region: 'hcm',
   vnuhcm: false,
   summary:
-    'Điểm sàn phương thức thi TN THPT (15 chuẩn/20 khối Pháp luật, thang 30) và học bạ (18, chỉ nhóm chuẩn) đã xác minh từ 2 bài công bố chính thức trên hoasen.edu.vn · Calculator chính xác đang chờ danh mục ngành, bảng điểm ưu tiên/điểm cộng, và ngưỡng học bạ/ĐGNL nhóm Luật',
+    'Điểm sàn phương thức thi TN THPT (15 chuẩn/20 khối Pháp luật, thang 30) và học bạ (18, chỉ nhóm chuẩn) đã xác minh từ 2 bài công bố chính thức trên hoasen.edu.vn. Có nhánh exact cho phương thức thi TN THPT (cả 2 nhóm): ĐXT = tổng thô + điểm ưu tiên (judgment call Điều 7 TT 06/2026); nhóm Pháp luật so ĐXT với ngưỡng (nguồn nói rõ "đã gồm ưu tiên"), nhóm chuẩn so tổng thô (nguồn im lặng). Danh mục ngành, bảng điểm cộng riêng, và ngưỡng học bạ/ĐGNL nhóm Luật vẫn ngoài phạm vi.',
   capabilities: {
     admissionInfo: true,
     programs: false,

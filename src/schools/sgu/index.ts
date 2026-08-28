@@ -13,7 +13,7 @@ export const sguModule: SchoolModule = {
   region: 'hcm',
   vnuhcm: false,
   summary:
-    'Đã xác minh thông báo ngưỡng đầu vào SGU 2026 trên trang tuyển sinh chính thức · Ngưỡng THPT thay đổi theo ngành/chương trình khoảng 16-23/30 · Chưa nhập bảng 47 ngành, phụ lục quy đổi và bảng điểm cộng.',
+    'Đã xác minh Thông báo 1098/TB-HĐTS (10/7/2026): bảng ngưỡng đầu vào đủ 47 ngành/chương trình (16-23/30) và công thức ĐXT = ĐTHGXT + ĐC + ĐƯT (mục 4.5, trích nguyên văn). Có nhánh exact cho 29 ngành ngoài sư phạm/Luật, tổ hợp không hệ số, không điểm cộng (ĐC=0): ĐXT = tổng thô + điểm ưu tiên (Điều 7 Quy chế tuyển sinh, trích dẫn trực tiếp — không phải judgment call). Nhóm sư phạm/Luật (điều kiện phụ riêng), phụ lục quy đổi chứng chỉ/V-SAT/ĐGNL và bảng điểm cộng chưa mô hình hoá.',
   capabilities: {
     admissionInfo: true,
     programs: false,

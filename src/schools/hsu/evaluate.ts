@@ -3,9 +3,12 @@ import type { ApplicantProfile } from '../../core/applicantProfile';
 import type { CalculationStep } from '../../core/calculationStep';
 import type { SubjectId } from '../../core/subjects';
 import { SUBJECT_LABELS } from '../../core/subjects';
+import { round2 } from '../../core/round2';
 import { hsuAdmissionMethods } from './methods';
 import { hsuKnowledgeGaps } from './knowledgeGaps';
 import { checkHsuThptExamThreshold, checkHsuTranscriptThreshold, type HsuThresholdGroup } from './eligibility';
+import { calculateHsuEffectivePriority30, lookupHsuStandardPriority30 } from './priority';
+import { hsuThptExamExactFormulaEvidence } from './evidence';
 
 export interface HsuSubjectContext {
   combinationId?: string;
@@ -75,6 +78,84 @@ export function evaluateHsuThptExamAdmission(profile: ApplicantProfile, context:
     missingRequirements: [...missingRequirements, ...(method.knowledgeGaps ?? hsuKnowledgeGaps).map((gap) => ({ kind: 'official-rule' as const, code: gap.id, label: gap.label }))],
     explanation,
     evidence: [],
+  };
+}
+
+const HSU_EXACT_METHOD = hsuAdmissionMethods[2];
+const HSU_EXACT_THRESHOLD_30: Record<HsuThresholdGroup, number> = { standard: 15, law: 20 };
+
+export interface HsuThptExamExactEvaluationContext {
+  thresholdGroup: HsuThresholdGroup;
+  subjectContext?: HsuSubjectContext;
+}
+
+/** HSU 2026 — phương thức thi TN THPT. Nhóm `law`: so ĐXT (thô + ưu tiên) với ngưỡng 20 (nguồn nói
+ * rõ "đã bao gồm điểm ưu tiên"). Nhóm `standard`: so TỔNG THÔ với ngưỡng 15 (nguồn im lặng về ưu
+ * tiên). ĐXT (thô + ưu tiên judgment call) luôn hiển thị tham khảo. */
+export function evaluateHsuThptExamExactAdmission(profile: ApplicantProfile, context: HsuThptExamExactEvaluationContext): AdmissionEvaluation {
+  const explanation: CalculationStep[] = [];
+  const missingRequirements: MissingRequirement[] = [];
+
+  const partial = (reason: string, missingInputs: string[] = []): AdmissionEvaluation => ({
+    schoolId: 'hsu',
+    year: HSU_EXACT_METHOD.year,
+    methodId: HSU_EXACT_METHOD.id,
+    confidence: 'partial',
+    eligibility: { status: 'unknown', reasons: [reason] },
+    missingInputs,
+    missingRules: [],
+    missingRequirements,
+    explanation: [],
+    evidence: [],
+  });
+
+  if (!context.subjectContext || context.subjectContext.subjects.length !== 3) {
+    missingRequirements.push({ kind: 'school-context', code: 'hsu-subject-combination', label: 'Chọn tổ hợp 3 môn xét tuyển HSU.' });
+    return partial('Cần chọn tổ hợp 3 môn để tính Điểm xét tuyển HSU.');
+  }
+  const subjects = context.subjectContext.subjects;
+
+  const { total30: raw30Unrounded, missingSubjects } = sumSubjectTotal(profile, subjects);
+  if (missingSubjects.length > 0) {
+    missingRequirements.push(...missingSubjects.map((s) => ({ kind: 'profile-input' as const, code: `hsu-thpt-${s}`, label: `Điểm thi TN THPT môn ${SUBJECT_LABELS[s]} cho tổ hợp HSU.` })));
+    return partial('Cần đủ điểm 3 môn thi TN THPT để tính Điểm xét tuyển HSU.', ['Chưa đủ điểm 3 môn thi TN THPT trong tổ hợp đã chọn.']);
+  }
+  const raw30 = raw30Unrounded as number;
+
+  const threshold = HSU_EXACT_THRESHOLD_30[context.thresholdGroup];
+  const standardPriority30 = lookupHsuStandardPriority30(profile.priority?.region, profile.priority?.category);
+  const priority = calculateHsuEffectivePriority30({ rawTotal30: raw30, standardPriority30 });
+  const dxt30 = round2(raw30 + priority.effectivePriority30);
+  const comparisonValue = context.thresholdGroup === 'law' ? dxt30 : raw30;
+  const eligible = comparisonValue >= threshold;
+
+  const groupLabel = context.thresholdGroup === 'law' ? 'khối Pháp luật' : 'nhóm ngành ngoài Pháp luật';
+  const comparisonLabel = context.thresholdGroup === 'law' ? 'Điểm xét tuyển (đã gồm ưu tiên)' : 'Tổng điểm thô (chưa gồm ưu tiên)';
+  const reasons = [
+    `Điểm sàn HSU 2026 (thi TN THPT, ${groupLabel}): ${comparisonLabel} ≥ ${threshold}/30.`,
+    `Điểm xét tuyển = tổng thô 3 môn + điểm ưu tiên = ${raw30} + ${priority.effectivePriority30} = ${dxt30}/30 → ${eligible ? 'đạt' : 'chưa đạt'} ngưỡng (so với ${comparisonLabel.toLowerCase()} = ${comparisonValue}).`,
+  ];
+
+  explanation.push({ id: 'hsu-exact-raw', label: 'Tổng điểm 3 môn thi (thô)', output: raw30, scale: 30, formula: subjects.map((s) => SUBJECT_LABELS[s]).join(' + '), evidence: hsuThptExamExactFormulaEvidence.evidence });
+  explanation.push({ id: 'hsu-exact-priority', label: priority.reduced ? 'Điểm ưu tiên (đã giảm)' : 'Điểm ưu tiên', output: priority.effectivePriority30, scale: 30, formula: priority.reduced ? '[(30 − tổng thô)/7,5] × Mức ưu tiên KV/ĐT (Điều 7 TT 06/2026)' : 'Mức ưu tiên KV/ĐT (Điều 7 TT 06/2026)', evidence: hsuThptExamExactFormulaEvidence.evidence });
+  explanation.push({ id: 'hsu-exact-dxt', label: 'Điểm xét tuyển', output: dxt30, scale: 30, formula: 'ĐXT = tổng thô 3 môn + điểm ưu tiên', evidence: hsuThptExamExactFormulaEvidence.evidence });
+
+  if (profile.priority?.region === undefined && profile.priority?.category === undefined) {
+    missingRequirements.push({ kind: 'profile-input', code: 'hsu-priority-region-category', label: 'Khu vực / đối tượng ưu tiên (chưa nhập — Điểm xét tuyển đang tính với điểm ưu tiên = 0).' });
+  }
+
+  return {
+    schoolId: 'hsu',
+    year: HSU_EXACT_METHOD.year,
+    methodId: HSU_EXACT_METHOD.id,
+    confidence: 'exact-verified',
+    eligibility: { status: eligible ? 'eligible' : 'ineligible', reasons },
+    score: { value: dxt30, scale: 30 },
+    missingInputs: [],
+    missingRules: [],
+    missingRequirements,
+    explanation,
+    evidence: [...hsuThptExamExactFormulaEvidence.evidence],
   };
 }
 

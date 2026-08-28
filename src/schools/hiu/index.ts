@@ -21,7 +21,7 @@ export const hiuModule: SchoolModule = {
   region: 'hcm',
   vnuhcm: false,
   summary:
-    'Ngưỡng đầu vào phương thức thi TN THPT (15/30, phần lớn ngành) và ĐGNL ĐHQG-HCM (650/700/675, thang 1200, tùy nhóm ngành) đã xác minh từ bài đăng chính thức hiu.vn (cập nhật 10/8/2026) · Nhóm pháp luật/sức khỏe cấp phép hành nghề dùng ngưỡng Bộ GD&ĐT quy định cho phương thức thi TN THPT — nguồn HIU không nêu con số cụ thể · Phương thức kết hợp thi TN THPT + học bạ có ngưỡng (16/30) nhưng thiếu công thức trọng số, chưa xây được eligibility checker.',
+    'Ngưỡng đầu vào phương thức thi TN THPT (15/30, phần lớn ngành) và ĐGNL ĐHQG-HCM (650/700/675, thang 1200, tùy nhóm ngành) đã xác minh từ bài đăng chính thức hiu.vn (cập nhật 10/8/2026). Có nhánh exact cho thi TN THPT nhóm standard: so tổng điểm thô với ngưỡng 15/30, kèm Điểm xét tuyển tham khảo (thô + ưu tiên judgment call Điều 7 TT 06/2026). Nhóm pháp luật/sức khỏe cấp phép hành nghề dùng ngưỡng Bộ GD&ĐT quy định cho phương thức thi TN THPT — nguồn HIU không nêu con số cụ thể · Phương thức kết hợp thi TN THPT + học bạ có ngưỡng (16/30) nhưng thiếu công thức trọng số, chưa xây được eligibility checker.',
   capabilities: {
     admissionInfo: true,
     programs: false,

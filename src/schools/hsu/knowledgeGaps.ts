@@ -39,12 +39,13 @@ export const hsuKnowledgeGaps: KnowledgeGap[] = [
   },
   {
     id: 'hsu-priority-bonus-table-not-found',
-    label: 'Bảng điểm ưu tiên khu vực/đối tượng theo Thông tư hiện hành (nếu HSU tự công bố lại) — không tìm thấy trong 2 nguồn đã đọc.',
+    label:
+      'HSU không tự công bố lại bảng điểm ưu tiên khu vực/đối tượng. Nhánh exact (evaluateHsuThptExamExactAdmission) áp dụng Điều 7 TT 06/2026 (judgment call, `priority.ts`): nhóm law so ĐXT (đã gồm ưu tiên) với ngưỡng vì nguồn nói rõ; nhóm standard so TỔNG THÔ (nguồn im lặng về ưu tiên).',
     status: 'incomplete',
     sourceId: 'hsu-quality-threshold-2026',
-    scoreAffecting: true,
+    scoreAffecting: false,
     implemented: false,
-    impact: 'exact-final-score-blocking',
+    impact: 'method-out-of-scope',
   },
   {
     id: 'hsu-program-catalog-not-imported',
