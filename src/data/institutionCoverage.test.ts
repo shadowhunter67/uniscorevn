@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 225,
       admissionDataAvailable: 225,
-      eligibilitySupported: 49,
-      calculatorSupported: 58,
+      eligibilitySupported: 44,
+      calculatorSupported: 63,
       partialCalculator: 3,
-      fullyVerified: 55,
+      fullyVerified: 60,
       catalogOnly: 42,
     });
   });
@@ -97,6 +97,11 @@ describe('institution coverage statistics', () => {
     expect(deriveInstitutionSupportStatus(schoolRegistry.hsu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hiu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.tdu)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.uda)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.bdu)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.ou)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.huce)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.tbdu)).toBe('verified-calculator');
     // UDN cluster batch (2026-08-24): udn stays a system-level umbrella (researched, no
     // independent admission formula); its member schools carry dedicated runtime modules. Five
     // stay eligibility-only; VKU graduated to a verified exact calculator (2026-08-27, combined
@@ -105,7 +110,6 @@ describe('institution coverage statistics', () => {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
     }
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnua)).toBe('eligibility-only');
-    expect(deriveInstitutionSupportStatus(schoolRegistry.huce)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.dav)).toBe('partial-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hlu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hdu)).toBe('verified-calculator');

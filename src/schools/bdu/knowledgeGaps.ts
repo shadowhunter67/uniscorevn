@@ -4,16 +4,16 @@ export const bduKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'bdu-program-threshold-table-not-imported',
     label:
-      'BDU 2026 cong bo nguong diem san rieng theo khoi nganh (da so nganh 15,0/30; Luat/Luat Kinh te 20,0/30; Duoc hoc 20,0/30); chua chon duoc nganh cu the de ap dung dung muc, va con ~100 to hop xet tuyen (A00-Y11) chua duoc anh xa toi nhom nganh.',
+      'Nhánh exact (bdu-thpt-exam-exact-2026) đã model 2 nhóm ngưỡng (standard 15/30 so RAW; lawOrPharmacy 20/30 so ĐXT) qua tham số `thresholdGroup` caller tự chọn — chưa ánh xạ ~100 tổ hợp xét tuyển (A00-Y11) hay danh mục ngành cụ thể tới 2 nhóm này.',
     status: 'official-but-unparsed',
     sourceId: 'bdu-admission-2026',
-    scoreAffecting: true,
+    scoreAffecting: false,
     knownData: [
       'Da so nganh: >= 15,0/30 (thi TN THPT)',
       'Luat, Luat Kinh te: >= 20,0/30 (thi TN THPT)',
       'Duoc hoc: >= 20,0/30 (thi TN THPT)',
     ],
-    impact: 'Runtime chi kiem tra duoc ngoai le duoi nguong thap nhat (15/30 = ineligible chac chan); tu 15/30 den 20/30 can chon nganh de ket luan chinh xac.',
+    impact: 'program-catalog-only',
   },
   {
     id: 'bdu-transcript-method-not-modeled',

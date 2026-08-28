@@ -10,9 +10,10 @@ export const huceKnowledgeGaps: KnowledgeGap[] = [
   },
   {
     id: 'huce-bonus-priority-not-modeled',
-    label: 'HUCE bonus and priority adjustments are documented but not fully modeled in runtime.',
+    label:
+      'The exact branch (evaluateHuceThptExamExactAdmission) computes a reference score with priority applied as a judgment call (Dieu 7 TT 06/2026, `priority.ts`) since HUCE does not publish its own priority table, but this is informational only and NOT used for the threshold check itself. HUCE-specific bonus points are still not modeled at all.',
     status: 'incomplete',
-    impact: 'Eligibility checks compare raw available scores to published intake thresholds without computing school-specific bonus or priority adjustments.',
+    impact: 'method-out-of-scope',
     sourceId: 'huce-threshold-conversion-2026',
   },
 ];

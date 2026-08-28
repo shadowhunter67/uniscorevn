@@ -3,9 +3,12 @@ import type { ApplicantProfile } from '../../core/applicantProfile';
 import type { CalculationStep } from '../../core/calculationStep';
 import type { SubjectId } from '../../core/subjects';
 import { SUBJECT_LABELS } from '../../core/subjects';
+import { round2 } from '../../core/round2';
 import type { ThptSubjectContext } from '../thptThresholdOnly';
 import { huceAdmissionMethods } from './methods';
 import { getHuceProgramThreshold, type HuceMethodId } from './thresholds';
+import { calculateHuceEffectivePriority30, lookupHuceStandardPriority30 } from './priority';
+import { huceThptExamExactThresholdEvidence } from './evidence';
 
 export interface HuceEvaluationContext {
   methodId?: HuceMethodId;
@@ -120,6 +123,94 @@ function scoreFor(profile: ApplicantProfile, context: HuceEvaluationContext, met
     };
   }
   return { total: context.externalScore };
+}
+
+const HUCE_EXACT_METHOD = huceAdmissionMethods[5];
+
+export interface HuceThptExamExactEvaluationContext {
+  programId: string;
+  subjectContext?: ThptSubjectContext;
+}
+
+/** HUCE 2026 — THPT-exam method, exact branch across all 51 programs. Eligible iff the raw
+ * 3-subject total meets the program's published threshold (`thresholds.ts`). The reference score
+ * (raw + priority, judgment call) is informational only, since the notice doesn't state whether
+ * priority is included in the floor. */
+export function evaluateHuceThptExamExactAdmission(profile: ApplicantProfile, context: HuceThptExamExactEvaluationContext): AdmissionEvaluation {
+  const explanation: CalculationStep[] = [];
+  const missingRequirements: MissingRequirement[] = [];
+
+  const partial = (reason: string, missingInputs: string[] = []): AdmissionEvaluation => ({
+    schoolId: 'huce',
+    year: HUCE_EXACT_METHOD.year,
+    methodId: HUCE_EXACT_METHOD.id,
+    confidence: 'partial',
+    eligibility: { status: 'unknown', reasons: [reason] },
+    missingInputs,
+    missingRules: [],
+    missingRequirements,
+    explanation: [],
+    evidence: [],
+  });
+
+  const program = getHuceProgramThreshold(context.programId);
+  if (!program || program.thptMin30 === undefined) {
+    missingRequirements.push({ kind: 'school-context', code: 'huce-program-out-of-scope', label: 'Select a HUCE program/campus with a published THPT-exam threshold.' });
+    return partial('Selected HUCE program is not in the exact-branch scope (no published THPT-exam threshold).');
+  }
+
+  if (!context.subjectContext || context.subjectContext.subjects.length !== 3) {
+    missingRequirements.push({ kind: 'school-context', code: 'huce-subject-combination', label: 'Select a HUCE subject combination.' });
+    return partial('Select a subject combination before computing the HUCE admission score.');
+  }
+  const subjects = context.subjectContext.subjects;
+
+  let total = 0;
+  const missing: SubjectId[] = [];
+  for (const s of subjects) {
+    const v = profile.thpt?.scores?.[s];
+    if (v === undefined) missing.push(s);
+    else total += v;
+  }
+  if (missing.length > 0) {
+    missingRequirements.push(...missing.map((s) => ({ kind: 'profile-input' as const, code: `huce-thpt-exact-${s}`, label: `THPT-exam score for ${SUBJECT_LABELS[s]}.` })));
+    return partial('All three THPT-exam subject scores are needed to compute the HUCE admission score.', ['Missing THPT scores for the selected subject combination.']);
+  }
+
+  const raw30 = round2(total);
+  const threshold = program.thptMin30;
+  const eligible = raw30 >= threshold;
+
+  const standardPriority30 = lookupHuceStandardPriority30(profile.priority?.region, profile.priority?.category);
+  const priority = calculateHuceEffectivePriority30({ rawTotal30: raw30, standardPriority30 });
+  const referenceScore30 = round2(raw30 + priority.effectivePriority30);
+
+  const reasons = [
+    `HUCE 2026 THPT-exam threshold for ${program.programCode} (${program.name}): raw total ≥ ${threshold}/30.`,
+    `Raw total = ${raw30}/30 → ${eligible ? 'meets' : 'does not meet'} the threshold. Reference score (raw + priority) = ${referenceScore30}/30.`,
+  ];
+
+  explanation.push({ id: 'huce-exact-raw', label: 'Raw 3-subject THPT total', output: raw30, scale: 30, formula: subjects.map((s) => SUBJECT_LABELS[s]).join(' + '), evidence: huceThptExamExactThresholdEvidence.evidence });
+  explanation.push({ id: 'huce-exact-priority', label: priority.reduced ? 'Priority points (reduced, reference only)' : 'Priority points (reference only)', output: priority.effectivePriority30, scale: 30, formula: priority.reduced ? '[(30 − raw total)/7.5] × standard priority (Dieu 7 TT 06/2026)' : 'Standard priority (Dieu 7 TT 06/2026)', evidence: huceThptExamExactThresholdEvidence.evidence });
+  explanation.push({ id: 'huce-exact-reference', label: 'Reference score (not used for the threshold check)', output: referenceScore30, scale: 30, formula: 'round2(raw total + priority)', evidence: huceThptExamExactThresholdEvidence.evidence });
+
+  if (profile.priority?.region === undefined && profile.priority?.category === undefined) {
+    missingRequirements.push({ kind: 'profile-input', code: 'huce-priority-region-category', label: 'Priority region/category (not supplied — reference score currently uses priority = 0).' });
+  }
+
+  return {
+    schoolId: 'huce',
+    year: HUCE_EXACT_METHOD.year,
+    methodId: HUCE_EXACT_METHOD.id,
+    confidence: 'exact-verified',
+    eligibility: { status: eligible ? 'eligible' : 'ineligible', reasons },
+    score: { value: referenceScore30, scale: 30 },
+    missingInputs: [],
+    missingRules: [],
+    missingRequirements,
+    explanation,
+    evidence: [...huceThptExamExactThresholdEvidence.evidence],
+  };
 }
 
 export function evaluateHuceAdmission(profile: ApplicantProfile, context: HuceEvaluationContext = {}): AdmissionEvaluation {

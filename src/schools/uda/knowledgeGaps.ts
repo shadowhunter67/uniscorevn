@@ -4,12 +4,12 @@ export const udaKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'uda-health-law-thresholds-not-modeled',
     label:
-      'UDA có ngưỡng riêng cao hơn cho nhóm ngành sức khỏe và luật (Y khoa >=22/30, Dược học >=20/30, Điều dưỡng/Hộ sinh/Kỹ thuật phục hồi chức năng >=18/30, Luật và Luật kinh tế >=20/30) chưa được mô hình hoá; runtime chỉ áp dụng ngưỡng 15/30 cho các ngành còn lại.',
+      'UDA có ngưỡng riêng cao hơn cho nhóm ngành sức khỏe và luật (Y khoa >=22/30, Dược học >=20/30, Điều dưỡng/Hộ sinh/Kỹ thuật phục hồi chức năng >=18/30, Luật và Luật kinh tế >=20/30, đều kèm điều kiện học lực/điểm xét tốt nghiệp thay thế) — ngoài phạm vi nhánh exact (uda-thpt-exam-exact-2026, chỉ nhóm ngành thường).',
     status: 'official-but-unparsed',
     sourceId: 'uda-threshold-2026',
-    scoreAffecting: true,
+    scoreAffecting: false,
     knownData: ['Y khoa >=22/30', 'Dược học >=20/30', 'Điều dưỡng/Hộ sinh/Kỹ thuật phục hồi chức năng >=18/30', 'Luật và Luật kinh tế >=20/30'],
-    impact: 'Thí sinh chọn ngành sức khỏe hoặc luật sẽ nhận kết quả không xác định thay vì áp nhầm ngưỡng 15/30.',
+    impact: 'method-out-of-scope',
   },
   {
     id: 'uda-other-methods-not-modeled',

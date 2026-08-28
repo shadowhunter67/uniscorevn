@@ -13,7 +13,7 @@ export const bduModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'BDU 2026 THPT eligibility is modeled from the official admission-portal page: a common 15,0/30 baseline, with a higher published floor (20,0/30) for Luat/Luat Kinh te and Duoc hoc documented as a knowledge gap until program selection is modeled. The transcript-based (hoc ba) method and priority points are not modeled yet.',
+    'BDU 2026 THPT eligibility is modeled from the official admission-portal page. An exact branch now covers 2 groups: standard (15,0/30, compared against the raw total) and lawOrPharmacy (Luat/Luat Kinh te/Duoc hoc, 20,0/30, compared against DXT since the source states the floor already includes priority points, applied via judgment call per Dieu 7 TT 06/2026). The transcript-based (hoc ba) method is not modeled yet.',
   capabilities: {
     admissionInfo: true,
     programs: false,

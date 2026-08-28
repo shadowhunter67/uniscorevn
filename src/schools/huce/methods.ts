@@ -47,4 +47,19 @@ export const huceAdmissionMethods: AdmissionMethodDescriptor[] = [
     capabilities: { eligibility: true, scoreConversion: false, bonus: false, priority: false, exactCalculator: false },
     knowledgeGaps: huceKnowledgeGaps,
   },
+  /**
+   * Narrow exact branch, THPT-exam method only, covering all 51 programs already in
+   * `thresholds.ts` (OCR'd from the official per-program table). The notice does not state a
+   * formula, so eligibility compares the raw 3-subject total to the published threshold; priority
+   * points are a documented judgment call (Dieu 7 TT 06/2026, `priority.ts`) applied only to the
+   * informational reference score. No `knowledgeGaps` attached.
+   */
+  {
+    id: 'huce-thpt-exam-exact-2026',
+    schoolId: 'huce',
+    name: 'THPT exam admission score',
+    year: 2026,
+    applicantTypes: ['Candidates using 2026 high-school graduation exam scores for a specific HUCE program/campus'],
+    capabilities: { eligibility: true, scoreConversion: false, bonus: false, priority: true, exactCalculator: true },
+  },
 ];
