@@ -18,11 +18,15 @@ export const vnuaKnowledgeGaps: KnowledgeGap[] = [
     sourceId: 'vnua-admission-notice-2026',
   },
   {
-    id: 'vnua-bonus-priority-not-modeled',
-    label: 'VNUA bonus/priority rules are documented but not yet implemented in the runtime evaluator.',
-    status: 'incomplete',
-    impact: 'The evaluator does not calculate final admission score or bonus-adjusted thresholds.',
+    id: 'vnua-bonus-detail-not-modeled',
+    label:
+      'VNUA cong bo diem cong (giai thuong hoc sinh gioi quoc gia/quoc te, chung chi ngoai ngu IELTS/HSK/SAT/ACT...) toi da 3,0/30, ap dung cho phuong thuc 2 va 3, nhung khong in bang quy doi cu the tung loai minh chung sang diem so (chi neu nhom va muc tran tung nhom). Runtime chua co field ho so tuong ung (giai thuong) va khong the tinh chinh xac tung truong hop.',
+    status: 'official-but-unparsed',
     sourceId: 'vnua-admission-notice-2026',
+    scoreAffecting: true,
+    implemented: false,
+    knownData: ['Tong diem cong toi da 3,0/30', 'Giai thuong (HSG quoc gia/quoc te) toi da 3,0', 'Diem khen thuong/khuyen khich toi da 1,5', 'Chung chi ngoai ngu (IELTS/HSK/SAT/ACT) toi da 1,5'],
+    impact: 'DXT tham khao (`vnua-thpt-exam-exact-2026`) chi cong tong diem tho + diem uu tien, KHONG cong diem cong — thi sinh co giai thuong/chung chi can tu cong them truoc khi so DXT thuc te.',
   },
 ];
 

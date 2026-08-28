@@ -15,6 +15,9 @@ export const vguKnowledgeGaps: KnowledgeGap[] = [
       '17/30: Ky thuat va Quan ly xay dung',
     ],
     impact: 'Runtime chi loai duoc ho so duoi 17/30 va xac nhan dat tren 22/30 (moi nganh); giua 17/30 va 22/30 can chon nganh de ket luan chinh xac.',
+    attemptedSources: [
+      '2026-08-28: WebFetch lai trang chinh thuc VGU (tuyensinh.vgu.edu.vn) — van chi co text tong hop "diem san dao dong 17-22 tuy nganh", bang so lieu tung nganh van chi la anh nhung, khong doc duoc text; khong tim thay ban cong bo moi hon 09/07/2026.',
+    ],
   },
   {
     id: 'vgu-floor-includes-priority-points',

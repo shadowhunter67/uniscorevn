@@ -13,7 +13,7 @@ export const vnuaModule: SchoolModule = {
   region: 'hanoi',
   vnuhcm: false,
   summary:
-    'Official 2026 VNUA sources are normalized for THPT eligibility: the common 15/30 baseline and numeric HVN01-HVN23 group thresholds are modeled; ministry-governed groups and bonus/priority scoring remain unresolved.',
+    'Official 2026 VNUA sources are normalized for THPT eligibility and an exact calculator: the common 15/30 baseline, numeric HVN01-HVN23 group thresholds (19/23 groups), and reference priority points (region/category, national reduction formula quoted verbatim from the notice) are modeled. Ministry-governed groups (HVN13, HVN19) and detailed bonus-point mapping (awards/certificates) remain unresolved.',
   capabilities: {
     admissionInfo: true,
     programs: false,

@@ -44,5 +44,9 @@ export const aguKnowledgeGaps: KnowledgeGap[] = [
     whyNotInferred:
       'Không dùng số liệu trong widget demo làm nguồn duy nhất cho một rule ảnh hưởng điểm số, kể cả khi số liệu trùng khớp phần khác đã verified (β).',
     impact: 'exact-final-score-blocking',
+    attemptedSources: [
+      '2026-08-28: WebFetch lại tuyensinh.agu.edu.vn/tuyen-sinh — vẫn không có công thức quy đổi từng thành phần dạng prose; widget vẫn tự ghi "hệ số giả lập (40%-40%-20%)" và công thức điểm ưu tiên trong widget ("[100 – Tổng điểm/25] × Mức điểm ưu tiên") vẫn chỉ tồn tại trong JS demo, không có trong ảnh thông báo đã ký.',
+      '2026-08-28: WebSearch không ra thông báo AGU mới nào (sau 08/07/2026) công bố bảng quy đổi tương đương đã hứa ở trang 4 Thông báo 24/TB-HĐTS.',
+    ],
   },
 ];

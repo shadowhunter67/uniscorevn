@@ -43,9 +43,9 @@ Snapshot hiện tại được tính từ `schoolRegistry` bằng `npm run stats
 | Cao đẳng giáo dục nghề nghiệp | 26 |
 | Nhóm độc lập khác | 0 |
 | Có dữ liệu tuyển sinh hoặc capability cao hơn | 225 |
-| Chỉ kiểm tra điều kiện/ngưỡng | 42 |
+| Chỉ kiểm tra điều kiện/ngưỡng | 40 |
 | Có calculator một phần | 3 |
-| Calculator đã xác minh | 62 |
+| Calculator đã xác minh | 64 |
 | Chỉ có trong danh mục | 42 |
 
 Catalog coverage != calculator coverage. Con số danh mục là độ phủ search/compare, không phải 100% calculator. Một số mục trong danh mục là school/faculty nội bộ của hệ thống đại học lớn; các mục này vẫn có thể giữ cho navigation hoặc mapping chương trình, nhưng không làm tăng KPI "cơ sở đào tạo tuyển sinh độc lập".
@@ -58,9 +58,9 @@ Danh sách đầy đủ 267 trường theo từng mức hỗ trợ đổi thư�
 
 | Mức hỗ trợ | Số trường | Ý nghĩa |
 |---|---:|---|
-| ✅ Calculator đã xác minh | 62 | Công thức, ngưỡng, điểm cộng/ưu tiên đều có nguồn chính thức trong phạm vi đã công bố |
+| ✅ Calculator đã xác minh | 64 | Công thức, ngưỡng, điểm cộng/ưu tiên đều có nguồn chính thức trong phạm vi đã công bố |
 | 🟡 Calculator một phần | 3 | Có công thức/quy đổi thật nhưng chưa phủ hết phương thức xét tuyển |
-| 🟡 Chỉ kiểm tra điều kiện/ngưỡng | 42 | Có ngưỡng điểm sàn/điều kiện thật, chưa tính được điểm xét tuyển đầy đủ |
+| 🟡 Chỉ kiểm tra điều kiện/ngưỡng | 40 | Có ngưỡng điểm sàn/điều kiện thật, chưa tính được điểm xét tuyển đầy đủ |
 | ⚪ Đã research, chưa đủ để tính | 118 | Nguồn chính thức xác nhận tồn tại nhưng số liệu không trích xuất được (ảnh/PDF/SPA/chặn fetch) hoặc bị chặn bởi tiêu chí không có trong hồ sơ (hạnh kiểm, sơ tuyển quân đội/công an...) |
 | ⚪ Chỉ có trong danh mục | 42 | Chưa tìm được nguồn tuyển sinh chính thức nào |
 

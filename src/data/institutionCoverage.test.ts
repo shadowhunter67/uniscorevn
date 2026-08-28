@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 225,
       admissionDataAvailable: 225,
-      eligibilitySupported: 42,
-      calculatorSupported: 65,
+      eligibilitySupported: 40,
+      calculatorSupported: 67,
       partialCalculator: 3,
-      fullyVerified: 62,
+      fullyVerified: 64,
       catalogOnly: 42,
     });
   });
@@ -113,7 +113,9 @@ describe('institution coverage statistics', () => {
     for (const schoolId of ['dut', 'dueudn', 'uedudn', 'uflsudn', 'uteudn']) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
     }
-    expect(deriveInstitutionSupportStatus(schoolRegistry.vnua)).toBe('eligibility-only');
+    // Batch (2026-08-28): VNUA graduated to verified-calculator — ngưỡng theo nhóm ngành (19/23
+    // nhóm) đã xác minh, điểm ưu tiên KV/ĐT hiển thị tham khảo (trích công thức từ chính thông báo).
+    expect(deriveInstitutionSupportStatus(schoolRegistry.vnua)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.dav)).toBe('partial-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hlu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hdu)).toBe('verified-calculator');
@@ -127,7 +129,9 @@ describe('institution coverage statistics', () => {
     expect(deriveInstitutionSupportStatus(schoolRegistry.eaut)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vwa)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hau)).toBe('verified-calculator');
-    expect(deriveInstitutionSupportStatus(schoolRegistry.ctump)).toBe('eligibility-only');
+    // Batch (2026-08-28): CTUMP graduated to verified-calculator — mức điểm nhận hồ sơ đợt 1 (4
+    // nhóm ngành) đã gồm điểm ưu tiên theo đúng công thức giảm dần trích từ chính TB 197/TB-ĐHYDCT.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.ctump)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.tbu)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.dthu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.ltvuni)).toBe('eligibility-only');

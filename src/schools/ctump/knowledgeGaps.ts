@@ -11,15 +11,6 @@ export const ctumpKnowledgeGaps: KnowledgeGap[] = [
     impact: 'Runtime chỉ kiểm tra được ngưỡng theo nhóm ngành do người dùng tự chọn, chưa tự suy ra nhóm từ tên/mã ngành cụ thể.',
   },
   {
-    id: 'ctump-priority-not-modeled',
-    label:
-      'Theo mục II.1 TB 197/TB-ĐHYDCT, mức điểm tối thiểu xét tuyển đợt 1 đã BAO GỒM điểm ưu tiên khu vực và đối tượng (công thức giảm dần công bố sẵn: Điểm ưu tiên = [(30 – Tổng điểm)/7,50] × Mức điểm ưu tiên quy định, áp dụng khi tổng điểm ≥ 22,5/30). Runtime hiện chỉ cộng điểm thô 3 môn, chưa cộng điểm ưu tiên.',
-    status: 'incomplete',
-    sourceId: 'ctump-quality-threshold-2026',
-    scoreAffecting: true,
-    impact: 'Thí sinh thuộc diện ưu tiên khu vực/đối tượng cần tự cộng điểm ưu tiên vào tổng điểm trước khi so với ngưỡng — kết quả "ineligible" sát ngưỡng của runtime có thể không chính xác.',
-  },
-  {
     id: 'ctump-vsat-method-not-modeled',
     label: 'Phương thức xét kết quả thi V-SAT (mục II.2, có bảng quy đổi tương đương điểm V-SAT <-> điểm thi THPT theo từng môn) đã công bố đầy đủ nhưng chưa model do ApplicantProfile chưa có field điểm thi V-SAT.',
     status: 'incomplete',
