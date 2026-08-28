@@ -13,7 +13,7 @@ export const ltvuniModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'Đã xác minh trực tiếp Thông báo 269/TB-ĐHLTV (09/07/2026, đọc từ file PDF đính kèm bài đăng chính thức, đủ 11/11 ngành): ngưỡng đầu vào phương thức thi TN THPT — 20,0/30 (Y học cổ truyền), 18,0/30 (Kỹ thuật phục hồi chức năng), 15,0/30 (9 ngành còn lại). Điểm xét tuyển công bố đã bao gồm điểm ưu tiên, runtime hiện chỉ so điểm thô 3 môn. Chưa có bảng tổ hợp môn cụ thể theo ngành.',
+    'Calculator exact cho phương thức xét điểm thi TN THPT (Phương thức 100): đọc trực tiếp Thông báo 269/TB-ĐHLTV (09/07/2026, PDF chính thức đọc qua vision, đủ 11/11 ngành) xác nhận công thức Điểm xét tuyển = Môn1+Môn2+Môn3+điểm ƯT (điểm ưu tiên CỘNG vào tổng trước khi so ngưỡng, không có điểm cộng) và bảng ngưỡng: 20,0/30 (Y học cổ truyền), 18,0/30 (Kỹ thuật phục hồi chức năng), 15,0/30 (9 ngành còn lại). Mức điểm ưu tiên KV/ĐT cụ thể dùng chuẩn toàn quốc (judgment call). Chưa có bảng tổ hợp môn cụ thể theo ngành.',
   capabilities: {
     admissionInfo: true,
     programs: false,

@@ -13,7 +13,7 @@ export const uflsudnModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'Đã xác minh lại nguồn tuyển sinh chính thức 2026 (thông báo hệ thống ĐHĐN + trang/tài liệu tuyển sinh riêng của UFLS) · Ngưỡng đảm bảo chất lượng đầu vào (thi TN THPT) khoảng 15.5-20/30 theo ngành · Chưa nhập bảng ngành chi tiết, phụ lục quy đổi và bảng điểm cộng/ưu tiên.',
+    'Calculator exact cho 4 ngành đào tạo giáo viên ngoại ngữ (Sư phạm tiếng Anh/Pháp/Trung Quốc/Hàn Quốc): ngưỡng 20,00/30 = tổng điểm 3 môn thi TN THPT + điểm ưu tiên khu vực/đối tượng, đọc trực tiếp qua vision ảnh "Ngưỡng đầu vào xét tuyển đại học chính quy năm 2026" trên trang chính thức, kết hợp công thức điểm ưu tiên (Thông tư 06/2026/TT-BGDĐT) từ PDF chính thức "Thông tin tuyển sinh năm 2026". Mức điểm ưu tiên KV/ĐT cụ thể dùng chuẩn toàn quốc (judgment call). Các ngành cử nhân còn lại (16 ngành, ngưỡng 15,5-17,5/30) cần điểm học bạ — chưa mô hình hoá.',
   capabilities: {
     admissionInfo: true,
     programs: false,

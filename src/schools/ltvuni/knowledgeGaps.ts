@@ -10,12 +10,4 @@ export const ltvuniKnowledgeGaps: KnowledgeGap[] = [
     knownData: ['11/11 ngành đã có ngưỡng: Y học cổ truyền 20,0; Kỹ thuật phục hồi chức năng 18,0; 9 ngành còn lại 15,0 (thang 30)'],
     impact: 'Runtime kiểm tra được ngưỡng theo ngành nhưng không xác thực tổ hợp môn có hợp lệ với ngành đó hay không.',
   },
-  {
-    id: 'ltvuni-priority-not-modeled',
-    label: 'Điểm xét tuyển công bố = tổng điểm 3 môn (thang 30) + điểm ưu tiên khu vực/đối tượng (nếu có). Runtime hiện chỉ cộng điểm thô 3 môn.',
-    status: 'incomplete',
-    sourceId: 'ltvuni-quality-threshold-2026',
-    scoreAffecting: true,
-    impact: 'Thí sinh thuộc diện ưu tiên khu vực/đối tượng cần tự cộng điểm ưu tiên vào tổng điểm trước khi so với ngưỡng.',
-  },
 ];

@@ -26,6 +26,9 @@ import { ajcAdmissionMethods } from '../schools/ajc/methods';
 import { fbuAdmissionMethods } from '../schools/fbu/methods';
 import { ushAdmissionMethods } from '../schools/ush/methods';
 import { vnuumpAdmissionMethods } from '../schools/vnuump/methods';
+import { ltvuniAdmissionMethods } from '../schools/ltvuni/methods';
+import { fpfuAdmissionMethods } from '../schools/fpfu/methods';
+import { uflsudnAdmissionMethods } from '../schools/uflsudn/methods';
 
 import { hcmutGoldenCases, hcmutNoDgnlGoldenCase } from '../schools/hcmut/__fixtures__/officialExamples2026';
 import { uehGoldenCases, uehOfficialFinalConversionCase } from '../schools/ueh/__fixtures__/officialExamples2026';
@@ -50,6 +53,9 @@ import { ajcThptExamExactGoldenCases } from '../schools/ajc/__fixtures__/officia
 import { fbuThptExamExactGoldenCases } from '../schools/fbu/__fixtures__/officialExamples2026';
 import { ushThptExamExactGoldenCases } from '../schools/ush/__fixtures__/officialExamples2026';
 import { vnuumpThptExamExactGoldenCases } from '../schools/vnuump/__fixtures__/officialExamples2026';
+import { ltvuniThptExamExactGoldenCases } from '../schools/ltvuni/__fixtures__/officialExamples2026';
+import { fpfuThptExamExactGoldenCases } from '../schools/fpfu/__fixtures__/officialExamples2026';
+import { uflsudnTeacherTrainingExactGoldenCases } from '../schools/uflsudn/__fixtures__/officialExamples2026';
 
 /**
  * Invariant CI bắt buộc: MỌI method có `capabilities.exactCalculator === true` phải có ÍT NHẤT 1
@@ -90,6 +96,9 @@ const allMethodsBySchool = {
   fbu: fbuAdmissionMethods,
   ush: ushAdmissionMethods,
   vnuump: vnuumpAdmissionMethods,
+  ltvuni: ltvuniAdmissionMethods,
+  fpfu: fpfuAdmissionMethods,
+  uflsudn: uflsudnAdmissionMethods,
 };
 
 function methodKey(schoolId: string, methodId: string): string {
@@ -139,6 +148,9 @@ const allGoldenCases = [
   ...fbuThptExamExactGoldenCases,
   ...ushThptExamExactGoldenCases,
   ...vnuumpThptExamExactGoldenCases,
+  ...ltvuniThptExamExactGoldenCases,
+  ...fpfuThptExamExactGoldenCases,
+  ...uflsudnTeacherTrainingExactGoldenCases,
 ];
 
 const coveredMethods = new Set(allGoldenCases.map((goldenCase) => methodKey(goldenCase.schoolId, goldenCase.methodId)));
@@ -199,6 +211,9 @@ describe('exact method golden coverage invariant', () => {
         'fbu:fbu-thpt-exam-exact-2026',
         'ush:ush-thpt-plus-talent-exact-2026',
         'vnuump:vnuump-thpt-exam-exact-2026',
+        'ltvuni:ltvuni-thpt-exam-exact-2026',
+        'fpfu:fpfu-thpt-exam-exact-2026',
+        'uflsudn:uflsudn-teacher-training-exact-2026',
       ].sort()
     );
   });

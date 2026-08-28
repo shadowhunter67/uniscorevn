@@ -28,6 +28,19 @@ export const uflsudnSources: (Omit<AdmissionSource, 'schoolId'> & { note?: strin
       'Đã tải và đọc trực tiếp file PDF chính thức ngày 2026-08-24: xác nhận UFLS (mã trường DDF) có 2 phương thức (xét tuyển thẳng theo quy chế; xét tuyển kết hợp điểm học bạ THPT và điểm thi TN THPT), và nêu rõ mỗi ngành có MỘT mức ngưỡng đầu vào chung áp dụng cho mọi tổ hợp, được công bố riêng theo kế hoạch Bộ GDĐT (không nằm trong chính file này).',
   },
   {
+    id: 'uflsudn-teacher-training-threshold-2026',
+    publisher: 'UFLS - Đại học Đà Nẵng',
+    title: 'Ngưỡng đầu vào xét tuyển đại học chính quy năm 2026 (bảng theo ngành)',
+    url: 'https://tuyensinh.ufl.udn.vn/wp-content/uploads/2026/07/Nguong-dau-vao-DH-chinh-quy-nam-2026-1-1-791x1024.jpg',
+    accessedAt: '2026-08-28',
+    publishedAt: '2026-07-01',
+    sourceType: 'official-admission',
+    verification: 'verified',
+    lifecycle: { effectiveYear: 2026, status: 'current' },
+    note:
+      'Ảnh chính thức (2 trang) trên trang tuyensinh.ufl.udn.vn, đọc trực tiếp qua vision 2026-08-28. Xác nhận: 4 ngành đào tạo giáo viên (Sư phạm tiếng Anh 7140231/Pháp 7140233/Trung Quốc 7140234/Hàn Quốc 7140237) có ngưỡng 20,0/30 = tổng điểm 3 môn thi TN THPT + điểm ưu tiên khu vực, đối tượng (KHÔNG cộng điểm cộng ở bước so ngưỡng này). Các ngành cử nhân còn lại dùng Điểm xét tuyển đầy đủ (kết hợp điểm thi + học bạ theo hệ số) với ngưỡng riêng 15,5-17,5/30 — CHƯA model (cần input học bạ, ngoài phạm vi batch này).',
+  },
+  {
     id: 'uflsudn-quality-threshold-2026',
     publisher: 'Trang tuyển sinh VNUK - Đại học Đà Nẵng (tổng hợp liên trường)',
     title: 'Điểm sàn các trường đại học công lập tại Đà Nẵng năm 2026',

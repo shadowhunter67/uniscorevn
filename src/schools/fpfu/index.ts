@@ -13,7 +13,7 @@ export const fpfuModule: SchoolModule = {
   region: 'hanoi',
   vnuhcm: false,
   summary:
-    'Đã xác minh (qua 2 báo nhà nước độc lập, Dân Trí và VietNamNet) ngưỡng đảm bảo chất lượng đầu vào hệ dân sự FPFU 2026 là 15,00/30 điểm thi TN THPT, 4 tổ hợp A00/A01/D07/D01, chỉ tiêu 250. Trang gốc daihocpccc.bocongan.gov.vn không truy cập trực tiếp được trong lượt research này. Module chỉ kiểm tra ngưỡng điểm; điều kiện sức khỏe/lý lịch đặc thù ngành Công an chưa mô hình hoá.',
+    'Calculator exact cho hệ dân sự (4 tổ hợp A00/A01/D07/D01): ngưỡng đảm bảo chất lượng đầu vào 15,00/30 điểm (thi TN THPT) + công thức Điểm xét tuyển = Môn1+Môn2+Môn3+điểm ưu tiên (Điều 7 Thông tư 06/2026/TT-BGDĐT), xác nhận qua 2 báo nhà nước độc lập (Dân Trí, VietNamNet) và 2 lượt tra cứu độc lập trang tuyển sinh chính thức. Trang gốc daihocpccc.bocongan.gov.vn không truy cập trực tiếp được (DNS bị chặn trong môi trường research). Mức điểm ưu tiên KV/ĐT cụ thể dùng chuẩn toàn quốc (judgment call). Điều kiện sức khỏe/lý lịch đặc thù ngành Công an chưa mô hình hoá.',
   capabilities: {
     admissionInfo: true,
     programs: false,
