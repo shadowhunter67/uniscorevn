@@ -94,7 +94,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
 - **DHV** — Trường Đại học Hùng Vương TP.HCM
-- **DNU** — Trường Đại học Đại Nam
+- **DNU-HN** — Trường Đại học Đại Nam
 - **DUE** — Trường Đại học Kinh tế - Đại học Đà Nẵng
 - **DUT** — Trường Đại học Bách khoa - Đại học Đà Nẵng
 - **EAUT** — Trường Đại học Công nghệ Đông Á
