@@ -29,4 +29,13 @@ export const dutKnowledgeGaps: KnowledgeGap[] = [
     impact:
       'Không đủ căn cứ để dựng scoreConversion/exactCalculator cho DUT; theo nguyên tắc "không đoán công thức", DUT giữ ở mức eligibility-only thay vì partial như kỳ vọng ban đầu trong backlog.',
   },
+  {
+    id: 'dut-recheck-2026-08-28',
+    label:
+      'Recheck 2026-08-28 (WebSearch + WebFetch trực tiếp `tuyensinh.dut.udn.vn/phuong-thuc-tuyen-sinh`): không tìm thêm được hệ số/bảng quy đổi tương đương máy đọc được giữa thi TN THPT và Đánh giá tư duy ĐHBK Hà Nội — trang chỉ liệt kê tên phương thức kèm link "Xem chi tiết" tới các trang con chưa fetch được nội dung số liệu. Báo chí (vietnamnet/vnexpress/tuyensinh247) chỉ có điểm CHUẨN (kết quả trúng tuyển cuối) theo ngành, không phải bảng hệ số quy đổi — không dùng thay thế được. Giữ nguyên eligibility-only.',
+    status: 'incomplete',
+    sourceId: 'dut-admission-info-2026',
+    scoreAffecting: true,
+    impact: 'Không có thay đổi so với đợt research trước; DUT tiếp tục ở mức eligibility-only.',
+  },
 ];

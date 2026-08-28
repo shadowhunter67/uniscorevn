@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { ApplicantProfile } from '../../core/applicantProfile';
 import { evaluateSchool, evaluateSchools } from '../../evaluation/schoolEvaluation';
-import { evaluatePntuThptExamAdmission } from './evaluate';
+import { evaluatePntuThptExamAdmission, evaluatePntuThptExamExactAdmission } from './evaluate';
 
 const b00Context = { subjectContext: { combinationId: 'B00', subjects: ['math', 'chemistry', 'biology'] as const } };
 
@@ -53,10 +53,81 @@ describe('PNTU THPT threshold eligibility 2026', () => {
   });
 
   it('routes through generic evaluateSchool and evaluateSchools adapters', () => {
+    // PNTU is now verified-calculator (thanks to the exact method below) — per the same
+    // classifyEvaluation rule as CTUMP/VNUA, a confidence:'partial'/score:undefined result from
+    // this BASE method reports generic status 'partial' (not 'eligible') once the school carries
+    // an exact method; use the base method's own `eligibility.status` (asserted above) for that.
     const profile: ApplicantProfile = { thpt: { scores: { math: 6, chemistry: 5, biology: 5 } } };
     const context = { ...b00Context, programId: '7310401' as const };
 
-    expect(evaluateSchool(profile, 'pntu', { context }).status).toBe('eligible');
-    expect(evaluateSchools(profile, ['pntu'], { pntu: context })[0].status).toBe('eligible');
+    expect(evaluateSchool(profile, 'pntu', { context }).status).toBe('partial');
+    expect(evaluateSchools(profile, ['pntu'], { pntu: context })[0].status).toBe('partial');
+  });
+});
+
+describe('PNTU exact calculator (pntu-thpt-exam-exact-2026)', () => {
+  it('requires a chosen program', () => {
+    const profile: ApplicantProfile = { thpt: { scores: { math: 8, chemistry: 8, biology: 8 } } };
+
+    const result = evaluatePntuThptExamExactAdmission(profile);
+
+    expect(result.confidence).toBe('partial');
+    expect(result.missingRequirements).toContainEqual(expect.objectContaining({ kind: 'school-context', code: 'pntu-exact-program' }));
+  });
+
+  it('rejects a combination not listed for the chosen program', () => {
+    const profile: ApplicantProfile = { thpt: { scores: { math: 8, physics: 8, english: 8 } } };
+
+    const result = evaluatePntuThptExamExactAdmission(profile, { programId: '7720101', combinationId: 'A01' });
+
+    expect(result.confidence).toBe('partial');
+    expect(result.missingRequirements).toContainEqual(expect.objectContaining({ kind: 'school-context', code: 'pntu-exact-combination' }));
+  });
+
+  it('adds priority points to the raw total before comparing to the threshold (no reduction below 22.5)', () => {
+    const profile: ApplicantProfile = {
+      thpt: { scores: { math: 5, chemistry: 5, biology: 5 } },
+      priority: { region: 'KV1', category: 'UT2' },
+    };
+
+    const result = evaluatePntuThptExamExactAdmission(profile, { programId: '7310401', combinationId: 'B00' });
+
+    expect(result.confidence).toBe('exact-verified');
+    expect(result.eligibility?.status).toBe('eligible');
+    expect(result.score).toEqual({ value: 16.75, scale: 30 });
+    expect(result.explanation.find((s) => s.id === 'pntu-exact-raw')?.output).toBe(15);
+  });
+
+  it('applies the priority reduction formula once the raw total reaches 22.5', () => {
+    const profile: ApplicantProfile = {
+      thpt: { scores: { math: 9, chemistry: 8, biology: 8 } },
+      priority: { region: 'KV1', category: 'UT1' },
+    };
+
+    const result = evaluatePntuThptExamExactAdmission(profile, { programId: '7720101', combinationId: 'B00' });
+
+    expect(result.eligibility?.status).toBe('eligible');
+    expect(result.score).toEqual({ value: 26.83, scale: 30 });
+  });
+
+  it('marks a below-threshold total as ineligible even with no priority points', () => {
+    const profile: ApplicantProfile = {
+      thpt: { scores: { math: 4, chemistry: 4, biology: 4 } },
+      priority: { region: 'KV3' },
+    };
+
+    const result = evaluatePntuThptExamExactAdmission(profile, { programId: '7720701', combinationId: 'B00' });
+
+    expect(result.eligibility?.status).toBe('ineligible');
+    expect(result.score).toEqual({ value: 12, scale: 30 });
+  });
+
+  it('flags missing priority context while still computing with priority = 0', () => {
+    const profile: ApplicantProfile = { thpt: { scores: { math: 6, chemistry: 6, biology: 6 } } };
+
+    const result = evaluatePntuThptExamExactAdmission(profile, { programId: '7720301', combinationId: 'B00' });
+
+    expect(result.confidence).toBe('exact-verified');
+    expect(result.missingRequirements).toContainEqual(expect.objectContaining({ kind: 'profile-input', code: 'pntu-priority-region-category' }));
   });
 });

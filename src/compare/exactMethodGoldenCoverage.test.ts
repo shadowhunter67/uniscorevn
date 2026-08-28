@@ -17,6 +17,7 @@ import { iuhAdmissionMethods } from '../schools/iuh/methods';
 import { ftuAdmissionMethods } from '../schools/ftu/methods';
 import { ctumpAdmissionMethods } from '../schools/ctump/methods';
 import { vnuaAdmissionMethods } from '../schools/vnua/methods';
+import { pntuAdmissionMethods } from '../schools/pntu/methods';
 
 import { hcmutGoldenCases, hcmutNoDgnlGoldenCase } from '../schools/hcmut/__fixtures__/officialExamples2026';
 import { uehGoldenCases, uehOfficialFinalConversionCase } from '../schools/ueh/__fixtures__/officialExamples2026';
@@ -32,6 +33,7 @@ import { ftuDomesticExamGoldenCases } from '../schools/ftu/__fixtures__/official
 import { hcmueThptExamExactGoldenCases } from '../schools/hcmue/__fixtures__/officialExamples2026';
 import { ctumpThptExamExactGoldenCases } from '../schools/ctump/__fixtures__/officialExamples2026';
 import { vnuaThptExamExactGoldenCases } from '../schools/vnua/__fixtures__/officialExamples2026';
+import { pntuThptExamExactGoldenCases } from '../schools/pntu/__fixtures__/officialExamples2026';
 
 /**
  * Invariant CI bắt buộc: MỌI method có `capabilities.exactCalculator === true` phải có ÍT NHẤT 1
@@ -63,6 +65,7 @@ const allMethodsBySchool = {
   ftu: ftuAdmissionMethods,
   ctump: ctumpAdmissionMethods,
   vnua: vnuaAdmissionMethods,
+  pntu: pntuAdmissionMethods,
 };
 
 function methodKey(schoolId: string, methodId: string): string {
@@ -103,6 +106,7 @@ const allGoldenCases = [
   ...hcmueThptExamExactGoldenCases,
   ...ctumpThptExamExactGoldenCases,
   ...vnuaThptExamExactGoldenCases,
+  ...pntuThptExamExactGoldenCases,
 ];
 
 const coveredMethods = new Set(allGoldenCases.map((goldenCase) => methodKey(goldenCase.schoolId, goldenCase.methodId)));
@@ -154,6 +158,7 @@ describe('exact method golden coverage invariant', () => {
         'hcmue:hcmue-thpt-exam-exact-2026',
         'ctump:ctump-thpt-exam-exact-2026',
         'vnua:vnua-thpt-exam-exact-2026',
+        'pntu:pntu-thpt-exam-exact-2026',
       ].sort()
     );
   });

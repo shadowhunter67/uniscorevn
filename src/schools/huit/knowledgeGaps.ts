@@ -49,6 +49,17 @@ export const huitKnowledgeGaps: KnowledgeGap[] = [
     impact: 'program-catalog-only',
   },
   {
+    id: 'huit-priority-bonus-recheck-2026-08-28',
+    label:
+      'Recheck 2026-08-28 (WebFetch trực tiếp `huit-quality-threshold-2026`): trang điểm sàn KHÔNG có bất kỳ câu chữ nào nhắc tới điểm ưu tiên (ĐƯT)/điểm cộng hay công thức/thành phần "điểm xét tuyển" — khác PNTU/CTUMP/VNUA (đều có ít nhất 1 câu tự trích công thức/nguyên tắc điểm ưu tiên trong chính nguồn threshold). Vì vậy KHÔNG áp dụng judgment call "mức chuẩn toàn quốc" cho HUIT trong batch này — thiếu anchor văn bản tối thiểu, không phải chỉ thiếu bảng số cụ thể.',
+    status: 'incomplete',
+    sourceId: 'huit-quality-threshold-2026',
+    scoreAffecting: true,
+    implemented: false,
+    whyNotInferred: 'Nguồn không có bất kỳ câu nào nhắc tới điểm ưu tiên/điểm cộng ở gần ngưỡng — khác các trường đã lên exact (PNTU/CTUMP/VNUA) nơi nguồn ít nhất tự trích 1 câu về ĐƯT.',
+    impact: 'exact-final-score-blocking',
+  },
+  {
     id: 'huit-earlier-notice-provisional-superseded',
     label:
       'Bài đăng 19/05/2026 (`huit-admission-info-2026-superseded`, trước kỳ thi THPT 2026) từng ghi ngưỡng PT1 nhóm Luật/Luật kinh tế là điều kiện tối thiểu TẠM THỜI (18/30 kèm Toán≥6/Văn≥6), tự nêu "ngưỡng cuối cùng được xác định sau kỳ thi". Bài 10/07/2026 (`huit-quality-threshold-2026`) là đúng bản công bố cuối đã hứa, với số liệu khác (20/30, không kèm điều kiện môn riêng) — UniscoreVN dùng bản cuối, giữ lại bản cũ trong `sources.ts` với `lifecycle.status: superseded` để tránh nhầm lẫn về sau.',

@@ -2,7 +2,7 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (64)
+## Calculator đã xác minh (65)
 
 - **BDU** — Truong Dai hoc Binh Duong
 - **CTU** — Trường Đại học Cần Thơ
@@ -42,6 +42,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **NLU** — Trường Đại học Nông Lâm TP.HCM
 - **NTU-HN** — Truong Dai hoc Nguyen Trai
 - **OU** — Trường Đại học Mở Thành phố Hồ Chí Minh
+- **PNTU** — Trường Đại học Y khoa Phạm Ngọc Thạch
 - **PTIT** — Học viện Công nghệ Bưu chính Viễn thông
 - **SGU** — Trường Đại học Sài Gòn
 - **TBDU** — Truong Dai hoc Thai Binh Duong
@@ -75,7 +76,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **NEU** — Trường Đại học Kinh tế Quốc dân
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 
-## Chỉ kiểm tra điều kiện/ngưỡng (40)
+## Chỉ kiểm tra điều kiện/ngưỡng (39)
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
 - **AJC** — Học viện Báo chí và Tuyên truyền
@@ -95,7 +96,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HUIT** — Trường Đại học Công Thương TP.HCM
 - **LTVUni** — Trường Đại học Lương Thế Vinh
 - **NTTU** — Trường Đại học Nguyễn Tất Thành
-- **PNTU** — Trường Đại học Y khoa Phạm Ngọc Thạch
 - **PYU** — Trường Đại học Phú Yên
 - **TBU** — Trường Đại học Thái Bình
 - **ThanhDo** — Truong Dai hoc Thanh Do

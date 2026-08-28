@@ -2,22 +2,13 @@ import type { KnowledgeGap } from '../../core/knowledgeStatus';
 
 export const pntuKnowledgeGaps: KnowledgeGap[] = [
   {
-    id: 'pntu-program-catalog-partially-imported',
+    id: 'pntu-threshold-table-cross-checked-not-primary',
     label:
-      'Ngưỡng đảm bảo chất lượng đầu vào 2026 của PNTU công bố dải 15,5-22,5/30 cho toàn bộ chương trình đào tạo (khoảng 15+ ngành); chỉ 3 ngành có tên + mã ngành + điểm sàn xác nhận chắc chắn qua báo chí đối chiếu (Y khoa, Răng-Hàm-Mặt, Tâm lý học) được nhập vào runtime.',
+      'Bảng ngưỡng đảm bảo chất lượng đầu vào 2026 (14 ngành) của PNTU chỉ công bố dạng ảnh trên cổng trường (`pntu-threshold-notice-2026`); dữ liệu dùng trong runtime đối chiếu chéo 2 nguồn báo chí độc lập (VnExpress + Giáo dục & Thời đại, 10/07/2026) khớp tuyệt đối, nhưng chưa tự đọc được ảnh gốc — verification ở mức cross-checked, không phải verified.',
     status: 'official-but-unparsed',
     sourceId: 'pntu-threshold-notice-2026',
-    scoreAffecting: false,
-    knownData: ['7720101 Y khoa: 22.5/30', '7720501 Răng - Hàm - Mặt: 22.5/30', '7310401 Tâm lý học: 15.5/30'],
-    missingData: ['Các ngành còn lại trong bảng ngưỡng PNTU 2026 (Dược học, Điều dưỡng, Y tế công cộng, Kỹ thuật xét nghiệm y học, ...)'],
-    impact: 'Runtime chỉ kết luận được cho 3 ngành đã xác nhận; các ngành khác vẫn ở trạng thái chưa xác định.',
-  },
-  {
-    id: 'pntu-priority-not-modeled',
-    label: 'Quy định cộng điểm ưu tiên khu vực/đối tượng (Bộ GD&ĐT) chưa được nhập vào runtime.',
-    status: 'incomplete',
-    impact: 'Ngưỡng đã nhập chỉ áp dụng cho thí sinh khu vực 3, không cộng điểm; runtime chưa xử lý điểm ưu tiên.',
-    sourceId: 'pntu-threshold-notice-2026',
+    scoreAffecting: true,
+    impact: 'Runtime dùng cross-checked làm căn cứ tính điểm; nếu báo chí ghi sai lệch với ảnh gốc, số liệu sẽ sai theo — cần đọc lại ảnh gốc khi có điều kiện.',
   },
   {
     id: 'pntu-direct-admission-not-modeled',

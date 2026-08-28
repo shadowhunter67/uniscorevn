@@ -37,6 +37,17 @@ export const nttuKnowledgeGaps: KnowledgeGap[] = [
     impact: 'exact-final-score-blocking',
   },
   {
+    id: 'nttu-priority-bonus-recheck-2026-08-28',
+    label:
+      'Recheck 2026-08-28 (WebFetch trực tiếp `nttu-quality-threshold-2026`): trang điểm sàn KHÔNG có bất kỳ câu chữ nào nhắc tới điểm ưu tiên (ĐƯT)/điểm cộng hay công thức/thành phần "điểm xét tuyển" — khác PNTU/CTUMP/VNUA (đều có ít nhất 1 câu tự trích công thức/nguyên tắc điểm ưu tiên trong chính nguồn threshold). Vì vậy KHÔNG áp dụng judgment call "mức chuẩn toàn quốc" cho NTTU trong batch này — thiếu anchor văn bản tối thiểu, không phải chỉ thiếu bảng số cụ thể.',
+    status: 'incomplete',
+    sourceId: 'nttu-quality-threshold-2026',
+    scoreAffecting: true,
+    implemented: false,
+    whyNotInferred: 'Nguồn không có bất kỳ câu nào nhắc tới điểm ưu tiên/điểm cộng ở gần ngưỡng — khác các trường đã lên exact (PNTU/CTUMP/VNUA) nơi nguồn ít nhất tự trích 1 câu về ĐƯT.',
+    impact: 'exact-final-score-blocking',
+  },
+  {
     id: 'nttu-transcript-methodology-unpublished',
     label:
       'Công thức tính "điểm học bạ" — nguồn chỉ công bố ngưỡng theo nhóm ngành, không nêu rõ cách tính tổng điểm 3 môn (theo năm lớp 12, theo 6 học kỳ...). Calculator chỉ nhận tổng điểm người dùng tự cung cấp (`totalScore30`), không tự tính từ `ApplicantProfile.transcript`.',

@@ -43,6 +43,7 @@ import { huafSources } from './huaf/sources';
 import { hueeduSources } from './hueedu/sources';
 import { ctumpSources } from './ctump/sources';
 import { vnuaSources } from './vnua/sources';
+import { pntuSources } from './pntu/sources';
 
 function withSchoolId(schoolId: string, sources: Omit<AdmissionSource, 'schoolId'>[]): AdmissionSource[] {
   return sources.map((source) => ({ ...source, schoolId }));
@@ -92,6 +93,7 @@ export const huafSourceRegistry: AdmissionSource[] = withSchoolId('huaf', huafSo
 export const hueeduSourceRegistry: AdmissionSource[] = withSchoolId('hueedu', hueeduSources);
 export const ctumpSourceRegistry: AdmissionSource[] = withSchoolId('ctump', ctumpSources);
 export const vnuaSourceRegistry: AdmissionSource[] = withSchoolId('vnua', vnuaSources);
+export const pntuSourceRegistry: AdmissionSource[] = withSchoolId('pntu', pntuSources);
 
 export const schoolSourceRegistries: Record<string, AdmissionSource[]> = {
   hcmut: hcmutSourceRegistry,
@@ -138,6 +140,7 @@ export const schoolSourceRegistries: Record<string, AdmissionSource[]> = {
   hueedu: hueeduSourceRegistry,
   ctump: ctumpSourceRegistry,
   vnua: vnuaSourceRegistry,
+  pntu: pntuSourceRegistry,
 };
 
 export const allAdmissionSources: AdmissionSource[] = [
@@ -185,4 +188,5 @@ export const allAdmissionSources: AdmissionSource[] = [
   ...hueeduSourceRegistry,
   ...ctumpSourceRegistry,
   ...vnuaSourceRegistry,
+  ...pntuSourceRegistry,
 ];

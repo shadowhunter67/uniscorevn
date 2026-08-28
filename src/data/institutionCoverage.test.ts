@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 225,
       admissionDataAvailable: 225,
-      eligibilitySupported: 40,
-      calculatorSupported: 67,
+      eligibilitySupported: 39,
+      calculatorSupported: 68,
       partialCalculator: 3,
-      fullyVerified: 64,
+      fullyVerified: 65,
       catalogOnly: 42,
     });
   });
@@ -89,7 +89,7 @@ describe('institution coverage statistics', () => {
     ]) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('researched');
     }
-    for (const schoolId of ['ajc', 'pntu', 'vnuf', 'vgu', 'hpu2']) {
+    for (const schoolId of ['ajc', 'vnuf', 'vgu', 'hpu2']) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
     }
     // Batch (2026-08-28): FPTU (điều kiện tổ hợp thô, mọi ngành) and HCMUE (ngưỡng theo ngành, 47
@@ -160,6 +160,11 @@ describe('institution coverage statistics', () => {
     expect(deriveInstitutionSupportStatus(schoolRegistry.tdmu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.halongu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.sgu)).toBe('verified-calculator');
+    // Batch 3 (2026-08-28): PNTU graduated to verified-calculator — ngưỡng đầu vào 14/14 ngành
+    // (cross-checked, 2 nguồn báo chí độc lập khớp tuyệt đối) + điểm ưu tiên KV/ĐT cộng vào tổng
+    // theo đúng công thức giảm dần trích nguyên văn Quyết định 671/QĐ-TĐHYKPNT. DUT/HUIT/NTTU/VAA
+    // vẫn eligibility-only (thiếu công thức quy đổi/bảng ngưỡng đầy đủ máy đọc được — xem knowledgeGaps).
+    expect(deriveInstitutionSupportStatus(schoolRegistry.pntu)).toBe('verified-calculator');
   });
 
   it('requires catalog source metadata for college identity entries', () => {

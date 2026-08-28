@@ -13,7 +13,7 @@ export const pntuModule: SchoolModule = {
   region: 'hcm',
   vnuhcm: false,
   summary:
-    'Đã xác minh thông báo ngưỡng đảm bảo chất lượng đầu vào 2026 (10/07/2026, khu vực 3): dải điểm sàn toàn trường 15,5-22,5/30, đối chiếu chéo báo chí xác nhận 3 ngành (Y khoa 22.5, Răng-Hàm-Mặt 22.5, Tâm lý học 15.5). Các ngành khối sức khoẻ còn lại và phương thức xét tuyển thẳng chưa được model hoá.',
+    'Calculator exact cho phương thức xét kết quả thi TN THPT (mã 100), toàn bộ 14 ngành: ngưỡng đảm bảo chất lượng đầu vào 2026 (10/07/2026, khu vực 3, dải 15,5-22,5/30) đối chiếu chéo ĐỘC LẬP 2 nguồn báo chí (VnExpress + Giáo dục & Thời đại, khớp tuyệt đối), cộng điểm ưu tiên khu vực/đối tượng theo đúng công thức giảm dần trích nguyên văn từ Quyết định 671/QĐ-TĐHYKPNT (mục 5.2, mục 6 xác nhận điểm ưu tiên CỘNG vào tổng trước khi so ngưỡng). Trường xác nhận KHÔNG áp dụng điểm cộng/điểm thưởng năm 2026. Phương thức xét tuyển thẳng (mã 301) ngoài phạm vi.',
   capabilities: {
     admissionInfo: true,
     programs: false,
@@ -22,16 +22,16 @@ export const pntuModule: SchoolModule = {
   },
   catalogSources: [
     {
-      title: 'Thông tin tuyển sinh đại học năm 2026',
-      url: 'https://pqldt.pnt.edu.vn/vi/tuyen-sinh-dai-hoc/thong-tin-tuyen-sinh-dai-hoc-nam-2026',
+      title: 'Quyết định 671/QĐ-TĐHYKPNT: Thông tin tuyển sinh đại học năm 2026',
+      url: 'https://pnt.edu.vn/Resources/Docs/SubDomain/pqldt/Tuyen%20sinh%20Dai%20hoc/TS2026/QD_BanHanh_ThongTin_TuyenSinh_DHCQ_TS2026(Full)-PDFs.pdf',
       type: 'official-institution',
-      checkedAt: '2026-08-24',
+      checkedAt: '2026-08-28',
     },
     {
       title: 'Thông báo ngưỡng đảm bảo chất lượng đầu vào (điểm sàn) tuyển sinh đại học chính quy năm 2026',
       url: 'https://pqldt.pnt.edu.vn/vi/tuyen-sinh-dai-hoc',
       type: 'official-institution',
-      checkedAt: '2026-08-24',
+      checkedAt: '2026-08-28',
     },
   ],
 };
