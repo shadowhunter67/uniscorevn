@@ -13,7 +13,7 @@ export const nluModule: SchoolModule = {
   region: 'hcm',
   vnuhcm: false,
   summary:
-    'Đã xác minh ngưỡng đảm bảo chất lượng đầu vào 2026 của NLU qua báo chí nhà nước (Báo Tuổi Trẻ, 27/06/2026): thi TN THPT dao động 16-18/30 tuỳ ngành (đa số 16, ngành cạnh tranh cao — Ngôn ngữ Anh, CNTT, Hóa học, Thực phẩm, Thú y — 18). Giáo dục mầm non/Sư phạm kỹ thuật nông nghiệp loại trừ. Học bạ (18-20/30) và ĐGNL ĐHQG-HCM (601-650) chưa mô hình hoá.',
+    'Tính chính xác Điểm xét tuyển NLU 2026 (thi TN THPT) theo 53 mã xét tuyển: ĐXT = round2(tổng thô 3 môn + điểm ưu tiên KV/ĐT theo Điều 7 TT 06/2026); đủ điều kiện xét tuyển khi tổng thô ≥ ngưỡng theo mã ngành (đa số 16/30, nhóm cạnh tranh cao — Ngôn ngữ Anh, CNTT, CNKT Hóa học, Công nghệ thực phẩm, Thú y — 18/30) — bảng ngưỡng đọc trực tiếp từ ảnh gốc trên ts.hcmuaf.edu.vn (qua chrome-devtools). Giáo dục mầm non/Sư phạm kỹ thuật nông nghiệp (ngưỡng riêng Bộ GD&ĐT) và phương thức học bạ/ĐGNL chưa mô hình hoá.',
   capabilities: {
     admissionInfo: true,
     programs: false,

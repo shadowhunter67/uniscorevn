@@ -17,6 +17,19 @@ export interface NluSource {
 
 export const nluSources: NluSource[] = [
   {
+    id: 'nlu-threshold-2026',
+    publisher: 'Trường Đại học Nông Lâm TP.HCM - Hội đồng tuyển sinh',
+    title: 'Ngưỡng đảm bảo chất lượng đầu vào (điểm sàn) các chương trình tuyển sinh đại học, tuyển sinh cao đẳng ngành Giáo dục Mầm non năm 2026 chính quy',
+    url: 'https://ts.hcmuaf.edu.vn/ts-44298-1/vn/span-stylecolor-rednguong-dam-bao-chat-luong-dau-vao-diem-san-cac-chuong-trinh-tuyen-sinh-dai-hoc-tuyen-sinh-cao-dang-nganh-giao-duc-mam-non-nam-2026-chinh-quy.html',
+    accessedAt: '2026-08-28',
+    publishedAt: '2026-06-28',
+    sourceType: 'official-admission',
+    verification: 'verified',
+    lifecycle: { effectiveYear: 2026, status: 'current' },
+    note:
+      'Tìm được URL trang chính thức qua chrome-devtools (trang chủ ts.hcmuaf.edu.vn → mục THÔNG TIN TUYỂN SINH); bảng ngưỡng nằm trong ảnh nhúng (data/image/Tuyen sinh 2026/nguong dam bao chat luong 2026.jpg — cùng ảnh trước đó không trích được text qua fetch tĩnh), tải trực tiếp và đọc bằng vision 2026-08-28. Bảng đủ 56 mã xét tuyển: cột THPT (phương thức thi TN THPT) = 16/30 (đa số) hoặc 18/30 (Ngôn ngữ Anh, CNTT, CNKT hóa học, Công nghệ thực phẩm×3 biến thể, Thú y×2 biến thể). "Áp dụng cho thí sinh thuộc khu vực 3, không hưởng ưu tiên theo đối tượng." Giáo dục Mầm non (CĐ/ĐH) và Sư phạm Kỹ thuật nông nghiệp: ngưỡng riêng theo TT 06/2026 — không có cột THPT, ngoài phạm vi.',
+  },
+  {
     id: 'nlu-floor-score-2026',
     publisher: 'Báo Tuổi Trẻ (cơ quan báo chí nhà nước)',
     title: 'Trường đại học công lập đầu tiên tại TP.HCM công bố điểm sàn xét tuyển, nhiều ngành từ 16 điểm',
