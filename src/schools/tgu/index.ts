@@ -13,7 +13,7 @@ export const tguModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'TGU 2026 THPT threshold is modeled from cross-checked press coverage of the official 2026 announcement: a common 15,0/30 baseline, with Law at 18,0/30. The Toan/Van subscore condition and other admission methods (transcript, V-SAT, aptitude assessment) are not modeled yet.',
+    'TGU 2026 co mot nhanh tinh du Diem xet tuyen (exact) cho Phuong thuc 1 (thi TN THPT), pham vi "cac nganh khac" (tru Luat va Giao duc Mam non), trich nguyen van De an tuyen sinh chinh thuc: DXT = tong tho 3 mon + diem uu tien (judgment call theo Dieu 7 TT 06/2026), dieu kien ĐXT >= 15,0/30 VA diem Toan hoac Ngu van >= 1/3 DXT. Nganh Luat va cac phuong thuc khac (hoc ba, V-SAT, danh gia nang luc) van o muc threshold-only/chua model.',
   capabilities: {
     admissionInfo: true,
     programs: false,

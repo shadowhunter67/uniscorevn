@@ -13,7 +13,7 @@ export const dtuModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'DTU 2026 THPT thresholds are modeled from the official admission page: a common 15,0/30 baseline, with higher published group floors for Law (18,0), Nursing/Medical Technology (16,5), and licensed health majors (Medicine/Dentistry/Pharmacy, 20,0) documented as knowledge gaps until program selection is modeled. Transcript, V-SAT, aptitude-assessment, and IELTS-conversion routes are not modeled yet.',
+    'Tính chính xác Điểm xét tuyển DTU 2026 (thi TN THPT, ngành chung, thí sinh không điểm cộng): ĐXT = round2(tổng thô 3 môn + điểm ưu tiên KV/ĐT theo Điều 7 TT 06/2026) — công thức trích nguyên văn trang tuyển sinh chính thức ("Điểm Xét tuyển = Điểm thi môn 1 + môn 2 + môn 3 + Điểm cộng + Điểm ưu tiên"); đủ điều kiện xét tuyển khi ĐXT ≥ 15,0/30. Ngành pháp luật (18,0 + điều kiện học lực), Điều dưỡng/KTXN (16,5 + học lực), Y khoa/RHM/Dược (20,0 + học lực), Kiến trúc/Thanh nhạc (năng khiếu) ngoài phạm vi. Học bạ, V-SAT, ĐGNL, quy đổi IELTS chưa mô hình hoá.',
   capabilities: {
     admissionInfo: true,
     programs: false,

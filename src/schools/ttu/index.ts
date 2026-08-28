@@ -13,7 +13,7 @@ export const ttuModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'TTU 2026 THPT floor scores are modeled from the official 09/07/2026 announcement: a common 15,0/30 baseline for most majors, with higher published group floors for Nursing/Medical Laboratory Technology (18,0), Law (20,0), and Medicine (22,0, highest) documented as a knowledge gap until program selection is modeled.',
+    'Tính chính xác Điểm xét tuyển TTU 2026 (thi TN THPT, trừ Y khoa) theo nhóm ngành: ĐXT = round2(tổng thô 3 môn + điểm ưu tiên KV/ĐT theo Điều 7 TT 06/2026); đủ điều kiện xét tuyển khi ĐXT ≥ ngưỡng nhóm (khối kỹ thuật/công nghệ/kinh tế/ngôn ngữ 15 / Điều dưỡng-KTXN y học 18 / Luật 20) — trích nguyên văn Công bố điểm sàn chính thức 09/07/2026; công thức tổng thô + ưu tiên là judgment call vì thông báo không in công thức tường minh. Ngành Y khoa (22, điều kiện kép tổ hợp + Sinh học bạ) ngoài phạm vi.',
   capabilities: {
     admissionInfo: true,
     programs: false,

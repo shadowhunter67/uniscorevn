@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 225,
       admissionDataAvailable: 225,
-      eligibilitySupported: 60,
-      calculatorSupported: 47,
+      eligibilitySupported: 54,
+      calculatorSupported: 53,
       partialCalculator: 3,
-      fullyVerified: 44,
+      fullyVerified: 50,
       catalogOnly: 42,
     });
   });
@@ -89,9 +89,10 @@ describe('institution coverage statistics', () => {
     ]) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('researched');
     }
-    for (const schoolId of ['ajc', 'pntu', 'vnuf', 'dtu', 'vgu', 'hpu2', 'fptu', 'hubt']) {
+    for (const schoolId of ['ajc', 'pntu', 'vnuf', 'vgu', 'hpu2', 'fptu', 'hubt']) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
     }
+    expect(deriveInstitutionSupportStatus(schoolRegistry.dtu)).toBe('verified-calculator');
     // UDN cluster batch (2026-08-24): udn stays a system-level umbrella (researched, no
     // independent admission formula); its member schools carry dedicated runtime modules. Five
     // stay eligibility-only; VKU graduated to a verified exact calculator (2026-08-27, combined
@@ -112,7 +113,7 @@ describe('institution coverage statistics', () => {
     expect(deriveInstitutionSupportStatus(schoolRegistry.tnu)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.dlu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.eaut)).toBe('eligibility-only');
-    expect(deriveInstitutionSupportStatus(schoolRegistry.vwa)).toBe('eligibility-only');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.vwa)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hau)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.ctump)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.tbu)).toBe('eligibility-only');
@@ -136,6 +137,12 @@ describe('institution coverage statistics', () => {
     for (const schoolId of ['dut', 'dueudn', 'uedudn', 'uflsudn', 'uteudn']) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
     }
+    expect(deriveInstitutionSupportStatus(schoolRegistry.ntuhn)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.umt)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.ttu)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.tgu)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.tdmu)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.halongu)).toBe('verified-calculator');
   });
 
   it('requires catalog source metadata for college identity entries', () => {

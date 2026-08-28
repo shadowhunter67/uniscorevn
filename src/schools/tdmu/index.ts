@@ -22,7 +22,7 @@ export const tdmuModule: SchoolModule = {
   region: 'hcm',
   vnuhcm: false,
   summary:
-    'Ngưỡng đảm bảo chất lượng đầu vào theo 3 nhóm ngành (45 ngành khác/Luật/sư phạm) đã xác minh từ bài đăng chính thức tdmu.edu.vn (09/7/2026) cho 3 phương thức: thi TN THPT (thang 30 — 15/20/20 điểm), học bạ (thang 30, điểm trung bình 3 môn tổ hợp 6 học kỳ — 16,5/21,5, chỉ 2 nhóm đầu), ĐGNL ĐHQG-HCM (thang 1200 — 600/750, chỉ 2 nhóm đầu) · Đây là điểm SÀN NHẬN HỒ SƠ, KHÔNG PHẢI điểm chuẩn trúng tuyển cuối — bảng điểm ưu tiên/điểm cộng riêng của trường chưa tìm được nguồn.',
+    'Ngưỡng đảm bảo chất lượng đầu vào theo 3 nhóm ngành (45 ngành khác/Luật/sư phạm) đã xác minh từ bài đăng chính thức tdmu.edu.vn (09/7/2026) cho 3 phương thức: thi TN THPT (thang 30 — 15/20/20 điểm), học bạ (thang 30, điểm trung bình 3 môn tổ hợp 6 học kỳ — 16,5/21,5, chỉ 2 nhóm đầu), ĐGNL ĐHQG-HCM (thang 1200 — 600/750, chỉ 2 nhóm đầu). Có thêm 1 nhánh exact (thi TN THPT, nhóm standard trừ Kiến trúc/Xây dựng + nhóm law): so tổng điểm thô với ngưỡng 15/20, kèm Điểm xét tuyển tham khảo (thô + ưu tiên judgment call theo Điều 7 TT 06/2026). Ngưỡng công bố là điểm SÀN NHẬN HỒ SƠ, KHÔNG PHẢI điểm chuẩn trúng tuyển cuối — bảng điểm cộng thành tích riêng của trường (nếu có) chưa tìm được nguồn.',
   capabilities: {
     admissionInfo: true,
     programs: false,

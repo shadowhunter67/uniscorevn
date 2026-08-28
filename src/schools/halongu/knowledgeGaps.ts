@@ -4,7 +4,7 @@ export const halonguKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'halongu-pedagogy-scope-excluded',
     label:
-      'Ngưỡng 15,00/30 (PT1, thi TN THPT) chỉ áp dụng cho nhóm ngành NGOÀI sư phạm. Nhóm sư phạm (kể cả Sư phạm Âm nhạc, PT3: 16,50/30 hoặc điểm đánh giá năng khiếu >= 6,50) theo quy định riêng của Bộ GD&ĐT, chưa được mô hình hoá.',
+      'Nhánh exact (evaluateHalonguThptExamExactAdmission, ĐXT = M1+M2+M3+ĐƯT, ngưỡng 15,00/30) chỉ phủ nhóm ngành NGOÀI sư phạm. Nhóm sư phạm (kể cả Sư phạm Âm nhạc, PT3: 16,50/30 hoặc điểm đánh giá năng khiếu >= 6,50) theo quy định riêng của Bộ GD&ĐT, ngoài phạm vi — chưa mô hình hoá.',
     status: 'official-but-unparsed',
     sourceId: 'halongu-quality-threshold-2026',
     scoreAffecting: false,

@@ -10,10 +10,10 @@ export const tdmuKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'tdmu-priority-bonus-table-not-found',
     label:
-      'Bảng điểm ưu tiên khu vực/đối tượng cụ thể áp dụng cho TDMU và bảng điểm cộng thành tích/chứng chỉ (nếu có) chưa tìm được nguồn TDMU tự công bố riêng — nguồn chỉ ghi "Điểm trúng tuyển là tổng điểm của thí sinh (đã bao gồm điểm cộng và điểm ưu tiên nếu có)" mà không có bảng số. Ngưỡng đảm bảo chất lượng đầu vào công bố ở đây là điểm SÀN NHẬN HỒ SƠ, KHÔNG PHẢI điểm chuẩn trúng tuyển cuối cùng.',
+      'Bảng điểm ưu tiên khu vực/đối tượng cụ thể áp dụng cho TDMU và bảng điểm cộng thành tích/chứng chỉ (nếu có) chưa tìm được nguồn TDMU tự công bố riêng. Nhánh exact (evaluateTdmuThptExamExactAdmission, nhóm standard trừ Kiến trúc/Xây dựng + nhóm law) so ngưỡng ĐẦU VÀO với tổng điểm THÔ (không cần bảng ưu tiên riêng vì ngưỡng công bố là điểm sàn nhận hồ sơ) và áp dụng Điều 7 TT 06/2026 (judgment call) chỉ cho Điểm xét tuyển hiển thị tham khảo — chưa dùng được để tính điểm CHUẨN trúng tuyển cuối cùng (cần điểm cộng thành tích riêng của trường, nếu có).',
     status: 'incomplete',
     sourceId: 'tdmu-quality-threshold-2026',
-    scoreAffecting: true,
+    scoreAffecting: false,
     implemented: false,
     impact: 'exact-final-score-blocking',
   },

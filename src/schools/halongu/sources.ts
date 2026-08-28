@@ -21,4 +21,14 @@ export const halonguSources: Omit<AdmissionSource, 'schoolId'>[] = [
     verification: 'verified',
     lifecycle: { effectiveYear: 2026, status: 'current' },
   },
+  {
+    id: 'halongu-formula-2026',
+    publisher: 'Trường Đại học Hạ Long',
+    title: 'Cách tính điểm xét tuyển tuyển sinh năm 2026',
+    url: 'https://uhl.edu.vn/CACHTINHDIEMXETTUYENTUYENSINHNAM_11210.htm',
+    accessedAt: '2026-08-28',
+    sourceType: 'official-admission',
+    verification: 'verified',
+    lifecycle: { effectiveYear: 2026, status: 'current' },
+  },
 ];

@@ -3,9 +3,12 @@ import type { ApplicantProfile } from '../../core/applicantProfile';
 import type { CalculationStep } from '../../core/calculationStep';
 import type { SubjectId } from '../../core/subjects';
 import { SUBJECT_LABELS } from '../../core/subjects';
+import { round2 } from '../../core/round2';
 import { tdmuAdmissionMethods } from './methods';
 import { tdmuKnowledgeGaps } from './knowledgeGaps';
 import { checkTdmuThptExamThreshold, checkTdmuTranscriptThreshold, checkTdmuVactThreshold, type TdmuProgramGroup } from './eligibility';
+import { calculateTdmuEffectivePriority30, lookupTdmuStandardPriority30 } from './priority';
+import { tdmuThptExamExactThresholdEvidence } from './evidence';
 
 export interface TdmuSubjectContext {
   combinationId?: string;
@@ -196,5 +199,95 @@ export function evaluateTdmuVactAdmission(profile: ApplicantProfile, context: Td
     missingRequirements: [...missingRequirements, ...gapExtras.missingRequirements],
     explanation,
     evidence: [],
+  };
+}
+
+const TDMU_EXACT_METHOD = tdmuAdmissionMethods[3];
+const TDMU_EXACT_THRESHOLD_30: Record<'standard' | 'law', number> = { standard: 15, law: 20 };
+
+export interface TdmuThptExamExactEvaluationContext {
+  group: 'standard' | 'law';
+  /** Tự xác nhận ngành xét tuyển KHÔNG phải Kiến trúc (7580101) hay Kỹ thuật xây dựng (7580201) —
+   * 2 ngành có điều kiện phụ riêng ngoài phạm vi nhánh exact này (xem `knowledgeGaps.ts`). */
+  isGeneralProgram: true;
+  subjectContext?: { combinationId?: string; subjects: readonly SubjectId[] };
+}
+
+/** TDMU 2026 — ngưỡng đầu vào phương thức thi TN THPT, phạm vi nhóm `standard` (trừ Kiến
+ * trúc/Xây dựng) và `law`. Đủ điều kiện ⟺ tổng điểm thô 3 môn ≥ ngưỡng (15/standard, 20/law) — so
+ * với tổng thô vì nguồn không nói ngưỡng đã gồm điểm ưu tiên. Điểm xét tuyển hiển thị (thô + ưu
+ * tiên judgment call) chỉ để tham khảo. */
+export function evaluateTdmuThptExamExactAdmission(
+  profile: ApplicantProfile,
+  context: TdmuThptExamExactEvaluationContext
+): AdmissionEvaluation {
+  const explanation: CalculationStep[] = [];
+  const missingRequirements: MissingRequirement[] = [];
+
+  const partial = (reason: string, missingInputs: string[] = []): AdmissionEvaluation => ({
+    schoolId: 'tdmu',
+    year: TDMU_EXACT_METHOD.year,
+    methodId: TDMU_EXACT_METHOD.id,
+    confidence: 'partial',
+    eligibility: { status: 'unknown', reasons: [reason] },
+    missingInputs,
+    missingRules: [],
+    missingRequirements,
+    explanation: [],
+    evidence: [],
+  });
+
+  if (!context.subjectContext || context.subjectContext.subjects.length !== 3) {
+    missingRequirements.push({ kind: 'school-context', code: 'tdmu-subject-combination', label: 'Chọn tổ hợp 3 môn xét tuyển TDMU.' });
+    return partial('Cần chọn tổ hợp 3 môn để tính ngưỡng đầu vào TDMU.');
+  }
+  const subjects = context.subjectContext.subjects;
+
+  let total = 0;
+  const missing: SubjectId[] = [];
+  for (const s of subjects) {
+    const v = profile.thpt?.scores?.[s];
+    if (v === undefined) missing.push(s);
+    else total += v;
+  }
+  if (missing.length > 0) {
+    missingRequirements.push(...missing.map((s) => ({ kind: 'profile-input' as const, code: `tdmu-thpt-${s}`, label: `Điểm thi TN THPT môn ${SUBJECT_LABELS[s]} cho tổ hợp TDMU.` })));
+    return partial('Cần đủ điểm 3 môn thi TN THPT để kiểm tra ngưỡng đầu vào TDMU.', ['Chưa đủ điểm 3 môn thi TN THPT trong tổ hợp đã chọn.']);
+  }
+
+  const raw30 = round2(total);
+  const threshold = TDMU_EXACT_THRESHOLD_30[context.group];
+  const thresholdPass = raw30 >= threshold;
+
+  const standardPriority30 = lookupTdmuStandardPriority30(profile.priority?.region, profile.priority?.category);
+  const priority = calculateTdmuEffectivePriority30({ rawTotal30: raw30, standardPriority30 });
+  const dxt30 = round2(raw30 + priority.effectivePriority30);
+
+  const groupLabel = context.group === 'law' ? 'ngành Luật (7380101)' : '45 ngành khác Luật và nhóm sư phạm (trừ Kiến trúc, Kỹ thuật xây dựng)';
+  const reasons = [
+    `Ngưỡng đảm bảo chất lượng đầu vào TDMU 2026 (thi TN THPT, ${groupLabel}): tổng điểm thô 3 môn ≥ ${threshold}/30.`,
+    `Tổng điểm thô 3 môn = ${raw30}/30 → ${thresholdPass ? 'đạt' : 'chưa đạt'} ngưỡng.`,
+  ];
+
+  explanation.push({ id: 'tdmu-exact-raw', label: 'Tổng điểm 3 môn thi (thô)', output: raw30, scale: 30, formula: subjects.map((s) => SUBJECT_LABELS[s]).join(' + '), evidence: tdmuThptExamExactThresholdEvidence.evidence });
+  explanation.push({ id: 'tdmu-exact-priority', label: priority.reduced ? 'Điểm ưu tiên (đã giảm, tham khảo)' : 'Điểm ưu tiên (tham khảo)', output: priority.effectivePriority30, scale: 30, formula: priority.reduced ? '[(30 − tổng thô)/7,5] × Mức ưu tiên KV/ĐT (Điều 7 TT 06/2026)' : 'Mức ưu tiên KV/ĐT (Điều 7 TT 06/2026)', evidence: tdmuThptExamExactThresholdEvidence.evidence });
+  explanation.push({ id: 'tdmu-exact-dxt', label: 'Điểm xét tuyển tham khảo (không dùng để so ngưỡng)', output: dxt30, scale: 30, formula: 'round2(tổng thô 3 môn + điểm ưu tiên)', evidence: tdmuThptExamExactThresholdEvidence.evidence });
+
+  if (profile.priority?.region === undefined && profile.priority?.category === undefined) {
+    missingRequirements.push({ kind: 'profile-input', code: 'tdmu-priority-region-category', label: 'Khu vực / đối tượng ưu tiên (chưa nhập — Điểm xét tuyển tham khảo đang tính với điểm ưu tiên = 0).' });
+  }
+
+  return {
+    schoolId: 'tdmu',
+    year: TDMU_EXACT_METHOD.year,
+    methodId: TDMU_EXACT_METHOD.id,
+    confidence: 'exact-verified',
+    eligibility: { status: thresholdPass ? 'eligible' : 'ineligible', reasons },
+    score: { value: dxt30, scale: 30 },
+    missingInputs: [],
+    missingRules: [],
+    missingRequirements,
+    explanation,
+    evidence: [...tdmuThptExamExactThresholdEvidence.evidence],
   };
 }

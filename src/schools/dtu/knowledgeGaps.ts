@@ -16,6 +16,15 @@ export const dtuKnowledgeGaps: KnowledgeGap[] = [
     impact: 'Runtime chi kiem tra duoc ngoai le duoi nguong thap nhat (15/30 = ineligible chac chan); tu 15/30 den 20/30 can chon nganh de ket luan chinh xac.',
   },
   {
+    id: 'dtu-formula-and-general-threshold-resolved',
+    label:
+      'Batch 2026-08-28: doc truc tiep trang tuyen sinh chinh thuc, tim duoc cong thuc Diem xet tuyen nguyen van (muc V.1.a): "Diem Xet tuyen = Diem thi mon 1 + Diem thi mon 2 + Diem thi mon 3 + Diem cong + Diem uu tien" → mo nhanh exact `dtu-thpt-exam-exact-2026` cho nganh chung, thi sinh khong diem cong. Nganh phap luat/suc khoe (dieu kien hoc luc + nguong rieng) va Kien truc/Thanh nhac (nang khieu) van ngoai pham vi.',
+    status: 'official-but-unparsed',
+    sourceId: 'dtu-admission-info-2026',
+    scoreAffecting: false,
+    impact: 'method-out-of-scope',
+  },
+  {
     id: 'dtu-transcript-vsat-danggia-not-modeled',
     label: 'DTU 2026 con co phuong thuc hoc ba (Ma 200), V-SAT, danh gia nang luc DHQG TPHCM (Ma 402: 700 diem khoi suc khoe co chung chi, 650 Dieu duong/KTXN, 600 nganh khac) va xet tuyen thang; chi phuong thuc thi TN THPT duoc mo hinh hoa.',
     status: 'official-but-unparsed',

@@ -13,7 +13,7 @@ export const halonguModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'Đã xác minh trực tiếp (uhl.edu.vn) ngưỡng PT1 (thi TN THPT) HALONGU 2026 cho nhóm ngành NGOÀI sư phạm: 15,00/30 điểm. Nhóm sư phạm (kể cả Sư phạm Âm nhạc) theo quy định riêng, CHƯA nằm trong runtime. Module chỉ kiểm tra ngưỡng PT1; PT2 (học bạ), PT3-PT5 (năng khiếu/chứng chỉ/ĐGNL Sư phạm Hà Nội) và bảng 26 ngành/tổ hợp chưa mô hình hoá.',
+    'Đã xác minh trực tiếp (uhl.edu.vn) ngưỡng PT1 (thi TN THPT) HALONGU 2026 cho nhóm ngành NGOÀI sư phạm: 15,00/30 điểm. Có thêm 1 nhánh exact trích nguyên văn công thức chính thức "Cách tính điểm xét tuyển": ĐXT = [M1+M2+M3] + ĐƯT (nếu có), điểm ưu tiên judgment call theo Điều 7 TT 06/2026. Nhóm sư phạm (kể cả Sư phạm Âm nhạc) theo quy định riêng, CHƯA nằm trong runtime. PT2 (học bạ), PT3-PT5 (năng khiếu/chứng chỉ/ĐGNL Sư phạm Hà Nội) và bảng 26 ngành/tổ hợp chưa mô hình hoá.',
   capabilities: {
     admissionInfo: true,
     programs: false,

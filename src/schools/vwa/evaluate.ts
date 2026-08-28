@@ -166,3 +166,109 @@ export function evaluateVwaTranscriptAdmission(profile: ApplicantProfile, contex
     evidence: [{ sourceId: 'vwa-quality-threshold-2026', location: 'Thông báo 96/TB-HVPNVN', verification: 'verified', effectiveYear: 2026 }],
   };
 }
+
+import { round2 } from '../../core/round2';
+import { VWA_THRESHOLD_BY_CODE, type VwaProgramThreshold } from './thresholds';
+import { calculateVwaEffectivePriority30, lookupVwaStandardPriority30 } from './priority';
+import { vwaThptExamFormulaEvidence } from './evidence';
+
+const VWA_EXACT_METHOD = vwaAdmissionMethods[2];
+
+export interface VwaThptExamExactEvaluationContext {
+  programCode?: string;
+  subjectContext?: VwaSubjectContext;
+}
+
+function checkVwaSpecialCondition(entry: VwaProgramThreshold, profile: ApplicantProfile): { pass: boolean | undefined; label: string } | undefined {
+  if (entry.specialCondition === 'math-min-6') {
+    const math = profile.thpt?.scores?.math;
+    return { pass: math === undefined ? undefined : math >= 6, label: 'Điểm thi TN THPT môn Toán ≥ 6,0.' };
+  }
+  return undefined;
+}
+
+/** VWA 2026 — phương thức thi TN THPT: ĐXT = round2(tổng thô 3 môn + điểm ưu tiên). Đủ điều kiện
+ * xét tuyển ⟺ ĐXT ≥ ngưỡng theo mã xét tuyển VÀ (nếu có) điều kiện phụ theo môn. */
+export function evaluateVwaThptExamExactAdmission(
+  profile: ApplicantProfile,
+  context: VwaThptExamExactEvaluationContext = {}
+): AdmissionEvaluation {
+  const explanation: CalculationStep[] = [];
+  const missingRequirements: MissingRequirement[] = [];
+
+  const partial = (reason: string, missingInputs: string[] = []): AdmissionEvaluation => ({
+    schoolId: 'vwa',
+    year: VWA_EXACT_METHOD.year,
+    methodId: VWA_EXACT_METHOD.id,
+    confidence: 'partial',
+    eligibility: { status: 'unknown', reasons: [reason] },
+    missingInputs,
+    missingRules: [],
+    missingRequirements,
+    explanation: [],
+    evidence: [],
+  });
+
+  if (!context.programCode) {
+    missingRequirements.push({ kind: 'school-context', code: 'vwa-program-code', label: 'Chọn mã xét tuyển VWA để áp ngưỡng.' });
+    return partial('Cần chọn mã xét tuyển VWA để tính Điểm xét tuyển.');
+  }
+  const entry = VWA_THRESHOLD_BY_CODE.get(context.programCode);
+  if (!entry || !entry.modellable) {
+    missingRequirements.push({ kind: 'school-context', code: 'vwa-program-code', label: entry ? `Ngành ${entry.name} có điều kiện chứng chỉ ngoại ngữ — ngoài phạm vi nhánh exact.` : `Mã xét tuyển "${context.programCode}" không có trong bảng ngưỡng VWA 2026.` });
+    return partial(entry ? `Ngành ${entry.name} ngoài phạm vi tính chính xác (cần chứng chỉ ngoại ngữ).` : `Mã xét tuyển "${context.programCode}" không có trong bảng ngưỡng VWA 2026.`);
+  }
+  if (!context.subjectContext || context.subjectContext.subjects.length !== 3) {
+    missingRequirements.push({ kind: 'school-context', code: 'vwa-subject-combination', label: 'Chọn tổ hợp 3 môn xét tuyển VWA.' });
+    return partial('Cần chọn tổ hợp 3 môn để tính Điểm xét tuyển VWA.');
+  }
+
+  const { total30, missingSubjects } = sumThptTotal(profile, context.subjectContext.subjects);
+  if (missingSubjects.length > 0) {
+    missingRequirements.push(...missingSubjects.map((s) => ({ kind: 'profile-input' as const, code: `vwa-thpt-${s}`, label: `Điểm thi TN THPT môn ${SUBJECT_LABELS[s]} cho tổ hợp VWA.` })));
+    return partial('Cần đủ điểm 3 môn thi TN THPT để tính Điểm xét tuyển VWA.', ['Chưa đủ điểm 3 môn thi TN THPT trong tổ hợp đã chọn.']);
+  }
+
+  const raw30 = round2(total30 as number);
+  const standardPriority30 = lookupVwaStandardPriority30(profile.priority?.region, profile.priority?.category);
+  const priority = calculateVwaEffectivePriority30({ rawTotal30: raw30, standardPriority30 });
+  const dxt30 = round2(raw30 + priority.effectivePriority30);
+  const thresholdPass = raw30 >= entry.threshold30;
+
+  const special = checkVwaSpecialCondition(entry, profile);
+  if (special?.pass === undefined && special !== undefined) {
+    missingRequirements.push({ kind: 'profile-input', code: 'vwa-special-condition', label: special.label });
+  }
+
+  const reasons = [
+    `Ngưỡng điểm xét tuyển ngành ${entry.name} (${entry.code}): tổng thô 3 môn ≥ ${entry.threshold30}/30 — tổng của bạn ${raw30}/30 → ${thresholdPass ? 'đạt' : 'chưa đạt'}.`,
+    `Điểm xét tuyển = tổng thô + điểm ưu tiên = ${raw30} + ${priority.effectivePriority30} = ${dxt30}/30.`,
+  ];
+  if (special) reasons.push(special.label + (special.pass === true ? ' — đạt.' : special.pass === false ? ' — chưa đạt.' : ' — chưa xác định.'));
+
+  explanation.push({ id: 'vwa-exact-raw', label: 'Tổng điểm 3 môn thi (thô)', output: raw30, scale: 30, formula: context.subjectContext.subjects.map((s) => SUBJECT_LABELS[s]).join(' + '), evidence: vwaThptExamFormulaEvidence.evidence });
+  explanation.push({ id: 'vwa-exact-priority', label: priority.reduced ? 'Điểm ưu tiên (đã giảm)' : 'Điểm ưu tiên', output: priority.effectivePriority30, scale: 30, formula: priority.reduced ? '[(30 − tổng thô)/7,5] × Mức ưu tiên KV/ĐT (Điều 7 TT 06/2026)' : 'Mức ưu tiên KV/ĐT (Điều 7 TT 06/2026)', evidence: vwaThptExamFormulaEvidence.evidence });
+  explanation.push({ id: 'vwa-exact-dxt', label: 'Điểm xét tuyển', output: dxt30, scale: 30, formula: 'round2(tổng thô 3 môn + điểm ưu tiên)', evidence: vwaThptExamFormulaEvidence.evidence });
+  explanation.push({ id: 'vwa-exact-threshold', label: `Ngưỡng — ${entry.name}`, output: entry.threshold30, scale: 30, formula: reasons[0], evidence: vwaThptExamFormulaEvidence.evidence });
+
+  if (profile.priority?.region === undefined && profile.priority?.category === undefined) {
+    missingRequirements.push({ kind: 'profile-input', code: 'vwa-priority-region-category', label: 'Khu vực / đối tượng ưu tiên (chưa nhập — Điểm xét tuyển đang tính với điểm ưu tiên = 0).' });
+  }
+
+  const eligible = thresholdPass && (special ? special.pass === true : true);
+  const status: 'eligible' | 'ineligible' | 'unknown' = special?.pass === undefined && special !== undefined ? 'unknown' : eligible ? 'eligible' : 'ineligible';
+
+  return {
+    schoolId: 'vwa',
+    year: VWA_EXACT_METHOD.year,
+    methodId: VWA_EXACT_METHOD.id,
+    confidence: 'exact-verified',
+    eligibility: { status, reasons },
+    score: { value: dxt30, scale: 30 },
+    missingInputs: [],
+    missingRules: [],
+    missingRequirements,
+    explanation,
+    evidence: [...vwaThptExamFormulaEvidence.evidence],
+  };
+}

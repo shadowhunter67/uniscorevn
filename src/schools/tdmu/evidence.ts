@@ -47,3 +47,21 @@ export const tdmuVactThresholdEvidence = {
     },
   ],
 } satisfies SourcedRule<Record<'standard' | 'law', number>>;
+
+/** TDMU 2026 — nhánh exact (Phương thức thi TN THPT, nhóm standard trừ Kiến trúc/Xây dựng + nhóm
+ * law): trích nguyên văn ngưỡng đảm bảo chất lượng đầu vào ở trên. Dùng riêng cho
+ * `evaluateTdmuThptExamExactAdmission` (so tổng điểm THÔ với ngưỡng — nguồn không nói ngưỡng đã
+ * gồm điểm ưu tiên). */
+export const tdmuThptExamExactThresholdEvidence = {
+  ruleId: 'tdmu-thpt-exam-exact-threshold-2026',
+  evidence: [
+    {
+      sourceId: 'tdmu-quality-threshold-2026',
+      location:
+        'Ngưỡng đảm bảo chất lượng đầu vào (phương thức thi TN THPT 2026, thang 30, điểm thô không quy đổi): 45 ngành khác Luật/sư phạm ≥ 15 điểm; ngành Luật (7380101) ≥ 20 điểm.',
+      verification: 'verified' as const,
+      effectiveYear: 2026,
+      verifiedAt: '2026-08-21',
+    },
+  ],
+};

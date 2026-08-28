@@ -14,7 +14,7 @@ export const vwaModule: SchoolModule = {
   entityLevel: 'academy',
   vnuhcm: false,
   summary:
-    'Đã xác minh Thông báo 96/TB-HVPNVN (07/07/2026): ngưỡng đảm bảo chất lượng đầu vào theo 3 nhóm ngành — thi TN THPT (thang 30 — 19/18/16 điểm), học bạ (thang 30, điểm trung bình 3 môn tổ hợp 6 học kỳ — 23/21/19 điểm). Ngành Luật/Kinh tế Luật chưa có số cụ thể (theo hướng dẫn Bộ GDĐT). Bảng ánh xạ mã ngành cụ thể -> nhóm/tổ hợp môn và điểm ưu tiên khu vực/đối tượng vẫn là knowledge gap.',
+    'Tính chính xác Điểm xét tuyển VWA 2026 (thi TN THPT) theo 15 mã xét tuyển: ĐXT = round2(tổng thô 3 môn + điểm ưu tiên KV/ĐT theo Điều 7 TT 06/2026); đủ điều kiện xét tuyển khi ĐXT ≥ ngưỡng theo mã ngành (19 Truyền thông đa phương tiện / 18 nhóm Quản trị-Du lịch-Truyền thông xã hội-Tâm lý / 16 nhóm còn lại) — bảng ngưỡng trích nguyên văn Thông báo 96/TB-HVPNVN. CNTT/Thiết kế phát triển Game: thêm điều kiện Toán ≥6,0. Ngoài phạm vi: Luật/Kinh tế Luật (chưa có số), 2 chương trình Chất lượng cao (cần chứng chỉ ngoại ngữ), phương thức học bạ/HSA/SPT.',
   capabilities: {
     admissionInfo: true,
     programs: false,

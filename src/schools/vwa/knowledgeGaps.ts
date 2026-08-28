@@ -4,12 +4,11 @@ export const vwaKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'vwa-program-mapping-not-imported',
     label:
-      'VWA 2026 công bố ngưỡng theo 3 nhóm ngành (Truyền thông đa phương tiện/Quản trị-Du lịch-Truyền thông xã hội-Tâm lý/nhóm còn lại) và 7 tổ hợp môn (A00/A01/C00/C03/D01/D14/D15), nhưng bảng ánh xạ chi tiết mã ngành -> tổ hợp môn cụ thể chưa được nhập vào runtime — thí sinh phải tự chọn nhóm ngành + tổ hợp môn.',
-    status: 'incomplete',
+      'Batch 2026-08-28: đọc trực tiếp Thông báo 96/TB-HVPNVN (bảng đầy đủ mã ngành + tổ hợp) qua chrome-devtools + OCR và nhập 17 mã xét tuyển vào `thresholds.ts` → mở nhánh exact `vwa-thpt-exam-exact-2026` (15/17 mã, trừ 2 mã Chất lượng cao cần chứng chỉ ngoại ngữ). Phương thức eligibility rộng (`vwa-thpt-exam-2026`) vẫn dùng nhóm 3 mức (19/18/16) do người dùng tự chọn.',
+    status: 'official-but-unparsed',
     sourceId: 'vwa-quality-threshold-2026',
     scoreAffecting: false,
-    knownData: ['Ngưỡng thi TN THPT: 19/18/16 theo 3 nhóm ngành', 'Ngưỡng học bạ: 23/21/19 theo 3 nhóm ngành'],
-    impact: 'Runtime chỉ kiểm tra được ngưỡng theo nhóm ngành do người dùng tự chọn; chưa tự suy ra nhóm từ tên ngành cụ thể.',
+    impact: 'method-out-of-scope',
   },
   {
     id: 'vwa-law-not-modeled',

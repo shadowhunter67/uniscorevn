@@ -51,4 +51,24 @@ export const tdmuAdmissionMethods: AdmissionMethodDescriptor[] = [
     capabilities: { eligibility: true, scoreConversion: false, bonus: false, priority: false, exactCalculator: false },
     knowledgeGaps: vactGaps,
   },
+  /**
+   * Nhánh HẸP tính đủ Điểm xét tuyển (exact), phương thức thi TN THPT, phạm vi nhóm `standard`
+   * (45 ngành, TRỪ Kiến trúc 7580101 và Kỹ thuật xây dựng 7580201 — điều kiện phụ riêng, xem
+   * `tdmu-gdmn-kientruc-xaydung-special-condition-not-modeled`, caller tự xác nhận
+   * `isGeneralProgram: true`) và nhóm `law` (ngành Luật 7380101, ĐK "chuẩn đầu vào QĐ 678/QĐ-BGDĐT"
+   * ngoài phạm vi điểm số — xem `tdmu-law-additional-input-standard-not-found`). Nhóm `teacher`
+   * KHÔNG đưa vào exact (gồm Giáo dục Mầm non 7140201 với công thức riêng, xem gap). Ngưỡng đầu
+   * vào ≥15 (standard)/≥20 (law), so với TỔNG ĐIỂM THÔ (nguồn không nói ngưỡng đã gồm ưu tiên —
+   * đây là "điểm sàn nhận hồ sơ", xem `sources.ts`). Điểm xét tuyển hiển thị = tổng thô + điểm ưu
+   * tiên judgment call (Điều 7 TT 06/2026, `priority.ts`) — chỉ để tham khảo, KHÔNG dùng để so
+   * ngưỡng. KHÔNG gắn `knowledgeGaps`.
+   */
+  {
+    id: 'tdmu-thpt-exam-exact-2026',
+    schoolId: 'tdmu',
+    name: 'Xét kết quả thi TN THPT — ngưỡng đầu vào ("các ngành khác" trừ Kiến trúc/Xây dựng, và ngành Luật)',
+    year: 2026,
+    applicantTypes: ['Thí sinh xét kết quả thi TN THPT 2026 vào một ngành TDMU thuộc nhóm standard (trừ Kiến trúc/Kỹ thuật xây dựng) hoặc ngành Luật'],
+    capabilities: { eligibility: true, scoreConversion: false, bonus: false, priority: true, exactCalculator: true },
+  },
 ];
