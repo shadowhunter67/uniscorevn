@@ -2,7 +2,7 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (41)
+## Calculator đã xác minh (42)
 
 - **CTU** — Trường Đại học Cần Thơ
 - **DTHU** — Trường Đại học Đồng Tháp
@@ -39,6 +39,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **UEL** — Trường Đại học Kinh tế - Luật – ĐHQG TP.HCM
 - **UFM** — Trường Đại học Tài chính – Marketing
 - **UMP** — Trường Đại học Y Dược Thành phố Hồ Chí Minh
+- **UMT** — Trường Đại học Quản lý và Công nghệ TP.HCM
 - **USSH** — Trường Đại học Khoa học Xã hội và Nhân văn – ĐHQG TP.HCM
 - **UTC** — Trường Đại học Giao thông vận tải
 - **VKU** — Trường Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn
@@ -52,7 +53,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **NEU** — Trường Đại học Kinh tế Quốc dân
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 
-## Chỉ kiểm tra điều kiện/ngưỡng (63)
+## Chỉ kiểm tra điều kiện/ngưỡng (62)
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
 - **AJC** — Học viện Báo chí và Tuyên truyền
@@ -104,7 +105,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **UFLS** — Trường Đại học Ngoại ngữ - Đại học Đà Nẵng
 - **UHD** — Trường Đại học Hải Dương
 - **UIT** — Trường Đại học Công nghệ Thông tin – ĐHQG TP.HCM
-- **UMT** — Trường Đại học Quản lý và Công nghệ TP.HCM
 - **USH** — Trường Đại học Thể dục Thể thao TP.HCM
 - **UTE** — Trường Đại học Sư phạm Kỹ thuật - Đại học Đà Nẵng
 - **UTM** — Trường Đại học Công nghệ và Quản lý hữu nghị

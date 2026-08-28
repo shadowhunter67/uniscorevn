@@ -13,7 +13,7 @@ export const umtModule: SchoolModule = {
   region: 'hcm',
   vnuhcm: false,
   summary:
-    'Nguồn báo chí dẫn thông báo chính thức UMT 2026 (2 nguồn độc lập khớp nhau) xác nhận điểm sàn xét tuyển bằng kết quả thi TN THPT là 15/30, áp dụng đồng nhất cho toàn bộ 10 ngành đào tạo.',
+    'Tính chính xác Điểm xét tuyển UMT 2026 (PT01 — thi TN THPT, thí sinh không điểm cộng thành tích): ĐXT = round2(tổng thô 3 môn + điểm ưu tiên KV/ĐT theo Điều 7 TT 06/2026) — trích nguyên văn Thông báo 57/2026/TB-UMT mục 1 ("Điểm ngưỡng ĐBCLĐV = Điểm quy đổi thang 30 + Điểm cộng nếu có + Điểm ưu tiên nếu có"); đủ điều kiện xét tuyển khi ĐXT ≥ 15,0/30, đồng nhất cả 10 ngành đào tạo. Phương thức học bạ (PT02, 18/30), ĐGNL (PT03), V-SAT (PT04) chưa mô hình hoá.',
   capabilities: {
     admissionInfo: true,
     programs: true,
@@ -22,10 +22,10 @@ export const umtModule: SchoolModule = {
   },
   catalogSources: [
     {
-      title: 'Trường Đại học Quản lý và Công nghệ TPHCM công bố điểm sàn xét tuyển',
-      url: 'https://giaoducthoidai.vn/truong-dai-hoc-quan-ly-va-cong-nghe-tphcm-cong-bo-diem-san-xet-tuyen-post784293.html',
-      type: 'secondary',
-      checkedAt: '2026-08-24',
+      title: 'Thông báo 57/2026/TB-UMT về điểm ngưỡng đảm bảo chất lượng đầu vào 2026',
+      url: 'https://umt.edu.vn/tin-tuc/truong-dai-hoc-umt-cong-bo-muc-diem-nhan-ho-so-xet-tuyen-nam-2026',
+      type: 'official-institution',
+      checkedAt: '2026-08-28',
     },
   ],
 };
