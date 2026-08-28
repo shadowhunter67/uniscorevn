@@ -22,6 +22,8 @@ export const vluKnowledgeGaps: KnowledgeGap[] = [
     whyNotInferred:
       'Không suy đoán ngành nào có môn thi chính từ tên ngành (vd ngành Ngôn ngữ Anh có thể có môn chính tiếng Anh, nhưng đây là suy đoán, không phải nguồn xác nhận) — hệ số 2 là score-affecting, sai 1 ngành sẽ làm sai điểm xét tuyển của đúng ngành đó.',
     impact: 'exact-final-score-blocking',
+    note:
+      'Research 2026-08-28 (batch nâng FPTU/HCMUE): tìm kiếm lại danh mục ngành/tổ hợp/hệ số 2 VLU 2026 — không tìm được trang/bảng mới nào liệt kê cụ thể ngành nào có môn thi chính. Gap vẫn còn nguyên, chưa đủ điều kiện nâng VLU lên verified exact.',
   },
   {
     id: 'vlu-priority-bonus-table-not-found',

@@ -27,6 +27,7 @@ import { ufmThptGoldenCases, ufmDgnlGoldenCases, ufmHocbaGoldenCases, ufmVsatGol
 import { hcmulawThpt5GoldenCases, hcmulawVsat4GoldenCases } from '../schools/hcmulaw/__fixtures__/officialExamples2026';
 import { iuhCombinedGoldenCases } from '../schools/iuh/__fixtures__/officialExamples2026';
 import { ftuDomesticExamGoldenCases } from '../schools/ftu/__fixtures__/officialExamples2026';
+import { hcmueThptExamExactGoldenCases } from '../schools/hcmue/__fixtures__/officialExamples2026';
 
 /**
  * Invariant CI bắt buộc: MỌI method có `capabilities.exactCalculator === true` phải có ÍT NHẤT 1
@@ -93,6 +94,7 @@ const allGoldenCases = [
   ...hcmulawVsat4GoldenCases,
   ...iuhCombinedGoldenCases,
   ...ftuDomesticExamGoldenCases,
+  ...hcmueThptExamExactGoldenCases,
 ];
 
 const coveredMethods = new Set(allGoldenCases.map((goldenCase) => methodKey(goldenCase.schoolId, goldenCase.methodId)));
@@ -141,6 +143,7 @@ describe('exact method golden coverage invariant', () => {
         'hcmulaw:hcmulaw-vsat4-2026',
         'iuh:iuh-combined-2026',
         'ftu:ftu-domestic-exam-2026',
+        'hcmue:hcmue-thpt-exam-exact-2026',
       ].sort()
     );
   });

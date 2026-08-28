@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 225,
       admissionDataAvailable: 225,
-      eligibilitySupported: 44,
-      calculatorSupported: 63,
+      eligibilitySupported: 42,
+      calculatorSupported: 65,
       partialCalculator: 3,
-      fullyVerified: 60,
+      fullyVerified: 62,
       catalogOnly: 42,
     });
   });
@@ -89,9 +89,13 @@ describe('institution coverage statistics', () => {
     ]) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('researched');
     }
-    for (const schoolId of ['ajc', 'pntu', 'vnuf', 'vgu', 'hpu2', 'fptu']) {
+    for (const schoolId of ['ajc', 'pntu', 'vnuf', 'vgu', 'hpu2']) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
     }
+    // Batch (2026-08-28): FPTU (điều kiện tổ hợp thô, mọi ngành) and HCMUE (ngưỡng theo ngành, 47
+    // ngành trụ sở chính TP.HCM) graduated to verified-calculator — reaches 62 verified.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.fptu)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.hcmue)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.dtu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hubt)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hsu)).toBe('verified-calculator');

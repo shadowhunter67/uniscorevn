@@ -18,7 +18,7 @@ export const hcmueMeta: Omit<SchoolModule, 'Page'> = {
   region: 'hcm',
   vnuhcm: false,
   summary:
-    'Đã xác minh phương thức và ngưỡng đầu vào 47 ngành tại trụ sở chính TP.HCM năm 2026, cộng điểm trúng tuyển tham khảo cho 47 ngành trụ sở chính + 15 ngành 2 phân hiệu Long An/Gia Lai. Runtime chỉ kiểm tra eligibility/ngưỡng, không tính điểm trúng tuyển.',
+    'Đã xác minh phương thức và ngưỡng đầu vào 47 ngành tại trụ sở chính TP.HCM năm 2026 — nhánh exact tính tổng điểm thô 3 môn thi TN THPT so với ngưỡng từng ngành (nguồn im lặng về việc gồm ưu tiên nên so tổng thô, điểm ưu tiên Điều 7 TT 06/2026 chỉ hiển thị ĐXT tham khảo). 15 ngành 2 phân hiệu Long An/Gia Lai chưa có ngưỡng công bố riêng, ngoài phạm vi nhánh exact. Runtime chưa tính điểm trúng tuyển (cutoff) chính thức.',
   capabilities: {
     admissionInfo: true,
     programs: true,

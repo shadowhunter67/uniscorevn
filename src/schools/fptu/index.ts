@@ -13,7 +13,7 @@ export const fptuModule: SchoolModule = {
   region: 'hanoi',
   vnuhcm: false,
   summary:
-    'Đã xác minh thông báo điểm sàn xét tuyển 2026 (daihoc.fpt.edu.vn, 01/07/2026): ngưỡng tổ hợp thô 3 môn thi TN THPT tối thiểu 15,0/30 (Axx/Cxx), áp dụng mọi ngành và mọi cơ sở đào tạo. Điểm xét tuyển cuối cùng (ĐXT >= 18,0/30, hoặc 21,0/30 cho Cử nhân tài năng Khoa học máy tính) dùng công thức kết hợp điểm thi và học bạ lớp 12 nhưng định nghĩa "điểm trung bình lớp 12" không rõ ràng nên chưa mô hình hoá (do-not-guess-formula).',
+    'Đã xác minh thông báo điểm sàn xét tuyển 2026 (daihoc.fpt.edu.vn, 01/07/2026): ngưỡng tổ hợp thô 3 môn thi TN THPT tối thiểu 15,0/30 (Axx/Cxx), áp dụng mọi ngành và mọi cơ sở đào tạo — nguồn tự phân biệt đây là "điều kiện tổ hợp thô", không phải điểm xét tuyển cuối cùng, nên UniscoreVN tính chính xác nhánh điều kiện sàn này (exact-verified). Điểm xét tuyển cuối cùng (ĐXT >= 18,0/30, hoặc 21,0/30 cho Cử nhân tài năng Khoa học máy tính) dùng công thức kết hợp điểm thi và học bạ lớp 12 nhưng định nghĩa "điểm trung bình lớp 12" không rõ ràng nên chưa mô hình hoá (do-not-guess-formula).',
   capabilities: {
     admissionInfo: true,
     programs: false,

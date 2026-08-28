@@ -121,7 +121,10 @@ describe('evaluateApplicantAcrossSchools', () => {
   it('generic evaluateSchool maps representative statuses without copying school formulas', () => {
     expect(evaluateSchool(profile, 'hcmut', { context: completeContexts().hcmut }).status).toBe('calculated');
     expect(evaluateSchool(profile, 'ussh', { context: { ...completeContexts().ussh, hasBonusAchievement: true } }).status).toBe('partial');
-    expect(evaluateSchool(profile, 'hcmue', { context: completeContexts().hcmue }).status).toBe('eligible');
+    // HCMUE đã có phương thức exact (hcmue-thpt-exam-exact-2026) → classifyEvaluation phân loại
+    // lại kết quả threshold-only (comparison adapter vẫn dùng method[0]) thành 'partial' — cùng
+    // tiền lệ UDA/TBDU/FPTU/VinhUni/...
+    expect(evaluateSchool(profile, 'hcmue', { context: completeContexts().hcmue }).status).toBe('partial');
     expect(evaluateSchool(profile, 'hcmut').status).toBe('missing-input');
     expect(evaluateSchool(profile, 'nce').status).toBe('unsupported');
   });
@@ -165,15 +168,18 @@ describe('evaluateApplicantAcrossSchools', () => {
     expect(results.hcmut.before.status).toBe('calculated');
     expect(results.hcmut.after.status).toBe('calculated');
     expect(results.hcmut.delta).toBeDefined();
-    expect(results.hcmue.before.status).toBe('eligible');
+    expect(results.hcmue.before.status).toBe('partial');
     expect(results.hcmue.statusChanged).toBe(false);
     expect(results.nce.before.status).toBe('unsupported');
     expect(results.nce.after.status).toBe('unsupported');
 
+    // HCMUE đã có phương thức exact → classifyEvaluation phân loại MỌI kết quả threshold-only
+    // (method[0], confidence 'partial', không score) thành 'partial' — kể cả khi thiếu input, nên
+    // before/after đều 'partial' và statusChanged = false (cùng tiền lệ UDA/TBDU/FPTU).
     const transition = evaluateScenario({}, { thpt: { math: 8.8, physics: 8.4, english: 9 }, vactTotal: 980 }, { schools: ['hcmue'], contexts });
-    expect(transition[0].before.status).toBe('missing-input');
-    expect(transition[0].after.status).toBe('eligible');
-    expect(transition[0].statusChanged).toBe(true);
+    expect(transition[0].before.status).toBe('partial');
+    expect(transition[0].after.status).toBe('partial');
+    expect(transition[0].statusChanged).toBe(false);
   });
 
   it('uses real program registries for compare selectors', () => {
