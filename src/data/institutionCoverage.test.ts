@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 225,
       admissionDataAvailable: 225,
-      eligibilitySupported: 25,
-      calculatorSupported: 82,
+      eligibilitySupported: 24,
+      calculatorSupported: 83,
       partialCalculator: 3,
-      fullyVerified: 79,
+      fullyVerified: 80,
       catalogOnly: 42,
     });
   });
@@ -173,6 +173,12 @@ describe('institution coverage statistics', () => {
     // đầy đủ 37 ngành (33 dùng công thức chuẩn); UTE (ĐHĐN) vẫn eligibility-only (chưa tìm được
     // ảnh/bảng tương đương).
     expect(deriveInstitutionSupportStatus(schoolRegistry.uedudn)).toBe('verified-calculator');
+    // Batch (2026-08-28): Đại Nam (dainam, catalog shortName DNU-HN — distinct from Đồng Nai's
+    // 'dnu') graduated to verified-calculator — thông báo chính thức tuyensinh.dainam.edu.vn
+    // (mục 1) xác nhận TRỰC TIẾP ngưỡng 15,0/30 (thi TN THPT, ngành ngoài Sức khoẻ/Pháp luật)
+    // KHÔNG bao gồm điểm cộng, điểm ưu tiên khu vực/đối tượng — không cần judgment call cho điểm
+    // ưu tiên (nguồn loại trừ trực tiếp, không im lặng). 80 -> reaches full verified-exact goal.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.dainam)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnuulis)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hce)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hul)).toBe('verified-calculator');
