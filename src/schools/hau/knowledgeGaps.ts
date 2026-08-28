@@ -22,10 +22,10 @@ export const hauKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'hau-priority-bonus-not-modeled',
     label:
-      'Theo Điều 1 QĐ 406/QĐ-ĐHKT-ĐT, mức điểm nhận hồ sơ đã công bố là TỔNG điểm 3 môn tổ hợp CỘNG điểm ưu tiên khu vực/đối tượng và điểm cộng (nếu có), không phải điểm thô đơn thuần. Runtime hiện chỉ cộng điểm thô 3 môn, chưa cộng điểm ưu tiên/điểm cộng.',
+      'Batch 2026-08-28: điểm ưu tiên khu vực/đối tượng (Điều 7 TT 06/2026, judgment call) đã model trong nhánh exact `hau-thpt-exam-exact-2026` — scope thí sinh KHÔNG có điểm cộng thành tích (bảng điểm cộng HAU chưa tìm được nguồn riêng). Phương thức eligibility rộng (`hau-thpt-exam-2026`) vẫn chỉ cộng điểm thô 3 môn.',
     status: 'incomplete',
     sourceId: 'hau-quality-threshold-2026',
-    scoreAffecting: true,
-    impact: 'Thí sinh có điểm ưu tiên/điểm cộng cần tự cộng thêm vào tổng điểm trước khi so với ngưỡng — kết quả "ineligible" sát ngưỡng của runtime có thể không chính xác nếu thí sinh thuộc diện ưu tiên.',
+    scoreAffecting: false,
+    impact: 'method-out-of-scope',
   },
 ];

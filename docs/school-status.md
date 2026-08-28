@@ -2,12 +2,13 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (39)
+## Calculator đã xác minh (40)
 
 - **CTU** — Trường Đại học Cần Thơ
 - **DTHU** — Trường Đại học Đồng Tháp
 - **FTU** — Trường Đại học Ngoại thương
 - **GDU** — Trường Đại học Gia Định
+- **HAU** — Trường Đại học Kiến trúc Hà Nội
 - **HCE** — Trường Đại học Kinh tế, Đại học Huế
 - **HCMULAW** — Trường Đại học Luật Thành phố Hồ Chí Minh
 - **HCMUS** — Trường Đại học Khoa học Tự nhiên - ĐHQG TP.HCM
@@ -50,7 +51,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **NEU** — Trường Đại học Kinh tế Quốc dân
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 
-## Chỉ kiểm tra điều kiện/ngưỡng (65)
+## Chỉ kiểm tra điều kiện/ngưỡng (64)
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
 - **AJC** — Học viện Báo chí và Tuyên truyền
@@ -70,7 +71,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **FPFU** — Trường Đại học Phòng cháy Chữa cháy
 - **FPTU** — Trường Đại học FPT
 - **HALONGU** — Trường Đại học Hạ Long
-- **HAU** — Trường Đại học Kiến trúc Hà Nội
 - **HCMUE** — Trường Đại học Sư phạm Thành phố Hồ Chí Minh (HCMUE, TPHCM)
 - **HCMUPES** — Trường Đại học Sư phạm Thể dục Thể thao TP.HCM
 - **HIU** — Trường Đại học Quốc tế Hồng Bàng
