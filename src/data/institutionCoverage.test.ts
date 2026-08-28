@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 225,
       admissionDataAvailable: 225,
-      eligibilitySupported: 26,
-      calculatorSupported: 81,
+      eligibilitySupported: 25,
+      calculatorSupported: 82,
       partialCalculator: 3,
-      fullyVerified: 78,
+      fullyVerified: 79,
       catalogOnly: 42,
     });
   });
@@ -110,7 +110,7 @@ describe('institution coverage statistics', () => {
     // independent admission formula); its member schools carry dedicated runtime modules. Five
     // stay eligibility-only; VKU graduated to a verified exact calculator (2026-08-27, combined
     // method) and is asserted separately below.
-    for (const schoolId of ['dut', 'dueudn', 'uedudn', 'uteudn']) {
+    for (const schoolId of ['dut', 'dueudn', 'uteudn']) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
     }
     // UFLS graduated to verified-calculator (2026-08-28) — 4 ngành đào tạo giáo viên ngoại ngữ,
@@ -168,6 +168,11 @@ describe('institution coverage statistics', () => {
     // thức (tổng 3 môn, không tính điểm cộng) + bảng ngưỡng đầy đủ 14/14 ngành (6 mức); điểm ưu
     // tiên KV/ĐT dùng judgment call (nguồn im lặng đúng 1 điểm này, không loại trừ như điểm cộng).
     expect(deriveInstitutionSupportStatus(schoolRegistry.thanhdo)).toBe('verified-calculator');
+    // Batch (2026-08-28): UED graduated to verified-calculator — ảnh chính thức tuyensinh.ued.udn.vn
+    // xác nhận trực tiếp công thức "tổng 3 môn + điểm ưu tiên KV/ĐT" (mục GHI CHÚ) + bảng ngưỡng
+    // đầy đủ 37 ngành (33 dùng công thức chuẩn); UTE (ĐHĐN) vẫn eligibility-only (chưa tìm được
+    // ảnh/bảng tương đương).
+    expect(deriveInstitutionSupportStatus(schoolRegistry.uedudn)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnuulis)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hce)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hul)).toBe('verified-calculator');
@@ -178,7 +183,7 @@ describe('institution coverage statistics', () => {
     for (const schoolId of ['husc', 'huaf', 'hueedu', 'humg', 'vmu']) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('verified-calculator');
     }
-    for (const schoolId of ['dut', 'dueudn', 'uedudn', 'uteudn']) {
+    for (const schoolId of ['dut', 'dueudn', 'uteudn']) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
     }
     // UFLS graduated to verified-calculator (2026-08-28) — 4 ngành đào tạo giáo viên ngoại ngữ,

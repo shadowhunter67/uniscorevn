@@ -2,7 +2,7 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (78)
+## Calculator đã xác minh (79)
 
 - **AJC** — Học viện Báo chí và Tuyên truyền
 - **APD** — Hoc vien Chinh sach va Phat trien
@@ -64,6 +64,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **TUAF** — Truong Dai hoc Nong Lam - Dai hoc Thai Nguyen
 - **UAH** — Truong Dai hoc Kien truc TP.HCM
 - **UDA** — Trường Đại học Đông Á
+- **UED** — Trường Đại học Sư phạm - Đại học Đà Nẵng
 - **UEF** — Trường Đại học Kinh tế - Tài chính TP.HCM
 - **UEH** — Trường Đại học Kinh tế TP.HCM
 - **UEL** — Trường Đại học Kinh tế - Luật – ĐHQG TP.HCM
@@ -89,7 +90,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **NEU** — Trường Đại học Kinh tế Quốc dân
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 
-## Chỉ kiểm tra điều kiện/ngưỡng (26)
+## Chỉ kiểm tra điều kiện/ngưỡng (25)
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
 - **DHV** — Trường Đại học Hùng Vương TP.HCM
@@ -107,7 +108,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **TNUE** — Truong Dai hoc Su pham - Dai hoc Thai Nguyen
 - **TNUFL** — Truong Ngoai ngu - Dai hoc Thai Nguyen
 - **TNUS** — Truong Dai hoc Khoa hoc - Dai hoc Thai Nguyen
-- **UED** — Trường Đại học Sư phạm - Đại học Đà Nẵng
 - **UIT** — Trường Đại học Công nghệ Thông tin – ĐHQG TP.HCM
 - **UTE** — Trường Đại học Sư phạm Kỹ thuật - Đại học Đà Nẵng
 - **UTM** — Trường Đại học Công nghệ và Quản lý hữu nghị

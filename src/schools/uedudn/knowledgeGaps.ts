@@ -19,4 +19,21 @@ export const uedudnKnowledgeGaps: KnowledgeGap[] = [
     scoreAffecting: true,
     impact: 'Chưa bật scoreConversion/exactCalculator; cần đọc phụ lục chính thức hoặc file đính kèm dạng ảnh/PDF quét.',
   },
+  {
+    id: 'uedudn-aptitude-majors-not-modeled',
+    label:
+      '4 ngành dùng công thức riêng theo ảnh chính thức (Giáo dục Thể chất, Sư phạm Mỹ thuật, Giáo dục Mầm non, Sư phạm Âm nhạc): ngưỡng = 1 môn thi TN THPT (Toán hoặc Văn) + 1/3 điểm ưu tiên, kèm điều kiện điểm năng khiếu >= 5đ (hoặc >=6,33-6,67 tuỳ ngành) — KHÁC công thức chuẩn 3 môn, KHÔNG mô hình hoá trong calculator exact.',
+    status: 'official-but-unparsed',
+    sourceId: 'uedudn-admission-info-2026',
+    scoreAffecting: false,
+    impact: 'Calculator exact chỉ phủ 33/37 ngành dùng công thức chuẩn (3 mức ngưỡng: 15,5/17,0/20,0); 4 ngành năng khiếu cần nhập điểm năng khiếu riêng, chưa có UI/luồng nhập cho việc này.',
+  },
+  {
+    id: 'uedudn-subject-combination-to-major-not-mapped',
+    label: 'Ảnh chính thức không kèm bảng tổ hợp môn xét tuyển cụ thể cho từng ngành (chỉ có mã ngành + tên ngành + ngưỡng) — thí sinh phải tự chọn tổ hợp và tự chọn đúng nhóm ngưỡng khi dùng calculator exact.',
+    status: 'incomplete',
+    sourceId: 'uedudn-admission-info-2026',
+    scoreAffecting: false,
+    impact: 'Calculator exact tính đúng công thức + ngưỡng theo nhóm ngành đã chọn, nhưng không tự xác thực tổ hợp môn có hợp lệ với ngành đó hay không.',
+  },
 ];
