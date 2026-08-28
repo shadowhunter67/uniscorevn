@@ -2,7 +2,7 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (76)
+## Calculator đã xác minh (77)
 
 - **AJC** — Học viện Báo chí và Tuyên truyền
 - **APD** — Hoc vien Chinh sach va Phat trien
@@ -23,6 +23,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HCE** — Trường Đại học Kinh tế, Đại học Huế
 - **HCMUE** — Trường Đại học Sư phạm Thành phố Hồ Chí Minh (HCMUE, TPHCM)
 - **HCMULAW** — Trường Đại học Luật Thành phố Hồ Chí Minh
+- **HCMUPES** — Trường Đại học Sư phạm Thể dục Thể thao TP.HCM
 - **HCMUS** — Trường Đại học Khoa học Tự nhiên - ĐHQG TP.HCM
 - **HCMUT** — Trường Đại học Bách khoa – ĐHQG TP.HCM
 - **HCMUTE** — Trường Đại học Công nghệ Kỹ thuật TP. Hồ Chí Minh
@@ -87,7 +88,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **NEU** — Trường Đại học Kinh tế Quốc dân
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 
-## Chỉ kiểm tra điều kiện/ngưỡng (28)
+## Chỉ kiểm tra điều kiện/ngưỡng (27)
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
 - **DHV** — Trường Đại học Hùng Vương TP.HCM
@@ -96,7 +97,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **DUT** — Trường Đại học Bách khoa - Đại học Đà Nẵng
 - **EAUT** — Trường Đại học Công nghệ Đông Á
 - **EIU** — Trường Đại học Quốc tế Miền Đông
-- **HCMUPES** — Trường Đại học Sư phạm Thể dục Thể thao TP.HCM
 - **HNUE** — Trường Đại học Sư phạm Hà Nội
 - **HPU2** — Truong Dai hoc Su pham Ha Noi 2
 - **HUIT** — Trường Đại học Công Thương TP.HCM

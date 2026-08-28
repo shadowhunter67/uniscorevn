@@ -13,7 +13,7 @@ export const hcmupesModule: SchoolModule = {
   region: 'hcm',
   vnuhcm: false,
   summary:
-    'Đã xác minh trực tiếp Thông báo 05/TB-HĐTS (13/07/2026, đọc từ PDF Google Drive chính thức) cho ngành Giáo dục thể chất: điểm tổ hợp (2 môn văn hóa + năng khiếu TDTT, không nhân hệ số) phải đạt ngưỡng theo khu vực ưu tiên (18,25-19,00/30). Cần nhập thêm điểm năng khiếu TDTT (không có trong hồ sơ chung) — vào trang so sánh HCMUPES để nhập. Huấn luyện thể thao/Quản lý TDTT và phương thức học bạ chưa mô hình hoá.',
+    'Calculator exact cho ngành Giáo dục thể chất, Phương thức 405 (thi TN THPT + năng khiếu TDTT): đọc trực tiếp Thông báo 05/TB-HĐTS (13/07/2026, PDF chính thức tải trực tiếp qua vision, không qua tuyensinh247) xác nhận ĐẦY ĐỦ bảng ngưỡng theo khu vực ưu tiên: KV3 >= 19,00; KV2 >= 18,75; KV2-NT >= 18,50; KV1 >= 18,25 (thang 30, điểm tổ hợp 2 môn văn hóa + năng khiếu TDTT, không nhân hệ số). Số liệu chính thức, không phải judgment call. Cần nhập thêm điểm năng khiếu TDTT (không có trong hồ sơ chung). Đối tượng ưu tiên (UT1/UT2), Huấn luyện thể thao/Quản lý TDTT, và phương thức học bạ (406) chưa mô hình hoá — xem knowledgeGaps.',
   capabilities: {
     admissionInfo: true,
     programs: false,

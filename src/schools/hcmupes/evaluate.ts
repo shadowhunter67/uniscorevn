@@ -6,6 +6,7 @@ import { SUBJECT_LABELS } from '../../core/subjects';
 import { checkHcmupesThreshold, HCMUPES_SUBJECT_PAIRS, type HcmupesPriorityRegion } from './eligibility';
 import { hcmupesAdmissionMethods } from './methods';
 import { hcmupesKnowledgeGaps } from './knowledgeGaps';
+import { hcmupesGdtcThresholdEvidence } from './evidence';
 
 const KNOWN_REGIONS: readonly HcmupesPriorityRegion[] = ['KV1', 'KV2-NT', 'KV2', 'KV3'];
 
@@ -64,16 +65,35 @@ export function evaluateHcmupesAdmission(profile: ApplicantProfile, context: Hcm
     if (scoreA !== undefined && scoreB !== undefined && context.talentScore10 !== undefined && isKnownRegion(region)) {
       const culturalTotal = Math.round((scoreA + scoreB) * 100) / 100;
       const result = checkHcmupesThreshold(culturalTotal, context.talentScore10, region);
+      const total30 = Math.round((culturalTotal + context.talentScore10) * 100) / 100;
       reasons.push(result.requiredText);
       explanation.push({
         id: 'hcmupes-total-threshold',
         label: 'Ngưỡng đầu vào HCMUPES 2026 (thi TN THPT + năng khiếu TDTT, ngành GDTC)',
-        output: culturalTotal + context.talentScore10,
+        output: total30,
         scale: 30,
         formula: result.requiredText,
-        evidence: [{ sourceId: 'hcmupes-gdtc-threshold-2026', location: 'Thông báo 05/TB-HĐTS, mục 1', verification: 'verified', effectiveYear: 2026 }],
+        evidence: hcmupesGdtcThresholdEvidence.evidence,
       });
       status = result.pass ? 'eligible' : 'ineligible';
+
+      // Thông báo 05/TB-HĐTS công bố ĐẦY ĐỦ bảng ngưỡng theo khu vực (KV1/KV2-NT/KV2/KV3) — khu
+      // vực ưu tiên đã được nhúng trực tiếp vào ngưỡng công bố (không cần cộng điểm ưu tiên riêng,
+      // không phải judgment call: đây là số liệu chính thức, không phải suy luận). Đối tượng ưu
+      // tiên (UT1/UT2) KHÔNG được đề cập trong thông báo — xem knowledgeGaps.
+      return {
+        schoolId: 'hcmupes',
+        year: method.year,
+        methodId: method.id,
+        confidence: 'exact-verified',
+        eligibility: { status, reasons },
+        score: { value: total30, scale: 30 },
+        missingInputs: [],
+        missingRules: gapExtras.missingRules,
+        missingRequirements: [...missingRequirements, ...gapExtras.missingRequirements],
+        explanation,
+        evidence: hcmupesGdtcThresholdEvidence.evidence,
+      };
     }
   }
 
@@ -87,6 +107,6 @@ export function evaluateHcmupesAdmission(profile: ApplicantProfile, context: Hcm
     missingRules: gapExtras.missingRules,
     missingRequirements: [...missingRequirements, ...gapExtras.missingRequirements],
     explanation,
-    evidence: [{ sourceId: 'hcmupes-gdtc-threshold-2026', location: 'Thông báo 05/TB-HĐTS, mục 1', verification: 'verified', effectiveYear: 2026 }],
+    evidence: hcmupesGdtcThresholdEvidence.evidence,
   };
 }

@@ -35,7 +35,7 @@ describe('HCMUPES THPT + năng khiếu TDTT eligibility 2026 (Giáo dục thể 
 
     const result = evaluateHcmupesAdmission(profile, baseCtx);
 
-    expect(result.confidence).toBe('partial');
+    expect(result.confidence).toBe('exact-verified');
     expect(result.eligibility?.status).toBe('ineligible');
     expect(result.evidence).toContainEqual(expect.objectContaining({ sourceId: 'hcmupes-gdtc-threshold-2026' }));
   });
@@ -46,6 +46,8 @@ describe('HCMUPES THPT + năng khiếu TDTT eligibility 2026 (Giáo dục thể 
     const result = evaluateHcmupesAdmission(profile, baseCtx);
 
     expect(result.eligibility?.status).toBe('eligible');
+    expect(result.confidence).toBe('exact-verified');
+    expect(result.score).toEqual({ value: 19, scale: 30 });
   });
 
   it('applies the lower KV1 18.25/30 threshold for zone-1 applicants', () => {
@@ -59,7 +61,7 @@ describe('HCMUPES THPT + năng khiếu TDTT eligibility 2026 (Giáo dục thể 
   it('routes through generic evaluateSchool and evaluateSchools adapters', () => {
     const profile: ApplicantProfile = { thpt: { scores: { math: 6, biology: 6 } }, priority: { region: 'KV3' } };
 
-    expect(evaluateSchool(profile, 'hcmupes', { context: baseCtx }).status).toBe('eligible');
-    expect(evaluateSchools(profile, ['hcmupes'], { hcmupes: baseCtx })[0].status).toBe('eligible');
+    expect(evaluateSchool(profile, 'hcmupes', { context: baseCtx }).status).toBe('calculated');
+    expect(evaluateSchools(profile, ['hcmupes'], { hcmupes: baseCtx })[0].status).toBe('calculated');
   });
 });

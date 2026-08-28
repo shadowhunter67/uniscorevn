@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 225,
       admissionDataAvailable: 225,
-      eligibilitySupported: 28,
-      calculatorSupported: 79,
+      eligibilitySupported: 27,
+      calculatorSupported: 80,
       partialCalculator: 3,
-      fullyVerified: 76,
+      fullyVerified: 77,
       catalogOnly: 42,
     });
   });
@@ -161,7 +161,9 @@ describe('institution coverage statistics', () => {
     expect(deriveInstitutionSupportStatus(schoolRegistry.fbu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.ush)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnuump)).toBe('verified-calculator');
-    expect(deriveInstitutionSupportStatus(schoolRegistry.hcmupes)).toBe('eligibility-only');
+    // Batch (2026-08-28): HCMUPES graduated to verified-calculator — Thông báo 05/TB-HĐTS công bố
+    // ĐẦY ĐỦ bảng ngưỡng theo khu vực ưu tiên (KV1-KV3), không cần judgment call cho điểm ưu tiên.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.hcmupes)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnuulis)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hce)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hul)).toBe('verified-calculator');
