@@ -72,6 +72,7 @@ import { dtuModule } from './dtu';
 import { uahModule } from './uah';
 import { vguModule } from './vgu';
 import { hpu2Module } from './hpu2';
+import { hustModule } from './hust';
 import { apdModule } from './apd';
 import { bduModule } from './bdu';
 import { bvuModule } from './bvu';
@@ -231,6 +232,7 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   uah: uahModule,
   vgu: vguModule,
   hpu2: hpu2Module,
+  hust: hustModule,
   apd: apdModule,
   bdu: bduModule,
   bvu: bvuModule,

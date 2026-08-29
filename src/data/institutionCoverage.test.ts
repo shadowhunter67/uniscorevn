@@ -66,7 +66,7 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 225,
       admissionDataAvailable: 225,
-      eligibilitySupported: 22,
+      eligibilitySupported: 23,
       calculatorSupported: 85,
       partialCalculator: 3,
       fullyVerified: 82,
@@ -79,17 +79,20 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(118);
+    expect(researchedOnly).toBe(117);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
-      'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'hust', 'tmu', 'haui', 'aof', 'bav', 'hanu', 'hou',
+      'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'tmu', 'haui', 'aof', 'bav', 'hanu', 'hou',
       'ntu', 'qnu', 'hueu',
       'hpmu', 'udn',
       'hmu', 'tlu', 'uth', 'phenikaa', 'thanglong', 'rmitvn', 'vinuni',
     ]) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('researched');
     }
-    for (const schoolId of ['vnuf', 'vgu', 'hpu2']) {
+    // Batch (2026-08-29): HUST graduated to eligibility-only — official ts.hust.edu.vn 2026
+    // quality-assurance threshold read via vision from the embedded image, banded by khối nhóm
+    // ngành (Kỹ thuật >=20/30; Kinh tế/Giáo dục/Ngoại ngữ >=19,5/30); no per-program mapping found.
+    for (const schoolId of ['vnuf', 'vgu', 'hpu2', 'hust']) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
     }
     // Batch (2026-08-28): FPTU (điều kiện tổ hợp thô, mọi ngành) and HCMUE (ngưỡng theo ngành, 47
