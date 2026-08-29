@@ -102,6 +102,7 @@ import { aofAdmissionMethods } from '../schools/aof/methods';
 import { bavAdmissionMethods } from '../schools/bav/methods';
 import { phenikaaAdmissionMethods } from '../schools/phenikaa/methods';
 import { houAdmissionMethods } from '../schools/hou/methods';
+import { lhuAdmissionMethods } from '../schools/lhu/methods';
 import { vaaAdmissionMethods } from '../schools/vaa/methods';
 import { vnulawAdmissionMethods } from '../schools/vnulaw/methods';
 import { eautAdmissionMethods } from '../schools/eaut/methods';
@@ -233,6 +234,7 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   bav: bavAdmissionMethods,
   phenikaa: phenikaaAdmissionMethods,
   hou: houAdmissionMethods,
+  lhu: lhuAdmissionMethods,
   vaa: vaaAdmissionMethods,
   vnulaw: vnulawAdmissionMethods,
   vnuump: vnuumpAdmissionMethods,

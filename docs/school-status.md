@@ -2,7 +2,7 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (87)
+## Calculator đã xác minh (88)
 
 - **AJC** — Học viện Báo chí và Tuyên truyền
 - **APD** — Hoc vien Chinh sach va Phat trien
@@ -49,6 +49,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HUTECH** — Trường Đại học Công nghệ TP. Hồ Chí Minh
 - **IU** — Trường Đại học Quốc tế – ĐHQG TP.HCM
 - **IUH** — Trường Đại học Công nghiệp Thành phố Hồ Chí Minh
+- **LHU** — Trường Đại học Lạc Hồng
 - **LTVUni** — Trường Đại học Lương Thế Vinh
 - **NCTU** — Truong Dai hoc Nam Can Tho
 - **NLU** — Trường Đại học Nông Lâm TP.HCM
@@ -125,7 +126,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-LS** — Truong Dai hoc Luat - Dai hoc Quoc gia Ha Noi
 - **VNUF** — Truong Dai hoc Lam nghiep
 
-## Đã research, chưa đủ để tính (111)
+## Đã research, chưa đủ để tính (110)
 
 - **AADAA** — Học viện Phòng không - Không quân
 - **ACTVN** — Học viện Kỹ thuật Mật mã
@@ -166,7 +167,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HUPES** — Trường Đại học Sư phạm Thể dục Thể thao Hà Nội
 - **HVU** — Trường Đại học Hùng Vương
 - **KBU** — Trường Đại học Kinh Bắc
-- **LHU** — Trường Đại học Lạc Hồng
 - **MAL** — Học viện Hậu cần
 - **MDU** — Trường Đại học Miền Đông
 - **MKU** — Trường Đại học Cửu Long

@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 225,
       admissionDataAvailable: 225,
       eligibilitySupported: 24,
-      calculatorSupported: 90,
+      calculatorSupported: 91,
       partialCalculator: 3,
-      fullyVerified: 87,
+      fullyVerified: 88,
       catalogOnly: 42,
     });
   });
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(111);
+    expect(researchedOnly).toBe(110);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'tmu', 'hanu',
@@ -230,6 +230,15 @@ describe('institution coverage statistics', () => {
     // ưu tiên KV/ĐT được cộng vào tổng trước khi so ngưỡng; giá trị bảng dùng judgment call chuẩn
     // quốc gia (nguồn im lặng đúng phần này). 86 -> 87.
     expect(deriveInstitutionSupportStatus(schoolRegistry.hou)).toBe('verified-calculator');
+    // Batch (2026-08-30): LHU (Trường Đại học Lạc Hồng) graduated to verified-calculator — a prior
+    // batch (2026-08-24) left this researched-only because tuyensinh.lhu.edu.vn exposed no
+    // extractable numeric text. This batch fetched lhu.edu.vn/640/52289/... (the "năm học 2026-2027"
+    // page, distinct from a similarly-named but stale "2025-2026" page still live on the same
+    // domain) directly via curl and confirmed verbatim "Điểm môn 1 + Điểm môn 2 + Điểm môn 3 >= 15
+    // điểm" (all ngành except Dược/Luật/Luật kinh tế, which follow a separate MOET-published
+    // threshold, not modeled). Priority silent -> judgment call chuẩn quốc gia, same as schools/utm.
+    // 87 -> 88.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.lhu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnuulis)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hce)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hul)).toBe('verified-calculator');

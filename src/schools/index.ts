@@ -103,6 +103,7 @@ import { aofModule } from './aof';
 import { bavModule } from './bav';
 import { phenikaaModule } from './phenikaa';
 import { houModule } from './hou';
+import { lhuModule } from './lhu';
 import { vaaModule } from './vaa';
 import { vnulawModule } from './vnulaw';
 import { vnuumpModule } from './vnuump';
@@ -272,6 +273,7 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   bav: bavModule,
   phenikaa: phenikaaModule,
   hou: houModule,
+  lhu: lhuModule,
   vaa: vaaModule,
   vnulaw: vnulawModule,
   vnuump: vnuumpModule,

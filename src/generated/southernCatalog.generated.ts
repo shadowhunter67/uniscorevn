@@ -147,7 +147,7 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     url: 'https://tuyensinh.lhu.edu.vn/',
     checkedAt: '2026-08-24',
     note:
-      'Batch 11 (2026-08-24): official tuyensinh.lhu.edu.vn portal fetched directly, confirming 5 admission methods (THPT exam; học bạ THPT; ĐGNL; V-SAT computer-based test >= 250; direct admission) exist for 2026, but the portal page itself does not expose numeric thresholds or subject combinations in extractable text. Secondary press (search-engine summary) reports a general 15/30 THPT floor with Dược/Luật/Luật kinh tế instead following the MOET-published health/law ngưỡng đảm bảo chất lượng đầu vào (announced 08/07/2026), but this was not cross-verified against lhu.edu.vn primary text, and the MOET-governed floor has no matching runtime rule yet. Left at researched; do not fabricate numbers.',
+      'Superseded (2026-08-30 batch): verified-calculator upgrade shipped. Batch 11 (2026-08-24) found tuyensinh.lhu.edu.vn portal exposed no extractable numeric text and left this researched-only. This batch fetched lhu.edu.vn/640/52289/... (the "năm học 2026-2027" admission-method announcement, distinct from an older lhu.edu.vn/tuyensinh.lhu.edu.vn page confusingly still live under "năm học 2025-2026" — dates cross-checked to avoid picking up last year\'s cycle) directly via curl, HTTP 200, real text (not image-embedded). Confirmed verbatim: "Điểm môn 1 + Điểm môn 2 + Điểm môn 3 ≥ 15 điểm" (thang 30, phương thức thi TN THPT), applying to all ngành except Dược/Luật/Luật kinh tế (their threshold instead follows the MOET-published ngưỡng, announced 08/07/2026 — still not modeled, knowledge gap). Source is silent on priority points either way — standard national judgment call applied (Điều 7 Thông tư 06/2026/TT-BGDĐT), same precedent as schools/utm. See normalized/runtime-source-snapshot/lhu/sources.ts. This entry is unused because lhu is now in explicitRuntimeSchoolIds; kept only as a research trail.',
   },
   mku: {
     sourceId: 'mku-admission-2026',
@@ -434,7 +434,7 @@ export const southernCatalogKnowledgeGap = {
  * official PDF directly (Thông báo 197/TB-ĐHYDCT, 09/07/2026) — a real text-layer PDF, not a scan.
  * 'dthu' too — shipped eligibility-only for 53/59 majors (3 groups, 15/20/20 thang 30), sourced by
  * downloading and reading the linked official PDF (Phụ lục I, 09/07/2026) directly. */
-const explicitRuntimeSchoolIds = new Set(['pntu', 'uah', 'bdu', 'bvu', 'gdu', 'nctu', 'tdu', 'tgu', 'ttu', 'vaa', 'ctump', 'dthu', 'nlu']);
+const explicitRuntimeSchoolIds = new Set(['pntu', 'uah', 'bdu', 'bvu', 'gdu', 'nctu', 'tdu', 'tgu', 'ttu', 'vaa', 'ctump', 'dthu', 'nlu', 'lhu']);
 const southernCatalogRuntimeSchools = southernCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const southernCatalogMethods: AdmissionMethodDescriptor[] = southernCatalogRuntimeSchools.map((school) => ({
