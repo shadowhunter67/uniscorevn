@@ -97,6 +97,7 @@ import { uhdModule } from './uhd';
 import { umtModule } from './umt';
 import { utmModule } from './utm';
 import { uttModule } from './utt';
+import { hmuModule } from './hmu';
 import { vaaModule } from './vaa';
 import { vnulawModule } from './vnulaw';
 import { vnuumpModule } from './vnuump';
@@ -260,6 +261,7 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   umt: umtModule,
   utm: utmModule,
   utt: uttModule,
+  hmu: hmuModule,
   vaa: vaaModule,
   vnulaw: vnulawModule,
   vnuump: vnuumpModule,

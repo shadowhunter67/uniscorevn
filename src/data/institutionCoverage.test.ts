@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 225,
       admissionDataAvailable: 225,
       eligibilitySupported: 23,
-      calculatorSupported: 85,
+      calculatorSupported: 86,
       partialCalculator: 3,
-      fullyVerified: 82,
+      fullyVerified: 83,
       catalogOnly: 42,
     });
   });
@@ -79,13 +79,13 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(117);
+    expect(researchedOnly).toBe(116);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'tmu', 'haui', 'aof', 'bav', 'hanu', 'hou',
       'ntu', 'qnu', 'hueu',
       'hpmu', 'udn',
-      'hmu', 'tlu', 'uth', 'phenikaa', 'thanglong', 'rmitvn', 'vinuni',
+      'tlu', 'uth', 'phenikaa', 'thanglong', 'rmitvn', 'vinuni',
     ]) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('researched');
     }
@@ -192,6 +192,12 @@ describe('institution coverage statistics', () => {
     // (ĐXT = tổng 3 môn + điểm ưu tiên) + bảng ngưỡng đầy đủ 75 mã xét tuyển, ngưỡng đã gồm điểm
     // ưu tiên; giá trị bảng KV/ĐT dùng judgment call chuẩn quốc gia. 81 -> 82.
     expect(deriveInstitutionSupportStatus(schoolRegistry.utt)).toBe('verified-calculator');
+    // Batch (2026-08-29): HMU shipped as a brand-new verified-calculator module — Thông báo số
+    // 3142/TB-ĐHYHN (10/07/2026) công bố ngưỡng đảm bảo chất lượng đầu vào theo 20 mã ngành (tổng
+    // thô 3 môn, không hệ số, không cộng điểm ưu tiên/điểm khuyến khích) — no primary PDF located,
+    // corroborated across multiple independent official-citing press sources (cross-checked).
+    // 82 -> 83.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.hmu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnuulis)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hce)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hul)).toBe('verified-calculator');

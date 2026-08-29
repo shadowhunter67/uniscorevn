@@ -92,6 +92,7 @@ import { uhdComparisonAdapter } from '../schools/uhd/comparison';
 import { umtComparisonAdapter } from '../schools/umt/comparison';
 import { utmComparisonAdapter } from '../schools/utm/comparison';
 import { uttComparisonAdapter } from '../schools/utt/comparison';
+import { hmuComparisonAdapter } from '../schools/hmu/comparison';
 import { vaaComparisonAdapter } from '../schools/vaa/comparison';
 import { vnulawComparisonAdapter } from '../schools/vnulaw/comparison';
 import { vnuumpComparisonAdapter } from '../schools/vnuump/comparison';
@@ -218,6 +219,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   umtComparisonAdapter,
   utmComparisonAdapter,
   uttComparisonAdapter,
+  hmuComparisonAdapter,
   vaaComparisonAdapter,
   vnulawComparisonAdapter,
   vnuumpComparisonAdapter,
@@ -240,7 +242,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
         'huce', 'dav', 'hlu', 'humg', 'hdu', 'vmu', 'ttn', 'tnu', 'dlu', 'vnuulis',
         'hce', 'hul', 'husc', 'huaf', 'hueedu',
         'dut', 'dueudn', 'uedudn', 'uflsudn', 'uteudn', 'vku',
-        'hup', 'ajc', 'vnuf', 'dtu', 'hpu2', 'hust', 'fptu', 'hubt', 'dainam', 'vnulaw', 'vnuump',
+        'hup', 'ajc', 'vnuf', 'dtu', 'hpu2', 'hust', 'hmu', 'fptu', 'hubt', 'dainam', 'vnulaw', 'vnuump',
       ].includes(adapter.schoolId)
   ),
   ...finalCatalogComparisonAdapters,
