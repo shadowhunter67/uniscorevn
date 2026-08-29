@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 225,
       admissionDataAvailable: 225,
       eligibilitySupported: 24,
-      calculatorSupported: 89,
+      calculatorSupported: 90,
       partialCalculator: 3,
-      fullyVerified: 86,
+      fullyVerified: 87,
       catalogOnly: 42,
     });
   });
@@ -79,10 +79,10 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(112);
+    expect(researchedOnly).toBe(111);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
-      'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'tmu', 'hanu', 'hou',
+      'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'tmu', 'hanu',
       'ntu', 'qnu', 'hueu',
       'hpmu', 'udn',
       'tlu', 'uth', 'thanglong', 'rmitvn', 'vinuni',
@@ -222,6 +222,14 @@ describe('institution coverage statistics', () => {
     // không nhân hệ số, không điểm cộng); 2 CTĐT tài năng loại trừ tuyệt đối điểm ưu tiên, các ngành
     // khác dùng judgment call chuẩn quốc gia. 85 -> 86.
     expect(deriveInstitutionSupportStatus(schoolRegistry.phenikaa)).toBe('verified-calculator');
+    // Batch (2026-08-29): HOU (Trường Đại học Mở Hà Nội) shipped as a brand-new verified-calculator
+    // module — hou.edu.vn "Ngưỡng bảo đảm chất lượng đầu vào Đại học chính quy năm 2026..." (đọc
+    // trực tiếp qua curl, ảnh PNG gốc, đọc bằng vision) công bố ngưỡng theo 22 ngành; batch này mô
+    // hình hoá 16/22 ngành dùng tổ hợp THPT chuẩn (loại 4 ngành năng khiếu vẽ + Ngôn ngữ Anh/Trung
+    // dùng tổ hợp hệ số 2 chưa suy diễn chắc chắn được cách quy đổi). Nguồn xác nhận TRỰC TIẾP điểm
+    // ưu tiên KV/ĐT được cộng vào tổng trước khi so ngưỡng; giá trị bảng dùng judgment call chuẩn
+    // quốc gia (nguồn im lặng đúng phần này). 86 -> 87.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.hou)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnuulis)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hce)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hul)).toBe('verified-calculator');
