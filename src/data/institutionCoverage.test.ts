@@ -66,7 +66,7 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 225,
       admissionDataAvailable: 225,
-      eligibilitySupported: 23,
+      eligibilitySupported: 24,
       calculatorSupported: 87,
       partialCalculator: 3,
       fullyVerified: 84,
@@ -79,10 +79,10 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(115);
+    expect(researchedOnly).toBe(114);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
-      'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'tmu', 'aof', 'bav', 'hanu', 'hou',
+      'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'tmu', 'bav', 'hanu', 'hou',
       'ntu', 'qnu', 'hueu',
       'hpmu', 'udn',
       'tlu', 'uth', 'phenikaa', 'thanglong', 'rmitvn', 'vinuni',
@@ -95,6 +95,11 @@ describe('institution coverage statistics', () => {
     for (const schoolId of ['vnuf', 'vgu', 'hpu2', 'hust']) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
     }
+    // Batch (2026-08-29): AOF (Học viện Tài chính) shipped as a brand-new eligibility-only module —
+    // official PDF "Thông tin tuyển sinh đại học năm 2026" (hvtc.edu.vn, downloaded via curl)
+    // publishes the phương thức 3 (THPT-exam) threshold banded by campus/program-type (16-20/30),
+    // not per individual program — no per-program mapping extracted in this batch.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.aof)).toBe('eligibility-only');
     // Batch (2026-08-28): FPTU (điều kiện tổ hợp thô, mọi ngành) and HCMUE (ngưỡng theo ngành, 47
     // ngành trụ sở chính TP.HCM) graduated to verified-calculator — reaches 62 verified.
     expect(deriveInstitutionSupportStatus(schoolRegistry.fptu)).toBe('verified-calculator');

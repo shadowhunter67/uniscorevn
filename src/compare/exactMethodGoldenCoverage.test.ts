@@ -37,6 +37,7 @@ import { utmAdmissionMethods } from '../schools/utm/methods';
 import { uttAdmissionMethods } from '../schools/utt/methods';
 import { hmuAdmissionMethods } from '../schools/hmu/methods';
 import { hauiAdmissionMethods } from '../schools/haui/methods';
+import { aofAdmissionMethods } from '../schools/aof/methods';
 
 import { hcmutGoldenCases, hcmutNoDgnlGoldenCase } from '../schools/hcmut/__fixtures__/officialExamples2026';
 import { uehGoldenCases, uehOfficialFinalConversionCase } from '../schools/ueh/__fixtures__/officialExamples2026';
@@ -123,6 +124,7 @@ const allMethodsBySchool = {
   utt: uttAdmissionMethods,
   hmu: hmuAdmissionMethods,
   haui: hauiAdmissionMethods,
+  aof: aofAdmissionMethods,
 };
 
 function methodKey(schoolId: string, methodId: string): string {

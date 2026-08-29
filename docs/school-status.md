@@ -95,9 +95,10 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **NEU** — Trường Đại học Kinh tế Quốc dân
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 
-## Chỉ kiểm tra điều kiện/ngưỡng (23)
+## Chỉ kiểm tra điều kiện/ngưỡng (24)
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
+- **AOF** — Học viện Tài chính
 - **DHV** — Trường Đại học Hùng Vương TP.HCM
 - **DUE** — Trường Đại học Kinh tế - Đại học Đà Nẵng
 - **DUT** — Trường Đại học Bách khoa - Đại học Đà Nẵng
@@ -121,12 +122,11 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-LS** — Truong Dai hoc Luat - Dai hoc Quoc gia Ha Noi
 - **VNUF** — Truong Dai hoc Lam nghiep
 
-## Đã research, chưa đủ để tính (115)
+## Đã research, chưa đủ để tính (114)
 
 - **AADAA** — Học viện Phòng không - Không quân
 - **ACTVN** — Học viện Kỹ thuật Mật mã
 - **AOC** — Trường Đại học Sĩ quan Pháo binh
-- **AOF** — Học viện Tài chính
 - **BAV** — Học viện Ngân hàng
 - **BGA** — Học viện Biên phòng
 - **BLU** — Trường Đại học Bạc Liêu
