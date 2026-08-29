@@ -60,6 +60,7 @@ import { thanhdoSources } from './thanhdo/sources';
 import { uedudnSources } from './uedudn/sources';
 import { dainamSources } from './dainam/sources';
 import { utmSources } from './utm/sources';
+import { uttSources } from './utt/sources';
 
 function withSchoolId(schoolId: string, sources: Omit<AdmissionSource, 'schoolId'>[]): AdmissionSource[] {
   return sources.map((source) => ({ ...source, schoolId }));
@@ -126,6 +127,7 @@ export const thanhdoSourceRegistry: AdmissionSource[] = withSchoolId('thanhdo', 
 export const uedudnSourceRegistry: AdmissionSource[] = withSchoolId('uedudn', uedudnSources);
 export const dainamSourceRegistry: AdmissionSource[] = withSchoolId('dainam', dainamSources);
 export const utmSourceRegistry: AdmissionSource[] = withSchoolId('utm', utmSources);
+export const uttSourceRegistry: AdmissionSource[] = withSchoolId('utt', uttSources);
 
 export const schoolSourceRegistries: Record<string, AdmissionSource[]> = {
   hcmut: hcmutSourceRegistry,
@@ -189,6 +191,7 @@ export const schoolSourceRegistries: Record<string, AdmissionSource[]> = {
   uedudn: uedudnSourceRegistry,
   dainam: dainamSourceRegistry,
   utm: utmSourceRegistry,
+  utt: uttSourceRegistry,
 };
 
 export const allAdmissionSources: AdmissionSource[] = [
@@ -253,4 +256,5 @@ export const allAdmissionSources: AdmissionSource[] = [
   ...uedudnSourceRegistry,
   ...dainamSourceRegistry,
   ...utmSourceRegistry,
+  ...uttSourceRegistry,
 ];

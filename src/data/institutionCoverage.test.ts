@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 225,
       admissionDataAvailable: 225,
-      eligibilitySupported: 23,
-      calculatorSupported: 84,
+      eligibilitySupported: 22,
+      calculatorSupported: 85,
       partialCalculator: 3,
-      fullyVerified: 81,
+      fullyVerified: 82,
       catalogOnly: 42,
     });
   });
@@ -184,6 +184,11 @@ describe('institution coverage statistics', () => {
     // tế); điểm ưu tiên KV/ĐT dùng judgment call chuẩn quốc gia (nguồn im lặng đúng điểm này).
     // 80 -> 81.
     expect(deriveInstitutionSupportStatus(schoolRegistry.utm)).toBe('verified-calculator');
+    // Batch (2026-08-29): UTT graduated to verified-calculator — utt.edu.vn "Thông báo điểm sàn
+    // đăng ký xét tuyển giữa các phương thức xét tuyển năm 2026" xác nhận công thức trực tiếp
+    // (ĐXT = tổng 3 môn + điểm ưu tiên) + bảng ngưỡng đầy đủ 75 mã xét tuyển, ngưỡng đã gồm điểm
+    // ưu tiên; giá trị bảng KV/ĐT dùng judgment call chuẩn quốc gia. 81 -> 82.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.utt)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnuulis)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hce)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hul)).toBe('verified-calculator');

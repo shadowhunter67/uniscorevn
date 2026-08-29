@@ -34,6 +34,7 @@ import { thanhdoAdmissionMethods } from '../schools/thanhdo/methods';
 import { uedudnAdmissionMethods } from '../schools/uedudn/methods';
 import { dainamAdmissionMethods } from '../schools/dainam/methods';
 import { utmAdmissionMethods } from '../schools/utm/methods';
+import { uttAdmissionMethods } from '../schools/utt/methods';
 
 import { hcmutGoldenCases, hcmutNoDgnlGoldenCase } from '../schools/hcmut/__fixtures__/officialExamples2026';
 import { uehGoldenCases, uehOfficialFinalConversionCase } from '../schools/ueh/__fixtures__/officialExamples2026';
@@ -66,6 +67,7 @@ import { thanhdoThptExamExactGoldenCases } from '../schools/thanhdo/__fixtures__
 import { uedudnThptExamExactGoldenCases } from '../schools/uedudn/__fixtures__/officialExamples2026';
 import { dainamThptExamExactGoldenCases } from '../schools/dainam/__fixtures__/officialExamples2026';
 import { utmThptExamExactGoldenCases } from '../schools/utm/__fixtures__/officialExamples2026';
+import { uttThptExamExactGoldenCases } from '../schools/utt/__fixtures__/officialExamples2026';
 
 /**
  * Invariant CI bắt buộc: MỌI method có `capabilities.exactCalculator === true` phải có ÍT NHẤT 1
@@ -114,6 +116,7 @@ const allMethodsBySchool = {
   uedudn: uedudnAdmissionMethods,
   dainam: dainamAdmissionMethods,
   utm: utmAdmissionMethods,
+  utt: uttAdmissionMethods,
 };
 
 function methodKey(schoolId: string, methodId: string): string {
@@ -171,6 +174,7 @@ const allGoldenCases = [
   ...uedudnThptExamExactGoldenCases,
   ...dainamThptExamExactGoldenCases,
   ...utmThptExamExactGoldenCases,
+  ...uttThptExamExactGoldenCases,
 ];
 
 const coveredMethods = new Set(allGoldenCases.map((goldenCase) => methodKey(goldenCase.schoolId, goldenCase.methodId)));
@@ -239,6 +243,7 @@ describe('exact method golden coverage invariant', () => {
         'uedudn:uedudn-thpt-exam-exact-2026',
         'dainam:dainam-thpt-exam-exact-2026',
         'utm:utm-thpt-exam-exact-2026',
+        'utt:utt-thpt-exam-exact-2026',
       ].sort()
     );
   });
