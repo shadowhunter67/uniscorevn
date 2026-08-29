@@ -97,6 +97,7 @@ import { umtAdmissionMethods } from '../schools/umt/methods';
 import { utmAdmissionMethods } from '../schools/utm/methods';
 import { uttAdmissionMethods } from '../schools/utt/methods';
 import { hmuAdmissionMethods } from '../schools/hmu/methods';
+import { hauiAdmissionMethods } from '../schools/haui/methods';
 import { vaaAdmissionMethods } from '../schools/vaa/methods';
 import { vnulawAdmissionMethods } from '../schools/vnulaw/methods';
 import { eautAdmissionMethods } from '../schools/eaut/methods';
@@ -223,6 +224,7 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   utm: utmAdmissionMethods,
   utt: uttAdmissionMethods,
   hmu: hmuAdmissionMethods,
+  haui: hauiAdmissionMethods,
   vaa: vaaAdmissionMethods,
   vnulaw: vnulawAdmissionMethods,
   vnuump: vnuumpAdmissionMethods,

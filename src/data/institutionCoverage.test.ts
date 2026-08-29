@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 225,
       admissionDataAvailable: 225,
       eligibilitySupported: 23,
-      calculatorSupported: 86,
+      calculatorSupported: 87,
       partialCalculator: 3,
-      fullyVerified: 83,
+      fullyVerified: 84,
       catalogOnly: 42,
     });
   });
@@ -79,10 +79,10 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(116);
+    expect(researchedOnly).toBe(115);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
-      'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'tmu', 'haui', 'aof', 'bav', 'hanu', 'hou',
+      'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'tmu', 'aof', 'bav', 'hanu', 'hou',
       'ntu', 'qnu', 'hueu',
       'hpmu', 'udn',
       'tlu', 'uth', 'phenikaa', 'thanglong', 'rmitvn', 'vinuni',
@@ -198,6 +198,11 @@ describe('institution coverage statistics', () => {
     // corroborated across multiple independent official-citing press sources (cross-checked).
     // 82 -> 83.
     expect(deriveInstitutionSupportStatus(schoolRegistry.hmu)).toBe('verified-calculator');
+    // Batch (2026-08-29): HAUI graduated to verified-calculator — haui.edu.vn "Ngưỡng đảm bảo chất
+    // lượng đầu vào và Quy tắc quy đổi điểm xét tuyển..." (đọc trực tiếp qua curl) công bố bảng
+    // ngưỡng đầy đủ 72 mã xét tuyển; điểm ưu tiên KV/ĐT dùng judgment call chuẩn quốc gia (nguồn
+    // im lặng ở mục phương thức 3). 83 -> 84.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.haui)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnuulis)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hce)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hul)).toBe('verified-calculator');

@@ -65,6 +65,7 @@ import { vnulawSources } from './vnulaw/sources';
 import { hustSources } from './hust/sources';
 import { uttSources } from './utt/sources';
 import { hmuSources } from './hmu/sources';
+import { hauiSources } from './haui/sources';
 
 function withSchoolId(schoolId: string, sources: Omit<AdmissionSource, 'schoolId'>[]): AdmissionSource[] {
   return sources.map((source) => ({ ...source, schoolId }));
@@ -136,6 +137,7 @@ export const vnulawSourceRegistry: AdmissionSource[] = withSchoolId('vnulaw', vn
 export const hustSourceRegistry: AdmissionSource[] = withSchoolId('hust', hustSources);
 export const uttSourceRegistry: AdmissionSource[] = withSchoolId('utt', uttSources);
 export const hmuSourceRegistry: AdmissionSource[] = withSchoolId('hmu', hmuSources);
+export const hauiSourceRegistry: AdmissionSource[] = withSchoolId('haui', hauiSources);
 
 export const schoolSourceRegistries: Record<string, AdmissionSource[]> = {
   hcmut: hcmutSourceRegistry,
@@ -201,6 +203,7 @@ export const schoolSourceRegistries: Record<string, AdmissionSource[]> = {
   utm: utmSourceRegistry,
   utt: uttSourceRegistry,
   hmu: hmuSourceRegistry,
+  haui: hauiSourceRegistry,
 };
 
 export const allAdmissionSources: AdmissionSource[] = [
@@ -270,4 +273,5 @@ export const allAdmissionSources: AdmissionSource[] = [
   ...vnulawSourceRegistry,
   ...hustSourceRegistry,
   ...hmuSourceRegistry,
+  ...hauiSourceRegistry,
 ];
