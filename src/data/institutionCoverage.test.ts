@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 225,
       admissionDataAvailable: 225,
       eligibilitySupported: 24,
-      calculatorSupported: 88,
+      calculatorSupported: 89,
       partialCalculator: 3,
-      fullyVerified: 85,
+      fullyVerified: 86,
       catalogOnly: 42,
     });
   });
@@ -79,13 +79,13 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(113);
+    expect(researchedOnly).toBe(112);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'tmu', 'hanu', 'hou',
       'ntu', 'qnu', 'hueu',
       'hpmu', 'udn',
-      'tlu', 'uth', 'phenikaa', 'thanglong', 'rmitvn', 'vinuni',
+      'tlu', 'uth', 'thanglong', 'rmitvn', 'vinuni',
     ]) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('researched');
     }
@@ -216,6 +216,12 @@ describe('institution coverage statistics', () => {
     // loại trừ vì ngưỡng chưa công bố); điểm ưu tiên dùng công thức BAV tự công bố với giá trị bảng
     // theo khung quốc gia (judgment call). 84 -> 85.
     expect(deriveInstitutionSupportStatus(schoolRegistry.bav)).toBe('verified-calculator');
+    // Batch (2026-08-29): Phenikaa shipped as a brand-new verified-calculator module —
+    // phenikaa-uni.edu.vn "công bố ngưỡng điểm nhận hồ sơ xét tuyển..." (bảng ngưỡng dạng ảnh, đọc
+    // bằng vision) công bố ngưỡng theo 7 nhóm lĩnh vực/ngành nêu đích danh (công thức đơn giản:
+    // không nhân hệ số, không điểm cộng); 2 CTĐT tài năng loại trừ tuyệt đối điểm ưu tiên, các ngành
+    // khác dùng judgment call chuẩn quốc gia. 85 -> 86.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.phenikaa)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnuulis)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hce)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hul)).toBe('verified-calculator');

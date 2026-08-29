@@ -2,7 +2,7 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (85)
+## Calculator đã xác minh (86)
 
 - **AJC** — Học viện Báo chí và Tuyên truyền
 - **APD** — Hoc vien Chinh sach va Phat trien
@@ -53,6 +53,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **NLU** — Trường Đại học Nông Lâm TP.HCM
 - **NTU-HN** — Truong Dai hoc Nguyen Trai
 - **OU** — Trường Đại học Mở Thành phố Hồ Chí Minh
+- **Phenikaa** — Trường Đại học Phenikaa
 - **PNTU** — Trường Đại học Y khoa Phạm Ngọc Thạch
 - **PTIT** — Học viện Công nghệ Bưu chính Viễn thông
 - **SGU** — Trường Đại học Sài Gòn
@@ -123,7 +124,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-LS** — Truong Dai hoc Luat - Dai hoc Quoc gia Ha Noi
 - **VNUF** — Truong Dai hoc Lam nghiep
 
-## Đã research, chưa đủ để tính (113)
+## Đã research, chưa đủ để tính (112)
 
 - **AADAA** — Học viện Phòng không - Không quân
 - **ACTVN** — Học viện Kỹ thuật Mật mã
@@ -184,7 +185,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **OCP** — Trường Đại học Sĩ quan Chính trị
 - **PCTU** — Trường Đại học Phan Châu Trinh
 - **PDU** — Trường Đại học Phạm Văn Đồng
-- **Phenikaa** — Trường Đại học Phenikaa
 - **PPA** — Học viện Cảnh sát Nhân dân
 - **PPU-CAND** — Trường Đại học Cảnh sát Nhân dân
 - **PSA** — Học viện An ninh Nhân dân

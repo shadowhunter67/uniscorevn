@@ -96,6 +96,7 @@ import { hmuComparisonAdapter } from '../schools/hmu/comparison';
 import { hauiComparisonAdapter } from '../schools/haui/comparison';
 import { aofComparisonAdapter } from '../schools/aof/comparison';
 import { bavComparisonAdapter } from '../schools/bav/comparison';
+import { phenikaaComparisonAdapter } from '../schools/phenikaa/comparison';
 import { vaaComparisonAdapter } from '../schools/vaa/comparison';
 import { vnulawComparisonAdapter } from '../schools/vnulaw/comparison';
 import { vnuumpComparisonAdapter } from '../schools/vnuump/comparison';
@@ -226,6 +227,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   hauiComparisonAdapter,
   aofComparisonAdapter,
   bavComparisonAdapter,
+  phenikaaComparisonAdapter,
   vaaComparisonAdapter,
   vnulawComparisonAdapter,
   vnuumpComparisonAdapter,
@@ -248,7 +250,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
         'huce', 'dav', 'hlu', 'humg', 'hdu', 'vmu', 'ttn', 'tnu', 'dlu', 'vnuulis',
         'hce', 'hul', 'husc', 'huaf', 'hueedu',
         'dut', 'dueudn', 'uedudn', 'uflsudn', 'uteudn', 'vku',
-        'hup', 'ajc', 'vnuf', 'dtu', 'hpu2', 'hust', 'hmu', 'haui', 'aof', 'bav', 'fptu', 'hubt', 'dainam', 'vnulaw', 'vnuump',
+        'hup', 'ajc', 'vnuf', 'dtu', 'hpu2', 'hust', 'hmu', 'haui', 'aof', 'bav', 'phenikaa', 'fptu', 'hubt', 'dainam', 'vnulaw', 'vnuump',
       ].includes(adapter.schoolId)
   ),
   ...finalCatalogComparisonAdapters,

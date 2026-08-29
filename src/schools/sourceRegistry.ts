@@ -68,6 +68,7 @@ import { hmuSources } from './hmu/sources';
 import { hauiSources } from './haui/sources';
 import { aofSources } from './aof/sources';
 import { bavSources } from './bav/sources';
+import { phenikaaSources } from './phenikaa/sources';
 
 function withSchoolId(schoolId: string, sources: Omit<AdmissionSource, 'schoolId'>[]): AdmissionSource[] {
   return sources.map((source) => ({ ...source, schoolId }));
@@ -142,6 +143,7 @@ export const hmuSourceRegistry: AdmissionSource[] = withSchoolId('hmu', hmuSourc
 export const hauiSourceRegistry: AdmissionSource[] = withSchoolId('haui', hauiSources);
 export const aofSourceRegistry: AdmissionSource[] = withSchoolId('aof', aofSources);
 export const bavSourceRegistry: AdmissionSource[] = withSchoolId('bav', bavSources);
+export const phenikaaSourceRegistry: AdmissionSource[] = withSchoolId('phenikaa', phenikaaSources);
 
 export const schoolSourceRegistries: Record<string, AdmissionSource[]> = {
   hcmut: hcmutSourceRegistry,
@@ -210,6 +212,7 @@ export const schoolSourceRegistries: Record<string, AdmissionSource[]> = {
   haui: hauiSourceRegistry,
   aof: aofSourceRegistry,
   bav: bavSourceRegistry,
+  phenikaa: phenikaaSourceRegistry,
 };
 
 export const allAdmissionSources: AdmissionSource[] = [
@@ -282,4 +285,5 @@ export const allAdmissionSources: AdmissionSource[] = [
   ...hauiSourceRegistry,
   ...aofSourceRegistry,
   ...bavSourceRegistry,
+  ...phenikaaSourceRegistry,
 ];
