@@ -2,7 +2,7 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (88)
+## Calculator đã xác minh (89)
 
 - **AJC** — Học viện Báo chí và Tuyên truyền
 - **APD** — Hoc vien Chinh sach va Phat trien
@@ -34,6 +34,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HIU** — Trường Đại học Quốc tế Hồng Bàng
 - **HLU** — Trường Đại học Luật Hà Nội
 - **HMU** — Trường Đại học Y Hà Nội
+- **HNMU** — Trường Đại học Thủ đô Hà Nội
 - **HOU** — Trường Đại học Mở Hà Nội
 - **HSU** — Trường Đại học Hoa Sen
 - **HUAF** — Trường Đại học Nông Lâm, Đại học Huế
@@ -126,7 +127,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-LS** — Truong Dai hoc Luat - Dai hoc Quoc gia Ha Noi
 - **VNUF** — Truong Dai hoc Lam nghiep
 
-## Đã research, chưa đủ để tính (110)
+## Đã research, chưa đủ để tính (109)
 
 - **AADAA** — Học viện Phòng không - Không quân
 - **ACTVN** — Học viện Kỹ thuật Mật mã
@@ -156,7 +157,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HCMUNRE** — Trường Đại học Tài nguyên và Môi trường TP.HCM
 - **HDIU** — Trường Đại học Đông Đô
 - **HLUV** — Trường Đại học Hoa Lư
-- **HNMU** — Trường Đại học Thủ đô Hà Nội
 - **HPMU** — Trường Đại học Y Dược Hải Phòng
 - **HTU** — Trường Đại học Hà Tĩnh
 - **HUC** — Trường Đại học Văn hóa Hà Nội

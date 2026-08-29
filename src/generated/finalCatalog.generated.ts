@@ -321,7 +321,7 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     url: 'https://hnmu.edu.vn/tuyen-sinh',
     checkedAt: '2026-08-24',
     note:
-      'Official HNMU (hnmu.edu.vn) admission portal confirmed reachable, listing regular undergraduate, liên thông, and văn bằng 2 admission tracks and referencing a 2026 "Quyết định phê duyệt điểm trúng tuyển" decision, but no floor score, subject-combination table, or per-program threshold is present as readable text on the fetched page (detail lives in linked announcement documents not retrieved this round). Left at researched; do not fabricate thresholds.',
+      'Superseded (2026-08-30 batch): verified-calculator upgrade shipped. Batch 2026-08-24 found hnmu.edu.vn/tuyen-sinh exposed no readable threshold text and left this researched-only. This batch could still not locate a primary PDF/page, but found the threshold verbatim, quoted identically, in TWO independent official-citing press outlets fetched directly via curl (HTTP 200 both): giadinh.suckhoedoisong.vn (13/07/2026) and vietnamnet.vn — same cross-checked-not-verified bar already accepted for schools/hmu. Quoted text: ngưỡng đảm bảo chất lượng đầu vào theo kết quả thi TN THPT 2026, thí sinh khu vực 3, tổng thô 3 môn/bài thi thang 30 không nhân hệ số, không tính điểm cộng: chương trình đào tạo giáo viên 20 điểm (riêng Giáo dục Thể chất 19 điểm cho tổ hợp 3 môn văn hóa); chương trình pháp luật 20 điểm (kèm điều kiện phụ Toán hoặc Văn >=6, not modeled); các ngành/chương trình khác 16 điểm. No priority points added when comparing to threshold (KV3-baseline wording near-identical to schools/hmu — followed the same no-priority-display precedent rather than inventing a judgment call). See normalized/runtime-source-snapshot/hnmu/sources.ts. This entry is unused because hnmu is now in explicitRuntimeSchoolIds; kept only as a research trail.',
   },
   hluv: {
     sourceId: 'hluv-admission-2026',
@@ -819,7 +819,7 @@ export const finalCatalogKnowledgeGap = {
 // shipped eligibility-only, THPT-exam route flat 15/30 (trừ Luật/Tâm lý học chờ Bộ GD&ĐT), nguồn
 // đối chiếu qua Báo Tuổi Trẻ (04/07/2026) vì tuyensinh.dhv.edu.vn không trích được số liệu qua
 // WebFetch.) They stay listed in `finalCatalogSchools` above for identity/location metadata only.
-const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus', 'tuaf', 'uhd', 'umt', 'utm', 'utt', 'eaut', 'vwa', 'hau', 'tbu', 'ltvuni', 'dhv', 'ush', 'hcmupes']);
+const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus', 'tuaf', 'uhd', 'umt', 'utm', 'utt', 'eaut', 'vwa', 'hau', 'tbu', 'ltvuni', 'dhv', 'ush', 'hcmupes', 'hnmu']);
 const finalCatalogRuntimeSchools = finalCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const finalCatalogMethods: AdmissionMethodDescriptor[] = finalCatalogRuntimeSchools.map((school) => ({

@@ -99,6 +99,7 @@ import { bavComparisonAdapter } from '../schools/bav/comparison';
 import { phenikaaComparisonAdapter } from '../schools/phenikaa/comparison';
 import { houComparisonAdapter } from '../schools/hou/comparison';
 import { lhuComparisonAdapter } from '../schools/lhu/comparison';
+import { hnmuComparisonAdapter } from '../schools/hnmu/comparison';
 import { vaaComparisonAdapter } from '../schools/vaa/comparison';
 import { vnulawComparisonAdapter } from '../schools/vnulaw/comparison';
 import { vnuumpComparisonAdapter } from '../schools/vnuump/comparison';
@@ -232,6 +233,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   phenikaaComparisonAdapter,
   houComparisonAdapter,
   lhuComparisonAdapter,
+  hnmuComparisonAdapter,
   vaaComparisonAdapter,
   vnulawComparisonAdapter,
   vnuumpComparisonAdapter,

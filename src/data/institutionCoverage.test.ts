@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 225,
       admissionDataAvailable: 225,
       eligibilitySupported: 24,
-      calculatorSupported: 91,
+      calculatorSupported: 92,
       partialCalculator: 3,
-      fullyVerified: 88,
+      fullyVerified: 89,
       catalogOnly: 42,
     });
   });
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(110);
+    expect(researchedOnly).toBe(109);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'tmu', 'hanu',
@@ -239,6 +239,13 @@ describe('institution coverage statistics', () => {
     // threshold, not modeled). Priority silent -> judgment call chuẩn quốc gia, same as schools/utm.
     // 87 -> 88.
     expect(deriveInstitutionSupportStatus(schoolRegistry.lhu)).toBe('verified-calculator');
+    // Batch (2026-08-30): HNMU (Trường Đại học Thủ đô Hà Nội) graduated to verified-calculator —
+    // no primary PDF located (same as schools/hmu), but the threshold is quoted verbatim and
+    // identically across 2 independent official-citing press outlets (giadinh.suckhoedoisong.vn,
+    // vietnamnet.vn), fetched directly via curl. Ngưỡng theo nhóm ngành, KV3, tổng thô không nhân
+    // hệ số, không tính điểm cộng: giáo viên 20/30 (GDTC 19/30), pháp luật 20/30, khác 16/30. No
+    // priority added to displayed score (same no-priority precedent as schools/hmu). 88 -> 89.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.hnmu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnuulis)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hce)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hul)).toBe('verified-calculator');
