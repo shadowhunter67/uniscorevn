@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 225,
       admissionDataAvailable: 225,
       eligibilitySupported: 24,
-      calculatorSupported: 87,
+      calculatorSupported: 88,
       partialCalculator: 3,
-      fullyVerified: 84,
+      fullyVerified: 85,
       catalogOnly: 42,
     });
   });
@@ -79,10 +79,10 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(114);
+    expect(researchedOnly).toBe(113);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
-      'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'tmu', 'bav', 'hanu', 'hou',
+      'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'tmu', 'hanu', 'hou',
       'ntu', 'qnu', 'hueu',
       'hpmu', 'udn',
       'tlu', 'uth', 'phenikaa', 'thanglong', 'rmitvn', 'vinuni',
@@ -208,6 +208,14 @@ describe('institution coverage statistics', () => {
     // ngưỡng đầy đủ 72 mã xét tuyển; điểm ưu tiên KV/ĐT dùng judgment call chuẩn quốc gia (nguồn
     // im lặng ở mục phương thức 3). 83 -> 84.
     expect(deriveInstitutionSupportStatus(schoolRegistry.haui)).toBe('verified-calculator');
+    // Batch (2026-08-29): BAV shipped as a brand-new verified-calculator module — hvnh.edu.vn
+    // "Thông báo về ngưỡng đảm bảo chất lượng đầu vào..." (Số 3508/TB-HVNH, đọc bằng vision qua PDF
+    // scan) công bố công thức (Toán nhân đôi, quy đổi thang 30) + ngưỡng theo loại chương trình
+    // (chuẩn/CLC 21,50; liên kết quốc tế 19,00); "Thông tin tuyển sinh năm 2026" (QĐ 2028/QĐ-HVNH)
+    // công bố bảng đầy đủ 45 mã xét tuyển với tổ hợp + môn chính (42/45 đưa vào tính toán, 3 mã Luật
+    // loại trừ vì ngưỡng chưa công bố); điểm ưu tiên dùng công thức BAV tự công bố với giá trị bảng
+    // theo khung quốc gia (judgment call). 84 -> 85.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.bav)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnuulis)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hce)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hul)).toBe('verified-calculator');

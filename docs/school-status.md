@@ -2,10 +2,11 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (84)
+## Calculator đã xác minh (85)
 
 - **AJC** — Học viện Báo chí và Tuyên truyền
 - **APD** — Hoc vien Chinh sach va Phat trien
+- **BAV** — Học viện Ngân hàng
 - **BDU** — Truong Dai hoc Binh Duong
 - **BVU** — Truong Dai hoc Ba Ria - Vung Tau
 - **CTU** — Trường Đại học Cần Thơ
@@ -122,12 +123,11 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-LS** — Truong Dai hoc Luat - Dai hoc Quoc gia Ha Noi
 - **VNUF** — Truong Dai hoc Lam nghiep
 
-## Đã research, chưa đủ để tính (114)
+## Đã research, chưa đủ để tính (113)
 
 - **AADAA** — Học viện Phòng không - Không quân
 - **ACTVN** — Học viện Kỹ thuật Mật mã
 - **AOC** — Trường Đại học Sĩ quan Pháo binh
-- **BAV** — Học viện Ngân hàng
 - **BGA** — Học viện Biên phòng
 - **BLU** — Trường Đại học Bạc Liêu
 - **BMTU** — Trường Đại học Y Dược Buôn Ma Thuột

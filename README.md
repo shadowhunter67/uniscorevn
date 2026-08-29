@@ -45,7 +45,7 @@ Snapshot hiện tại được tính từ `schoolRegistry` bằng `npm run stats
 | Có dữ liệu tuyển sinh hoặc capability cao hơn | 225 |
 | Chỉ kiểm tra điều kiện/ngưỡng | 22 |
 | Có calculator một phần | 3 |
-| Calculator đã xác minh | 84 |
+| Calculator đã xác minh | 85 |
 | Chỉ có trong danh mục | 42 |
 
 Catalog coverage != calculator coverage. Con số danh mục là độ phủ search/compare, không phải 100% calculator. Một số mục trong danh mục là school/faculty nội bộ của hệ thống đại học lớn; các mục này vẫn có thể giữ cho navigation hoặc mapping chương trình, nhưng không làm tăng KPI "cơ sở đào tạo tuyển sinh độc lập".
@@ -58,7 +58,7 @@ Danh sách đầy đủ 267 trường theo từng mức hỗ trợ đổi thư�
 
 | Mức hỗ trợ | Số trường | Ý nghĩa |
 |---|---:|---|
-| ✅ Calculator đã xác minh | 84 | Công thức, ngưỡng, điểm cộng/ưu tiên đều có nguồn chính thức trong phạm vi đã công bố |
+| ✅ Calculator đã xác minh | 85 | Công thức, ngưỡng, điểm cộng/ưu tiên đều có nguồn chính thức trong phạm vi đã công bố |
 | 🟡 Calculator một phần | 3 | Có công thức/quy đổi thật nhưng chưa phủ hết phương thức xét tuyển |
 | 🟡 Chỉ kiểm tra điều kiện/ngưỡng | 22 | Có ngưỡng điểm sàn/điều kiện thật, chưa tính được điểm xét tuyển đầy đủ |
 | ⚪ Đã research, chưa đủ để tính | 118 | Nguồn chính thức xác nhận tồn tại nhưng số liệu không trích xuất được (ảnh/PDF/SPA/chặn fetch) hoặc bị chặn bởi tiêu chí không có trong hồ sơ (hạnh kiểm, sơ tuyển quân đội/công an...) |

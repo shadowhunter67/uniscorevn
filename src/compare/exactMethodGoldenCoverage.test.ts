@@ -38,6 +38,7 @@ import { uttAdmissionMethods } from '../schools/utt/methods';
 import { hmuAdmissionMethods } from '../schools/hmu/methods';
 import { hauiAdmissionMethods } from '../schools/haui/methods';
 import { aofAdmissionMethods } from '../schools/aof/methods';
+import { bavAdmissionMethods } from '../schools/bav/methods';
 
 import { hcmutGoldenCases, hcmutNoDgnlGoldenCase } from '../schools/hcmut/__fixtures__/officialExamples2026';
 import { uehGoldenCases, uehOfficialFinalConversionCase } from '../schools/ueh/__fixtures__/officialExamples2026';
@@ -73,6 +74,7 @@ import { utmThptExamExactGoldenCases } from '../schools/utm/__fixtures__/officia
 import { uttThptExamExactGoldenCases } from '../schools/utt/__fixtures__/officialExamples2026';
 import { hmuThptExamExactGoldenCases } from '../schools/hmu/__fixtures__/officialExamples2026';
 import { hauiThptExamExactGoldenCases } from '../schools/haui/__fixtures__/officialExamples2026';
+import { bavThptExamExactGoldenCases } from '../schools/bav/__fixtures__/officialExamples2026';
 
 /**
  * Invariant CI bắt buộc: MỌI method có `capabilities.exactCalculator === true` phải có ÍT NHẤT 1
@@ -125,6 +127,7 @@ const allMethodsBySchool = {
   hmu: hmuAdmissionMethods,
   haui: hauiAdmissionMethods,
   aof: aofAdmissionMethods,
+  bav: bavAdmissionMethods,
 };
 
 function methodKey(schoolId: string, methodId: string): string {
@@ -185,6 +188,7 @@ const allGoldenCases = [
   ...uttThptExamExactGoldenCases,
   ...hmuThptExamExactGoldenCases,
   ...hauiThptExamExactGoldenCases,
+  ...bavThptExamExactGoldenCases,
 ];
 
 const coveredMethods = new Set(allGoldenCases.map((goldenCase) => methodKey(goldenCase.schoolId, goldenCase.methodId)));
@@ -256,6 +260,7 @@ describe('exact method golden coverage invariant', () => {
         'utt:utt-thpt-exam-exact-2026',
         'hmu:hmu-thpt-exam-exact-2026',
         'haui:haui-thpt-exam-exact-2026',
+        'bav:bav-thpt-exam-exact-2026',
       ].sort()
     );
   });

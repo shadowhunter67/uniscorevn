@@ -47,6 +47,12 @@ export const COMMON_SUBJECT_COMBINATIONS: readonly SubjectCombination[] = [
   { id: 'C01', subjects: ['literature', 'math', 'physics'] },
   { id: 'C02', subjects: ['literature', 'math', 'chemistry'] },
   { id: 'C04', subjects: ['literature', 'math', 'geography'] },
+  /** C00/C03/D09/D14 — thêm khi implement BAV 2026 (Học viện Ngân hàng dùng đủ 8 tổ hợp quốc gia
+   * A00/A01/D01/D07/D09/D14/C00/C03 cho phương thức xét điểm thi TN THPT, xem `schools/bav`). */
+  { id: 'C00', subjects: ['literature', 'history', 'geography'] },
+  { id: 'C03', subjects: ['literature', 'math', 'history'] },
+  { id: 'D09', subjects: ['math', 'history', 'english'] },
+  { id: 'D14', subjects: ['literature', 'history', 'english'] },
 ];
 
 /** Nhãn tiếng Việt — dùng ở bất kỳ trường nào cần hiển thị tên môn cho người dùng chọn. */
