@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 225,
       admissionDataAvailable: 225,
       eligibilitySupported: 24,
-      calculatorSupported: 92,
+      calculatorSupported: 93,
       partialCalculator: 3,
-      fullyVerified: 89,
+      fullyVerified: 90,
       catalogOnly: 42,
     });
   });
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(109);
+    expect(researchedOnly).toBe(108);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'tmu', 'hanu',
@@ -246,6 +246,14 @@ describe('institution coverage statistics', () => {
     // hệ số, không tính điểm cộng: giáo viên 20/30 (GDTC 19/30), pháp luật 20/30, khác 16/30. No
     // priority added to displayed score (same no-priority precedent as schools/hmu). 88 -> 89.
     expect(deriveInstitutionSupportStatus(schoolRegistry.hnmu)).toBe('verified-calculator');
+    // Batch (2026-08-30): CMCU (Trường Đại học CMC) graduated to verified-calculator — a prior
+    // batch (2026-08-24) only found the "điểm chuẩn" page (image not extractable) and left this
+    // researched-only. This batch found a different official page — "Thông báo điểm sàn nộp hồ sơ
+    // xét tuyển..." (10/07/2026) — whose threshold table image WAS readable via vision. Formula:
+    // môn chính (Toán, or Toán/Văn for Truyền thông Đa phương tiện) x2 + 2 môn bất kỳ, thang 40,
+    // 9 named lĩnh vực/ngành (22/40, 21/40, or 20/40). Priority silent -> judgment call chuẩn quốc
+    // gia, quy đổi x4/3 sang thang 40 (same technique as schools/ajc). 89 -> 90.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.cmcu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnuulis)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hce)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hul)).toBe('verified-calculator');

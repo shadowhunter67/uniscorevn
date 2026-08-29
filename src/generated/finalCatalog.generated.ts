@@ -230,7 +230,7 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     publishedAt: '2026-08-09',
     checkedAt: '2026-08-24',
     note:
-      'Batch-expand-05 (2026-08-24): trang tuyển sinh chính thức cmcu.edu.vn fetch được, xác nhận 4 phương thức (CMC-TEST đánh giá năng lực riêng, học bạ THPT, điểm thi TN THPT, xét tuyển thẳng) và phân biệt rõ "ngưỡng đảm bảo chất lượng" (theo quy định Bộ GD&ĐT) với "điểm chuẩn" (do Hội đồng tuyển sinh CMC tự quyết). Điểm chuẩn 2026 công bố trên thang /40 (22,7-26,9 cho phương thức THPT/học bạ), nhưng KHÔNG có ngưỡng đầu vào /30 hoặc /40 cụ thể riêng của trường được nêu bằng text — bảng điểm theo ngành nằm trong ảnh đính kèm không trích xuất được. Do-not-guess-formula áp dụng: chưa đủ cấu trúc để nâng lên eligibility-only.',
+      'Superseded (2026-08-30 batch): verified-calculator upgrade shipped. Batch-expand-05 (2026-08-24) found only the final điểm chuẩn page (image table not extractable) and left this researched-only. This batch found a DIFFERENT official page — "Thông báo điểm sàn nộp hồ sơ xét tuyển..." (10/07/2026) — fetched directly via curl (HTTP 200); its threshold table image (Thong-bao-diem-san-nop-ho-so-xet-tuyen-Truong-Dai-hoc-CMC-2026.webp, downloaded directly via curl, HTTP 200) WAS readable via vision, chữ rõ. Full 9-row lĩnh vực/ngành table, formula "môn chính (Toán, hoặc Toán/Văn cho Truyền thông Đa phương tiện) x2 + 2 môn bất kỳ", thang 40: Điện tử-Viễn thông/AI/An ninh mạng 22/40; Khoa học Máy tính/CNTT/Kỹ thuật Phần mềm/Logistics/Truyền thông Đa phương tiện 21/40; các ngành còn lại 20/40. Priority silent -> judgment call chuẩn quốc gia, quy đổi x4/3 sang thang 40 (same technique as schools/ajc for its hệ số-2/thang-40 nhóm ngành). See normalized/runtime-source-snapshot/cmcu/sources.ts. This entry is unused because cmcu is now in explicitRuntimeSchoolIds; kept only as a research trail.',
   },
   dsu: {
     sourceId: 'dsu-admission-2026',
@@ -819,7 +819,7 @@ export const finalCatalogKnowledgeGap = {
 // shipped eligibility-only, THPT-exam route flat 15/30 (trừ Luật/Tâm lý học chờ Bộ GD&ĐT), nguồn
 // đối chiếu qua Báo Tuổi Trẻ (04/07/2026) vì tuyensinh.dhv.edu.vn không trích được số liệu qua
 // WebFetch.) They stay listed in `finalCatalogSchools` above for identity/location metadata only.
-const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus', 'tuaf', 'uhd', 'umt', 'utm', 'utt', 'eaut', 'vwa', 'hau', 'tbu', 'ltvuni', 'dhv', 'ush', 'hcmupes', 'hnmu']);
+const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus', 'tuaf', 'uhd', 'umt', 'utm', 'utt', 'eaut', 'vwa', 'hau', 'tbu', 'ltvuni', 'dhv', 'ush', 'hcmupes', 'hnmu', 'cmcu']);
 const finalCatalogRuntimeSchools = finalCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const finalCatalogMethods: AdmissionMethodDescriptor[] = finalCatalogRuntimeSchools.map((school) => ({
