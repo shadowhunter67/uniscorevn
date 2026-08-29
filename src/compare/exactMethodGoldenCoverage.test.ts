@@ -33,6 +33,7 @@ import { hcmupesAdmissionMethods } from '../schools/hcmupes/methods';
 import { thanhdoAdmissionMethods } from '../schools/thanhdo/methods';
 import { uedudnAdmissionMethods } from '../schools/uedudn/methods';
 import { dainamAdmissionMethods } from '../schools/dainam/methods';
+import { utmAdmissionMethods } from '../schools/utm/methods';
 
 import { hcmutGoldenCases, hcmutNoDgnlGoldenCase } from '../schools/hcmut/__fixtures__/officialExamples2026';
 import { uehGoldenCases, uehOfficialFinalConversionCase } from '../schools/ueh/__fixtures__/officialExamples2026';
@@ -64,6 +65,7 @@ import { hcmupesGdtcExactGoldenCases } from '../schools/hcmupes/__fixtures__/off
 import { thanhdoThptExamExactGoldenCases } from '../schools/thanhdo/__fixtures__/officialExamples2026';
 import { uedudnThptExamExactGoldenCases } from '../schools/uedudn/__fixtures__/officialExamples2026';
 import { dainamThptExamExactGoldenCases } from '../schools/dainam/__fixtures__/officialExamples2026';
+import { utmThptExamExactGoldenCases } from '../schools/utm/__fixtures__/officialExamples2026';
 
 /**
  * Invariant CI bắt buộc: MỌI method có `capabilities.exactCalculator === true` phải có ÍT NHẤT 1
@@ -111,6 +113,7 @@ const allMethodsBySchool = {
   thanhdo: thanhdoAdmissionMethods,
   uedudn: uedudnAdmissionMethods,
   dainam: dainamAdmissionMethods,
+  utm: utmAdmissionMethods,
 };
 
 function methodKey(schoolId: string, methodId: string): string {
@@ -167,6 +170,7 @@ const allGoldenCases = [
   ...thanhdoThptExamExactGoldenCases,
   ...uedudnThptExamExactGoldenCases,
   ...dainamThptExamExactGoldenCases,
+  ...utmThptExamExactGoldenCases,
 ];
 
 const coveredMethods = new Set(allGoldenCases.map((goldenCase) => methodKey(goldenCase.schoolId, goldenCase.methodId)));
@@ -234,6 +238,7 @@ describe('exact method golden coverage invariant', () => {
         'thanhdo:thanhdo-thpt-exam-exact-2026',
         'uedudn:uedudn-thpt-exam-exact-2026',
         'dainam:dainam-thpt-exam-exact-2026',
+        'utm:utm-thpt-exam-exact-2026',
       ].sort()
     );
   });

@@ -18,11 +18,12 @@ export const utmKnowledgeGaps: KnowledgeGap[] = [
     impact: 'UniscoreVN chỉ kiểm tra được ngưỡng cho phương thức xét điểm thi TN THPT.',
   },
   {
-    id: 'utm-primary-source-direct-fetch-blocked',
-    label: 'Trang utm.edu.vn chặn truy cập trực tiếp (HTTP 403) trong lượt research này; số liệu lấy từ nội dung trang đã được index qua tìm kiếm, chưa fetch trực tiếp xác minh lại.',
-    status: 'official-but-unparsed',
+    id: 'utm-priority-table-silent',
+    label:
+      'Thông báo ngưỡng UTM 2026 im lặng hoàn toàn về điểm ưu tiên khu vực/đối tượng (không có bảng, không loại trừ trực tiếp như Đại Nam) — nhánh exact áp judgment call chuẩn quốc gia (Điều 7 Thông tư 08/2022/TT-BGDĐT), cùng tiền lệ CTU/UTC/PTIT/HUB/TGU.',
+    status: 'incomplete',
     sourceId: 'utm-threshold-2026',
-    scoreAffecting: false,
-    impact: 'Cần thử fetch lại từ môi trường mạng khác để xác minh trực tiếp nội dung trang.',
+    scoreAffecting: true,
+    impact: 'Điểm ưu tiên dùng judgment call, không phải số UTM tự công bố — nếu UTM sau này công bố bảng riêng thì phải cập nhật lại.',
   },
 ];

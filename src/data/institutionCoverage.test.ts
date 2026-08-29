@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 225,
       admissionDataAvailable: 225,
-      eligibilitySupported: 24,
-      calculatorSupported: 83,
+      eligibilitySupported: 23,
+      calculatorSupported: 84,
       partialCalculator: 3,
-      fullyVerified: 80,
+      fullyVerified: 81,
       catalogOnly: 42,
     });
   });
@@ -179,6 +179,11 @@ describe('institution coverage statistics', () => {
     // KHÔNG bao gồm điểm cộng, điểm ưu tiên khu vực/đối tượng — không cần judgment call cho điểm
     // ưu tiên (nguồn loại trừ trực tiếp, không im lặng). 80 -> reaches full verified-exact goal.
     expect(deriveInstitutionSupportStatus(schoolRegistry.dainam)).toBe('verified-calculator');
+    // Batch (2026-08-29): UTM graduated to verified-calculator — utm.edu.vn (đọc trực tiếp qua curl,
+    // khắc phục lần trước bị 403) xác nhận ngưỡng 15/30 (thi TN THPT, ngành ngoài Luật/Luật kinh
+    // tế); điểm ưu tiên KV/ĐT dùng judgment call chuẩn quốc gia (nguồn im lặng đúng điểm này).
+    // 80 -> 81.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.utm)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnuulis)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hce)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hul)).toBe('verified-calculator');

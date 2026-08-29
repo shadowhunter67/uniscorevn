@@ -13,7 +13,7 @@ export const utmModule: SchoolModule = {
   region: 'hanoi',
   vnuhcm: false,
   summary:
-    'Nguồn tuyển sinh UTM 2026 (utm.edu.vn, đã index qua tìm kiếm, WebFetch trực tiếp bị chặn 403) xác nhận điểm sàn xét tuyển bằng kết quả thi TN THPT là 15/30 cho các ngành thường; ngành Luật/Luật kinh tế có ngưỡng riêng theo Bộ GD&ĐT, chưa mô hình hoá.',
+    'Tính chính xác Điểm xét tuyển UTM 2026 (phương thức thi TN THPT, ngành ngoài Luật/Luật kinh tế): thông báo chính thức utm.edu.vn (đọc trực tiếp qua curl 2026-08-29) xác nhận NGUYÊN VĂN ngưỡng "các ngành đào tạo: từ 15 điểm" (thang 30, không nhân hệ số). Nguồn im lặng về điểm ưu tiên khu vực/đối tượng => áp judgment call chuẩn quốc gia (Điều 7 Thông tư 08/2022/TT-BGDĐT). Ngành Luật/Luật kinh tế có ngưỡng riêng theo quy định Bộ GD&ĐT (chưa mô hình hoá); phương thức học bạ (từ 18/30) và đánh giá năng lực (từ 60 điểm) chưa được chuẩn hoá vào runtime.',
   capabilities: {
     admissionInfo: true,
     programs: true,
@@ -25,7 +25,7 @@ export const utmModule: SchoolModule = {
       title: 'Trường Đại học Công nghệ và Quản lý Hữu Nghị công bố ngưỡng đảm bảo chất lượng đầu vào đại học chính quy năm 2026',
       url: 'https://utm.edu.vn/truong-dai-hoc-cong-nghe-va-quan-ly-huu-nghi-cong-bo-nguong-dam-bao-chat-luong-dau-vao-dai-hoc-chinh-quy-nam-2026-1132.html',
       type: 'official-institution',
-      checkedAt: '2026-08-24',
+      checkedAt: '2026-08-29',
     },
   ],
 };
