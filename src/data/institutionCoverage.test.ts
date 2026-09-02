@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 225,
       admissionDataAvailable: 225,
       eligibilitySupported: 24,
-      calculatorSupported: 107,
+      calculatorSupported: 108,
       partialCalculator: 3,
-      fullyVerified: 104,
+      fullyVerified: 105,
       catalogOnly: 42,
     });
   });
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(94);
+    expect(researchedOnly).toBe(93);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuvju', 'hanu',
@@ -358,6 +358,15 @@ describe('institution coverage statistics', () => {
     // loại X70/X78 (thành phần môn của trường chưa xác minh). Dải điểm chuẩn 22,80-27,55/30. Mã
     // ngành dùng mã ngành trường. Priority VALUE judgment call (chuẩn quốc gia). 103 -> 104.
     expect(deriveInstitutionSupportStatus(schoolRegistry.huc)).toBe('verified-calculator');
+    // Batch (2026-09-02): HUNRE (Trường Đại học Tài nguyên và Môi trường Hà Nội) graduated from
+    // researched to verified-calculator (roadmap 100 -> 150, batch 1, Phase B). Điểm chuẩn 22/22
+    // ngành đại học chính quy, nguồn Viettelstore, cross-check dải điểm + ngành cao nhất (Marketing)
+    // với Giaoduc.net.vn (khớp tuyệt đối). Xác nhận trực tiếp điểm chuẩn "đã bao gồm điểm ưu tiên
+    // (nếu có)". Mỗi ngành công bố 1 mức chung (không phân biệt theo tổ hợp) — CHỈ modeled tổ hợp
+    // D01 (dải điểm D01 xác nhận riêng khớp chính xác bảng công bố). Dải điểm chuẩn 15,00-26,65/30.
+    // Mã ngành dùng mã ngành đào tạo chuẩn quốc gia. Priority VALUE judgment call (chuẩn quốc gia).
+    // 104 -> 105.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.hunre)).toBe('verified-calculator');
     // Batch (2026-09-02): TMU (Trường Đại học Thương mại) graduated from catalog-only/researched to
     // verified-calculator. Thông báo điểm sàn chính thức (đăng lại nguyên văn trên Cổng TTĐT Chính
     // phủ) confirms a SINGLE flat threshold (20/30, no per-ngành variation, "Không có sự chênh lệch
