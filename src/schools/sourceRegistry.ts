@@ -83,6 +83,7 @@ import { vnuhusSources } from './vnuhus/sources';
 import { vnusshSources } from './vnussh/sources';
 import { hucSources } from './huc/sources';
 import { hunreSources } from './hunre/sources';
+import { humpSources } from './hump/sources';
 import { tvuSources } from './tvu/sources';
 import { qnuSources } from './qnu/sources';
 import { qbuSources } from './qbu/sources';
@@ -177,6 +178,7 @@ export const vnuhusSourceRegistry: AdmissionSource[] = withSchoolId('vnuhus', vn
 export const vnusshSourceRegistry: AdmissionSource[] = withSchoolId('vnussh', vnusshSources);
 export const hucSourceRegistry: AdmissionSource[] = withSchoolId('huc', hucSources);
 export const hunreSourceRegistry: AdmissionSource[] = withSchoolId('hunre', hunreSources);
+export const humpSourceRegistry: AdmissionSource[] = withSchoolId('hump', humpSources);
 export const tvuSourceRegistry: AdmissionSource[] = withSchoolId('tvu', tvuSources);
 export const qnuSourceRegistry: AdmissionSource[] = withSchoolId('qnu', qnuSources);
 export const qbuSourceRegistry: AdmissionSource[] = withSchoolId('qbu', qbuSources);
@@ -265,6 +267,7 @@ export const schoolSourceRegistries: Record<string, AdmissionSource[]> = {
   vnussh: vnusshSourceRegistry,
   huc: hucSourceRegistry,
   hunre: hunreSourceRegistry,
+  hump: humpSourceRegistry,
   tvu: tvuSourceRegistry,
   qnu: qnuSourceRegistry,
   qbu: qbuSourceRegistry,
@@ -357,6 +360,7 @@ export const allAdmissionSources: AdmissionSource[] = [
   ...vnusshSourceRegistry,
   ...hucSourceRegistry,
   ...hunreSourceRegistry,
+  ...humpSourceRegistry,
   ...tvuSourceRegistry,
   ...qnuSourceRegistry,
   ...qbuSourceRegistry,

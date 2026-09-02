@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 225,
       admissionDataAvailable: 225,
       eligibilitySupported: 24,
-      calculatorSupported: 108,
+      calculatorSupported: 109,
       partialCalculator: 3,
-      fullyVerified: 105,
+      fullyVerified: 106,
       catalogOnly: 42,
     });
   });
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(93);
+    expect(researchedOnly).toBe(92);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuvju', 'hanu',
@@ -367,6 +367,14 @@ describe('institution coverage statistics', () => {
     // Mã ngành dùng mã ngành đào tạo chuẩn quốc gia. Priority VALUE judgment call (chuẩn quốc gia).
     // 104 -> 105.
     expect(deriveInstitutionSupportStatus(schoolRegistry.hunre)).toBe('verified-calculator');
+    // Batch (2026-09-02): HUMP (Trường Đại học Y - Dược, Đại học Huế) graduated from researched to
+    // verified-calculator (roadmap 100 -> 150, batch 1, Phase B — Huế cluster). Điểm chuẩn 11/11
+    // ngành đại học chính quy, nguồn tuyensinh247, cross-check TUYỆT ĐỐI qua Báo Hà Tĩnh (10/11
+    // ngành khớp từng số theo tổ hợp). Xác nhận trực tiếp điểm chuẩn "tổng điểm các môn xét tuyển +
+    // điểm ưu tiên nếu có". Mỗi ngành 1 mức chung mọi tổ hợp (giống VNU-UET/VNU-HUS/HUNRE). Dải
+    // điểm chuẩn 17,00-25,17/30. Tổ hợp A00/B00/B08/D07 (đã có sẵn). Mã ngành dùng mã ngành chuẩn
+    // quốc gia (series 772xxxx). Priority VALUE judgment call (chuẩn quốc gia). 105 -> 106.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.hump)).toBe('verified-calculator');
     // Batch (2026-09-02): TMU (Trường Đại học Thương mại) graduated from catalog-only/researched to
     // verified-calculator. Thông báo điểm sàn chính thức (đăng lại nguyên văn trên Cổng TTĐT Chính
     // phủ) confirms a SINGLE flat threshold (20/30, no per-ngành variation, "Không có sự chênh lệch

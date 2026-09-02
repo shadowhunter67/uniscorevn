@@ -119,6 +119,7 @@ import { vnuhusAdmissionMethods } from '../schools/vnuhus/methods';
 import { vnusshAdmissionMethods } from '../schools/vnussh/methods';
 import { hucAdmissionMethods } from '../schools/huc/methods';
 import { hunreAdmissionMethods } from '../schools/hunre/methods';
+import { humpAdmissionMethods } from '../schools/hump/methods';
 import { tmuAdmissionMethods } from '../schools/tmu/methods';
 import { vaaAdmissionMethods } from '../schools/vaa/methods';
 import { vnulawAdmissionMethods } from '../schools/vnulaw/methods';
@@ -268,6 +269,7 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   vnussh: vnusshAdmissionMethods,
   huc: hucAdmissionMethods,
   hunre: hunreAdmissionMethods,
+  hump: humpAdmissionMethods,
   tmu: tmuAdmissionMethods,
   vaa: vaaAdmissionMethods,
   vnulaw: vnulawAdmissionMethods,
