@@ -106,6 +106,7 @@ import { lhuAdmissionMethods } from '../schools/lhu/methods';
 import { hnmuAdmissionMethods } from '../schools/hnmu/methods';
 import { cmcuAdmissionMethods } from '../schools/cmcu/methods';
 import { hdiuAdmissionMethods } from '../schools/hdiu/methods';
+import { tluAdmissionMethods } from '../schools/tlu/methods';
 import { tmuAdmissionMethods } from '../schools/tmu/methods';
 import { vaaAdmissionMethods } from '../schools/vaa/methods';
 import { vnulawAdmissionMethods } from '../schools/vnulaw/methods';
@@ -242,6 +243,7 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   hnmu: hnmuAdmissionMethods,
   cmcu: cmcuAdmissionMethods,
   hdiu: hdiuAdmissionMethods,
+  tlu: tluAdmissionMethods,
   tmu: tmuAdmissionMethods,
   vaa: vaaAdmissionMethods,
   vnulaw: vnulawAdmissionMethods,

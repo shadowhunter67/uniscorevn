@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 225,
       admissionDataAvailable: 225,
       eligibilitySupported: 24,
-      calculatorSupported: 95,
+      calculatorSupported: 96,
       partialCalculator: 3,
-      fullyVerified: 92,
+      fullyVerified: 93,
       catalogOnly: 42,
     });
   });
@@ -79,13 +79,13 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(106);
+    expect(researchedOnly).toBe(105);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'hanu',
       'ntu', 'qnu', 'hueu',
       'hpmu', 'udn',
-      'tlu', 'uth', 'thanglong', 'rmitvn', 'vinuni',
+      'uth', 'thanglong', 'rmitvn', 'vinuni',
     ]) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('researched');
     }
@@ -262,6 +262,12 @@ describe('institution coverage statistics', () => {
     // Điều dưỡng/KTXN y học 17,00/30; Luật kinh tế 18,00/30; 12 ngành còn lại 14,00/30. Priority
     // VALUE still judgment call (chuẩn quốc gia). 90 -> 91.
     expect(deriveInstitutionSupportStatus(schoolRegistry.hdiu)).toBe('verified-calculator');
+    // Batch (2026-09-02): TLU (Trường Đại học Thủy lợi) graduated from researched to
+    // verified-calculator. Điểm chuẩn PT1 (xét điểm thi TN THPT) theo ngành đăng lại nguyên văn
+    // trên Cổng TTĐT Chính phủ (`sources.ts:tlu-threshold-2025`) — điểm chuẩn trúng tuyển thực tế
+    // (không phải điểm sàn), 43/43 ngành đại học chính quy hệ tiêu chuẩn. Priority VALUE judgment
+    // call (chuẩn quốc gia, trường không tự công bố mức cụ thể). 92 -> 93.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.tlu)).toBe('verified-calculator');
     // Batch (2026-09-02): TMU (Trường Đại học Thương mại) graduated from catalog-only/researched to
     // verified-calculator. Thông báo điểm sàn chính thức (đăng lại nguyên văn trên Cổng TTĐT Chính
     // phủ) confirms a SINGLE flat threshold (20/30, no per-ngành variation, "Không có sự chênh lệch

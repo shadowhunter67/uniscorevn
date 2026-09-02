@@ -2,7 +2,7 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (92)
+## Calculator đã xác minh (93)
 
 - **AJC** — Học viện Báo chí và Tuyên truyền
 - **APD** — Hoc vien Chinh sach va Phat trien
@@ -69,6 +69,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **TDU** — Truong Dai hoc Tay Do
 - **TGU** — Truong Dai hoc Tien Giang
 - **ThanhDo** — Truong Dai hoc Thanh Do
+- **TLU** — Trường Đại học Thủy lợi
 - **TMU** — Trường Đại học Thương mại
 - **TTN** — Truong Dai hoc Tay Nguyen
 - **TTU** — Truong Dai hoc Tan Tao
@@ -130,7 +131,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-LS** — Truong Dai hoc Luat - Dai hoc Quoc gia Ha Noi
 - **VNUF** — Truong Dai hoc Lam nghiep
 
-## Đã research, chưa đủ để tính (106)
+## Đã research, chưa đủ để tính (105)
 
 - **AADAA** — Học viện Phòng không - Không quân
 - **ACTVN** — Học viện Kỹ thuật Mật mã
@@ -199,7 +200,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **SKDA** — Trường Đại học Sân khấu - Điện ảnh Hà Nội
 - **SKDAHCM** — Trường Đại học Sân khấu - Điện ảnh TP.HCM
 - **STU** — Trường Đại học Công nghệ Sài Gòn
-- **TLU** — Trường Đại học Thủy lợi
 - **TLU-HN** — Trường Đại học Thăng Long
 - **TNUT** — Trường Đại học Kỹ thuật Công nghiệp - Đại học Thái Nguyên
 - **TQT** — Trường Đại học Trần Quốc Tuấn - Sĩ quan Lục quân 1
