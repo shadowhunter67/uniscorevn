@@ -79,6 +79,9 @@ export const COMMON_SUBJECT_COMBINATIONS: readonly SubjectCombination[] = [
   { id: 'A07', subjects: ['math', 'history', 'geography'] },
   { id: 'B03', subjects: ['math', 'biology', 'literature'] },
   { id: 'D15', subjects: ['literature', 'geography', 'english'] },
+  /** X02 — thêm khi implement HUST 2025 (Toán/Ngữ văn/Tin học — tổ hợp "khối văn" song song với
+   * B03/C01/C02 mà HUST dùng cho gần như mọi ngành, xem `schools/hust/thresholds2025.ts`). */
+  { id: 'X02', subjects: ['math', 'literature', 'informatics'] },
 ];
 
 /** Nhãn tiếng Việt — dùng ở bất kỳ trường nào cần hiển thị tên môn cho người dùng chọn. */

@@ -53,7 +53,11 @@ describe('HUST THPT baseline eligibility 2026', () => {
   it('routes through generic evaluateSchool and evaluateSchools adapters', () => {
     const profile: ApplicantProfile = { thpt: { scores: { math: 5, physics: 5, chemistry: 5 } } };
 
-    expect(evaluateSchool(profile, 'hust', { context: a00Context }).status).toBe('ineligible');
-    expect(evaluateSchools(profile, ['hust'], { hust: a00Context })[0].status).toBe('ineligible');
+    // Batch 2026-09-03: HUST now has a real exact calculator (method[1], hust-thpt-exam-exact-2025)
+    // alongside the still-banded 2026 baseline (method[0]) — the generic comparison adapter still
+    // resolves through the threshold-only baseline, so it correctly reports 'partial' instead of a
+    // raw 'ineligible' (same fix applied to AOF when it graduated to verified-calculator).
+    expect(evaluateSchool(profile, 'hust', { context: a00Context }).status).toBe('partial');
+    expect(evaluateSchools(profile, ['hust'], { hust: a00Context })[0].status).toBe('partial');
   });
 });

@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 225,
       admissionDataAvailable: 225,
-      eligibilitySupported: 23,
-      calculatorSupported: 110,
+      eligibilitySupported: 22,
+      calculatorSupported: 111,
       partialCalculator: 3,
-      fullyVerified: 107,
+      fullyVerified: 108,
       catalogOnly: 42,
     });
   });
@@ -92,9 +92,15 @@ describe('institution coverage statistics', () => {
     // Batch (2026-08-29): HUST graduated to eligibility-only — official ts.hust.edu.vn 2026
     // quality-assurance threshold read via vision from the embedded image, banded by khối nhóm
     // ngành (Kỹ thuật >=20/30; Kinh tế/Giáo dục/Ngoại ngữ >=19,5/30); no per-program mapping found.
-    for (const schoolId of ['vnuf', 'vgu', 'hpu2', 'hust']) {
+    for (const schoolId of ['vnuf', 'vgu', 'hpu2']) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
     }
+    // Batch (2026-09-03, roadmap 100 -> 150, Phase A remainder): HUST graduated to verified-
+    // calculator — found the ACTUAL per-chương-trình/tổ-hợp cutoff table for the adjacent 2025
+    // cycle (tuyensinh247, cross-check TUYỆT ĐỐI 4 mức top/bottom qua vnexpress/nhandan/chinhphu.vn)
+    // plus the official ts.hust.edu.vn "Điểm xét" weighted-formula page — added as an independent
+    // method[1] (`hust-thpt-exam-exact-2025`) alongside the still-banded 2026 method[0].
+    expect(deriveInstitutionSupportStatus(schoolRegistry.hust)).toBe('verified-calculator');
     // Batch (2026-08-29): AOF (Học viện Tài chính) shipped as a brand-new eligibility-only module —
     // official PDF "Thông tin tuyển sinh đại học năm 2026" (hvtc.edu.vn, downloaded via curl)
     // publishes the phương thức 3 (THPT-exam) threshold banded by campus/program-type (16-20/30),

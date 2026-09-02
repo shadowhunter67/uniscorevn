@@ -26,4 +26,23 @@ export const hustKnowledgeGaps: KnowledgeGap[] = [
     sourceId: 'hust-threshold-2026',
     scoreAffecting: true,
   },
+  {
+    id: 'hust-2025-foreign-language-combos-not-modeled',
+    label:
+      'Bảng điểm chuẩn 2025 (`thresholds2025.ts`) còn dùng D04 (Toán/Văn/Trung), D26 (Toán/Lý/Đức), D28 (Toán/Lý/Nhật), D29 (Toán/Lý/Pháp) và K01 (tổ hợp trọng số 4 môn riêng: Toán x3 + Văn x1 + Lý/Hóa/Sinh/Tin x2, thang 1/2) cho một số chương trình liên kết quốc tế — CHƯA mô hình hoá vì `SubjectId` dùng chung của app chỉ có "english" cho môn ngoại ngữ (không có Trung/Đức/Nhật/Pháp) và K01 có cấu trúc trọng số 4-môn không khớp mô hình combinationId cố định 3-môn hiện tại.',
+    status: 'official-but-unparsed',
+    sourceId: 'hust-threshold-2025',
+    scoreAffecting: false,
+    impact:
+      'Thí sinh CHỈ thi các tổ hợp D04/D26/D28/D29/K01 (không có tổ hợp nào khác trong danh sách công bố cho chương trình đó) chưa tính được qua UniscoreVN — nhưng MỌI chương trình bị ảnh hưởng vẫn còn ít nhất 1 nhóm tổ hợp khác (A00/A01/B00/D01/D07 hoặc B03/C01/C02/X02) đã mô hình hoá đầy đủ.',
+  },
+  {
+    id: 'hust-2025-priority-value-silent',
+    label:
+      'Công thức chính thức 2025 (`hust-formula-official-2025`) chỉ ghi "+ Điểm ưu tiên" và dẫn Thông tư 08/2022 + 06/2025/TT-BGDĐT — KHÔNG tự công bố mức điểm ưu tiên KV/ĐT cụ thể dùng cho HUST. Dùng khung điểm ưu tiên quốc gia hiện hành làm judgment call cho GIÁ TRỊ bảng (`priority2025.ts`), áp dụng quy tắc giảm dần trên TỔNG THÔ 3 môn (chưa nhân hệ số môn chính), đúng theo cách Thông tư 08 định nghĩa.',
+    status: 'incomplete',
+    sourceId: 'hust-formula-official-2025',
+    scoreAffecting: true,
+    impact: 'Điểm ưu tiên hiển thị dùng giá trị bảng chuẩn quốc gia, không phải số HUST tự công bố riêng.',
+  },
 ];

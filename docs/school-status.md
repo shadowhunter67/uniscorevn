@@ -2,9 +2,9 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (107)
+## Calculator đã xác minh (108)
 
-🎉 **Milestone: 100 calculator đã xác minh** — cột mốc kết thúc chiến dịch mở rộng bắt đầu từ 60 (2026-08-xx), đạt 100 tại batch 2026-09-02 với QNamU (Trường Đại học Quảng Nam). Roadmap mới (100 -> 150) bắt đầu ngay batch tiếp theo cùng ngày: +7 trường (VNU-UET/VNU-HUS/VNU-USSH — cụm VNU-Hà Nội; HUC — retry thành công qua rào cản SPA; HUNRE; HUMP — cụm Huế; AOF nâng cấp lên exact) đưa tổng lên 107.
+🎉 **Milestone: 100 calculator đã xác minh** — cột mốc kết thúc chiến dịch mở rộng bắt đầu từ 60 (2026-08-xx), đạt 100 tại batch 2026-09-02 với QNamU (Trường Đại học Quảng Nam). Roadmap mới (100 -> 150) bắt đầu ngay batch tiếp theo cùng ngày: +7 trường (VNU-UET/VNU-HUS/VNU-USSH — cụm VNU-Hà Nội; HUC — retry thành công qua rào cản SPA; HUNRE; HUMP — cụm Huế; AOF nâng cấp lên exact) đưa tổng lên 107. Batch 2026-09-03 (roadmap 100 -> 150, Phase A): HUST nâng cấp từ eligibility-only lên exact (điểm chuẩn 65/65 chương trình x tổ hợp, năm liền kề 2025, công thức "môn chính" xác nhận trực tiếp qua ts.hust.edu.vn) đưa tổng lên 108.
 
 - **AJC** — Học viện Báo chí và Tuyên truyền
 - **AOF** — Học viện Tài chính
@@ -56,6 +56,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HUNRE** — Trường Đại học Tài nguyên và Môi trường Hà Nội
 - **HUP** — Trường Đại học Dược Hà Nội
 - **HUSC** — Trường Đại học Khoa học, Đại học Huế
+- **HUST** — Đại học Bách khoa Hà Nội
 - **HUTECH** — Trường Đại học Công nghệ TP. Hồ Chí Minh
 - **IU** — Trường Đại học Quốc tế – ĐHQG TP.HCM
 - **IUH** — Trường Đại học Công nghiệp Thành phố Hồ Chí Minh
@@ -120,7 +121,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **NEU** — Trường Đại học Kinh tế Quốc dân
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 
-## Chỉ kiểm tra điều kiện/ngưỡng (23)
+## Chỉ kiểm tra điều kiện/ngưỡng (22)
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
 - **DHV** — Trường Đại học Hùng Vương TP.HCM
@@ -131,7 +132,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HNUE** — Trường Đại học Sư phạm Hà Nội
 - **HPU2** — Truong Dai hoc Su pham Ha Noi 2
 - **HUIT** — Trường Đại học Công Thương TP.HCM
-- **HUST** — Đại học Bách khoa Hà Nội
 - **NTTU** — Trường Đại học Nguyễn Tất Thành
 - **PYU** — Trường Đại học Phú Yên
 - **TNU** — Dai hoc Thai Nguyen
