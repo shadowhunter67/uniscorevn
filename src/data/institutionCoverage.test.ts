@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 225,
       admissionDataAvailable: 225,
       eligibilitySupported: 24,
-      calculatorSupported: 99,
+      calculatorSupported: 100,
       partialCalculator: 3,
-      fullyVerified: 96,
+      fullyVerified: 97,
       catalogOnly: 42,
     });
   });
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(102);
+    expect(researchedOnly).toBe(101);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuuet', 'vnuhus', 'vnussh', 'vnuvju', 'hanu',
@@ -289,6 +289,13 @@ describe('institution coverage statistics', () => {
     // và khác" — gộp nhiều chuyên ngành, không rõ 1 mã ngành), điểm chuẩn 25,37-29,84/30, mỗi
     // ngành có tập tổ hợp riêng. Priority VALUE judgment call (chuẩn quốc gia). 95 -> 96.
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnued)).toBe('verified-calculator');
+    // Batch (2026-09-02): TVU (Trường Đại học Trà Vinh) graduated from researched to
+    // verified-calculator. Điểm chuẩn 5/47+ ngành (khối sức khỏe) cross-checked qua 2 báo độc lập
+    // (FPTShop, Sforum/CellphoneS — cổng chính thức chỉ đăng lại ảnh từ VTC News). Xác nhận TRỰC
+    // TIẾP điểm chuẩn = "tổng điểm các môn xét tuyển + điểm ưu tiên nếu có". Y khoa 21,25, RHM
+    // 20,75, Dược học 19,00, Điều dưỡng 17,25, KTXN y học 21,50/30, tổ hợp A00/B00/B08 (đã có sẵn).
+    // Priority VALUE judgment call (chuẩn quốc gia). 96 -> 97.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.tvu)).toBe('verified-calculator');
     // Batch (2026-09-02): TMU (Trường Đại học Thương mại) graduated from catalog-only/researched to
     // verified-calculator. Thông báo điểm sàn chính thức (đăng lại nguyên văn trên Cổng TTĐT Chính
     // phủ) confirms a SINGLE flat threshold (20/30, no per-ngành variation, "Không có sự chênh lệch

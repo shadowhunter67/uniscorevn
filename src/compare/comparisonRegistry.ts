@@ -106,6 +106,7 @@ import { tluComparisonAdapter } from '../schools/tlu/comparison';
 import { hpmuComparisonAdapter } from '../schools/hpmu/comparison';
 import { vnuebComparisonAdapter } from '../schools/vnueb/comparison';
 import { vnuedComparisonAdapter } from '../schools/vnued/comparison';
+import { tvuComparisonAdapter } from '../schools/tvu/comparison';
 import { tmuComparisonAdapter } from '../schools/tmu/comparison';
 import { vaaComparisonAdapter } from '../schools/vaa/comparison';
 import { vnulawComparisonAdapter } from '../schools/vnulaw/comparison';
@@ -248,6 +249,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   hpmuComparisonAdapter,
   vnuebComparisonAdapter,
   vnuedComparisonAdapter,
+  tvuComparisonAdapter,
   vaaComparisonAdapter,
   vnulawComparisonAdapter,
   vnuumpComparisonAdapter,
@@ -263,7 +265,10 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   nluComparisonAdapter,
   ushComparisonAdapter,
   hcmupesComparisonAdapter,
-  ...southernCatalogComparisonAdapters,
+  /** 'tvu' loại trừ — đã có adapter thật (`schools/tvu/comparison.ts`), tránh bị catalog generic
+   * (nghiên cứu sơ bộ, chưa có calculator) ghi đè trong `schoolComparisonAdapterRegistry` (last-
+   * write-wins theo `schoolId`, cùng hazard đã fix cho HDIU/TMU/TLU/HPMU/VNU-UEB/VNU-UED). */
+  ...southernCatalogComparisonAdapters.filter((adapter) => adapter.schoolId !== 'tvu'),
   ...remainingCatalogComparisonAdapters.filter(
     (adapter) =>
       ![

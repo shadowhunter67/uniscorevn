@@ -2,7 +2,7 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (96)
+## Calculator đã xác minh (97)
 
 - **AJC** — Học viện Báo chí và Tuyên truyền
 - **APD** — Hoc vien Chinh sach va Phat trien
@@ -75,6 +75,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **TTN** — Truong Dai hoc Tay Nguyen
 - **TTU** — Truong Dai hoc Tan Tao
 - **TUAF** — Truong Dai hoc Nong Lam - Dai hoc Thai Nguyen
+- **TVU** — Trường Đại học Trà Vinh
 - **UAH** — Truong Dai hoc Kien truc TP.HCM
 - **UDA** — Trường Đại học Đông Á
 - **UED** — Trường Đại học Sư phạm - Đại học Đà Nẵng
@@ -134,7 +135,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-LS** — Truong Dai hoc Luat - Dai hoc Quoc gia Ha Noi
 - **VNUF** — Truong Dai hoc Lam nghiep
 
-## Đã research, chưa đủ để tính (102)
+## Đã research, chưa đủ để tính (101)
 
 - **AADAA** — Học viện Phòng không - Không quân
 - **ACTVN** — Học viện Kỹ thuật Mật mã
@@ -210,7 +211,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **TUEBA** — Trường Đại học Kinh tế và Quản trị kinh doanh - Đại học Thái Nguyên
 - **TUMP** — Trường Đại học Y Dược - Đại học Thái Nguyên
 - **TUU** — Trường Đại học Công đoàn
-- **TVU** — Trường Đại học Trà Vinh
 - **TVUni** — Trường Đại học Trưng Vương
 - **UAD** — Trường Đại học Mỹ thuật Công nghiệp
 - **UDN** — Đại học Đà Nẵng
