@@ -74,6 +74,7 @@ import { lhuSources } from './lhu/sources';
 import { hnmuSources } from './hnmu/sources';
 import { cmcuSources } from './cmcu/sources';
 import { hdiuSources } from './hdiu/sources';
+import { tmuSources } from './tmu/sources';
 
 function withSchoolId(schoolId: string, sources: Omit<AdmissionSource, 'schoolId'>[]): AdmissionSource[] {
   return sources.map((source) => ({ ...source, schoolId }));
@@ -154,6 +155,7 @@ export const lhuExactSourceRegistry: AdmissionSource[] = withSchoolId('lhu', lhu
 export const hnmuSourceRegistry: AdmissionSource[] = withSchoolId('hnmu', hnmuSources);
 export const cmcuSourceRegistry: AdmissionSource[] = withSchoolId('cmcu', cmcuSources);
 export const hdiuSourceRegistry: AdmissionSource[] = withSchoolId('hdiu', hdiuSources);
+export const tmuSourceRegistry: AdmissionSource[] = withSchoolId('tmu', tmuSources);
 
 export const schoolSourceRegistries: Record<string, AdmissionSource[]> = {
   hcmut: hcmutSourceRegistry,
@@ -228,6 +230,7 @@ export const schoolSourceRegistries: Record<string, AdmissionSource[]> = {
   hnmu: hnmuSourceRegistry,
   cmcu: cmcuSourceRegistry,
   hdiu: hdiuSourceRegistry,
+  tmu: tmuSourceRegistry,
 };
 
 export const allAdmissionSources: AdmissionSource[] = [
@@ -306,4 +309,5 @@ export const allAdmissionSources: AdmissionSource[] = [
   ...hnmuSourceRegistry,
   ...cmcuSourceRegistry,
   ...hdiuSourceRegistry,
+  ...tmuSourceRegistry,
 ];

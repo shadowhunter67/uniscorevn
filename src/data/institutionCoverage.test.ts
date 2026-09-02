@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 225,
       admissionDataAvailable: 225,
       eligibilitySupported: 24,
-      calculatorSupported: 94,
+      calculatorSupported: 95,
       partialCalculator: 3,
-      fullyVerified: 91,
+      fullyVerified: 92,
       catalogOnly: 42,
     });
   });
@@ -79,10 +79,10 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(107);
+    expect(researchedOnly).toBe(106);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
-      'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'tmu', 'hanu',
+      'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'hanu',
       'ntu', 'qnu', 'hueu',
       'hpmu', 'udn',
       'tlu', 'uth', 'thanglong', 'rmitvn', 'vinuni',
@@ -262,6 +262,13 @@ describe('institution coverage statistics', () => {
     // Điều dưỡng/KTXN y học 17,00/30; Luật kinh tế 18,00/30; 12 ngành còn lại 14,00/30. Priority
     // VALUE still judgment call (chuẩn quốc gia). 90 -> 91.
     expect(deriveInstitutionSupportStatus(schoolRegistry.hdiu)).toBe('verified-calculator');
+    // Batch (2026-09-02): TMU (Trường Đại học Thương mại) graduated from catalog-only/researched to
+    // verified-calculator. Thông báo điểm sàn chính thức (đăng lại nguyên văn trên Cổng TTĐT Chính
+    // phủ) confirms a SINGLE flat threshold (20/30, no per-ngành variation, "Không có sự chênh lệch
+    // điểm ... giữa các tổ hợp xét tuyển") that already includes priority points ("đã bao gồm điểm
+    // ưu tiên đối tượng, ưu tiên khu vực") — simpler than HDIU/HOU (no per-field table needed).
+    // Models 7/10 published tổ hợp (A00/A01/D01/D07/D09/D10/D84). 91 -> 92.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.tmu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnuulis)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hce)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hul)).toBe('verified-calculator');

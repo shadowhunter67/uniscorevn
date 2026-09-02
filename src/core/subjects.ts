@@ -64,6 +64,8 @@ export const COMMON_SUBJECT_COMBINATIONS: readonly SubjectCombination[] = [
   { id: 'C14', subjects: ['literature', 'math', 'civic-economic-law'] },
   { id: 'C19', subjects: ['literature', 'history', 'civic-economic-law'] },
   { id: 'B04', subjects: ['math', 'biology', 'civic-economic-law'] },
+  /** D84 — thêm khi implement TMU 2025 (Đại học Thương mại, tổ hợp Toán/GDKTPL/Tiếng Anh). */
+  { id: 'D84', subjects: ['math', 'civic-economic-law', 'english'] },
 ];
 
 /** Nhãn tiếng Việt — dùng ở bất kỳ trường nào cần hiển thị tên môn cho người dùng chọn. */
