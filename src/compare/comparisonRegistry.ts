@@ -105,6 +105,7 @@ import { hdiuComparisonAdapter } from '../schools/hdiu/comparison';
 import { tluComparisonAdapter } from '../schools/tlu/comparison';
 import { hpmuComparisonAdapter } from '../schools/hpmu/comparison';
 import { vnuebComparisonAdapter } from '../schools/vnueb/comparison';
+import { vnuedComparisonAdapter } from '../schools/vnued/comparison';
 import { tmuComparisonAdapter } from '../schools/tmu/comparison';
 import { vaaComparisonAdapter } from '../schools/vaa/comparison';
 import { vnulawComparisonAdapter } from '../schools/vnulaw/comparison';
@@ -246,6 +247,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   tluComparisonAdapter,
   hpmuComparisonAdapter,
   vnuebComparisonAdapter,
+  vnuedComparisonAdapter,
   vaaComparisonAdapter,
   vnulawComparisonAdapter,
   vnuumpComparisonAdapter,
@@ -269,7 +271,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
         'hce', 'hul', 'husc', 'huaf', 'hueedu',
         'dut', 'dueudn', 'uedudn', 'uflsudn', 'uteudn', 'vku',
         'hup', 'ajc', 'vnuf', 'dtu', 'hpu2', 'hust', 'hmu', 'haui', 'aof', 'bav', 'phenikaa', 'hou', 'fptu', 'hubt', 'dainam', 'vnulaw', 'vnuump',
-        'tmu', 'tlu', 'hpmu', 'vnueb',
+        'tmu', 'tlu', 'hpmu', 'vnueb', 'vnued',
       ].includes(adapter.schoolId)
   ),
   /** 'hdiu' loại trừ — đã có adapter thật (`schools/hdiu/comparison.ts`), tránh bị catalog generic

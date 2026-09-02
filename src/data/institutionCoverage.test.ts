@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 225,
       admissionDataAvailable: 225,
       eligibilitySupported: 24,
-      calculatorSupported: 98,
+      calculatorSupported: 99,
       partialCalculator: 3,
-      fullyVerified: 95,
+      fullyVerified: 96,
       catalogOnly: 42,
     });
   });
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(103);
+    expect(researchedOnly).toBe(102);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuuet', 'vnuhus', 'vnussh', 'vnuvju', 'hanu',
@@ -282,6 +282,13 @@ describe('institution coverage statistics', () => {
     // thêm vào core/subjects.ts trong batch này). Priority VALUE judgment call (chuẩn quốc gia).
     // 94 -> 95.
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnueb)).toBe('verified-calculator');
+    // Batch (2026-09-02): VNU-UED (Trường Đại học Giáo dục - ĐHQGHN) graduated from researched to
+    // verified-calculator. Điểm chuẩn theo ngành + tổ hợp, nguồn tuyensinh247 (cross-check dải
+    // điểm với VnExpress; cổng chính thức chỉ đăng ảnh). Xác nhận TRỰC TIẾP điểm chuẩn = "tổng
+    // điểm các môn xét tuyển + điểm ưu tiên nếu có". 10/11 ngành (loại trừ nhóm "Khoa học giáo dục
+    // và khác" — gộp nhiều chuyên ngành, không rõ 1 mã ngành), điểm chuẩn 25,37-29,84/30, mỗi
+    // ngành có tập tổ hợp riêng. Priority VALUE judgment call (chuẩn quốc gia). 95 -> 96.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.vnued)).toBe('verified-calculator');
     // Batch (2026-09-02): TMU (Trường Đại học Thương mại) graduated from catalog-only/researched to
     // verified-calculator. Thông báo điểm sàn chính thức (đăng lại nguyên văn trên Cổng TTĐT Chính
     // phủ) confirms a SINGLE flat threshold (20/30, no per-ngành variation, "Không có sự chênh lệch

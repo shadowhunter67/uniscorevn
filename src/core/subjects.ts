@@ -74,6 +74,11 @@ export const COMMON_SUBJECT_COMBINATIONS: readonly SubjectCombination[] = [
    * Toán/GDKTPL trùng với C14 (mã tổ hợp quốc gia khác nhau nhưng cùng 3 môn) — xác nhận qua nhiều
    * nguồn thứ cấp độc lập, xem `schools/vnueb/sources.ts`. */
   { id: 'X01', subjects: ['literature', 'math', 'civic-economic-law'] },
+  /** A07/B03/D15 — thêm khi implement VNU-UED 2025 (Trường ĐH Giáo dục - ĐHQGHN, khối ngành sư
+   * phạm dùng tổ hợp có Lịch sử/Địa lý/Sinh học kèm Toán/Văn/Anh). */
+  { id: 'A07', subjects: ['math', 'history', 'geography'] },
+  { id: 'B03', subjects: ['math', 'biology', 'literature'] },
+  { id: 'D15', subjects: ['literature', 'geography', 'english'] },
 ];
 
 /** Nhãn tiếng Việt — dùng ở bất kỳ trường nào cần hiển thị tên môn cho người dùng chọn. */
