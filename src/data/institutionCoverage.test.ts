@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 225,
       admissionDataAvailable: 225,
       eligibilitySupported: 24,
-      calculatorSupported: 97,
+      calculatorSupported: 98,
       partialCalculator: 3,
-      fullyVerified: 94,
+      fullyVerified: 95,
       catalogOnly: 42,
     });
   });
@@ -79,10 +79,10 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(104);
+    expect(researchedOnly).toBe(103);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
-      'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'hanu',
+      'vnuuet', 'vnuhus', 'vnussh', 'vnuvju', 'hanu',
       'ntu', 'qnu', 'hueu',
       'udn',
       'uth', 'thanglong', 'rmitvn', 'vinuni',
@@ -274,6 +274,14 @@ describe('institution coverage statistics', () => {
     // TIẾP điểm chuẩn đã cộng điểm ưu tiên/điểm thưởng. 7/7 ngành, điểm chuẩn 19,35-25,33/30.
     // Priority VALUE judgment call (chuẩn quốc gia). 93 -> 94.
     expect(deriveInstitutionSupportStatus(schoolRegistry.hpmu)).toBe('verified-calculator');
+    // Batch (2026-09-02): VNU-UEB (Trường Đại học Kinh tế - ĐHQGHN) graduated from researched to
+    // verified-calculator. Điểm chuẩn theo ngành cross-checked qua 2 báo độc lập (tuyensinh247,
+    // Sforum/CellphoneS — cổng tuyển sinh chính thức trả HTTP 403 khi truy cập trực tiếp), xác
+    // nhận TRỰC TIẾP điểm chuẩn = "tổng điểm các môn xét tuyển + điểm ưu tiên nếu có". 6/6 ngành
+    // đại học chính quy, điểm chuẩn 24,20-25,72/30, tổ hợp D01/A01/D09/D10/C01/C03/C04/X01 (X01
+    // thêm vào core/subjects.ts trong batch này). Priority VALUE judgment call (chuẩn quốc gia).
+    // 94 -> 95.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.vnueb)).toBe('verified-calculator');
     // Batch (2026-09-02): TMU (Trường Đại học Thương mại) graduated from catalog-only/researched to
     // verified-calculator. Thông báo điểm sàn chính thức (đăng lại nguyên văn trên Cổng TTĐT Chính
     // phủ) confirms a SINGLE flat threshold (20/30, no per-ngành variation, "Không có sự chênh lệch

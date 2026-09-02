@@ -70,6 +70,10 @@ export const COMMON_SUBJECT_COMBINATIONS: readonly SubjectCombination[] = [
   { id: 'B04', subjects: ['math', 'biology', 'civic-economic-law'] },
   /** D84 — thêm khi implement TMU 2025 (Đại học Thương mại, tổ hợp Toán/GDKTPL/Tiếng Anh). */
   { id: 'D84', subjects: ['math', 'civic-economic-law', 'english'] },
+  /** X01 — thêm khi implement VNU-UEB 2025 (Trường ĐH Kinh tế - ĐHQGHN). Thành phần môn Ngữ văn/
+   * Toán/GDKTPL trùng với C14 (mã tổ hợp quốc gia khác nhau nhưng cùng 3 môn) — xác nhận qua nhiều
+   * nguồn thứ cấp độc lập, xem `schools/vnueb/sources.ts`. */
+  { id: 'X01', subjects: ['literature', 'math', 'civic-economic-law'] },
 ];
 
 /** Nhãn tiếng Việt — dùng ở bất kỳ trường nào cần hiển thị tên môn cho người dùng chọn. */

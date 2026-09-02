@@ -2,7 +2,7 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (94)
+## Calculator đã xác minh (95)
 
 - **AJC** — Học viện Báo chí và Tuyên truyền
 - **APD** — Hoc vien Chinh sach va Phat trien
@@ -94,6 +94,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VKU** — Trường Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn
 - **VinhUni** — Trường Đại học Vinh
 - **VMU** — Trường Đại học Hàng hải Việt Nam
+- **VNU-UEB** — Trường Đại học Kinh tế - ĐHQG Hà Nội
 - **VNU-ULIS** — Truong Dai hoc Ngoai ngu - Dai hoc Quoc gia Ha Noi
 - **VNU-UMP** — Truong Dai hoc Y Duoc - Dai hoc Quoc gia Ha Noi
 - **VNUA** — Hoc vien Nong nghiep Viet Nam
@@ -132,7 +133,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-LS** — Truong Dai hoc Luat - Dai hoc Quoc gia Ha Noi
 - **VNUF** — Truong Dai hoc Lam nghiep
 
-## Đã research, chưa đủ để tính (104)
+## Đã research, chưa đủ để tính (103)
 
 - **AADAA** — Học viện Phòng không - Không quân
 - **ACTVN** — Học viện Kỹ thuật Mật mã
@@ -231,7 +232,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-HUS** — Trường Đại học Khoa học Tự nhiên - ĐHQG Hà Nội
 - **VNU-IS** — Trường Quốc tế - ĐHQG Hà Nội
 - **VNU-SIS** — Trường Khoa học liên ngành và Nghệ thuật - ĐHQG Hà Nội
-- **VNU-UEB** — Trường Đại học Kinh tế - ĐHQG Hà Nội
 - **VNU-UED** — Trường Đại học Giáo dục - ĐHQG Hà Nội
 - **VNU-UET** — Trường Đại học Công nghệ - ĐHQG Hà Nội
 - **VNU-USSH** — Trường Đại học Khoa học Xã hội và Nhân văn - ĐHQG Hà Nội
