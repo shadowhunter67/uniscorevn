@@ -2,7 +2,7 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (97)
+## Calculator đã xác minh (98)
 
 - **AJC** — Học viện Báo chí và Tuyên truyền
 - **APD** — Hoc vien Chinh sach va Phat trien
@@ -62,6 +62,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **Phenikaa** — Trường Đại học Phenikaa
 - **PNTU** — Trường Đại học Y khoa Phạm Ngọc Thạch
 - **PTIT** — Học viện Công nghệ Bưu chính Viễn thông
+- **QNU** — Trường Đại học Quy Nhơn
 - **SGU** — Trường Đại học Sài Gòn
 - **TBDU** — Truong Dai hoc Thai Binh Duong
 - **TBU** — Trường Đại học Thái Bình
@@ -135,7 +136,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-LS** — Truong Dai hoc Luat - Dai hoc Quoc gia Ha Noi
 - **VNUF** — Truong Dai hoc Lam nghiep
 
-## Đã research, chưa đủ để tính (101)
+## Đã research, chưa đủ để tính (100)
 
 - **AADAA** — Học viện Phòng không - Không quân
 - **ACTVN** — Học viện Kỹ thuật Mật mã
@@ -197,7 +198,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **PVU** — Trường Đại học Dầu khí Việt Nam
 - **QBU** — Trường Đại học Quảng Bình
 - **QNamU** — Trường Đại học Quảng Nam
-- **QNU** — Trường Đại học Quy Nhơn
 - **RMITVN** — Trường Đại học RMIT Việt Nam
 - **SIGO** — Trường Đại học Sĩ quan Thông tin liên lạc
 - **SKDA** — Trường Đại học Sân khấu - Điện ảnh Hà Nội

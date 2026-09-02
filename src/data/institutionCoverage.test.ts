@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 225,
       admissionDataAvailable: 225,
       eligibilitySupported: 24,
-      calculatorSupported: 100,
+      calculatorSupported: 101,
       partialCalculator: 3,
-      fullyVerified: 97,
+      fullyVerified: 98,
       catalogOnly: 42,
     });
   });
@@ -79,11 +79,11 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(101);
+    expect(researchedOnly).toBe(100);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuuet', 'vnuhus', 'vnussh', 'vnuvju', 'hanu',
-      'ntu', 'qnu', 'hueu',
+      'ntu', 'hueu',
       'udn',
       'uth', 'thanglong', 'rmitvn', 'vinuni',
     ]) {
@@ -296,6 +296,14 @@ describe('institution coverage statistics', () => {
     // 20,75, Dược học 19,00, Điều dưỡng 17,25, KTXN y học 21,50/30, tổ hợp A00/B00/B08 (đã có sẵn).
     // Priority VALUE judgment call (chuẩn quốc gia). 96 -> 97.
     expect(deriveInstitutionSupportStatus(schoolRegistry.tvu)).toBe('verified-calculator');
+    // Batch (2026-09-02): QNU (Trường Đại học Quy Nhơn) graduated from researched to
+    // verified-calculator. Điểm chuẩn 10/52 ngành (khối sư phạm/giáo dục, không nhân hệ số) cross-
+    // checked qua 2-3 báo độc lập (trangedu.com, Sforum/CellphoneS, Báo Gia Lai — cổng chính thức
+    // chỉ đăng ảnh). Điểm chuẩn công bố là mức ĐXT tối thiểu (ĐXT = 3 môn + điểm ưu tiên theo công
+    // thức trường công bố) — đã bao hàm ưu tiên theo định nghĩa. Sư phạm Lịch sử 27,21 xuống Sư
+    // phạm Tiếng Anh 23,59/30. Loại trừ ngành khối Kinh tế/Kỹ thuật (nhân hệ số, 2 nguồn lệch
+    // nhau). Priority VALUE judgment call (chuẩn quốc gia). 97 -> 98.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.qnu)).toBe('verified-calculator');
     // Batch (2026-09-02): TMU (Trường Đại học Thương mại) graduated from catalog-only/researched to
     // verified-calculator. Thông báo điểm sàn chính thức (đăng lại nguyên văn trên Cổng TTĐT Chính
     // phủ) confirms a SINGLE flat threshold (20/30, no per-ngành variation, "Không có sự chênh lệch
