@@ -2,11 +2,12 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (100)
+## Calculator đã xác minh (107)
 
-🎉 **Milestone: 100 calculator đã xác minh** — cột mốc kết thúc chiến dịch mở rộng bắt đầu từ 60 (2026-08-xx), đạt 100 tại batch 2026-09-02 với QNamU (Trường Đại học Quảng Nam).
+🎉 **Milestone: 100 calculator đã xác minh** — cột mốc kết thúc chiến dịch mở rộng bắt đầu từ 60 (2026-08-xx), đạt 100 tại batch 2026-09-02 với QNamU (Trường Đại học Quảng Nam). Roadmap mới (100 -> 150) bắt đầu ngay batch tiếp theo cùng ngày: +7 trường (VNU-UET/VNU-HUS/VNU-USSH — cụm VNU-Hà Nội; HUC — retry thành công qua rào cản SPA; HUNRE; HUMP — cụm Huế; AOF nâng cấp lên exact) đưa tổng lên 107.
 
 - **AJC** — Học viện Báo chí và Tuyên truyền
+- **AOF** — Học viện Tài chính
 - **APD** — Hoc vien Chinh sach va Phat trien
 - **BAV** — Học viện Ngân hàng
 - **BDU** — Truong Dai hoc Binh Duong
@@ -45,11 +46,14 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HUAF** — Trường Đại học Nông Lâm, Đại học Huế
 - **HUB** — Trường Đại học Ngân hàng TP. Hồ Chí Minh
 - **HUBT** — Trường Đại học Kinh doanh và Công nghệ Hà Nội
+- **HUC** — Trường Đại học Văn hóa Hà Nội
 - **HUCE** — Truong Dai hoc Xay dung Ha Noi
 - **HUED** — Trường Đại học Sư phạm, Đại học Huế
 - **HUFLIT** — Trường Đại học Ngoại ngữ - Tin học TP. Hồ Chí Minh
 - **HUL** — Trường Đại học Luật, Đại học Huế
 - **HUMG** — Trường Đại học Mỏ - Địa chất
+- **HUMP** — Trường Đại học Y - Dược, Đại học Huế
+- **HUNRE** — Trường Đại học Tài nguyên và Môi trường Hà Nội
 - **HUP** — Trường Đại học Dược Hà Nội
 - **HUSC** — Trường Đại học Khoa học, Đại học Huế
 - **HUTECH** — Trường Đại học Công nghệ TP. Hồ Chí Minh
@@ -100,10 +104,13 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VKU** — Trường Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn
 - **VinhUni** — Trường Đại học Vinh
 - **VMU** — Trường Đại học Hàng hải Việt Nam
+- **VNU-HUS** — Trường Đại học Khoa học Tự nhiên - ĐHQG Hà Nội
 - **VNU-UEB** — Trường Đại học Kinh tế - ĐHQG Hà Nội
 - **VNU-UED** — Trường Đại học Giáo dục - ĐHQG Hà Nội
+- **VNU-UET** — Trường Đại học Công nghệ - ĐHQG Hà Nội
 - **VNU-ULIS** — Truong Dai hoc Ngoai ngu - Dai hoc Quoc gia Ha Noi
 - **VNU-UMP** — Truong Dai hoc Y Duoc - Dai hoc Quoc gia Ha Noi
+- **VNU-USSH** — Trường Đại học Khoa học Xã hội và Nhân văn - ĐHQG Hà Nội
 - **VNUA** — Hoc vien Nong nghiep Viet Nam
 - **VWA** — Học viện Phụ nữ Việt Nam
 
@@ -113,10 +120,9 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **NEU** — Trường Đại học Kinh tế Quốc dân
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 
-## Chỉ kiểm tra điều kiện/ngưỡng (24)
+## Chỉ kiểm tra điều kiện/ngưỡng (23)
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
-- **AOF** — Học viện Tài chính
 - **DHV** — Trường Đại học Hùng Vương TP.HCM
 - **DUE** — Trường Đại học Kinh tế - Đại học Đà Nẵng
 - **DUT** — Trường Đại học Bách khoa - Đại học Đà Nẵng
@@ -140,7 +146,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-LS** — Truong Dai hoc Luat - Dai hoc Quoc gia Ha Noi
 - **VNUF** — Truong Dai hoc Lam nghiep
 
-## Đã research, chưa đủ để tính (98)
+## Đã research, chưa đủ để tính (92)
 
 - **AADAA** — Học viện Phòng không - Không quân
 - **ACTVN** — Học viện Kỹ thuật Mật mã
@@ -169,11 +175,8 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HCMUNRE** — Trường Đại học Tài nguyên và Môi trường TP.HCM
 - **HLUV** — Trường Đại học Hoa Lư
 - **HTU** — Trường Đại học Hà Tĩnh
-- **HUC** — Trường Đại học Văn hóa Hà Nội
 - **HueU** — Đại học Huế
 - **HUFL** — Trường Đại học Ngoại ngữ - Đại học Huế
-- **HUMP** — Trường Đại học Y Dược - Đại học Huế
-- **HUNRE** — Trường Đại học Tài nguyên và Môi trường Hà Nội
 - **HUPES** — Trường Đại học Sư phạm Thể dục Thể thao Hà Nội
 - **HVU** — Trường Đại học Hùng Vương
 - **KBU** — Trường Đại học Kinh Bắc
@@ -232,11 +235,8 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNAM** — Học viện Âm nhạc Quốc gia Việt Nam
 - **VNKGU** — Trường Đại học Kiên Giang
 - **VNU-HSB** — Trường Quản trị và Kinh doanh - ĐHQG Hà Nội
-- **VNU-HUS** — Trường Đại học Khoa học Tự nhiên - ĐHQG Hà Nội
 - **VNU-IS** — Trường Quốc tế - ĐHQG Hà Nội
 - **VNU-SIS** — Trường Khoa học liên ngành và Nghệ thuật - ĐHQG Hà Nội
-- **VNU-UET** — Trường Đại học Công nghệ - ĐHQG Hà Nội
-- **VNU-USSH** — Trường Đại học Khoa học Xã hội và Nhân văn - ĐHQG Hà Nội
 - **VNUFA** — Trường Đại học Mỹ thuật Việt Nam
 - **VTTU** — Trường Đại học Võ Trường Toản
 - **VYA** — Học viện Thanh thiếu niên Việt Nam
