@@ -101,6 +101,7 @@ import { houComparisonAdapter } from '../schools/hou/comparison';
 import { lhuComparisonAdapter } from '../schools/lhu/comparison';
 import { hnmuComparisonAdapter } from '../schools/hnmu/comparison';
 import { cmcuComparisonAdapter } from '../schools/cmcu/comparison';
+import { hdiuComparisonAdapter } from '../schools/hdiu/comparison';
 import { vaaComparisonAdapter } from '../schools/vaa/comparison';
 import { vnulawComparisonAdapter } from '../schools/vnulaw/comparison';
 import { vnuumpComparisonAdapter } from '../schools/vnuump/comparison';
@@ -236,6 +237,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   lhuComparisonAdapter,
   hnmuComparisonAdapter,
   cmcuComparisonAdapter,
+  hdiuComparisonAdapter,
   vaaComparisonAdapter,
   vnulawComparisonAdapter,
   vnuumpComparisonAdapter,
@@ -261,7 +263,10 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
         'hup', 'ajc', 'vnuf', 'dtu', 'hpu2', 'hust', 'hmu', 'haui', 'aof', 'bav', 'phenikaa', 'hou', 'fptu', 'hubt', 'dainam', 'vnulaw', 'vnuump',
       ].includes(adapter.schoolId)
   ),
-  ...finalCatalogComparisonAdapters,
+  /** 'hdiu' loại trừ — đã có adapter thật (`schools/hdiu/comparison.ts`), tránh bị catalog generic
+   * (nghiên cứu sơ bộ, chưa có calculator) ghi đè trong `schoolComparisonAdapterRegistry` (last-
+   * write-wins theo `schoolId`). */
+  ...finalCatalogComparisonAdapters.filter((adapter) => adapter.schoolId !== 'hdiu'),
   ...collegeCatalogComparisonAdapters,
 ];
 

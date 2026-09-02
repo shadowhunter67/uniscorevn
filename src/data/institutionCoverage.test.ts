@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 225,
       admissionDataAvailable: 225,
       eligibilitySupported: 24,
-      calculatorSupported: 93,
+      calculatorSupported: 94,
       partialCalculator: 3,
-      fullyVerified: 90,
+      fullyVerified: 91,
       catalogOnly: 42,
     });
   });
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(108);
+    expect(researchedOnly).toBe(107);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'tmu', 'hanu',
@@ -254,6 +254,14 @@ describe('institution coverage statistics', () => {
     // 9 named lĩnh vực/ngành (22/40, 21/40, or 20/40). Priority silent -> judgment call chuẩn quốc
     // gia, quy đổi x4/3 sang thang 40 (same technique as schools/ajc). 89 -> 90.
     expect(deriveInstitutionSupportStatus(schoolRegistry.cmcu)).toBe('verified-calculator');
+    // Batch (2026-09-02): HDIU (Trường Đại học Đông Đô) graduated from catalog-only/researched to
+    // verified-calculator. Quyết định 129/QĐ-ĐHĐD (26/3/2025, PDF gốc có chữ ký/con dấu) confirms
+    // điểm xét = tổng thô 3 môn (làm tròn 0,25) + điểm ưu tiên KV/ĐT, and ngưỡng đảm bảo chất lượng
+    // đầu vào GỒM CẢ điểm ưu tiên (no judgment call needed for whether priority applies). Specific
+    // per-ngành floors (VietNamNet, reporting the school's own announcement): Dược học 19,00/30;
+    // Điều dưỡng/KTXN y học 17,00/30; Luật kinh tế 18,00/30; 12 ngành còn lại 14,00/30. Priority
+    // VALUE still judgment call (chuẩn quốc gia). 90 -> 91.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.hdiu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnuulis)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hce)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hul)).toBe('verified-calculator');

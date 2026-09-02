@@ -53,6 +53,17 @@ export const COMMON_SUBJECT_COMBINATIONS: readonly SubjectCombination[] = [
   { id: 'C03', subjects: ['literature', 'math', 'history'] },
   { id: 'D09', subjects: ['math', 'history', 'english'] },
   { id: 'D14', subjects: ['literature', 'history', 'english'] },
+  /** A09/A12/A13/A14/C14/C19/B04 — thêm khi implement HDIU 2025 (Đại học Đông Đô dùng đủ các tổ
+   * hợp có môn GDKTPL/Tin học của bảng mã ngành đại học chính quy — 3 tổ hợp còn lại của HDIU
+   * dùng Tiếng Trung/Nhật/Hàn không có trong `SubjectId`, chưa mô hình hoá, xem
+   * `schools/hdiu/knowledgeGaps.ts`). */
+  { id: 'A09', subjects: ['math', 'geography', 'civic-economic-law'] },
+  { id: 'A12', subjects: ['math', 'english', 'informatics'] },
+  { id: 'A13', subjects: ['math', 'literature', 'informatics'] },
+  { id: 'A14', subjects: ['math', 'physics', 'informatics'] },
+  { id: 'C14', subjects: ['literature', 'math', 'civic-economic-law'] },
+  { id: 'C19', subjects: ['literature', 'history', 'civic-economic-law'] },
+  { id: 'B04', subjects: ['math', 'biology', 'civic-economic-law'] },
 ];
 
 /** Nhãn tiếng Việt — dùng ở bất kỳ trường nào cần hiển thị tên môn cho người dùng chọn. */
