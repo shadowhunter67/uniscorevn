@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 225,
       admissionDataAvailable: 225,
       eligibilitySupported: 24,
-      calculatorSupported: 105,
+      calculatorSupported: 106,
       partialCalculator: 3,
-      fullyVerified: 102,
+      fullyVerified: 103,
       catalogOnly: 42,
     });
   });
@@ -79,10 +79,10 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(96);
+    expect(researchedOnly).toBe(95);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
-      'vnussh', 'vnuvju', 'hanu',
+      'vnuvju', 'hanu',
       'ntu', 'hueu',
       'udn',
       'uth', 'thanglong', 'rmitvn', 'vinuni',
@@ -340,6 +340,15 @@ describe('institution coverage statistics', () => {
     // D07/D08/D09/D10/X01 (mọi ngành đều có A00). Mã ngành dùng mã trường (QHT01-QHT99). Priority
     // VALUE judgment call (chuẩn quốc gia). 101 -> 102.
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnuhus)).toBe('verified-calculator');
+    // Batch (2026-09-02): VNU-USSH (Trường Đại học Khoa học Xã hội và Nhân văn - ĐHQGHN) graduated
+    // from researched to verified-calculator (roadmap 100 -> 150, batch 1, Phase B). Điểm chuẩn
+    // 28/29 ngành đại học chính quy (loại Truyền thông đa phương tiện — không có trong bảng nhánh
+    // THPT thu thập được), nguồn tuyensinh247, cross-check với VietnamNet. MỖI NGÀNH có mức điểm
+    // RIÊNG theo TỪNG tổ hợp (giống QBU, khác VNU-UET/VNU-HUS). Dải điểm chuẩn 21,75-29,00/30. Tổ
+    // hợp hỗ trợ C00/C03/C04/D01/D14/D15 (loại D66/D04/D06/DD2 — ngoại ngữ Trung/Nhật/Hàn chưa có
+    // SubjectId). Mã ngành dùng mã trường (QHX01-QHX28). Priority VALUE judgment call (chuẩn quốc
+    // gia). 102 -> 103.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.vnussh)).toBe('verified-calculator');
     // Batch (2026-09-02): TMU (Trường Đại học Thương mại) graduated from catalog-only/researched to
     // verified-calculator. Thông báo điểm sàn chính thức (đăng lại nguyên văn trên Cổng TTĐT Chính
     // phủ) confirms a SINGLE flat threshold (20/30, no per-ngành variation, "Không có sự chênh lệch
