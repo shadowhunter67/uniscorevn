@@ -45,6 +45,8 @@ import { lhuAdmissionMethods } from '../schools/lhu/methods';
 import { hnmuAdmissionMethods } from '../schools/hnmu/methods';
 import { cmcuAdmissionMethods } from '../schools/cmcu/methods';
 
+import { aofThptExamExactGoldenCases2025 } from '../schools/aof/__fixtures__/officialExamples2025';
+
 import { hcmutGoldenCases, hcmutNoDgnlGoldenCase } from '../schools/hcmut/__fixtures__/officialExamples2026';
 import { uehGoldenCases, uehOfficialFinalConversionCase } from '../schools/ueh/__fixtures__/officialExamples2026';
 import { uelGoldenCases } from '../schools/uel/__fixtures__/officialExamples2026';
@@ -209,6 +211,7 @@ const allGoldenCases = [
   ...lhuThptExamExactGoldenCases,
   ...hnmuThptExamExactGoldenCases,
   ...cmcuThptExamExactGoldenCases,
+  ...aofThptExamExactGoldenCases2025,
 ];
 
 const coveredMethods = new Set(allGoldenCases.map((goldenCase) => methodKey(goldenCase.schoolId, goldenCase.methodId)));
@@ -286,6 +289,7 @@ describe('exact method golden coverage invariant', () => {
         'lhu:lhu-thpt-exam-exact-2026',
         'hnmu:hnmu-thpt-exam-exact-2026',
         'cmcu:cmcu-thpt-exam-exact-2026',
+        'aof:aof-thpt-exam-exact-2025',
       ].sort()
     );
   });

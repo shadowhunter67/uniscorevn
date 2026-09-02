@@ -34,4 +34,13 @@ export const aofKnowledgeGaps: KnowledgeGap[] = [
     sourceId: 'aof-threshold-2026',
     scoreAffecting: false,
   },
+  {
+    id: 'aof-2025-2026-year-mismatch',
+    label:
+      'Method[1] (`aof-thpt-exam-exact-2025`) dùng điểm CHUẨN TRÚNG TUYỂN thật của năm 2025 (theo mã ngành), KHÁC method[0] (`aof-thpt-exam-2026`) dùng ngưỡng SÀN công bố trước cho năm 2026 (theo cơ sở/loại chương trình). 2 method độc lập, không suy diễn từ năm này sang năm kia — thí sinh 2026 tham khảo method[1] (điểm chuẩn 2025) chỉ mang tính lịch sử, không phải cam kết điểm chuẩn 2026.',
+    status: 'incomplete',
+    sourceId: 'aof-threshold-2025',
+    scoreAffecting: false,
+    impact: 'Điểm chuẩn 2025 hiển thị ở method[1] không đại diện chắc chắn cho điểm chuẩn 2026 thực tế (có thể biến động theo năm).',
+  },
 ];

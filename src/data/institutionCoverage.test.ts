@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 225,
       admissionDataAvailable: 225,
-      eligibilitySupported: 24,
-      calculatorSupported: 109,
+      eligibilitySupported: 23,
+      calculatorSupported: 110,
       partialCalculator: 3,
-      fullyVerified: 106,
+      fullyVerified: 107,
       catalogOnly: 42,
     });
   });
@@ -99,7 +99,11 @@ describe('institution coverage statistics', () => {
     // official PDF "Thông tin tuyển sinh đại học năm 2026" (hvtc.edu.vn, downloaded via curl)
     // publishes the phương thức 3 (THPT-exam) threshold banded by campus/program-type (16-20/30),
     // not per individual program — no per-program mapping extracted in this batch.
-    expect(deriveInstitutionSupportStatus(schoolRegistry.aof)).toBe('eligibility-only');
+    // Batch (2026-09-02, roadmap 100 -> 150, Phase A): graduated to verified-calculator — found a
+    // per-ngành/chương trình điểm CHUẨN TRÚNG TUYỂN table for the adjacent 2025 cycle (Báo Hà Tĩnh,
+    // cross-check TUYỆT ĐỐI qua tuyensinh247, 34/34 ngành/chương trình khớp), added as an
+    // independent method[1] (`aof-thpt-exam-exact-2025`) alongside the still-banded 2026 method[0].
+    expect(deriveInstitutionSupportStatus(schoolRegistry.aof)).toBe('verified-calculator');
     // Batch (2026-08-28): FPTU (điều kiện tổ hợp thô, mọi ngành) and HCMUE (ngưỡng theo ngành, 47
     // ngành trụ sở chính TP.HCM) graduated to verified-calculator — reaches 62 verified.
     expect(deriveInstitutionSupportStatus(schoolRegistry.fptu)).toBe('verified-calculator');

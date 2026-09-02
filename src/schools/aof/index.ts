@@ -13,7 +13,7 @@ export const aofModule: SchoolModule = {
   region: 'hanoi',
   vnuhcm: false,
   summary:
-    'AOF 2026 (phương thức 3 - thi TN THPT) ngưỡng đảm bảo chất lượng đầu vào công bố theo cơ sở/loại chương trình (thang 30, đọc từ PDF chính thức "Thông tin tuyển sinh đại học năm 2026" hvtc.edu.vn, curl 2026-08-29): Phân hiệu TP.HCM và Hưng Yên >= 16; chương trình LKT với ĐH Toulon (Hà Nội) >= 17; chương trình chuẩn/LKT DDP (Hà Nội) >= 19; chương trình chất lượng cao chứng chỉ quốc tế (Hà Nội) >= 20. Bảng ánh xạ từng mã ngành cụ thể -> nhóm cơ sở/loại chương trình chưa trích xuất đầy đủ, nên chỉ mô hình hoá được dạng dải ngưỡng (eligibility-only, không có exact calculator). Riêng ngành Luật/Luật kinh doanh có thêm điều kiện Toán >= 6, chưa mô hình hoá.',
+    'Batch 2026-09-02 (roadmap 100 -> 150) — thêm nhánh exact CHO NĂM 2025 (method riêng, `aof-thpt-exam-exact-2025`): điểm chuẩn trúng tuyển thật 34/34 ngành/chương trình, nguồn Báo Hà Tĩnh (`sources.ts:aof-threshold-2025`), cross-check TUYỆT ĐỐI qua tuyensinh247 (`aof-threshold-secondary-2025`). Xác nhận trực tiếp điểm chuẩn "tổng điểm các môn xét tuyển + điểm ưu tiên nếu có". Dải điểm chuẩn 2025: 21,00-26,60/30, tổ hợp A00/A01/D01/D07 (chương trình chuẩn) hoặc A01/D01/D07 (chương trình định hướng chứng chỉ quốc tế). Method[1] KHÁC method[0]: AOF 2026 (phương thức 3 - thi TN THPT) ngưỡng đảm bảo chất lượng đầu vào công bố theo cơ sở/loại chương trình (thang 30, đọc từ PDF chính thức "Thông tin tuyển sinh đại học năm 2026" hvtc.edu.vn, curl 2026-08-29): Phân hiệu TP.HCM và Hưng Yên >= 16; chương trình LKT với ĐH Toulon (Hà Nội) >= 17; chương trình chuẩn/LKT DDP (Hà Nội) >= 19; chương trình chất lượng cao chứng chỉ quốc tế (Hà Nội) >= 20. Bảng ánh xạ từng mã ngành cụ thể (2026) -> nhóm cơ sở/loại chương trình chưa trích xuất đầy đủ, nên method[0] chỉ mô hình hoá được dạng dải ngưỡng. Riêng ngành Luật/Luật kinh doanh có thêm điều kiện Toán >= 6 (2026), chưa mô hình hoá.',
   capabilities: {
     admissionInfo: true,
     programs: false,
@@ -26,6 +26,12 @@ export const aofModule: SchoolModule = {
       url: 'https://hvtc.edu.vn/Uploads/files/T6-2026/3_TTTS%20DHCQ%20NAM%202026%20-%20BAN%20CAP%20NHAT.pdf',
       type: 'official-institution',
       checkedAt: '2026-08-29',
+    },
+    {
+      title: 'Điểm chuẩn Học Viện Tài chính 2025 – Theo ngành và tổ hợp xét tuyển (Báo Hà Tĩnh)',
+      url: 'https://baohatinh.vn/cong-cu/diem-chuan/htc-hoc-vien-tai-chinh',
+      type: 'secondary',
+      checkedAt: '2026-09-02',
     },
   ],
 };
