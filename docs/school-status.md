@@ -2,7 +2,9 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (99)
+## Calculator đã xác minh (100)
+
+🎉 **Milestone: 100 calculator đã xác minh** — cột mốc kết thúc chiến dịch mở rộng bắt đầu từ 60 (2026-08-xx), đạt 100 tại batch 2026-09-02 với QNamU (Trường Đại học Quảng Nam).
 
 - **AJC** — Học viện Báo chí và Tuyên truyền
 - **APD** — Hoc vien Chinh sach va Phat trien
@@ -63,6 +65,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **PNTU** — Trường Đại học Y khoa Phạm Ngọc Thạch
 - **PTIT** — Học viện Công nghệ Bưu chính Viễn thông
 - **QBU** — Trường Đại học Quảng Bình
+- **QNamU** — Trường Đại học Quảng Nam
 - **QNU** — Trường Đại học Quy Nhơn
 - **SGU** — Trường Đại học Sài Gòn
 - **TBDU** — Truong Dai hoc Thai Binh Duong
@@ -137,7 +140,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-LS** — Truong Dai hoc Luat - Dai hoc Quoc gia Ha Noi
 - **VNUF** — Truong Dai hoc Lam nghiep
 
-## Đã research, chưa đủ để tính (99)
+## Đã research, chưa đủ để tính (98)
 
 - **AADAA** — Học viện Phòng không - Không quân
 - **ACTVN** — Học viện Kỹ thuật Mật mã
@@ -197,7 +200,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **PSA** — Học viện An ninh Nhân dân
 - **PSU-CAND** — Trường Đại học An ninh Nhân dân
 - **PVU** — Trường Đại học Dầu khí Việt Nam
-- **QNamU** — Trường Đại học Quảng Nam
 - **RMITVN** — Trường Đại học RMIT Việt Nam
 - **SIGO** — Trường Đại học Sĩ quan Thông tin liên lạc
 - **SKDA** — Trường Đại học Sân khấu - Điện ảnh Hà Nội

@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 225,
       admissionDataAvailable: 225,
       eligibilitySupported: 24,
-      calculatorSupported: 102,
+      calculatorSupported: 103,
       partialCalculator: 3,
-      fullyVerified: 99,
+      fullyVerified: 100,
       catalogOnly: 42,
     });
   });
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(99);
+    expect(researchedOnly).toBe(98);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuuet', 'vnuhus', 'vnussh', 'vnuvju', 'hanu',
@@ -313,6 +313,16 @@ describe('institution coverage statistics', () => {
     // tiên = 0) — tương đương mức ĐXT tối thiểu. Dải điểm chuẩn 15,00-26,86/30. Priority VALUE
     // judgment call (chuẩn quốc gia). 98 -> 99.
     expect(deriveInstitutionSupportStatus(schoolRegistry.qbu)).toBe('verified-calculator');
+    // Batch (2026-09-02): QNamU (Trường Đại học Quảng Nam) graduated from researched to
+    // verified-calculator — MILESTONE: 100th verified-exact calculator, campaign complete (60 ->
+    // 100). Điểm chuẩn 8/13 ngành (loại Giáo dục Mầm non — tổ hợp năng khiếu; loại 5 ngành hiển
+    // thị mức nhận hồ sơ "14" — xác nhận qua Vietjack.com KHÔNG PHẢI điểm trúng tuyển thật), THEO
+    // TỪNG TỔ HỢP, cross-checked TUYỆT ĐỐI qua Trangedu.com + Sforum/CellphoneS (29/29 cặp ngành/
+    // tổ hợp). Công thức xác nhận trực tiếp qua Vietjack.com (trích đề án tuyển sinh trường):
+    // "Điểm trúng tuyển là tổng điểm 3 môn theo tổ hợp xét tuyển (không nhân hệ số) và điểm ưu
+    // tiên" + công thức giảm dần điểm ưu tiên khớp tuyệt đối khung quốc gia (ngưỡng 22,5, số chia
+    // 7,5). Dải điểm chuẩn 23,00-26,27/30. Priority VALUE judgment call (chuẩn quốc gia). 99 -> 100.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.qnamu)).toBe('verified-calculator');
     // Batch (2026-09-02): TMU (Trường Đại học Thương mại) graduated from catalog-only/researched to
     // verified-calculator. Thông báo điểm sàn chính thức (đăng lại nguyên văn trên Cổng TTĐT Chính
     // phủ) confirms a SINGLE flat threshold (20/30, no per-ngành variation, "Không có sự chênh lệch

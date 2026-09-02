@@ -113,6 +113,7 @@ import { vnuedAdmissionMethods } from '../schools/vnued/methods';
 import { tvuAdmissionMethods } from '../schools/tvu/methods';
 import { qnuAdmissionMethods } from '../schools/qnu/methods';
 import { qbuAdmissionMethods } from '../schools/qbu/methods';
+import { qnamuAdmissionMethods } from '../schools/qnamu/methods';
 import { tmuAdmissionMethods } from '../schools/tmu/methods';
 import { vaaAdmissionMethods } from '../schools/vaa/methods';
 import { vnulawAdmissionMethods } from '../schools/vnulaw/methods';
@@ -256,6 +257,7 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   tvu: tvuAdmissionMethods,
   qnu: qnuAdmissionMethods,
   qbu: qbuAdmissionMethods,
+  qnamu: qnamuAdmissionMethods,
   tmu: tmuAdmissionMethods,
   vaa: vaaAdmissionMethods,
   vnulaw: vnulawAdmissionMethods,
