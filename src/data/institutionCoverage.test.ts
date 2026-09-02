@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 225,
       admissionDataAvailable: 225,
       eligibilitySupported: 24,
-      calculatorSupported: 106,
+      calculatorSupported: 107,
       partialCalculator: 3,
-      fullyVerified: 103,
+      fullyVerified: 104,
       catalogOnly: 42,
     });
   });
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(95);
+    expect(researchedOnly).toBe(94);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuvju', 'hanu',
@@ -349,6 +349,15 @@ describe('institution coverage statistics', () => {
     // SubjectId). Mã ngành dùng mã trường (QHX01-QHX28). Priority VALUE judgment call (chuẩn quốc
     // gia). 102 -> 103.
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnussh)).toBe('verified-calculator');
+    // Batch (2026-09-02): HUC (Trường Đại học Văn hóa Hà Nội) graduated from researched to
+    // verified-calculator (roadmap 100 -> 150, batch 1, Phase B). Trang tuyển sinh chính thức là
+    // SPA render JS (nguyên nhân trước đây bị đánh giá "chưa research được") — retry thành công qua
+    // 2 nguồn báo đăng lại dạng text (tuyensinh247 + Báo Hà Tĩnh), khớp TUYỆT ĐỐI 20/20 ngành x tổ
+    // hợp. Xác nhận trực tiếp điểm chuẩn "tổng điểm các môn xét tuyển + điểm ưu tiên nếu có". MỖI
+    // NGÀNH có 3 mức theo nhóm tổ hợp (D01 riêng; {C03,C04,D14,D15,X01} 1 mức; C00 mức cao nhất) —
+    // loại X70/X78 (thành phần môn của trường chưa xác minh). Dải điểm chuẩn 22,80-27,55/30. Mã
+    // ngành dùng mã ngành trường. Priority VALUE judgment call (chuẩn quốc gia). 103 -> 104.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.huc)).toBe('verified-calculator');
     // Batch (2026-09-02): TMU (Trường Đại học Thương mại) graduated from catalog-only/researched to
     // verified-calculator. Thông báo điểm sàn chính thức (đăng lại nguyên văn trên Cổng TTĐT Chính
     // phủ) confirms a SINGLE flat threshold (20/30, no per-ngành variation, "Không có sự chênh lệch
