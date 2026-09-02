@@ -109,6 +109,7 @@ import { vnuebModule } from './vnueb';
 import { vnuedModule } from './vnued';
 import { tvuModule } from './tvu';
 import { qnuModule } from './qnu';
+import { qbuModule } from './qbu';
 import { tmuModule } from './tmu';
 import { houModule } from './hou';
 import { lhuModule } from './lhu';
@@ -289,6 +290,7 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   vnued: vnuedModule,
   tvu: tvuModule,
   qnu: qnuModule,
+  qbu: qbuModule,
   tmu: tmuModule,
   hou: houModule,
   lhu: lhuModule,

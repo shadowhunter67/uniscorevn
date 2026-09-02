@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 225,
       admissionDataAvailable: 225,
       eligibilitySupported: 24,
-      calculatorSupported: 101,
+      calculatorSupported: 102,
       partialCalculator: 3,
-      fullyVerified: 98,
+      fullyVerified: 99,
       catalogOnly: 42,
     });
   });
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(100);
+    expect(researchedOnly).toBe(99);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuuet', 'vnuhus', 'vnussh', 'vnuvju', 'hanu',
@@ -304,6 +304,15 @@ describe('institution coverage statistics', () => {
     // phạm Tiếng Anh 23,59/30. Loại trừ ngành khối Kinh tế/Kỹ thuật (nhân hệ số, 2 nguồn lệch
     // nhau). Priority VALUE judgment call (chuẩn quốc gia). 97 -> 98.
     expect(deriveInstitutionSupportStatus(schoolRegistry.qnu)).toBe('verified-calculator');
+    // Batch (2026-09-02): QBU (Trường Đại học Quảng Bình) graduated from researched to
+    // verified-calculator. Điểm chuẩn 14/15 ngành (loại Giáo dục Mầm non — tổ hợp năng khiếu chưa
+    // xác minh), THEO TỪNG TỔ HỢP (không phải 1 mức chung/ngành), cross-checked qua 5 nguồn độc
+    // lập (Tuyensinh247/Taro.edu.vn bảng chi tiết theo tổ hợp — khớp tuyệt đối 72/72 cặp ngành/tổ
+    // hợp; FPTShop/Sforum/Navigates bảng mức thấp nhất/ngành — khớp tuyệt đối). Nguồn xác nhận
+    // TOÀN BỘ 15 ngành KHÔNG nhân hệ số, điểm chuẩn công bố ứng với thí sinh khu vực 3 (điểm ưu
+    // tiên = 0) — tương đương mức ĐXT tối thiểu. Dải điểm chuẩn 15,00-26,86/30. Priority VALUE
+    // judgment call (chuẩn quốc gia). 98 -> 99.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.qbu)).toBe('verified-calculator');
     // Batch (2026-09-02): TMU (Trường Đại học Thương mại) graduated from catalog-only/researched to
     // verified-calculator. Thông báo điểm sàn chính thức (đăng lại nguyên văn trên Cổng TTĐT Chính
     // phủ) confirms a SINGLE flat threshold (20/30, no per-ngành variation, "Không có sự chênh lệch
