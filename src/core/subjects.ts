@@ -39,6 +39,10 @@ export const COMMON_SUBJECT_COMBINATIONS: readonly SubjectCombination[] = [
   { id: 'D07', subjects: ['math', 'chemistry', 'english'] },
   /** D10 — thêm khi implement HMU 2026 (Toán/Địa lý/Anh, dùng cho các ngành khối xã hội của HMU). */
   { id: 'D10', subjects: ['math', 'geography', 'english'] },
+  /** D08 — thêm khi implement HPMU 2025 (Toán/Sinh/Anh — cùng thành phần môn với B08 nhưng mã tổ
+   * hợp quốc gia khác nhau, xác nhận qua nhiều nguồn thứ cấp độc lập, không mâu thuẫn cho tổ hợp
+   * này — khác lo ngại ghi ở comment C01/C02/C04 bên dưới vốn nói về HAUI). */
+  { id: 'D08', subjects: ['math', 'biology', 'english'] },
   /** C01/C02/C04 — thêm khi implement HAUI 2026 (chỉ 3/21 tổ hợp HAUI dùng ánh xạ theo taxonomy
    * này; các tổ hợp còn lại — B03, C03, D04, D06, D08, D14, D15, DD2, và ký hiệu riêng của trường
    * X05/X06/X07/X25 — dùng môn ngoại ngữ Trung/Nhật/Hàn hoặc thành phần KHÔNG xác định được đáng

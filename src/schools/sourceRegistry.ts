@@ -75,6 +75,7 @@ import { hnmuSources } from './hnmu/sources';
 import { cmcuSources } from './cmcu/sources';
 import { hdiuSources } from './hdiu/sources';
 import { tluSources } from './tlu/sources';
+import { hpmuSources } from './hpmu/sources';
 import { tmuSources } from './tmu/sources';
 
 function withSchoolId(schoolId: string, sources: Omit<AdmissionSource, 'schoolId'>[]): AdmissionSource[] {
@@ -157,6 +158,7 @@ export const hnmuSourceRegistry: AdmissionSource[] = withSchoolId('hnmu', hnmuSo
 export const cmcuSourceRegistry: AdmissionSource[] = withSchoolId('cmcu', cmcuSources);
 export const hdiuSourceRegistry: AdmissionSource[] = withSchoolId('hdiu', hdiuSources);
 export const tluSourceRegistry: AdmissionSource[] = withSchoolId('tlu', tluSources);
+export const hpmuSourceRegistry: AdmissionSource[] = withSchoolId('hpmu', hpmuSources);
 export const tmuSourceRegistry: AdmissionSource[] = withSchoolId('tmu', tmuSources);
 
 export const schoolSourceRegistries: Record<string, AdmissionSource[]> = {
@@ -233,6 +235,7 @@ export const schoolSourceRegistries: Record<string, AdmissionSource[]> = {
   cmcu: cmcuSourceRegistry,
   hdiu: hdiuSourceRegistry,
   tlu: tluSourceRegistry,
+  hpmu: hpmuSourceRegistry,
   tmu: tmuSourceRegistry,
 };
 
@@ -313,5 +316,6 @@ export const allAdmissionSources: AdmissionSource[] = [
   ...cmcuSourceRegistry,
   ...hdiuSourceRegistry,
   ...tluSourceRegistry,
+  ...hpmuSourceRegistry,
   ...tmuSourceRegistry,
 ];

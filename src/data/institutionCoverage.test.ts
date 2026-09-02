@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 225,
       admissionDataAvailable: 225,
       eligibilitySupported: 24,
-      calculatorSupported: 96,
+      calculatorSupported: 97,
       partialCalculator: 3,
-      fullyVerified: 93,
+      fullyVerified: 94,
       catalogOnly: 42,
     });
   });
@@ -79,12 +79,12 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(105);
+    expect(researchedOnly).toBe(104);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuuet', 'vnueb', 'vnuhus', 'vnussh', 'vnuvju', 'hanu',
       'ntu', 'qnu', 'hueu',
-      'hpmu', 'udn',
+      'udn',
       'uth', 'thanglong', 'rmitvn', 'vinuni',
     ]) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('researched');
@@ -268,6 +268,12 @@ describe('institution coverage statistics', () => {
     // (không phải điểm sàn), 43/43 ngành đại học chính quy hệ tiêu chuẩn. Priority VALUE judgment
     // call (chuẩn quốc gia, trường không tự công bố mức cụ thể). 92 -> 93.
     expect(deriveInstitutionSupportStatus(schoolRegistry.tlu)).toBe('verified-calculator');
+    // Batch (2026-09-02): HPMU (Trường Đại học Y Dược Hải Phòng) graduated from researched to
+    // verified-calculator. Điểm chuẩn theo ngành cross-checked qua 2 báo độc lập (VietNamNet,
+    // Công lý — nguồn gốc chính thức Cổng TTĐT Chính phủ chỉ đăng dạng ảnh SPA), xác nhận TRỰC
+    // TIẾP điểm chuẩn đã cộng điểm ưu tiên/điểm thưởng. 7/7 ngành, điểm chuẩn 19,35-25,33/30.
+    // Priority VALUE judgment call (chuẩn quốc gia). 93 -> 94.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.hpmu)).toBe('verified-calculator');
     // Batch (2026-09-02): TMU (Trường Đại học Thương mại) graduated from catalog-only/researched to
     // verified-calculator. Thông báo điểm sàn chính thức (đăng lại nguyên văn trên Cổng TTĐT Chính
     // phủ) confirms a SINGLE flat threshold (20/30, no per-ngành variation, "Không có sự chênh lệch
