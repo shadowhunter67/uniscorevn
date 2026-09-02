@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 225,
       admissionDataAvailable: 225,
       eligibilitySupported: 24,
-      calculatorSupported: 103,
+      calculatorSupported: 104,
       partialCalculator: 3,
-      fullyVerified: 100,
+      fullyVerified: 101,
       catalogOnly: 42,
     });
   });
@@ -79,10 +79,10 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(98);
+    expect(researchedOnly).toBe(97);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
-      'vnuuet', 'vnuhus', 'vnussh', 'vnuvju', 'hanu',
+      'vnuhus', 'vnussh', 'vnuvju', 'hanu',
       'ntu', 'hueu',
       'udn',
       'uth', 'thanglong', 'rmitvn', 'vinuni',
@@ -323,6 +323,15 @@ describe('institution coverage statistics', () => {
     // tiên" + công thức giảm dần điểm ưu tiên khớp tuyệt đối khung quốc gia (ngưỡng 22,5, số chia
     // 7,5). Dải điểm chuẩn 23,00-26,27/30. Priority VALUE judgment call (chuẩn quốc gia). 99 -> 100.
     expect(deriveInstitutionSupportStatus(schoolRegistry.qnamu)).toBe('verified-calculator');
+    // Batch (2026-09-02): VNU-UET (Trường Đại học Công nghệ - ĐHQGHN) graduated from researched to
+    // verified-calculator (new roadmap 100 -> 150, batch 1). Điểm chuẩn 20/20 ngành đại học chính
+    // quy, nguồn tuyensinh247 (`sources.ts`), cross-check dải điểm với VnExpress. Trường tự công bố
+    // "Điểm trúng tuyển của một ngành là như nhau giữa các tổ hợp xét tuyển" (chinhphu.vn) và xác
+    // nhận trực tiếp điểm chuẩn ĐÃ CỘNG ưu tiên. Dải điểm chuẩn 22,00-28,19/30. Tổ hợp hỗ trợ
+    // A00/A01/D01 (+B00 cho 2 ngành khối nông nghiệp/sinh học) — không cần thêm subject combo mới.
+    // Mã ngành dùng mã nội bộ trường (CN1-CN21). Priority VALUE judgment call (chuẩn quốc gia).
+    // 100 -> 101.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.vnuuet)).toBe('verified-calculator');
     // Batch (2026-09-02): TMU (Trường Đại học Thương mại) graduated from catalog-only/researched to
     // verified-calculator. Thông báo điểm sàn chính thức (đăng lại nguyên văn trên Cổng TTĐT Chính
     // phủ) confirms a SINGLE flat threshold (20/30, no per-ngành variation, "Không có sự chênh lệch
