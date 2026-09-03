@@ -615,7 +615,7 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     url: 'https://vttu.edu.vn/truong-dai-hoc-vo-truong-toan-tuyen-sinh-trinh-do-dai-hoc-he-chinh-quy-nam-2026/',
     checkedAt: '2026-08-25',
     note:
-      'Official 2026 page confirms 5 methods (100 thi TN THPT, 200 hoc ba, 407 ket hop thi+hoc ba for Y khoa/Rang Ham Mat/Duoc hoc/Luat, DGNL, THPT nuoc ngoai) and the general formula (3-subject total + regional/subject priority points), but only a partial subject-combination list surfaced (A00 for Quan tri kinh doanh/Tai chinh-Ngan hang/Ke toan); the full per-major combination table and numeric floor scores were not extractable in this pass. Left at researched; do not fabricate the remaining combos or thresholds.',
+      "Superseded (batch expand-27, 2026-09-03): verified-calculator upgrade shipped for 9/9 majors (THPT-exam branch only, mã 100/101). The blocker noted here (image-embedded tables, not extractable via WebFetch) was resolved by navigating directly to the WordPress-hosted image URLs in chrome-devtools (curl was 403'd by hotlink protection) and reading them via vision: 'CÔNG BỐ MỨC ĐIỂM NHẬN HỒ SƠ XÉT TUYỂN' (bai-15.jpg, thang 30 — Y khoa/RHM 20.5, Dược 19.0, Luật 18.0, 5 remaining majors 15.0) plus the ngành/mã ngành/tổ hợp/chỉ tiêu tables and the exact formula wording ('Điểm xét tuyển = Đ1+Đ2+Đ3+ĐƯT'). Cross-checked against fptshop.com.vn (secondary). Học bạ branch (mã 200/407/409, percentile-equating conversion table) intentionally left unmodeled — one published bucket row (mốc 70%) has an internally overlapping range with mốc 60%, not trustworthy enough to model as exact. See normalized/runtime-source-snapshot/vttu/sources.ts. This entry is unused because vttu is now in explicitRuntimeSchoolIds; kept only as a research trail.",
   },
   ydlu: {
     sourceId: 'ydlu-admission-2026',
@@ -819,7 +819,7 @@ export const finalCatalogKnowledgeGap = {
 // shipped eligibility-only, THPT-exam route flat 15/30 (trừ Luật/Tâm lý học chờ Bộ GD&ĐT), nguồn
 // đối chiếu qua Báo Tuổi Trẻ (04/07/2026) vì tuyensinh.dhv.edu.vn không trích được số liệu qua
 // WebFetch.) They stay listed in `finalCatalogSchools` above for identity/location metadata only.
-const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus', 'tuaf', 'uhd', 'umt', 'utm', 'utt', 'eaut', 'vwa', 'hau', 'tbu', 'ltvuni', 'dhv', 'ush', 'hcmupes', 'hnmu', 'cmcu']);
+const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus', 'tuaf', 'uhd', 'umt', 'utm', 'utt', 'eaut', 'vwa', 'hau', 'tbu', 'ltvuni', 'dhv', 'ush', 'hcmupes', 'hnmu', 'cmcu', 'vttu']);
 const finalCatalogRuntimeSchools = finalCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const finalCatalogMethods: AdmissionMethodDescriptor[] = finalCatalogRuntimeSchools.map((school) => ({

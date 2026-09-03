@@ -128,6 +128,7 @@ import { hluvComparisonAdapter } from '../schools/hluv/comparison';
 import { bluComparisonAdapter } from '../schools/blu/comparison';
 import { dlaComparisonAdapter } from '../schools/dla/comparison';
 import { mkuComparisonAdapter } from '../schools/mku/comparison';
+import { vttuComparisonAdapter } from '../schools/vttu/comparison';
 import { thanglongComparisonAdapter } from '../schools/thanglong/comparison';
 import { tuebaComparisonAdapter } from '../schools/tueba/comparison';
 import { tumpComparisonAdapter } from '../schools/tump/comparison';
@@ -298,6 +299,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   bluComparisonAdapter,
   dlaComparisonAdapter,
   mkuComparisonAdapter,
+  vttuComparisonAdapter,
   thanglongComparisonAdapter,
   tuebaComparisonAdapter,
   tumpComparisonAdapter,
