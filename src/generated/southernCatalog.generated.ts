@@ -388,7 +388,7 @@ export const southernCatalogSchools: readonly SouthernCatalogSchool[] = [
     name: 'Trường Đại học Cửu Long',
     location: 'Vĩnh Long',
     ownership: 'private',
-    summary: 'Đã đưa vào roster miền Nam theo backlog; chưa nhập dữ liệu chính thức.',
+    summary: 'Verified-exact 2026-09-03: điểm chuẩn trúng tuyển 33/42 ngành đại học chính quy KHÔNG thuộc khối sức khỏe (nhánh thi TN THPT), nguồn CHÍNH CHỦ tuyensinh.mku.edu.vn.',
   },
   {
     id: 'ttu',
