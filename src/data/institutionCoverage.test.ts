@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 225,
       admissionDataAvailable: 225,
       eligibilitySupported: 22,
-      calculatorSupported: 125,
+      calculatorSupported: 126,
       partialCalculator: 3,
-      fullyVerified: 122,
+      fullyVerified: 123,
       catalogOnly: 42,
     });
   });
@@ -79,16 +79,23 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(78);
+    expect(researchedOnly).toBe(77);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuvju', 'hanu',
       'ntu', 'hueu',
       'udn',
-      'uth', 'thanglong', 'rmitvn', 'vinuni',
+      'uth', 'rmitvn', 'vinuni',
     ]) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('researched');
     }
+    // Batch (2026-09-03, roadmap 100 -> 150): TLU-HN (Trường Đại học Thăng Long) graduated to
+    // verified-calculator — official Thông báo số 25082205/TB-ĐHTL (22/8/2025, PDF gốc có chữ ký +
+    // con dấu, đọc bằng vision) publishes per-ngành điểm trúng tuyển for the "tổ hợp gốc" of each
+    // group, cross-referenced with the official combo-delta conversion Thông báo số 25072301/TB-ĐHTL
+    // (23/7/2025) to convert to any other combo within the same group. 22/24 ngành modeled (excludes
+    // Thanh nhạc/Thiết kế đồ hoạ — Nhóm 4, no conversion table).
+    expect(deriveInstitutionSupportStatus(schoolRegistry.thanglong)).toBe('verified-calculator');
     // Batch (2026-08-29): HUST graduated to eligibility-only — official ts.hust.edu.vn 2026
     // quality-assurance threshold read via vision from the embedded image, banded by khối nhóm
     // ngành (Kỹ thuật >=20/30; Kinh tế/Giáo dục/Ngoại ngữ >=19,5/30); no per-program mapping found.

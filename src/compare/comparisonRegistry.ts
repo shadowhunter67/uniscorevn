@@ -125,6 +125,7 @@ import { hcaComparisonAdapter } from '../schools/hca/comparison';
 import { naemComparisonAdapter } from '../schools/naem/comparison';
 import { hatComparisonAdapter } from '../schools/hat/comparison';
 import { hluvComparisonAdapter } from '../schools/hluv/comparison';
+import { thanglongComparisonAdapter } from '../schools/thanglong/comparison';
 import { tuebaComparisonAdapter } from '../schools/tueba/comparison';
 import { tumpComparisonAdapter } from '../schools/tump/comparison';
 import { ctuetComparisonAdapter } from '../schools/ctuet/comparison';
@@ -291,6 +292,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   naemComparisonAdapter,
   hatComparisonAdapter,
   hluvComparisonAdapter,
+  thanglongComparisonAdapter,
   tuebaComparisonAdapter,
   tumpComparisonAdapter,
   ctuetComparisonAdapter,
@@ -325,14 +327,16 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
         'dut', 'dueudn', 'uedudn', 'uflsudn', 'uteudn', 'vku',
         'hup', 'ajc', 'vnuf', 'dtu', 'hpu2', 'hust', 'hmu', 'haui', 'aof', 'bav', 'phenikaa', 'hou', 'fptu', 'hubt', 'dainam', 'vnulaw', 'vnuump',
         'tmu', 'tlu', 'hpmu', 'vnueb', 'vnued', 'vnuuet', 'vnuhus', 'vnussh', 'hump', 'qnu', 'qbu', 'qnamu', 'pctu', 'htu', 'dumtp', 'bmtu',
-        'hat',
+        'hat', 'thanglong',
       ].includes(adapter.schoolId)
   ),
   /** 'hdiu'/'huc'/'tueba'/'tump'/'tnut'/'hca'/'naem'/'hluv' loại trừ — đã có adapter thật (`schools/hdiu/comparison.ts`,
    * `schools/huc/comparison.ts`, `schools/tueba/comparison.ts`, `schools/tump/comparison.ts`,
    * `schools/tnut/comparison.ts`, `schools/hca/comparison.ts`, `schools/naem/comparison.ts`,
    * `schools/hluv/comparison.ts`), tránh bị catalog generic (nghiên cứu sơ bộ, chưa có calculator) ghi
-   * đè trong `schoolComparisonAdapterRegistry` (last-write-wins theo `schoolId`). */
+   * đè trong `schoolComparisonAdapterRegistry` (last-write-wins theo `schoolId`). 'thanglong' đã loại
+   * trừ ở filter `remainingCatalogComparisonAdapters` phía trên (đã có adapter thật
+   * `schools/thanglong/comparison.ts`). */
   ...finalCatalogComparisonAdapters.filter((adapter) => !['hdiu', 'huc', 'hunre', 'tueba', 'tump', 'tnut', 'hca', 'naem', 'hluv'].includes(adapter.schoolId)),
   ...collegeCatalogComparisonAdapters,
 ];
