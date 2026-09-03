@@ -113,6 +113,11 @@ export const COMMON_SUBJECT_COMBINATIONS: readonly SubjectCombination[] = [
   { id: 'X70', subjects: ['literature', 'history', 'civic-economic-law'] },
   { id: 'X74', subjects: ['literature', 'geography', 'civic-economic-law'] },
   { id: 'X78', subjects: ['literature', 'civic-economic-law', 'english'] },
+  /** X21/X26/D66 — thêm khi implement HTU 2025 (Trường Đại học Hà Tĩnh dùng các tổ hợp này cho
+   * ngành Kỹ thuật xây dựng/Công nghệ thông tin/Ngôn ngữ Anh, xem `schools/htu/thresholds.ts`). */
+  { id: 'X21', subjects: ['math', 'geography', 'civic-economic-law'] },
+  { id: 'X26', subjects: ['math', 'informatics', 'english'] },
+  { id: 'D66', subjects: ['literature', 'civic-economic-law', 'english'] },
 ];
 
 /** Nhãn tiếng Việt — dùng ở bất kỳ trường nào cần hiển thị tên môn cho người dùng chọn. */
