@@ -122,6 +122,7 @@ import { htuComparisonAdapter } from '../schools/htu/comparison';
 import { dumtpComparisonAdapter } from '../schools/dumtp/comparison';
 import { bmtuComparisonAdapter } from '../schools/bmtu/comparison';
 import { hcaComparisonAdapter } from '../schools/hca/comparison';
+import { naemComparisonAdapter } from '../schools/naem/comparison';
 import { tuebaComparisonAdapter } from '../schools/tueba/comparison';
 import { tumpComparisonAdapter } from '../schools/tump/comparison';
 import { ctuetComparisonAdapter } from '../schools/ctuet/comparison';
@@ -285,6 +286,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   dumtpComparisonAdapter,
   bmtuComparisonAdapter,
   hcaComparisonAdapter,
+  naemComparisonAdapter,
   tuebaComparisonAdapter,
   tumpComparisonAdapter,
   ctuetComparisonAdapter,
@@ -321,12 +323,12 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
         'tmu', 'tlu', 'hpmu', 'vnueb', 'vnued', 'vnuuet', 'vnuhus', 'vnussh', 'hump', 'qnu', 'qbu', 'qnamu', 'pctu', 'htu', 'dumtp', 'bmtu',
       ].includes(adapter.schoolId)
   ),
-  /** 'hdiu'/'huc'/'tueba'/'tump'/'tnut'/'hca' loại trừ — đã có adapter thật (`schools/hdiu/comparison.ts`,
+  /** 'hdiu'/'huc'/'tueba'/'tump'/'tnut'/'hca'/'naem' loại trừ — đã có adapter thật (`schools/hdiu/comparison.ts`,
    * `schools/huc/comparison.ts`, `schools/tueba/comparison.ts`, `schools/tump/comparison.ts`,
-   * `schools/tnut/comparison.ts`, `schools/hca/comparison.ts`), tránh bị catalog generic (nghiên
-   * cứu sơ bộ, chưa có calculator) ghi đè trong `schoolComparisonAdapterRegistry`
-   * (last-write-wins theo `schoolId`). */
-  ...finalCatalogComparisonAdapters.filter((adapter) => !['hdiu', 'huc', 'hunre', 'tueba', 'tump', 'tnut', 'hca'].includes(adapter.schoolId)),
+   * `schools/tnut/comparison.ts`, `schools/hca/comparison.ts`, `schools/naem/comparison.ts`), tránh bị
+   * catalog generic (nghiên cứu sơ bộ, chưa có calculator) ghi đè trong
+   * `schoolComparisonAdapterRegistry` (last-write-wins theo `schoolId`). */
+  ...finalCatalogComparisonAdapters.filter((adapter) => !['hdiu', 'huc', 'hunre', 'tueba', 'tump', 'tnut', 'hca', 'naem'].includes(adapter.schoolId)),
   ...collegeCatalogComparisonAdapters,
 ];
 
