@@ -2,9 +2,9 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (112)
+## Calculator đã xác minh (113)
 
-🎉 **Milestone: 100 calculator đã xác minh** — cột mốc kết thúc chiến dịch mở rộng bắt đầu từ 60 (2026-08-xx), đạt 100 tại batch 2026-09-02 với QNamU (Trường Đại học Quảng Nam). Roadmap mới (100 -> 150) bắt đầu ngay batch tiếp theo cùng ngày: +7 trường (VNU-UET/VNU-HUS/VNU-USSH — cụm VNU-Hà Nội; HUC — retry thành công qua rào cản SPA; HUNRE; HUMP — cụm Huế; AOF nâng cấp lên exact) đưa tổng lên 107. Batch 2026-09-03 (roadmap 100 -> 150, Phase A): HUST nâng cấp từ eligibility-only lên exact (điểm chuẩn 65/65 chương trình x tổ hợp, năm liền kề 2025, công thức "môn chính" xác nhận trực tiếp qua ts.hust.edu.vn) đưa tổng lên 108. Batch tiếp theo cùng ngày: PCTU (Trường Đại học Phan Châu Trinh) mới — nguồn CHÍNH CHỦ pctu.edu.vn cho cả formula 2025 ("Điểm xét tuyển = ĐM1+ĐM2+ĐM3+Điểm ƯT") và bảng điểm chuẩn 2025 (ảnh, đọc bằng vision), cùng năm, khác góc độ với research trước đó (dừng vì trang "năm 2026" có thêm điều kiện xếp loại học lực) — đưa tổng lên 109. Batch tiếp theo cùng ngày (roadmap Thái Nguyên/dầu khí): **PVU** (Trường Đại học Dầu khí Việt Nam) mới — nguồn CHÍNH CHỦ pvu.edu.vn 2026 cho cả điều kiện xét tuyển (tổng thô 3 môn theo tổ hợp) và điểm chuẩn đợt 1 (22,50/30, đồng nhất mọi ngành/tổ hợp trong 3 ngành 2026), cùng năm 2026; và **TUEBA** (Trường Đại học Kinh tế và QTKD - Đại học Thái Nguyên) mới — nguồn CHÍNH CHỦ tuyensinh.tueba.edu.vn 2026 cho ngưỡng đảm bảo chất lượng đầu vào theo ngành (3 mức 17,0/17,5/20,0/30) đã bao gồm điểm ưu tiên, retry thành công so với research trước đó (batch expand-14 từng dừng vì chỉ tìm thấy thông báo 2025) — đưa tổng lên 111. Batch tiếp theo cùng ngày (roadmap 100 -> 150, Phase B): **CTUET** (Trường Đại học Kỹ thuật - Công nghệ Cần Thơ, mã trường KCC) mới — nguồn CHÍNH CHỦ ctuet.edu.vn 2025 cho điểm trúng tuyển CHÍNH THỨC theo 22 ngành (20,15–24,68/30, thông báo 79/TB-ĐHKTCN ký tên đóng dấu), công thức ("Điểm xét tuyển = tổng 3 môn + Điểm ưu tiên + điểm cộng") và mức điểm ưu tiên KV/ĐT CHÍNH CHỦ công bố theo Phụ lục II/III Quy chế tuyển sinh (Quyết định 396/QĐ-ĐHKTCN) — không phải judgment call quốc gia thay thế như TUEBA/PVU, cùng năm 2025 cho cả 3 nguồn — đưa tổng lên 112.
+🎉 **Milestone: 100 calculator đã xác minh** — cột mốc kết thúc chiến dịch mở rộng bắt đầu từ 60 (2026-08-xx), đạt 100 tại batch 2026-09-02 với QNamU (Trường Đại học Quảng Nam). Roadmap mới (100 -> 150) bắt đầu ngay batch tiếp theo cùng ngày: +7 trường (VNU-UET/VNU-HUS/VNU-USSH — cụm VNU-Hà Nội; HUC — retry thành công qua rào cản SPA; HUNRE; HUMP — cụm Huế; AOF nâng cấp lên exact) đưa tổng lên 107. Batch 2026-09-03 (roadmap 100 -> 150, Phase A): HUST nâng cấp từ eligibility-only lên exact (điểm chuẩn 65/65 chương trình x tổ hợp, năm liền kề 2025, công thức "môn chính" xác nhận trực tiếp qua ts.hust.edu.vn) đưa tổng lên 108. Batch tiếp theo cùng ngày: PCTU (Trường Đại học Phan Châu Trinh) mới — nguồn CHÍNH CHỦ pctu.edu.vn cho cả formula 2025 ("Điểm xét tuyển = ĐM1+ĐM2+ĐM3+Điểm ƯT") và bảng điểm chuẩn 2025 (ảnh, đọc bằng vision), cùng năm, khác góc độ với research trước đó (dừng vì trang "năm 2026" có thêm điều kiện xếp loại học lực) — đưa tổng lên 109. Batch tiếp theo cùng ngày (roadmap Thái Nguyên/dầu khí): **PVU** (Trường Đại học Dầu khí Việt Nam) mới — nguồn CHÍNH CHỦ pvu.edu.vn 2026 cho cả điều kiện xét tuyển (tổng thô 3 môn theo tổ hợp) và điểm chuẩn đợt 1 (22,50/30, đồng nhất mọi ngành/tổ hợp trong 3 ngành 2026), cùng năm 2026; và **TUEBA** (Trường Đại học Kinh tế và QTKD - Đại học Thái Nguyên) mới — nguồn CHÍNH CHỦ tuyensinh.tueba.edu.vn 2026 cho ngưỡng đảm bảo chất lượng đầu vào theo ngành (3 mức 17,0/17,5/20,0/30) đã bao gồm điểm ưu tiên, retry thành công so với research trước đó (batch expand-14 từng dừng vì chỉ tìm thấy thông báo 2025) — đưa tổng lên 111. Batch tiếp theo cùng ngày (roadmap 100 -> 150, Phase B): **CTUET** (Trường Đại học Kỹ thuật - Công nghệ Cần Thơ, mã trường KCC) mới — nguồn CHÍNH CHỦ ctuet.edu.vn 2025 cho điểm trúng tuyển CHÍNH THỨC theo 22 ngành (20,15–24,68/30, thông báo 79/TB-ĐHKTCN ký tên đóng dấu), công thức ("Điểm xét tuyển = tổng 3 môn + Điểm ưu tiên + điểm cộng") và mức điểm ưu tiên KV/ĐT CHÍNH CHỦ công bố theo Phụ lục II/III Quy chế tuyển sinh (Quyết định 396/QĐ-ĐHKTCN) — không phải judgment call quốc gia thay thế như TUEBA/PVU, cùng năm 2025 cho cả 3 nguồn — đưa tổng lên 112. Batch tiếp theo cùng ngày (roadmap 100 -> 150, Phase C): **DNU** (Trường Đại học Đồng Nai, mã trường DNU — phân biệt với DNU-HN/Đại Nam) mới — nguồn CHÍNH CHỦ dnpu.edu.vn 2025 cho cả điểm trúng tuyển CHÍNH THỨC theo 9/11 ngành có phương thức thi TN THPT (16,00–26,51/30, Quyết định 1408/QĐ-HĐTS ký tên đóng dấu) và công thức/tổ hợp/điều kiện phụ (Thông tin tuyển sinh 2025, xác nhận điểm chuẩn áp dụng như nhau cho mọi tổ hợp/phương thức); điểm ưu tiên dùng khung quốc gia hiện hành (trường không tự công bố bảng riêng, judgment call — cùng tiền lệ TUEBA/PVU); cùng năm 2025 cho cả 2 nguồn — đưa tổng lên 113.
 
 - **AJC** — Học viện Báo chí và Tuyên truyền
 - **AOF** — Học viện Tài chính
@@ -17,6 +17,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **CTUET** — Trường Đại học Kỹ thuật - Công nghệ Cần Thơ
 - **CTUMP** — Trường Đại học Y Dược Cần Thơ
 - **DLU** — Truong Dai hoc Da Lat
+- **DNU** — Trường Đại học Đồng Nai
 - **DNU-HN** — Trường Đại học Đại Nam
 - **DTHU** — Trường Đại học Đồng Tháp
 - **DTU** — Truong Dai hoc Duy Tan
@@ -150,7 +151,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-LS** — Truong Dai hoc Luat - Dai hoc Quoc gia Ha Noi
 - **VNUF** — Truong Dai hoc Lam nghiep
 
-## Đã research, chưa đủ để tính (88)
+## Đã research, chưa đủ để tính (87)
 
 - **AADAA** — Học viện Phòng không - Không quân
 - **ACTVN** — Học viện Kỹ thuật Mật mã
@@ -163,7 +164,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **CĐSPTW-NT** — Trường Cao đẳng Sư phạm Trung ương - Nha Trang
 - **DHP** — Trường Đại học Hải Phòng
 - **DLA** — Trường Đại học Kinh tế Công nghiệp Long An
-- **DNU** — Trường Đại học Đồng Nai
 - **DSU** — Trường Đại học Thể dục Thể thao Đà Nẵng
 - **DUMTP** — Trường Đại học Kỹ thuật Y Dược Đà Nẵng
 - **FUV** — Trường Đại học Fulbright Việt Nam

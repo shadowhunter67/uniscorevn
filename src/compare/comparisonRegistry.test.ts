@@ -117,6 +117,7 @@ import { pctuAdmissionMethods } from '../schools/pctu/methods';
 import { pvuAdmissionMethods } from '../schools/pvu/methods';
 import { tuebaAdmissionMethods } from '../schools/tueba/methods';
 import { ctuetAdmissionMethods } from '../schools/ctuet/methods';
+import { dnuAdmissionMethods } from '../schools/dnu/methods';
 import { qnamuAdmissionMethods } from '../schools/qnamu/methods';
 import { vnuuetAdmissionMethods } from '../schools/vnuuet/methods';
 import { vnuhusAdmissionMethods } from '../schools/vnuhus/methods';
@@ -271,6 +272,7 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   pvu: pvuAdmissionMethods,
   tueba: tuebaAdmissionMethods,
   ctuet: ctuetAdmissionMethods,
+  dnu: dnuAdmissionMethods,
   qnamu: qnamuAdmissionMethods,
   vnuuet: vnuuetAdmissionMethods,
   vnuhus: vnuhusAdmissionMethods,

@@ -119,6 +119,7 @@ import { pctuComparisonAdapter } from '../schools/pctu/comparison';
 import { pvuComparisonAdapter } from '../schools/pvu/comparison';
 import { tuebaComparisonAdapter } from '../schools/tueba/comparison';
 import { ctuetComparisonAdapter } from '../schools/ctuet/comparison';
+import { dnuComparisonAdapter } from '../schools/dnu/comparison';
 import { qnamuComparisonAdapter } from '../schools/qnamu/comparison';
 import { tmuComparisonAdapter } from '../schools/tmu/comparison';
 import { vaaComparisonAdapter } from '../schools/vaa/comparison';
@@ -275,6 +276,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   pvuComparisonAdapter,
   tuebaComparisonAdapter,
   ctuetComparisonAdapter,
+  dnuComparisonAdapter,
   qnamuComparisonAdapter,
   vaaComparisonAdapter,
   vnulawComparisonAdapter,
@@ -291,11 +293,12 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   nluComparisonAdapter,
   ushComparisonAdapter,
   hcmupesComparisonAdapter,
-  /** 'tvu'/'pvu'/'ctuet' loại trừ — đã có adapter thật (`schools/tvu/comparison.ts`,
-   * `schools/pvu/comparison.ts`, `schools/ctuet/comparison.ts`), tránh bị catalog generic (nghiên
-   * cứu sơ bộ, chưa có calculator) ghi đè trong `schoolComparisonAdapterRegistry` (last-write-wins
-   * theo `schoolId`, cùng hazard đã fix cho HDIU/TMU/TLU/HPMU/VNU-UEB/VNU-UED). */
-  ...southernCatalogComparisonAdapters.filter((adapter) => !['tvu', 'pvu', 'ctuet'].includes(adapter.schoolId)),
+  /** 'tvu'/'pvu'/'ctuet'/'dnu' loại trừ — đã có adapter thật (`schools/tvu/comparison.ts`,
+   * `schools/pvu/comparison.ts`, `schools/ctuet/comparison.ts`, `schools/dnu/comparison.ts`), tránh
+   * bị catalog generic (nghiên cứu sơ bộ, chưa có calculator) ghi đè trong
+   * `schoolComparisonAdapterRegistry` (last-write-wins theo `schoolId`, cùng hazard đã fix cho
+   * HDIU/TMU/TLU/HPMU/VNU-UEB/VNU-UED). */
+  ...southernCatalogComparisonAdapters.filter((adapter) => !['tvu', 'pvu', 'ctuet', 'dnu'].includes(adapter.schoolId)),
   ...remainingCatalogComparisonAdapters.filter(
     (adapter) =>
       ![
