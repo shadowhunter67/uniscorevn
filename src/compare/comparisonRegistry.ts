@@ -117,6 +117,7 @@ import { qnuComparisonAdapter } from '../schools/qnu/comparison';
 import { qbuComparisonAdapter } from '../schools/qbu/comparison';
 import { pctuComparisonAdapter } from '../schools/pctu/comparison';
 import { pvuComparisonAdapter } from '../schools/pvu/comparison';
+import { tnutComparisonAdapter } from '../schools/tnut/comparison';
 import { tuebaComparisonAdapter } from '../schools/tueba/comparison';
 import { tumpComparisonAdapter } from '../schools/tump/comparison';
 import { ctuetComparisonAdapter } from '../schools/ctuet/comparison';
@@ -275,6 +276,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   qbuComparisonAdapter,
   pctuComparisonAdapter,
   pvuComparisonAdapter,
+  tnutComparisonAdapter,
   tuebaComparisonAdapter,
   tumpComparisonAdapter,
   ctuetComparisonAdapter,
@@ -311,11 +313,11 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
         'tmu', 'tlu', 'hpmu', 'vnueb', 'vnued', 'vnuuet', 'vnuhus', 'vnussh', 'hump', 'qnu', 'qbu', 'qnamu', 'pctu',
       ].includes(adapter.schoolId)
   ),
-  /** 'hdiu'/'huc'/'tueba'/'tump' loại trừ — đã có adapter thật (`schools/hdiu/comparison.ts`,
-   * `schools/huc/comparison.ts`, `schools/tueba/comparison.ts`, `schools/tump/comparison.ts`), tránh
-   * bị catalog generic (nghiên cứu sơ bộ, chưa có calculator) ghi đè trong
-   * `schoolComparisonAdapterRegistry` (last-write-wins theo `schoolId`). */
-  ...finalCatalogComparisonAdapters.filter((adapter) => !['hdiu', 'huc', 'hunre', 'tueba', 'tump'].includes(adapter.schoolId)),
+  /** 'hdiu'/'huc'/'tueba'/'tump'/'tnut' loại trừ — đã có adapter thật (`schools/hdiu/comparison.ts`,
+   * `schools/huc/comparison.ts`, `schools/tueba/comparison.ts`, `schools/tump/comparison.ts`,
+   * `schools/tnut/comparison.ts`), tránh bị catalog generic (nghiên cứu sơ bộ, chưa có calculator)
+   * ghi đè trong `schoolComparisonAdapterRegistry` (last-write-wins theo `schoolId`). */
+  ...finalCatalogComparisonAdapters.filter((adapter) => !['hdiu', 'huc', 'hunre', 'tueba', 'tump', 'tnut'].includes(adapter.schoolId)),
   ...collegeCatalogComparisonAdapters,
 ];
 
