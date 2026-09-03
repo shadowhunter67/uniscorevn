@@ -116,6 +116,7 @@ import { humpModule } from './hump';
 import { tvuModule } from './tvu';
 import { qnuModule } from './qnu';
 import { qbuModule } from './qbu';
+import { pctuModule } from './pctu';
 import { qnamuModule } from './qnamu';
 import { tmuModule } from './tmu';
 import { houModule } from './hou';
@@ -303,6 +304,7 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   hump: humpModule,
   tvu: tvuModule,
   qnu: qnuModule,
+  pctu: pctuModule,
   qbu: qbuModule,
   qnamu: qnamuModule,
   tmu: tmuModule,

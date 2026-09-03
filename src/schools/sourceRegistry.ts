@@ -87,6 +87,7 @@ import { humpSources } from './hump/sources';
 import { tvuSources } from './tvu/sources';
 import { qnuSources } from './qnu/sources';
 import { qbuSources } from './qbu/sources';
+import { pctuSources } from './pctu/sources';
 import { qnamuSources } from './qnamu/sources';
 import { tmuSources } from './tmu/sources';
 
@@ -182,6 +183,7 @@ export const humpSourceRegistry: AdmissionSource[] = withSchoolId('hump', humpSo
 export const tvuSourceRegistry: AdmissionSource[] = withSchoolId('tvu', tvuSources);
 export const qnuSourceRegistry: AdmissionSource[] = withSchoolId('qnu', qnuSources);
 export const qbuSourceRegistry: AdmissionSource[] = withSchoolId('qbu', qbuSources);
+export const pctuSourceRegistry: AdmissionSource[] = withSchoolId('pctu', pctuSources);
 export const qnamuSourceRegistry: AdmissionSource[] = withSchoolId('qnamu', qnamuSources);
 export const tmuSourceRegistry: AdmissionSource[] = withSchoolId('tmu', tmuSources);
 
@@ -271,6 +273,7 @@ export const schoolSourceRegistries: Record<string, AdmissionSource[]> = {
   tvu: tvuSourceRegistry,
   qnu: qnuSourceRegistry,
   qbu: qbuSourceRegistry,
+  pctu: pctuSourceRegistry,
   qnamu: qnamuSourceRegistry,
   tmu: tmuSourceRegistry,
 };
@@ -364,6 +367,7 @@ export const allAdmissionSources: AdmissionSource[] = [
   ...tvuSourceRegistry,
   ...qnuSourceRegistry,
   ...qbuSourceRegistry,
+  ...pctuSourceRegistry,
   ...qnamuSourceRegistry,
   ...tmuSourceRegistry,
 ];

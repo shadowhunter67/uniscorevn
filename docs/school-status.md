@@ -2,9 +2,9 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (108)
+## Calculator đã xác minh (109)
 
-🎉 **Milestone: 100 calculator đã xác minh** — cột mốc kết thúc chiến dịch mở rộng bắt đầu từ 60 (2026-08-xx), đạt 100 tại batch 2026-09-02 với QNamU (Trường Đại học Quảng Nam). Roadmap mới (100 -> 150) bắt đầu ngay batch tiếp theo cùng ngày: +7 trường (VNU-UET/VNU-HUS/VNU-USSH — cụm VNU-Hà Nội; HUC — retry thành công qua rào cản SPA; HUNRE; HUMP — cụm Huế; AOF nâng cấp lên exact) đưa tổng lên 107. Batch 2026-09-03 (roadmap 100 -> 150, Phase A): HUST nâng cấp từ eligibility-only lên exact (điểm chuẩn 65/65 chương trình x tổ hợp, năm liền kề 2025, công thức "môn chính" xác nhận trực tiếp qua ts.hust.edu.vn) đưa tổng lên 108.
+🎉 **Milestone: 100 calculator đã xác minh** — cột mốc kết thúc chiến dịch mở rộng bắt đầu từ 60 (2026-08-xx), đạt 100 tại batch 2026-09-02 với QNamU (Trường Đại học Quảng Nam). Roadmap mới (100 -> 150) bắt đầu ngay batch tiếp theo cùng ngày: +7 trường (VNU-UET/VNU-HUS/VNU-USSH — cụm VNU-Hà Nội; HUC — retry thành công qua rào cản SPA; HUNRE; HUMP — cụm Huế; AOF nâng cấp lên exact) đưa tổng lên 107. Batch 2026-09-03 (roadmap 100 -> 150, Phase A): HUST nâng cấp từ eligibility-only lên exact (điểm chuẩn 65/65 chương trình x tổ hợp, năm liền kề 2025, công thức "môn chính" xác nhận trực tiếp qua ts.hust.edu.vn) đưa tổng lên 108. Batch tiếp theo cùng ngày: PCTU (Trường Đại học Phan Châu Trinh) mới — nguồn CHÍNH CHỦ pctu.edu.vn cho cả formula 2025 ("Điểm xét tuyển = ĐM1+ĐM2+ĐM3+Điểm ƯT") và bảng điểm chuẩn 2025 (ảnh, đọc bằng vision), cùng năm, khác góc độ với research trước đó (dừng vì trang "năm 2026" có thêm điều kiện xếp loại học lực) — đưa tổng lên 109.
 
 - **AJC** — Học viện Báo chí và Tuyên truyền
 - **AOF** — Học viện Tài chính
@@ -66,6 +66,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **NLU** — Trường Đại học Nông Lâm TP.HCM
 - **NTU-HN** — Truong Dai hoc Nguyen Trai
 - **OU** — Trường Đại học Mở Thành phố Hồ Chí Minh
+- **PCTU** — Trường Đại học Phan Châu Trinh
 - **Phenikaa** — Trường Đại học Phenikaa
 - **PNTU** — Trường Đại học Y khoa Phạm Ngọc Thạch
 - **PTIT** — Học viện Công nghệ Bưu chính Viễn thông
@@ -146,7 +147,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-LS** — Truong Dai hoc Luat - Dai hoc Quoc gia Ha Noi
 - **VNUF** — Truong Dai hoc Lam nghiep
 
-## Đã research, chưa đủ để tính (92)
+## Đã research, chưa đủ để tính (91)
 
 - **AADAA** — Học viện Phòng không - Không quân
 - **ACTVN** — Học viện Kỹ thuật Mật mã
@@ -196,7 +197,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **NTU** — Trường Đại học Nha Trang
 - **NUAE** — Trường Đại học Sư phạm Nghệ thuật Trung ương
 - **OCP** — Trường Đại học Sĩ quan Chính trị
-- **PCTU** — Trường Đại học Phan Châu Trinh
 - **PDU** — Trường Đại học Phạm Văn Đồng
 - **PPA** — Học viện Cảnh sát Nhân dân
 - **PPU-CAND** — Trường Đại học Cảnh sát Nhân dân
