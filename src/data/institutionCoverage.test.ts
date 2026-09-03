@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 225,
       admissionDataAvailable: 225,
       eligibilitySupported: 22,
-      calculatorSupported: 126,
+      calculatorSupported: 127,
       partialCalculator: 3,
-      fullyVerified: 123,
+      fullyVerified: 124,
       catalogOnly: 42,
     });
   });
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(77);
+    expect(researchedOnly).toBe(76);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuvju', 'hanu',
@@ -96,6 +96,13 @@ describe('institution coverage statistics', () => {
     // (23/7/2025) to convert to any other combo within the same group. 22/24 ngành modeled (excludes
     // Thanh nhạc/Thiết kế đồ hoạ — Nhóm 4, no conversion table).
     expect(deriveInstitutionSupportStatus(schoolRegistry.thanglong)).toBe('verified-calculator');
+    // Batch (2026-09-03, roadmap 100 -> 150): BLU (Trường Đại học Bạc Liêu) graduated to
+    // verified-calculator — official tuyensinh.blu.edu.vn: ảnh "ĐIỂM CHUẨN TRÚNG TUYỂN NĂM 2026"
+    // (Quyết định số 426/QĐ-ĐHBL, 10/8/2026, đọc bằng vision) + trang HTML chính thức tổ hợp môn theo
+    // ngành + trang HTML chính thức công thức điểm ưu tiên (xác nhận KV1=0,75/nhóm ĐT2=1,00 qua ví
+    // dụ minh hoạ). 13/15 ngành đại học chính quy modeled, nhánh thi TN THPT (loại trừ Giáo dục Mầm
+    // non — trình độ cao đẳng khác cấp + tổ hợp năng khiếu).
+    expect(deriveInstitutionSupportStatus(schoolRegistry.blu)).toBe('verified-calculator');
     // Batch (2026-08-29): HUST graduated to eligibility-only — official ts.hust.edu.vn 2026
     // quality-assurance threshold read via vision from the embedded image, banded by khối nhóm
     // ngành (Kỹ thuật >=20/30; Kinh tế/Giáo dục/Ngoại ngữ >=19,5/30); no per-program mapping found.

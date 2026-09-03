@@ -118,6 +118,9 @@ export const COMMON_SUBJECT_COMBINATIONS: readonly SubjectCombination[] = [
   { id: 'X21', subjects: ['math', 'geography', 'civic-economic-law'] },
   { id: 'X26', subjects: ['math', 'informatics', 'english'] },
   { id: 'D66', subjects: ['literature', 'civic-economic-law', 'english'] },
+  /** X79 — thêm khi implement BLU 2026 (Trường Đại học Bạc Liêu, ngành Ngôn ngữ Anh dùng tổ hợp
+   * Ngữ văn/Tin học/Tiếng Anh, xem `schools/blu/thresholds.ts`). */
+  { id: 'X79', subjects: ['literature', 'informatics', 'english'] },
 ];
 
 /** Nhãn tiếng Việt — dùng ở bất kỳ trường nào cần hiển thị tên môn cho người dùng chọn. */

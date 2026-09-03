@@ -363,7 +363,8 @@ export const southernCatalogSchools: readonly SouthernCatalogSchool[] = [
     name: 'Trường Đại học Bạc Liêu',
     location: 'Bạc Liêu',
     ownership: 'public',
-    summary: 'Đã đưa vào roster miền Nam theo backlog; chưa claim công thức/ngưỡng.',
+    summary:
+      'Đã có calculator verified-exact riêng (`schools/blu`) — placeholder catalog này bị loại trừ khỏi southernCatalog spread trong comparisonRegistry.ts, giữ lại chỉ để hiển thị metadata roster.',
   },
   {
     id: 'dnu',

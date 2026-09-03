@@ -125,6 +125,7 @@ import { hcaComparisonAdapter } from '../schools/hca/comparison';
 import { naemComparisonAdapter } from '../schools/naem/comparison';
 import { hatComparisonAdapter } from '../schools/hat/comparison';
 import { hluvComparisonAdapter } from '../schools/hluv/comparison';
+import { bluComparisonAdapter } from '../schools/blu/comparison';
 import { thanglongComparisonAdapter } from '../schools/thanglong/comparison';
 import { tuebaComparisonAdapter } from '../schools/tueba/comparison';
 import { tumpComparisonAdapter } from '../schools/tump/comparison';
@@ -292,6 +293,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   naemComparisonAdapter,
   hatComparisonAdapter,
   hluvComparisonAdapter,
+  bluComparisonAdapter,
   thanglongComparisonAdapter,
   tuebaComparisonAdapter,
   tumpComparisonAdapter,
@@ -313,12 +315,12 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   nluComparisonAdapter,
   ushComparisonAdapter,
   hcmupesComparisonAdapter,
-  /** 'tvu'/'pvu'/'ctuet'/'dnu' loại trừ — đã có adapter thật (`schools/tvu/comparison.ts`,
-   * `schools/pvu/comparison.ts`, `schools/ctuet/comparison.ts`, `schools/dnu/comparison.ts`), tránh
-   * bị catalog generic (nghiên cứu sơ bộ, chưa có calculator) ghi đè trong
-   * `schoolComparisonAdapterRegistry` (last-write-wins theo `schoolId`, cùng hazard đã fix cho
-   * HDIU/TMU/TLU/HPMU/VNU-UEB/VNU-UED). */
-  ...southernCatalogComparisonAdapters.filter((adapter) => !['tvu', 'pvu', 'ctuet', 'dnu'].includes(adapter.schoolId)),
+  /** 'tvu'/'pvu'/'ctuet'/'dnu'/'blu' loại trừ — đã có adapter thật (`schools/tvu/comparison.ts`,
+   * `schools/pvu/comparison.ts`, `schools/ctuet/comparison.ts`, `schools/dnu/comparison.ts`,
+   * `schools/blu/comparison.ts`), tránh bị catalog generic (nghiên cứu sơ bộ, chưa có calculator) ghi
+   * đè trong `schoolComparisonAdapterRegistry` (last-write-wins theo `schoolId`, cùng hazard đã fix
+   * cho HDIU/TMU/TLU/HPMU/VNU-UEB/VNU-UED). */
+  ...southernCatalogComparisonAdapters.filter((adapter) => !['tvu', 'pvu', 'ctuet', 'dnu', 'blu'].includes(adapter.schoolId)),
   ...remainingCatalogComparisonAdapters.filter(
     (adapter) =>
       ![

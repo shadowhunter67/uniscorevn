@@ -51,6 +51,7 @@ import { hcaSources } from './hca/sources';
 import { naemSources } from './naem/sources';
 import { hatSources } from './hat/sources';
 import { hluvSources } from './hluv/sources';
+import { bluSources } from './blu/sources';
 import { thanglongSources } from './thanglong/sources';
 import { tbuSources } from './tbu/sources';
 import { uhdSources } from './uhd/sources';
@@ -161,6 +162,7 @@ export const hcaSourceRegistry: AdmissionSource[] = withSchoolId('hca', hcaSourc
 export const naemSourceRegistry: AdmissionSource[] = withSchoolId('naem', naemSources);
 export const hatSourceRegistry: AdmissionSource[] = withSchoolId('hat', hatSources);
 export const hluvSourceRegistry: AdmissionSource[] = withSchoolId('hluv', hluvSources);
+export const bluSourceRegistry: AdmissionSource[] = withSchoolId('blu', bluSources);
 export const thanglongSourceRegistry: AdmissionSource[] = withSchoolId('thanglong', thanglongSources);
 export const tbuSourceRegistry: AdmissionSource[] = withSchoolId('tbu', tbuSources);
 export const uhdSourceRegistry: AdmissionSource[] = withSchoolId('uhd', uhdSources);
@@ -268,6 +270,7 @@ export const schoolSourceRegistries: Record<string, AdmissionSource[]> = {
   naem: naemSourceRegistry,
   hat: hatSourceRegistry,
   hluv: hluvSourceRegistry,
+  blu: bluSourceRegistry,
   thanglong: thanglongSourceRegistry,
   tbu: tbuSourceRegistry,
   uhd: uhdSourceRegistry,
@@ -373,6 +376,7 @@ export const allAdmissionSources: AdmissionSource[] = [
   ...naemSourceRegistry,
   ...hatSourceRegistry,
   ...hluvSourceRegistry,
+  ...bluSourceRegistry,
   ...thanglongSourceRegistry,
   ...tbuSourceRegistry,
   ...uhdSourceRegistry,
