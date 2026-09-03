@@ -117,6 +117,7 @@ import { pctuAdmissionMethods } from '../schools/pctu/methods';
 import { pvuAdmissionMethods } from '../schools/pvu/methods';
 import { tnutAdmissionMethods } from '../schools/tnut/methods';
 import { htuAdmissionMethods } from '../schools/htu/methods';
+import { dumtpAdmissionMethods } from '../schools/dumtp/methods';
 import { tuebaAdmissionMethods } from '../schools/tueba/methods';
 import { tumpAdmissionMethods } from '../schools/tump/methods';
 import { ctuetAdmissionMethods } from '../schools/ctuet/methods';
@@ -275,6 +276,7 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   pvu: pvuAdmissionMethods,
   tnut: tnutAdmissionMethods,
   htu: htuAdmissionMethods,
+  dumtp: dumtpAdmissionMethods,
   tueba: tuebaAdmissionMethods,
   tump: tumpAdmissionMethods,
   ctuet: ctuetAdmissionMethods,
