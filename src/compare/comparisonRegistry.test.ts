@@ -72,6 +72,7 @@ import { hustAdmissionMethods } from '../schools/hust/methods';
 import { apdAdmissionMethods } from '../schools/apd/methods';
 import { bduAdmissionMethods } from '../schools/bdu/methods';
 import { bvuAdmissionMethods } from '../schools/bvu/methods';
+import { bmtuAdmissionMethods } from '../schools/bmtu/methods';
 import { eiuAdmissionMethods } from '../schools/eiu/methods';
 import { fptuAdmissionMethods } from '../schools/fptu/methods';
 import { hubtAdmissionMethods } from '../schools/hubt/methods';
@@ -231,6 +232,7 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   apd: apdAdmissionMethods,
   bdu: bduAdmissionMethods,
   bvu: bvuAdmissionMethods,
+  bmtu: bmtuAdmissionMethods,
   eiu: eiuAdmissionMethods,
   fptu: fptuAdmissionMethods,
   hubt: hubtAdmissionMethods,
