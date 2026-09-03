@@ -156,6 +156,7 @@ import { nluModule } from './nlu';
 import { ushModule } from './ush';
 import { hcmupesModule } from './hcmupes';
 import { vttuModule } from './vttu';
+import { hbuModule } from './hbu';
 import { southernCatalogModules } from './southernCatalog';
 import { remainingCatalogModules } from './remainingCatalog';
 import { finalCatalogModules } from './finalCatalog';
@@ -363,4 +364,5 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   ush: ushModule,
   hcmupes: hcmupesModule,
   vttu: vttuModule,
+  hbu: hbuModule,
 };

@@ -121,6 +121,13 @@ export const COMMON_SUBJECT_COMBINATIONS: readonly SubjectCombination[] = [
   /** X79 — thêm khi implement BLU 2026 (Trường Đại học Bạc Liêu, ngành Ngôn ngữ Anh dùng tổ hợp
    * Ngữ văn/Tin học/Tiếng Anh, xem `schools/blu/thresholds.ts`). */
   { id: 'X79', subjects: ['literature', 'informatics', 'english'] },
+  /** A10/A11/C20 — thêm khi implement HBU 2025 (Trường Đại học Hòa Bình). A10 (Toán/Vật lý/GDKTPL)
+   * và C20 (Ngữ văn/Địa lý/GDKTPL) trùng thành phần môn với X05/X74 đã có sẵn (mã tổ hợp quốc gia
+   * khác nhau nhưng cùng 3 môn — cùng tiền lệ cặp C14/X01, D08/B08 ở trên); A11 (Toán/Hóa học/GDKTPL)
+   * là tổ hợp mới, xem `schools/hbu/sources.ts`. */
+  { id: 'A10', subjects: ['math', 'physics', 'civic-economic-law'] },
+  { id: 'A11', subjects: ['math', 'chemistry', 'civic-economic-law'] },
+  { id: 'C20', subjects: ['literature', 'geography', 'civic-economic-law'] },
 ];
 
 /** Nhãn tiếng Việt — dùng ở bất kỳ trường nào cần hiển thị tên môn cho người dùng chọn. */
