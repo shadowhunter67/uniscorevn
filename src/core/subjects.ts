@@ -43,6 +43,12 @@ export const COMMON_SUBJECT_COMBINATIONS: readonly SubjectCombination[] = [
    * hợp quốc gia khác nhau, xác nhận qua nhiều nguồn thứ cấp độc lập, không mâu thuẫn cho tổ hợp
    * này — khác lo ngại ghi ở comment C01/C02/C04 bên dưới vốn nói về HAUI). */
   { id: 'D08', subjects: ['math', 'biology', 'english'] },
+  /** D00 — thêm khi implement TUMP 2025 (Trường Đại học Y - Dược, Đại học Thái Nguyên). Thành phần
+   * môn (Toán, Ngữ văn, Tiếng Anh) trùng với D01, nhưng "Thông tin tuyển sinh đại học năm 2025"
+   * (dnpu — thực ra tuyensinh.tump.edu.vn, xem `schools/tump/sources.ts`) liệt kê nguyên văn mã
+   * "D00: Toán, Ngữ văn, Tiếng Anh" cho ngành Điều dưỡng/Hộ sinh — giữ nguyên mã trường tự công bố
+   * thay vì tự ý gộp vào D01, cùng tiền lệ cặp B08/D08 trùng thành phần môn ở trên. */
+  { id: 'D00', subjects: ['math', 'literature', 'english'] },
   /** C01/C02/C04 — thêm khi implement HAUI 2026 (chỉ 3/21 tổ hợp HAUI dùng ánh xạ theo taxonomy
    * này; các tổ hợp còn lại — B03, C03, D04, D06, D08, D14, D15, DD2, và ký hiệu riêng của trường
    * X05/X06/X07/X25 — dùng môn ngoại ngữ Trung/Nhật/Hàn hoặc thành phần KHÔNG xác định được đáng
