@@ -124,13 +124,13 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     note:
       'Superseded (2026-08-25 batch): eligibility-only upgrade shipped. The attached PDF was downloaded directly from its FileManager link and read as a file (not via WebFetch, which only summarized the landing page) — full Phụ lục I table read: all 59 mã ngành, tổ hợp, and NĐV. Modeled 3 clean groups for phương thức 100 (thi TN THPT, no năng khiếu): teacherTraining 20/30 (16 majors), standard 15/30 (36 majors), law 20/30 (Luật, extra rank condition not modeled). 6 năng-khiếu-gated majors (Mầm non/GDTC/SP Âm nhạc/SP Mỹ thuật/Huấn luyện Thể thao) not modeled — no talent-score field. NĐV already includes priority points; runtime only sums raw score. See normalized/runtime-source-snapshot/dthu/sources.ts. This entry is unused because dthu is now in explicitRuntimeSchoolIds; kept only as a research trail.',
   },
-  due: {
+  dla: {
     sourceId: 'due-admission-2026',
     title: 'Trường Đại học Kinh tế Công nghiệp Long An (DLA) công bố các phương thức tuyển sinh năm 2026',
     url: 'https://tuyensinh.daihoclongan.edu.vn/tin-tuc-tuyen-sinh/742-truong-dai-hoc-kinh-te-cong-nghiep-long-an-dla-cong-bo-cac-phuong-thuc-tuyen-sinh-nam-2026.html',
     checkedAt: '2026-08-24',
     note:
-      'Batch expand-06 (2026-08-24): official tuyensinh.daihoclongan.edu.vn 2026 announcement confirmed live via WebFetch, listing 4 admission methods (THPT exam results, học bạ/transcript GPA, ĐHQG TP.HCM aptitude test, and direct admission per current regulations) with a reference to subject-combination tables per program, but no numeric threshold/floor score for any method was present in the extracted page content. Runtime stays researched-only; do not fabricate threshold numbers.',
+      'Superseded (2026-09-03 batch): verified-calculator upgrade shipped. Batch expand-06 (2026-08-24) found the announcement text-only (no numeric threshold) and left this researched-only. This batch used chrome-devtools (site is a legacy Joomla-ish template but the threshold/combination tables are embedded Google-Drive-hosted images, not plain text) to read: (1) article #750 "DLA chính thức công bố điểm chuẩn đại học năm 2026" — CHÍNH CHỦ image "CÔNG BỐ ĐIỂM CHUẨN TRÚNG TUYỂN ĐẠI HỌC CHÍNH QUY 2026" (mã trường DLA), full 9-ngành table, cột "Điểm THPT" (thang 30): Kế toán/QTKD/Marketing/TCNH/CNTT/CNKT Xây dựng/Ngôn ngữ Anh/Du lịch = 15,0; Luật Kinh tế = 20,0 (note (*) về điều kiện phụ chỉ áp dụng nhánh học bạ/ĐGNL, không áp dụng nhánh thi TN THPT); (2) article #742 — CHÍNH CHỦ image "NGÀNH / MÃ NGÀNH / TỔ HỢP MÔN" (2026), 2 nhóm tổ hợp: nhóm 7 ngành khối kinh tế/kỹ thuật dùng D01/C03/C04/C01/X02/C14; nhóm Ngôn ngữ Anh + Du lịch dùng D01/D09/C14/D14/D15/C00 — toàn bộ 12 mã tổ hợp đã có sẵn trong subjects.ts, không cần thêm SubjectId/combo mới. Công thức "Điểm xét tuyển = Tổng điểm thi THPT của tổ hợp 3 môn + Điểm ưu tiên" xác nhận qua trang chuyên đề tuyensinh247.com (thứ cấp, không phải chính chủ) + khớp với cách trình bày cột điểm chuẩn thang 30 không hệ số của trường — cùng kỹ thuật cross-check đã chấp nhận cho HAT/HUMP. Điểm ưu tiên dùng khung quốc gia hiện hành (trường chỉ dẫn chiếu quy chế Bộ GD&ĐT trong bài "Điểm cộng chi tiết cho thí sinh đạt 22,5 điểm trở lên", không tự công bố bảng riêng — judgment call, cùng tiền lệ DNU/TUEBA/PVU). Chỉ mô hình hoá nhánh xét kết quả thi TN THPT — DLA còn nhánh học bạ và ĐGNL ĐHQG-HCM đã công bố điểm chuẩn song song, chưa mô hình hoá. Fixed a pre-existing id typo: this catalog entry was keyed "due" (looked like a copy-paste artifact, unrelated to the "dueudn"/DUE-UDN school) — renamed to "dla" to match the mã trường. See normalized/runtime-source-snapshot/dla/sources.ts. This entry is unused because dla is now in explicitRuntimeSchoolIds; kept only as a research trail.',
   },
   hcmunre: {
     sourceId: 'hcmunre-admission-2026',
@@ -399,12 +399,12 @@ export const southernCatalogSchools: readonly SouthernCatalogSchool[] = [
     summary: 'Đã đưa vào roster miền Nam theo backlog; cần research đề án/ngưỡng chính thức.',
   },
   {
-    id: 'due',
+    id: 'dla',
     shortName: 'DLA',
     name: 'Trường Đại học Kinh tế Công nghiệp Long An',
     location: 'Long An',
     ownership: 'private',
-    summary: 'Đã đưa vào roster miền Nam theo backlog; chưa nhập nguồn tuyển sinh chính thức.',
+    summary: 'Verified-exact 2026-09-03: điểm chuẩn trúng tuyển 9/9 ngành đại học chính quy (nhánh thi TN THPT), nguồn CHÍNH CHỦ tuyensinh.daihoclongan.edu.vn.',
   },
   {
     id: 'pvu',
@@ -435,7 +435,7 @@ export const southernCatalogKnowledgeGap = {
  * official PDF directly (Thông báo 197/TB-ĐHYDCT, 09/07/2026) — a real text-layer PDF, not a scan.
  * 'dthu' too — shipped eligibility-only for 53/59 majors (3 groups, 15/20/20 thang 30), sourced by
  * downloading and reading the linked official PDF (Phụ lục I, 09/07/2026) directly. */
-const explicitRuntimeSchoolIds = new Set(['pntu', 'uah', 'bdu', 'bvu', 'gdu', 'nctu', 'tdu', 'tgu', 'ttu', 'vaa', 'ctump', 'dthu', 'nlu', 'lhu']);
+const explicitRuntimeSchoolIds = new Set(['pntu', 'uah', 'bdu', 'bvu', 'gdu', 'nctu', 'tdu', 'tgu', 'ttu', 'vaa', 'ctump', 'dthu', 'nlu', 'lhu', 'dla']);
 const southernCatalogRuntimeSchools = southernCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const southernCatalogMethods: AdmissionMethodDescriptor[] = southernCatalogRuntimeSchools.map((school) => ({

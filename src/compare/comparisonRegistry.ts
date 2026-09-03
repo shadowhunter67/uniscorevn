@@ -126,6 +126,7 @@ import { naemComparisonAdapter } from '../schools/naem/comparison';
 import { hatComparisonAdapter } from '../schools/hat/comparison';
 import { hluvComparisonAdapter } from '../schools/hluv/comparison';
 import { bluComparisonAdapter } from '../schools/blu/comparison';
+import { dlaComparisonAdapter } from '../schools/dla/comparison';
 import { thanglongComparisonAdapter } from '../schools/thanglong/comparison';
 import { tuebaComparisonAdapter } from '../schools/tueba/comparison';
 import { tumpComparisonAdapter } from '../schools/tump/comparison';
@@ -294,6 +295,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   hatComparisonAdapter,
   hluvComparisonAdapter,
   bluComparisonAdapter,
+  dlaComparisonAdapter,
   thanglongComparisonAdapter,
   tuebaComparisonAdapter,
   tumpComparisonAdapter,
@@ -315,12 +317,13 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   nluComparisonAdapter,
   ushComparisonAdapter,
   hcmupesComparisonAdapter,
-  /** 'tvu'/'pvu'/'ctuet'/'dnu'/'blu' loại trừ — đã có adapter thật (`schools/tvu/comparison.ts`,
+  /** 'tvu'/'pvu'/'ctuet'/'dnu'/'blu'/'dla' loại trừ — đã có adapter thật (`schools/tvu/comparison.ts`,
    * `schools/pvu/comparison.ts`, `schools/ctuet/comparison.ts`, `schools/dnu/comparison.ts`,
-   * `schools/blu/comparison.ts`), tránh bị catalog generic (nghiên cứu sơ bộ, chưa có calculator) ghi
-   * đè trong `schoolComparisonAdapterRegistry` (last-write-wins theo `schoolId`, cùng hazard đã fix
-   * cho HDIU/TMU/TLU/HPMU/VNU-UEB/VNU-UED). */
-  ...southernCatalogComparisonAdapters.filter((adapter) => !['tvu', 'pvu', 'ctuet', 'dnu', 'blu'].includes(adapter.schoolId)),
+   * `schools/blu/comparison.ts`, `schools/dla/comparison.ts`), tránh bị catalog generic (nghiên cứu sơ
+   * bộ, chưa có calculator) ghi đè trong `schoolComparisonAdapterRegistry` (last-write-wins theo
+   * `schoolId`, cùng hazard đã fix cho HDIU/TMU/TLU/HPMU/VNU-UEB/VNU-UED). Lưu ý: catalog placeholder
+   * của DLA từng bị key nhầm 'due' (đã fix ở private repo + regenerate, xem `southernCatalog.generated.ts`). */
+  ...southernCatalogComparisonAdapters.filter((adapter) => !['tvu', 'pvu', 'ctuet', 'dnu', 'blu', 'dla'].includes(adapter.schoolId)),
   ...remainingCatalogComparisonAdapters.filter(
     (adapter) =>
       ![

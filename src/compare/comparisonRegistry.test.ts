@@ -78,6 +78,7 @@ import { naemAdmissionMethods } from '../schools/naem/methods';
 import { hatAdmissionMethods } from '../schools/hat/methods';
 import { hluvAdmissionMethods } from '../schools/hluv/methods';
 import { bluAdmissionMethods } from '../schools/blu/methods';
+import { dlaAdmissionMethods } from '../schools/dla/methods';
 import { thanglongAdmissionMethods } from '../schools/thanglong/methods';
 import { eiuAdmissionMethods } from '../schools/eiu/methods';
 import { fptuAdmissionMethods } from '../schools/fptu/methods';
@@ -244,6 +245,7 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   hat: hatAdmissionMethods,
   hluv: hluvAdmissionMethods,
   blu: bluAdmissionMethods,
+  dla: dlaAdmissionMethods,
   thanglong: thanglongAdmissionMethods,
   eiu: eiuAdmissionMethods,
   fptu: fptuAdmissionMethods,
