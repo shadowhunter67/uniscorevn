@@ -90,6 +90,7 @@ import { qbuSources } from './qbu/sources';
 import { pctuSources } from './pctu/sources';
 import { pvuSources } from './pvu/sources';
 import { tuebaSources } from './tueba/sources';
+import { ctuetSources } from './ctuet/sources';
 import { qnamuSources } from './qnamu/sources';
 import { tmuSources } from './tmu/sources';
 
@@ -188,6 +189,7 @@ export const qbuSourceRegistry: AdmissionSource[] = withSchoolId('qbu', qbuSourc
 export const pctuSourceRegistry: AdmissionSource[] = withSchoolId('pctu', pctuSources);
 export const pvuSourceRegistry: AdmissionSource[] = withSchoolId('pvu', pvuSources);
 export const tuebaSourceRegistry: AdmissionSource[] = withSchoolId('tueba', tuebaSources);
+export const ctuetSourceRegistry: AdmissionSource[] = withSchoolId('ctuet', ctuetSources);
 export const qnamuSourceRegistry: AdmissionSource[] = withSchoolId('qnamu', qnamuSources);
 export const tmuSourceRegistry: AdmissionSource[] = withSchoolId('tmu', tmuSources);
 
@@ -280,6 +282,7 @@ export const schoolSourceRegistries: Record<string, AdmissionSource[]> = {
   pctu: pctuSourceRegistry,
   pvu: pvuSourceRegistry,
   tueba: tuebaSourceRegistry,
+  ctuet: ctuetSourceRegistry,
   qnamu: qnamuSourceRegistry,
   tmu: tmuSourceRegistry,
 };
@@ -376,6 +379,7 @@ export const allAdmissionSources: AdmissionSource[] = [
   ...pctuSourceRegistry,
   ...pvuSourceRegistry,
   ...tuebaSourceRegistry,
+  ...ctuetSourceRegistry,
   ...qnamuSourceRegistry,
   ...tmuSourceRegistry,
 ];

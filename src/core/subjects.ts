@@ -89,6 +89,24 @@ export const COMMON_SUBJECT_COMBINATIONS: readonly SubjectCombination[] = [
   { id: 'X07', subjects: ['math', 'physics', 'technology'] },
   { id: 'X10', subjects: ['math', 'chemistry', 'informatics'] },
   { id: 'X11', subjects: ['math', 'chemistry', 'technology'] },
+  /** C05/C08/D11/D12/D13/X05/X13/X14/X25/X59/X70/X74/X78 — thêm khi implement CTUET 2025 (Trường
+   * Đại học Kỹ thuật - Công nghệ Cần Thơ dùng đủ các tổ hợp này trong Phụ lục "Thông tin tuyển sinh
+   * năm 2025", xem `schools/ctuet/thresholds.ts`). X16 (Toán, Sinh học, CN nông nghiệp) của CTUET
+   * KHÔNG có SubjectId tương ứng ("CN nông nghiệp" không nằm trong danh mục môn) — chưa mô hình hoá,
+   * xem `schools/ctuet/knowledgeGaps.ts`. */
+  { id: 'C05', subjects: ['literature', 'physics', 'chemistry'] },
+  { id: 'C08', subjects: ['literature', 'chemistry', 'biology'] },
+  { id: 'D11', subjects: ['literature', 'physics', 'english'] },
+  { id: 'D12', subjects: ['literature', 'chemistry', 'english'] },
+  { id: 'D13', subjects: ['literature', 'biology', 'english'] },
+  { id: 'X05', subjects: ['math', 'physics', 'civic-economic-law'] },
+  { id: 'X13', subjects: ['math', 'biology', 'civic-economic-law'] },
+  { id: 'X14', subjects: ['math', 'biology', 'informatics'] },
+  { id: 'X25', subjects: ['math', 'civic-economic-law', 'english'] },
+  { id: 'X59', subjects: ['literature', 'physics', 'informatics'] },
+  { id: 'X70', subjects: ['literature', 'history', 'civic-economic-law'] },
+  { id: 'X74', subjects: ['literature', 'geography', 'civic-economic-law'] },
+  { id: 'X78', subjects: ['literature', 'civic-economic-law', 'english'] },
 ];
 
 /** Nhãn tiếng Việt — dùng ở bất kỳ trường nào cần hiển thị tên môn cho người dùng chọn. */
