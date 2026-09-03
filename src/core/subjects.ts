@@ -82,6 +82,13 @@ export const COMMON_SUBJECT_COMBINATIONS: readonly SubjectCombination[] = [
   /** X02 — thêm khi implement HUST 2025 (Toán/Ngữ văn/Tin học — tổ hợp "khối văn" song song với
    * B03/C01/C02 mà HUST dùng cho gần như mọi ngành, xem `schools/hust/thresholds2025.ts`). */
   { id: 'X02', subjects: ['math', 'literature', 'informatics'] },
+  /** X06/X07/X10/X11 — thêm khi implement PVU 2026 (Trường Đại học Dầu khí Việt Nam dùng đủ 11 tổ
+   * hợp thi TN THPT: A00/A01/A02/B00/C01/C02/D07 đã có sẵn + 4 tổ hợp riêng có môn Tin học/Công
+   * nghệ, xem `schools/pvu/sources.ts`). */
+  { id: 'X06', subjects: ['math', 'physics', 'informatics'] },
+  { id: 'X07', subjects: ['math', 'physics', 'technology'] },
+  { id: 'X10', subjects: ['math', 'chemistry', 'informatics'] },
+  { id: 'X11', subjects: ['math', 'chemistry', 'technology'] },
 ];
 
 /** Nhãn tiếng Việt — dùng ở bất kỳ trường nào cần hiển thị tên môn cho người dùng chọn. */

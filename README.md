@@ -28,7 +28,7 @@ Repo public này theo mô hình open-core: UI, generic engine, compare framework
 
 UniScoreVN xây dựng danh mục các cơ sở tuyển sinh đại học và cao đẳng tại Việt Nam. Calculator chỉ được kích hoạt đối với phương thức có đủ nguồn tuyển sinh chính thức. Cao đẳng thuộc giáo dục nghề nghiệp được phân loại riêng với nhóm đại học và cao đẳng ngành Giáo dục Mầm non; trung cấp không nằm trong scope iteration này.
 
-🎉 **Cột mốc 100 calculator đã xác minh** (2026-09-02) — kết thúc chiến dịch mở rộng độ phủ bắt đầu từ 60 trường. Roadmap mới (100 -> 150) đã đạt 107 (batch 1: cụm VNU-Hà Nội, HUC, HUNRE, HUMP, nâng cấp AOF). Xem chi tiết từng trường tại [docs/school-status.md](docs/school-status.md).
+🎉 **Cột mốc 100 calculator đã xác minh** (2026-09-02) — kết thúc chiến dịch mở rộng độ phủ bắt đầu từ 60 trường. Roadmap mới (100 -> 150) đã đạt 111 (batch 1: cụm VNU-Hà Nội, HUC, HUNRE, HUMP, nâng cấp AOF; batch tiếp theo: HUST nâng cấp lên exact, PCTU, PVU, TUEBA mới). Xem chi tiết từng trường tại [docs/school-status.md](docs/school-status.md).
 
 ![Độ phủ calculator UniScoreVN](docs/coverage-chart.svg)
 
@@ -45,9 +45,9 @@ Snapshot hiện tại được tính từ `schoolRegistry` bằng `npm run stats
 | Cao đẳng giáo dục nghề nghiệp | 26 |
 | Nhóm độc lập khác | 0 |
 | Có dữ liệu tuyển sinh hoặc capability cao hơn | 225 |
-| Chỉ kiểm tra điều kiện/ngưỡng | 23 |
+| Chỉ kiểm tra điều kiện/ngưỡng | 22 |
 | Có calculator một phần | 3 |
-| Calculator đã xác minh | 107 |
+| Calculator đã xác minh | 111 |
 | Chỉ có trong danh mục | 42 |
 
 Catalog coverage != calculator coverage. Con số danh mục là độ phủ search/compare, không phải 100% calculator. Một số mục trong danh mục là school/faculty nội bộ của hệ thống đại học lớn; các mục này vẫn có thể giữ cho navigation hoặc mapping chương trình, nhưng không làm tăng KPI "cơ sở đào tạo tuyển sinh độc lập".
@@ -60,10 +60,10 @@ Danh sách đầy đủ 267 trường theo từng mức hỗ trợ đổi thư�
 
 | Mức hỗ trợ | Số trường | Ý nghĩa |
 |---|---:|---|
-| ✅ Calculator đã xác minh | 107 | Công thức, ngưỡng, điểm cộng/ưu tiên đều có nguồn chính thức trong phạm vi đã công bố |
+| ✅ Calculator đã xác minh | 111 | Công thức, ngưỡng, điểm cộng/ưu tiên đều có nguồn chính thức trong phạm vi đã công bố |
 | 🟡 Calculator một phần | 3 | Có công thức/quy đổi thật nhưng chưa phủ hết phương thức xét tuyển |
-| 🟡 Chỉ kiểm tra điều kiện/ngưỡng | 23 | Có ngưỡng điểm sàn/điều kiện thật, chưa tính được điểm xét tuyển đầy đủ |
-| ⚪ Đã research, chưa đủ để tính | 92 | Nguồn chính thức xác nhận tồn tại nhưng số liệu không trích xuất được (ảnh/PDF/SPA/chặn fetch) hoặc bị chặn bởi tiêu chí không có trong hồ sơ (hạnh kiểm, sơ tuyển quân đội/công an...) |
+| 🟡 Chỉ kiểm tra điều kiện/ngưỡng | 22 | Có ngưỡng điểm sàn/điều kiện thật, chưa tính được điểm xét tuyển đầy đủ |
+| ⚪ Đã research, chưa đủ để tính | 89 | Nguồn chính thức xác nhận tồn tại nhưng số liệu không trích xuất được (ảnh/PDF/SPA/chặn fetch) hoặc bị chặn bởi tiêu chí không có trong hồ sơ (hạnh kiểm, sơ tuyển quân đội/công an...) |
 | ⚪ Chỉ có trong danh mục | 42 | Chưa tìm được nguồn tuyển sinh chính thức nào |
 
 "Đã xác minh"/"chính xác" nghĩa là công thức, ngưỡng, điểm cộng và điểm ưu tiên đều có nguồn chính thức xác minh trong phạm vi đã công bố — một số trường chỉ chính xác trong phạm vi cụ thể (ví dụ thí sinh không có thành tích cộng điểm). Toàn bộ roster catalog đã được nối vào registry/search/compare; UniScoreVN sẽ không kết luận đủ điều kiện hoặc tính điểm cho một trường cho đến khi có nguồn chính thức đủ rõ ràng — không đoán công thức.

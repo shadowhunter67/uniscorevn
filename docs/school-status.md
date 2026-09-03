@@ -2,9 +2,9 @@
 
 File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số liệu tổng hợp; xem [README](../README.md) cho bảng tổng quan và ý nghĩa từng mức). Danh sách đầy đủ dưới đây phục vụ tra cứu và bị khóa bởi test chống drift (`src/schools/index.test.ts`) — mọi trường mới thêm vào registry phải xuất hiện ở đây.
 
-## Calculator đã xác minh (109)
+## Calculator đã xác minh (111)
 
-🎉 **Milestone: 100 calculator đã xác minh** — cột mốc kết thúc chiến dịch mở rộng bắt đầu từ 60 (2026-08-xx), đạt 100 tại batch 2026-09-02 với QNamU (Trường Đại học Quảng Nam). Roadmap mới (100 -> 150) bắt đầu ngay batch tiếp theo cùng ngày: +7 trường (VNU-UET/VNU-HUS/VNU-USSH — cụm VNU-Hà Nội; HUC — retry thành công qua rào cản SPA; HUNRE; HUMP — cụm Huế; AOF nâng cấp lên exact) đưa tổng lên 107. Batch 2026-09-03 (roadmap 100 -> 150, Phase A): HUST nâng cấp từ eligibility-only lên exact (điểm chuẩn 65/65 chương trình x tổ hợp, năm liền kề 2025, công thức "môn chính" xác nhận trực tiếp qua ts.hust.edu.vn) đưa tổng lên 108. Batch tiếp theo cùng ngày: PCTU (Trường Đại học Phan Châu Trinh) mới — nguồn CHÍNH CHỦ pctu.edu.vn cho cả formula 2025 ("Điểm xét tuyển = ĐM1+ĐM2+ĐM3+Điểm ƯT") và bảng điểm chuẩn 2025 (ảnh, đọc bằng vision), cùng năm, khác góc độ với research trước đó (dừng vì trang "năm 2026" có thêm điều kiện xếp loại học lực) — đưa tổng lên 109.
+🎉 **Milestone: 100 calculator đã xác minh** — cột mốc kết thúc chiến dịch mở rộng bắt đầu từ 60 (2026-08-xx), đạt 100 tại batch 2026-09-02 với QNamU (Trường Đại học Quảng Nam). Roadmap mới (100 -> 150) bắt đầu ngay batch tiếp theo cùng ngày: +7 trường (VNU-UET/VNU-HUS/VNU-USSH — cụm VNU-Hà Nội; HUC — retry thành công qua rào cản SPA; HUNRE; HUMP — cụm Huế; AOF nâng cấp lên exact) đưa tổng lên 107. Batch 2026-09-03 (roadmap 100 -> 150, Phase A): HUST nâng cấp từ eligibility-only lên exact (điểm chuẩn 65/65 chương trình x tổ hợp, năm liền kề 2025, công thức "môn chính" xác nhận trực tiếp qua ts.hust.edu.vn) đưa tổng lên 108. Batch tiếp theo cùng ngày: PCTU (Trường Đại học Phan Châu Trinh) mới — nguồn CHÍNH CHỦ pctu.edu.vn cho cả formula 2025 ("Điểm xét tuyển = ĐM1+ĐM2+ĐM3+Điểm ƯT") và bảng điểm chuẩn 2025 (ảnh, đọc bằng vision), cùng năm, khác góc độ với research trước đó (dừng vì trang "năm 2026" có thêm điều kiện xếp loại học lực) — đưa tổng lên 109. Batch tiếp theo cùng ngày (roadmap Thái Nguyên/dầu khí): **PVU** (Trường Đại học Dầu khí Việt Nam) mới — nguồn CHÍNH CHỦ pvu.edu.vn 2026 cho cả điều kiện xét tuyển (tổng thô 3 môn theo tổ hợp) và điểm chuẩn đợt 1 (22,50/30, đồng nhất mọi ngành/tổ hợp trong 3 ngành 2026), cùng năm 2026; và **TUEBA** (Trường Đại học Kinh tế và QTKD - Đại học Thái Nguyên) mới — nguồn CHÍNH CHỦ tuyensinh.tueba.edu.vn 2026 cho ngưỡng đảm bảo chất lượng đầu vào theo ngành (3 mức 17,0/17,5/20,0/30) đã bao gồm điểm ưu tiên, retry thành công so với research trước đó (batch expand-14 từng dừng vì chỉ tìm thấy thông báo 2025) — đưa tổng lên 111.
 
 - **AJC** — Học viện Báo chí và Tuyên truyền
 - **AOF** — Học viện Tài chính
@@ -70,6 +70,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **Phenikaa** — Trường Đại học Phenikaa
 - **PNTU** — Trường Đại học Y khoa Phạm Ngọc Thạch
 - **PTIT** — Học viện Công nghệ Bưu chính Viễn thông
+- **PVU** — Trường Đại học Dầu khí Việt Nam
 - **QBU** — Trường Đại học Quảng Bình
 - **QNamU** — Trường Đại học Quảng Nam
 - **QNU** — Trường Đại học Quy Nhơn
@@ -86,6 +87,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **TTN** — Truong Dai hoc Tay Nguyen
 - **TTU** — Truong Dai hoc Tan Tao
 - **TUAF** — Truong Dai hoc Nong Lam - Dai hoc Thai Nguyen
+- **TUEBA** — Trường Đại học Kinh tế và Quản trị kinh doanh - Đại học Thái Nguyên
 - **TVU** — Trường Đại học Trà Vinh
 - **UAH** — Truong Dai hoc Kien truc TP.HCM
 - **UDA** — Trường Đại học Đông Á
@@ -147,7 +149,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-LS** — Truong Dai hoc Luat - Dai hoc Quoc gia Ha Noi
 - **VNUF** — Truong Dai hoc Lam nghiep
 
-## Đã research, chưa đủ để tính (91)
+## Đã research, chưa đủ để tính (89)
 
 - **AADAA** — Học viện Phòng không - Không quân
 - **ACTVN** — Học viện Kỹ thuật Mật mã
@@ -202,7 +204,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **PPU-CAND** — Trường Đại học Cảnh sát Nhân dân
 - **PSA** — Học viện An ninh Nhân dân
 - **PSU-CAND** — Trường Đại học An ninh Nhân dân
-- **PVU** — Trường Đại học Dầu khí Việt Nam
 - **RMITVN** — Trường Đại học RMIT Việt Nam
 - **SIGO** — Trường Đại học Sĩ quan Thông tin liên lạc
 - **SKDA** — Trường Đại học Sân khấu - Điện ảnh Hà Nội
@@ -213,7 +214,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **TQT** — Trường Đại học Trần Quốc Tuấn - Sĩ quan Lục quân 1
 - **TQU** — Trường Đại học Tân Trào
 - **TUCST** — Trường Đại học Văn hóa, Thể thao và Du lịch Thanh Hóa
-- **TUEBA** — Trường Đại học Kinh tế và Quản trị kinh doanh - Đại học Thái Nguyên
 - **TUMP** — Trường Đại học Y Dược - Đại học Thái Nguyên
 - **TUU** — Trường Đại học Công đoàn
 - **TVUni** — Trường Đại học Trưng Vương
