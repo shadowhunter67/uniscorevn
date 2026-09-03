@@ -80,6 +80,7 @@ import { bmtuModule } from './bmtu';
 import { hcaModule } from './hca';
 import { naemModule } from './naem';
 import { hatModule } from './hat';
+import { hluvModule } from './hluv';
 import { eiuModule } from './eiu';
 import { fbuModule } from './fbu';
 import { fpfuModule } from './fpfu';
@@ -278,6 +279,7 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   hca: hcaModule,
   naem: naemModule,
   hat: hatModule,
+  hluv: hluvModule,
   eiu: eiuModule,
   fptu: fptuModule,
   hubt: hubtModule,
