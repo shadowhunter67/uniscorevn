@@ -133,6 +133,7 @@ import { hbuComparisonAdapter } from '../schools/hbu/comparison';
 import { hvuComparisonAdapter } from '../schools/hvu/comparison';
 import { vhsComparisonAdapter } from '../schools/vhs/comparison';
 import { vyaComparisonAdapter } from '../schools/vya/comparison';
+import { trungvuongComparisonAdapter } from '../schools/trungvuong/comparison';
 import { thanglongComparisonAdapter } from '../schools/thanglong/comparison';
 import { tuebaComparisonAdapter } from '../schools/tueba/comparison';
 import { tumpComparisonAdapter } from '../schools/tump/comparison';
@@ -308,6 +309,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   hvuComparisonAdapter,
   vhsComparisonAdapter,
   vyaComparisonAdapter,
+  trungvuongComparisonAdapter,
   thanglongComparisonAdapter,
   tuebaComparisonAdapter,
   tumpComparisonAdapter,
@@ -355,7 +357,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
    * đè trong `schoolComparisonAdapterRegistry` (last-write-wins theo `schoolId`). 'thanglong' đã loại
    * trừ ở filter `remainingCatalogComparisonAdapters` phía trên (đã có adapter thật
    * `schools/thanglong/comparison.ts`). */
-  ...finalCatalogComparisonAdapters.filter((adapter) => !['hdiu', 'huc', 'hunre', 'tueba', 'tump', 'tnut', 'hca', 'naem', 'hluv', 'vhs'].includes(adapter.schoolId)),
+  ...finalCatalogComparisonAdapters.filter((adapter) => !['hdiu', 'huc', 'hunre', 'tueba', 'tump', 'tnut', 'hca', 'naem', 'hluv', 'vhs', 'trungvuong'].includes(adapter.schoolId)),
   ...collegeCatalogComparisonAdapters,
 ];
 

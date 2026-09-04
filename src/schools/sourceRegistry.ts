@@ -70,6 +70,7 @@ import { hbuSources } from './hbu/sources';
 import { hvuSources } from './hvu/sources';
 import { vhsSources } from './vhs/sources';
 import { vyaSources } from './vya/sources';
+import { trungvuongSources } from './trungvuong/sources';
 import { thanhdoSources } from './thanhdo/sources';
 import { uedudnSources } from './uedudn/sources';
 import { dainamSources } from './dainam/sources';
@@ -188,6 +189,7 @@ export const hbuSourceRegistry: AdmissionSource[] = withSchoolId('hbu', hbuSourc
 export const hvuSourceRegistry: AdmissionSource[] = withSchoolId('hvu', hvuSources);
 export const vhsSourceRegistry: AdmissionSource[] = withSchoolId('vhs', vhsSources);
 export const vyaSourceRegistry: AdmissionSource[] = withSchoolId('vya', vyaSources);
+export const trungvuongSourceRegistry: AdmissionSource[] = withSchoolId('trungvuong', trungvuongSources);
 export const thanhdoSourceRegistry: AdmissionSource[] = withSchoolId('thanhdo', thanhdoSources);
 export const uedudnSourceRegistry: AdmissionSource[] = withSchoolId('uedudn', uedudnSources);
 export const dainamSourceRegistry: AdmissionSource[] = withSchoolId('dainam', dainamSources);
@@ -303,6 +305,7 @@ export const schoolSourceRegistries: Record<string, AdmissionSource[]> = {
   hvu: hvuSourceRegistry,
   vhs: vhsSourceRegistry,
   vya: vyaSourceRegistry,
+  trungvuong: trungvuongSourceRegistry,
   thanhdo: thanhdoSourceRegistry,
   uedudn: uedudnSourceRegistry,
   dainam: dainamSourceRegistry,
@@ -416,6 +419,7 @@ export const allAdmissionSources: AdmissionSource[] = [
   ...hvuSourceRegistry,
   ...vhsSourceRegistry,
   ...vyaSourceRegistry,
+  ...trungvuongSourceRegistry,
   ...thanhdoSourceRegistry,
   ...uedudnSourceRegistry,
   ...dainamSourceRegistry,

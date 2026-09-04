@@ -139,6 +139,10 @@ export const COMMON_SUBJECT_COMBINATIONS: readonly SubjectCombination[] = [
   /** A04 — thêm khi implement VYA 2026 (Học viện Thanh thiếu niên Việt Nam, ngành Công nghệ thông
    * tin/Kinh tế dùng tổ hợp Toán/Vật lí/Địa lí, xem `schools/vya/thresholds.ts`). */
   { id: 'A04', subjects: ['math', 'physics', 'geography'] },
+  /** A05 — thêm khi implement TVUni 2025 (Trường Đại học Trưng Vương, ngành Công nghệ kỹ thuật ô tô
+   * và Quản trị dịch vụ du lịch và lữ hành dùng tổ hợp Toán/Hóa học/Lịch sử, xem
+   * `schools/trungvuong/thresholds.ts`). */
+  { id: 'A05', subjects: ['math', 'chemistry', 'history'] },
 ];
 
 /** Nhãn tiếng Việt — dùng ở bất kỳ trường nào cần hiển thị tên môn cho người dùng chọn. */
