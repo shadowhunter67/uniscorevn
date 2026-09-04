@@ -818,8 +818,14 @@ export const finalCatalogKnowledgeGap = {
 // (WebFetch alone cannot see Drive-hosted/embedded-image content). Batch (2026-08-26): dhv —
 // shipped eligibility-only, THPT-exam route flat 15/30 (trừ Luật/Tâm lý học chờ Bộ GD&ĐT), nguồn
 // đối chiếu qua Báo Tuổi Trẻ (04/07/2026) vì tuyensinh.dhv.edu.vn không trích được số liệu qua
-// WebFetch.) They stay listed in `finalCatalogSchools` above for identity/location metadata only.
-const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus', 'tuaf', 'uhd', 'umt', 'utm', 'utt', 'eaut', 'vwa', 'hau', 'tbu', 'ltvuni', 'dhv', 'ush', 'hcmupes', 'hnmu', 'cmcu', 'vttu', 'hbu', 'vhs']);
+// WebFetch.) Batch (2026-09-04): vya — Học viện Thanh thiếu niên Việt Nam, shipped verified-exact
+// for 9/9 ngành (mã 100, thi TN THPT) and 7/9 ngành (mã 200, học bạ lớp 10/11/12 — Luật/Quan hệ
+// công chúng "Không xét"), both CHÍNH CHỦ (tuyensinh.vya.edu.vn: Quyết định 218/QĐ-HVTTNVN cho
+// công thức/tổ hợp, Thông báo 162/TB-HVTTNVN 19/8/2026 cho điểm trúng tuyển chính thức sau kỳ
+// thi), priority table quoted verbatim in the school's own Quyết định 261/QĐ-HVTTNVN (not a
+// national-framework judgment call substitute, same precedent as vhs.
+// They stay listed in `finalCatalogSchools` above for identity/location metadata only.
+const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus', 'tuaf', 'uhd', 'umt', 'utm', 'utt', 'eaut', 'vwa', 'hau', 'tbu', 'ltvuni', 'dhv', 'ush', 'hcmupes', 'hnmu', 'cmcu', 'vttu', 'hbu', 'vhs', 'vya']);
 const finalCatalogRuntimeSchools = finalCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const finalCatalogMethods: AdmissionMethodDescriptor[] = finalCatalogRuntimeSchools.map((school) => ({
