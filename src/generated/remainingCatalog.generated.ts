@@ -459,7 +459,8 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     url: 'https://www.hvu.edu.vn/tin-tuc/tuyen-sinh.hvu',
     checkedAt: '2026-08-24',
     note:
-      'Batch 11 (2026-08-24): official hvu.edu.vn admission page confirmed live, but its 2026 admission-information document is only linked as an external Google Drive file, not extractable as page text via WebFetch. Secondary press (baomoi.com, citing an official Trường ĐH Hùng Vương announcement) reports a per-major-group ngưỡng đảm bảo chất lượng đầu vào table (17-21/30: 21 for Tiểu học/Toán/Ngữ văn/Tiếng Anh sư phạm, 20 for KHTN/Lịch sử-Địa lí sư phạm/Mầm non, 19 for GDTC/Âm nhạc/Mỹ thuật sư phạm, 18 for Điều dưỡng, 17 for the remaining majors), but this was not cross-verified against the primary hvu.edu.vn document text in this pass. Left at researched; do not fabricate the per-major table from secondary press alone.',
+      'Batch 11 (2026-08-24): official hvu.edu.vn admission page confirmed live, but its 2026 admission-information document is only linked as an external Google Drive file, not extractable as page text via WebFetch. Secondary press (baomoi.com, citing an official Trường ĐH Hùng Vương announcement) reports a per-major-group ngưỡng đảm bảo chất lượng đầu vào table (17-21/30: 21 for Tiểu học/Toán/Ngữ văn/Tiếng Anh sư phạm, 20 for KHTN/Lịch sử-Địa lí sư phạm/Mầm non, 19 for GDTC/Âm nhạc/Mỹ thuật sư phạm, 18 for Điều dưỡng, 17 for the remaining majors), but this was not cross-verified against the primary hvu.edu.vn document text in this pass. ' +
+      'Superseded (2026-09-04 batch): exact-verified upgrade shipped by downloading the actual Quyết định 226/QĐ-ĐHHV PDF (not just the preview) plus the đợt-1 2026 cutoff announcement (báo Phú Thọ + Giáo dục & Thời đại) for 7/27 ngành. See normalized/runtime-source-snapshot/hvu/sources.ts. This entry is unused because hvu is now in explicitRuntimeSchoolIds; kept only as a research trail.',
   },
   hump: {
     sourceId: 'hump-admission-2026',
@@ -641,6 +642,7 @@ const explicitRuntimeSchoolIds = new Set([
   'hmu',
   'haui',
   'aof',
+  'hvu',
 ]);
 const remainingCatalogRuntimeSchools = remainingCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
