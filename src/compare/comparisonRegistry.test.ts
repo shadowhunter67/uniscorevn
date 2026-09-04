@@ -155,6 +155,7 @@ import { ctumpAdmissionMethods } from '../schools/ctump/methods';
 import { tbuAdmissionMethods } from '../schools/tbu/methods';
 import { dthuAdmissionMethods } from '../schools/dthu/methods';
 import { ltvuniAdmissionMethods } from '../schools/ltvuni/methods';
+import { pxuAdmissionMethods } from '../schools/pxu/methods';
 import { dhvAdmissionMethods } from '../schools/dhv/methods';
 import { pyuAdmissionMethods } from '../schools/pyu/methods';
 import { nluAdmissionMethods } from '../schools/nlu/methods';
@@ -331,6 +332,7 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   tbu: tbuAdmissionMethods,
   dthu: dthuAdmissionMethods,
   ltvuni: ltvuniAdmissionMethods,
+  pxu: pxuAdmissionMethods,
   dhv: dhvAdmissionMethods,
   pyu: pyuAdmissionMethods,
   nlu: nluAdmissionMethods,

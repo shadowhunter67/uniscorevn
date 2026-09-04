@@ -826,7 +826,7 @@ export const finalCatalogKnowledgeGap = {
 // thi), priority table quoted verbatim in the school's own Quyết định 261/QĐ-HVTTNVN (not a
 // national-framework judgment call substitute, same precedent as vhs.
 // They stay listed in `finalCatalogSchools` above for identity/location metadata only.
-const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus', 'tuaf', 'uhd', 'umt', 'utm', 'utt', 'eaut', 'vwa', 'hau', 'tbu', 'ltvuni', 'dhv', 'ush', 'hcmupes', 'hnmu', 'cmcu', 'vttu', 'hbu', 'vhs', 'vya', 'trungvuong']);
+const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus', 'tuaf', 'uhd', 'umt', 'utm', 'utt', 'eaut', 'vwa', 'hau', 'tbu', 'ltvuni', 'dhv', 'ush', 'hcmupes', 'hnmu', 'cmcu', 'vttu', 'hbu', 'vhs', 'vya', 'trungvuong', 'pxu']);
 const finalCatalogRuntimeSchools = finalCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const finalCatalogMethods: AdmissionMethodDescriptor[] = finalCatalogRuntimeSchools.map((school) => ({
