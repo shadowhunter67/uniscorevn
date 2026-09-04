@@ -128,6 +128,14 @@ export const COMMON_SUBJECT_COMBINATIONS: readonly SubjectCombination[] = [
   { id: 'A10', subjects: ['math', 'physics', 'civic-economic-law'] },
   { id: 'A11', subjects: ['math', 'chemistry', 'civic-economic-law'] },
   { id: 'C20', subjects: ['literature', 'geography', 'civic-economic-law'] },
+  /** A06/A08/X17/X22 — thêm khi implement VHS 2026 (Trường Đại học Văn hóa TP.HCM). A08 (Toán/Lịch
+   * sử/GDKTPL) và X17 (cùng 3 môn, mã tổ hợp quốc gia khác nhau) trùng thành phần môn — cùng tiền lệ
+   * cặp C14/X01, D08/B08 ở trên; A06 (Toán/Hóa học/Địa lý) và X22 (Toán/Địa lý/Tin học) là tổ hợp
+   * mới, xem `schools/vhs/sources.ts`. */
+  { id: 'A06', subjects: ['math', 'chemistry', 'geography'] },
+  { id: 'A08', subjects: ['math', 'history', 'civic-economic-law'] },
+  { id: 'X17', subjects: ['math', 'history', 'civic-economic-law'] },
+  { id: 'X22', subjects: ['math', 'geography', 'informatics'] },
 ];
 
 /** Nhãn tiếng Việt — dùng ở bất kỳ trường nào cần hiển thị tên môn cho người dùng chọn. */

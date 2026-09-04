@@ -7,30 +7,30 @@
     <text x="0" y="76" font-size="13" font-weight="600" fill="#0b0b0b">Calculator đã xác minh</text>
     <line x1="240" y1="84" x2="550" y2="84" stroke="#e1e0d9" stroke-width="1" />
     <rect x="240" y="62" width="310" height="20" rx="4" fill="#2a78d6" />
-    <text x="560" y="76" font-size="13" font-weight="600" fill="#0b0b0b" text-anchor="start">129</text>
-    <text x="640" y="76" font-size="11" fill="#898781" text-anchor="end">48.3%</text>
+    <text x="560" y="76" font-size="13" font-weight="600" fill="#0b0b0b" text-anchor="start">130</text>
+    <text x="640" y="76" font-size="11" fill="#898781" text-anchor="end">48.7%</text>
   
     <text x="0" y="110" font-size="13" font-weight="600" fill="#0b0b0b">Calculator một phần</text>
     <line x1="240" y1="118" x2="550" y2="118" stroke="#e1e0d9" stroke-width="1" />
-    <rect x="240" y="96" width="7.209302325581395" height="20" rx="4" fill="#eb6834" />
+    <rect x="240" y="96" width="7.153846153846154" height="20" rx="4" fill="#eb6834" />
     <text x="560" y="110" font-size="13" font-weight="600" fill="#0b0b0b" text-anchor="start">3</text>
     <text x="640" y="110" font-size="11" fill="#898781" text-anchor="end">1.1%</text>
   
     <text x="0" y="144" font-size="13" font-weight="600" fill="#0b0b0b">Chỉ kiểm tra điều kiện/ngưỡng</text>
     <line x1="240" y1="152" x2="550" y2="152" stroke="#e1e0d9" stroke-width="1" />
-    <rect x="240" y="130" width="52.86821705426357" height="20" rx="4" fill="#1baf7a" />
+    <rect x="240" y="130" width="52.46153846153847" height="20" rx="4" fill="#1baf7a" />
     <text x="560" y="144" font-size="13" font-weight="600" fill="#0b0b0b" text-anchor="start">22</text>
     <text x="640" y="144" font-size="11" fill="#898781" text-anchor="end">8.2%</text>
   
     <text x="0" y="178" font-size="13" font-weight="600" fill="#0b0b0b">Đã research, chưa đủ để tính</text>
     <line x1="240" y1="186" x2="550" y2="186" stroke="#e1e0d9" stroke-width="1" />
-    <rect x="240" y="164" width="170.6201550387597" height="20" rx="4" fill="#eda100" />
-    <text x="560" y="178" font-size="13" font-weight="600" fill="#0b0b0b" text-anchor="start">71</text>
-    <text x="640" y="178" font-size="11" fill="#898781" text-anchor="end">26.6%</text>
+    <rect x="240" y="164" width="166.9230769230769" height="20" rx="4" fill="#eda100" />
+    <text x="560" y="178" font-size="13" font-weight="600" fill="#0b0b0b" text-anchor="start">70</text>
+    <text x="640" y="178" font-size="11" fill="#898781" text-anchor="end">26.2%</text>
   
     <text x="0" y="212" font-size="13" font-weight="600" fill="#0b0b0b">Chỉ có trong danh mục</text>
     <line x1="240" y1="220" x2="550" y2="220" stroke="#e1e0d9" stroke-width="1" />
-    <rect x="240" y="198" width="100.93023255813954" height="20" rx="4" fill="#e87ba4" />
+    <rect x="240" y="198" width="100.15384615384616" height="20" rx="4" fill="#e87ba4" />
     <text x="560" y="212" font-size="13" font-weight="600" fill="#0b0b0b" text-anchor="start">42</text>
     <text x="640" y="212" font-size="11" fill="#898781" text-anchor="end">15.7%</text>
   

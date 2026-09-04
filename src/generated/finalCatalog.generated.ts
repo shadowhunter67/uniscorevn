@@ -567,7 +567,7 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     url: 'https://www.hcmuc.edu.vn/tuyen-sinh/',
     checkedAt: '2026-08-24',
     note:
-      'Cổng tuyển sinh chính thức (hcmuc.edu.vn) xác nhận qua tìm kiếm: 1.300 chỉ tiêu, 3 phương thức (điểm thi TN THPT, học bạ THPT, kết hợp thi năng khiếu cho chuyên ngành Tổ chức - dàn dựng chương trình văn hóa nghệ thuật), tổ hợp môn đa dạng theo ngành (Ngữ văn, Lịch sử, Địa lý, Toán, tiếng Anh, tiếng Trung, Tin học, GDKTPL). Không có ngưỡng điểm sàn công khai dạng số duy nhất áp dụng chung; tổ hợp/ngưỡng thay đổi theo từng ngành nên chưa đủ cấu trúc để mô hình hoá trong batch này.',
+      "Superseded (2026-09-04 batch): verified-calculator upgrade shipped for 14/16 mã-100 (THPT-exam) ngành/chuyên ngành. hcmuc.edu.vn's admission announcement page embeds a Google Drive link to the actual signed PDF (Thông báo 34/TB-ĐHVHHCM, 04/02/2026) — downloaded and read directly (not just the earlier search-engine summary) for the formula, the school's own priority-point table, and the per-major subject-combination table (16 rows, mã phương thức 100/200/405/406). The đợt-1 2026 official cutoff (Thông báo 207/TB-ĐHVHHCM, 10/8/2026, signed + sealed) was found republished at full resolution — not just summarized — by the Government's own policy portal (xaydungchinhsach.chinhphu.vn), which mirrors the two original scanned pages; both images were downloaded directly (stripping the CDN's thumb_w prefix for full resolution) and read via vision. Excluded: 1/16 ngành (7229042C, năng khiếu-gated, mã 405/406 only), the D04 (Tiếng Trung) combination (no SubjectId), and a per-combination 'môn chính x2 >= other two' eligibility condition (Thông tư 08/2022 Điều 9) that is not enforced (documented gap — does not affect the score formula itself, which is a flat unweighted 3-subject sum). See normalized/runtime-source-snapshot/vhs/sources.ts. This entry is unused because vhs is now in explicitRuntimeSchoolIds; kept only as a research trail.",
   },
   vmmu: {
     sourceId: 'vmmu-admission-2026',
@@ -819,7 +819,7 @@ export const finalCatalogKnowledgeGap = {
 // shipped eligibility-only, THPT-exam route flat 15/30 (trừ Luật/Tâm lý học chờ Bộ GD&ĐT), nguồn
 // đối chiếu qua Báo Tuổi Trẻ (04/07/2026) vì tuyensinh.dhv.edu.vn không trích được số liệu qua
 // WebFetch.) They stay listed in `finalCatalogSchools` above for identity/location metadata only.
-const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus', 'tuaf', 'uhd', 'umt', 'utm', 'utt', 'eaut', 'vwa', 'hau', 'tbu', 'ltvuni', 'dhv', 'ush', 'hcmupes', 'hnmu', 'cmcu', 'vttu', 'hbu']);
+const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus', 'tuaf', 'uhd', 'umt', 'utm', 'utt', 'eaut', 'vwa', 'hau', 'tbu', 'ltvuni', 'dhv', 'ush', 'hcmupes', 'hnmu', 'cmcu', 'vttu', 'hbu', 'vhs']);
 const finalCatalogRuntimeSchools = finalCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const finalCatalogMethods: AdmissionMethodDescriptor[] = finalCatalogRuntimeSchools.map((school) => ({
