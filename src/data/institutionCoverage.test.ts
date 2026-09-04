@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 225,
       admissionDataAvailable: 225,
       eligibilitySupported: 22,
-      calculatorSupported: 135,
+      calculatorSupported: 136,
       partialCalculator: 3,
-      fullyVerified: 132,
+      fullyVerified: 133,
       catalogOnly: 42,
     });
   });
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(68);
+    expect(researchedOnly).toBe(67);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuvju', 'hanu',
@@ -96,6 +96,13 @@ describe('institution coverage statistics', () => {
     // (23/7/2025) to convert to any other combo within the same group. 22/24 ngành modeled (excludes
     // Thanh nhạc/Thiết kế đồ hoạ — Nhóm 4, no conversion table).
     expect(deriveInstitutionSupportStatus(schoolRegistry.thanglong)).toBe('verified-calculator');
+    // Batch (2026-09-04, roadmap 100 -> 150): DSU (Trường Đại học Thể dục Thể thao Đà Nẵng)
+    // graduated to verified-calculator — Phương thức mã 100 (điểm thi TN THPT, ngành Quản lý TDTT
+    // 7810301 only) via official Quyết định 1088/QĐ-TDTTĐN-HĐTS (22/8/2025, PDF chữ ký + con dấu)
+    // for the threshold (21,50/30) and Thông báo 247/TB-TDTTĐN for the tổ hợp (B03/C14). Priority
+    // table cited directly from the school's own Quy chế tuyển sinh Điều 7 (QĐ 577/QĐ-TDTTĐN),
+    // not a judgment call. 2 other ngành require năng khiếu TDTT and are not modeled.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.dsu)).toBe('verified-calculator');
     // Batch (2026-09-03, roadmap 100 -> 150): BLU (Trường Đại học Bạc Liêu) graduated to
     // verified-calculator — official tuyensinh.blu.edu.vn: ảnh "ĐIỂM CHUẨN TRÚNG TUYỂN NĂM 2026"
     // (Quyết định số 426/QĐ-ĐHBL, 10/8/2026, đọc bằng vision) + trang HTML chính thức tổ hợp môn theo

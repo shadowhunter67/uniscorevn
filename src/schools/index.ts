@@ -161,6 +161,7 @@ import { hvuModule } from './hvu';
 import { vhsModule } from './vhs';
 import { vyaModule } from './vya';
 import { trungvuongModule } from './trungvuong';
+import { dsuModule } from './dsu';
 import { southernCatalogModules } from './southernCatalog';
 import { remainingCatalogModules } from './remainingCatalog';
 import { finalCatalogModules } from './finalCatalog';
@@ -373,4 +374,5 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   vhs: vhsModule,
   vya: vyaModule,
   trungvuong: trungvuongModule,
+  dsu: dsuModule,
 };

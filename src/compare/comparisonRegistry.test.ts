@@ -86,6 +86,7 @@ import { hvuAdmissionMethods } from '../schools/hvu/methods';
 import { vhsAdmissionMethods } from '../schools/vhs/methods';
 import { vyaAdmissionMethods } from '../schools/vya/methods';
 import { trungvuongAdmissionMethods } from '../schools/trungvuong/methods';
+import { dsuAdmissionMethods } from '../schools/dsu/methods';
 import { thanglongAdmissionMethods } from '../schools/thanglong/methods';
 import { eiuAdmissionMethods } from '../schools/eiu/methods';
 import { fptuAdmissionMethods } from '../schools/fptu/methods';
@@ -260,6 +261,7 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   vhs: vhsAdmissionMethods,
   vya: vyaAdmissionMethods,
   trungvuong: trungvuongAdmissionMethods,
+  dsu: dsuAdmissionMethods,
   thanglong: thanglongAdmissionMethods,
   eiu: eiuAdmissionMethods,
   fptu: fptuAdmissionMethods,
