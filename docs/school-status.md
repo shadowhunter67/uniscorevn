@@ -241,7 +241,9 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-SIS** — Trường Khoa học liên ngành và Nghệ thuật - ĐHQG Hà Nội
 - **VNUFA** — Trường Đại học Mỹ thuật Việt Nam
 
-## Chỉ có trong danh mục (41)
+## Chỉ có trong danh mục (47)
+
+Batch catalog-expansion (2026-09-04): +6 cơ sở đại học/học viện công lập độc lập bị thiếu khỏi danh mục — phát hiện qua đối chiếu toàn bộ registry hiện có với danh sách trường đại học/học viện Việt Nam (Wikipedia dùng làm manh mối, KHÔNG làm bằng chứng danh tính duy nhất) rồi xác minh từng website chính thức riêng lẻ trước khi thêm: **EPU** (Trường Đại học Điện lực, Hà Nội, epu.edu.vn, trực thuộc Bộ Công Thương — KHÁC "Trường Cao đẳng Điện lực TP.HCM"/HEPC đã có sẵn trong danh mục), **VUTM** (Học viện Y Dược học cổ truyền Việt Nam, Hà Nội, vutm.edu.vn, trực thuộc Bộ Y tế), **HUPH** (Trường Đại học Y tế Công cộng, Hà Nội, huph.edu.vn, trực thuộc Bộ Y tế), **HMTU** (Trường Đại học Kỹ thuật Y tế Hải Dương, Hải Dương, hmtu.edu.vn, trực thuộc Bộ Y tế), **NDUN** (Trường Đại học Điều dưỡng Nam Định, Nam Định, ndun.edu.vn, trực thuộc Bộ Y tế), **HUArt** (Trường Đại học Nghệ thuật, Đại học Huế, huế, nghethuathue.edu.vn — trường thành viên Đại học Huế, cùng convention với husc/hce/hul/huaf/hueedu/hump/hufl/hat đã có; KHÁC Học viện Âm nhạc Huế/`ham` đã có sẵn, 2 cơ sở đã tách từ 1994). Catalog-only — chưa research nguồn tuyển sinh, KHÔNG bật bất kỳ capability nào. Xem `docs/catalog-expansion-report.md` cho nguồn chi tiết.
 
 - **AIU** — Trường Đại học Quốc tế Á Châu
 - **BHU** — Trường Đại học Quốc tế Bắc Hà
@@ -256,18 +258,23 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **DNC** — Trường Cao đẳng Đà Nẵng
 - **DQC** — Trường Cao đẳng Kỹ nghệ Dung Quất
 - **DVTC** — Trường Cao đẳng Du lịch Đà Nẵng
+- **EPU** — Trường Đại học Điện lực
 - **HCE-CĐ** — Trường Cao đẳng Kinh tế Thành phố Hồ Chí Minh
 - **HCMCC** — Trường Cao đẳng Xây dựng Thành phố Hồ Chí Minh
 - **HCMCT** — Trường Cao đẳng Giao thông Vận tải TP.HCM
 - **HCTB** — Trường Cao đẳng Kỹ thuật và Nghiệp vụ Hà Nội
 - **HEPC** — Trường Cao đẳng Điện lực TP.HCM
+- **HMTU** — Trường Đại học Kỹ thuật Y tế Hải Dương
 - **HOTEC** — Trường Cao đẳng Kinh tế - Kỹ thuật Thành phố Hồ Chí Minh
+- **HUArt** — Trường Đại học Nghệ thuật, Đại học Huế
+- **HUPH** — Trường Đại học Y tế Công cộng
 - **HVCT** — Trường Cao đẳng Kỹ nghệ II
 - **KTXD-HCM** — Trường Cao đẳng Kiến trúc - Xây dựng Thành phố Hồ Chí Minh
 - **Lilama 2** — Trường Cao đẳng Công nghệ Quốc tế Lilama 2
 - **LTTC** — Trường Cao đẳng Lý Tự Trọng TP.HCM
 - **NCEPA** — Trường Kinh tế và Quản lý công - Đại học Kinh tế Quốc dân
 - **NCT-NEU** — Trường Công nghệ - Đại học Kinh tế Quốc dân
+- **NDUN** — Trường Đại học Điều dưỡng Nam Định
 - **NEU-CoB** — Trường Kinh doanh - Đại học Kinh tế Quốc dân
 - **NSPC** — Trường Cao đẳng Bách khoa Nam Sài Gòn
 - **QTU** — Trường Đại học Quang Trung
@@ -283,5 +290,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VCTE** — Trường Cao đẳng nghề Kỹ thuật công nghệ
 - **VHNT-HCM** — Trường Cao đẳng Văn hóa Nghệ thuật TP.HCM
 - **Việt-Xô 1** — Trường Cao đẳng nghề Việt - Xô số 1
+- **VUTM** — Học viện Y Dược học cổ truyền Việt Nam
 - **YDLU** — Trường Đại học Yersin Đà Lạt
 

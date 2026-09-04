@@ -595,6 +595,15 @@ export const remainingCatalogSchools: readonly RemainingCatalogSchool[] = [
   { id: 'pctu', shortName: 'PCTU', name: 'Trường Đại học Phan Châu Trinh', location: 'Đà Nẵng', ownership: 'private', region: 'other' },
   { id: 'ydlu', shortName: 'YDLU', name: 'Trường Đại học Yersin Đà Lạt', location: 'Lâm Đồng', ownership: 'private', region: 'other' },
   { id: 'upt', shortName: 'UPT', name: 'Trường Đại học Phan Thiết', location: 'Bình Thuận', ownership: 'private', region: 'other' },
+  // Catalog-expansion batch (2026-09-04): 6 institutions confirmed missing from registry after
+  // cross-check against catalog ids + Wikipedia institution list + Bộ VHTTDL/individual official
+  // domains. catalog-only — no admission-data source researched yet, see catalog-expansion-report.md.
+  { id: 'epu', shortName: 'EPU', name: 'Trường Đại học Điện lực', location: 'Hà Nội', ownership: 'public', region: 'hanoi' },
+  { id: 'vutm', shortName: 'VUTM', name: 'Học viện Y Dược học cổ truyền Việt Nam', location: 'Hà Nội', ownership: 'public', region: 'hanoi' },
+  { id: 'huph', shortName: 'HUPH', name: 'Trường Đại học Y tế Công cộng', location: 'Hà Nội', ownership: 'public', region: 'hanoi' },
+  { id: 'hmtu', shortName: 'HMTU', name: 'Trường Đại học Kỹ thuật Y tế Hải Dương', location: 'Hải Dương', ownership: 'public', region: 'other' },
+  { id: 'ndun', shortName: 'NDUN', name: 'Trường Đại học Điều dưỡng Nam Định', location: 'Nam Định', ownership: 'public', region: 'other' },
+  { id: 'huart', shortName: 'HUArt', name: 'Trường Đại học Nghệ thuật, Đại học Huế', location: 'Huế', ownership: 'public', region: 'other' },
 ];
 
 export const remainingCatalogKnowledgeGap = {
