@@ -12,7 +12,7 @@ import { collegeCatalogSchools } from '../schools/collegeCatalog';
 
 describe('institution coverage statistics', () => {
   it('separates catalog coverage from institution KPI coverage', () => {
-    expect(institutionCoverage.totalCatalogEntries).toBe(283);
+    expect(institutionCoverage.totalCatalogEntries).toBe(286);
     expect(institutionCoverage.institutionEntries).toBeLessThan(institutionCoverage.totalCatalogEntries);
     expect(institutionCoverage.internalUnitEntries).toBe(12);
     expect(institutionCoverage.institutionEntries + institutionCoverage.internalUnitEntries).toBe(institutionCoverage.totalCatalogEntries);
@@ -55,12 +55,12 @@ describe('institution coverage statistics', () => {
 
   it('derives stable public KPI counts from the registry', () => {
     expect(summarizeInstitutionCoverage()).toEqual({
-      totalCatalogEntries: 283,
-      institutionEntries: 271,
-      independentEducationInstitutions: 271,
+      totalCatalogEntries: 286,
+      institutionEntries: 274,
+      independentEducationInstitutions: 274,
       universityInstitutions: 220,
       academies: 22,
-      pedagogicalColleges: 3,
+      pedagogicalColleges: 6,
       vocationalColleges: 26,
       otherIndependentInstitutions: 0,
       internalUnitEntries: 12,
@@ -70,7 +70,7 @@ describe('institution coverage statistics', () => {
       calculatorSupported: 137,
       partialCalculator: 3,
       fullyVerified: 134,
-      catalogOnly: 57,
+      catalogOnly: 60,
     });
   });
 

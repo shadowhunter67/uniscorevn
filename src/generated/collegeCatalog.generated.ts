@@ -719,6 +719,17 @@ export const collegeCatalogSchools: readonly CollegeCatalogSchool[] = [
       },
     ],
   },
+  // Catalog-expansion batch 2 (2026-09-04): cross-referenced the existing 3 `college_pedagogy`
+  // entries (all under the CĐSP Trung ương umbrella) against provincial "Cao đẳng Sư phạm" schools
+  // nationwide. Most provincial CĐSP have already been merged into regional Phân hiệu Đại học
+  // branches or multi-disciplinary colleges (confirmed for CĐSP Điện Biên — merged into Phân hiệu
+  // Đại học Thái Nguyên tại Điện Biên along with CĐ Y tế Điện Biên — and CĐSP Lạng Sơn — merged into
+  // Trường Cao đẳng Lạng Sơn — both correctly NOT added). These 3 were individually verified as
+  // still independent, standalone pedagogical colleges with a live official domain and an active
+  // 2026 admission notice of their own:
+  { id: 'cdspkg', shortName: 'CĐSPKG', name: 'Trường Cao đẳng Sư phạm Kiên Giang', location: 'Kiên Giang', ownership: 'public', region: 'other', entityLevel: 'college_pedagogy', aliases: ['CĐSP Kiên Giang'] },
+  { id: 'cdsptb', shortName: 'CĐSPTB', name: 'Trường Cao đẳng Sư phạm Thái Bình', location: 'Thái Bình', ownership: 'public', region: 'other', entityLevel: 'college_pedagogy', aliases: ['CĐSP Thái Bình'] },
+  { id: 'cdspbrvt', shortName: 'CĐSPBRVT', name: 'Trường Cao đẳng Sư phạm Bà Rịa - Vũng Tàu', location: 'Bà Rịa - Vũng Tàu', ownership: 'public', region: 'other', entityLevel: 'college_pedagogy', aliases: ['CĐSP Bà Rịa - Vũng Tàu'] },
 ];
 
 export const collegeCatalogKnowledgeGap = {
