@@ -315,3 +315,234 @@ same live-domain-verification and merger-check discipline used in this batch.
    University, Intracom University, Ha Hoa Tien University, Thanh Dong University, Van Xuan
    University of Technology, etc.) is still unverified and was not part of this batch's 13-lead
    scope — worth a dedicated pass.
+
+---
+
+# Batch 3 (2026-09-05)
+
+This batch tackles all three items Batch 2 deferred: the vocational-college (GDNN) tier (previously
+untouched), a full sweep of the VQA accredited-institutions list against the `college_pedagogy` tier
+(the `.rar` blocker from Batch 2), and the leftover "assorted small/obscure private universities"
+list from Batch 1.
+
+## Summary
+
+| Metric | Before (Batch 2 end) | After Part 1 (GDNN+CĐSP) | After Part 3 (universities) |
+|---|---:|---:|---:|
+| Total catalog entries (search/compare) | 286 | 303 | **307** |
+| Independent education institutions (KPI) | 274 | 291 | **295** |
+| Internal/non-KPI entries | 12 | 12 | 12 |
+| University-level entries | 220 | 220 | **224** |
+| Academies | 22 | 22 | 22 |
+| Pedagogical colleges | 6 | 9 | 9 |
+| Vocational colleges | 26 | 40 | 40 |
+| Catalog-only entries | 60 | 77 | **81** |
+| Admission data available (researched+) | 226 | 226 (unchanged) | 226 (unchanged) |
+| Eligibility-only | 22 | 22 (unchanged) | 22 (unchanged) |
+| Partial calculator | 3 | 3 (unchanged) | 3 (unchanged) |
+| **Verified calculator** | **134** | **134 (unchanged)** | **134 (unchanged, as required)** |
+
+New catalog-only institutions added this batch: **21** (14 vocational colleges + 3 pedagogical
+colleges + 4 leftover private universities).
+
+## Part 1 — Vocational colleges (GDNN) tier
+
+Re-pulled the exact same official sources already cited for this tier in `README.md`'s "Phạm vi và
+độ phủ" section and in `collegeCatalog.ts`'s `collegeCatalogSources`, rather than starting from a
+generic web search, per the task brief.
+
+### Quyết định 1723/QĐ-TTg (public colleges under Bộ GD&ĐT) — re-pulled, no new entries
+
+The chinhphu.vn page only exposes a metadata shell; the actual PDF
+(`datafiles.chinhphu.vn/cpp/files/vbpq/2025/8/1723-ttg.signed.pdf`, dated 12/8/2025 — a newer,
+re-issued version of the decision than whatever was used originally) was downloaded and read via
+the `Read` tool's PDF-to-image-vision rendering. Its list of 65 public units includes exactly the
+same 12 colleges (items 45-56: `vcte`, `dungquatcollege`, `hvct`, `cic1`, `hcmcc`, `ncc`, `cuwc`,
+`vietxo1`, `lilama2`, `cmc-college`, `ccst`, `hctb`) already in the registry, plus the 3 CĐSP Trung
+ương campuses (items 42-44: `nce`, `ncspnt`, `ncehcm`). **No new colleges found** — this is a
+positive completeness confirmation for this specific source, not a gap.
+
+### Đà Nẵng GDNN list (danang.edu.vn, "đến 08/4/2025") — +9
+
+The `.xlsx` attachment (previously inaccessible in earlier sessions the same way the VQA `.rar` was)
+downloaded cleanly via `curl` this time and was parsed directly: unzipped as a zip archive, then the
+shared-strings table and row/cell XML were parsed with a small Node script to reconstruct the table
+including the "Loại hình sở hữu" (ownership) sub-columns (Công lập/DNNN/Tư thục/FDI), giving an
+**authoritative per-institution ownership classification** rather than guessing from secondary
+aggregators. Of its 17 "Trường cao đẳng" rows, 4 were already cataloged (`cdtm`, `dvtc`, `cfi`,
+`danangcollege`); the other 13 were researched individually.
+
+**Added (9)**, each verified with a live official domain:
+
+| ID | Institution | Ownership (per official list) | Official website |
+|---|---|---|---|
+| `gtvttw5` | Trường Cao đẳng Giao thông vận tải Trung ương V | Public (Bộ Xây dựng, formerly Bộ GTVT) | caodanggtvttw5.edu.vn |
+| `cep` | Trường Cao đẳng Kinh tế - Kế hoạch Đà Nẵng | Public (formerly Bộ KH&ĐT) | cep.edu.vn (returned HTTP 500 at check time; domain ownership/identity independently corroborated via its own linked tuyensinh subpage cached in search results) |
+| `hscdn` | Trường Cao đẳng nghề Hoa Sen (cơ sở Đà Nẵng) | Private | hsc.edu.vn |
+| `nvtc` | Trường Cao đẳng Nguyễn Văn Trỗi | Private | nguyenvantroicollege.edu.vn |
+| `cdpd` | Trường Cao đẳng Phương Đông Đà Nẵng | Private | cdpd.edu.vn |
+| `dpcdn` | Trường Cao đẳng Bách khoa Đà Nẵng | Private | bachkhoadanang.edu.vn |
+| `vavc` | Trường Cao đẳng nghề Việt - Úc | Private | vavc.edu.vn |
+| `dvcdn` | Trường Cao đẳng Đại Việt Đà Nẵng | Private | daivietdanang.edu.vn |
+| `cdyd-vn` | Trường Cao đẳng Công nghệ Y - Dược Việt Nam | Private | caodangyduocvietnam.edu.vn |
+
+Notes:
+- `hscdn` (Cao đẳng nghề Hoa Sen) was independently confirmed to be a **distinct legal entity** from
+  the already-cataloged `hsu` (Đại học Hoa Sen university) — described by its own materials as a
+  "strategic partner" of HSU and a member of the separate Nguyễn Hoàng Education System, not a
+  renamed/absorbed unit.
+- An AI-summarized fetch of some of these sites guessed ownership incorrectly (e.g. called `nvtc`
+  and `dpcdn` "public"); the official Đà Nẵng government spreadsheet's own ownership column was
+  trusted over those guesses and confirms both are Tư thục (private).
+
+**Declined / needs review (3)**:
+
+| Institution | Ownership | Reason |
+|---|---|---|
+| Trường Cao đẳng Văn hóa - Nghệ thuật Đà Nẵng | Public | Domain dead/squatted: its `cdvhntdanang.edu.vn` does not resolve (DNS failure), and the alternate domain found in government-portal text (`vhntdng.vn`) now hosts an unrelated third-party fintech lending site (domain squatting), not the school. No live official domain could be confirmed this batch. |
+| Trường Cao đẳng Công nghệ - Ngoại thương | Private | 5+ different domains (`cdcnnt.edu.vn`, `cnnt.edu.vn`, `ftcollege.edu.vn`, `truongcaodangngoaithuong.edu.vn`, `ngoaithuongcollege.edu.vn`) each present themselves as this institution's official site — too ambiguous to pick one confidently without risking citing a squatted/wrong domain. |
+| Trường Cao đẳng Quốc tế Sài Gòn | Private | No confirmed dedicated `.edu.vn` domain found (only a `.vn` marketing site, a wikidot page, and third-party aggregators) — fails the official-domain-only source rule. |
+
+### HCMC GDNN directory (gdnn.tphcm.gov.vn) — +2
+
+The directory's homepage "cơ sở tiêu biểu" (featured institutions) widget was fetched via raw
+`curl` (excluding the page's unrelated rotating `og:title`/`twitter:title` meta tags, which cycle
+through random institutions on every request and are NOT part of the actual results list — an early
+WebFetch pass was misled by this into treating one such meta-only name, "Trường Cao đẳng Hàng Hải và
+Đường thủy II", as a real hit; it was not, once meta tags were excluded from the raw HTML). The
+site's full paginated directory (~31 pages spanning every institution type across the post-2025
+merged TP.HCM/Bình Dương/Bà Rịa-Vũng Tàu area) is JS/AJAX-driven and did not respond to GET-parameter
+filtering (`TrinhDoID=91` for "Cao đẳng") in this session — same class of blocker as the VQA `.rar`
+and Đà Nẵng `.xlsx` were before this batch, but not resolved here; a full sweep of that directory is
+left for a future batch. Of the 10 Cao đẳng entries in the homepage widget, 8 were already cataloged;
+these 2 are the confirmed-missing remainder:
+
+| ID | Institution | Ownership | Official website |
+|---|---|---|---|
+| `ctim` | Trường Cao đẳng Bán công Công nghệ và Quản trị doanh nghiệp (CTIM) | Public (trực thuộc HEPZA — Ban Quản lý các Khu chế xuất và Công nghiệp TP.HCM) | ctim.edu.vn |
+| `ctdthuduc` | Trường Cao đẳng Kinh tế - Kỹ thuật Thủ Đức | Public | tuyensinh.ctdthuduc.edu.vn (main domain ctdthuduc.edu.vn) |
+
+## Part 2 — CĐSP sweep against the VQA accredited list
+
+**The `.rar` blocker from Batch 2 was resolved this batch.** The VQA page
+(vqa.moet.gov.vn, "...cập nhật đến ngày 31-7-2026-93.html") itself only exposed a `?download=1&id=0`
+link rather than a direct `.rar` URL in its HTML; following that redirect with `curl` (rather than
+WebFetch, which cannot follow through to binary downloads) successfully retrieved a 4.8MB RAR
+archive. No `unrar`/`7z` binary was available on the machine (and none was installed, per the
+project's do-not-install-without-asking norm for anything beyond a lightweight npm package); instead
+`node-unrar-js` (a WASM-compiled unrar with no native-binary dependency) was installed via `npm` in a
+scratch directory and used to extract the archive, yielding two documents: a list of accredited
+institutions (`1__ds-csgd-duoc-cong-nhan-dat-tccl-31-7-2026.docx`/`.pdf`) and a much larger list of
+accredited *programs* (`2__ds-ctdt-...`, not needed for this sweep). The `.docx` (a zip archive
+itself) was unzipped and its `word/document.xml` parsed to plain text directly — far more reliable
+than PDF vision-reading for a text table like this.
+
+The document's "2. Các trường cao đẳng sư phạm" section lists **exactly 12** nationwide accredited
+CĐSP as of 31/7/2026 (explicitly stated: "Danh sách có ... 12 trường cao đẳng sư phạm"). Cross-
+referencing against the 6 already cataloged (`nce`, `ncspnt`, `ncehcm` from the original registry;
+`cdspkg`, `cdsptb`, `cdspbrvt` from Batch 2) left 6 to individually research:
+
+**Added (3)** — confirmed still independent with a live official domain and active 2026 admission
+notice:
+
+| ID | Institution | Official website |
+|---|---|---|
+| `cdspnd` | Trường Cao đẳng Sư phạm Nam Định | cdspnd.edu.vn |
+| `cdspbn` | Trường Cao đẳng Sư phạm Bắc Ninh | cdspbacninh.edu.vn |
+| `cdsphb` | Trường Cao đẳng Sư phạm Hòa Bình | cdsphoabinh.edu.vn |
+
+**Confirmed merged, correctly NOT added (3)** — the VQA list itself is a historical accreditation
+record and can lag org-chart changes, so each was independently cross-checked against current press:
+
+| Institution | Merger | Source |
+|---|---|---|
+| Trường Cao đẳng Sư phạm Nghệ An | Merged into Trường Đại học Kinh tế Nghệ An, which was simultaneously renamed to Trường Đại học Nghệ An (`naue`, already in the registry) | Quyết định 1653/QĐ-TTg, 26/12/2024 — the exact same merger already documented on the `naue` entry's name-correction note since Batch 2; this is a reconfirmation, not a new finding |
+| Trường Cao đẳng Sư phạm Thừa Thiên Huế | Merged (Feb 2024) with Trường Cao đẳng nghề Thừa Thiên Huế and Trường Cao đẳng Giao thông Huế into a single new "Trường Cao đẳng Huế" | Quyết định 147/QĐ-LĐTBXH (05/02/2024); corroborated by giaoduc.net.vn, tienphong.vn, nhandan.vn |
+| Trường Cao đẳng Sư phạm Đà Lạt | Merged (Aug 2022) with Đà Lạt's vocational college and the Lâm Đồng Technical-Economic college into a single new "Trường Cao đẳng Đà Lạt" | Multiple corroborating press/reference sources |
+
+**New finding beyond the VQA list**: the 3 merger-successor institutions above are themselves
+genuine, currently-independent, multi-disciplinary vocational colleges that were not yet in the
+catalog under any name. Along with Batch 2's already-documented CĐSP Lạng Sơn merger target (also
+never actually added as its own entry, only mentioned in a code comment), all 3 successor colleges
+were added as `vocational_college` entries (not `college_pedagogy`, since none of them is purely a
+teacher-training institution anymore):
+
+| ID | Institution | Official website |
+|---|---|---|
+| `cdhue` | Trường Cao đẳng Huế | cdhue.edu.vn |
+| `cddl` | Trường Cao đẳng Đà Lạt | cddl.edu.vn |
+| `lce` | Trường Cao đẳng Lạng Sơn | lce.edu.vn |
+
+This closes the loop from Batch 2's CĐSP Điện Biên/Lạng Sơn merger findings — the previous batch
+correctly excluded the absorbed CĐSP but didn't add the resulting institution; this batch confirms
+the CĐSP Điện Biên merger via a second independent check (still merged into Phân hiệu Đại học Thái
+Nguyên tại Điện Biên, which is a branch of the already-cataloged `tnu` — no separate entry needed
+since it's modeled as part of Đại học Thái Nguyên, consistent with how other Đại học Thái Nguyên/Đà
+Nẵng/Huế member branches are handled) and fully resolves Lạng Sơn's successor college.
+
+## Part 3 — Leftover "assorted small/obscure private universities" (from Batch 1)
+
+Batch 1 flagged 5 unverified Wikipedia-sourced leads: Bac Ha International University, Intracom
+University, Ha Hoa Tien University, Thanh Dong University, Van Xuan University of Technology.
+
+- **Bac Ha International University** — found **already present** in the registry as `bhu`
+  (`Trường Đại học Quốc tế Bắc Hà`, `finalCatalog.ts`) — not a new addition. Its own site
+  (`iubh.edu.vn`) states it has temporarily paused 2025-2026 admissions to focus on quality
+  improvements; noted for context only, since the institution itself is already cataloged and this
+  doesn't change its catalog-only status.
+- The other 4 were confirmed genuinely missing and independent, each with a live official `.edu.vn`
+  domain and active 2026 admission content, no id/name collision found:
+
+| ID | Institution | Location | Ownership | Official website |
+|---|---|---|---|---|
+| `intracom` | Trường Đại học Intracom | Hà Nội | Private | intracomuni.edu.vn |
+| `hht` | Trường Đại học Hà Hoa Tiên | Hà Nam | Private | hahoatien.edu.vn |
+| `thanhdong` | Trường Đại học Thành Đông | Hải Dương | Private | thanhdong.edu.vn |
+| `vxut` | Trường Đại học Công nghệ Vạn Xuân | Nghệ An | Private | vxut.edu.vn |
+
+(Id `tdu` was avoided for Thành Đông because it collides with an existing registry id for a
+different, already-cataloged school — used `thanhdong` instead.)
+
+## Test/build status (Batch 3)
+
+- `npm run validate` (private): OK, both sub-batches.
+- `npm run export:runtime` (private): wrote all 4 generated artifacts for each sub-batch; public
+  repo diffs matched the intended additions exactly (plus a small follow-up re-export after adding
+  missing `catalogSources` to `cdhue`/`cddl`/`lce`, caught by
+  `institutionCoverage.test.ts`'s "requires catalog source metadata" test).
+- `tsc --noEmit`: clean (both repos, both sub-batches).
+- `npm run test`: 355/355 test files, 2707/2707 tests passing after each sub-batch (count-drift
+  assertions updated: `src/schools/index.test.ts`, `src/data/institutionCoverage.test.ts`,
+  `src/components/landingCatalog.test.ts`, `src/compare/evaluateApplicantAcrossSchools.test.ts`,
+  plus `docs/school-status.md`'s anti-drift shortName list and header counts). No verified/partial/
+  eligibility/admission-data-available count was touched.
+- `npm run lint`: clean.
+- `npm run build`: succeeds (same pre-existing bundle-size warning as Batches 1-2, unrelated).
+- `npm run audit:data`: 0 catalog audit errors, 0 catalog audit warnings; confirms final counts
+  (307 catalog entries / 295 independent institutions / 134 verified calculators).
+- `npm run validate:generated` / `npm run stats:coverage` / `npm run coverage:chart`: regenerated;
+  README KPI table, narrative paragraph, and `docs/coverage-chart.svg` updated to match.
+
+## Recommendation for next batch (Batch 4, if any)
+
+1. **HCMC GDNN directory full sweep** — the site's paginated directory (~31 pages, covering the
+   post-2025-merger TP.HCM area including former Bình Dương and Bà Rịa-Vũng Tàu institutions) is
+   JS/AJAX-driven and did not yield to GET-parameter filtering in this session; only the homepage's
+   10-item "featured" widget was usable. A tool that can drive the actual search form (e.g. a
+   browser-automation pass, or reverse-engineering the AJAX endpoint the `TrinhDoID` select posts
+   to) would likely surface more genuinely-missing Cao đẳng entries, especially from the merged-in
+   Bình Dương/Bà Rịa-Vũng Tàu areas.
+2. **Needs-review domain disambiguation**: Trường Cao đẳng Công nghệ - Ngoại thương (5+ competing
+   domains) and Trường Cao đẳng Quốc tế Sài Gòn (no `.edu.vn` found) — both still real, named
+   institutions per multiple secondary sources, just blocked on confidently identifying/confirming
+   an official primary domain.
+3. Trường Cao đẳng Văn hóa - Nghệ thuật Đà Nẵng's domain situation (dead + squatted) could be
+   rechecked in a future batch in case the school stands up a new official domain.
+4. At this point, catalog completeness has reached a reasonable stopping point for the three
+   explicitly-scoped source types this campaign has worked through (national university/academy
+   tier, CĐSP tier against the authoritative VQA list, and the two vocational-college directories
+   the README already cites). Any further catalog growth would mean either expanding into GDNN
+   directories the README does NOT yet cite for additional provinces (a scope-widening decision, not
+   just "the next batch") or continued incremental leads surfacing organically during future
+   admission-data research batches. Recommend treating catalog-breadth-expansion as substantially
+   complete for now unless a specific new authoritative source is identified.

@@ -28,7 +28,7 @@ Repo public này theo mô hình open-core: UI, generic engine, compare framework
 
 UniScoreVN xây dựng danh mục các cơ sở tuyển sinh đại học và cao đẳng tại Việt Nam. Calculator chỉ được kích hoạt đối với phương thức có đủ nguồn tuyển sinh chính thức. Cao đẳng thuộc giáo dục nghề nghiệp được phân loại riêng với nhóm đại học và cao đẳng ngành Giáo dục Mầm non; trung cấp không nằm trong scope iteration này.
 
-🎉 **Cột mốc 100 calculator đã xác minh** (2026-09-02) — kết thúc chiến dịch mở rộng độ phủ bắt đầu từ 60 trường. Roadmap mới (100 -> 150) đã đạt 134 (2026-09-04) qua nhiều batch liên tiếp — xem lịch sử đầy đủ từng batch tại [docs/school-status.md](docs/school-status.md). Song song, batch **catalog-expansion** (2026-09-04) mở rộng độ phủ danh mục (KHÔNG phải calculator) thêm 6 cơ sở đại học/học viện công lập catalog-only còn thiếu (EPU, VUTM, HUPH, HMTU, NDUN, HUArt), **catalog-expansion batch 2** (2026-09-04/05) giải quyết 13 lead còn tồn đọng từ batch 1, thêm 10 cơ sở đại học/học viện mới (UNETI, VUI, SDU, QUI, VIU, MTU, BAFU, HVTA, TKS, DNTU) cùng 3 trường cao đẳng sư phạm còn độc lập (CĐSPKG, CĐSPTB, CĐSPBRVT), và **catalog-expansion batch 3** (2026-09-05) mở rộng tier cao đẳng GDNN (+14: 9 trường Đà Nẵng, 2 trường TP.HCM, 3 trường kế thừa sau sáp nhập CĐSP), tier cao đẳng sư phạm (+3, sau khi tải thành công danh sách kiểm định VQA từng bị chặn bởi file .rar) và 4 trường đại học tư thục nhỏ còn sót từ batch 1 (Intracom, Hà Hoa Tiên, Thành Đông, VXUT) — xem [docs/catalog-expansion-report.md](docs/catalog-expansion-report.md).
+🎉 **Cột mốc 100 calculator đã xác minh** (2026-09-02) — kết thúc chiến dịch mở rộng độ phủ bắt đầu từ 60 trường. Roadmap mới (100 -> 150) đã đạt 134 (2026-09-04) qua nhiều batch liên tiếp — xem lịch sử đầy đủ từng batch tại [docs/school-status.md](docs/school-status.md). Song song, batch **catalog-expansion** (2026-09-04) mở rộng độ phủ danh mục (KHÔNG phải calculator) thêm 6 cơ sở đại học/học viện công lập catalog-only còn thiếu (EPU, VUTM, HUPH, HMTU, NDUN, HUArt), **catalog-expansion batch 2** (2026-09-04/05) giải quyết 13 lead còn tồn đọng từ batch 1, thêm 10 cơ sở đại học/học viện mới (UNETI, VUI, SDU, QUI, VIU, MTU, BAFU, HVTA, TKS, DNTU) cùng 3 trường cao đẳng sư phạm còn độc lập (CĐSPKG, CĐSPTB, CĐSPBRVT), và **catalog-expansion batch 3** (2026-09-05) mở rộng tier cao đẳng GDNN (+14: 9 trường Đà Nẵng, 2 trường TP.HCM, 3 trường kế thừa sau sáp nhập CĐSP), tier cao đẳng sư phạm (+3, sau khi tải thành công danh sách kiểm định VQA từng bị chặn bởi file .rar) và 4 trường đại học tư thục nhỏ còn sót từ batch 1 (Intracom, Hà Hoa Tiên, Thành Đông, VXUT) — tổng +21 mục, đưa danh mục lên 307/295 — xem [docs/catalog-expansion-report.md](docs/catalog-expansion-report.md).
 
 ![Độ phủ calculator UniScoreVN](docs/coverage-chart.svg)
 
@@ -36,10 +36,10 @@ Snapshot hiện tại được tính từ `schoolRegistry` bằng `npm run stats
 
 | KPI | Số lượng |
 |---|---:|
-| Mục trong danh mục/search/compare | 303 |
-| Cơ sở giáo dục độc lập trong danh mục | 291 |
+| Mục trong danh mục/search/compare | 307 |
+| Cơ sở giáo dục độc lập trong danh mục | 295 |
 | Đơn vị nội bộ/không tính vào KPI cơ sở | 12 |
-| Đại học / cơ sở hệ đại học | 220 |
+| Đại học / cơ sở hệ đại học | 224 |
 | Học viện | 22 |
 | Cao đẳng sư phạm/GDMN | 9 |
 | Cao đẳng giáo dục nghề nghiệp | 40 |
@@ -48,7 +48,7 @@ Snapshot hiện tại được tính từ `schoolRegistry` bằng `npm run stats
 | Chỉ kiểm tra điều kiện/ngưỡng | 22 |
 | Có calculator một phần | 3 |
 | Calculator đã xác minh | 134 |
-| Chỉ có trong danh mục | 77 |
+| Chỉ có trong danh mục | 81 |
 
 Catalog coverage != calculator coverage. Con số danh mục là độ phủ search/compare, không phải 100% calculator. Một số mục trong danh mục là school/faculty nội bộ của hệ thống đại học lớn; các mục này vẫn có thể giữ cho navigation hoặc mapping chương trình, nhưng không làm tăng KPI "cơ sở đào tạo tuyển sinh độc lập".
 

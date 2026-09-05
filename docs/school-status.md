@@ -241,7 +241,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-SIS** — Trường Khoa học liên ngành và Nghệ thuật - ĐHQG Hà Nội
 - **VNUFA** — Trường Đại học Mỹ thuật Việt Nam
 
-## Chỉ có trong danh mục (77)
+## Chỉ có trong danh mục (81)
 
 Batch catalog-expansion (2026-09-04): +6 cơ sở đại học/học viện công lập độc lập bị thiếu khỏi danh mục — phát hiện qua đối chiếu toàn bộ registry hiện có với danh sách trường đại học/học viện Việt Nam (Wikipedia dùng làm manh mối, KHÔNG làm bằng chứng danh tính duy nhất) rồi xác minh từng website chính thức riêng lẻ trước khi thêm: **EPU** (Trường Đại học Điện lực, Hà Nội, epu.edu.vn, trực thuộc Bộ Công Thương — KHÁC "Trường Cao đẳng Điện lực TP.HCM"/HEPC đã có sẵn trong danh mục), **VUTM** (Học viện Y Dược học cổ truyền Việt Nam, Hà Nội, vutm.edu.vn, trực thuộc Bộ Y tế), **HUPH** (Trường Đại học Y tế Công cộng, Hà Nội, huph.edu.vn, trực thuộc Bộ Y tế), **HMTU** (Trường Đại học Kỹ thuật Y tế Hải Dương, Hải Dương, hmtu.edu.vn, trực thuộc Bộ Y tế), **NDUN** (Trường Đại học Điều dưỡng Nam Định, Nam Định, ndun.edu.vn, trực thuộc Bộ Y tế), **HUArt** (Trường Đại học Nghệ thuật, Đại học Huế, huế, nghethuathue.edu.vn — trường thành viên Đại học Huế, cùng convention với husc/hce/hul/huaf/hueedu/hump/hufl/hat đã có; KHÁC Học viện Âm nhạc Huế/`ham` đã có sẵn, 2 cơ sở đã tách từ 1994). Catalog-only — chưa research nguồn tuyển sinh, KHÔNG bật bất kỳ capability nào. Xem `docs/catalog-expansion-report.md` cho nguồn chi tiết.
 
@@ -276,6 +276,14 @@ nghệ và Quản trị doanh nghiệp, ctim.edu.vn, trực thuộc HEPZA), **CT
 Kỹ thuật Thủ Đức, ctdthuduc.edu.vn). Trường Cao đẳng Công nghệ - Ngoại thương (5+ conflicting domains
 claim official status) and Trường Cao đẳng Quốc tế Sài Gòn (no confirmed `.edu.vn` domain) were left
 as needs-review rather than added. See `docs/catalog-expansion-report.md` for full detail.
+
+Batch catalog-expansion 3, part 3 (2026-09-05): resolved the "assorted small/obscure private
+universities" list flagged in batch 1 (Wikipedia-only leads, never independently verified there).
+Bac Ha International University was found ALREADY present (id `bhu`) — not a new addition. +4
+confirmed genuinely missing, each with a live official `.edu.vn` domain and active 2026 admission
+content: **Intracom** (Trường Đại học Intracom, Hà Nội, intracomuni.edu.vn), **HHT** (Trường Đại học
+Hà Hoa Tiên, Hà Nam, hahoatien.edu.vn), **Thành Đông** (Trường Đại học Thành Đông, Hải Dương,
+thanhdong.edu.vn), **VXUT** (Trường Đại học Công nghệ Vạn Xuân, Nghệ An, vxut.edu.vn).
 
 - **AIU** — Trường Đại học Quốc tế Á Châu
 - **BAFU** — Trường Đại học Nông - Lâm Bắc Giang
@@ -315,6 +323,7 @@ as needs-review rather than added. See `docs/catalog-expansion-report.md` for fu
 - **HCMCT** — Trường Cao đẳng Giao thông Vận tải TP.HCM
 - **HCTB** — Trường Cao đẳng Kỹ thuật và Nghiệp vụ Hà Nội
 - **HEPC** — Trường Cao đẳng Điện lực TP.HCM
+- **HHT** — Trường Đại học Hà Hoa Tiên
 - **HMTU** — Trường Đại học Kỹ thuật Y tế Hải Dương
 - **HOTEC** — Trường Cao đẳng Kinh tế - Kỹ thuật Thành phố Hồ Chí Minh
 - **HSC** — Trường Cao đẳng nghề Hoa Sen (cơ sở Đà Nẵng)
@@ -322,6 +331,7 @@ as needs-review rather than added. See `docs/catalog-expansion-report.md` for fu
 - **HUPH** — Trường Đại học Y tế Công cộng
 - **HVCT** — Trường Cao đẳng Kỹ nghệ II
 - **HVTA** — Học viện Tòa án
+- **Intracom** — Trường Đại học Intracom
 - **KTXD-HCM** — Trường Cao đẳng Kiến trúc - Xây dựng Thành phố Hồ Chí Minh
 - **Lilama 2** — Trường Cao đẳng Công nghệ Quốc tế Lilama 2
 - **LTTC** — Trường Cao đẳng Lý Tự Trọng TP.HCM
@@ -342,6 +352,7 @@ as needs-review rather than added. See `docs/catalog-expansion-report.md` for fu
 - **SMS-HUST** — Trường Vật liệu - Đại học Bách khoa Hà Nội
 - **SoICT** — Trường Công nghệ Thông tin và Truyền thông - Đại học Bách khoa Hà Nội
 - **TDC** — Trường Cao đẳng Công nghệ Thủ Đức
+- **Thành Đông** — Trường Đại học Thành Đông
 - **TKS** — Trường Đại học Kiểm sát Hà Nội
 - **TNU-IS** — Khoa Quốc tế - Đại học Thái Nguyên
 - **TTC** — Trường Cao đẳng Thủ Thiêm Thành phố Hồ Chí Minh
@@ -353,5 +364,6 @@ as needs-review rather than added. See `docs/catalog-expansion-report.md` for fu
 - **VIU** — Trường Đại học Công nghiệp Việt-Hung
 - **VUI** — Trường Đại học Công nghiệp Việt Trì
 - **VUTM** — Học viện Y Dược học cổ truyền Việt Nam
+- **VXUT** — Trường Đại học Công nghệ Vạn Xuân
 - **YDLU** — Trường Đại học Yersin Đà Lạt
 

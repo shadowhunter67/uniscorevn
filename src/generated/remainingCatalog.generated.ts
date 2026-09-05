@@ -627,6 +627,18 @@ export const remainingCatalogSchools: readonly RemainingCatalogSchool[] = [
   { id: 'hvta', shortName: 'HVTA', name: 'Học viện Tòa án', location: 'Hà Nội', ownership: 'public', region: 'hanoi' },
   { id: 'tks', shortName: 'TKS', name: 'Trường Đại học Kiểm sát Hà Nội', location: 'Hà Nội', ownership: 'public', region: 'hanoi' },
   { id: 'dntu', shortName: 'DNTU', name: 'Trường Đại học Công nghệ Đồng Nai', location: 'Đồng Nai', ownership: 'private', region: 'other' },
+  // Catalog-expansion batch 3 (2026-09-05), part 3: resolved the "assorted small/obscure private
+  // universities" list flagged in batch 1 (from a Wikipedia lead list, not independently verified
+  // there). Bac Ha International University was found ALREADY present (id `bhu`, finalCatalog.ts) —
+  // not a new addition. These 4 were confirmed genuinely missing/independent: each has a live
+  // official .edu.vn domain with active 2026 admission content, and no id/name collision was found
+  // across all 4 catalog files. Bắc Hà itself is separately confirmed to have temporarily paused
+  // 2025-2026 admissions per its own site (iubh.edu.vn) — noted for context, not a reason to exclude
+  // it (it's already cataloged) or these 4 (all actively admitting for 2026).
+  { id: 'intracom', shortName: 'Intracom', name: 'Trường Đại học Intracom', location: 'Hà Nội', ownership: 'private', region: 'hanoi' },
+  { id: 'hht', shortName: 'HHT', name: 'Trường Đại học Hà Hoa Tiên', location: 'Hà Nam', ownership: 'private', region: 'other' },
+  { id: 'thanhdong', shortName: 'Thành Đông', name: 'Trường Đại học Thành Đông', location: 'Hải Dương', ownership: 'private', region: 'other' },
+  { id: 'vxut', shortName: 'VXUT', name: 'Trường Đại học Công nghệ Vạn Xuân', location: 'Nghệ An', ownership: 'private', region: 'other' },
 ];
 
 export const remainingCatalogKnowledgeGap = {
