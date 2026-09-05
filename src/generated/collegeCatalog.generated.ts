@@ -730,6 +730,227 @@ export const collegeCatalogSchools: readonly CollegeCatalogSchool[] = [
   { id: 'cdspkg', shortName: 'CĐSPKG', name: 'Trường Cao đẳng Sư phạm Kiên Giang', location: 'Kiên Giang', ownership: 'public', region: 'other', entityLevel: 'college_pedagogy', aliases: ['CĐSP Kiên Giang'] },
   { id: 'cdsptb', shortName: 'CĐSPTB', name: 'Trường Cao đẳng Sư phạm Thái Bình', location: 'Thái Bình', ownership: 'public', region: 'other', entityLevel: 'college_pedagogy', aliases: ['CĐSP Thái Bình'] },
   { id: 'cdspbrvt', shortName: 'CĐSPBRVT', name: 'Trường Cao đẳng Sư phạm Bà Rịa - Vũng Tàu', location: 'Bà Rịa - Vũng Tàu', ownership: 'public', region: 'other', entityLevel: 'college_pedagogy', aliases: ['CĐSP Bà Rịa - Vũng Tàu'] },
+  // Catalog-expansion batch 3 (2026-09-05) — Part 1: VQA (Cục Quản lý chất lượng, Bộ GD&ĐT)
+  // accredited-institutions list (kd-clgd-7_2026, cập nhật 31/7/2026), successfully retrieved this
+  // batch (the .rar attachment that blocked batch 2 was downloaded and extracted via a WASM-based
+  // unrar library since no system unrar/7z tool was available). Its "2. Các trường cao đẳng sư
+  // phạm" section lists exactly 12 accredited CĐSP nationwide. Cross-referencing against the 6
+  // already-cataloged (nce/ncspnt/ncehcm/cdspkg/cdspbrvt from batches 1-2, plus this list) found 6
+  // more names; batch verification found 3 already merged (CĐSP Nghệ An → Đại học Nghệ An per
+  // Quyết định 1653/QĐ-TTg, already documented on the existing `naue` entry since batch 2; CĐSP
+  // Thừa Thiên Huế → merged Feb 2024 with 2 other Huế vocational colleges into "Trường Cao đẳng
+  // Huế" per Quyết định 147/QĐ-LĐTBXH; CĐSP Đà Lạt → merged Aug 2022 with Đà Lạt's vocational and
+  // technical-economic colleges into "Trường Cao đẳng Đà Lạt") and 3 still independent with a live
+  // official domain and an active 2026 admission notice:
+  { id: 'cdspnd', shortName: 'CĐSPND', name: 'Trường Cao đẳng Sư phạm Nam Định', location: 'Nam Định', ownership: 'public', region: 'other', entityLevel: 'college_pedagogy', aliases: ['CĐSP Nam Định'] },
+  { id: 'cdspbn', shortName: 'CĐSPBN', name: 'Trường Cao đẳng Sư phạm Bắc Ninh', location: 'Bắc Ninh', ownership: 'public', region: 'other', entityLevel: 'college_pedagogy', aliases: ['CĐSP Bắc Ninh'] },
+  { id: 'cdsphb', shortName: 'CĐSPHB', name: 'Trường Cao đẳng Sư phạm Hòa Bình', location: 'Hòa Bình', ownership: 'public', region: 'other', entityLevel: 'college_pedagogy', aliases: ['CĐSP Hòa Bình'] },
+  // Catalog-expansion batch 3 — Part 2: the 3 successor multi-disciplinary colleges formed by the
+  // mergers found above/in batch 2 (Trường Cao đẳng Huế, Trường Cao đẳng Đà Lạt) plus the batch-2-
+  // documented CĐSP Lạng Sơn merger target (Trường Cao đẳng Lạng Sơn, mentioned only in a comment
+  // above until now, never actually added as its own catalog entry) — these are themselves genuine,
+  // currently-independent vocational colleges with their own live official domain and active 2026
+  // admission content, so they belong in the catalog even though the pedagogical college they
+  // absorbed does not get a separate entry:
+  {
+    id: 'cdhue', shortName: 'CĐ Huế', name: 'Trường Cao đẳng Huế', location: 'Huế', ownership: 'public', region: 'other',
+    entityLevel: 'vocational_college', aliases: ['Hue College'],
+    catalogSources: [{ title: 'Trường Cao đẳng Huế', url: 'https://cdhue.edu.vn/', type: 'official-institution', checkedAt: '2026-09-05' }],
+  },
+  {
+    id: 'cddl', shortName: 'CĐ Đà Lạt', name: 'Trường Cao đẳng Đà Lạt', location: 'Lâm Đồng', ownership: 'public', region: 'other',
+    entityLevel: 'vocational_college', aliases: ['Dalat College'],
+    catalogSources: [{ title: 'Trường Cao Đẳng Đà Lạt', url: 'https://cddl.edu.vn/', type: 'official-institution', checkedAt: '2026-09-05' }],
+  },
+  {
+    id: 'lce', shortName: 'CĐ Lạng Sơn', name: 'Trường Cao đẳng Lạng Sơn', location: 'Lạng Sơn', ownership: 'public', region: 'other',
+    entityLevel: 'vocational_college',
+    catalogSources: [{ title: 'Trường Cao đẳng Lạng Sơn', url: 'https://lce.edu.vn/', type: 'official-institution', checkedAt: '2026-09-05' }],
+  },
+  // Catalog-expansion batch 3 — Part 3: re-pulled the Đà Nẵng GDNN list already cited in this
+  // file's `collegeCatalogSources` (danang.edu.vn, "đến 08/4/2025") — the .xlsx attachment
+  // downloaded cleanly this time (unlike the earlier .rar blocker) and was parsed directly
+  // (openxml shared-strings + row data), giving an authoritative ownership classification (Công
+  // lập/Tư thục/FDI column) per institution rather than guessing from secondary aggregators. Of its
+  // 17 "Trường cao đẳng" rows, 4 were already cataloged (Thương mại/`cdtm`, Du lịch Đà Nẵng/`dvtc`,
+  // Lương thực-Thực phẩm/`cfi`, nghề Đà Nẵng/`danangcollege`); these 9 are the confirmed-missing,
+  // live-domain-verified remainder. "Trường Cao đẳng Văn hóa - Nghệ thuật Đà Nẵng" (also on this
+  // list, public) was NOT added — see "Not added / needs review" in the batch 3 report.
+  {
+    id: 'gtvttw5',
+    shortName: 'GTVT TW V',
+    name: 'Trường Cao đẳng Giao thông vận tải Trung ương V',
+    location: 'Đà Nẵng',
+    province: 'Đà Nẵng',
+    ownership: 'public',
+    region: 'other',
+    entityLevel: 'vocational_college',
+    aliases: ['Cao đẳng Giao thông vận tải Trung ương V', 'Trường Cao đẳng Giao thông vận tải II'],
+    catalogSources: [
+      DANANG_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Giao thông vận tải Trung ương V', url: 'http://www.caodanggtvttw5.edu.vn/', type: 'official-institution', checkedAt: '2026-09-05' },
+    ],
+  },
+  {
+    id: 'cep',
+    shortName: 'CEP',
+    name: 'Trường Cao đẳng Kinh tế - Kế hoạch Đà Nẵng',
+    location: 'Đà Nẵng',
+    province: 'Đà Nẵng',
+    ownership: 'public',
+    region: 'other',
+    entityLevel: 'vocational_college',
+    aliases: ['Cao đẳng Kinh tế - Kế hoạch Đà Nẵng'],
+    catalogSources: [
+      DANANG_GDNN_SOURCE,
+      {
+        title: 'Trường Cao đẳng Kinh tế Kế hoạch Đà Nẵng (cep.edu.vn) — domain xác nhận qua nhiều nguồn tuyển sinh liên kết; trang chủ trả lỗi 500 tạm thời tại thời điểm kiểm tra 2026-09-05',
+        url: 'https://cep.edu.vn/',
+        type: 'official-institution',
+        checkedAt: '2026-09-05',
+      },
+    ],
+  },
+  {
+    id: 'hscdn',
+    shortName: 'HSC',
+    name: 'Trường Cao đẳng nghề Hoa Sen (cơ sở Đà Nẵng)',
+    location: 'Đà Nẵng',
+    province: 'Đà Nẵng',
+    ownership: 'private',
+    region: 'other',
+    entityLevel: 'vocational_college',
+    aliases: ['Hoa Sen College', 'Cao đẳng Hoa Sen'],
+    catalogSources: [
+      DANANG_GDNN_SOURCE,
+      { title: 'Trường Cao Đẳng Nghề Hoa Sen', url: 'https://hsc.edu.vn/', type: 'official-institution', checkedAt: '2026-09-05' },
+    ],
+  },
+  {
+    id: 'nvtc',
+    shortName: 'NVTC',
+    name: 'Trường Cao đẳng Nguyễn Văn Trỗi',
+    location: 'Đà Nẵng',
+    province: 'Đà Nẵng',
+    ownership: 'private',
+    region: 'other',
+    entityLevel: 'vocational_college',
+    aliases: ['Nguyen Van Troi College', 'Cao đẳng nghề Nguyễn Văn Trỗi'],
+    catalogSources: [
+      DANANG_GDNN_SOURCE,
+      { title: 'Trường cao đẳng Nguyễn Văn Trỗi – Đà Nẵng', url: 'https://nguyenvantroicollege.edu.vn/', type: 'official-institution', checkedAt: '2026-09-05' },
+    ],
+  },
+  {
+    id: 'cdpd',
+    shortName: 'CĐPĐ',
+    name: 'Trường Cao đẳng Phương Đông Đà Nẵng',
+    location: 'Đà Nẵng',
+    province: 'Đà Nẵng',
+    ownership: 'private',
+    region: 'other',
+    entityLevel: 'vocational_college',
+    aliases: ['Phuong Dong College Da Nang'],
+    catalogSources: [
+      DANANG_GDNN_SOURCE,
+      { title: 'Trường Cao Đẳng Phương Đông Đà Nẵng', url: 'http://cdpd.edu.vn/', type: 'official-institution', checkedAt: '2026-09-05' },
+    ],
+  },
+  {
+    id: 'dpcdn',
+    shortName: 'DPC',
+    name: 'Trường Cao đẳng Bách khoa Đà Nẵng',
+    location: 'Đà Nẵng',
+    province: 'Đà Nẵng',
+    ownership: 'private',
+    region: 'other',
+    entityLevel: 'vocational_college',
+    aliases: ['Danang Polytechnic College', 'Cao đẳng Bách khoa Đà Nẵng'],
+    catalogSources: [
+      DANANG_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Bách khoa Đà Nẵng', url: 'https://www.bachkhoadanang.edu.vn/', type: 'official-institution', checkedAt: '2026-09-05' },
+    ],
+  },
+  {
+    id: 'vavc',
+    shortName: 'VAVC',
+    name: 'Trường Cao đẳng nghề Việt - Úc',
+    location: 'Đà Nẵng',
+    province: 'Đà Nẵng',
+    ownership: 'private',
+    region: 'other',
+    entityLevel: 'vocational_college',
+    aliases: ['Vietnam-Australia College', 'Cao đẳng nghề Việt Úc'],
+    catalogSources: [
+      DANANG_GDNN_SOURCE,
+      { title: 'TRƯỜNG CAO ĐẲNG NGHỀ VIỆT - ÚC', url: 'https://vavc.edu.vn/', type: 'official-institution', checkedAt: '2026-09-05' },
+    ],
+  },
+  {
+    id: 'dvcdn',
+    shortName: 'ĐVC-ĐN',
+    name: 'Trường Cao đẳng Đại Việt Đà Nẵng',
+    location: 'Đà Nẵng',
+    province: 'Đà Nẵng',
+    ownership: 'private',
+    region: 'other',
+    entityLevel: 'vocational_college',
+    aliases: ['Da Viet Da Nang College', 'Cao đẳng Đại Việt Đà Nẵng'],
+    catalogSources: [
+      DANANG_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Đại Việt Đà Nẵng', url: 'https://daivietdanang.edu.vn/', type: 'official-institution', checkedAt: '2026-09-05' },
+    ],
+  },
+  {
+    id: 'cdyd-vn',
+    shortName: 'CNYD-VN',
+    name: 'Trường Cao đẳng Công nghệ Y - Dược Việt Nam',
+    location: 'Đà Nẵng',
+    province: 'Đà Nẵng',
+    ownership: 'private',
+    region: 'other',
+    entityLevel: 'vocational_college',
+    aliases: ['Vietnam Medical Technology College', 'Cao đẳng Công nghệ Y - Dược Việt Nam'],
+    catalogSources: [
+      DANANG_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Công nghệ Y - Dược Việt Nam', url: 'https://caodangyduocvietnam.edu.vn/', type: 'official-institution', checkedAt: '2026-09-05' },
+    ],
+  },
+  // Catalog-expansion batch 3 — Part 4: re-pulled the HCMC GDNN directory already cited in this
+  // file's `collegeCatalogSources` (gdnn.tphcm.gov.vn) — its homepage "cơ sở tiêu biểu" widget
+  // (confirmed via raw HTML fetch, excluding unrelated rotating og:title/twitter:title meta noise)
+  // lists 10 Cao đẳng institutions; 8 were already cataloged, these 2 are the confirmed-missing
+  // remainder (own official .edu.vn domain verified live for both):
+  {
+    id: 'ctim',
+    shortName: 'CTIM',
+    name: 'Trường Cao đẳng Bán công Công nghệ và Quản trị doanh nghiệp',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'public',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    aliases: ['CTIM', 'College of Technology and Industrial Management'],
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Cao đẳng CTIM', url: 'https://ctim.edu.vn/', type: 'official-institution', checkedAt: '2026-09-05' },
+    ],
+  },
+  {
+    id: 'ctdthuduc',
+    shortName: 'CTD-TĐ',
+    name: 'Trường Cao đẳng Kinh tế - Kỹ thuật Thủ Đức',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'public',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    aliases: ['Trường Cao Đẳng Kinh Tế Kỹ Thuật Thủ Đức'],
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao Đẳng Kinh Tế Kỹ Thuật Thủ Đức', url: 'https://tuyensinh.ctdthuduc.edu.vn/', type: 'official-institution', checkedAt: '2026-09-05' },
+    ],
+  },
 ];
 
 export const collegeCatalogKnowledgeGap = {

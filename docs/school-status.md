@@ -241,31 +241,75 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-SIS** — Trường Khoa học liên ngành và Nghệ thuật - ĐHQG Hà Nội
 - **VNUFA** — Trường Đại học Mỹ thuật Việt Nam
 
-## Chỉ có trong danh mục (60)
+## Chỉ có trong danh mục (77)
 
 Batch catalog-expansion (2026-09-04): +6 cơ sở đại học/học viện công lập độc lập bị thiếu khỏi danh mục — phát hiện qua đối chiếu toàn bộ registry hiện có với danh sách trường đại học/học viện Việt Nam (Wikipedia dùng làm manh mối, KHÔNG làm bằng chứng danh tính duy nhất) rồi xác minh từng website chính thức riêng lẻ trước khi thêm: **EPU** (Trường Đại học Điện lực, Hà Nội, epu.edu.vn, trực thuộc Bộ Công Thương — KHÁC "Trường Cao đẳng Điện lực TP.HCM"/HEPC đã có sẵn trong danh mục), **VUTM** (Học viện Y Dược học cổ truyền Việt Nam, Hà Nội, vutm.edu.vn, trực thuộc Bộ Y tế), **HUPH** (Trường Đại học Y tế Công cộng, Hà Nội, huph.edu.vn, trực thuộc Bộ Y tế), **HMTU** (Trường Đại học Kỹ thuật Y tế Hải Dương, Hải Dương, hmtu.edu.vn, trực thuộc Bộ Y tế), **NDUN** (Trường Đại học Điều dưỡng Nam Định, Nam Định, ndun.edu.vn, trực thuộc Bộ Y tế), **HUArt** (Trường Đại học Nghệ thuật, Đại học Huế, huế, nghethuathue.edu.vn — trường thành viên Đại học Huế, cùng convention với husc/hce/hul/huaf/hueedu/hump/hufl/hat đã có; KHÁC Học viện Âm nhạc Huế/`ham` đã có sẵn, 2 cơ sở đã tách từ 1994). Catalog-only — chưa research nguồn tuyển sinh, KHÔNG bật bất kỳ capability nào. Xem `docs/catalog-expansion-report.md` cho nguồn chi tiết.
 
 Batch catalog-expansion 2 (2026-09-04): resolution of the 13 needs-review leads from batch 1 — +10 confirmed-missing public/private institutions added (official domain verified live for each): **UNETI** (Trường Đại học Kinh tế - Kỹ thuật Công nghiệp, Hà Nội, uneti.edu.vn, Bộ Công Thương), **VUI** (Trường Đại học Công nghiệp Việt Trì, Phú Thọ, vui.edu.vn, Bộ Công Thương), **SDU** (Trường Đại học Sao Đỏ, Hải Dương, saodo.edu.vn, Bộ Công Thương), **QUI** (Trường Đại học Công nghiệp Quảng Ninh, Quảng Ninh, qui.edu.vn, Bộ Công Thương — distinct from Quy Nhơn University/`qnu`), **VIU** (Trường Đại học Công nghiệp Việt-Hung, Hà Nội, viu.edu.vn), **MTU** (Trường Đại học Xây dựng Miền Tây, Vĩnh Long, mtu.edu.vn — distinct from Trường Đại học Xây dựng Miền Trung/`muce` already cataloged), **BAFU** (Trường Đại học Nông - Lâm Bắc Giang, Bắc Giang, bafu.edu.vn), **HVTA** (Học viện Tòa án, Hà Nội, hocvientoaan.edu.vn, trực thuộc TAND Tối cao), **TKS** (Trường Đại học Kiểm sát Hà Nội, Hà Nội, tks.edu.vn, trực thuộc VKSND Tối cao), **DNTU** (Trường Đại học Công nghệ Đồng Nai, Đồng Nai, dntu.edu.vn, tư thục — distinct from Trường Đại học Đồng Nai/`dnu` already cataloged/verified). 3 of the 13 leads were NOT added: Trường Đại học Lao động - Xã hội was already present (id `ulsa`); Trường Đại học Tài chính - Quản trị kinh doanh (UFBA) was found dissolved into a branch campus of Học viện Tài chính (`aof`) per Quyết định 691/QĐ-TTg (16/4/2026); Trường Đại học Kinh tế Nghệ An was already present under the same domain (id `naue`) — its display name was corrected in place (renamed to Trường Đại học Nghệ An per Quyết định 1653/QĐ-TTg, 26/12/2024), not a new addition. Same batch also added +3 pedagogical colleges (`college_pedagogy`) after cross-referencing the existing CĐSPTW-only tier against provincial Cao đẳng Sư phạm: **CĐSPKG** (Trường Cao đẳng Sư phạm Kiên Giang, cdspkg.edu.vn), **CĐSPTB** (Trường Cao đẳng Sư phạm Thái Bình, cdsptb.edu.vn), **CĐSPBRVT** (Trường Cao đẳng Sư phạm Bà Rịa - Vũng Tàu, cdspbrvt.edu.vn) — each confirmed still independently operating via a live official domain. Two candidates were confirmed MERGED and correctly NOT added: Trường Cao đẳng Sư phạm Điện Biên (into Phân hiệu Đại học Thái Nguyên tại Điện Biên) and Trường Cao đẳng Sư phạm Lạng Sơn (into Trường Cao đẳng Lạng Sơn). See `docs/catalog-expansion-report.md` for full detail.
+
+Batch catalog-expansion 3 (2026-09-05), vocational-college (GDNN) + CĐSP tier: re-pulled the same
+official sources already cited for this tier. The VQA (Cục Quản lý chất lượng, Bộ GD&ĐT) accredited-
+institutions `.rar` that blocked batch 2 was successfully downloaded and extracted this batch (via a
+WASM-based unrar library, since no system unrar/7z tool was available) — its 12-entry accredited CĐSP
+list added +3 confirmed-still-independent colleges: **CĐSPND** (Trường Cao đẳng Sư phạm Nam Định,
+cdspnd.edu.vn), **CĐSPBN** (Trường Cao đẳng Sư phạm Bắc Ninh, cdspbacninh.edu.vn), **CĐSPHB** (Trường
+Cao đẳng Sư phạm Hòa Bình, cdsphoabinh.edu.vn). 3 more accredited CĐSP were confirmed MERGED and
+correctly NOT added: CĐSP Nghệ An (into `naue`, already documented since batch 2), CĐSP Thừa Thiên
+Huế (into Trường Cao đẳng Huế, Quyết định 147/QĐ-LĐTBXH, 02/2024), CĐSP Đà Lạt (into Trường Cao đẳng
+Đà Lạt, 08/2022). Their 3 merger-successor colleges — plus batch 2's already-documented CĐSP Lạng Sơn
+merger target — are themselves genuine independent vocational colleges not yet catalogued, so they
+were added: **CĐ Huế** (cdhue.edu.vn), **CĐ Đà Lạt** (cddl.edu.vn), **CĐ Lạng Sơn** (lce.edu.vn).
+Re-pulling Quyết định 1723/QĐ-TTg (public colleges under Bộ GD&ĐT, re-fetched as the current
+12/8/2025-dated PDF) confirmed all 12 already-cataloged entries match items 45-56 with no new
+colleges. Re-pulling the Đà Nẵng GDNN list (danang.edu.vn, "đến 08/4/2025") — its `.xlsx` parsed
+directly this time — found +9 confirmed-missing colleges with live official domains: **GTVT TW V**
+(Trường Cao đẳng Giao thông vận tải Trung ương V), **CEP** (Trường Cao đẳng Kinh tế - Kế hoạch Đà
+Nẵng), **HSC** (Trường Cao đẳng nghề Hoa Sen, cơ sở Đà Nẵng — verified a distinct legal entity from
+Đại học Hoa Sen/`hsu`), **NVTC** (Trường Cao đẳng Nguyễn Văn Trỗi), **CĐPĐ** (Trường Cao đẳng Phương
+Đông Đà Nẵng), **DPC** (Trường Cao đẳng Bách khoa Đà Nẵng), **VAVC** (Trường Cao đẳng nghề Việt -
+Úc), **ĐVC-ĐN** (Trường Cao đẳng Đại Việt Đà Nẵng), **CNYD-VN** (Trường Cao đẳng Công nghệ Y - Dược
+Việt Nam). Trường Cao đẳng Văn hóa - Nghệ thuật Đà Nẵng (also on this list, public) was NOT added —
+its only known domains (`cdvhntdanang.edu.vn`, `vhntdng.vn`) are dead/squatted (the latter now hosts
+an unrelated fintech lending site) at time of research. Re-pulling the HCMC GDNN directory
+(gdnn.tphcm.gov.vn) found +2 confirmed-missing colleges: **CTIM** (Trường Cao đẳng Bán công Công
+nghệ và Quản trị doanh nghiệp, ctim.edu.vn, trực thuộc HEPZA), **CTD-TĐ** (Trường Cao đẳng Kinh tế -
+Kỹ thuật Thủ Đức, ctdthuduc.edu.vn). Trường Cao đẳng Công nghệ - Ngoại thương (5+ conflicting domains
+claim official status) and Trường Cao đẳng Quốc tế Sài Gòn (no confirmed `.edu.vn` domain) were left
+as needs-review rather than added. See `docs/catalog-expansion-report.md` for full detail.
 
 - **AIU** — Trường Đại học Quốc tế Á Châu
 - **BAFU** — Trường Đại học Nông - Lâm Bắc Giang
 - **BHU** — Trường Đại học Quốc tế Bắc Hà
 - **CCO** — Trường Đại học Sĩ quan Phòng hóa
 - **CCST** — Trường Cao đẳng Xây dựng và Công nghệ - Xã hội
+- **CĐ Huế** — Trường Cao đẳng Huế
+- **CĐ Đà Lạt** — Trường Cao đẳng Đà Lạt
+- **CĐ Lạng Sơn** — Trường Cao đẳng Lạng Sơn
+- **CĐPĐ** — Trường Cao đẳng Phương Đông Đà Nẵng
+- **CĐSPBN** — Trường Cao đẳng Sư phạm Bắc Ninh
+- **CĐSPHB** — Trường Cao đẳng Sư phạm Hòa Bình
+- **CĐSPND** — Trường Cao đẳng Sư phạm Nam Định
+- **CEP** — Trường Cao đẳng Kinh tế - Kế hoạch Đà Nẵng
 - **CFI** — Trường Cao đẳng Lương thực - Thực phẩm
 - **CIC1** — Trường Cao đẳng Xây dựng số 1
 - **CMC-CĐ** — Trường Cao đẳng Cơ giới Xây dựng
+- **CNYD-VN** — Trường Cao đẳng Công nghệ Y - Dược Việt Nam
 - **COC** — Trường Cao đẳng Thương mại
+- **CTD-TĐ** — Trường Cao đẳng Kinh tế - Kỹ thuật Thủ Đức
+- **CTIM** — Trường Cao đẳng Bán công Công nghệ và Quản trị doanh nghiệp
 - **CUWC** — Trường Cao đẳng Xây dựng Công trình đô thị
 - **CVAUni** — Trường Đại học Chu Văn An
 - **CĐSPBRVT** — Trường Cao đẳng Sư phạm Bà Rịa - Vũng Tàu
 - **CĐSPKG** — Trường Cao đẳng Sư phạm Kiên Giang
 - **CĐSPTB** — Trường Cao đẳng Sư phạm Thái Bình
 - **DNC** — Trường Cao đẳng Đà Nẵng
+- **DPC** — Trường Cao đẳng Bách khoa Đà Nẵng
 - **DQC** — Trường Cao đẳng Kỹ nghệ Dung Quất
 - **DNTU** — Trường Đại học Công nghệ Đồng Nai
 - **DVTC** — Trường Cao đẳng Du lịch Đà Nẵng
+- **ĐVC-ĐN** — Trường Cao đẳng Đại Việt Đà Nẵng
 - **EPU** — Trường Đại học Điện lực
+- **GTVT TW V** — Trường Cao đẳng Giao thông vận tải Trung ương V
 - **HCE-CĐ** — Trường Cao đẳng Kinh tế Thành phố Hồ Chí Minh
 - **HCMCC** — Trường Cao đẳng Xây dựng Thành phố Hồ Chí Minh
 - **HCMCT** — Trường Cao đẳng Giao thông Vận tải TP.HCM
@@ -273,6 +317,7 @@ Batch catalog-expansion 2 (2026-09-04): resolution of the 13 needs-review leads 
 - **HEPC** — Trường Cao đẳng Điện lực TP.HCM
 - **HMTU** — Trường Đại học Kỹ thuật Y tế Hải Dương
 - **HOTEC** — Trường Cao đẳng Kinh tế - Kỹ thuật Thành phố Hồ Chí Minh
+- **HSC** — Trường Cao đẳng nghề Hoa Sen (cơ sở Đà Nẵng)
 - **HUArt** — Trường Đại học Nghệ thuật, Đại học Huế
 - **HUPH** — Trường Đại học Y tế Công cộng
 - **HVCT** — Trường Cao đẳng Kỹ nghệ II
@@ -286,6 +331,7 @@ Batch catalog-expansion 2 (2026-09-04): resolution of the 13 needs-review leads 
 - **NDUN** — Trường Đại học Điều dưỡng Nam Định
 - **NEU-CoB** — Trường Kinh doanh - Đại học Kinh tế Quốc dân
 - **NSPC** — Trường Cao đẳng Bách khoa Nam Sài Gòn
+- **NVTC** — Trường Cao đẳng Nguyễn Văn Trỗi
 - **QTU** — Trường Đại học Quang Trung
 - **QUI** — Trường Đại học Công nghiệp Quảng Ninh
 - **SCLS** — Trường Hóa và Khoa học sự sống - Đại học Bách khoa Hà Nội
@@ -300,6 +346,7 @@ Batch catalog-expansion 2 (2026-09-04): resolution of the 13 needs-review leads 
 - **TNU-IS** — Khoa Quốc tế - Đại học Thái Nguyên
 - **TTC** — Trường Cao đẳng Thủ Thiêm Thành phố Hồ Chí Minh
 - **UNETI** — Trường Đại học Kinh tế - Kỹ thuật Công nghiệp
+- **VAVC** — Trường Cao đẳng nghề Việt - Úc
 - **VCTE** — Trường Cao đẳng nghề Kỹ thuật công nghệ
 - **VHNT-HCM** — Trường Cao đẳng Văn hóa Nghệ thuật TP.HCM
 - **Việt-Xô 1** — Trường Cao đẳng nghề Việt - Xô số 1
