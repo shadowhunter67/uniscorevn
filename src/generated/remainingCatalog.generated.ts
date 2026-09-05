@@ -604,6 +604,29 @@ export const remainingCatalogSchools: readonly RemainingCatalogSchool[] = [
   { id: 'hmtu', shortName: 'HMTU', name: 'Trường Đại học Kỹ thuật Y tế Hải Dương', location: 'Hải Dương', ownership: 'public', region: 'other' },
   { id: 'ndun', shortName: 'NDUN', name: 'Trường Đại học Điều dưỡng Nam Định', location: 'Nam Định', ownership: 'public', region: 'other' },
   { id: 'huart', shortName: 'HUArt', name: 'Trường Đại học Nghệ thuật, Đại học Huế', location: 'Huế', ownership: 'public', region: 'other' },
+  // Catalog-expansion batch 2 (2026-09-04): resolution of the 13 "needs review" leads flagged in
+  // catalog-expansion-report.md batch 1. 10 confirmed genuinely missing/independent and added below
+  // (official .edu.vn domain verified live for each, no id/name collision found across all 4 catalog
+  // files). 3 of the 13 leads were NOT added: Trường Đại học Lao động - Xã hội was already present
+  // (id `ulsa`, finalCatalog.ts); Trường Đại học Tài chính - Quản trị kinh doanh (UFBA) was found to
+  // have been dissolved into a branch campus of Học viện Tài chính (`aof`, already cataloged) per
+  // Quyết định 691/QĐ-TTg (16/4/2026) — ufba.edu.vn's TLS certificate now covers *.hvtc.edu.vn,
+  // confirming absorption; Trường Đại học Kinh tế Nghệ An was found already present under the SAME
+  // domain (id `naue`, naue.edu.vn, finalCatalog.ts) — its display name is stale (renamed to
+  // "Trường Đại học Nghệ An" per Quyết định 1653/QĐ-TTg, 26/12/2024, merging in Nghệ An Pedagogical
+  // College) but this is a name correction to an EXISTING entry, not a new addition — id/shortName
+  // left unchanged for backward compatibility; see the `naue` name-correction note above its entry
+  // in finalCatalog.ts. See catalog-expansion-report.md for full per-lead detail.
+  { id: 'uneti', shortName: 'UNETI', name: 'Trường Đại học Kinh tế - Kỹ thuật Công nghiệp', location: 'Hà Nội', ownership: 'public', region: 'hanoi' },
+  { id: 'vui', shortName: 'VUI', name: 'Trường Đại học Công nghiệp Việt Trì', location: 'Phú Thọ', ownership: 'public', region: 'other' },
+  { id: 'saodo', shortName: 'SDU', name: 'Trường Đại học Sao Đỏ', location: 'Hải Dương', ownership: 'public', region: 'other' },
+  { id: 'qui', shortName: 'QUI', name: 'Trường Đại học Công nghiệp Quảng Ninh', location: 'Quảng Ninh', ownership: 'public', region: 'other' },
+  { id: 'viu', shortName: 'VIU', name: 'Trường Đại học Công nghiệp Việt-Hung', location: 'Hà Nội', ownership: 'public', region: 'hanoi' },
+  { id: 'mtu', shortName: 'MTU', name: 'Trường Đại học Xây dựng Miền Tây', location: 'Vĩnh Long', ownership: 'public', region: 'other' },
+  { id: 'bafu', shortName: 'BAFU', name: 'Trường Đại học Nông - Lâm Bắc Giang', location: 'Bắc Giang', ownership: 'public', region: 'other' },
+  { id: 'hvta', shortName: 'HVTA', name: 'Học viện Tòa án', location: 'Hà Nội', ownership: 'public', region: 'hanoi' },
+  { id: 'tks', shortName: 'TKS', name: 'Trường Đại học Kiểm sát Hà Nội', location: 'Hà Nội', ownership: 'public', region: 'hanoi' },
+  { id: 'dntu', shortName: 'DNTU', name: 'Trường Đại học Công nghệ Đồng Nai', location: 'Đồng Nai', ownership: 'private', region: 'other' },
 ];
 
 export const remainingCatalogKnowledgeGap = {

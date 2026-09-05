@@ -714,7 +714,12 @@ export const finalCatalogSchools: readonly FinalCatalogSchool[] = [
   { id: 'hnmu', shortName: 'HNMU', name: 'Trường Đại học Thủ đô Hà Nội', location: 'Hà Nội', ownership: 'public', region: 'hanoi' },
   { id: 'hca', shortName: 'HCA', name: 'Học viện Cán bộ Thành phố Hồ Chí Minh', location: 'TP.HCM', ownership: 'public', region: 'hcm' },
   { id: 'uhd', shortName: 'UHD', name: 'Trường Đại học Hải Dương', location: 'Hải Dương', ownership: 'public', region: 'other' },
-  { id: 'naue', shortName: 'NAUE', name: 'Trường Đại học Kinh tế Nghệ An', location: 'Nghệ An', ownership: 'public', region: 'other' },
+  // Name-correction (catalog-expansion batch 2, 2026-09-04): the institution renamed itself to
+  // "Trường Đại học Nghệ An" per Quyết định 1653/QĐ-TTg (26/12/2024, merging in Nghệ An Pedagogical
+  // College); same legal entity, same domain (naue.edu.vn). id/shortName kept unchanged for
+  // backward compatibility — only the display name is corrected to the institution's current
+  // official name, with the former name preserved for searchability.
+  { id: 'naue', shortName: 'NAUE', name: 'Trường Đại học Nghệ An (trước đây là Trường Đại học Kinh tế Nghệ An)', location: 'Nghệ An', ownership: 'public', region: 'other' },
   { id: 'vmuvinh', shortName: 'VMU-Vinh', name: 'Trường Đại học Y khoa Vinh', location: 'Nghệ An', ownership: 'public', region: 'other' },
   { id: 'hluv', shortName: 'HLUV', name: 'Trường Đại học Hoa Lư', location: 'Ninh Bình', ownership: 'public', region: 'other' },
   { id: 'tbu', shortName: 'TBU', name: 'Trường Đại học Thái Bình', location: 'Thái Bình', ownership: 'public', region: 'other' },

@@ -241,11 +241,14 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-SIS** — Trường Khoa học liên ngành và Nghệ thuật - ĐHQG Hà Nội
 - **VNUFA** — Trường Đại học Mỹ thuật Việt Nam
 
-## Chỉ có trong danh mục (47)
+## Chỉ có trong danh mục (57)
 
 Batch catalog-expansion (2026-09-04): +6 cơ sở đại học/học viện công lập độc lập bị thiếu khỏi danh mục — phát hiện qua đối chiếu toàn bộ registry hiện có với danh sách trường đại học/học viện Việt Nam (Wikipedia dùng làm manh mối, KHÔNG làm bằng chứng danh tính duy nhất) rồi xác minh từng website chính thức riêng lẻ trước khi thêm: **EPU** (Trường Đại học Điện lực, Hà Nội, epu.edu.vn, trực thuộc Bộ Công Thương — KHÁC "Trường Cao đẳng Điện lực TP.HCM"/HEPC đã có sẵn trong danh mục), **VUTM** (Học viện Y Dược học cổ truyền Việt Nam, Hà Nội, vutm.edu.vn, trực thuộc Bộ Y tế), **HUPH** (Trường Đại học Y tế Công cộng, Hà Nội, huph.edu.vn, trực thuộc Bộ Y tế), **HMTU** (Trường Đại học Kỹ thuật Y tế Hải Dương, Hải Dương, hmtu.edu.vn, trực thuộc Bộ Y tế), **NDUN** (Trường Đại học Điều dưỡng Nam Định, Nam Định, ndun.edu.vn, trực thuộc Bộ Y tế), **HUArt** (Trường Đại học Nghệ thuật, Đại học Huế, huế, nghethuathue.edu.vn — trường thành viên Đại học Huế, cùng convention với husc/hce/hul/huaf/hueedu/hump/hufl/hat đã có; KHÁC Học viện Âm nhạc Huế/`ham` đã có sẵn, 2 cơ sở đã tách từ 1994). Catalog-only — chưa research nguồn tuyển sinh, KHÔNG bật bất kỳ capability nào. Xem `docs/catalog-expansion-report.md` cho nguồn chi tiết.
 
+Batch catalog-expansion 2 (2026-09-04): resolution of the 13 needs-review leads from batch 1 — +10 confirmed-missing public/private institutions added (official domain verified live for each): **UNETI** (Trường Đại học Kinh tế - Kỹ thuật Công nghiệp, Hà Nội, uneti.edu.vn, Bộ Công Thương), **VUI** (Trường Đại học Công nghiệp Việt Trì, Phú Thọ, vui.edu.vn, Bộ Công Thương), **SDU** (Trường Đại học Sao Đỏ, Hải Dương, saodo.edu.vn, Bộ Công Thương), **QUI** (Trường Đại học Công nghiệp Quảng Ninh, Quảng Ninh, qui.edu.vn, Bộ Công Thương — distinct from Quy Nhơn University/`qnu`), **VIU** (Trường Đại học Công nghiệp Việt-Hung, Hà Nội, viu.edu.vn), **MTU** (Trường Đại học Xây dựng Miền Tây, Vĩnh Long, mtu.edu.vn — distinct from Trường Đại học Xây dựng Miền Trung/`muce` already cataloged), **BAFU** (Trường Đại học Nông - Lâm Bắc Giang, Bắc Giang, bafu.edu.vn), **HVTA** (Học viện Tòa án, Hà Nội, hocvientoaan.edu.vn, trực thuộc TAND Tối cao), **TKS** (Trường Đại học Kiểm sát Hà Nội, Hà Nội, tks.edu.vn, trực thuộc VKSND Tối cao), **DNTU** (Trường Đại học Công nghệ Đồng Nai, Đồng Nai, dntu.edu.vn, tư thục — distinct from Trường Đại học Đồng Nai/`dnu` already cataloged/verified). 3 of the 13 leads were NOT added: Trường Đại học Lao động - Xã hội was already present (id `ulsa`); Trường Đại học Tài chính - Quản trị kinh doanh (UFBA) was found dissolved into a branch campus of Học viện Tài chính (`aof`) per Quyết định 691/QĐ-TTg (16/4/2026); Trường Đại học Kinh tế Nghệ An was already present under the same domain (id `naue`) — its display name was corrected in place (renamed to Trường Đại học Nghệ An per Quyết định 1653/QĐ-TTg, 26/12/2024), not a new addition. See `docs/catalog-expansion-report.md` for full detail.
+
 - **AIU** — Trường Đại học Quốc tế Á Châu
+- **BAFU** — Trường Đại học Nông - Lâm Bắc Giang
 - **BHU** — Trường Đại học Quốc tế Bắc Hà
 - **CCO** — Trường Đại học Sĩ quan Phòng hóa
 - **CCST** — Trường Cao đẳng Xây dựng và Công nghệ - Xã hội
@@ -257,6 +260,7 @@ Batch catalog-expansion (2026-09-04): +6 cơ sở đại học/học viện côn
 - **CVAUni** — Trường Đại học Chu Văn An
 - **DNC** — Trường Cao đẳng Đà Nẵng
 - **DQC** — Trường Cao đẳng Kỹ nghệ Dung Quất
+- **DNTU** — Trường Đại học Công nghệ Đồng Nai
 - **DVTC** — Trường Cao đẳng Du lịch Đà Nẵng
 - **EPU** — Trường Đại học Điện lực
 - **HCE-CĐ** — Trường Cao đẳng Kinh tế Thành phố Hồ Chí Minh
@@ -269,27 +273,35 @@ Batch catalog-expansion (2026-09-04): +6 cơ sở đại học/học viện côn
 - **HUArt** — Trường Đại học Nghệ thuật, Đại học Huế
 - **HUPH** — Trường Đại học Y tế Công cộng
 - **HVCT** — Trường Cao đẳng Kỹ nghệ II
+- **HVTA** — Học viện Tòa án
 - **KTXD-HCM** — Trường Cao đẳng Kiến trúc - Xây dựng Thành phố Hồ Chí Minh
 - **Lilama 2** — Trường Cao đẳng Công nghệ Quốc tế Lilama 2
 - **LTTC** — Trường Cao đẳng Lý Tự Trọng TP.HCM
+- **MTU** — Trường Đại học Xây dựng Miền Tây
 - **NCEPA** — Trường Kinh tế và Quản lý công - Đại học Kinh tế Quốc dân
 - **NCT-NEU** — Trường Công nghệ - Đại học Kinh tế Quốc dân
 - **NDUN** — Trường Đại học Điều dưỡng Nam Định
 - **NEU-CoB** — Trường Kinh doanh - Đại học Kinh tế Quốc dân
 - **NSPC** — Trường Cao đẳng Bách khoa Nam Sài Gòn
 - **QTU** — Trường Đại học Quang Trung
+- **QUI** — Trường Đại học Công nghiệp Quảng Ninh
 - **SCLS** — Trường Hóa và Khoa học sự sống - Đại học Bách khoa Hà Nội
+- **SDU** — Trường Đại học Sao Đỏ
 - **SEEE** — Trường Điện - Điện tử - Đại học Bách khoa Hà Nội
 - **SEM-HUST** — Trường Kinh tế - Đại học Bách khoa Hà Nội
 - **SME-HUST** — Trường Cơ khí - Đại học Bách khoa Hà Nội
 - **SMS-HUST** — Trường Vật liệu - Đại học Bách khoa Hà Nội
 - **SoICT** — Trường Công nghệ Thông tin và Truyền thông - Đại học Bách khoa Hà Nội
 - **TDC** — Trường Cao đẳng Công nghệ Thủ Đức
+- **TKS** — Trường Đại học Kiểm sát Hà Nội
 - **TNU-IS** — Khoa Quốc tế - Đại học Thái Nguyên
 - **TTC** — Trường Cao đẳng Thủ Thiêm Thành phố Hồ Chí Minh
+- **UNETI** — Trường Đại học Kinh tế - Kỹ thuật Công nghiệp
 - **VCTE** — Trường Cao đẳng nghề Kỹ thuật công nghệ
 - **VHNT-HCM** — Trường Cao đẳng Văn hóa Nghệ thuật TP.HCM
 - **Việt-Xô 1** — Trường Cao đẳng nghề Việt - Xô số 1
+- **VIU** — Trường Đại học Công nghiệp Việt-Hung
+- **VUI** — Trường Đại học Công nghiệp Việt Trì
 - **VUTM** — Học viện Y Dược học cổ truyền Việt Nam
 - **YDLU** — Trường Đại học Yersin Đà Lạt
 

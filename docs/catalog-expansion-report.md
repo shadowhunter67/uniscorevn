@@ -136,7 +136,7 @@ already needed to touch the KPI table for the count increase, the stale 111 was 
 already-true 134 in the same edit — this is a display correction of an existing fact, not new
 verification work, and does not change any registry data or capability.
 
-## Recommendation for next batch
+## Recommendation for next batch (superseded by Batch 2 below)
 
 - Verify the "unclear legal status / not yet verified" list above (13 leads) individually — this
   is the natural next increment, same tier (universities), before moving to pedagogical/vocational
@@ -148,3 +148,170 @@ verification work, and does not change any registry data or capability.
   the next batch touches that list, rather than repeatedly re-surfacing them as ambiguous leads.
 - Pedagogical colleges and vocational colleges (GDNN) tier was explicitly out of scope for this
   session per the brief and is a reasonable target for the next batch.
+
+---
+
+# Batch 2 (2026-09-04/05)
+
+This batch resolves the 13 needs-review leads from Batch 1, the two specific open questions
+(Bắc Ninh Sport University / `upes1`, religious/seminary scope), and cross-references the
+`college_pedagogy` tier against a nationwide sweep of provincial Cao đẳng Sư phạm colleges.
+
+## Summary
+
+| Metric | Before (Batch 1 end) | After Batch 2 |
+|---|---:|---:|
+| Total catalog entries (search/compare) | 273 | 286 |
+| Independent education institutions (KPI) | 261 | 274 |
+| Internal/non-KPI entries | 12 | 12 |
+| University-level entries | 210 | 220 |
+| Academies | 22 | 22 |
+| Pedagogical colleges | 3 | 6 |
+| Vocational colleges | 26 | 26 |
+| Catalog-only entries | 47 | 60 |
+| Admission data available (researched+) | 226 | 226 (unchanged) |
+| Eligibility-only | 22 | 22 (unchanged) |
+| Partial calculator | 3 | 3 (unchanged) |
+| **Verified calculator** | **134** | **134 (unchanged, as required)** |
+
+New catalog-only institutions added this batch: **13** (10 from the 13 leads + 3 pedagogical
+colleges). Vocational colleges (GDNN) tier was not attempted this batch — see recommendation below.
+
+## Part A — Resolution of the 13 needs-review leads
+
+Each lead was checked for (a) a live, institution-controlled `.edu.vn` domain via web search/fetch,
+(b) full-text grep across both repos for name/domain collisions, (c) any known
+merger/rename/dissolution event that would make it not-independent.
+
+### Added (10)
+
+| ID | Institution | Official website | Notes |
+|---|---|---|---|
+| `uneti` | Trường Đại học Kinh tế - Kỹ thuật Công nghiệp | https://uneti.edu.vn/ | Public, Bộ Công Thương, Hà Nội (+ Ninh Bình campus) |
+| `vui` | Trường Đại học Công nghiệp Việt Trì | https://vui.edu.vn/ | Public, Bộ Công Thương, Phú Thọ |
+| `saodo` | Trường Đại học Sao Đỏ | http://saodo.edu.vn/ | Public, Bộ Công Thương, Hải Dương |
+| `qui` | Trường Đại học Công nghiệp Quảng Ninh | https://qui.edu.vn/ | Public, Bộ Công Thương, Quảng Ninh — distinct from `qnu` (Quy Nhơn University); already flagged as a distinct entity in an earlier `qnu` research note |
+| `viu` | Trường Đại học Công nghiệp Việt-Hung | https://viu.edu.vn/ | Public, Hà Nội |
+| `mtu` | Trường Đại học Xây dựng Miền Tây | https://mtu.edu.vn/ | Public, Vĩnh Long — distinct from `muce` (Trường Đại học Xây dựng Miền Trung, Phú Yên) already cataloged |
+| `bafu` | Trường Đại học Nông - Lâm Bắc Giang | https://bafu.edu.vn/ | Public, Bắc Giang |
+| `hvta` | Học viện Tòa án | https://hocvientoaan.edu.vn/ | Public, trực thuộc TAND Tối cao, Hà Nội |
+| `tks` | Trường Đại học Kiểm sát Hà Nội | https://tks.edu.vn/ | Public, trực thuộc VKSND Tối cao, Hà Nội |
+| `dntu` | Trường Đại học Công nghệ Đồng Nai | https://dntu.edu.vn/ | Private, Đồng Nai — distinct from `dnu`/`dnpu.edu.vn` (Trường Đại học Đồng Nai, public, verified calculator) |
+
+### Declined (3)
+
+| Institution | Reason |
+|---|---|
+| Trường Đại học Lao động - Xã hội | Duplicate — already present as `ulsa` (`finalCatalog.ts`), researched status. No action. |
+| Trường Đại học Tài chính - Quản trị kinh doanh (UFBA) | **Merged/subsidiary, correctly excluded.** Dissolved into "Phân hiệu Học viện Tài chính tại tỉnh Hưng Yên" — a branch campus of the already-cataloged `aof` (Học viện Tài chính) — per Quyết định 691/QĐ-TTg (16/4/2026). Confirmed independently: `ufba.edu.vn`'s live TLS certificate now covers `*.hvtc.edu.vn` (Học viện Tài chính's own domain), i.e. UFBA's web infrastructure has literally been absorbed into AOF's. Not added as independent. |
+| Trường Đại học Kinh tế Nghệ An | **Already present under a different display name**, not a new gap. Same domain (`naue.edu.vn`) as the existing `naue` entry (`finalCatalog.ts`). The institution itself renamed to "Trường Đại học Nghệ An" per Quyết định 1653/QĐ-TTg (26/12/2024), which also merged in the former Nghệ An Pedagogical College. Action taken: corrected the `name` field on the existing `naue` entry to `"Trường Đại học Nghệ An (trước đây là Trường Đại học Kinh tế Nghệ An)"` — id and shortName (`NAUE`) left unchanged for backward compatibility. This is a factual correction to an existing entry, not a new addition, and does not touch any capability. |
+
+### Bắc Ninh Sport University / `upes1` (open question, resolved)
+
+Confirmed identical: `upes1` in the registry is `Trường Đại học Thể dục Thể thao Bắc Ninh`, which is
+the exact institution the English Wikipedia lead calls "Bắc Ninh Sport University" — same legal
+entity, just a different display-language name. No duplicate risk, no action needed.
+
+### Religious/seminary institutions (open question, scope decision made)
+
+**Decision: out of scope for the UniScoreVN catalog, at least for now — documented explicitly rather
+than left as a repeatedly-resurfaced ambiguous lead.**
+
+Rationale: `README.md`'s own scope statement ("UniScoreVN xây dựng danh mục các cơ sở tuyển sinh đại
+học và cao đẳng tại Việt Nam") does not explicitly carve out or explicitly include religious
+institutions — there is no existing precedent in the registry either way. Vietnamese Buddhist
+academies (Học viện Phật giáo Việt Nam, several regional campuses) and Catholic/Protestant
+seminaries are degree-issuing under religious-authority recognition, but their admission process is
+fundamentally different from every other entry in this catalog: candidates are nominated/endorsed by
+their religious order (Giáo hội Phật giáo Việt Nam, a diocese, etc.) rather than applying through the
+standard THPT-exam/transcript/national-aptitude-test pathways this app's `ApplicantProfile` and
+comparison engine are built around. Since UniScoreVN's core value proposition (score-based
+eligibility/calculator comparison) categorically cannot apply to these institutions even in a
+catalog-only sense that would ever graduate to eligibility/calculator support, and the project has no
+existing framework or precedent for modeling admission-by-religious-nomination, the most conservative
+and honest call is to leave them out entirely rather than add them as catalog-only entries that could
+never legitimately progress. This is a scope decision, not a data gap — do not re-flag these as
+"needs review" in future batches unless the project's admission-modeling scope is deliberately
+expanded to cover non-score-based nomination processes.
+
+## Part B — Pedagogical colleges (`college_pedagogy`) tier
+
+The existing `college_pedagogy` tier only covered the 3 "Trường Cao đẳng Sư phạm Trung ương" (CĐSPTW)
+campuses (Hà Nội/`nce`, Nha Trang/`ncspnt`, TP.HCM/`ncehcm`) — a single national institution's 3
+campuses, not the wider population of provincial Cao đẳng Sư phạm across Vietnam. This batch searched
+for provincial CĐSP schools to cross-reference against this tier.
+
+**Key finding: most provincial CĐSP have already been merged/dissolved**, consistent with a
+nationwide teacher-training-system restructuring reported by multiple sources in 2025/2026
+("Đề xuất sáp nhập hầu hết cao đẳng sư phạm vào các trường đại học"). Two mergers were confirmed
+directly during this batch's research (and correctly NOT added):
+
+- **Trường Cao đẳng Sư phạm Điện Biên** — merged (along with Trường Cao đẳng Y tế Điện Biên) into
+  **Phân hiệu Đại học Thái Nguyên tại tỉnh Điện Biên** (a branch of Đại học Thái Nguyên, `tnu` already
+  cataloged). Confirmed via a live 301 redirect from `cdspdienbien.edu.vn` to `dienbien.tnu.edu.vn`
+  plus corroborating press coverage (tnu.edu.vn, giaoducthoidai.vn, Đảng bộ tỉnh Điện Biên).
+- **Trường Cao đẳng Sư phạm Lạng Sơn** — merged into the multi-disciplinary **Trường Cao đẳng Lạng
+  Sơn** (`lce.edu.vn`); no longer a standalone pedagogical college.
+
+### Added (3, catalog-only, `entityLevel: 'college_pedagogy'`)
+
+| ID | Institution | Official website | Verification |
+|---|---|---|---|
+| `cdspkg` | Trường Cao đẳng Sư phạm Kiên Giang | https://www.cdspkg.edu.vn/ | Live official domain with a dedicated, dated 2026 admission notice ("Thông báo tuyển sinh cao đẳng hệ chính quy năm 2026") — confirmed still independently operating, not a duplicate of the already-cataloged `vnkgu` (Trường Đại học Kiên Giang, a separate university). |
+| `cdsptb` | Trường Cao đẳng Sư phạm Thái Bình | http://cdsptb.edu.vn/ | Live official domain; independent press coverage of its own 2026 organizational activities confirms it has not been merged (Thái Bình province itself was administratively merged into Hưng Yên in 2025, but the school retains its own identity/domain). |
+| `cdspbrvt` | Trường Cao đẳng Sư phạm Bà Rịa - Vũng Tàu | https://www.cdspbrvt.edu.vn/ | Live official domain (found only after a follow-up domain-specific search — most search results surfaced only its Facebook page, which per this project's source-priority rule is never used as the primary identity source). |
+
+### Not exhaustively covered (documented gap, not silently dropped)
+
+The full authoritative list of accredited "cơ sở giáo dục đại học và cao đẳng sư phạm" is published
+by Bộ GD&ĐT's Cục Quản lý chất lượng (VQA) at
+https://vqa.moet.gov.vn/vi/thong-bao-quan-ly-bao-dam/thong-bao/danh-sach-cac-co-so-giao-duc-chuong-trinh-dao-tao-giao-duc-dai-hoc-va-cao-dang-su-pham-duoc-cong-nhan-dat-tieu-chuan-chat-luong-giao-duc-cap-nhat-den-ngay-31-7-2026-93.html
+(updated 31/7/2026), but the actual list is inside a `.rar` attachment not retrievable via the
+WebFetch tool available in this session. Without that authoritative source, this batch relied on
+targeted web searches for individually-named provincial CĐSP (a non-exhaustive approach), verifying
+each candidate's live domain and merger status one at a time rather than guessing at a full list.
+Given the high merger rate observed (2 of the first 3 non-CĐSPTW candidates checked had already been
+dissolved), a full sweep against the VQA list is recommended as a dedicated next-batch task rather
+than continuing ad hoc searches, to avoid both missing genuinely-independent colleges and wasting
+research budget re-discovering already-merged ones one at a time.
+
+## Part C — Vocational colleges (GDNN) tier
+
+**Not attempted this batch** — deferred to batch 3 per the task brief's explicit "optional, only if
+time permits" framing. The `vocational_college` tier already has 26 entries sourced from Quyết định
+1723/QĐ-TTg (public colleges under Bộ GD&ĐT) plus the Đà Nẵng and TP.HCM GDNN directories (see
+`collegeCatalogSources` in the private repo / README's "Phạm vi và độ phủ" section). A future batch
+should re-pull those same sources (they may have been updated since the original research pass) and
+also consider other provincial GDNN management portals the README does not yet cite, applying the
+same live-domain-verification and merger-check discipline used in this batch.
+
+## Test/build status (Batch 2)
+
+- `npm run validate` (private): OK, both sub-batches.
+- `npm run export:runtime` (private): wrote all 4 generated artifacts for each sub-batch.
+- `tsc --noEmit`: clean.
+- `npm run test`: 355/355 test files, 2707/2707 tests passing after each sub-batch (count-drift
+  assertions updated: `src/schools/index.test.ts`, `src/data/institutionCoverage.test.ts`,
+  `src/components/landingCatalog.test.ts`, `src/compare/evaluateApplicantAcrossSchools.test.ts`, plus
+  `docs/school-status.md`'s anti-drift bullet list). No verified/partial/eligibility/
+  admission-data-available count was touched.
+- `npm run lint`: clean.
+- `npm run build`: succeeds (same pre-existing bundle-size warning as Batch 1, unrelated).
+- `npm run audit:data`: 0 catalog audit errors, 0 catalog audit warnings; confirms final counts
+  (286 catalog entries / 274 independent institutions / 134 verified calculators).
+- `npm run validate:generated` / `npm run stats:coverage` / `npm run coverage:chart`: regenerated;
+  README KPI table and `docs/coverage-chart.svg` updated to match.
+
+## Recommendation for next batch (Batch 3)
+
+1. **Vocational colleges (GDNN) tier** — re-pull Quyết định 1723/QĐ-TTg and the Đà Nẵng/TP.HCM GDNN
+   directories already cited in the README for any colleges not yet cataloged, plus look for other
+   provincial GDNN management portals; apply the same domain + merger-check discipline.
+2. **Full CĐSP sweep against the VQA accredited-institutions list** (see Part B) — the `.rar`
+   attachment needs a tool that can download and extract it (or manual retrieval), since WebFetch
+   cannot reach its contents; this would let a future batch confirm the complete, current picture
+   instead of the ad hoc per-candidate searches used here.
+3. The "assorted small/obscure private universities" list flagged in Batch 1 (Bac Ha International
+   University, Intracom University, Ha Hoa Tien University, Thanh Dong University, Van Xuan
+   University of Technology, etc.) is still unverified and was not part of this batch's 13-lead
+   scope — worth a dedicated pass.
