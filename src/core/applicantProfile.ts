@@ -1,4 +1,5 @@
 import type { SubjectId } from './subjects';
+import type { TranscriptBySemester } from './transcriptSemesters';
 import type { VactProfile } from './vactProfile';
 
 /**
@@ -17,9 +18,17 @@ export interface ApplicantProfile {
   };
 
   transcript?: {
+    /** TB CẢ NĂM theo từng lớp (Thông tư 22/2021, thường = (TB HK1 + 2×TB HK2)/3). Đây là đường đi
+     * CHÍNH của học bạ và là field duy nhất mọi adapter cũ đọc — KHÔNG đổi ý nghĩa/tên. */
     grade10?: Partial<Record<SubjectId, number>>;
     grade11?: Partial<Record<SubjectId, number>>;
     grade12?: Partial<Record<SubjectId, number>>;
+    /** OPT-IN, additive (batch "6 học kỳ"): TB TỪNG HỌC KỲ (6 học kỳ lớp 10/11/12). Chỉ dùng cho các
+     * trường công bố công thức "trung bình cộng của 06 học kỳ" (VLU/HUTECH/HCMULAW) — KHÔNG suy được
+     * từ `grade10`/`grade11`/`grade12` và ngược lại, nên 2 nhóm field tồn tại song song, độc lập.
+     * Hồ sơ cũ không có field này; consumer phải coi "vắng mặt" là thiếu input, không fallback sang
+     * TB năm. Xem `core/transcriptSemesters.ts`. */
+    bySemester?: TranscriptBySemester;
   };
 
   exams?: {
