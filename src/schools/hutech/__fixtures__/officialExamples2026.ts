@@ -82,6 +82,124 @@ export const hutechThptGoldenCases: GoldenAdmissionCase<
   },
 ];
 
+/** 6 điểm học kỳ của MỘT môn, thứ tự `TRANSCRIPT_SEMESTER_KEYS` (HK1/HK2 lớp 10 → HK1/HK2 lớp 12). */
+export interface HutechHocbaSemesterInput {
+  subject1Semesters: [number, number, number, number, number, number];
+  subject2Semesters: [number, number, number, number, number, number];
+  subject3Semesters: [number, number, number, number, number, number];
+  priorityRegion?: string;
+  priorityCategory?: string;
+  group: HutechThresholdGroup;
+}
+
+/**
+ * Xét học bạ THPT (6 học kỳ) — Tier C, cùng lý do như xét THPT/ĐGNL ở trên: nguồn chính thức có
+ * công thức ("TB 3 môn theo tổ hợp của 6 học kỳ") + bảng ngưỡng theo nhóm ngành nhưng KHÔNG có
+ * worked example, nên `expected` tính tay trong `derivation`.
+ */
+export const hutechHocbaGoldenCases: GoldenAdmissionCase<HutechHocbaSemesterInput, { raw30: number; finalScore: number; eligible: boolean }>[] = [
+  {
+    id: 'hutech-2026-hocba-standard-normal',
+    schoolId: 'hutech',
+    methodId: 'hutech-hocba-2026',
+    year: 2026,
+    tier: 'C',
+    sourceId: 'hutech-quality-threshold-2026',
+    sourceNote: 'Ngưỡng "Phương thức 2: Xét tuyển học bạ THPT (6 học kỳ) — Các ngành còn lại: 18 điểm"; điểm học lực = tổng TB 6 học kỳ của 3 môn.',
+    derivation: `
+      môn 1: (7+8+7+8+7+8)/6 = 45/6 = 7.50
+      môn 2: (6+6+7+7+8+8)/6 = 42/6 = 7.00
+      môn 3: (9+9+9+9+9+9)/6 = 54/6 = 9.00
+      raw30 = 7.50 + 7.00 + 9.00 = 23.50 (>=18 → eligible, nhóm standard)
+      không khai KV/ĐT → standardPriority30 = 0 → effectivePriority30 = 0
+      finalScore = round(min(30, 23.50+0)) = 23.50
+    `,
+    input: {
+      subject1Semesters: [7, 8, 7, 8, 7, 8],
+      subject2Semesters: [6, 6, 7, 7, 8, 8],
+      subject3Semesters: [9, 9, 9, 9, 9, 9],
+      group: 'standard',
+    },
+    expected: { raw30: 23.5, finalScore: 23.5, eligible: true },
+  },
+  {
+    id: 'hutech-2026-hocba-medicine-boundary',
+    schoolId: 'hutech',
+    methodId: 'hutech-hocba-2026',
+    year: 2026,
+    tier: 'C',
+    sourceId: 'hutech-quality-threshold-2026',
+    sourceNote: 'Ngưỡng học bạ nhóm "Y khoa" = 23/30 — case này ĐÚNG bằng ngưỡng.',
+    derivation: `
+      môn 1: (8+8+8+8+8+8)/6 = 48/6 = 8.00
+      môn 2: (7+7+7+7+7+7)/6 = 42/6 = 7.00
+      môn 3: (8+8+8+8+8+8)/6 = 48/6 = 8.00
+      raw30 = 8.00 + 7.00 + 8.00 = 23.00 (== 23 → eligible, boundary >= chứ không phải >)
+      finalScore = round(min(30, 23.00+0)) = 23.00
+    `,
+    boundaryNote: 'Ngưỡng học bạ Y khoa đúng bằng điểm — chứng minh phép so sánh dùng >=.',
+    input: {
+      subject1Semesters: [8, 8, 8, 8, 8, 8],
+      subject2Semesters: [7, 7, 7, 7, 7, 7],
+      subject3Semesters: [8, 8, 8, 8, 8, 8],
+      group: 'medicine',
+    },
+    expected: { raw30: 23.0, finalScore: 23.0, eligible: true },
+  },
+  {
+    id: 'hutech-2026-hocba-semester-vs-yearly-divergence',
+    schoolId: 'hutech',
+    methodId: 'hutech-hocba-2026',
+    year: 2026,
+    tier: 'C',
+    sourceId: 'hutech-admission-plan-2026',
+    sourceNote:
+      'Case chứng minh vì sao phải lưu điểm THEO HỌC KỲ: cùng bộ điểm này, TB cả năm (Thông tư 22/2021, (HK1+2×HK2)/3) ra 21,00 nhưng công thức HUTECH (TB 6 học kỳ) ra 20,50.',
+    derivation: `
+      môn 1 (HK1/HK2 mỗi lớp = 6/9): TB 6 học kỳ = (6+9+6+9+6+9)/6 = 45/6 = 7.50
+        (đối chiếu: TB CẢ NĂM theo TT22 = (6 + 2×9)/3 = 24/3 = 8.00 mỗi năm → nếu dùng TB năm sẽ ra 8.00, LỆCH 0.50)
+      môn 2: (7+7+7+7+7+7)/6 = 7.00
+      môn 3: (6+6+6+6+6+6)/6 = 6.00
+      raw30 = 7.50 + 7.00 + 6.00 = 20.50 (>=18 → eligible, nhóm standard)
+      finalScore = round(min(30, 20.50+0)) = 20.50
+      (nếu sai lầm dùng TB năm: 8.00+7.00+6.00 = 21.00 — chênh 0.50 điểm)
+    `,
+    boundaryNote: 'Anchor cho quyết định thêm `transcript.bySemester`: TB năm KHÔNG thay được TB 6 học kỳ.',
+    input: {
+      subject1Semesters: [6, 9, 6, 9, 6, 9],
+      subject2Semesters: [7, 7, 7, 7, 7, 7],
+      subject3Semesters: [6, 6, 6, 6, 6, 6],
+      group: 'standard',
+    },
+    expected: { raw30: 20.5, finalScore: 20.5, eligible: true },
+  },
+  {
+    id: 'hutech-2026-hocba-priority-reduction-boundary',
+    schoolId: 'hutech',
+    methodId: 'hutech-hocba-2026',
+    year: 2026,
+    tier: 'C',
+    sourceId: 'hutech-admission-plan-2026',
+    sourceNote: 'Giảm điểm ưu tiên khi tổng >= 22,5/30 (bảng chuẩn quốc gia, cross-checked) — áp dụng cùng cách với phương thức xét THPT thang 30.',
+    derivation: `
+      cả 3 môn đều 9 ở mọi học kỳ → mỗi môn TB = 54/6 = 9.00
+      raw30 = 9.00×3 = 27.00 (>=18 → eligible, nhóm standard)
+      standardPriority30 = KV1 = 0.75
+      cappedTotal=27.00 >= 22.5 → GIẢM: effectivePriority30 = round(((30-27)/7.5)×0.75) = round(0.4×0.75) = 0.30
+      finalScore = round(min(30, 27.00+0.30)) = 27.30
+    `,
+    boundaryNote: 'Priority reduction threshold (22,5/30) vừa bị vượt.',
+    input: {
+      subject1Semesters: [9, 9, 9, 9, 9, 9],
+      subject2Semesters: [9, 9, 9, 9, 9, 9],
+      subject3Semesters: [9, 9, 9, 9, 9, 9],
+      priorityRegion: 'KV1',
+      group: 'standard',
+    },
+    expected: { raw30: 27.0, finalScore: 27.3, eligible: true },
+  },
+];
+
 export const hutechDgnlGoldenCases: GoldenAdmissionCase<
   { dgnlScore1200: number; priorityRegion?: string; priorityCategory?: string; group: HutechThresholdGroup },
   { finalScore: number; eligible: boolean }

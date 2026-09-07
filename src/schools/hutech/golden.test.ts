@@ -1,9 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { assertGoldenCaseProvenance } from '../../core/goldenAdmissionCase';
-import { calculateHutechThptRawScore, calculateHutechThptFinalScore, calculateHutechDgnlFinalScore } from './calculator';
-import { checkHutechThptThreshold, checkHutechDgnlThreshold } from './eligibility';
+import { sumCombinationAveragesAcrossSemesters, TRANSCRIPT_SEMESTER_KEYS, type TranscriptBySemester } from '../../core/transcriptSemesters';
+import { calculateHutechThptRawScore, calculateHutechThptFinalScore, calculateHutechDgnlFinalScore, calculateHutechHocbaFinalScore } from './calculator';
+import { checkHutechThptThreshold, checkHutechDgnlThreshold, checkHutechHocbaThreshold } from './eligibility';
 import { lookupHutechStandardPriority30, calculateHutechPriority30, calculateHutechPriority1200 } from './priority';
-import { hutechThptGoldenCases, hutechDgnlGoldenCases } from './__fixtures__/officialExamples2026';
+import { hutechThptGoldenCases, hutechDgnlGoldenCases, hutechHocbaGoldenCases } from './__fixtures__/officialExamples2026';
 
 /**
  * Golden/domain conformance — HUTECH 2026 exact calculators (xét THPT / xét ĐGNL), phạm vi ĐC=0
@@ -39,6 +40,44 @@ describe('HUTECH 2026 golden conformance — xét THPT (Tier C — sourceId hute
     const notReduced = hutechThptGoldenCases.find((c) => c.id === 'hutech-2026-thpt-standard-normal')!;
     expect(calculateHutechThptRawScore(reduced.input)).toBeGreaterThanOrEqual(22.5);
     expect(calculateHutechThptRawScore(notReduced.input)).toBeLessThan(22.5);
+  });
+});
+
+describe('HUTECH 2026 golden conformance — xét học bạ 6 học kỳ (Tier C)', () => {
+  assertGoldenCaseProvenance(hutechHocbaGoldenCases);
+
+  it.each(hutechHocbaGoldenCases)('$id', (goldenCase) => {
+    // Dựng `bySemester` thật từ 3×6 điểm của fixture rồi đi qua đúng helper core dùng trong
+    // production (`sumCombinationAveragesAcrossSemesters`), không tự cộng tay trong test.
+    const subjects = ['math', 'physics', 'english'] as const;
+    const semestersBySubject = [goldenCase.input.subject1Semesters, goldenCase.input.subject2Semesters, goldenCase.input.subject3Semesters];
+    const bySemester: TranscriptBySemester = {};
+    TRANSCRIPT_SEMESTER_KEYS.forEach((semesterKey, semesterIndex) => {
+      bySemester[semesterKey] = Object.fromEntries(subjects.map((subjectId, subjectIndex) => [subjectId, semestersBySubject[subjectIndex][semesterIndex]]));
+    });
+
+    const { total30 } = sumCombinationAveragesAcrossSemesters(bySemester, subjects);
+    expect(total30).toBe(goldenCase.expected.raw30);
+
+    const threshold = checkHutechHocbaThreshold(total30!, goldenCase.input.group);
+    expect(threshold.pass).toBe(goldenCase.expected.eligible);
+
+    const standardPriority30 = lookupHutechStandardPriority30(goldenCase.input.priorityRegion, goldenCase.input.priorityCategory);
+    const priority = calculateHutechPriority30({ academicScore30: total30!, standardPriority30 });
+    const finalScore = calculateHutechHocbaFinalScore({ raw30: total30!, priority30: priority.effectivePriority30 });
+
+    expect(finalScore).toBe(goldenCase.expected.finalScore);
+  });
+
+  it('TB 6 học kỳ KHÁC TB cả năm — case divergence chứng minh gap granularity là thật', () => {
+    const divergence = hutechHocbaGoldenCases.find((c) => c.id === 'hutech-2026-hocba-semester-vs-yearly-divergence')!;
+    const [s1, s2, s3, s4, s5, s6] = divergence.input.subject1Semesters;
+    const semesterAverage = (s1 + s2 + s3 + s4 + s5 + s6) / 6;
+    // TB cả năm theo Thông tư 22/2021 cho từng lớp: (HK1 + 2×HK2)/3.
+    const yearlyAverage = ((s1 + 2 * s2) / 3 + (s3 + 2 * s4) / 3 + (s5 + 2 * s6) / 3) / 3;
+    expect(semesterAverage).toBe(7.5);
+    expect(yearlyAverage).toBe(8);
+    expect(semesterAverage).not.toBe(yearlyAverage);
   });
 });
 

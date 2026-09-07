@@ -20,6 +20,15 @@ export function calculateHutechThptFinalScore(input: { raw30: number; priority30
   return round2(Math.min(30, input.raw30 + input.priority30));
 }
 
+/**
+ * Xét học bạ THPT (6 học kỳ) — Điểm học lực = TỔNG "TB 6 học kỳ" của 3 môn theo tổ hợp (thang 30).
+ * TB từng môn tính ở `core/transcriptSemesters.ts` (trung bình cộng đơn giản của đúng 6 học kỳ,
+ * KHÔNG phải TB cả năm theo Thông tư 22/2021 — 2 con số khác nhau, xem `knowledgeGaps.ts`).
+ */
+export function calculateHutechHocbaFinalScore(input: { raw30: number; priority30: number }): number {
+  return round2(Math.min(30, input.raw30 + input.priority30));
+}
+
 /** Điểm xét tuyển cuối (xét ĐGNL, thang 1200) = Tổng điểm ĐGNL + Điểm ưu tiên. */
 export function calculateHutechDgnlFinalScore(input: { dgnlScore1200: number; priority1200: number }): number {
   return round2(input.dgnlScore1200 + input.priority1200);

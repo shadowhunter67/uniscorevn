@@ -57,10 +57,10 @@ export function checkHutechVsatThreshold(vsatScore: number, group: HutechThresho
 }
 
 /** Xét học bạ THPT 6 học kỳ — "Y khoa: 23 điểm; Dược: 21 điểm; Điều dưỡng, Kỹ thuật xét nghiệm y
- * học: 19 điểm; Các ngành còn lại: 18 điểm" (04/7/2026). Xuất khẩu để test/document công thức
- * ngưỡng, nhưng `evaluate.ts` KHÔNG gọi hàm này cho kết quả `exact` (xem
- * `knowledgeGaps.ts:hutech-hocba-semester-granularity-gap` — dữ liệu hồ sơ dùng chung không đủ chi
- * tiết theo học kỳ để tính đúng "TB 3 môn của 6 học kỳ"). */
+ * học: 19 điểm; Các ngành còn lại: 18 điểm" (04/7/2026). `transcriptTotal30` = tổng "TB 6 học kỳ"
+ * của 3 môn theo tổ hợp (`core/transcriptSemesters.ts`), đúng phạm vi tên phương thức công bố
+ * ("Xét tuyển học bạ THPT (6 học kỳ)") — batch "6 học kỳ" đã wire hàm này vào `evaluate.ts` cho
+ * kết quả exact. */
 export function checkHutechHocbaThreshold(transcriptTotal30: number, group: HutechThresholdGroup): HutechEligibilityResult {
   const threshold = group === 'medicine' ? 23 : group === 'pharmacy' || group === 'pharmacy-law' ? 21 : group === 'nursing-lab' ? 19 : 18;
   return {
