@@ -3,8 +3,10 @@ import type { ApplicantProfile } from '../../core/applicantProfile';
 import type { CalculationStep } from '../../core/calculationStep';
 import type { SubjectId } from '../../core/subjects';
 import { SUBJECT_LABELS } from '../../core/subjects';
+import { sumCombinationAveragesAcrossSemesters, TRANSCRIPT_SEMESTER_LABELS } from '../../core/transcriptSemesters';
 import { vluAdmissionMethods } from './methods';
 import { vluKnowledgeGaps } from './knowledgeGaps';
+import { vluTranscriptFormulaEvidence } from './evidence';
 import {
   checkVluThptExamThreshold,
   checkVluTranscriptOrCombinedEligibility,
@@ -93,9 +95,18 @@ export interface VluTranscriptEvaluationContext {
   graduationScore10?: number;
 }
 
-/** Phương thức 2 (học bạ, mã dùng chung): Xét kết quả học tập cấp THPT. Method 3 (kết hợp) dùng
+/**
+ * Phương thức 2 (học bạ, mã dùng chung): Xét kết quả học tập cấp THPT. Method 3 (kết hợp) dùng
  * chung hàm này ở phần điều kiện bổ sung (giống nhau theo nguồn — chỉ khác nguồn điểm 80% còn
- * lại chưa quy đổi được, xem `vlu-combined-method-conversion-table-unpublished`). */
+ * lại chưa quy đổi được, xem `vlu-combined-method-conversion-table-unpublished`).
+ *
+ * Batch "6 học kỳ": ĐIỂM HỌC BẠ theo tổ hợp nay tính được thật (TB 6 học kỳ × 3 môn, đọc từ
+ * `transcript.bySemester`) và hiện trong `explanation`. NHƯNG kết quả vẫn `confidence: 'partial'`,
+ * KHÔNG trả `score` — vì 2 gap KHÁC vẫn mở và đều score-affecting: danh mục ngành có "môn thi chính
+ * nhân hệ số 2" chưa công bố (`vlu-primary-subject-list-unpublished`) và bảng điểm ưu tiên/điểm cộng
+ * chưa tìm được (`vlu-priority-bonus-table-not-found`). Đưa ra một con số gọi là "điểm xét tuyển"
+ * khi chưa biết ngành nào nhân hệ số 2 sẽ là sai với đúng những ngành đó.
+ */
 function evaluateVluTranscriptFamilyAdmission(method: (typeof vluAdmissionMethods)[number], profile: ApplicantProfile, context: VluTranscriptEvaluationContext = {}): AdmissionEvaluation {
   const explanation: CalculationStep[] = [];
   const missingInputs: string[] = [];
@@ -108,6 +119,41 @@ function evaluateVluTranscriptFamilyAdmission(method: (typeof vluAdmissionMethod
     thptExamTotal30 = total30;
     if (missingSubjects.length > 0 && group !== 'standard') {
       missingInputs.push('Chưa đủ điểm 3 môn thi TN THPT để đối chiếu điều kiện thay thế (chỉ cần cho khối Sức khỏe/Luật).');
+    }
+  }
+
+  // Điểm học bạ theo công thức chính thức: TB 6 học kỳ của 3 môn tổ hợp (`transcript.bySemester`).
+  // KHÔNG lấy TB cả năm (`grade10/11/12`) thay thế — 2 cách tính ra số khác nhau.
+  if (context.subjectContext) {
+    const transcriptTotal = sumCombinationAveragesAcrossSemesters(profile.transcript?.bySemester, context.subjectContext.subjects);
+    if (transcriptTotal.total30 === undefined) {
+      missingInputs.push('Chưa đủ điểm học bạ TỪNG HỌC KỲ (6 học kỳ lớp 10/11/12) cho 3 môn tổ hợp — điểm trung bình cả năm không thay thế được.');
+      for (const { subjectId, missingSemesters } of transcriptTotal.missingBySubject) {
+        missingRequirements.push({
+          kind: 'profile-input',
+          code: `vlu-transcript-semester-${subjectId}`,
+          label: `Điểm học bạ môn ${SUBJECT_LABELS[subjectId]} còn thiếu ${missingSemesters.length}/6 học kỳ (${missingSemesters.map((key) => TRANSCRIPT_SEMESTER_LABELS[key]).join(', ')}).`,
+        });
+      }
+    } else {
+      for (const { subjectId, average } of transcriptTotal.subjectAverages ?? []) {
+        explanation.push({
+          id: `${method.id}-subject-average-${subjectId}`,
+          label: `TB 6 học kỳ môn ${SUBJECT_LABELS[subjectId]}`,
+          output: average,
+          scale: 10,
+          formula: '(HK1 lớp 10 + HK2 lớp 10 + HK1 lớp 11 + HK2 lớp 11 + HK1 lớp 12 + HK2 lớp 12) / 6',
+          evidence: vluTranscriptFormulaEvidence.evidence,
+        });
+      }
+      explanation.push({
+        id: `${method.id}-transcript-total`,
+        label: 'Điểm học bạ theo tổ hợp (tổng TB 6 học kỳ của 3 môn)',
+        output: transcriptTotal.total30,
+        scale: 30,
+        formula: vluTranscriptFormulaEvidence.value.description,
+        evidence: vluTranscriptFormulaEvidence.evidence,
+      });
     }
   }
 
@@ -138,7 +184,7 @@ function evaluateVluTranscriptFamilyAdmission(method: (typeof vluAdmissionMethod
     missingRules: (method.knowledgeGaps ?? vluKnowledgeGaps).map((gap) => gap.label),
     missingRequirements: [...missingRequirements, ...(method.knowledgeGaps ?? vluKnowledgeGaps).map((gap) => ({ kind: 'official-rule' as const, code: gap.id, label: gap.label }))],
     explanation,
-    evidence: [],
+    evidence: [...vluTranscriptFormulaEvidence.evidence],
   };
 }
 

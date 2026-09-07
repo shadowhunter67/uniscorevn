@@ -8,7 +8,6 @@ const thptExamGaps = [...gapById('vlu-primary-subject-list-unpublished'), ...gap
 const transcriptGaps = [
   ...gapById('vlu-primary-subject-list-unpublished'),
   ...gapById('vlu-priority-bonus-table-not-found'),
-  ...gapById('vlu-transcript-semester-granularity-gap'),
   ...gapById('vlu-program-catalog-not-imported'),
 ];
 
@@ -23,7 +22,11 @@ const combinedGaps = [...transcriptGaps, ...gapById('vlu-combined-method-convers
  * Cả 3 method đều `eligibility: true` (ngưỡng nhóm ngành đã verified từ 2 nguồn official-school
  * cross-check khớp nhau) nhưng `scoreConversion`/`bonus`/`priority`/`exactCalculator` đều `false`
  * — chặn bởi gap thật (danh mục môn thi chính chưa công bố, bảng ưu tiên/điểm cộng chưa tìm được,
- * và với PT2/PT3 thêm data-model gap về độ chi tiết học kỳ / bảng quy đổi kỳ thi kết hợp).
+ * và với PT3 thêm bảng quy đổi kỳ thi kết hợp).
+ *
+ * Batch "6 học kỳ": `vlu-transcript-semester-granularity-gap` ĐÃ ĐÓNG (xem `knowledgeGaps.ts`) —
+ * PT2/PT3 nay tính và hiện được ĐIỂM HỌC BẠ theo tổ hợp trong `explanation`, nhưng capability giữ
+ * nguyên `false` vì 2 gap score-affecting còn lại vẫn chặn điểm xét tuyển CUỐI.
  */
 export const vluAdmissionMethods: AdmissionMethodDescriptor[] = [
   {
