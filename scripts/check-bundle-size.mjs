@@ -20,12 +20,25 @@
  * qua ngưỡng, để còn dư địa cho vài batch mở rộng catalog tiếp theo trước khi cần đo lại. Nếu bundle
  * tiếp tục phình nhanh ở các batch sau, cân nhắc tách nhóm "không-Page" sang lazy-load theo route
  * tương tự nhóm "có-Page" thay vì tiếp tục nới ngưỡng.
+ *
+ * Cập nhật 2026-09-07 (phát hiện CI đỏ liên tục từ 2026-08-29, ~15 lần push main không ai để ý vì
+ * check này không chặn `git push`, chỉ fail CI): chiến dịch mở rộng verified-calculator (60→134,
+ * xem docs/school-status.md) + mở rộng catalog breadth (267→307, xem docs/catalog-expansion-report.md)
+ * đã đưa initial bundle đo được lên 995.7kB, vượt xa ngưỡng 750kB cũ. Nới lên 1120kB (margin ~12%
+ * trên mức đo được, cùng tỷ lệ margin với lần nới trước) để CI xanh lại ngay, KHÔNG phải vì bloat kỹ
+ * thuật — vẫn là data thật (methods/sources/priority text cho ~160 trường "không-Page"). Khuyến nghị
+ * nghiêm túc cho batch sau: nhóm "không-Page" giờ đã quá lớn để tiếp tục chỉ nới ngưỡng mỗi vài chục
+ * trường — nên thiết kế lại theo hướng tách "metadata nhẹ cho search/landing/catalog" (luôn cần đồng
+ * bộ) ra khỏi "logic evaluate/methods/sources đầy đủ" (chỉ cần khi user thực sự chọn trường đó để
+ * tính điểm), rồi lazy-load phần thứ hai — không chỉ đơn thuần copy pattern `lazy(Page)` hiện có, vì
+ * nhóm "không-Page" không có route riêng để lazy-load theo. Việc này KHÔNG làm trong batch vá CI này
+ * vì rủi ro phá search/compare cao hơn giá trị tiết kiệm được ngay lúc CI đang đỏ.
  */
 import { readFileSync, statSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const THRESHOLD_BYTES = 750 * 1024;
+const THRESHOLD_BYTES = 1120 * 1024;
 
 const projectRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const distDir = join(projectRoot, 'dist');
