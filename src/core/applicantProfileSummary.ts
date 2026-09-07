@@ -14,6 +14,14 @@ export interface ApplicantProfileSummary {
   transcriptSubjectCount: number;
   thptSubjects: ApplicantProfileSubjectSummary[];
   transcriptSubjects: ApplicantProfileSubjectSummary[];
+  /** Cờ theo từng mục — dùng cho UI progressive-disclosure (checklist "Đã nhập"/"Chưa có" theo
+   * từng section) mà không bắt UI tự inspect field nested. Thêm additive, không đổi field cũ. */
+  hasVact: boolean;
+  hasThpt: boolean;
+  hasTranscript: boolean;
+  hasPriority: boolean;
+  certificateCount: number;
+  hasCertificates: boolean;
 }
 
 export interface ApplicantProfileSubjectSummary {
@@ -54,6 +62,8 @@ export function summarizeApplicantProfile(profile: ApplicantProfile): ApplicantP
     },
   }));
 
+  const hasPriority = Boolean(profile.priority?.region || profile.priority?.category);
+  const certificateCount = countDefinedKeys(profile.certificates);
   const hasData = vactTotal !== undefined || thptSubjectCount > 0 || transcriptSubjectIds.size > 0;
 
   return {
@@ -63,5 +73,11 @@ export function summarizeApplicantProfile(profile: ApplicantProfile): ApplicantP
     transcriptSubjectCount: transcriptSubjectIds.size,
     thptSubjects,
     transcriptSubjects,
+    hasVact: vactTotal !== undefined,
+    hasThpt: thptSubjectCount > 0,
+    hasTranscript: transcriptSubjectIds.size > 0,
+    hasPriority,
+    certificateCount,
+    hasCertificates: certificateCount > 0,
   };
 }

@@ -7,6 +7,7 @@ import {
   getVisibleSchoolCountAfterReset,
   hasActiveLandingFilters,
   INITIAL_VISIBLE_SCHOOL_COUNT,
+  isEvaluableSchool,
   matchesLandingEntityFilter,
   sortSchoolsForLanding,
   type LandingFilters,
@@ -19,6 +20,7 @@ const defaultFilters: LandingFilters = {
   tierFilter: 'all',
   systemFilter: 'all',
   sortMode: 'useful',
+  onlyEvaluable: false,
 };
 
 function school(id: string, shortName: string, capabilities: SchoolModule['capabilities'], extra: Partial<SchoolModule> = {}): SchoolModule {
@@ -101,6 +103,15 @@ describe('landing catalog helpers', () => {
     expect(hasActiveLandingFilters({ ...defaultFilters, query: 'ueh' })).toBe(true);
     expect(hasActiveLandingFilters({ ...defaultFilters, sortMode: 'az' })).toBe(true);
     expect(hasActiveLandingFilters({ ...defaultFilters, systemFilter: 'hue' })).toBe(true);
+    expect(hasActiveLandingFilters({ ...defaultFilters, onlyEvaluable: true })).toBe(true);
+  });
+
+  it('onlyEvaluable keeps verified/partial/eligibility-only schools and drops researched/catalog-only', () => {
+    const all = Object.values(schoolRegistry);
+    const evaluableOnly = filterSchoolsForLanding(all, { ...defaultFilters, onlyEvaluable: true });
+    expect(evaluableOnly.length).toBeGreaterThan(0);
+    expect(evaluableOnly.length).toBeLessThan(all.length);
+    expect(evaluableOnly.every(isEvaluableSchool)).toBe(true);
   });
 
   it('systemFilter narrows the catalog to one university system', () => {

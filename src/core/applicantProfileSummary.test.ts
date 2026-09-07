@@ -11,7 +11,26 @@ describe('summarizeApplicantProfile', () => {
       transcriptSubjectCount: 0,
       thptSubjects: [],
       transcriptSubjects: [],
+      hasVact: false,
+      hasThpt: false,
+      hasTranscript: false,
+      hasPriority: false,
+      certificateCount: 0,
+      hasCertificates: false,
     });
+  });
+
+  it('cờ theo từng mục phản ánh đúng phần đã nhập', () => {
+    const summary = summarizeApplicantProfile({
+      priority: { region: 'KV2-NT' },
+      certificates: { ielts: 7 },
+    });
+    expect(summary.hasPriority).toBe(true);
+    expect(summary.hasCertificates).toBe(true);
+    expect(summary.certificateCount).toBe(1);
+    expect(summary.hasVact).toBe(false);
+    expect(summary.hasThpt).toBe(false);
+    expect(summary.hasTranscript).toBe(false);
   });
 
   it('có vactTotal → hasData true', () => {

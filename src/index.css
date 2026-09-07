@@ -1,16 +1,31 @@
 @import "tailwindcss";
 
+/*
+ * Design tokens — xem docs/design-system.md cho nguyên tắc đầy đủ (rõ > đẹp, chữ > icon,
+ * danh sách > card, list dùng divider/border thay vì shadow/radius lớn).
+ * --radius-card (20px) + --shadow-card GIỮ NGUYÊN vì 16 trang calculator "nặng" (HCMUT, UIT...)
+ * vẫn đang dùng — component MỚI (list/section) dùng --radius-sm/--radius-md + border, không dùng
+ * shadow-card, để tránh cảm giác "card nổi" kiểu AI dashboard.
+ */
 @theme {
   --color-bg: #f6f7f9;
   --color-surface: #ffffff;
   --color-surface-soft: #f1f4f8;
   --color-ink: #111827;
-  --color-muted: #667085;
+  --color-ink-soft: #374151;
+  --color-muted: #55606e;
+  --color-border: #d7dce3;
+  --color-border-strong: #b7bfc9;
   --color-primary: #183153;
-  --color-accent: #2f6bff;
+  /* Đổi từ #2f6bff — Lighthouse a11y audit phát hiện text-accent trên bg-accent/10 (pattern CTA
+   * dùng khắp app) chỉ đạt ~3.9:1, dưới ngưỡng WCAG AA (4.5:1). #1d4ed8 đạt ~5.9:1 trên cùng nền,
+   * vẫn rõ ràng là "xanh accent", không đổi brand identity. */
+  --color-accent: #1d4ed8;
   --color-success: #16805c;
   --color-warning: #b54708;
   --color-danger: #b42318;
+  --radius-sm: 6px;
+  --radius-md: 10px;
   --radius-card: 20px;
   --shadow-card: 0 1px 2px rgba(17, 24, 39, 0.04), 0 12px 24px -12px rgba(17, 24, 39, 0.12);
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -22,4 +37,44 @@ html {
 
 body {
   @apply bg-bg text-ink antialiased;
+}
+
+/* Chế độ dễ đọc (A-/A/A+) — xem src/core/textSize.ts. Scale font-size gốc: mọi utility Tailwind
+ * dùng rem nên toàn app scale theo, không cần sửa từng component. */
+html[data-text-size='sm'] {
+  font-size: 93.75%;
+}
+html[data-text-size='lg'] {
+  font-size: 118.75%;
+  --color-muted: #40484f;
+}
+
+/* Touch target tối thiểu cho control tương tác chính, lớn hơn nữa ở chế độ dễ đọc. */
+:root {
+  --ui-tap-min: 40px;
+}
+html[data-text-size='lg'] {
+  --ui-tap-min: 48px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 100;
+  transition: top 0.15s ease;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

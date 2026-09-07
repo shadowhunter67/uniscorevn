@@ -18,6 +18,21 @@ export interface LandingFilters {
   /** id cụm đại học (`universitySystems.ts`) hoặc 'all'. */
   systemFilter: OptionalLandingFilter<string>;
   sortMode: LandingSortMode;
+  /** Checkbox mặc định "Chỉ hiện trường tôi có thể đánh giá" — true → chỉ giữ trường có thể tính
+   * điểm/kiểm tra điều kiện (verified/partial/eligibility-only), ẩn "đã có thông tin"/"chưa có dữ
+   * liệu". Độc lập với `tierFilter` (bộ lọc nâng cao, chọn đúng 1 mức) — cả hai cùng áp dụng nếu
+   * người dùng bật cả hai. */
+  onlyEvaluable: boolean;
+}
+
+const EVALUABLE_STATUSES: ReadonlySet<InstitutionSupportStatus> = new Set([
+  'verified-calculator',
+  'partial-calculator',
+  'eligibility-only',
+]);
+
+export function isEvaluableSchool(school: SchoolModule): boolean {
+  return EVALUABLE_STATUSES.has(deriveInstitutionSupportStatus(school));
 }
 
 export const INITIAL_VISIBLE_SCHOOL_COUNT = 30;
@@ -81,7 +96,8 @@ export function filterSchoolsForLanding(schools: readonly SchoolModule[], filter
     .filter((school) => matchesLandingEntityFilter(school, filters.entityFilter))
     .filter((school) => filters.regionFilter === 'all' || school.region === filters.regionFilter)
     .filter((school) => filters.tierFilter === 'all' || deriveInstitutionSupportStatus(school) === filters.tierFilter)
-    .filter((school) => filters.systemFilter === 'all' || getUniversitySystemId(school.id) === filters.systemFilter);
+    .filter((school) => filters.systemFilter === 'all' || getUniversitySystemId(school.id) === filters.systemFilter)
+    .filter((school) => !filters.onlyEvaluable || isEvaluableSchool(school));
 }
 
 export function getVisibleSchoolCountAfterReset(totalResults: number): number {
@@ -95,7 +111,8 @@ export function hasActiveLandingFilters(filters: LandingFilters): boolean {
     filters.regionFilter !== 'all' ||
     filters.tierFilter !== 'all' ||
     filters.systemFilter !== 'all' ||
-    filters.sortMode !== 'useful'
+    filters.sortMode !== 'useful' ||
+    filters.onlyEvaluable
   );
 }
 

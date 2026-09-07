@@ -2,6 +2,9 @@ import { ArrowDown, ArrowUp, ExternalLink, Pencil, Trash2 } from 'lucide-react';
 import type { MissingRequirement } from '../../core/admissionEvaluation';
 import type { SchoolEvaluationSummary } from '../../compare/evaluateApplicantAcrossSchools';
 import { withMissingRequirementActions } from '../../compare/missingRequirementActions';
+import { assessCompetitiveness } from '../../evaluation/competitiveness/competitiveness';
+import { CompetitivenessRow } from '../CompetitivenessRow';
+import { CompetitivenessExplanation } from '../CompetitivenessExplanation';
 import { ComparisonStatusBadge } from './ComparisonStatusBadge';
 import type { ProgramOption } from './types';
 
@@ -44,6 +47,11 @@ export function ComparisonEntryCard({
 }) {
   const score = summary.evaluation.score;
   const requirements = getRequirements(summary);
+  const competitiveness = assessCompetitiveness({
+    evaluation: summary.evaluation,
+    comparisons: summary.cutoffComparisons ?? [],
+    currentYear: summary.evaluation.year,
+  });
 
   return (
     <article className="rounded-card border border-ink/10 bg-surface p-5 shadow-card">
@@ -126,6 +134,13 @@ export function ComparisonEntryCard({
                 ))}
               </div>
             )}
+          </div>
+        )}
+
+        {competitiveness.band !== 'insufficient-data' && (
+          <div>
+            <CompetitivenessRow assessment={competitiveness} />
+            <CompetitivenessExplanation assessment={competitiveness} />
           </div>
         )}
 

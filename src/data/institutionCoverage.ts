@@ -196,12 +196,26 @@ export function auditInstitutionCatalog(schools: readonly SchoolModule[] = Objec
   return issues;
 }
 
+/**
+ * Nhãn hiển thị cho người dùng cuối — dùng ngôn ngữ thường, tránh từ kỹ thuật nội bộ
+ * ("calculator", "eligibility-only"...). Key enum (`InstitutionSupportStatus`) vẫn giữ tên kỹ
+ * thuật cho code/docs; chỉ phần string hiển thị đổi. Xem `SUPPORT_STATUS_HELP` cho câu giải thích
+ * ngắn dùng trong glossary/tooltip.
+ */
 export const SUPPORT_STATUS_LABELS: Record<InstitutionSupportStatus, string> = {
-  'catalog-only': 'Đang thu thập dữ liệu',
-  researched: 'Đang bổ sung dữ liệu',
-  'eligibility-only': 'Chỉ kiểm tra điều kiện',
+  'catalog-only': 'Chưa có dữ liệu tuyển sinh',
+  researched: 'Đã có thông tin tuyển sinh',
+  'eligibility-only': 'Kiểm tra được điều kiện',
   'partial-calculator': 'Tính được một phần',
-  'verified-calculator': 'Calculator xác minh',
+  'verified-calculator': 'Tính được điểm xét tuyển',
+};
+
+export const SUPPORT_STATUS_HELP: Record<InstitutionSupportStatus, string> = {
+  'catalog-only': 'Trường có trong danh mục nhưng UniScoreVN chưa tìm được nguồn tuyển sinh chính thức nào.',
+  researched: 'Đã có thông tin tuyển sinh chính thức, nhưng chưa đủ để tính điểm hay kết luận điều kiện.',
+  'eligibility-only': 'Có ngưỡng điểm sàn/điều kiện chính thức, chưa tính được điểm xét tuyển đầy đủ.',
+  'partial-calculator': 'Có công thức thật nhưng chưa phủ hết mọi phương thức xét tuyển của trường.',
+  'verified-calculator': 'Công thức, ngưỡng, điểm cộng và điểm ưu tiên đều có nguồn chính thức trong phạm vi đã công bố.',
 };
 
 export function getEntityLevelLabel(school: SchoolModule): string {

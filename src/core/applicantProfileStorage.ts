@@ -28,9 +28,11 @@ import { SUBJECT_LABELS, type SubjectId } from './subjects';
  */
 
 const VALID_SUBJECT_IDS: ReadonlySet<string> = new Set(Object.keys(SUBJECT_LABELS));
-const THPT_SCORE_RANGE = { min: 0, max: 10 } as const;
+/** export để `core/profileValidationMessages.ts` dùng lại đúng range này cho thông báo lỗi form —
+ * không khai lại range trùng ở nơi khác (source-of-truth duy nhất). */
+export const THPT_SCORE_RANGE = { min: 0, max: 10 } as const;
 const GRADUATION_YEAR_RANGE = { min: 1950, max: 2100 } as const;
-const CERTIFICATE_RANGES = {
+export const CERTIFICATE_RANGES = {
   ielts: { min: 0, max: 9 },
   toeflIbt: { min: 0, max: 120 },
   toeic: { min: 0, max: 990 },

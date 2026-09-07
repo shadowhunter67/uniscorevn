@@ -1,6 +1,7 @@
 import type { EvidenceCriticality, RuleLifecycle } from './freshness';
 import type { SourceType } from './admissionHistory';
 import type { VerificationLevel } from './trust';
+import type { EvidenceConfidence } from './evidenceConfidence';
 
 /**
  * Bằng chứng cho MỘT hằng số/rule cụ thể trong công thức (khác `<school>/sources.ts` vốn liệt
@@ -28,6 +29,10 @@ export interface RuleEvidence {
   lastReviewedAt?: string;
   /** Ghi chú về hạn chế hoặc assumption. */
   note?: string;
+  /** Optional — không set thì `deriveEvidenceConfidence()` tự suy từ `sourceType`/`verification`.
+   * Chỉ cần khai tay khi giá trị suy ra sai (vd đây là ảnh/PDF scan, không phải text đọc trực
+   * tiếp) — xem `core/evidenceConfidence.ts`. */
+  evidenceConfidence?: EvidenceConfidence;
 }
 
 /** Wrapper gắn evidence vào một giá trị cụ thể — dùng ở registry riêng (vd `schools/<id>/evidence.ts`),

@@ -12,6 +12,10 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+
+# Generated at prebuild (scripts/generate-sitemap.ts) — regenerated every build, không commit để
+# tránh drift với schoolRegistry/taxonomy thật.
+public/sitemap.xml
 *.local
 .env
 .env.*

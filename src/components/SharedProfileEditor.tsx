@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import type { ApplicantProfile } from '../core/applicantProfile';
 import type { ApplicantProfileContextValue } from '../core/applicantProfileContextCore';
 import type { SubjectId } from '../core/subjects';
 import { COMMON_SUBJECT_COMBINATIONS, SUBJECT_LABELS } from '../core/subjects';
+import { summarizeApplicantProfile } from '../core/applicantProfileSummary';
+import { validateCertificateScore, validateThptScore, validateTranscriptScore, validateVactTotal } from '../core/profileValidationMessages';
 
 const ALL_SUBJECT_IDS = Object.keys(SUBJECT_LABELS) as SubjectId[];
 import { ScoreInput } from './ScoreInput';
@@ -55,12 +57,16 @@ function BufferedScoreInput({
   hideLabel,
   committedValue,
   onCommit,
+  validate,
 }: {
   id: string;
   label: string;
   hideLabel?: boolean;
   committedValue: number | undefined;
   onCommit: (raw: string) => void;
+  /** Trả về thông báo lỗi bằng tiếng người (`core/profileValidationMessages.ts`) hoặc `null` nếu
+   * hợp lệ/chưa nhập — bỏ trống thì ô này không hiện lỗi (dùng cho field không có range cố định). */
+  validate?: (raw: string) => string | null;
 }) {
   const [raw, setRaw] = useState(() => committedValue?.toString() ?? '');
 
@@ -74,7 +80,7 @@ function BufferedScoreInput({
       label={label}
       hideLabel={hideLabel}
       value={raw}
-      error={null}
+      error={validate?.(raw) ?? null}
       onChange={setRaw}
       onBlur={() => onCommit(raw)}
       compact
@@ -82,18 +88,41 @@ function BufferedScoreInput({
   );
 }
 
-/** Nút "x" nhỏ để bỏ 1 môn đã thêm — dùng chung cho cả Điểm THPT lẫn Học bạ. */
+/** Nút xóa 1 môn đã thêm — CHỮ THẬT ("Xóa {môn}"), không dùng dấu "×" đơn độc (dễ bấm nhầm, khó
+ * đọc với người lớn tuổi/mắt kém). Dùng chung cho cả Điểm THPT lẫn Học bạ. */
 function RemoveSubjectButton({ label, onRemove }: { label: string; onRemove: () => void }) {
   return (
     <button
       type="button"
       onClick={onRemove}
-      aria-label={`Xóa môn ${label}`}
-      title={`Xóa môn ${label}`}
-      className="shrink-0 rounded p-0.5 text-muted transition hover:bg-danger/10 hover:text-danger"
+      className="shrink-0 rounded-sm text-sm font-medium text-muted underline-offset-2 transition hover:text-danger hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
     >
-      ✕
+      Xóa {label}
     </button>
+  );
+}
+
+/** 1 mục trong checklist hồ sơ — gấp lại mặc định trừ khi đã có dữ liệu, dòng tóm tắt "Đã nhập"/
+ * "Chưa có" đứng ngay dưới tiêu đề (progressive disclosure, không hiện hết mọi mục 1 lúc). */
+function ProfileChecklistSection({
+  title,
+  statusLabel,
+  hasData,
+  children,
+}: {
+  title: string;
+  statusLabel: string;
+  hasData: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <details open={hasData} className="rounded-md border border-border px-3 py-2.5">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-2 text-sm">
+        <span className="font-medium text-ink">{title}</span>
+        <span className={hasData ? 'text-ink-soft' : 'text-muted'}>{hasData ? `✓ ${statusLabel}` : statusLabel}</span>
+      </summary>
+      <div className="mt-3">{children}</div>
+    </details>
   );
 }
 
@@ -105,9 +134,13 @@ function RemoveSubjectButton({ label, onRemove }: { label: string; onRemove: () 
 /** Môn thêm thủ công nhưng chưa gõ điểm — vẫn phải hiện ô nhập dù `ApplicantProfile` chưa có giá
  * trị (missing ≠ 0, nên không thể "thêm môn" bằng cách ghi placeholder 0 vào profile). */
 function AddSubjectPicker({
+  id,
+  label,
   availableIds,
   onAdd,
 }: {
+  id: string;
+  label: string;
   availableIds: SubjectId[];
   onAdd: (subjectId: SubjectId) => void;
 }) {
@@ -115,7 +148,11 @@ function AddSubjectPicker({
   if (availableIds.length === 0) return null;
   return (
     <div className="mt-1.5 flex items-center gap-2">
+      <label htmlFor={id} className="sr-only">
+        {label}
+      </label>
       <select
+        id={id}
         value={selected}
         onChange={(e) => setSelected(e.target.value)}
         className="h-9 rounded-lg border border-ink/10 bg-surface px-2.5 text-xs text-ink outline-none focus:border-accent focus:ring-2 focus:ring-accent/25"
@@ -233,10 +270,16 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
     }
   }
 
+  const summary = summarizeApplicantProfile(profile);
+
   return (
-    <div className="mt-2 space-y-4 text-sm">
-      <div>
-        <p className="text-xs font-medium text-ink">ĐGNL (tổng điểm)</p>
+    <div className="mt-2 space-y-3 text-sm">
+      <ProfileChecklistSection
+        title="Đánh giá năng lực (ĐGNL)"
+        statusLabel={summary.hasVact ? `${summary.vactTotal}` : 'Chưa có'}
+        hasData={summary.hasVact}
+      >
+        <p className="text-sm font-medium text-ink">ĐGNL (tổng điểm)</p>
         <div className="mt-1.5 max-w-[180px]">
           <BufferedScoreInput
             id="shared-profile-vact-total"
@@ -244,42 +287,47 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
             hideLabel
             committedValue={profile.exams?.vact?.total}
             onCommit={commitVactTotal}
+            validate={validateVactTotal}
           />
         </div>
         {componentsClearedNotice && (
-          <p className="mt-1 text-xs text-warning">
+          <p className="mt-1 text-sm text-warning">
             4 điểm thành phần ĐGNL (nếu đã nhập ở HCMUT) đã bị xóa vì không còn khớp tổng mới — nhập lại ở trang HCMUT nếu cần.
           </p>
         )}
-      </div>
+      </ProfileChecklistSection>
 
-      <div>
-        <p className="text-xs font-medium text-ink">Tổ hợp môn</p>
-        <select
-          id="shared-profile-preferred-combination"
-          value={profile.preferredCombinationId ?? ''}
-          onChange={(e) => commitPreferredCombination(e.target.value)}
-          className="mt-1.5 block h-10 rounded-lg border border-ink/10 bg-surface px-2.5 text-sm text-ink outline-none focus:border-accent focus:ring-2 focus:ring-accent/25"
-        >
-          <option value="">Không chọn</option>
-          {COMMON_SUBJECT_COMBINATIONS.map((combination) => (
-            <option key={combination.id} value={combination.id}>
-              {combination.id} ({combination.subjects.map((subjectId) => SUBJECT_LABELS[subjectId]).join(' - ')})
-            </option>
-          ))}
-        </select>
-        <p className="mt-1 text-xs text-muted">
-          Chọn tổ hợp sẽ tự hiện ô nhập điểm đúng 3 môn bên dưới — hoặc bỏ qua bước này, tự thêm từng môn ở mục "Điểm
-          THPT". Đây chỉ là gợi ý nhanh, không tự áp dụng cho trường nào; nếu một trường tính điểm không khớp tổ hợp
-          bạn chọn ở đây, vào trang chi tiết của trường đó (bấm "Xem hồ sơ ở tất cả trường" bên dưới rồi mở từng
-          trường) để chọn/sửa lại tổ hợp riêng cho trường đó.
-        </p>
-      </div>
+      <ProfileChecklistSection
+        title="Điểm thi THPT"
+        statusLabel={summary.hasThpt ? `Đã nhập ${summary.thptSubjectCount} môn` : 'Chưa có'}
+        hasData={summary.hasThpt}
+      >
+        <div>
+          <label htmlFor="shared-profile-preferred-combination" className="text-sm font-medium text-ink">
+            Tổ hợp môn
+          </label>
+          <select
+            id="shared-profile-preferred-combination"
+            value={profile.preferredCombinationId ?? ''}
+            onChange={(e) => commitPreferredCombination(e.target.value)}
+            className="mt-1.5 block h-10 rounded-lg border border-ink/10 bg-surface px-2.5 text-sm text-ink outline-none focus:border-accent focus:ring-2 focus:ring-accent/25"
+          >
+            <option value="">Không chọn</option>
+            {COMMON_SUBJECT_COMBINATIONS.map((combination) => (
+              <option key={combination.id} value={combination.id}>
+                {combination.id} ({combination.subjects.map((subjectId) => SUBJECT_LABELS[subjectId]).join(' - ')})
+              </option>
+            ))}
+          </select>
+          <p className="mt-1 text-sm text-muted">
+            Chọn tổ hợp sẽ tự hiện ô nhập điểm đúng 3 môn bên dưới — hoặc bỏ qua bước này, tự thêm từng môn. Đây chỉ
+            là gợi ý nhanh, không tự áp dụng cho trường nào; nếu một trường tính điểm không khớp tổ hợp bạn chọn ở
+            đây, vào trang chi tiết của trường đó để chọn/sửa lại tổ hợp riêng cho trường đó.
+          </p>
+        </div>
 
-      <div>
-        <p className="text-xs font-medium text-ink">Điểm THPT</p>
         {thptSubjectIds.size > 0 && (
-          <div className="mt-1.5 grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
             {[...thptSubjectIds].map((subjectId) => (
               <div key={subjectId}>
                 <div className="flex items-baseline justify-between gap-1">
@@ -294,24 +342,32 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
                   hideLabel
                   committedValue={profile.thpt?.scores?.[subjectId]}
                   onCommit={(raw) => commitThptScore(subjectId, raw)}
+                  validate={(raw) => validateThptScore(SUBJECT_LABELS[subjectId], raw)}
                 />
               </div>
             ))}
           </div>
         )}
-        <AddSubjectPicker
-          availableIds={ALL_SUBJECT_IDS.filter((id) => !thptSubjectIds.has(id))}
-          onAdd={(subjectId) => setPendingThptSubjects((current) => [...current, subjectId])}
-        />
-      </div>
+        <div className="mt-2">
+          <AddSubjectPicker
+            id="shared-profile-add-thpt-subject"
+            label="Thêm môn cho điểm THPT"
+            availableIds={ALL_SUBJECT_IDS.filter((id) => !thptSubjectIds.has(id))}
+            onAdd={(subjectId) => setPendingThptSubjects((current) => [...current, subjectId])}
+          />
+        </div>
+      </ProfileChecklistSection>
 
-      <div>
-        <p className="text-xs font-medium text-ink">Học bạ</p>
+      <ProfileChecklistSection
+        title="Điểm học bạ"
+        statusLabel={summary.hasTranscript ? `Đã nhập ${summary.transcriptSubjectCount} môn` : 'Chưa có'}
+        hasData={summary.hasTranscript}
+      >
         {transcriptSubjectIds.size > 0 && (
-          <div className="mt-1.5 space-y-2">
+          <div className="space-y-2">
             {[...transcriptSubjectIds].map((subjectId) => (
               <div key={subjectId} className="grid grid-cols-4 items-center gap-2">
-                <span className="flex items-center justify-between gap-1 text-xs text-muted">
+                <span className="flex flex-col gap-1 text-sm text-muted">
                   {SUBJECT_LABELS[subjectId]}
                   <RemoveSubjectButton label={SUBJECT_LABELS[subjectId]} onRemove={() => removeTranscriptSubject(subjectId)} />
                 </span>
@@ -323,23 +379,37 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
                     hideLabel
                     committedValue={profile.transcript?.[year]?.[subjectId]}
                     onCommit={(raw) => commitTranscriptScore(year, subjectId, raw)}
+                    validate={(raw) =>
+                      validateTranscriptScore(
+                        SUBJECT_LABELS[subjectId],
+                        year === 'grade10' ? 'lớp 10' : year === 'grade11' ? 'lớp 11' : 'lớp 12',
+                        raw
+                      )
+                    }
                   />
                 ))}
               </div>
             ))}
           </div>
         )}
-        <AddSubjectPicker
-          availableIds={ALL_SUBJECT_IDS.filter((id) => !transcriptSubjectIds.has(id))}
-          onAdd={(subjectId) => setPendingTranscriptSubjects((current) => [...current, subjectId])}
-        />
-      </div>
+        <div className="mt-2">
+          <AddSubjectPicker
+            id="shared-profile-add-transcript-subject"
+            label="Thêm môn cho điểm học bạ"
+            availableIds={ALL_SUBJECT_IDS.filter((id) => !transcriptSubjectIds.has(id))}
+            onAdd={(subjectId) => setPendingTranscriptSubjects((current) => [...current, subjectId])}
+          />
+        </div>
+      </ProfileChecklistSection>
 
-      <div>
-        <p className="text-xs font-medium text-ink">Điểm ưu tiên khu vực/đối tượng</p>
-        <div className="mt-1.5 flex flex-wrap gap-3">
+      <ProfileChecklistSection
+        title="Khu vực & đối tượng ưu tiên"
+        statusLabel={summary.hasPriority ? [profile.priority?.region, profile.priority?.category].filter(Boolean).join(' · ') : 'Chưa có'}
+        hasData={summary.hasPriority}
+      >
+        <div className="flex flex-wrap gap-3">
           <div>
-            <label htmlFor="shared-profile-priority-region" className="text-xs text-muted">
+            <label htmlFor="shared-profile-priority-region" className="text-sm text-muted">
               Khu vực
             </label>
             <select
@@ -357,7 +427,7 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
             </select>
           </div>
           <div>
-            <label htmlFor="shared-profile-priority-category" className="text-xs text-muted">
+            <label htmlFor="shared-profile-priority-category" className="text-sm text-muted">
               Đối tượng ưu tiên
             </label>
             <select
@@ -375,12 +445,16 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
             </select>
           </div>
         </div>
-        <p className="mt-1 text-xs text-muted">Mã chuẩn Bộ GD&ĐT — mỗi trường tự quy đổi ra điểm cộng riêng, không hiện số điểm chung ở đây.</p>
-      </div>
+        <p className="mt-1 text-sm text-muted">Mã chuẩn Bộ GD&ĐT — mỗi trường tự quy đổi ra điểm cộng riêng, không hiện số điểm chung ở đây.</p>
+      </ProfileChecklistSection>
 
-      <div>
-        <p className="text-xs font-medium text-ink">Chứng chỉ (dùng để tính điểm thưởng/khuyến khích ở trường có hỗ trợ)</p>
-        <div className="mt-1.5 grid grid-cols-2 gap-3 sm:grid-cols-3">
+      <ProfileChecklistSection
+        title="Chứng chỉ quốc tế"
+        statusLabel={summary.hasCertificates ? `Đã nhập ${summary.certificateCount} chứng chỉ` : 'Không bắt buộc — chưa có'}
+        hasData={summary.hasCertificates}
+      >
+        <p className="text-sm text-muted">Dùng để tính điểm thưởng/khuyến khích ở trường có hỗ trợ quy đổi.</p>
+        <div className="mt-2 grid grid-cols-2 gap-3 sm:grid-cols-3">
           {CERTIFICATE_FIELDS.map(({ key, label, hint }) => (
             <BufferedScoreInput
               key={key}
@@ -388,12 +462,13 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
               label={`${label} (${hint})`}
               committedValue={profile.certificates?.[key]}
               onCommit={(raw) => commitCertificate(key, raw)}
+              validate={(raw) => validateCertificateScore(key, label, raw)}
             />
           ))}
         </div>
-      </div>
+      </ProfileChecklistSection>
 
-      <p className="text-xs text-muted">Sửa xong bấm ra ngoài ô là tự lưu.</p>
+      <p className="text-sm text-muted">Sửa xong bấm ra ngoài ô là tự lưu.</p>
     </div>
   );
 }
