@@ -1,6 +1,7 @@
 import { RotateCcw } from 'lucide-react';
 import { ShareButton } from './ShareButton';
 import { siteConfig } from '../config/site';
+import { BrandWordmark } from './BrandLogo';
 
 interface HeaderProps {
   /** Thông tin trường đang active — Header không tự biết, nhận từ page gọi nó (mỗi trường 1 page riêng). */
@@ -15,8 +16,12 @@ export function Header({ school, onReset, buildShareUrl, onChangeSchool }: Heade
   return (
     <header className="flex flex-col gap-4 py-8 sm:flex-row sm:items-start sm:justify-between">
       <div>
-        <h1 className="text-2xl font-bold text-ink sm:text-3xl">{siteConfig.name}</h1>
-        <p className="mt-1 text-sm text-muted sm:text-base">{siteConfig.tagline}</p>
+        {/* Wordmark thay chữ — vẫn nằm trong <h1> và `alt` = tên brand nên cấu trúc heading/SEO
+            không đổi (16 trang trường "nặng" dùng Header này, không dùng SiteHeader). */}
+        <h1>
+          <BrandWordmark className="h-8 w-auto sm:h-9" />
+        </h1>
+        <p className="mt-1.5 text-sm text-muted sm:text-base">{siteConfig.tagline}</p>
 
         <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1">
           <span className="rounded-full bg-accent/10 px-2.5 py-0.5 text-xs font-semibold text-accent">

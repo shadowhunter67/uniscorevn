@@ -2,7 +2,14 @@
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Favicon = brand mark mới. KHÔNG trỏ thẳng /brand/icon.png (1254×1254, ~576KB) vào tab —
+         icon-32.png / icon-180.png là bản THU NHỎ ĐÚNG KÍCH THƯỚC của chính file đó (không đổi
+         thiết kế/màu), 1.7KB và 23KB.
+         KHÔNG khai báo /favicon.svg nữa: file đó là logo CŨ trước khi có bộ nhận diện này, và mỗi
+         trình duyệt chọn giữa SVG/PNG một kiểu (Chrome lấy khai báo cuối, Firefox ưu tiên SVG) nên
+         để cả hai sẽ có máy hiện logo cũ. File vẫn nằm trong public/, chỉ không còn được tham chiếu. -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/brand/icon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/brand/icon-180.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>UniScoreVN — Tính & mô phỏng điểm xét tuyển</title>
     <meta
@@ -18,7 +25,11 @@
       content="UniScoreVN giúp tính, so sánh và mô phỏng điểm xét tuyển tại các trường đại học, học viện và cao đẳng Việt Nam theo dữ liệu tuyển sinh chính thức."
     />
     <meta property="og:url" content="https://uniscorevn.vercel.app/" />
+    <!-- Ảnh vuông = đúng định dạng cho card "summary" (không phải summary_large_image). -->
+    <meta property="og:image" content="https://uniscorevn.vercel.app/brand/icon.png" />
+    <meta property="og:image:alt" content="UniScoreVN" />
     <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://uniscorevn.vercel.app/brand/icon.png" />
     <meta name="twitter:title" content="UniScoreVN — Tính & mô phỏng điểm xét tuyển" />
     <meta
       name="twitter:description"

@@ -35,7 +35,7 @@ export function SchoolListItem({ school, onSelectSchool, onOpenCompare }: School
   const fieldIds = getFieldsForSchool(school.id).slice(0, 4);
 
   return (
-    <li className="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:gap-4">
+    <li className="-mx-2 flex flex-col gap-3 rounded-md px-2 py-4 transition-colors duration-150 hover:bg-surface-soft/60 sm:flex-row sm:items-center sm:gap-4">
       <SchoolLogo schoolId={school.id} shortName={school.shortName} name={school.name} size="md" />
 
       <div className="min-w-0 flex-1">
@@ -60,7 +60,8 @@ export function SchoolListItem({ school, onSelectSchool, onOpenCompare }: School
         </p>
       </div>
 
-      <div className="shrink-0 sm:pl-2">
+      {/* CTA có bề ngang tối thiểu cố định để mép nút thẳng hàng giữa các dòng dù nhãn dài ngắn khác nhau. */}
+      <div className="shrink-0 sm:w-44 sm:pl-2 sm:text-right">
         {hasCtaAction ? (
           <button
             type="button"
@@ -68,12 +69,12 @@ export function SchoolListItem({ school, onSelectSchool, onOpenCompare }: School
               if (ctaAction.kind === 'compare') onOpenCompare();
               else onSelectSchool(school.id);
             }}
-            className="min-h-[--ui-tap-min] w-full rounded-md border border-accent/30 bg-accent/10 px-4 py-2 text-sm font-medium text-accent transition hover:bg-accent/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 sm:w-auto"
+            className="min-h-[--ui-tap-min] w-full cursor-pointer rounded-md border border-accent/30 bg-accent/10 px-4 py-2 text-sm font-medium text-accent transition-colors duration-150 hover:bg-accent/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
           >
             {buttonLabel}
           </button>
         ) : (
-          <span className="block text-sm font-medium text-muted sm:text-right">Chưa có dữ liệu chi tiết</span>
+          <span className="block text-sm font-medium text-muted">Chưa có dữ liệu chi tiết</span>
         )}
       </div>
     </li>

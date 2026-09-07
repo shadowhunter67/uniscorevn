@@ -11,6 +11,7 @@ import {
   type InstitutionSupportStatus,
 } from '../data/institutionCoverage';
 import { UNIVERSITY_SYSTEMS } from '../data/universitySystems';
+import { Disclosure } from './Disclosure';
 import { SharedProfileEditor } from './SharedProfileEditor';
 import { AboutDataSection } from './AboutDataSection';
 import { SchoolListItem } from './SchoolListItem';
@@ -60,12 +61,12 @@ function FilterSelect<T extends string>({
   options: { value: T; label: string }[];
 }) {
   return (
-    <label className="flex items-center gap-1.5 text-sm text-muted">
+    <label className="flex items-center gap-1.5 text-sm font-medium text-ink-soft">
       <span className="shrink-0">{label}</span>
       <select
         value={value}
         onChange={(event) => onChange(event.target.value as OptionalLandingFilter<T>)}
-        className="min-h-[--ui-tap-min] rounded-md border border-border bg-surface px-2 py-1.5 text-sm text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+        className="min-h-[--ui-tap-min] rounded-md border border-border bg-surface px-2.5 py-1.5 text-sm font-normal text-ink transition-colors duration-150 hover:border-border-strong focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
       >
         <option value="all">Tất cả</option>
         {options.map((option) => (
@@ -133,23 +134,29 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
   }
 
   return (
-    <div className="py-8 sm:py-12">
-      <div className="text-center">
+    <div className="py-6 sm:py-9">
+      {/* Hero compact: navbar đã có logo nên phần này không lặp lại logo, chỉ giữ H1 (tên brand —
+          không đổi để không ảnh hưởng SEO), tagline, số liệu phủ dữ liệu và 2 lối vào rõ ràng. */}
+      <div className="mx-auto max-w-3xl text-center">
         <h1 className="text-3xl font-bold text-ink sm:text-4xl">{siteConfig.name}</h1>
-        <p className="mt-2 text-base text-muted sm:text-lg">{siteConfig.tagline}</p>
-        <p className="mx-auto mt-2 max-w-2xl text-base leading-relaxed text-muted">
+        <p className="mt-1.5 text-base text-ink-soft sm:text-lg">{siteConfig.tagline}</p>
+        <p className="mx-auto mt-3 text-base leading-relaxed text-muted">
           Hiện có {institutionCoverage.fullyVerified} trường có thể tính điểm xét tuyển đầy đủ, trong tổng số {institutionCoverage.independentEducationInstitutions} cơ sở
           giáo dục độc lập. Nhập điểm một lần, so sánh theo quy tắc tuyển sinh riêng của từng cơ sở.
         </p>
-        <p className="mt-4 text-sm text-muted">
-          Đã có trường muốn xem? Tìm bên dưới.{' '}
-          <button type="button" onClick={onOpenFieldBrowse} className="font-medium text-accent underline-offset-2 hover:underline">
-            Chưa biết nên chọn trường nào? Xem theo lĩnh vực bạn quan tâm →
+        <p className="mt-4 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm text-muted">
+          <span>Đã có trường muốn xem? Tìm bên dưới.</span>
+          <button
+            type="button"
+            onClick={onOpenFieldBrowse}
+            className="inline-flex min-h-9 items-center rounded-md px-1.5 font-medium text-accent underline-offset-2 transition-colors duration-150 hover:bg-accent/10 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+          >
+            Chưa biết nên chọn trường nào? Xem theo lĩnh vực →
           </button>
         </p>
       </div>
 
-      <div className="mx-auto mt-7 max-w-2xl rounded-md border border-accent/20 bg-accent/5 px-4 py-3 text-sm">
+      <div className="mx-auto mt-6 max-w-3xl rounded-md border border-accent/20 bg-accent/5 px-4 py-3 text-sm">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <p className="text-ink">
             <span className="font-medium">Hồ sơ điểm dùng chung.</span>{' '}
@@ -176,10 +183,9 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
               .join(' · ')}
           </p>
         )}
-        <details open={profileSummary.hasData} className="mt-2 rounded-md border border-accent/15 bg-surface/70 px-3 py-2">
-          <summary className="cursor-pointer text-sm font-medium text-ink">Nhập / chỉnh sửa điểm</summary>
+        <Disclosure summary="Nhập / chỉnh sửa điểm" defaultOpen={profileSummary.hasData} className="mt-2.5">
           <SharedProfileEditor profile={profile} updateProfile={updateProfile} updateVactTotal={updateVactTotal} />
-        </details>
+        </Disclosure>
         {profileSummary.hasData && (
           <button
             type="button"
@@ -191,7 +197,9 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
         )}
       </div>
 
-      <div className="mx-auto mt-8 max-w-5xl">
+      {/* Danh sách trường dùng hết bề ngang container (max-w-6xl ≈ 1150px ở App.tsx) — trước đây bị
+          bó thêm ở max-w-5xl nên màn hình lớn thừa nhiều khoảng trắng hai bên. */}
+      <div className="mt-9">
         <h2 className="text-lg font-semibold text-ink sm:text-xl">Chọn cơ sở để bắt đầu</h2>
 
         <div className="mt-3 max-w-2xl">
@@ -227,20 +235,19 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
               label,
             }))}
           />
-          <label className="flex min-h-[--ui-tap-min] items-center gap-2 text-sm text-ink">
+          <label className="flex min-h-[--ui-tap-min] cursor-pointer items-center gap-2 rounded-md px-1 text-sm font-medium text-ink-soft transition-colors duration-150 hover:text-ink">
             <input
               type="checkbox"
               checked={onlyEvaluable}
               onChange={(event) => setOnlyEvaluable(event.target.checked)}
-              className="h-5 w-5 rounded border-border-strong text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+              className="h-5 w-5 cursor-pointer rounded border-border-strong text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
             />
             Chỉ hiện trường tôi có thể đánh giá
           </label>
         </div>
 
-        <details className="mt-3 rounded-md border border-border px-3 py-2">
-          <summary className="cursor-pointer text-sm font-medium text-ink">Bộ lọc nâng cao</summary>
-          <div className="mt-3 space-y-3">
+        <Disclosure summary="Bộ lọc nâng cao" className="mt-3 max-w-2xl">
+          <div className="space-y-3">
             <div className="flex flex-wrap gap-2" role="group" aria-label="Lọc theo mức hỗ trợ">
               <button
                 type="button"
@@ -273,12 +280,12 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
                 onChange={setSystemFilter}
                 options={UNIVERSITY_SYSTEMS.map((system) => ({ value: system.id, label: system.shortLabel }))}
               />
-              <label className="flex items-center gap-1.5 text-sm text-muted">
+              <label className="flex items-center gap-1.5 text-sm font-medium text-ink-soft">
                 <span className="shrink-0">Sắp xếp</span>
                 <select
                   value={sortMode}
                   onChange={(event) => setSortMode(event.target.value as LandingSortMode)}
-                  className="min-h-[--ui-tap-min] rounded-md border border-border bg-surface px-2 py-1.5 text-sm text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                  className="min-h-[--ui-tap-min] rounded-md border border-border bg-surface px-2.5 py-1.5 text-sm font-normal text-ink transition-colors duration-150 hover:border-border-strong focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
                 >
                   {(Object.entries(SORT_LABELS) as [LandingSortMode, string][]).map(([value, label]) => (
                     <option key={value} value={value}>
@@ -289,7 +296,7 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
               </label>
             </div>
           </div>
-        </details>
+        </Disclosure>
 
         {filtersActive && (
           <button

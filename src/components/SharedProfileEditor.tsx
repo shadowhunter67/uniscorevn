@@ -1,4 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react';
+import { X } from 'lucide-react';
+import { Disclosure } from './Disclosure';
 import type { ApplicantProfile } from '../core/applicantProfile';
 import type { ApplicantProfileContextValue } from '../core/applicantProfileContextCore';
 import type { SubjectId } from '../core/subjects';
@@ -7,6 +9,11 @@ import { summarizeApplicantProfile } from '../core/applicantProfileSummary';
 import { validateCertificateScore, validateThptScore, validateTranscriptScore, validateVactTotal } from '../core/profileValidationMessages';
 
 const ALL_SUBJECT_IDS = Object.keys(SUBJECT_LABELS) as SubjectId[];
+
+/** Style select dùng chung trong panel hồ sơ — cùng chiều cao/viền/radius với `ScoreInput` để các
+ * control trong một form không mỗi cái một kiểu. */
+const SELECT_CLASS =
+  'h-10 rounded-md border border-border bg-surface px-2.5 text-sm text-ink outline-none transition-colors duration-150 hover:border-border-strong focus:border-accent focus:ring-2 focus:ring-accent/25';
 import { ScoreInput } from './ScoreInput';
 
 interface SharedProfileEditorProps {
@@ -88,19 +95,44 @@ function BufferedScoreInput({
   );
 }
 
-/** Nút xóa 1 môn đã thêm — CHỮ THẬT ("Xóa {môn}"), không dùng dấu "×" đơn độc (dễ bấm nhầm, khó
- * đọc với người lớn tuổi/mắt kém). Dùng chung cho cả Điểm THPT lẫn Học bạ. */
-function RemoveSubjectButton({ label, onRemove }: { label: string; onRemove: () => void }) {
+/**
+ * Nút xóa 1 môn đã thêm. TRƯỚC ĐÂY là chữ thật "Xóa {môn}" cạnh tên môn — đúng về khả năng đọc
+ * nhưng lặp lại ở mọi dòng khiến hành động phá hủy nổi ngang với chính tên môn (nhiễu thị giác).
+ * NAY: icon X nhỏ, màu muted, chỉ chuyển sang đỏ khi hover/focus. Vẫn giữ nguyên khả năng tiếp
+ * cận — `aria-label`/`title` là câu đầy đủ "Xóa môn {tên}", vùng bấm ≥ --ui-tap-min, và nút LUÔN
+ * hiển thị (không ẩn tới khi hover) để dùng được trên cảm ứng và với người mắt kém.
+ */
+function RemoveSubjectButton({
+  label,
+  onRemove,
+  className = 'inline-flex',
+}: {
+  label: string;
+  onRemove: () => void;
+  /** BẮT BUỘC chứa class display (`inline-flex`, hoặc cặp `hidden sm:inline-flex`). Cố ý không đặt
+   * `inline-flex` sẵn trong class gốc: nếu vừa có `inline-flex` gốc vừa có `hidden` từ caller thì
+   * hai utility cùng specificity, thứ tự trong CSS quyết định — đã từng làm nút "chỉ desktop" vẫn
+   * hiện trên mobile. */
+  className?: string;
+}) {
   return (
     <button
       type="button"
       onClick={onRemove}
-      className="shrink-0 rounded-sm text-sm font-medium text-muted underline-offset-2 transition hover:text-danger hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+      aria-label={`Xóa môn ${label}`}
+      title={`Xóa môn ${label}`}
+      className={`h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-md text-muted transition-colors duration-150 hover:bg-danger/10 hover:text-danger focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 ${className}`}
     >
-      Xóa {label}
+      <X size={16} aria-hidden="true" />
     </button>
   );
 }
+
+const TRANSCRIPT_YEARS = [
+  { key: 'grade10', label: 'Lớp 10', shortLabel: 'L10' },
+  { key: 'grade11', label: 'Lớp 11', shortLabel: 'L11' },
+  { key: 'grade12', label: 'Lớp 12', shortLabel: 'L12' },
+] as const;
 
 /** 1 mục trong checklist hồ sơ — gấp lại mặc định trừ khi đã có dữ liệu, dòng tóm tắt "Đã nhập"/
  * "Chưa có" đứng ngay dưới tiêu đề (progressive disclosure, không hiện hết mọi mục 1 lúc). */
@@ -116,13 +148,13 @@ function ProfileChecklistSection({
   children: ReactNode;
 }) {
   return (
-    <details open={hasData} className="rounded-md border border-border px-3 py-2.5">
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-2 text-sm">
-        <span className="font-medium text-ink">{title}</span>
-        <span className={hasData ? 'text-ink-soft' : 'text-muted'}>{hasData ? `✓ ${statusLabel}` : statusLabel}</span>
-      </summary>
-      <div className="mt-3">{children}</div>
-    </details>
+    <Disclosure
+      summary={title}
+      defaultOpen={hasData}
+      meta={<span className={hasData ? 'font-medium text-ink-soft' : undefined}>{hasData ? `✓ ${statusLabel}` : statusLabel}</span>}
+    >
+      {children}
+    </Disclosure>
   );
 }
 
@@ -155,7 +187,7 @@ function AddSubjectPicker({
         id={id}
         value={selected}
         onChange={(e) => setSelected(e.target.value)}
-        className="h-9 rounded-lg border border-ink/10 bg-surface px-2.5 text-xs text-ink outline-none focus:border-accent focus:ring-2 focus:ring-accent/25"
+        className={SELECT_CLASS}
       >
         <option value="">+ Thêm môn...</option>
         {availableIds.map((subjectId) => (
@@ -172,7 +204,7 @@ function AddSubjectPicker({
           onAdd(selected as SubjectId);
           setSelected('');
         }}
-        className="rounded-md border border-accent/30 bg-accent/10 px-2.5 py-1.5 text-xs font-medium text-accent transition hover:bg-accent/20 disabled:cursor-not-allowed disabled:opacity-40"
+        className="h-10 cursor-pointer rounded-md border border-accent/30 bg-accent/10 px-3 text-sm font-medium text-accent transition-colors duration-150 hover:bg-accent/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 disabled:cursor-not-allowed disabled:border-border disabled:bg-surface-soft disabled:text-muted"
       >
         Thêm
       </button>
@@ -273,7 +305,7 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
   const summary = summarizeApplicantProfile(profile);
 
   return (
-    <div className="mt-2 space-y-3 text-sm">
+    <div className="mt-2 mb-3 space-y-2.5 text-sm">
       <ProfileChecklistSection
         title="Đánh giá năng lực (ĐGNL)"
         statusLabel={summary.hasVact ? `${summary.vactTotal}` : 'Chưa có'}
@@ -310,7 +342,7 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
             id="shared-profile-preferred-combination"
             value={profile.preferredCombinationId ?? ''}
             onChange={(e) => commitPreferredCombination(e.target.value)}
-            className="mt-1.5 block h-10 rounded-lg border border-ink/10 bg-surface px-2.5 text-sm text-ink outline-none focus:border-accent focus:ring-2 focus:ring-accent/25"
+            className={`mt-1.5 block w-full max-w-md ${SELECT_CLASS}`}
           >
             <option value="">Không chọn</option>
             {COMMON_SUBJECT_COMBINATIONS.map((combination) => (
@@ -327,11 +359,11 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
         </div>
 
         {thptSubjectIds.size > 0 && (
-          <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <div className="mt-3 grid grid-cols-2 gap-x-3 gap-y-2.5 sm:grid-cols-3">
             {[...thptSubjectIds].map((subjectId) => (
               <div key={subjectId}>
-                <div className="flex items-baseline justify-between gap-1">
-                  <label htmlFor={`shared-profile-thpt-${subjectId}`} className="text-sm font-medium text-ink">
+                <div className="flex min-h-8 items-center justify-between gap-1">
+                  <label htmlFor={`shared-profile-thpt-${subjectId}`} className="truncate text-sm font-medium text-ink">
                     {SUBJECT_LABELS[subjectId]}
                   </label>
                   <RemoveSubjectButton label={SUBJECT_LABELS[subjectId]} onRemove={() => removeThptSubject(subjectId)} />
@@ -363,31 +395,55 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
         statusLabel={summary.hasTranscript ? `Đã nhập ${summary.transcriptSubjectCount} môn` : 'Chưa có'}
         hasData={summary.hasTranscript}
       >
+        {/* 3 ô mỗi môn = điểm trung bình môn của LỚP 10 / 11 / 12 (xem `commitTranscriptScore` và
+            `ApplicantProfile.transcript.grade10|grade11|grade12`), không phải 3 kỳ/3 năm nào khác.
+            Trước đây 3 ô này không có tiêu đề cột nên không đọc được ô nào là lớp nào. */}
         {transcriptSubjectIds.size > 0 && (
-          <div className="space-y-2">
-            {[...transcriptSubjectIds].map((subjectId) => (
-              <div key={subjectId} className="grid grid-cols-4 items-center gap-2">
-                <span className="flex flex-col gap-1 text-sm text-muted">
-                  {SUBJECT_LABELS[subjectId]}
-                  <RemoveSubjectButton label={SUBJECT_LABELS[subjectId]} onRemove={() => removeTranscriptSubject(subjectId)} />
+          <div className="space-y-2.5">
+            <div className="hidden grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))_2rem] items-end gap-x-2.5 sm:grid">
+              <span className="text-sm font-medium text-ink-soft">Môn</span>
+              {TRANSCRIPT_YEARS.map((year) => (
+                <span key={year.key} className="text-center text-sm font-medium text-ink-soft">
+                  {year.label}
                 </span>
-                {(['grade10', 'grade11', 'grade12'] as const).map((year) => (
-                  <BufferedScoreInput
-                    key={year}
-                    id={`shared-profile-transcript-${year}-${subjectId}`}
-                    label={year === 'grade10' ? 'Lớp 10' : year === 'grade11' ? 'Lớp 11' : 'Lớp 12'}
-                    hideLabel
-                    committedValue={profile.transcript?.[year]?.[subjectId]}
-                    onCommit={(raw) => commitTranscriptScore(year, subjectId, raw)}
-                    validate={(raw) =>
-                      validateTranscriptScore(
-                        SUBJECT_LABELS[subjectId],
-                        year === 'grade10' ? 'lớp 10' : year === 'grade11' ? 'lớp 11' : 'lớp 12',
-                        raw
-                      )
-                    }
+              ))}
+              <span className="sr-only">Xóa môn</span>
+            </div>
+
+            {[...transcriptSubjectIds].map((subjectId) => (
+              <div
+                key={subjectId}
+                className="grid grid-cols-3 items-start gap-x-2 gap-y-1.5 border-t border-border pt-2.5 sm:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))_2rem] sm:items-center sm:gap-x-2.5 sm:border-t-0 sm:pt-0"
+              >
+                <div className="col-span-3 flex items-center justify-between gap-2 sm:col-span-1 sm:min-w-0">
+                  <span className="truncate text-sm font-medium text-ink">{SUBJECT_LABELS[subjectId]}</span>
+                  <RemoveSubjectButton
+                    label={SUBJECT_LABELS[subjectId]}
+                    onRemove={() => removeTranscriptSubject(subjectId)}
+                    className="inline-flex sm:hidden"
                   />
+                </div>
+                {TRANSCRIPT_YEARS.map((year) => (
+                  <div key={year.key}>
+                    {/* Dưới sm không có hàng tiêu đề cột nên mỗi ô tự mang nhãn ngắn L10/L11/L12. */}
+                    <span aria-hidden="true" className="mb-0.5 block text-center text-xs font-medium text-muted sm:hidden">
+                      {year.shortLabel}
+                    </span>
+                    <BufferedScoreInput
+                      id={`shared-profile-transcript-${year.key}-${subjectId}`}
+                      label={`${SUBJECT_LABELS[subjectId]} ${year.label}`}
+                      hideLabel
+                      committedValue={profile.transcript?.[year.key]?.[subjectId]}
+                      onCommit={(raw) => commitTranscriptScore(year.key, subjectId, raw)}
+                      validate={(raw) => validateTranscriptScore(SUBJECT_LABELS[subjectId], year.label.toLowerCase(), raw)}
+                    />
+                  </div>
                 ))}
+                <RemoveSubjectButton
+                  label={SUBJECT_LABELS[subjectId]}
+                  onRemove={() => removeTranscriptSubject(subjectId)}
+                  className="hidden sm:inline-flex"
+                />
               </div>
             ))}
           </div>
@@ -407,16 +463,16 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
         statusLabel={summary.hasPriority ? [profile.priority?.region, profile.priority?.category].filter(Boolean).join(' · ') : 'Chưa có'}
         hasData={summary.hasPriority}
       >
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-4">
           <div>
-            <label htmlFor="shared-profile-priority-region" className="text-sm text-muted">
+            <label htmlFor="shared-profile-priority-region" className="text-sm font-medium text-ink">
               Khu vực
             </label>
             <select
               id="shared-profile-priority-region"
               value={profile.priority?.region ?? ''}
               onChange={(e) => commitPriorityRegion(e.target.value)}
-              className="mt-1 block h-10 rounded-lg border border-ink/10 bg-surface px-2.5 text-sm text-ink outline-none focus:border-accent focus:ring-2 focus:ring-accent/25"
+              className={`mt-1 block w-40 ${SELECT_CLASS}`}
             >
               <option value="">Không chọn</option>
               {PRIORITY_REGION_OPTIONS.map(({ code, label }) => (
@@ -427,14 +483,14 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
             </select>
           </div>
           <div>
-            <label htmlFor="shared-profile-priority-category" className="text-sm text-muted">
+            <label htmlFor="shared-profile-priority-category" className="text-sm font-medium text-ink">
               Đối tượng ưu tiên
             </label>
             <select
               id="shared-profile-priority-category"
               value={profile.priority?.category ?? ''}
               onChange={(e) => commitPriorityCategory(e.target.value)}
-              className="mt-1 block h-10 rounded-lg border border-ink/10 bg-surface px-2.5 text-sm text-ink outline-none focus:border-accent focus:ring-2 focus:ring-accent/25"
+              className={`mt-1 block w-60 max-w-full ${SELECT_CLASS}`}
             >
               <option value="">Không chọn</option>
               {PRIORITY_CATEGORY_OPTIONS.map(({ code, label }) => (

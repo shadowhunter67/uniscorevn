@@ -24,6 +24,10 @@
   --color-success: #16805c;
   --color-warning: #b54708;
   --color-danger: #b42318;
+  /* Teal của chữ "VN" trong logo. DÙNG TIẾT CHẾ (accent nhỏ: gạch dưới tiêu đề, dot trạng thái
+   * tích cực) — không phủ teal lên CTA/nền lớn, navy + blue vẫn là màu brand chính. #0f766e đạt
+   * ~5.2:1 trên --color-surface nên dùng làm màu chữ được. */
+  --color-teal: #0f766e;
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-card: 20px;
@@ -55,6 +59,19 @@ html[data-text-size='lg'] {
 }
 html[data-text-size='lg'] {
   --ui-tap-min: 48px;
+}
+
+/* Focus ring mặc định cho mọi control tương tác chưa tự khai báo ring riêng (VD <summary> trong
+ * <details>, link trong nội dung). Đặt trong :where() nên specificity = 0: component nào đã có
+ * `focus:outline-none focus-visible:ring-*` của Tailwind vẫn thắng, không bị 2 lớp viền chồng. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Micro UX: chỉ transition nhẹ, không animation trang trí (xem quy tắc UI trong README/CLAUDE.md). */
+:where(details > summary) {
+  transition: color 150ms ease;
 }
 
 .skip-link {

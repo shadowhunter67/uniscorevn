@@ -1,6 +1,7 @@
 import type { CompetitivenessAssessment } from '../evaluation/competitiveness/competitiveness';
 import { CONFIDENCE_LABELS } from '../evaluation/competitiveness/competitivenessConfidence';
 import { COMPETITIVENESS_DISCLAIMER } from '../evaluation/competitiveness/competitivenessLanguage';
+import { Disclosure } from './Disclosure';
 
 /** "Vì sao đánh giá như vậy?" — expandable, hiện điểm/mốc điểm chuẩn/chênh lệch/độ tin cậy. Ẩn
  * hẳn khi `band === 'insufficient-data'` (không có gì để giải thích). */
@@ -8,9 +9,8 @@ export function CompetitivenessExplanation({ assessment }: { assessment: Competi
   if (assessment.band === 'insufficient-data') return null;
 
   return (
-    <details className="mt-2 rounded-md border border-border px-3 py-2">
-      <summary className="cursor-pointer text-sm font-medium text-ink">Vì sao có đánh giá này?</summary>
-      <div className="mt-2 space-y-1.5 text-sm text-ink-soft">
+    <Disclosure summary="Vì sao có đánh giá này?" className="mt-2">
+      <div className="space-y-1.5 text-[13px] text-ink-soft">
         {assessment.referenceYear !== undefined && (
           <p>
             Điểm chuẩn tham chiếu: năm {assessment.referenceYear}
@@ -34,6 +34,6 @@ export function CompetitivenessExplanation({ assessment }: { assessment: Competi
         )}
         <p className="text-muted">{COMPETITIVENESS_DISCLAIMER}</p>
       </div>
-    </details>
+    </Disclosure>
   );
 }

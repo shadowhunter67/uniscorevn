@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import { siteConfig } from '../config/site';
+import { BrandResponsiveLogo } from './BrandLogo';
 import { TextSizeControl } from './TextSizeControl';
 import { useFocusTrap } from '../hooks/useFocusTrap';
 
@@ -35,8 +35,8 @@ function NavLink({ item, active, onNavigate }: { item: NavItem; active: boolean;
         event.preventDefault();
         onNavigate(item.path);
       }}
-      className={`rounded-sm px-1 py-2 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 ${
-        active ? 'text-accent' : 'text-ink-soft hover:text-ink'
+      className={`flex min-h-[--ui-tap-min] items-center rounded-md px-2.5 text-sm font-medium transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 ${
+        active ? 'bg-accent/10 text-accent' : 'text-ink-soft hover:bg-surface-soft hover:text-ink'
       }`}
     >
       {item.label}
@@ -55,19 +55,22 @@ export function SiteHeader({ pathname, onNavigate }: SiteHeaderProps) {
 
   return (
     <header className="border-b border-border bg-surface">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-2.5">
+        {/* Logo về trang chủ. Viewport hẹp dùng icon vuông thay wordmark ngang (wordmark 3:1 thu nhỏ
+            tới mức đọc không ra thì vô nghĩa) — cùng 1 target, cùng hành vi. */}
         <a
           href="/"
           onClick={(event) => {
             event.preventDefault();
             navigate('/');
           }}
-          className="rounded-sm text-base font-bold text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+          aria-label="UniScoreVN — về trang chủ"
+          className="flex shrink-0 items-center rounded-md py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
         >
-          {siteConfig.name}
+          <BrandResponsiveLogo className="h-8 w-auto" />
         </a>
 
-        <nav aria-label="Điều hướng chính" className="hidden items-center gap-5 sm:flex">
+        <nav aria-label="Điều hướng chính" className="hidden items-center gap-1 sm:flex">
           {NAV_ITEMS.map((item) => (
             <NavLink key={item.path} item={item} active={pathname === item.path} onNavigate={navigate} />
           ))}

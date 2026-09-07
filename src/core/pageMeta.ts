@@ -43,15 +43,16 @@ function upsertLinkCanonical(href: string): void {
  * Cập nhật title/description/canonical/Open Graph/Twitter card theo route hiện tại (runtime,
  * không dùng thư viện SEO/không SSR). GIỚI HẠN đã biết: đây là SPA client-side, crawler không chạy
  * JS (đa số social-preview bot vẫn chạy JS, nhưng không phải tất cả) sẽ chỉ thấy meta tĩnh trong
- * index.html (trang chủ). Không có ảnh OG riêng cho từng route — repo chưa có asset ảnh social
- * preview thật, không tự tạo ảnh giả ở đây (og:image bị bỏ qua, Twitter card dùng "summary" không
- * cần ảnh bắt buộc).
+ * index.html (trang chủ). Ảnh OG dùng chung 1 icon brand cho mọi route (`/brand/icon.png`, vuông,
+ * hợp với Twitter card "summary") — chưa có ảnh preview riêng theo route và KHÔNG tự sinh ảnh giả.
  */
 export function setPageMeta({ title, description, path }: PageMetaOptions): void {
   if (typeof document === 'undefined') return;
 
   const desc = description ?? siteConfig.description;
   const canonicalUrl = `${siteConfig.canonicalUrl}${path}`;
+  // Bản gốc độ phân giải cao (1254×1254) — crawler social cần ảnh đủ lớn, không dùng bản thu nhỏ.
+  const socialImageUrl = `${siteConfig.canonicalUrl}/brand/icon.png`;
 
   document.title = title;
   upsertMetaByName('description', desc);
@@ -62,8 +63,11 @@ export function setPageMeta({ title, description, path }: PageMetaOptions): void
   upsertMetaByProperty('og:title', title);
   upsertMetaByProperty('og:description', desc);
   upsertMetaByProperty('og:url', canonicalUrl);
+  upsertMetaByProperty('og:image', socialImageUrl);
+  upsertMetaByProperty('og:image:alt', siteConfig.name);
 
   upsertMetaByName('twitter:card', 'summary');
   upsertMetaByName('twitter:title', title);
   upsertMetaByName('twitter:description', desc);
+  upsertMetaByName('twitter:image', socialImageUrl);
 }
