@@ -546,3 +546,164 @@ different, already-cataloged school — used `thanhdong` instead.)
    just "the next batch") or continued incremental leads surfacing organically during future
    admission-data research batches. Recommend treating catalog-breadth-expansion as substantially
    complete for now unless a specific new authoritative source is identified.
+
+---
+
+# Batch 4 (2026-09-07)
+
+The project owner explicitly requested another expansion pass despite Batch 3's "substantially
+complete for now" recommendation. This batch used a new lead source not previously tapped
+(a nationwide "mã trường"/admission-code roster, third-party but comprehensive) and a targeted
+re-sweep of the already-cataloged military/police academy tier for gaps in the same category.
+
+## Summary
+
+| Metric | Before (Batch 3 end) | After Batch 4 |
+|---|---:|---:|
+| Total catalog entries (search/compare) | 307 | **319** |
+| Independent education institutions (KPI) | 295 | **307** |
+| Internal/non-KPI entries | 12 | 12 |
+| University-level entries | 224 | **235** |
+| Academies | 22 | 22 |
+| Pedagogical colleges | 9 | 9 |
+| Vocational colleges | 40 | **41** |
+| Catalog-only entries | 81 | **93** |
+| Admission data available (researched+) | 226 | 226 (unchanged) |
+| Eligibility-only | 22 | 22 (unchanged) |
+| Partial calculator | 3 | 3 (unchanged) |
+| **Verified calculator** | **134** | **134 (unchanged, as required)** |
+
+New catalog-only institutions added this batch: **12**. All catalog-only — no `exactCalculator`,
+`eligibility`, `cutoffs`, `scoreConversion`, or `admissionInfo` capability was set for any of them.
+
+## Methodology this batch
+
+1. Re-read `README.md`, `docs/data-methodology.md`, `docs/school-status.md`,
+   `docs/catalog-expansion-report.md` (batches 1-3), `src/core/schoolModule.ts` (schema unchanged
+   since batch 3), and the `RemainingCatalogSchool`/`CollegeCatalogSchool` shapes in
+   `uniscorevn-data/normalized/runtime-source-snapshot/{remainingCatalog,collegeCatalog}.ts`.
+2. Extracted a working set of ~315 lowercased ids already in the registry (all 4 catalog files'
+   generated output + every promoted `src/schools/<id>/` module directory) to diff new candidates
+   against.
+3. Pulled a nationwide "mã trường" (admission-code) roster from vietjack.com — a secondary
+   aggregator, used strictly as a **lead generator** per the source-priority rule, never as sole
+   identity/existence evidence — covering every province's universities/academies/CĐSP plus the
+   military/police officer-training tier. Cross-referenced every name on that roster against the
+   existing registry via full-text grep (case-insensitive, substring match on the Vietnamese
+   institution name) to filter out already-cataloged entries before spending any web-research
+   budget on a candidate.
+4. For every surviving candidate, independently verified via live web search/fetch: (a) it is not
+   already present in the registry under a different id/display name/renamed identity, (b) it has a
+   live, institution-controlled official domain (never Facebook/Wikipedia/third-party admissions
+   aggregator/dead-or-squatted domain), (c) it is a legally independent institution, not a
+   faculty/branch-campus/absorbed entity. Two candidates failed step (a) after deeper research
+   (confirmed already-merged into an already-cataloged institution — see "Not added" below) and one
+   failed step (b) (no live domain found).
+5. For the 5 military-academy candidates, applied the same "one legal entity, one catalog entry"
+   convention already established for other dual-track (quân sự/dân sự admission code) schools
+   already in the registry (e.g. `msa`/Học viện Khoa học Quân sự has one entry despite dual tracks)
+   — confirmed via research that each pair of admission codes (e.g. `VPH`+`ZPH` for Trần Đại Nghĩa)
+   refers to the same institution's two recruitment tracks, not two institutions, before adding a
+   single entry.
+6. Added the 11 university/military-tier entries to the private repo's
+   `normalized/runtime-source-snapshot/remainingCatalog.ts` (same minimal shape as prior batches:
+   `id`, `shortName`, `name`, `location`, `ownership`, `region`) and the 1 vocational-college entry
+   (Trường Cao đẳng Cần Thơ) to `collegeCatalog.ts` (`entityLevel: 'vocational_college'`, with a
+   `catalogSources` entry, matching that file's existing convention).
+7. Ran `npm run validate` and `npm run export:runtime` in the private repo, then in the public repo:
+   `tsc --noEmit`, full `npm run test`, `npm run lint`, `npm run build`, `npm run audit:data`,
+   `npm run validate:generated`, `npm run stats:coverage`, `npm run coverage:chart`, `npm run
+   check:docs`.
+8. Updated the hard-coded catalog-count assertions that legitimately changed
+   (`src/schools/index.test.ts`, `src/data/institutionCoverage.test.ts`,
+   `src/components/landingCatalog.test.ts`, `src/compare/evaluateApplicantAcrossSchools.test.ts`)
+   plus `docs/school-status.md`'s anti-drift shortName list/header count and `README.md`'s KPI
+   table/narrative/support-status table — none of the verified/partial/eligibility/
+   admission-data-available assertions were touched.
+
+## Added institutions
+
+| ID | Institution | Type | Province | Official website | Status |
+|---|---|---|---|---|---|
+| `iuv` | Trường Đại học Công nghiệp Vinh | University (private) | Nghệ An | https://iuv.edu.vn/ | catalog-only |
+| `mit` | Trường Đại học Công nghệ Miền Đông | University (private) | Đồng Nai | https://mit.vn/ | catalog-only |
+| `thuv` | Trường Đại học Y khoa Tokyo Việt Nam | University (private/FDI) | Hưng Yên | https://tokyo-human.edu.vn/ | catalog-only |
+| `hpu` | Trường Đại học Quản lý và Công nghệ Hải Phòng | University (private) | Hải Phòng | https://hpu.edu.vn/ | catalog-only |
+| `dau` | Trường Đại học Kiến trúc Đà Nẵng | University (private) | Đà Nẵng | https://dau.edu.vn/ | catalog-only |
+| `siu` | Trường Đại học Quốc tế Sài Gòn | University (private) | TP.HCM | https://siu.edu.vn/ | catalog-only |
+| `tsqdc` | Trường Sĩ quan Đặc công | Military academy (public) | Hà Nội | https://tsqdc.edu.vn/ | catalog-only |
+| `tgh` | Trường Sĩ quan Tăng - Thiết giáp | Military academy (public) | Vĩnh Phúc | https://siquantangthietgiap.vn/ | catalog-only |
+| `nguyenhue` | Trường Đại học Nguyễn Huệ (Trường Sĩ quan Lục quân 2) | Military academy (public) | Đồng Nai | https://daihocnguyenhue.edu.vn/ | catalog-only |
+| `tdnu` | Trường Đại học Trần Đại Nghĩa (Trường Sĩ quan Kỹ thuật Quân sự) | Military academy (public) | TP.HCM | https://tdnu.edu.vn/ | catalog-only |
+| `ngoquyen` | Trường Sĩ quan Công binh - Đại học Ngô Quyền | Military academy (public) | Bình Dương | https://tsqcb.edu.vn/ | catalog-only |
+| `cdct` | Trường Cao đẳng Cần Thơ | Vocational college (public) | Cần Thơ | https://tuyensinh.cdct.edu.vn/ | catalog-only |
+
+Notes on individual entries:
+- `iuv` — verified private (Wikipedia + press corroboration: "cơ sở giáo dục đại học tư thục, có tư
+  cách pháp nhân"), distinct from the already-cataloged public `vinhuni`/Trường Đại học Vinh.
+- `hpu` — id chosen to avoid collision with the already-cataloged `hpu2`
+  (Trường Đại học Sư phạm Hà Nội 2, an unrelated school whose id predates this batch and was NOT
+  renamed, per the no-rename rule); the vietjack roster happens to reuse "HPU"/"DHP"-style codes
+  loosely and should not be read as evidence these are the same institution.
+- `siu` (Trường Đại học Quốc tế Sài Gòn) — this exact institution was flagged in Batch 3's
+  "needs review" table for lacking a confirmed `.edu.vn` domain. This batch found a live
+  `siu.edu.vn` with active 2026 admission content, resolving that open item.
+- `tdnu` / `ngoquyen` / `nguyenhue` — each is one legal institution with two admission-code tracks
+  (quân sự/dân sự); modeled as a single catalog entry, consistent with how every other
+  already-cataloged military academy with a civil admission track is modeled (e.g. `msa`, `mta`,
+  `vmmu`). `nguyenhue` (Sĩ quan Lục quân 2) is confirmed distinct from the already-cataloged `tqt`
+  (Sĩ quan Lục quân 1) — two separate officer-training schools, not a duplicate.
+- `cdct` — press coverage (dantri.com.vn, Nov 2025) describes an unexecuted "phương án sắp xếp"
+  (reorganization proposal) to merge this school into Trường Cao đẳng Kinh tế - Kỹ thuật Cần Thơ.
+  As of this batch the school's own domain still independently publishes 2026 admission content
+  under its own name/identity, so it was added as still-independent — flagged here for a future
+  batch to re-check in case the merger proceeds.
+
+## Not added / needs review
+
+| Institution | Reason | Notes |
+|---|---|---|
+| Trường Đại học Nội vụ Hà Nội | merged | Merged into Học viện Hành chính Quốc gia (`napa`, already cataloged) on 15/9/2022. Confirmed via multiple independent sources; not a new gap. |
+| Trường Đại học Tài chính - Kế toán (Quảng Ngãi, UFA) | merged/subsidiary | Merged into Trường Đại học Tài chính – Marketing (`ufm`, already cataloged, note the en-dash in its stored `name` — a grep for a plain hyphen falsely suggested it was missing until this was caught) as a branch campus ("Phân hiệu ... tại Quảng Ngãi"), per a Deputy PM decision signed 24/12/2025. Confirmed via tuoitre.vn/vnexpress.net/thanhnien.vn corroborating coverage. |
+| Trường Đại học Mỹ thuật Công nghiệp Á Châu (AUAD) | no reliable source / dead domain | Private, established 2011, actively admitting per secondary sources, but its only known domains (`auad.edu.vn`, `tuyensinh.auad.edu.vn`) both fail DNS resolution at verification time. Not to be confused with the already-cataloged public `uad`/Trường Đại học Mỹ thuật Công nghiệp (est. 1949) — a different, older institution whose own domain (`uad.edu.vn`) initially caused confusion during this batch's research before the two were correctly disambiguated. Left unadded per the no-invented-URL rule; worth rechecking in a future batch in case AUAD stands up a new live domain. |
+
+No other candidates surfaced by the vietjack roster warranted action this batch: the roster's
+extensive military/police-academy and CĐSP sections were cross-checked and found either
+already-cataloged (under the same or a corrected display name) or already covered by Batch 2/3's
+merger findings (e.g. CĐSP Điện Biên, CĐSP Lạng Sơn, CĐSP Nghệ An, CĐSP Thừa Thiên Huế, CĐSP Đà Lạt
+— all previously confirmed merged, reconfirmed present-as-merged here, no new action taken).
+
+## Test/build status (Batch 4)
+
+- `npm run validate` (private): OK.
+- `npm run export:runtime` (private): wrote all 4 generated artifacts; public repo diff was exactly
+  the intended 12-entry addition (11 to `remainingCatalog.generated.ts`, 1 to
+  `collegeCatalog.generated.ts`).
+- `tsc --noEmit`: clean.
+- `npm run test`: 368/368 test files, 2771/2771 tests passing (count-drift assertions updated:
+  `src/schools/index.test.ts`, `src/data/institutionCoverage.test.ts`,
+  `src/components/landingCatalog.test.ts`, `src/compare/evaluateApplicantAcrossSchools.test.ts`,
+  plus `docs/school-status.md`'s anti-drift shortName list and header count). No verified/partial/
+  eligibility/admission-data-available count was touched.
+- `npm run lint`: clean (one pre-existing, unrelated `react/only-export-components` warning in
+  `src/core/TextSizeContext.tsx`, not touched by this batch).
+- `npm run build`: succeeds.
+- `npm run audit:data`: 0 catalog audit errors, 0 catalog audit warnings; confirms final counts
+  (319 catalog entries / 307 independent institutions / 134 verified calculators).
+- `npm run validate:generated` / `npm run stats:coverage` / `npm run coverage:chart` /
+  `npm run check:docs`: regenerated; README KPI table, narrative paragraph, support-status table,
+  and `docs/coverage-chart.svg` updated to match; `check:docs` confirms no README/institutionCoverage
+  drift.
+
+## Recommendation for next batch (Batch 5, if any)
+
+1. Re-check `cdct` (Trường Cao đẳng Cần Thơ) for the proposed merger into Trường Cao đẳng Kinh tế -
+   Kỹ thuật Cần Thơ mentioned in Nov-2025 press — not yet enacted at this batch's verification time.
+2. Re-check `auad` (Trường Đại học Mỹ thuật Công nghiệp Á Châu) for a live official domain.
+3. The HCMC GDNN directory's full paginated sweep (flagged since Batch 3) is still not done — its
+   JS/AJAX-driven search form has not yielded to any tool available in these sessions so far.
+4. Trường Cao đẳng Công nghệ - Ngoại thương (5+ competing domains) and Trường Cao đẳng Văn hóa -
+   Nghệ thuật Đà Nẵng (dead/squatted domain) — both still open from Batch 3, unchanged this batch.
+5. No other systematic gap was identified this batch beyond the vietjack-roster sweep and the
+   military-tier re-check; a further batch would likely need a new authoritative source (e.g. a
+   fresh MOET/MOHA institutional list) rather than re-mining already-exhausted leads.

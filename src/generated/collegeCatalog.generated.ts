@@ -951,6 +951,27 @@ export const collegeCatalogSchools: readonly CollegeCatalogSchool[] = [
       { title: 'Trường Cao Đẳng Kinh Tế Kỹ Thuật Thủ Đức', url: 'https://tuyensinh.ctdthuduc.edu.vn/', type: 'official-institution', checkedAt: '2026-09-05' },
     ],
   },
+  // Catalog-expansion batch 4 (2026-09-07): cross-referenced against a secondary-source "mã trường"
+  // admission-code roster (vietjack.com, lead-generator only per source-priority rule). Live official
+  // admission portal confirmed with active 2026 recruitment notices. Note for a future batch: press
+  // coverage (dantri.com.vn, Nov 2025) describes an UNEXECUTED "phương án sắp xếp" (reorganization
+  // proposal) to merge this school into Trường Cao đẳng Kinh tế - Kỹ thuật Cần Thơ — not yet enacted
+  // as of this batch (the school's own domain still independently publishes 2026 admission content
+  // under its own name), so added as still-independent, but this should be re-checked in a later
+  // batch in case the merger proceeds.
+  {
+    id: 'cdct',
+    shortName: 'CDCT',
+    name: 'Trường Cao đẳng Cần Thơ',
+    location: 'Cần Thơ',
+    province: 'Cần Thơ',
+    ownership: 'public',
+    region: 'other',
+    entityLevel: 'vocational_college',
+    catalogSources: [
+      { title: 'Trường Cao đẳng Cần Thơ - Cổng thông tin tuyển sinh', url: 'https://tuyensinh.cdct.edu.vn/', type: 'official-institution', checkedAt: '2026-09-07' },
+    ],
+  },
 ];
 
 export const collegeCatalogKnowledgeGap = {

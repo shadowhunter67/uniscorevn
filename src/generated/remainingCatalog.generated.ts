@@ -639,6 +639,33 @@ export const remainingCatalogSchools: readonly RemainingCatalogSchool[] = [
   { id: 'hht', shortName: 'HHT', name: 'Trường Đại học Hà Hoa Tiên', location: 'Hà Nam', ownership: 'private', region: 'other' },
   { id: 'thanhdong', shortName: 'Thành Đông', name: 'Trường Đại học Thành Đông', location: 'Hải Dương', ownership: 'private', region: 'other' },
   { id: 'vxut', shortName: 'VXUT', name: 'Trường Đại học Công nghệ Vạn Xuân', location: 'Nghệ An', ownership: 'private', region: 'other' },
+  // Catalog-expansion batch 4 (2026-09-07): cross-referenced the current registry against a
+  // secondary-source "mã trường" lead list (vietjack.com, admission-code roster spanning every
+  // province — used only as a lead generator, never as sole evidence per the source-priority rule)
+  // plus a full sweep of the already-cataloged military/police academy tier for gaps in the same
+  // category. Each candidate below was independently verified: (a) not already present under a
+  // different id/display name (full-text grep across all 4 catalog files + all promoted
+  // src/schools/<id>/ modules), (b) has a live, institution-controlled official domain (not
+  // Facebook/Wikipedia/third-party aggregator), (c) is a legally independent institution, not a
+  // renamed/merged/absorbed entity. See catalog-expansion-report.md Batch 4 for full detail,
+  // including 2 candidates confirmed already-merged and correctly NOT added (Trường Đại học Nội vụ
+  // Hà Nội -> merged into Học viện Hành chính Quốc gia/`napa`, 15/9/2022; Trường Đại học Tài chính -
+  // Kế toán Quảng Ngãi -> merged into Trường Đại học Tài chính – Marketing/`ufm` as a branch campus,
+  // Quyết định Dec/2025) and 1 candidate (Trường Đại học Mỹ thuật Công nghiệp Á Châu/AUAD) left
+  // unadded for lack of a live official domain (auad.edu.vn and tuyensinh.auad.edu.vn both fail DNS
+  // resolution at verification time) — do not confuse with the already-cataloged public
+  // `uad`/Trường Đại học Mỹ thuật Công nghiệp, a different, older institution.
+  { id: 'iuv', shortName: 'IUV', name: 'Trường Đại học Công nghiệp Vinh', location: 'Nghệ An', ownership: 'private', region: 'other' },
+  { id: 'mit', shortName: 'MIT', name: 'Trường Đại học Công nghệ Miền Đông', location: 'Đồng Nai', ownership: 'private', region: 'other' },
+  { id: 'thuv', shortName: 'THUV', name: 'Trường Đại học Y khoa Tokyo Việt Nam', location: 'Hưng Yên', ownership: 'private', region: 'other' },
+  { id: 'hpu', shortName: 'HPU', name: 'Trường Đại học Quản lý và Công nghệ Hải Phòng', location: 'Hải Phòng', ownership: 'private', region: 'other' },
+  { id: 'dau', shortName: 'DAU', name: 'Trường Đại học Kiến trúc Đà Nẵng', location: 'Đà Nẵng', ownership: 'private', region: 'other' },
+  { id: 'siu', shortName: 'SIU', name: 'Trường Đại học Quốc tế Sài Gòn', location: 'TP.HCM', ownership: 'private', region: 'hcm' },
+  { id: 'tsqdc', shortName: 'TSQĐC', name: 'Trường Sĩ quan Đặc công', location: 'Hà Nội', ownership: 'public', region: 'hanoi' },
+  { id: 'tgh', shortName: 'TGH', name: 'Trường Sĩ quan Tăng - Thiết giáp', location: 'Vĩnh Phúc', ownership: 'public', region: 'other' },
+  { id: 'nguyenhue', shortName: 'NH-SQLQ2', name: 'Trường Đại học Nguyễn Huệ (Trường Sĩ quan Lục quân 2)', location: 'Đồng Nai', ownership: 'public', region: 'other' },
+  { id: 'tdnu', shortName: 'TDNU', name: 'Trường Đại học Trần Đại Nghĩa (Trường Sĩ quan Kỹ thuật Quân sự)', location: 'TP.HCM', ownership: 'public', region: 'hcm' },
+  { id: 'ngoquyen', shortName: 'NQU-SQCB', name: 'Trường Sĩ quan Công binh - Đại học Ngô Quyền', location: 'Bình Dương', ownership: 'public', region: 'other' },
 ];
 
 export const remainingCatalogKnowledgeGap = {

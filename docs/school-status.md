@@ -241,7 +241,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-SIS** — Trường Khoa học liên ngành và Nghệ thuật - ĐHQG Hà Nội
 - **VNUFA** — Trường Đại học Mỹ thuật Việt Nam
 
-## Chỉ có trong danh mục (81)
+## Chỉ có trong danh mục (93)
 
 Batch catalog-expansion (2026-09-04): +6 cơ sở đại học/học viện công lập độc lập bị thiếu khỏi danh mục — phát hiện qua đối chiếu toàn bộ registry hiện có với danh sách trường đại học/học viện Việt Nam (Wikipedia dùng làm manh mối, KHÔNG làm bằng chứng danh tính duy nhất) rồi xác minh từng website chính thức riêng lẻ trước khi thêm: **EPU** (Trường Đại học Điện lực, Hà Nội, epu.edu.vn, trực thuộc Bộ Công Thương — KHÁC "Trường Cao đẳng Điện lực TP.HCM"/HEPC đã có sẵn trong danh mục), **VUTM** (Học viện Y Dược học cổ truyền Việt Nam, Hà Nội, vutm.edu.vn, trực thuộc Bộ Y tế), **HUPH** (Trường Đại học Y tế Công cộng, Hà Nội, huph.edu.vn, trực thuộc Bộ Y tế), **HMTU** (Trường Đại học Kỹ thuật Y tế Hải Dương, Hải Dương, hmtu.edu.vn, trực thuộc Bộ Y tế), **NDUN** (Trường Đại học Điều dưỡng Nam Định, Nam Định, ndun.edu.vn, trực thuộc Bộ Y tế), **HUArt** (Trường Đại học Nghệ thuật, Đại học Huế, huế, nghethuathue.edu.vn — trường thành viên Đại học Huế, cùng convention với husc/hce/hul/huaf/hueedu/hump/hufl/hat đã có; KHÁC Học viện Âm nhạc Huế/`ham` đã có sẵn, 2 cơ sở đã tách từ 1994). Catalog-only — chưa research nguồn tuyển sinh, KHÔNG bật bất kỳ capability nào. Xem `docs/catalog-expansion-report.md` cho nguồn chi tiết.
 
@@ -285,6 +285,37 @@ content: **Intracom** (Trường Đại học Intracom, Hà Nội, intracomuni.e
 Hà Hoa Tiên, Hà Nam, hahoatien.edu.vn), **Thành Đông** (Trường Đại học Thành Đông, Hải Dương,
 thanhdong.edu.vn), **VXUT** (Trường Đại học Công nghệ Vạn Xuân, Nghệ An, vxut.edu.vn).
 
+Batch catalog-expansion 4 (2026-09-07): cross-referenced the registry against a secondary-source
+"mã trường" admission-code roster (vietjack.com, spanning every province — used only as a lead
+generator per the source-priority rule, never as sole evidence) plus a full sweep of the
+already-cataloged military/police academy tier for gaps in the same category. +12 confirmed-missing,
+each independently verified via a live official domain: **IUV** (Trường Đại học Công nghiệp Vinh,
+Nghệ An, private, iuv.edu.vn — distinct from Trường Đại học Vinh/`vinhuni` already cataloged),
+**MIT** (Trường Đại học Công nghệ Miền Đông, Đồng Nai, private, mit.vn), **THUV** (Trường Đại học Y
+khoa Tokyo Việt Nam, Hưng Yên, private/FDI, tokyo-human.edu.vn), **HPU** (Trường Đại học Quản lý và
+Công nghệ Hải Phòng, private, hpu.edu.vn — distinct from `hpu2`/Trường Đại học Sư phạm Hà Nội 2,
+an unrelated id collision with this school's vietjack admission code only), **DAU** (Trường Đại học
+Kiến trúc Đà Nẵng, private, dau.edu.vn), **SIU** (Trường Đại học Quốc tế Sài Gòn, private,
+siu.edu.vn — previously flagged needs-review in batch 3 for lacking a confirmed domain; a live
+siu.edu.vn was found this batch), **TSQĐC** (Trường Sĩ quan Đặc công, Hà Nội, public/military,
+tsqdc.edu.vn), **TGH** (Trường Sĩ quan Tăng - Thiết giáp, Vĩnh Phúc, public/military,
+siquantangthietgiap.vn), **NH-SQLQ2** (Trường Đại học Nguyễn Huệ / Trường Sĩ quan Lục quân 2, Đồng
+Nai, public/military, daihocnguyenhue.edu.vn — distinct from the already-cataloged `tqt`/Trường Sĩ
+quan Lục quân 1), **TDNU** (Trường Đại học Trần Đại Nghĩa / Trường Sĩ quan Kỹ thuật Quân sự, TP.HCM,
+public/military, tdnu.edu.vn — one institution with dual quân sự/dân sự admission-code tracks,
+modeled as a single entry per this project's existing convention for other dual-track military
+schools), **NQU-SQCB** (Trường Sĩ quan Công binh - Đại học Ngô Quyền, Bình Dương, public/military,
+tsqcb.edu.vn — same dual-track convention), and **CDCT** (Trường Cao đẳng Cần Thơ, public,
+`vocational_college`, tuyensinh.cdct.edu.vn). 2 candidates were confirmed already-merged and
+correctly NOT added: Trường Đại học Nội vụ Hà Nội (merged into Học viện Hành chính Quốc gia/`napa`,
+15/9/2022) and Trường Đại học Tài chính - Kế toán Quảng Ngãi (merged into Trường Đại học Tài chính –
+Marketing/`ufm` as a branch campus, Quyết định Dec/2025). 1 candidate (Trường Đại học Mỹ thuật Công
+nghiệp Á Châu / AUAD, private) was left unadded for lack of a live official domain (both
+auad.edu.vn and tuyensinh.auad.edu.vn fail DNS resolution) — not to be confused with the
+already-cataloged public `uad`/Trường Đại học Mỹ thuật Công nghiệp, a different, older institution
+whose domain (uad.edu.vn) briefly caused confusion during this batch's research. See
+`docs/catalog-expansion-report.md` for full detail.
+
 - **AIU** — Trường Đại học Quốc tế Á Châu
 - **BAFU** — Trường Đại học Nông - Lâm Bắc Giang
 - **BHU** — Trường Đại học Quốc tế Bắc Hà
@@ -294,6 +325,7 @@ thanhdong.edu.vn), **VXUT** (Trường Đại học Công nghệ Vạn Xuân, Ng
 - **CĐ Đà Lạt** — Trường Cao đẳng Đà Lạt
 - **CĐ Lạng Sơn** — Trường Cao đẳng Lạng Sơn
 - **CĐPĐ** — Trường Cao đẳng Phương Đông Đà Nẵng
+- **CDCT** — Trường Cao đẳng Cần Thơ
 - **CĐSPBN** — Trường Cao đẳng Sư phạm Bắc Ninh
 - **CĐSPHB** — Trường Cao đẳng Sư phạm Hòa Bình
 - **CĐSPND** — Trường Cao đẳng Sư phạm Nam Định
@@ -307,6 +339,7 @@ thanhdong.edu.vn), **VXUT** (Trường Đại học Công nghệ Vạn Xuân, Ng
 - **CTIM** — Trường Cao đẳng Bán công Công nghệ và Quản trị doanh nghiệp
 - **CUWC** — Trường Cao đẳng Xây dựng Công trình đô thị
 - **CVAUni** — Trường Đại học Chu Văn An
+- **DAU** — Trường Đại học Kiến trúc Đà Nẵng
 - **CĐSPBRVT** — Trường Cao đẳng Sư phạm Bà Rịa - Vũng Tàu
 - **CĐSPKG** — Trường Cao đẳng Sư phạm Kiên Giang
 - **CĐSPTB** — Trường Cao đẳng Sư phạm Thái Bình
@@ -326,25 +359,31 @@ thanhdong.edu.vn), **VXUT** (Trường Đại học Công nghệ Vạn Xuân, Ng
 - **HHT** — Trường Đại học Hà Hoa Tiên
 - **HMTU** — Trường Đại học Kỹ thuật Y tế Hải Dương
 - **HOTEC** — Trường Cao đẳng Kinh tế - Kỹ thuật Thành phố Hồ Chí Minh
+- **HPU** — Trường Đại học Quản lý và Công nghệ Hải Phòng
 - **HSC** — Trường Cao đẳng nghề Hoa Sen (cơ sở Đà Nẵng)
 - **HUArt** — Trường Đại học Nghệ thuật, Đại học Huế
 - **HUPH** — Trường Đại học Y tế Công cộng
 - **HVCT** — Trường Cao đẳng Kỹ nghệ II
 - **HVTA** — Học viện Tòa án
 - **Intracom** — Trường Đại học Intracom
+- **IUV** — Trường Đại học Công nghiệp Vinh
 - **KTXD-HCM** — Trường Cao đẳng Kiến trúc - Xây dựng Thành phố Hồ Chí Minh
 - **Lilama 2** — Trường Cao đẳng Công nghệ Quốc tế Lilama 2
 - **LTTC** — Trường Cao đẳng Lý Tự Trọng TP.HCM
+- **MIT** — Trường Đại học Công nghệ Miền Đông
 - **MTU** — Trường Đại học Xây dựng Miền Tây
 - **NCEPA** — Trường Kinh tế và Quản lý công - Đại học Kinh tế Quốc dân
 - **NCT-NEU** — Trường Công nghệ - Đại học Kinh tế Quốc dân
 - **NDUN** — Trường Đại học Điều dưỡng Nam Định
 - **NEU-CoB** — Trường Kinh doanh - Đại học Kinh tế Quốc dân
+- **NH-SQLQ2** — Trường Đại học Nguyễn Huệ (Trường Sĩ quan Lục quân 2)
+- **NQU-SQCB** — Trường Sĩ quan Công binh - Đại học Ngô Quyền
 - **NSPC** — Trường Cao đẳng Bách khoa Nam Sài Gòn
 - **NVTC** — Trường Cao đẳng Nguyễn Văn Trỗi
 - **QTU** — Trường Đại học Quang Trung
 - **QUI** — Trường Đại học Công nghiệp Quảng Ninh
 - **SCLS** — Trường Hóa và Khoa học sự sống - Đại học Bách khoa Hà Nội
+- **SIU** — Trường Đại học Quốc tế Sài Gòn
 - **SDU** — Trường Đại học Sao Đỏ
 - **SEEE** — Trường Điện - Điện tử - Đại học Bách khoa Hà Nội
 - **SEM-HUST** — Trường Kinh tế - Đại học Bách khoa Hà Nội
@@ -352,9 +391,13 @@ thanhdong.edu.vn), **VXUT** (Trường Đại học Công nghệ Vạn Xuân, Ng
 - **SMS-HUST** — Trường Vật liệu - Đại học Bách khoa Hà Nội
 - **SoICT** — Trường Công nghệ Thông tin và Truyền thông - Đại học Bách khoa Hà Nội
 - **TDC** — Trường Cao đẳng Công nghệ Thủ Đức
+- **TDNU** — Trường Đại học Trần Đại Nghĩa (Trường Sĩ quan Kỹ thuật Quân sự)
+- **TGH** — Trường Sĩ quan Tăng - Thiết giáp
 - **Thành Đông** — Trường Đại học Thành Đông
+- **THUV** — Trường Đại học Y khoa Tokyo Việt Nam
 - **TKS** — Trường Đại học Kiểm sát Hà Nội
 - **TNU-IS** — Khoa Quốc tế - Đại học Thái Nguyên
+- **TSQĐC** — Trường Sĩ quan Đặc công
 - **TTC** — Trường Cao đẳng Thủ Thiêm Thành phố Hồ Chí Minh
 - **UNETI** — Trường Đại học Kinh tế - Kỹ thuật Công nghiệp
 - **VAVC** — Trường Cao đẳng nghề Việt - Úc

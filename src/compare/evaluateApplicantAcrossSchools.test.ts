@@ -101,11 +101,11 @@ describe('evaluateApplicantAcrossSchools', () => {
    * Giờ roster mặc định lặp qua đúng `schoolComparisonAdapters` (1 nguồn duy nhất), nên HCMUE tự
    * động xuất hiện — xem `docs/architecture.md` Batch 16.
    */
-  it('renders the canonical 307-entry compare roster in product order (registry-driven, no integration drift)', () => {
+  it('renders the canonical 319-entry compare roster in product order (registry-driven, no integration drift)', () => {
     const roster = evaluateApplicantAcrossSchools(profile).map((summary) => summary.schoolId);
 
     expect(roster).toEqual(COMPARE_SCHOOL_ORDER);
-    expect(roster).toHaveLength(307);
+    expect(roster).toHaveLength(319);
     expect(roster).toEqual(expect.arrayContaining(['nce', 'ncspnt', 'ncehcm', 'vcte', 'hctb']));
   });
 
