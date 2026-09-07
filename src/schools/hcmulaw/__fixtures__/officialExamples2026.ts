@@ -51,3 +51,52 @@ export const hcmulawVsat4GoldenCases: GoldenAdmissionCase<{ subjectId: 'math'; x
     expected: { y: 8.68 },
   },
 ];
+
+/**
+ * Phương thức 3 (mã 200, học bạ trường ưu tiên ĐHQG-HCM) — quy đổi học bạ y = x - k (mục 2.1).
+ *
+ * Case 1 là Tier A: ví dụ minh họa CHÍNH THỨC dạng text của văn bản gốc (D01, x=28,00 → y=24,20),
+ * đồng thời là cross-check độc lập cho giá trị k(D01)=3,8 transcribe từ ảnh `LỆCH K.png`.
+ * Case 2 là Tier C: ghép thêm bước điểm ưu tiên (bảng chuẩn quốc gia) để phủ ĐXT cuối cùng.
+ */
+export const hcmulawTranscript3GoldenCases: GoldenAdmissionCase<
+  { combinationCode: string; x30: number; priorityRegion?: string; priorityCategory?: string },
+  { converted30: number; finalScore: number }
+>[] = [
+  {
+    id: 'hcmulaw-2026-transcript3-official-worked-example-d01',
+    schoolId: 'hcmulaw',
+    methodId: 'hcmulaw-priority-highschool3-2026',
+    year: 2026,
+    tier: 'A',
+    sourceId: 'hcmulaw-equivalence-notice-2026',
+    sourceNote:
+      'Ví dụ minh họa CHÍNH THỨC dạng text (mục 2.1): "học sinh có điểm học bạ cấp THPT tổ hợp môn D01 (x = 28,0 điểm); độ lệch ... theo tổ hợp môn D01 là 3,80 điểm (k = 3,80 điểm) ... y = x - k = 28,00 - 3,80 = 24,20".',
+    derivation: `
+      x = 28.00, k(D01) = 3.80 (tra bảng "độ lệch k", ảnh LỆCH K.png)
+      y = x - k = 28.00 - 3.80 = 24.20  <-- ĐÚNG con số văn bản tự công bố
+      không khai KV/ĐT -> effectivePriority30 = 0 -> finalScore = round(min(30, 24.20+0)) = 24.20
+    `,
+    boundaryNote: 'Anchor xác thực bảng k transcribe từ ảnh: nếu k(D01) bị đọc sai, case này fail ngay.',
+    input: { combinationCode: 'D01', x30: 28 },
+    expected: { converted30: 24.2, finalScore: 24.2 },
+  },
+  {
+    id: 'hcmulaw-2026-transcript3-priority-reduction-boundary',
+    schoolId: 'hcmulaw',
+    methodId: 'hcmulaw-priority-highschool3-2026',
+    year: 2026,
+    tier: 'C',
+    sourceId: 'hcmulaw-method-notice-2026',
+    sourceNote: 'ĐXT (PT3) = điểm tổ hợp học bạ đã quy đổi + điểm ưu tiên (PT3 không có điểm khuyến khích). Giảm ưu tiên khi điểm tổ hợp >= 22,5/30 (bảng chuẩn quốc gia).',
+    derivation: `
+      x = 27.00, k(D01) = 3.80 -> y = 27.00 - 3.80 = 23.20
+      standardPriority30 = KV1 = 0.75
+      y = 23.20 >= 22.5 -> GIẢM: effectivePriority30 = round(((30-23.20)/7.5)x0.75) = round((6.8/7.5)x0.75) = round(0.68) = 0.68
+      finalScore = round(min(30, 23.20+0.68)) = 23.88
+    `,
+    boundaryNote: 'Priority reduction threshold (22,5/30) áp lên điểm ĐÃ quy đổi (y), không phải điểm học bạ thô (x).',
+    input: { combinationCode: 'D01', x30: 27, priorityRegion: 'KV1' },
+    expected: { converted30: 23.2, finalScore: 23.88 },
+  },
+];

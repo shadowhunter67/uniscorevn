@@ -177,3 +177,99 @@ export function convertHcmulawVsatSubjectScore(subjectId: SubjectId, x: number):
   if (a === b || c === d) return round2(c);
   return round2(c + ((x - a) * (d - c)) / (b - a));
 }
+
+/**
+ * ===== Mục 2.1 — Quy đổi ĐIỂM HỌC BẠ cấp THPT sang tương đương điểm thi TN THPT 2026 (Phương thức
+ * 2 và 3) =====
+ *
+ * Công thức (verbatim ảnh `LỆCH K.png`, cùng Thông báo 9/7/2026 `hcmulaw-equivalence-notice-2026`):
+ *
+ *   y = x - k
+ *   - y: điểm tổ hợp môn sau khi quy đổi điểm tương đương;
+ *   - x: điểm tổ hợp của học bạ cấp THPT (TRUNG BÌNH CỘNG CỦA 6 HỌC KỲ);
+ *   - k: độ lệch điểm tổ hợp giữa điểm học bạ cấp THPT và điểm thi tốt nghiệp THPT năm 2026.
+ *
+ * KHÔNG phải bách phân vị/nội suy (khác mục 2.2 V-SAT ở trên) — chỉ là phép trừ hằng số theo tổ hợp.
+ *
+ * Nguồn transcribe: ảnh `tuyensinh.hcmulaw.edu.vn/upload/images/2026/SÀN + QUY ĐỔI/LỆCH K.png`
+ * (1080×1350), đọc trực tiếp qua chrome-devtools (phóng to 2,4–3x, screenshot từng nửa bảng, đối
+ * chiếu 2 lượt). Bảng gồm ĐÚNG 16 ô (5 tổ hợp đứng riêng + 11 nhóm tổ hợp) — khớp con số 16 đã ghi
+ * nhận từ trước ở `sources.ts`.
+ *
+ * CROSS-CHECK ĐỘC LẬP: chính trang thông báo (phần TEXT, không phải ảnh) có ví dụ minh họa —
+ * "tổ hợp môn D01 (x = 28,0 điểm); ... theo tổ hợp môn D01 là 3,80 điểm (k = 3,80 điểm) ...
+ * y = x - k = 28,00 - 3,80 = 24,20". Ô D01 transcribe dưới đây = 3,8 → KHỚP.
+ */
+export const HCMULAW_TRANSCRIPT_K_BY_COMBINATION: Readonly<Record<string, number>> = {
+  // Hàng 1 — 5 tổ hợp đứng riêng.
+  A00: 4.5,
+  A01: 5.0,
+  C00: 4.0,
+  X26: 3.5,
+  X79: 3.5,
+
+  // Hàng 2 — 6 nhóm tổ hợp (mọi mã trong cùng nhóm dùng CHUNG một giá trị k).
+  D01: 3.8,
+  D03: 3.8,
+  D04: 3.8,
+  D06: 3.8,
+  D11: 4.3,
+  D53: 4.3,
+  D54: 4.3,
+  D55: 4.3,
+  D12: 4.0,
+  D48: 4.0,
+  D49: 4.0,
+  D50: 4.0,
+  D14: 3.5,
+  D63: 3.5,
+  D64: 3.5,
+  D65: 3.5,
+  D15: 4.5,
+  D43: 4.5,
+  D44: 4.5,
+  D45: 4.5,
+  X78: 4.8,
+  X86: 4.8,
+  X90: 4.8,
+  X98: 4.8,
+
+  // Hàng 3 — 5 nhóm tổ hợp.
+  D28: 5.0,
+  D29: 5.0,
+  D30: 5.0,
+  D07: 3.5,
+  D23: 3.5,
+  D24: 3.5,
+  D25: 3.5,
+  D09: 3.5,
+  D38: 3.5,
+  D39: 3.5,
+  D40: 3.5,
+  D10: 4.5,
+  D18: 4.5,
+  D19: 4.5,
+  D20: 4.5,
+  X25: 5.0,
+  X33: 5.0,
+  X37: 5.0,
+  X45: 5.0,
+};
+
+/** `undefined` = tổ hợp KHÔNG có trong bảng "độ lệch k" công bố → không quy đổi được (caller phải
+ * báo `unsupported`, không được đoán k). */
+export function getHcmulawTranscriptK(combinationCode: string | undefined): number | undefined {
+  if (!combinationCode) return undefined;
+  return HCMULAW_TRANSCRIPT_K_BY_COMBINATION[combinationCode];
+}
+
+/**
+ * y = x - k, làm tròn 2 chữ số thập phân. `x` = tổng TB 6 học kỳ của 3 môn tổ hợp (thang 30, nguồn
+ * yêu cầu "làm tròn đến 02 chữ số thập phân"). Kẹp sàn 0 — y âm vô nghĩa trong thang xét tuyển (chỉ
+ * xảy ra khi x < k, tức học bạ dưới ~5/30, nằm ngoài mọi ngưỡng xét tuyển của trường).
+ */
+export function convertHcmulawTranscriptCombinationScore(combinationCode: string | undefined, x30: number): number | undefined {
+  const k = getHcmulawTranscriptK(combinationCode);
+  if (k === undefined) return undefined;
+  return round2(Math.max(0, x30 - k));
+}

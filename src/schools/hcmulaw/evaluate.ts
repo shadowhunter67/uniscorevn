@@ -7,10 +7,17 @@ import { hcmulawAdmissionMethods } from './methods';
 import { hcmulawKnowledgeGaps } from './knowledgeGaps';
 import { findHcmulawProgram, findHcmulawCombination, type HcmulawProgramId } from './programs';
 import { checkHcmulawThreshold, checkHcmulawThpt5Threshold } from './eligibility';
-import { calculateHcmulawSubjectGroupScore, calculateHcmulawThpt5FinalScore, calculateHcmulawVsat4SubjectGroupScore, calculateHcmulawVsat4FinalScore } from './calculator';
+import {
+  calculateHcmulawSubjectGroupScore,
+  calculateHcmulawThpt5FinalScore,
+  calculateHcmulawVsat4SubjectGroupScore,
+  calculateHcmulawVsat4FinalScore,
+  calculateHcmulawPriorityHighschool3FinalScore,
+} from './calculator';
 import { calculateHcmulawPriority30, lookupHcmulawStandardPriority30 } from './priority';
-import { convertHcmulawVsatSubjectScore } from './conversionTable';
-import { hcmulawFormulaEvidence, hcmulawThresholdEvidence, hcmulawPriorityEvidence, hcmulawVsatConversionEvidence } from './evidence';
+import { convertHcmulawVsatSubjectScore, convertHcmulawTranscriptCombinationScore, getHcmulawTranscriptK } from './conversionTable';
+import { sumCombinationAveragesAcrossSemesters, TRANSCRIPT_SEMESTER_LABELS } from '../../core/transcriptSemesters';
+import { hcmulawFormulaEvidence, hcmulawThresholdEvidence, hcmulawPriorityEvidence, hcmulawVsatConversionEvidence, hcmulawTranscriptConversionEvidence } from './evidence';
 
 function partial(methodId: string, year: number, input: { missingInputs: string[]; missingRequirements: MissingRequirement[]; explanation: CalculationStep[]; eligibilityReason: string }): AdmissionEvaluation {
   return {
@@ -27,20 +34,104 @@ function partial(methodId: string, year: number, input: { missingInputs: string[
   };
 }
 
-function unavailableForHocbaGranularityGap(methodId: string, year: number): AdmissionEvaluation {
-  const gap = hcmulawKnowledgeGaps.find((g) => g.id === 'hcmulaw-hocba-semester-granularity-gap')!;
-  return {
-    schoolId: 'hcmulaw',
-    year,
-    methodId,
-    confidence: 'unavailable',
-    eligibility: { status: 'unknown', reasons: [gap.label] },
-    missingInputs: ['Điểm học bạ theo TỪNG HỌC KỲ (6 học kỳ lớp 10/11/12) — hồ sơ dùng chung chỉ lưu TB cả năm, không đủ granularity cho công thức quy đổi y=x-k của HCMULAW.'],
-    missingRules: [gap.label],
-    missingRequirements: [{ kind: 'unsupported', code: gap.id, label: gap.label }],
-    explanation: [],
-    evidence: [],
-  };
+export interface HcmulawTranscriptEvaluationContext {
+  programId?: HcmulawProgramId;
+  combinationCode?: string;
+}
+
+interface TranscriptConversionResult {
+  /** `undefined` = chưa tính được; caller trả về `partialResult` kèm sẵn. */
+  converted30?: number;
+  x30?: number;
+  k?: number;
+  program?: ReturnType<typeof findHcmulawProgram>;
+  combination?: ReturnType<typeof findHcmulawCombination>;
+  partialResult?: AdmissionEvaluation;
+}
+
+/**
+ * Phần DÙNG CHUNG của Phương thức 2 và 3: resolve ngành/tổ hợp → x (tổng TB 6 học kỳ của 3 môn, đọc
+ * từ `profile.transcript.bySemester`) → y = x - k (`conversionTable.ts`).
+ *
+ * Gap granularity đã ĐÓNG (batch "6 học kỳ") — nhưng đóng bằng DỮ LIỆU THẬT: thiếu bất kỳ học kỳ nào
+ * thì trả `partial` + liệt kê đúng ô còn thiếu, TUYỆT ĐỐI không lấy TB cả năm (`grade10/11/12`) làm
+ * proxy cho x.
+ */
+function resolveHcmulawTranscriptCombinationScore(
+  profile: ApplicantProfile,
+  context: HcmulawTranscriptEvaluationContext,
+  methodId: string,
+  year: number,
+  explanation: CalculationStep[],
+  missingRequirements: MissingRequirement[]
+): TranscriptConversionResult {
+  if (!context.programId) {
+    missingRequirements.push({ kind: 'school-context', code: 'hcmulaw-program', label: 'Chọn ngành xét tuyển HCMULAW.' });
+    return { partialResult: partial(methodId, year, { missingInputs: ['Chọn ngành xét tuyển.'], missingRequirements, explanation, eligibilityReason: 'Cần chọn ngành để tra ngưỡng đầu vào.' }) };
+  }
+
+  const program = findHcmulawProgram(context.programId);
+  if (!program) {
+    missingRequirements.push({ kind: 'school-context', code: 'hcmulaw-program', label: 'Ngành xét tuyển không hợp lệ.' });
+    return { partialResult: partial(methodId, year, { missingInputs: ['Chọn ngành xét tuyển hợp lệ.'], missingRequirements, explanation, eligibilityReason: 'Ngành không tồn tại trong danh mục đã import.' }) };
+  }
+
+  const combination = findHcmulawCombination(program, context.combinationCode);
+  if (!combination) {
+    missingRequirements.push({ kind: 'school-context', code: 'hcmulaw-combination', label: 'Chọn tổ hợp 3 môn xét tuyển thuộc ngành đã chọn.' });
+    return { partialResult: partial(methodId, year, { missingInputs: ['Chọn tổ hợp 3 môn.'], missingRequirements, explanation, eligibilityReason: 'Cần chọn tổ hợp để tính điểm.' }) };
+  }
+
+  const k = getHcmulawTranscriptK(combination.code);
+  if (k === undefined) {
+    missingRequirements.push({
+      kind: 'unsupported',
+      code: 'hcmulaw-transcript-k-missing',
+      label: `Tổ hợp ${combination.code} không có trong bảng "độ lệch k" công bố — không quy đổi được điểm học bạ sang thang thi TN THPT.`,
+    });
+    return { partialResult: partial(methodId, year, { missingInputs: ['Tổ hợp chưa có độ lệch k công bố.'], missingRequirements, explanation, eligibilityReason: 'Không đủ bảng quy đổi cho tổ hợp này.' }) };
+  }
+
+  const combinationTotal = sumCombinationAveragesAcrossSemesters(profile.transcript?.bySemester, combination.subjects);
+  if (combinationTotal.total30 === undefined) {
+    for (const { subjectId, missingSemesters } of combinationTotal.missingBySubject) {
+      missingRequirements.push({
+        kind: 'profile-input',
+        code: `hcmulaw-transcript-semester-${subjectId}`,
+        label: `Điểm học bạ môn ${SUBJECT_LABELS[subjectId]} còn thiếu ${missingSemesters.length}/6 học kỳ (${missingSemesters.map((key) => TRANSCRIPT_SEMESTER_LABELS[key]).join(', ')}).`,
+      });
+    }
+    return {
+      partialResult: partial(methodId, year, {
+        missingInputs: ['Chưa đủ điểm học bạ TỪNG HỌC KỲ (6 học kỳ lớp 10/11/12) cho 3 môn tổ hợp — điểm trung bình cả năm KHÔNG thay thế được (công thức yêu cầu "trung bình cộng của 6 học kỳ").'],
+        missingRequirements,
+        explanation,
+        eligibilityReason: 'Cần đủ điểm 6 học kỳ của 3 môn tổ hợp để quy đổi điểm học bạ.',
+      }),
+    };
+  }
+
+  const x30 = combinationTotal.total30;
+  explanation.push({
+    id: `${methodId}-transcript-total`,
+    label: 'Điểm tổ hợp học bạ (tổng TB 6 học kỳ của 3 môn)',
+    output: x30,
+    scale: 30,
+    formula: 'x = TB 6 HK môn 1 + TB 6 HK môn 2 + TB 6 HK môn 3',
+    evidence: hcmulawTranscriptConversionEvidence.evidence,
+  });
+
+  const converted30 = convertHcmulawTranscriptCombinationScore(combination.code, x30)!;
+  explanation.push({
+    id: `${methodId}-transcript-conversion`,
+    label: `Quy đổi tương đương thi TN THPT (tổ hợp ${combination.code}, độ lệch k = ${k.toFixed(2)})`,
+    output: converted30,
+    scale: 30,
+    formula: 'y = x - k',
+    evidence: hcmulawTranscriptConversionEvidence.evidence,
+  });
+
+  return { converted30, x30, k, program, combination };
 }
 
 export interface HcmulawThpt5EvaluationContext {
@@ -129,17 +220,159 @@ export function evaluateHcmulawThpt5Admission(profile: ApplicantProfile, context
   };
 }
 
-/** Phương thức 2 (mã 410, kết hợp học bạ + chứng chỉ/SAT) — LUÔN `unavailable`: công thức quy đổi
- * y=x-k đã có (batch 2026-08-20) nhưng x cần TB học bạ theo 6 học kỳ, granularity hồ sơ dùng chung
- * không đáp ứng, xem `knowledgeGaps.ts:hcmulaw-hocba-semester-granularity-gap`. */
-export function evaluateHcmulawCombined2Admission(): AdmissionEvaluation {
-  return unavailableForHocbaGranularityGap(hcmulawAdmissionMethods[0].id, hcmulawAdmissionMethods[0].year);
+/**
+ * Phương thức 2 (mã 410, kết hợp học bạ + chứng chỉ ngoại ngữ quốc tế/SAT) — điểm tổ hợp học bạ đã
+ * quy đổi (y = x - k) nay TÍNH ĐƯỢC, nhưng kết quả vẫn `partial`, KHÔNG trả `score`:
+ *
+ * ĐXT của phương thức này = y + ĐIỂM KHUYẾN KHÍCH (tối đa 1,50, bắt buộc có chứng chỉ mới đủ điều
+ * kiện xét) + điểm ưu tiên. Bảng điểm khuyến khích đọc được đầy đủ dạng text, NHƯNG hồ sơ dùng chung
+ * chưa mô hình hoá đủ để chọn đúng mức — xem `knowledgeGaps.ts:hcmulaw-method2-bonus-certificate-model-gap`
+ * (2 lý do độc lập: `ApplicantProfile.certificates` không có chứng chỉ tiếng Pháp/Nhật/Trung dù nguồn
+ * tính chúng và "chỉ công nhận 1 loại cao nhất"; và `toeflIbt` không kèm ngày dự thi trong khi nguồn
+ * dùng 2 thang TOEFL iBT khác nhau theo mốc 21/01/2026). Cộng thiếu điểm khuyến khích sẽ ra ĐXT THẤP
+ * HƠN thực tế — sai theo hướng nguy hiểm cho thí sinh, nên không đưa ra con số.
+ */
+export function evaluateHcmulawCombined2Admission(profile: ApplicantProfile = {}, context: HcmulawTranscriptEvaluationContext = {}): AdmissionEvaluation {
+  const explanation: CalculationStep[] = [];
+  const missingRequirements: MissingRequirement[] = [];
+  const methodId = hcmulawAdmissionMethods[0].id;
+  const year = hcmulawAdmissionMethods[0].year;
+
+  const resolved = resolveHcmulawTranscriptCombinationScore(profile, context, methodId, year, explanation, missingRequirements);
+  if (resolved.partialResult) return resolved.partialResult;
+
+  const x30 = resolved.x30!;
+  const minTranscript = hcmulawTranscriptConversionEvidence.value.minTranscriptCombined30.method2;
+  const transcriptFloorPass = x30 >= minTranscript;
+  const requiredText = `Tổng TB 6 học kỳ của 3 môn tổ hợp ≥ ${minTranscript.toFixed(2)}/30 (điều kiện riêng của Phương thức 2)`;
+  explanation.push({ id: `${methodId}-transcript-floor`, label: 'Điều kiện điểm học bạ (Phương thức 2)', output: x30, scale: 30, formula: requiredText, evidence: hcmulawTranscriptConversionEvidence.evidence });
+
+  const bonusGap = hcmulawKnowledgeGaps.find((gap) => gap.id === 'hcmulaw-method2-bonus-certificate-model-gap')!;
+  missingRequirements.push({ kind: 'unsupported', code: bonusGap.id, label: bonusGap.label });
+
+  return {
+    schoolId: 'hcmulaw',
+    year,
+    methodId,
+    confidence: 'partial',
+    eligibility: {
+      status: transcriptFloorPass ? 'unknown' : 'ineligible',
+      reasons: transcriptFloorPass
+        ? [requiredText, 'Đạt điều kiện điểm học bạ — nhưng còn phụ thuộc chứng chỉ ngoại ngữ/SAT và tổng 3 môn thi TN THPT, chưa kết luận được.']
+        : [requiredText],
+    },
+    missingInputs: ['Điểm khuyến khích từ chứng chỉ ngoại ngữ/SAT chưa mô hình hoá được từ hồ sơ dùng chung — không lắp ráp được điểm xét tuyển cuối.'],
+    missingRules: [bonusGap.label],
+    missingRequirements,
+    explanation,
+    evidence: [...hcmulawTranscriptConversionEvidence.evidence],
+  };
 }
 
-/** Phương thức 3 (mã 200, học bạ trường ưu tiên ĐHQG-HCM) — LUÔN `unavailable`, cùng lý do Phương
- * thức 2. */
-export function evaluateHcmulawPriorityHighschool3Admission(): AdmissionEvaluation {
-  return unavailableForHocbaGranularityGap(hcmulawAdmissionMethods[1].id, hcmulawAdmissionMethods[1].year);
+export interface HcmulawPriorityHighschool3EvaluationContext extends HcmulawTranscriptEvaluationContext {
+  /** Học đủ 3 năm tại trường THPT thuộc "Danh sách 149 trường ưu tiên xét tuyển 2026 của ĐHQG-HCM"
+   * — danh sách này KHÔNG import trong repo (nằm ngoài phạm vi module trường), nhận cờ từ caller. */
+  studiedAtPriorityHighSchool?: boolean;
+  /** Kết quả học tập CẢ 3 NĂM lớp 10/11/12 đạt mức Tốt (hoặc giỏi với thí sinh TN từ 2024 trở về
+   * trước) — `ApplicantProfile` không lưu xếp loại học lực, nhận cờ từ caller (cùng quy ước
+   * `VluTranscriptEvaluationContext.academicRank12`). */
+  allYearsRankedGood?: boolean;
+  /** `true` = có thành tích được cộng "điểm xét thưởng" (vd giải khuyến khích HSG quốc gia, +1,50) —
+   * phạm vi áp dụng của mục này cho từng phương thức không nêu rõ trong nguồn, nên khi `true` kết quả
+   * giữ `partial` (cùng semantics `hasBonusAchievement` ở HUTECH/USSH/IU/TDTU/HUFLIT). */
+  hasBonusAchievement?: boolean;
+}
+
+/**
+ * Phương thức 3 (mã 200, học bạ trường THPT ưu tiên ĐHQG-HCM) — EXACT trong phạm vi thí sinh không
+ * có điểm xét thưởng thành tích.
+ *
+ * ĐXT = y + điểm ưu tiên (kẹp 30), với y = x - k. Nguồn (`hcmulaw-method-notice-2026` mục 3, đọc lại
+ * verbatim 2026-09-07) KHÔNG có thành phần "điểm khuyến khích" nào cho phương thức này — khác hẳn
+ * Phương thức 2. Điều kiện xét: x ≥ 24,50 + học đủ 3 năm trường ưu tiên + học lực cả 3 năm mức Tốt.
+ */
+export function evaluateHcmulawPriorityHighschool3Admission(
+  profile: ApplicantProfile = {},
+  context: HcmulawPriorityHighschool3EvaluationContext = {}
+): AdmissionEvaluation {
+  const explanation: CalculationStep[] = [];
+  const missingRequirements: MissingRequirement[] = [];
+  const methodId = hcmulawAdmissionMethods[1].id;
+  const year = hcmulawAdmissionMethods[1].year;
+
+  const resolved = resolveHcmulawTranscriptCombinationScore(profile, context, methodId, year, explanation, missingRequirements);
+  if (resolved.partialResult) return resolved.partialResult;
+
+  const x30 = resolved.x30!;
+  const converted30 = resolved.converted30!;
+  const program = resolved.program!;
+
+  const minTranscript = hcmulawTranscriptConversionEvidence.value.minTranscriptCombined30.method3;
+  const transcriptFloorText = `Tổng TB 6 học kỳ của 3 môn tổ hợp ≥ ${minTranscript.toFixed(2)}/30 (điều kiện riêng của Phương thức 3)`;
+  const transcriptFloorPass = x30 >= minTranscript;
+  explanation.push({ id: `${methodId}-transcript-floor`, label: 'Điều kiện điểm học bạ (Phương thức 3)', output: x30, scale: 30, formula: transcriptFloorText, evidence: hcmulawTranscriptConversionEvidence.evidence });
+
+  if (context.studiedAtPriorityHighSchool === undefined) {
+    missingRequirements.push({ kind: 'school-context', code: 'hcmulaw-priority-highschool', label: 'Xác nhận có học đủ 3 năm tại trường THPT thuộc danh sách ưu tiên xét tuyển của ĐHQG-HCM.' });
+  }
+  if (context.allYearsRankedGood === undefined) {
+    missingRequirements.push({ kind: 'profile-input', code: 'hcmulaw-all-years-ranked-good', label: 'Xác nhận kết quả học tập cả 3 năm lớp 10/11/12 đạt mức Tốt (hoặc giỏi).' });
+  }
+
+  if (context.hasBonusAchievement === true) {
+    missingRequirements.push({
+      kind: 'official-rule',
+      code: 'hcmulaw-achievement-bonus-scope-unclear',
+      label: 'Có thành tích được cộng "điểm xét thưởng" nhưng nguồn không nêu rõ mục này áp dụng cho những phương thức nào — không lắp ráp điểm xét tuyển cuối.',
+    });
+    return {
+      schoolId: 'hcmulaw',
+      year,
+      methodId,
+      confidence: 'partial',
+      eligibility: { status: 'unknown', reasons: [transcriptFloorText] },
+      missingInputs: ['Mức "điểm xét thưởng" áp dụng cho Phương thức 3 chưa xác định từ nguồn.'],
+      missingRules: ['Phạm vi áp dụng "điểm xét thưởng" (giải khuyến khích HSG quốc gia, +1,50) theo từng phương thức chưa nêu rõ.'],
+      missingRequirements,
+      explanation,
+      evidence: [...hcmulawTranscriptConversionEvidence.evidence],
+    };
+  }
+
+  const standardPriority30 = lookupHcmulawStandardPriority30(profile.priority?.region, profile.priority?.category);
+  const priority = calculateHcmulawPriority30({ academicScore30: converted30, standardPriority30 });
+  explanation.push({
+    id: `${methodId}-priority`,
+    label: priority.reduced ? 'Điểm ưu tiên đã giảm' : 'Điểm ưu tiên',
+    output: priority.effectivePriority30,
+    scale: 30,
+    formula: priority.reduced ? '[(30 – Điểm tổ hợp môn)/7,5] × Mức ưu tiên' : 'Mức điểm ưu tiên quy đổi',
+    evidence: hcmulawPriorityEvidence.evidence,
+  });
+
+  const finalScore = calculateHcmulawPriorityHighschool3FinalScore({ subjectGroupScore30: converted30, priority30: priority.effectivePriority30 });
+  explanation.push({ id: `${methodId}-final`, label: 'Điểm xét tuyển (Phương thức 3) cuối cùng', output: finalScore, scale: 30 });
+
+  const threshold = checkHcmulawThreshold(finalScore, program.id, 'Phương thức 3, học bạ trường ưu tiên ĐHQG-HCM');
+  explanation.push({ id: `${methodId}-eligibility-threshold`, label: 'Ngưỡng đầu vào', output: finalScore, scale: 30, formula: threshold.requiredText, evidence: hcmulawThresholdEvidence.evidence });
+
+  const conditionsKnown = context.studiedAtPriorityHighSchool !== undefined && context.allYearsRankedGood !== undefined;
+  const conditionsPass = context.studiedAtPriorityHighSchool === true && context.allYearsRankedGood === true && transcriptFloorPass && threshold.pass;
+  const status: 'eligible' | 'ineligible' | 'unknown' = !transcriptFloorPass || !threshold.pass ? 'ineligible' : conditionsKnown ? (conditionsPass ? 'eligible' : 'ineligible') : 'unknown';
+
+  return {
+    schoolId: 'hcmulaw',
+    year,
+    methodId,
+    confidence: 'exact-verified',
+    eligibility: { status, reasons: [transcriptFloorText, threshold.requiredText, 'Phải học đủ 3 năm tại trường THPT thuộc danh sách ưu tiên ĐHQG-HCM và học lực cả 3 năm đạt mức Tốt.'] },
+    score: { value: finalScore, scale: 30 },
+    missingInputs: [],
+    missingRules: [],
+    missingRequirements,
+    explanation,
+    evidence: [...hcmulawTranscriptConversionEvidence.evidence, ...hcmulawThresholdEvidence.evidence, ...hcmulawPriorityEvidence.evidence],
+  };
 }
 
 export interface HcmulawVsat4EvaluationContext {
