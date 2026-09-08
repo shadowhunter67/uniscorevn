@@ -2,8 +2,10 @@ import { describe, expect, it } from 'vitest';
 import { isKnownSchoolId, SCHOOL_LOGOS } from './schoolLogos';
 
 describe('schoolLogos', () => {
-  it('registry rỗng vẫn là trạng thái hợp lệ (chưa có logo thật nào được xác minh)', () => {
-    expect(SCHOOL_LOGOS).toEqual({});
+  it('mọi key trong registry phải trùng schoolId của chính record đó', () => {
+    for (const [schoolId, record] of Object.entries(SCHOOL_LOGOS)) {
+      expect(record.schoolId, `key ${schoolId} không khớp record.schoolId`).toBe(schoolId);
+    }
   });
 
   it('mọi record (nếu có) phải khai đủ nguồn + ngày lấy + trỏ tới school có thật', () => {
