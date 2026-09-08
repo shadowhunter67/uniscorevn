@@ -370,7 +370,7 @@ export const collegeCatalogSchools: readonly CollegeCatalogSchool[] = [
     ownership: 'public',
     region: 'other',
     entityLevel: 'vocational_college',
-    aliases: ['Danang College', 'DANAVTC', 'Trường Cao đẳng nghề Đà Nẵng'],
+    aliases: ['Danang College', 'DANAVTC', 'Trường Cao đẳng nghề Đà Nẵng', 'Trường Cao đẳng Văn hóa - Nghệ thuật Đà Nẵng'],
     catalogSources: [
       DANANG_GDNN_SOURCE,
       {
@@ -385,6 +385,17 @@ export const collegeCatalogSchools: readonly CollegeCatalogSchool[] = [
         url: 'https://dnc.edu.vn/',
         type: 'official-institution',
         checkedAt: '2026-08-22',
+      },
+      // Catalog-expansion batch 5 (2026-09-08): confirms Batch 3's "Trường Cao đẳng Văn hóa - Nghệ
+      // thuật Đà Nẵng" needs-review lead (flagged for dead/squatted domain) resolves to THIS
+      // already-cataloged entry, not a separate institution — it was merged into the predecessor
+      // "Trường Cao đẳng nghề Đà Nẵng" and the combined entity renamed to "Trường Cao đẳng Đà Nẵng"
+      // per Quyết định 1867/QĐ-BGDĐT (03/7/2025). No new catalog entry needed; alias added above.
+      {
+        title: 'Sáp nhập Trường Cao đẳng Văn hóa Nghệ thuật Đà Nẵng vào Trường Cao đẳng nghề Đà Nẵng và đổi tên thành Trường Cao đẳng Đà Nẵng',
+        url: 'https://dnc.edu.vn/bai-viet/sap-nhap-truong-cao-dang-van-hoa-nghe-thuat-da-nang-vao-truong-cao-dang-nghe-da-nang-va-doi-ten-thanh-truong-cao-dang-da-nang',
+        type: 'official-institution',
+        checkedAt: '2026-09-08',
       },
     ],
   },

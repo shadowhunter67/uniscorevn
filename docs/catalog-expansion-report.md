@@ -707,3 +707,101 @@ merger findings (e.g. CĐSP Điện Biên, CĐSP Lạng Sơn, CĐSP Nghệ An, C
 5. No other systematic gap was identified this batch beyond the vietjack-roster sweep and the
    military-tier re-check; a further batch would likely need a new authoritative source (e.g. a
    fresh MOET/MOHA institutional list) rather than re-mining already-exhausted leads.
+
+---
+
+# Batch 5 (2026-09-08)
+
+This batch worked through Batch 4's specific leftover leads rather than mining a new source. Net
+result: **0 new catalog entries** — every lead either resolved to "no change needed" (merger still
+unexecuted, domain still dead, disambiguation still unresolved) or turned out to already be covered
+by an existing entry once traced carefully. One existing entry was enriched with a missing alias and
+a corroborating source.
+
+## Summary
+
+| Metric | Before (Batch 4 end) | After Batch 5 |
+|---|---:|---:|
+| Total catalog entries (search/compare) | 319 | **319 (unchanged)** |
+| Independent education institutions (KPI) | 307 | **307 (unchanged)** |
+| Vocational colleges | 41 | 41 (unchanged) |
+| **Verified calculator** | **134** | **134 (unchanged)** |
+
+## Leads worked (from Batch 4's "Recommendation for next batch")
+
+1. **`cdct` (Trường Cao đẳng Cần Thơ) merger re-check** — press (dantri.com.vn, Nov 2025) described
+   an unexecuted reorganization proposal to merge this school into Trường Cao đẳng Kinh tế - Kỹ
+   thuật Cần Thơ. Re-verified this batch: a corroborating thanhnien.vn article (13/11/2025) confirms
+   Cần Thơ's city government approved transferring `cdct`'s land/facilities as part of a broader
+   local restructuring, but `cdct`'s own domain (`tuyensinh.cdct.edu.vn`) is still live, still
+   publishing under its own independent name, with active "tuyển sinh ... năm học 2026-2027"
+   content as of this check. No Prime Minister/MOET decision confirming the merger as *executed*
+   was found (unlike the confirmed, decision-numbered mergers found elsewhere this batch — see
+   below). Per the no-change-unless-confirmed-executed rule: **left unchanged**, still flagged for a
+   future re-check.
+2. **AUAD (Trường Đại học Mỹ thuật Công nghiệp Á Châu) domain re-check** — re-tested both
+   `auad.edu.vn` and a newly-surfaced alternate `mythuatcongnghiepachau.edu.vn` (cited by a
+   secondary aggregator as AUAD's site): both fail DNS resolution (`ENOTFOUND`) at verification
+   time. **Left unchanged**, not added, per the no-invented-URL rule.
+3. **Trường Cao đẳng Công nghệ - Ngoại thương domain disambiguation** — re-searched; the competing
+   domains identified in Batch 3 are still all live and none stands out as clearly canonical over
+   the others. One (`ngoaithuongcollege.edu.vn`) does carry live 2026 admission content and a
+   consistent institution name/address, making it the most plausible candidate, but a 5th mirror
+   (`cnnteduvn.webflow.io`) also surfaced this batch, reinforcing the original ambiguity rather than
+   resolving it. **Left unchanged / still needs review** rather than guessing.
+4. **Trường Cao đẳng Văn hóa - Nghệ thuật Đà Nẵng domain re-check** — found that this institution
+   was merged (confirmed executed: Quyết định 1867/QĐ-BGDĐT, 03/7/2025) into "Trường Cao đẳng nghề
+   Đà Nẵng", with the combined entity renamed "Trường Cao đẳng Đà Nẵng" (live official domain
+   `dnc.edu.vn`, confirmed via the school's own site and giaoduc.net.vn coverage of the same
+   decision). This merger successor turned out to **already be cataloged** as `danangcollege`
+   (added in an earlier batch, sourced from the Đà Nẵng GDNN directory) — its `name`, `location`,
+   and `dnc.edu.vn` source were already correct, but it was missing the "Trường Cao đẳng Văn hóa -
+   Nghệ thuật Đà Nẵng" alias and a source documenting the merger explicitly. **No new entry added**
+   (an initial attempt to add one as a separate `cddn` id was caught by `npm run audit:data`'s
+   `DUPLICATE_CANONICAL_NAME` check before being committed, and reverted); instead the existing
+   `danangcollege` entry in `uniscorevn-data/normalized/runtime-source-snapshot/collegeCatalog.ts`
+   was enriched with the missing alias and the merger-confirmation source.
+5. **HCMC GDNN AJAX directory sweep** — attempted again via `chrome-devtools`, but the shared browser
+   profile was already in use by a concurrent process this session (`Failed to attach: browser
+   already running for this profile`), and starting a second isolated instance was avoided to not
+   risk interfering with a concurrent agent working in the same workspace. A plain `WebFetch` re-check
+   of `gdnn.tphcm.gov.vn` confirms the directory page still exists at `/co-so-giao-duc-nghe-nghiep`
+   but exposes no discoverable AJAX endpoint in static HTML. **Still not done** — carried forward
+   again for a future batch with a free browser-automation session.
+6. No new authoritative source (fresh MOET/MOHA list) was identified this batch; no further
+   candidates were pursued beyond the four specific leads above, per this batch's scope.
+
+## Not added / needs review (carried forward, unchanged)
+
+| Institution | Reason | Notes |
+|---|---|---|
+| Trường Cao đẳng Cần Thơ (`cdct`, already cataloged) | merger proposed, not executed | Re-check again in a future batch; watch for a Prime Minister/MOET decision number. |
+| Trường Đại học Mỹ thuật Công nghiệp Á Châu (AUAD) | dead domain | Both known domains still fail DNS. |
+| Trường Cao đẳng Công nghệ - Ngoại thương | 5+ competing domains | Still unresolved; `ngoaithuongcollege.edu.vn` is the most plausible single candidate but not confidently sole-official. |
+| Trường Cao đẳng Quốc tế Sài Gòn | no confirmed `.edu.vn` | Unchanged from Batch 3 (not in this batch's explicit scope). |
+
+## Test/build status (Batch 5)
+
+- `npm run validate` (private): OK.
+- `npm run export:runtime` (private): wrote all 4 generated artifacts; public repo diff was exactly
+  the intended alias/source enrichment to the existing `danangcollege` entry in
+  `collegeCatalog.generated.ts` (no entry count change).
+- `npm run audit:data`: 0 catalog audit errors, 0 catalog audit warnings after the fix (the
+  transient `DUPLICATE_CANONICAL_NAME` error from the reverted `cddn` duplicate was caught and
+  fixed before committing); counts unchanged at 319 catalog entries / 307 independent institutions /
+  134 verified calculators.
+- Full `tsc -b` / `npm run test` / `npm run lint` / `npm run build` / `npm run validate:generated` /
+  `npm run stats:coverage` / `npm run check:docs` deferred to the end-of-session combined quality
+  gate (run once after workstreams A, B, and C were all complete — see final report).
+
+## Recommendation for next batch (Batch 6, if any)
+
+1. Re-check `cdct` again for an executed (decision-numbered) merger.
+2. Re-check AUAD for a live domain.
+3. Trường Cao đẳng Công nghệ - Ngoại thương's domain ambiguity is now a 3-batch-old open item;
+   consider treating it as permanently unresolved unless a Bộ GD-ĐT/Bộ LĐTBXH primary list turns up.
+4. The HCMC GDNN AJAX sweep is now open across 4 batches; needs a session with an exclusively-owned
+   browser-automation instance to make progress.
+5. This batch's experience (a "needs-review" lead resolving to an already-cataloged entry, not a
+   gap) is a reminder to grep the *actual content* of candidate source files, not just check
+   file-level `grep -l` hits, before concluding an institution is missing.
