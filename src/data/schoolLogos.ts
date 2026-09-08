@@ -123,6 +123,55 @@ export const SCHOOL_LOGOS: Record<string, SchoolLogoRecord> = {
   hvu: { schoolId: 'hvu', file: 'hvu.png', format: 'png', width: 100, height: 100, sourceUrl: 'https://hvu.edu.vn', sourceTitle: 'Trường Đại học Hùng Vương (trang chủ)', retrievedAt: '2026-09-08' },
   vhs: { schoolId: 'vhs', file: 'vhs.png', format: 'png', width: 470, height: 80, sourceUrl: 'https://hcmuc.edu.vn', sourceTitle: 'Trường Đại học Văn hóa Thành phố Hồ Chí Minh (trang chủ)', retrievedAt: '2026-09-08' },
   vya: { schoolId: 'vya', file: 'vya.png', format: 'png', width: 6155, height: 1005, sourceUrl: 'https://vya.edu.vn', sourceTitle: 'Học viện Thanh thiếu niên Việt Nam (trang chủ)', retrievedAt: '2026-09-08' },
+
+  // Batch 3 (2026-09-08) — 40 trường verified-exact còn lại, domain xác thực từ src/schools/<id>/sources.ts
+  // (hoặc tra cứu web khi sources.ts không có URL chính chủ) rồi mới crawl logo trên đúng domain đó —
+  // KHÔNG đoán domain pattern như batch trước. 5 trường bị bỏ qua: `qbu`/`hpmu` (đã xác nhận lại logo
+  // trên domain đúng vẫn không dùng được — qbu.edu.vn chỉ có bản logo xám nhạt gần như vô hình, hpmu
+  // chỉ có asset "logo" là huy hiệu Bộ Y Tế không phải logo trường, giống kết luận batch 2), `ou`
+  // (ou.edu.vn vẫn chỉ có bản dark-version trắng-trong-suốt, giữ nguyên kết luận batch 2), `iu`
+  // (hcmiu.edu.vn/tuyensinh.hcmiu.edu.vn chặn bởi JS cookie-challenge chống bot, không lấy được HTML
+  // thật), `uflsudn` (ufl.udn.vn liên tục 502 Bad Gateway nhiều lần thử — domain đang lỗi).
+  apd: { schoolId: 'apd', file: 'apd.png', format: 'png', width: 339, height: 458, sourceUrl: 'https://apd.edu.vn', sourceTitle: 'Học viện Chính sách và Phát triển (trang chủ)', retrievedAt: '2026-09-08' },
+  bmtu: { schoolId: 'bmtu', file: 'bmtu.png', format: 'png', width: 1268, height: 674, sourceUrl: 'https://bmu.edu.vn', sourceTitle: 'Trường Đại học Y Dược Buôn Ma Thuột (trang chủ, og:image)', retrievedAt: '2026-09-08' },
+  cmcu: { schoolId: 'cmcu', file: 'cmcu.png', format: 'png', width: 400, height: 71, sourceUrl: 'https://cmcu.edu.vn', sourceTitle: 'Trường Đại học CMC (trang chủ)', retrievedAt: '2026-09-08' },
+  ctump: { schoolId: 'ctump', file: 'ctump.png', format: 'png', width: 512, height: 109, sourceUrl: 'https://ctump.edu.vn', sourceTitle: 'Trường Đại học Y Dược Cần Thơ (media.ctump.edu.vn, header)', retrievedAt: '2026-09-08' },
+  dainam: { schoolId: 'dainam', file: 'dainam.png', format: 'png', width: 922, height: 232, sourceUrl: 'https://dainam.edu.vn', sourceTitle: 'Trường Đại học Đại Nam (trang chủ, logo ngang)', retrievedAt: '2026-09-08' },
+  dlu: { schoolId: 'dlu', file: 'dlu.png', format: 'png', width: 193, height: 193, sourceUrl: 'https://dlu.edu.vn', sourceTitle: 'Trường Đại học Đà Lạt (trang chủ)', retrievedAt: '2026-09-08' },
+  dthu: { schoolId: 'dthu', file: 'dthu.png', format: 'png', width: 200, height: 200, sourceUrl: 'https://dthu.edu.vn', sourceTitle: 'Trường Đại học Đồng Tháp (trang chủ)', retrievedAt: '2026-09-08' },
+  dumtp: { schoolId: 'dumtp', file: 'dumtp.png', format: 'png', width: 1200, height: 1200, sourceUrl: 'https://ydn.edu.vn', sourceTitle: 'Trường Đại học Kỹ thuật Y Dược Đà Nẵng (trang chủ)', retrievedAt: '2026-09-08' },
+  fbu: { schoolId: 'fbu', file: 'fbu.png', format: 'png', width: 400, height: 96, sourceUrl: 'https://fbu.edu.vn', sourceTitle: 'Trường Đại học Tài chính - Ngân hàng Hà Nội (trang chủ, header logo)', retrievedAt: '2026-09-08' },
+  fpfu: { schoolId: 'fpfu', file: 'fpfu.png', format: 'png', width: 669, height: 671, sourceUrl: 'https://daihocpccc.edu.vn', sourceTitle: 'Trường Đại học Phòng cháy Chữa cháy (trang chủ, logo Học viện PCCC và Cứu nạn cứu hộ)', retrievedAt: '2026-09-08' },
+  fptu: { schoolId: 'fptu', file: 'fptu.png', format: 'png', width: 330, height: 93, sourceUrl: 'https://daihoc.fpt.edu.vn', sourceTitle: 'Trường Đại học FPT (trang chủ, header logo)', retrievedAt: '2026-09-08' },
+  hat: { schoolId: 'hat', file: 'hat.png', format: 'png', width: 192, height: 192, sourceUrl: 'https://huht.hueuni.edu.vn', sourceTitle: 'Trường Du lịch - Đại học Huế (trang chủ, favicon 192px)', retrievedAt: '2026-09-08' },
+  hbu: { schoolId: 'hbu', file: 'hbu.webp', format: 'webp', width: 1128, height: 865, sourceUrl: 'https://daihochoabinh.edu.vn', sourceTitle: 'Trường Đại học Hòa Bình (trang chủ, thương hiệu "Victoria Hòa Bình University")', retrievedAt: '2026-09-08' },
+  hca: { schoolId: 'hca', file: 'hca.png', format: 'png', width: 85, height: 85, sourceUrl: 'http://hcmca.edu.vn', sourceTitle: 'Học viện Cán bộ Thành phố Hồ Chí Minh (trang chủ)', retrievedAt: '2026-09-08' },
+  hce: { schoolId: 'hce', file: 'hce.jpg', format: 'jpg', width: 372, height: 372, sourceUrl: 'https://hce.edu.vn', sourceTitle: 'Trường Đại học Kinh tế, Đại học Huế (trang chủ, ảnh loading/logo)', retrievedAt: '2026-09-08' },
+  hcmut: { schoolId: 'hcmut', file: 'hcmut.png', format: 'png', width: 3508, height: 2481, sourceUrl: 'https://hcmut.edu.vn', sourceTitle: 'Trường Đại học Bách khoa – ĐHQG TP.HCM (trang chủ, bundle JS nhận diện thương hiệu)', retrievedAt: '2026-09-08' },
+  hcmute: { schoolId: 'hcmute', file: 'hcmute.jpg', format: 'jpg', width: 2711, height: 466, sourceUrl: 'https://hcmute.edu.vn', sourceTitle: 'Trường Đại học Công nghệ Kỹ thuật TP. Hồ Chí Minh (trang chủ, banner logo HCM-UTE)', retrievedAt: '2026-09-08' },
+  hluv: { schoolId: 'hluv', file: 'hluv.jpg', format: 'jpg', width: 520, height: 108, sourceUrl: 'http://hluv.edu.vn', sourceTitle: 'Trường Đại học Hoa Lư (trang chủ, header logo)', retrievedAt: '2026-09-08' },
+  hnmu: { schoolId: 'hnmu', file: 'hnmu.png', format: 'png', width: 1116, height: 223, sourceUrl: 'https://hnmu.edu.vn', sourceTitle: 'Trường Đại học Thủ đô Hà Nội (trang chủ)', retrievedAt: '2026-09-08' },
+  hsu: { schoolId: 'hsu', file: 'hsu.png', format: 'png', width: 1055, height: 519, sourceUrl: 'https://www.hoasen.edu.vn', sourceTitle: 'Trường Đại học Hoa Sen (trang chủ, header logo)', retrievedAt: '2026-09-08' },
+  htu: { schoolId: 'htu', file: 'htu.png', format: 'png', width: 495, height: 90, sourceUrl: 'https://htu.edu.vn', sourceTitle: 'Trường Đại học Hà Tĩnh (trang chủ, ảnh nền logo template)', retrievedAt: '2026-09-08' },
+  hub: { schoolId: 'hub', file: 'hub.svg', format: 'svg', width: 2386, height: 820, sourceUrl: 'https://hub.edu.vn', sourceTitle: 'Trường Đại học Ngân hàng TP. Hồ Chí Minh (trang chủ, inline SVG logo trong header)', retrievedAt: '2026-09-08' },
+  huc: { schoolId: 'huc', file: 'huc.png', format: 'png', width: 200, height: 195, sourceUrl: 'https://huc.edu.vn', sourceTitle: 'Trường Đại học Văn hóa Hà Nội (trang chủ)', retrievedAt: '2026-09-08' },
+  husc: { schoolId: 'husc', file: 'husc.png', format: 'png', width: 2203, height: 424, sourceUrl: 'https://husc.edu.vn', sourceTitle: 'Trường Đại học Khoa học, Đại học Huế (trang chủ, logo_vi_white.png — nền xanh đậm)', retrievedAt: '2026-09-08' },
+  ltvuni: { schoolId: 'ltvuni', file: 'ltvuni.jpg', format: 'jpg', width: 1200, height: 119, sourceUrl: 'https://ltvu.edu.vn', sourceTitle: 'Trường Đại học Lương Thế Vinh (trang chủ, banner navbar-brand)', retrievedAt: '2026-09-08' },
+  naem: { schoolId: 'naem', file: 'naem.jpg', format: 'jpg', width: 812, height: 815, sourceUrl: 'https://naem.edu.vn', sourceTitle: 'Học viện Quản lý giáo dục (trang chủ, logo header)', retrievedAt: '2026-09-08' },
+  nctu: { schoolId: 'nctu', file: 'nctu.webp', format: 'webp', width: 100, height: 97, sourceUrl: 'https://nctu.edu.vn', sourceTitle: 'Trường Đại học Nam Cần Thơ (trang chủ, favicon)', retrievedAt: '2026-09-08' },
+  nlu: { schoolId: 'nlu', file: 'nlu.jpg', format: 'jpg', width: 293, height: 293, sourceUrl: 'https://nlu.edu.vn', sourceTitle: 'Trường Đại học Nông Lâm TP.HCM (trang chủ, og:image)', retrievedAt: '2026-09-08' },
+  phenikaa: { schoolId: 'phenikaa', file: 'phenikaa.png', format: 'png', width: 2448, height: 493, sourceUrl: 'https://phenikaa-uni.edu.vn', sourceTitle: 'Trường Đại học Phenikaa (trang chủ, module logo)', retrievedAt: '2026-09-08' },
+  qnamu: { schoolId: 'qnamu', file: 'qnamu.png', format: 'png', width: 225, height: 225, sourceUrl: 'https://qnamuni.edu.vn', sourceTitle: 'Trường Đại học Quảng Nam (trang chủ)', retrievedAt: '2026-09-08' },
+  tbu: { schoolId: 'tbu', file: 'tbu.jpg', format: 'jpg', width: 253, height: 48, sourceUrl: 'https://tbu.edu.vn', sourceTitle: 'Trường Đại học Thái Bình (media.tbu.edu.vn, logo dashboard)', retrievedAt: '2026-09-08' },
+  trungvuong: { schoolId: 'trungvuong', file: 'trungvuong.png', format: 'png', width: 262, height: 96, sourceUrl: 'https://tv-uni.edu.vn', sourceTitle: 'Trường Đại học Trưng Vương (tv-uni.edu.vn, logo gốc)', retrievedAt: '2026-09-08' },
+  ufm: { schoolId: 'ufm', file: 'ufm.png', format: 'png', width: 366, height: 95, sourceUrl: 'https://ufm.edu.vn', sourceTitle: 'Trường Đại học Tài chính – Marketing (trang chủ, logo4.png)', retrievedAt: '2026-09-08' },
+  ump: { schoolId: 'ump', file: 'ump.png', format: 'png', width: 320, height: 320, sourceUrl: 'https://ump.edu.vn', sourceTitle: 'Trường Đại học Y Dược Thành phố Hồ Chí Minh (trang chủ, logo2.png dùng cho .brand)', retrievedAt: '2026-09-08' },
+  ush: { schoolId: 'ush', file: 'ush.png', format: 'png', width: 200, height: 200, sourceUrl: 'https://ush.edu.vn', sourceTitle: 'Trường Đại học Thể dục Thể thao Thành phố Hồ Chí Minh (trang chủ, logo-dh.png)', retrievedAt: '2026-09-08' },
+  utt: { schoolId: 'utt', file: 'utt.jpg', format: 'jpg', width: 1200, height: 628, sourceUrl: 'https://utt.edu.vn', sourceTitle: 'Trường Đại học Công nghệ Giao thông vận tải (trang chủ, logo-utt)', retrievedAt: '2026-09-08' },
+  vnua: { schoolId: 'vnua', file: 'vnua.png', format: 'png', width: 700, height: 79, sourceUrl: 'https://vnua.edu.vn', sourceTitle: 'Học viện Nông nghiệp Việt Nam (trang chủ, header logo)', retrievedAt: '2026-09-08' },
+  vnueb: { schoolId: 'vnueb', file: 'vnueb.png', format: 'png', width: 2375, height: 2425, sourceUrl: 'https://ueb.edu.vn', sourceTitle: 'Trường Đại học Kinh tế - ĐHQGHN (trang chủ, logo.png)', retrievedAt: '2026-09-08' },
+  vnued: { schoolId: 'vnued', file: 'vnued.png', format: 'png', width: 180, height: 180, sourceUrl: 'https://education.vnu.edu.vn', sourceTitle: 'Trường Đại học Giáo dục - ĐHQGHN (trang chủ, apple-touch-icon 180px)', retrievedAt: '2026-09-08' },
+  vnuulis: { schoolId: 'vnuulis', file: 'vnuulis.png', format: 'png', width: 567, height: 567, sourceUrl: 'https://ulis.vnu.edu.vn', sourceTitle: 'Trường Đại học Ngoại ngữ - Đại học Quốc gia Hà Nội (trang chủ, header logo)', retrievedAt: '2026-09-08' },
 };
 
 export function getSchoolLogo(schoolId: string): SchoolLogoRecord | undefined {
