@@ -1,7 +1,7 @@
 import type { AdmissionMethodDescriptor } from '../../core/admissionMethod';
 import { hcmulawKnowledgeGaps } from './knowledgeGaps';
 
-const hocbaGranularityGap = hcmulawKnowledgeGaps.filter((gap) => gap.id === 'hcmulaw-hocba-semester-granularity-gap');
+const method2BonusGap = hcmulawKnowledgeGaps.filter((gap) => gap.id === 'hcmulaw-method2-bonus-certificate-model-gap');
 
 /**
  * HCMULAW 2026 — 4/5 phương thức có công thức điểm (mã 410/200/417/100; Phương thức 1 mã 301 xét
@@ -13,12 +13,17 @@ const hocbaGranularityGap = hcmulawKnowledgeGaps.filter((gap) => gap.id === 'hcm
  *   30, không nhân hệ số), không có điểm cộng, điểm ưu tiên theo bảng chuẩn quốc gia.
  * - `vsat4`: `exactCalculator: true` — quy đổi RIÊNG TỪNG MÔN qua bảng bách phân vị (7 môn Toán/
  *   Văn/Anh/Lý/Hóa/Sử/Địa, `conversionTable.ts`), verified khớp ví dụ minh họa chính thức.
- * - `combined2`/`priorityHighSchool3`: giữ `exactCalculator: false` — công thức y=x-k đã có nhưng
- *   x cần TB học bạ theo 6 HỌC KỲ, hồ sơ dùng chung chỉ lưu TB năm (3 giá trị), xem
- *   `knowledgeGaps.ts:hcmulaw-hocba-semester-granularity-gap`. Module này KHÔNG implement bảng điểm
- *   khuyến khích chứng chỉ ngoại ngữ/SAT của Phương thức 2 trong batch này dù nội dung đã đọc được
- *   đầy đủ từ nguồn — vì phần "điểm tổ hợp môn" của PT2 vẫn bị chặn nên chưa có evaluator nào tiêu
- *   thụ bảng đó, để `capabilities.bonus: false` trung thực (chưa có consumer runtime).
+ * Batch "6 học kỳ" (2026-09-07) — `hcmulaw-hocba-semester-granularity-gap` ĐÃ ĐÓNG (hồ sơ dùng chung
+ * có `transcript.bySemester`; bảng "độ lệch k" 16 ô đã transcribe vào `conversionTable.ts`):
+ * - `priorityHighSchool3`: lên `exactCalculator: true` — ĐXT = (x - k) + điểm ưu tiên, kẹp 30. Nguồn
+ *   KHÔNG có thành phần "điểm khuyến khích" cho phương thức này. Exact trong phạm vi thí sinh không
+ *   có "điểm xét thưởng" thành tích (cùng semantics conditional-exact HUTECH/USSH/IU/TDTU/HUFLIT) —
+ *   KHÔNG gắn `knowledgeGaps` vào descriptor này (`auditMethods()` coi `exactCalculator:true` +
+ *   `knowledgeGaps` non-empty là lỗi EXACT_METHOD_HAS_UNRESOLVED_GAPS).
+ * - `combined2`: vẫn `exactCalculator: false`, nhưng vì gap MỚI khác hẳn —
+ *   `hcmulaw-method2-bonus-certificate-model-gap` (điểm khuyến khích chứng chỉ ngoại ngữ/SAT không
+ *   mô hình hoá được từ `ApplicantProfile.certificates` hiện tại). Phần điểm tổ hợp học bạ quy đổi
+ *   (y = x - k) ĐÃ tính được và hiện trong `explanation`, nên `scoreConversion: true`.
  */
 export const hcmulawAdmissionMethods: AdmissionMethodDescriptor[] = [
   {
@@ -27,17 +32,16 @@ export const hcmulawAdmissionMethods: AdmissionMethodDescriptor[] = [
     name: 'Xét tuyển kết hợp kết quả học tập THPT với chứng chỉ ngoại ngữ quốc tế/SAT (mã PT 410)',
     year: 2026,
     applicantTypes: ['Thí sinh tốt nghiệp THPT, có chứng chỉ ngoại ngữ quốc tế hoặc kết quả SAT'],
-    capabilities: { eligibility: false, scoreConversion: false, bonus: false, priority: false, exactCalculator: false },
-    knowledgeGaps: hocbaGranularityGap,
+    capabilities: { eligibility: true, scoreConversion: true, bonus: false, priority: false, exactCalculator: false },
+    knowledgeGaps: method2BonusGap,
   },
   {
     id: 'hcmulaw-priority-highschool3-2026',
     schoolId: 'hcmulaw',
     name: 'Xét tuyển học tập THPT — trường thuộc diện ưu tiên xét tuyển của ĐHQG-HCM (mã PT 200)',
     year: 2026,
-    applicantTypes: ['Thí sinh học 3 năm tại trường THPT thuộc danh sách ưu tiên ĐHQG-HCM'],
-    capabilities: { eligibility: false, scoreConversion: false, bonus: false, priority: false, exactCalculator: false },
-    knowledgeGaps: hocbaGranularityGap,
+    applicantTypes: ['Thí sinh học 3 năm tại trường THPT thuộc danh sách ưu tiên ĐHQG-HCM, không có điểm xét thưởng thành tích'],
+    capabilities: { eligibility: true, scoreConversion: true, bonus: false, priority: true, exactCalculator: true },
   },
   {
     id: 'hcmulaw-vsat4-2026',

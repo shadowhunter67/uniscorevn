@@ -12,7 +12,12 @@ import type { AdmissionEvaluation } from '../../core/admissionEvaluation';
 import { hcmulawSources } from './sources';
 import { hcmulawAdmissionMethods } from './methods';
 import { hcmulawKnowledgeGaps } from './knowledgeGaps';
-import { evaluateHcmulawThpt5Admission, evaluateHcmulawVsat4Admission } from './evaluate';
+import {
+  evaluateHcmulawThpt5Admission,
+  evaluateHcmulawVsat4Admission,
+  evaluateHcmulawPriorityHighschool3Admission,
+  evaluateHcmulawCombined2Admission,
+} from './evaluate';
 import { hcmulawPrograms, findHcmulawProgram, type HcmulawProgramId } from './programs';
 import { HCMULAW_PRIORITY_REGION_POINTS_30, HCMULAW_PRIORITY_CATEGORY_POINTS_30 } from './priority';
 
@@ -22,8 +27,11 @@ interface HcmulawPageProps {
 
 const YEAR = 2026;
 
-/** HCMULAW Page — batch 2026-08-21. Chỉ 2/4 phương thức có Page tính điểm (PT5 thi THPT / PT4
- * V-SAT) — exact. PT2/PT3 (học bạ, cần TB 6 học kỳ) hiển thị trung thực là chưa tính được. */
+/** HCMULAW Page — batch 2026-08-21, cập nhật batch "6 học kỳ" (2026-09-07). 3/4 phương thức tính
+ * được điểm xét tuyển (PT5 thi THPT / PT4 V-SAT / PT3 học bạ trường ưu tiên) — exact. PT2 hiện được
+ * điểm tổ hợp học bạ đã quy đổi (y = x − k) nhưng KHÔNG hiện điểm xét tuyển cuối: còn thiếu mô hình
+ * "điểm khuyến khích" chứng chỉ ngoại ngữ/SAT, xem
+ * `knowledgeGaps.ts:hcmulaw-method2-bonus-certificate-model-gap`. */
 export function HcmulawPage({ onChangeSchool }: HcmulawPageProps) {
   const { profile, updateProfile } = useApplicantProfile();
   const [programId, setProgramId] = useState<HcmulawProgramId | ''>('');
@@ -49,6 +57,15 @@ export function HcmulawPage({ onChangeSchool }: HcmulawPageProps) {
   const category = profile.priority?.category ?? '';
 
   const thpt5Evaluation = evaluateHcmulawThpt5Admission(profile, { programId: programId || undefined, combinationCode: combinationCode || undefined });
+
+  const [priorityHighSchool, setPriorityHighSchool] = useState(false);
+  const transcriptContext = { programId: programId || undefined, combinationCode: combinationCode || undefined };
+  const priorityHighschool3Evaluation = evaluateHcmulawPriorityHighschool3Admission(profile, {
+    ...transcriptContext,
+    studiedAtPriorityHighSchool: priorityHighSchool,
+    allYearsRankedGood: priorityHighSchool,
+  });
+  const combined2Evaluation = evaluateHcmulawCombined2Admission(profile, transcriptContext);
 
   const [vsatScores, setVsatScores] = useState<Partial<Record<SubjectId, string>>>({});
   const vsat4Evaluation = evaluateHcmulawVsat4Admission(profile, {
@@ -102,7 +119,9 @@ export function HcmulawPage({ onChangeSchool }: HcmulawPageProps) {
         />
 
         <section className="mt-5 rounded-card bg-surface p-6 shadow-card sm:p-8">
-          <h2 className="text-lg font-semibold text-ink">Phương thức đang hỗ trợ: {hcmulawAdmissionMethods[3].name} · {hcmulawAdmissionMethods[2].name}</h2>
+          <h2 className="text-lg font-semibold text-ink">
+            Phương thức đang hỗ trợ: {hcmulawAdmissionMethods[3].name} · {hcmulawAdmissionMethods[2].name} · {hcmulawAdmissionMethods[1].name}
+          </h2>
           <MethodCapabilitySummary method={hcmulawAdmissionMethods[3]} />
           <p className="mt-4 text-sm text-muted">
             <span className="font-mono text-ink">Điểm xét tuyển = Điểm tổ hợp môn + Điểm ưu tiên</span> (thang 30,
@@ -265,6 +284,34 @@ export function HcmulawPage({ onChangeSchool }: HcmulawPageProps) {
                 </div>
                 <p className="mt-1 text-xs text-muted">Chỉ hỗ trợ tổ hợp gồm 7 môn có bảng quy đổi công bố (Toán/Văn/Anh/Lý/Hóa/Sử/Địa).</p>
                 {renderResult(vsat4Evaluation, 'Điểm xét tuyển PT4')}
+              </div>
+
+              <div className="mt-4 rounded-xl bg-surface p-4">
+                <p className="text-sm font-medium text-ink">PT3 — Học bạ trường THPT ưu tiên ĐHQG-HCM (tổ hợp {combination.code})</p>
+                <p className="mt-1 text-xs text-muted">
+                  Điểm tổ hợp học bạ quy đổi <span className="font-mono">y = x − k</span>, với x = tổng trung bình cộng{' '}
+                  <strong>6 học kỳ</strong> của 3 môn tổ hợp. Nhập điểm từng học kỳ ở mục "Điểm học bạ theo từng học kỳ
+                  (nâng cao)" trong hồ sơ dùng chung — điểm trung bình cả năm không thay thế được.
+                </p>
+                <label className="mt-2 flex items-center gap-2 text-sm text-ink">
+                  <input
+                    type="checkbox"
+                    checked={priorityHighSchool}
+                    onChange={(e) => setPriorityHighSchool(e.target.checked)}
+                  />
+                  Học đủ 3 năm tại trường THPT thuộc danh sách ưu tiên ĐHQG-HCM, học lực cả 3 năm mức Tốt
+                </label>
+                <SharedProfileNotice className="mt-2" />
+                {renderResult(priorityHighschool3Evaluation, 'Điểm xét tuyển PT3')}
+              </div>
+
+              <div className="mt-4 rounded-xl bg-surface p-4">
+                <p className="text-sm font-medium text-ink">PT2 — Kết hợp học bạ + chứng chỉ ngoại ngữ/SAT (tổ hợp {combination.code})</p>
+                <p className="mt-1 text-xs text-muted">
+                  Quy đổi điểm học bạ dùng chung công thức <span className="font-mono">y = x − k</span> với PT3, nhưng điểm xét
+                  tuyển cuối của PT2 còn cộng "điểm khuyến khích" từ chứng chỉ — phần này chưa tính được, xem cảnh báo bên dưới.
+                </p>
+                {renderResult(combined2Evaluation, 'Điểm xét tuyển PT2')}
               </div>
             </>
           )}

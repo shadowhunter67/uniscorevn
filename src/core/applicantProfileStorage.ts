@@ -11,6 +11,7 @@ import {
   type VactProfile,
 } from './vactProfile';
 import { SUBJECT_LABELS, type SubjectId } from './subjects';
+import { TRANSCRIPT_SEMESTER_KEYS, type TranscriptBySemester } from './transcriptSemesters';
 
 /**
  * Batch — runtime validation cho dữ liệu đến từ localStorage/URL (untrusted input, có thể là
@@ -80,6 +81,23 @@ function sanitizeThpt(value: unknown): ApplicantProfile['thpt'] | undefined {
   return Object.keys(scores).length > 0 ? { scores } : undefined;
 }
 
+/**
+ * `bySemester` (batch "6 học kỳ") — whitelist THEO KEY giống hệt nhánh TB năm ở trên: key học kỳ lạ
+ * bị drop, `SubjectId`/range dùng lại `sanitizeSubjectScores` (cùng thang điểm 10). Vì `bySemester`
+ * là field OPT-IN thêm sau, hồ sơ cũ đơn giản là không có nó — không cần bump version/migration,
+ * chỉ cần whitelist ở đây (nếu KHÔNG thêm, sanitizer sẽ âm thầm xoá dữ liệu học kỳ mỗi lần load).
+ */
+function sanitizeTranscriptBySemester(value: unknown): TranscriptBySemester | undefined {
+  if (!isPlainObject(value)) return undefined;
+  const result: TranscriptBySemester = {};
+  TRANSCRIPT_SEMESTER_KEYS.forEach((semester) => {
+    if (!isPlainObject(value[semester])) return;
+    const scores = sanitizeSubjectScores(value[semester]);
+    if (Object.keys(scores).length > 0) result[semester] = scores;
+  });
+  return emptyToUndefined(result);
+}
+
 function sanitizeTranscript(value: unknown): ApplicantProfile['transcript'] | undefined {
   if (!isPlainObject(value)) return undefined;
   const result: NonNullable<ApplicantProfile['transcript']> = {};
@@ -89,6 +107,8 @@ function sanitizeTranscript(value: unknown): ApplicantProfile['transcript'] | un
       if (Object.keys(scores).length > 0) result[grade] = scores;
     }
   });
+  const bySemester = sanitizeTranscriptBySemester(value.bySemester);
+  if (bySemester) result.bySemester = bySemester;
   return emptyToUndefined(result);
 }
 

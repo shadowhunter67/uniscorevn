@@ -116,3 +116,76 @@ describe('evaluateVluCombinedAdmission (Phương thức 3 — kết hợp)', () 
     expect(evaluation.missingRules.some((label) => label.includes('kết hợp'))).toBe(true);
   });
 });
+
+/**
+ * Điểm học bạ VLU = "tổng điểm trung bình 03 môn theo tổ hợp xét tuyển của 06 học kỳ".
+ * Số kỳ vọng TÍNH TAY từ fixture dưới đây:
+ *   math    = (7+8+7+8+7+8)/6 = 45/6 = 7,50
+ *   physics = (6+6+7+7+8+8)/6 = 42/6 = 7,00
+ *   english = (9+9+9+9+9+9)/6 = 54/6 = 9,00
+ *   tổng    = 7,50 + 7,00 + 9,00 = 23,50/30
+ */
+const SIX_SEMESTERS = {
+  grade10Sem1: { math: 7, physics: 6, english: 9 },
+  grade10Sem2: { math: 8, physics: 6, english: 9 },
+  grade11Sem1: { math: 7, physics: 7, english: 9 },
+  grade11Sem2: { math: 8, physics: 7, english: 9 },
+  grade12Sem1: { math: 7, physics: 8, english: 9 },
+  grade12Sem2: { math: 8, physics: 8, english: 9 },
+};
+
+describe('VLU học bạ — TB 3 môn của 6 học kỳ (transcript.bySemester)', () => {
+  const subjectContext = { combinationId: 'A01', subjects: A01_SUBJECTS };
+
+  it('tính đúng TB từng môn và tổng 23,50/30 (tính tay)', () => {
+    const evaluation = evaluateVluTranscriptAdmission(
+      { transcript: { bySemester: SIX_SEMESTERS } },
+      { thresholdGroup: 'standard', subjectContext }
+    );
+    expect(evaluation.explanation.find((s) => s.id === 'vlu-transcript-2026-subject-average-math')?.output).toBe(7.5);
+    expect(evaluation.explanation.find((s) => s.id === 'vlu-transcript-2026-subject-average-physics')?.output).toBe(7);
+    expect(evaluation.explanation.find((s) => s.id === 'vlu-transcript-2026-transcript-total')?.output).toBe(23.5);
+  });
+
+  it('KHÔNG trả điểm xét tuyển cuối — 2 gap score-affecting khác vẫn mở (hệ số 2 / bảng ưu tiên)', () => {
+    const evaluation = evaluateVluTranscriptAdmission(
+      { transcript: { bySemester: SIX_SEMESTERS } },
+      { thresholdGroup: 'standard', subjectContext }
+    );
+    expect(evaluation.score).toBeUndefined();
+    expect(evaluation.confidence).toBe('partial');
+    expect(evaluation.missingRequirements?.some((r) => r.code === 'vlu-primary-subject-list-unpublished')).toBe(true);
+  });
+
+  it('chỉ có TB cả năm (không có bySemester) -> báo thiếu học kỳ, KHÔNG lấy TB năm làm proxy', () => {
+    const evaluation = evaluateVluTranscriptAdmission(
+      { transcript: { grade10: { math: 8 }, grade11: { math: 8 }, grade12: { math: 8 } } },
+      { thresholdGroup: 'standard', subjectContext }
+    );
+    expect(evaluation.explanation.some((s) => s.id === 'vlu-transcript-2026-transcript-total')).toBe(false);
+    expect(evaluation.missingRequirements?.some((r) => r.code === 'vlu-transcript-semester-math')).toBe(true);
+  });
+
+  it('thiếu đúng 1 học kỳ của 1 môn -> vẫn không tính (all-or-nothing)', () => {
+    const evaluation = evaluateVluTranscriptAdmission(
+      { transcript: { bySemester: { ...SIX_SEMESTERS, grade12Sem2: { math: 8, physics: 8 } } } },
+      { thresholdGroup: 'standard', subjectContext }
+    );
+    expect(evaluation.explanation.some((s) => s.id === 'vlu-transcript-2026-transcript-total')).toBe(false);
+    const missing = evaluation.missingRequirements?.find((r) => r.code === 'vlu-transcript-semester-english');
+    expect(missing?.label).toContain('1/6 học kỳ');
+  });
+
+  it('Phương thức 3 (kết hợp) dùng chung công thức học bạ này', () => {
+    const evaluation = evaluateVluCombinedAdmission(
+      { transcript: { bySemester: SIX_SEMESTERS } },
+      { thresholdGroup: 'standard', subjectContext }
+    );
+    expect(evaluation.explanation.find((s) => s.id === 'vlu-combined-2026-transcript-total')?.output).toBe(23.5);
+  });
+
+  it('gap granularity học kỳ đã được gỡ khỏi missingRules của Phương thức 2', () => {
+    const evaluation = evaluateVluTranscriptAdmission({}, { thresholdGroup: 'standard' });
+    expect(evaluation.missingRules.some((label) => label.includes('06 học kỳ'))).toBe(false);
+  });
+});

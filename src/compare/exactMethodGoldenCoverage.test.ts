@@ -53,9 +53,9 @@ import { uelGoldenCases } from '../schools/uel/__fixtures__/officialExamples2026
 import { hcmusGoldenCase, hcmusVactConversionGoldenCases } from '../schools/hcmus/__fixtures__/officialExamples2026';
 import { usshGoldenCases } from '../schools/ussh/__fixtures__/officialExamples2026';
 import { iuGoldenCases } from '../schools/iu/__fixtures__/officialExamples2026';
-import { hutechThptGoldenCases, hutechDgnlGoldenCases } from '../schools/hutech/__fixtures__/officialExamples2026';
+import { hutechThptGoldenCases, hutechDgnlGoldenCases, hutechHocbaGoldenCases } from '../schools/hutech/__fixtures__/officialExamples2026';
 import { ufmThptGoldenCases, ufmDgnlGoldenCases, ufmHocbaGoldenCases, ufmVsatGoldenCases } from '../schools/ufm/__fixtures__/officialExamples2026';
-import { hcmulawThpt5GoldenCases, hcmulawVsat4GoldenCases } from '../schools/hcmulaw/__fixtures__/officialExamples2026';
+import { hcmulawThpt5GoldenCases, hcmulawVsat4GoldenCases, hcmulawTranscript3GoldenCases } from '../schools/hcmulaw/__fixtures__/officialExamples2026';
 import { iuhCombinedGoldenCases } from '../schools/iuh/__fixtures__/officialExamples2026';
 import { ftuDomesticExamGoldenCases } from '../schools/ftu/__fixtures__/officialExamples2026';
 import { hcmueThptExamExactGoldenCases } from '../schools/hcmue/__fixtures__/officialExamples2026';
@@ -174,12 +174,14 @@ const allGoldenCases = [
   ...iuGoldenCases,
   ...hutechThptGoldenCases,
   ...hutechDgnlGoldenCases,
+  ...hutechHocbaGoldenCases,
   ...ufmThptGoldenCases,
   ...ufmDgnlGoldenCases,
   ...ufmHocbaGoldenCases,
   ...ufmVsatGoldenCases,
   ...hcmulawThpt5GoldenCases,
   ...hcmulawVsat4GoldenCases,
+  ...hcmulawTranscript3GoldenCases,
   ...iuhCombinedGoldenCases,
   ...ftuDomesticExamGoldenCases,
   ...hcmueThptExamExactGoldenCases,
@@ -252,12 +254,14 @@ describe('exact method golden coverage invariant', () => {
         'ussh:ussh-integrated-2026',
         'hutech:hutech-thpt-2026',
         'hutech:hutech-dgnl-2026',
+        'hutech:hutech-hocba-2026',
         'ufm:ufm-thpt-2026',
         'ufm:ufm-hocba-2026',
         'ufm:ufm-dgnl-2026',
         'ufm:ufm-vsat-2026',
         'hcmulaw:hcmulaw-thpt5-2026',
         'hcmulaw:hcmulaw-vsat4-2026',
+        'hcmulaw:hcmulaw-priority-highschool3-2026',
         'iuh:iuh-combined-2026',
         'ftu:ftu-domestic-exam-2026',
         'hcmue:hcmue-thpt-exam-exact-2026',

@@ -11,7 +11,7 @@ import { COMMON_SUBJECT_COMBINATIONS, SUBJECT_LABELS, type SubjectId } from '../
 import { hutechSources } from './sources';
 import { hutechAdmissionMethods } from './methods';
 import { hutechKnowledgeGaps } from './knowledgeGaps';
-import { evaluateHutechThptAdmission, evaluateHutechDgnlAdmission, evaluateHutechVsatAdmission } from './evaluate';
+import { evaluateHutechThptAdmission, evaluateHutechDgnlAdmission, evaluateHutechVsatAdmission, evaluateHutechHocbaAdmission } from './evaluate';
 import type { HutechThresholdGroup } from './eligibility';
 import { HUTECH_PRIORITY_REGION_POINTS_30, HUTECH_PRIORITY_CATEGORY_POINTS_30 } from './priority';
 import type { AdmissionEvaluation } from '../../core/admissionEvaluation';
@@ -30,10 +30,11 @@ const THRESHOLD_GROUP_LABELS: Record<HutechThresholdGroup, string> = {
   standard: 'Các ngành còn lại',
 };
 
-/** HUTECH Page — batch 2026-08-21. Chỉ 2/4 phương thức có Page tính điểm (xét THPT/xét ĐGNL) —
- * exact trong phạm vi KHÔNG có thành tích cộng điểm. Xét học bạ (unavailable, cần dữ liệu 6 học
- * kỳ) và xét V-SAT (eligibility-only, thang điểm chưa rõ) hiển thị trung thực bằng banner, không
- * có form tính điểm riêng cho 2 phương thức đó. */
+/** HUTECH Page — batch 2026-08-21, cập nhật batch "6 học kỳ". 3/4 phương thức có Page tính điểm
+ * (xét THPT/xét học bạ/xét ĐGNL) — exact trong phạm vi KHÔNG có thành tích cộng điểm. Xét học bạ
+ * đọc điểm 6 học kỳ từ hồ sơ dùng chung (`transcript.bySemester`), dùng chung ô "Tổ hợp 3 môn" +
+ * "Nhóm ngành" + điểm ưu tiên với phương thức xét THPT nên không dựng lại form riêng. Xét V-SAT vẫn
+ * eligibility-only (thang điểm chưa rõ), hiển thị trung thực bằng banner. */
 export function HutechPage({ onChangeSchool }: HutechPageProps) {
   const { profile, updateProfile } = useApplicantProfile();
   const [combinationId, setCombinationId] = useState('');
@@ -70,6 +71,12 @@ export function HutechPage({ onChangeSchool }: HutechPageProps) {
   const dgnlProfile = effectiveDgnl !== undefined ? { ...profile, exams: { vact: { ...profile.exams?.vact, total: effectiveDgnl } } } : profile;
   const dgnlEvaluation = evaluateHutechDgnlAdmission(dgnlProfile, { thresholdGroup, hasBonusAchievement });
   const dgnlPriority = dgnlEvaluation.explanation.find((s) => s.id === 'hutech-dgnl-priority');
+
+  const hocbaEvaluation = evaluateHutechHocbaAdmission(profile, {
+    subjectContext: combination ? { combinationId: combination.id, subjects: combination.subjects } : undefined,
+    thresholdGroup,
+    hasBonusAchievement,
+  });
 
   const [vsatScoreInput, setVsatScoreInput] = useState('');
   const vsatEvaluation = evaluateHutechVsatAdmission({
@@ -116,7 +123,9 @@ export function HutechPage({ onChangeSchool }: HutechPageProps) {
         />
 
         <section className="mt-5 rounded-card bg-surface p-6 shadow-card sm:p-8">
-          <h2 className="text-lg font-semibold text-ink">Phương thức đang hỗ trợ tính điểm: {hutechAdmissionMethods[0].name} · {hutechAdmissionMethods[3].name}</h2>
+          <h2 className="text-lg font-semibold text-ink">
+            Phương thức đang hỗ trợ tính điểm: {hutechAdmissionMethods[0].name} · {hutechAdmissionMethods[1].name} · {hutechAdmissionMethods[3].name}
+          </h2>
           <MethodCapabilitySummary method={hutechAdmissionMethods[0]} />
           <p className="mt-4 text-sm text-muted">
             <span className="font-mono text-ink">Điểm xét tuyển = Điểm học lực + Điểm ưu tiên</span> (thang 30 cho xét
@@ -282,6 +291,17 @@ export function HutechPage({ onChangeSchool }: HutechPageProps) {
             </p>
           )}
           {renderResult(dgnlEvaluation, 1200, 'Điểm xét tuyển (xét ĐGNL)')}
+        </section>
+
+        <section className="mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+          <h2 className="text-lg font-semibold text-ink">{hutechAdmissionMethods[1].name}</h2>
+          <p className="mt-1 text-sm text-muted">
+            Điểm học lực = tổng điểm trung bình 3 môn theo tổ hợp <strong>của 6 học kỳ</strong> (lớp 10/11/12). Nhập điểm
+            từng học kỳ ở mục "Điểm học bạ theo từng học kỳ (nâng cao)" trong hồ sơ dùng chung — điểm trung bình cả năm
+            KHÔNG dùng thay được cho phương thức này (hai cách tính ra số khác nhau).
+          </p>
+          <SharedProfileNotice className="mt-2" />
+          {renderResult(hocbaEvaluation, 30, 'Điểm xét tuyển (xét học bạ)')}
         </section>
 
         <section className="mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">

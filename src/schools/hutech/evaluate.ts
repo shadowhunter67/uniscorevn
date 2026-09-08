@@ -3,9 +3,10 @@ import type { ApplicantProfile } from '../../core/applicantProfile';
 import type { CalculationStep } from '../../core/calculationStep';
 import type { SubjectId } from '../../core/subjects';
 import { SUBJECT_LABELS } from '../../core/subjects';
+import { sumCombinationAveragesAcrossSemesters, TRANSCRIPT_SEMESTER_LABELS } from '../../core/transcriptSemesters';
 import { hutechAdmissionMethods } from './methods';
-import { checkHutechThptThreshold, checkHutechDgnlThreshold, checkHutechVsatThreshold, type HutechThresholdGroup } from './eligibility';
-import { calculateHutechThptRawScore, calculateHutechThptFinalScore, calculateHutechDgnlFinalScore } from './calculator';
+import { checkHutechThptThreshold, checkHutechDgnlThreshold, checkHutechVsatThreshold, checkHutechHocbaThreshold, type HutechThresholdGroup } from './eligibility';
+import { calculateHutechThptRawScore, calculateHutechThptFinalScore, calculateHutechDgnlFinalScore, calculateHutechHocbaFinalScore } from './calculator';
 import { calculateHutechPriority30, calculateHutechPriority1200, lookupHutechStandardPriority30 } from './priority';
 import { hutechFormulaEvidence, hutechThresholdEvidence, hutechPriorityEvidence } from './evidence';
 
@@ -114,25 +115,111 @@ export function evaluateHutechThptAdmission(profile: ApplicantProfile, context: 
   };
 }
 
-/** Xét học bạ THPT (6 học kỳ) — LUÔN `partial`. Công thức chính thức cần TB 3 môn theo tổ hợp CỦA
- * 6 HỌC KỲ, nhưng `ApplicantProfile.transcript` dùng chung chỉ lưu TB CẢ NĂM (không đủ chi tiết để
- * tính đúng, xem `knowledgeGaps.ts:hutech-hocba-semester-granularity-gap`). Hàm này tồn tại để
- * method có 1 evaluator nhất quán với 3 phương thức còn lại thay vì im lặng bỏ qua, và để test
- * conformance phần "verified quan trọng" (ngưỡng đầu vào theo nhóm ngành, xem `eligibility.ts`). */
-export function evaluateHutechHocbaAdmission(): AdmissionEvaluation {
+export interface HutechHocbaEvaluationContext {
+  subjectContext?: HutechSubjectContext;
+  thresholdGroup?: HutechThresholdGroup;
+  /** Cùng semantics phương thức xét THPT/ĐGNL — `true` = có thành tích cộng điểm, bảng điểm thưởng
+   * chưa có nguồn nên kết quả giữ `partial`. */
+  hasBonusAchievement?: boolean;
+}
+
+/**
+ * Xét học bạ THPT (6 học kỳ) — thang 30. Điểm học lực = tổng "TB 6 học kỳ" của 3 môn theo tổ hợp,
+ * đọc từ `profile.transcript.bySemester` (`core/transcriptSemesters.ts`).
+ *
+ * Data-model gap "6 học kỳ vs TB năm" đã ĐÓNG (batch thêm `transcript.bySemester`) — nhưng đóng
+ * bằng cách BỔ SUNG dữ liệu thật, KHÔNG bằng cách xấp xỉ: thiếu bất kỳ học kỳ nào của bất kỳ môn nào
+ * trong tổ hợp thì trả `partial` + liệt kê đúng ô còn thiếu, TUYỆT ĐỐI không lấy TB cả năm
+ * (`transcript.grade10/11/12`) làm proxy — đó chính là sai số mà gap này sinh ra để tránh.
+ */
+export function evaluateHutechHocbaAdmission(profile: ApplicantProfile = {}, context: HutechHocbaEvaluationContext = {}): AdmissionEvaluation {
+  const explanation: CalculationStep[] = [];
+  const missingRequirements: MissingRequirement[] = [];
   const methodId = hutechAdmissionMethods[1].id;
   const year = hutechAdmissionMethods[1].year;
+  const group: HutechThresholdGroup = context.thresholdGroup ?? 'standard';
+
+  if (!context.subjectContext || context.subjectContext.subjects.length !== 3) {
+    missingRequirements.push({ kind: 'school-context', code: 'hutech-subject-combination', label: 'Chọn tổ hợp 3 môn xét tuyển HUTECH.' });
+    return partial(methodId, year, { missingInputs: ['Chọn tổ hợp 3 môn.'], missingRequirements, explanation, eligibilityReason: 'Cần chọn tổ hợp để kiểm tra ngưỡng đầu vào.' });
+  }
+
+  const { subjects } = context.subjectContext;
+  const combinationTotal = sumCombinationAveragesAcrossSemesters(profile.transcript?.bySemester, subjects);
+  if (combinationTotal.total30 === undefined) {
+    for (const { subjectId, missingSemesters } of combinationTotal.missingBySubject) {
+      missingRequirements.push({
+        kind: 'profile-input',
+        code: `hutech-hocba-semester-${subjectId}`,
+        label: `Điểm học bạ môn ${SUBJECT_LABELS[subjectId]} còn thiếu ${missingSemesters.length}/6 học kỳ (${missingSemesters.map((key) => TRANSCRIPT_SEMESTER_LABELS[key]).join(', ')}).`,
+      });
+    }
+    return partial(methodId, year, {
+      missingInputs: ['Chưa đủ điểm TỪNG HỌC KỲ (6 học kỳ lớp 10/11/12) cho 3 môn của tổ hợp — điểm trung bình cả năm KHÔNG thay thế được, hai cách tính ra số khác nhau.'],
+      missingRequirements,
+      explanation,
+      eligibilityReason: 'Cần đủ điểm 6 học kỳ của 3 môn tổ hợp để tính điểm học bạ.',
+    });
+  }
+
+  const raw30 = combinationTotal.total30;
+  for (const { subjectId, average } of combinationTotal.subjectAverages ?? []) {
+    explanation.push({
+      id: `hutech-hocba-subject-average-${subjectId}`,
+      label: `TB 6 học kỳ môn ${SUBJECT_LABELS[subjectId]}`,
+      output: average,
+      scale: 10,
+      formula: '(HK1 lớp 10 + HK2 lớp 10 + HK1 lớp 11 + HK2 lớp 11 + HK1 lớp 12 + HK2 lớp 12) / 6',
+      evidence: hutechFormulaEvidence.evidence,
+    });
+  }
+
+  const threshold = checkHutechHocbaThreshold(raw30, group);
+  explanation.push({ id: 'hutech-hocba-eligibility-threshold', label: 'Ngưỡng đầu vào (xét học bạ)', output: raw30, scale: 30, formula: threshold.requiredText, evidence: hutechThresholdEvidence.evidence });
+  explanation.push({ id: 'hutech-hocba-academic-score', label: 'Điểm học lực (tổng TB 6 học kỳ của 3 môn)', output: raw30, scale: 30, formula: 'TB 6 HK môn 1 + TB 6 HK môn 2 + TB 6 HK môn 3', evidence: hutechFormulaEvidence.evidence });
+
+  if (context.hasBonusAchievement === true) {
+    missingRequirements.push({ kind: 'official-rule', code: 'hutech-bonus-table-not-found', label: 'Có thành tích cộng điểm nhưng bảng điểm thưởng/khuyến khích cụ thể chưa tìm được nguồn chính thức.' });
+    return {
+      schoolId: 'hutech',
+      year,
+      methodId,
+      confidence: 'partial',
+      eligibility: { status: threshold.pass ? 'eligible' : 'ineligible', reasons: [threshold.requiredText] },
+      missingInputs: ['Mức điểm thưởng/khuyến khích cụ thể chưa có nguồn — không tính được Điểm cộng.'],
+      missingRules: ['Bảng điểm thưởng/điểm khuyến khích HUTECH chưa tìm được nguồn chính thức.'],
+      missingRequirements,
+      explanation,
+      evidence: [...hutechFormulaEvidence.evidence, ...hutechThresholdEvidence.evidence],
+    };
+  }
+
+  const standardPriority30 = lookupHutechStandardPriority30(profile.priority?.region, profile.priority?.category);
+  const priority = calculateHutechPriority30({ academicScore30: raw30, standardPriority30 });
+  explanation.push({
+    id: 'hutech-hocba-priority',
+    label: priority.reduced ? 'Điểm ưu tiên đã giảm' : 'Điểm ưu tiên',
+    output: priority.effectivePriority30,
+    scale: 30,
+    formula: priority.reduced ? '[(30 – Học lực)/7,5] × Mức ưu tiên' : 'Mức điểm ưu tiên quy đổi',
+    evidence: hutechPriorityEvidence.evidence,
+  });
+
+  const finalScore = calculateHutechHocbaFinalScore({ raw30, priority30: priority.effectivePriority30 });
+  explanation.push({ id: 'hutech-hocba-final', label: 'Điểm xét tuyển (xét học bạ) cuối cùng', output: finalScore, scale: 30 });
+
   return {
     schoolId: 'hutech',
     year,
     methodId,
-    confidence: 'unavailable',
-    eligibility: { status: 'unknown', reasons: ['Công thức cần điểm theo 6 học kỳ riêng lẻ, hồ sơ dùng chung chỉ lưu TB cả năm — không đủ dữ liệu để tính đúng công thức.'] },
-    missingInputs: ['Điểm trung bình từng học kỳ (HK1/HK2 của lớp 10/11/12) — hồ sơ dùng chung hiện chỉ lưu TB cả năm.'],
-    missingRules: ['Chưa xác nhận TB cả năm có tương đương phép tính TB 6 học kỳ của HUTECH hay không.'],
-    missingRequirements: [{ kind: 'unsupported', code: 'hutech-hocba-semester-granularity-gap', label: 'Phương thức học bạ HUTECH cần dữ liệu theo học kỳ, chưa được hồ sơ dùng chung hỗ trợ.' }],
-    explanation: [],
-    evidence: [...hutechFormulaEvidence.evidence],
+    confidence: 'exact-verified',
+    eligibility: { status: threshold.pass ? 'eligible' : 'ineligible', reasons: [threshold.requiredText] },
+    score: { value: finalScore, scale: 30 },
+    missingInputs: [],
+    missingRules: [],
+    missingRequirements,
+    explanation,
+    evidence: [...hutechFormulaEvidence.evidence, ...hutechThresholdEvidence.evidence, ...hutechPriorityEvidence.evidence],
   };
 }
 

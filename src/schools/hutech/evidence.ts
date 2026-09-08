@@ -4,18 +4,27 @@ export const hutechFormulaEvidence = {
   value: {
     thptDescription: 'tổng điểm 3 môn thi tốt nghiệp THPT 2026 theo tổ hợp xét tuyển (thang 30)',
     dgnlDescription: 'tổng điểm bài thi ĐGNL ĐHQG TP.HCM 2026 (thang 1200), đọc từ hồ sơ điểm dùng chung',
+    hocbaDescription: 'tổng điểm trung bình 3 môn theo tổ hợp xét tuyển của 6 học kỳ lớp 10/11/12 (thang 30)',
   },
   evidence: [
     {
       sourceId: 'hutech-admission-plan-2026',
       location:
-        'Mục "Phương thức xét tuyển": phương thức xét kết quả kỳ thi tốt nghiệp THPT 2026 dùng tổng điểm 3 môn theo tổ hợp; phương thức xét kết quả ĐGNL ĐHQG TP.HCM 2026 dùng trực tiếp kết quả kỳ thi (thang 1200).',
+        'Mục "Phương thức xét tuyển": phương thức xét kết quả kỳ thi tốt nghiệp THPT 2026 dùng tổng điểm 3 môn theo tổ hợp; phương thức xét kết quả ĐGNL ĐHQG TP.HCM 2026 dùng trực tiếp kết quả kỳ thi (thang 1200); phương thức xét học bạ dùng điểm trung bình 3 môn theo tổ hợp của 6 học kỳ (lớp 10/11/12).',
       verification: 'verified' as const,
       effectiveYear: 2026,
       verifiedAt: '2026-08-18',
     },
+    {
+      sourceId: 'hutech-quality-threshold-2026',
+      location: '"Phương thức 2: Xét tuyển học bạ THPT (6 học kỳ)" — tên phương thức ghi rõ phạm vi 6 học kỳ, cross-check khớp mô tả công thức ở `hutech-admission-plan-2026`.',
+      verification: 'verified' as const,
+      effectiveYear: 2026,
+      publishedAt: '2026-07-04',
+      verifiedAt: '2026-08-18',
+    },
   ],
-} satisfies SourcedRule<{ thptDescription: string; dgnlDescription: string }>;
+} satisfies SourcedRule<{ thptDescription: string; dgnlDescription: string; hocbaDescription: string }>;
 
 /**
  * Ngưỡng đảm bảo chất lượng đầu vào 2026 — 4 nhóm ngành × 4 phương thức, trích verbatim từ

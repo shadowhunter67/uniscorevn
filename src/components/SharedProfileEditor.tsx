@@ -6,6 +6,12 @@ import type { ApplicantProfileContextValue } from '../core/applicantProfileConte
 import type { SubjectId } from '../core/subjects';
 import { COMMON_SUBJECT_COMBINATIONS, SUBJECT_LABELS } from '../core/subjects';
 import { summarizeApplicantProfile } from '../core/applicantProfileSummary';
+import {
+  hasAnySemesterScore,
+  TRANSCRIPT_SEMESTER_KEYS,
+  TRANSCRIPT_SEMESTER_LABELS,
+  type TranscriptSemesterKey,
+} from '../core/transcriptSemesters';
 import { validateCertificateScore, validateThptScore, validateTranscriptScore, validateVactTotal } from '../core/profileValidationMessages';
 
 const ALL_SUBJECT_IDS = Object.keys(SUBJECT_LABELS) as SubjectId[];
@@ -241,6 +247,22 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
     }));
   }
 
+  /** Ghi 1 ô điểm học kỳ — chỉ đụng nhánh `transcript.bySemester`, KHÔNG chạm `grade10/11/12`
+   * (2 nhóm field độc lập, xem `core/transcriptSemesters.ts`). */
+  function commitSemesterScore(semester: TranscriptSemesterKey, subjectId: SubjectId, raw: string) {
+    const value = parseScore(raw);
+    updateProfile((current) => ({
+      ...current,
+      transcript: {
+        ...current.transcript,
+        bySemester: {
+          ...current.transcript?.bySemester,
+          [semester]: { ...current.transcript?.bySemester?.[semester], [subjectId]: value },
+        },
+      },
+    }));
+  }
+
   function removeThptSubject(subjectId: SubjectId) {
     updateProfile((current) => {
       const { [subjectId]: _removed, ...rest } = current.thpt?.scores ?? {};
@@ -256,12 +278,19 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
         const { [subjectId]: _removed, ...rest } = year;
         return rest;
       };
+      // Xóa môn phải cắt CẢ điểm học kỳ chi tiết của môn đó — nếu không, môn "đã xóa" vẫn còn dữ
+      // liệu ẩn trong `bySemester` và sẽ hiện lại ở mục học kỳ.
+      const bySemester = current.transcript?.bySemester;
+      const nextBySemester = bySemester
+        ? Object.fromEntries(TRANSCRIPT_SEMESTER_KEYS.filter((key) => bySemester[key]).map((key) => [key, stripSubject(bySemester[key])]))
+        : undefined;
       return {
         ...current,
         transcript: {
           grade10: stripSubject(current.transcript?.grade10),
           grade11: stripSubject(current.transcript?.grade11),
           grade12: stripSubject(current.transcript?.grade12),
+          bySemester: nextBySemester,
         },
       };
     });
@@ -301,6 +330,16 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
       if (value !== undefined) transcriptSubjectIds.add(subjectId as SubjectId);
     }
   }
+
+  // Mục học kỳ dùng LẠI đúng danh sách môn của mục TB năm (không bắt chọn lại môn), cộng thêm môn
+  // chỉ có ở dữ liệu học kỳ (hồ sơ nhập học kỳ trước, chưa nhập TB năm).
+  const semesterSubjectIds = new Set<SubjectId>(transcriptSubjectIds);
+  for (const semester of TRANSCRIPT_SEMESTER_KEYS) {
+    for (const [subjectId, value] of Object.entries(profile.transcript?.bySemester?.[semester] ?? {})) {
+      if (value !== undefined) semesterSubjectIds.add(subjectId as SubjectId);
+    }
+  }
+  const hasSemesterData = hasAnySemesterScore(profile);
 
   const summary = summarizeApplicantProfile(profile);
 
@@ -456,6 +495,53 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
             onAdd={(subjectId) => setPendingTranscriptSubjects((current) => [...current, subjectId])}
           />
         </div>
+      </ProfileChecklistSection>
+
+      {/* Mục PHỤ, mặc định gấp — đường đi chính vẫn là TB cả năm ở trên. Chỉ mở khi thí sinh xét
+          những trường công bố công thức tính trên 6 học kỳ. */}
+      <ProfileChecklistSection
+        title="Điểm học bạ theo từng học kỳ (nâng cao)"
+        statusLabel={hasSemesterData ? `Đã nhập ${semesterSubjectIds.size} môn` : 'Không bắt buộc — chưa có'}
+        hasData={hasSemesterData}
+      >
+        <p className="text-sm text-muted">
+          Một số trường (VLU, HUTECH, ĐH Luật TP.HCM) tính điểm học bạ bằng trung bình cộng của <strong>6 học kỳ</strong>,
+          không dùng điểm trung bình cả năm ở mục trên — hai cách tính này ra số khác nhau nên không suy được từ nhau.
+          Chỉ cần nhập ở đây nếu bạn xét những trường đó; phải đủ cả 6 học kỳ của một môn thì mới tính được.
+        </p>
+        {semesterSubjectIds.size === 0 ? (
+          <p className="mt-2 text-sm text-muted">Thêm môn ở mục "Điểm học bạ" phía trên trước, các môn đó sẽ tự hiện ở đây.</p>
+        ) : (
+          <div className="mt-3 space-y-4">
+            {[...semesterSubjectIds].map((subjectId) => (
+              <div key={subjectId}>
+                <p className="text-sm font-medium text-ink">{SUBJECT_LABELS[subjectId]}</p>
+                <div className="mt-1.5 grid grid-cols-3 gap-2 sm:grid-cols-6">
+                  {TRANSCRIPT_SEMESTER_KEYS.map((semester) => (
+                    <div key={semester} className="min-w-0">
+                      <label
+                        htmlFor={`shared-profile-transcript-semester-${semester}-${subjectId}`}
+                        className="block truncate text-xs text-muted"
+                      >
+                        {TRANSCRIPT_SEMESTER_LABELS[semester]}
+                      </label>
+                      <BufferedScoreInput
+                        id={`shared-profile-transcript-semester-${semester}-${subjectId}`}
+                        label={`${SUBJECT_LABELS[subjectId]} ${TRANSCRIPT_SEMESTER_LABELS[semester]}`}
+                        hideLabel
+                        committedValue={profile.transcript?.bySemester?.[semester]?.[subjectId]}
+                        onCommit={(raw) => commitSemesterScore(semester, subjectId, raw)}
+                        validate={(raw) =>
+                          validateTranscriptScore(SUBJECT_LABELS[subjectId], TRANSCRIPT_SEMESTER_LABELS[semester], raw)
+                        }
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </ProfileChecklistSection>
 
       <ProfileChecklistSection

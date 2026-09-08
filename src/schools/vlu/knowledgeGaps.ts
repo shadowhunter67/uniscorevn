@@ -5,6 +5,16 @@ import type { KnowledgeGap } from '../../core/knowledgeStatus';
  * đảm bảo chất lượng đầu vào theo nhóm ngành (thi TN THPT: 15/18/20/22; học bạ/kết hợp: điều kiện
  * học lực + điểm thay thế) đã verified từ 2 bài viết chính thức, cross-check khớp nhau. Các mục
  * dưới đây vẫn là gap vì lý do CỤ THỂ đọc được, không phải "trường chưa công bố" chung chung.
+ *
+ * **Batch "6 học kỳ" — ĐÃ ĐÓNG `vlu-transcript-semester-granularity-gap`** (xoá khỏi mảng dưới đây,
+ * đúng quy ước UFM khi đóng `ufm-hocba-semester-granularity-gap`): blocker là mô hình dữ liệu dùng
+ * chung chỉ lưu TB cả năm, nay `ApplicantProfile.transcript.bySemester` lưu đủ 6 học kỳ
+ * (`core/transcriptSemesters.ts`) nên `evaluate.ts` tính và hiển thị được ĐIỂM HỌC BẠ theo tổ hợp
+ * ("tổng điểm trung bình 03 môn ... của 06 học kỳ").
+ *
+ * CHÚ Ý: đóng gap này KHÔNG nâng VLU lên exact — Phương thức 2/3 vẫn `partial`, không trả `score`,
+ * vì `vlu-primary-subject-list-unpublished` (ngành nào nhân hệ số 2) và `vlu-priority-bonus-table-not-found`
+ * vẫn mở và đều `exact-final-score-blocking`.
  */
 export const vluKnowledgeGaps: KnowledgeGap[] = [
   {
@@ -41,16 +51,6 @@ export const vluKnowledgeGaps: KnowledgeGap[] = [
     id: 'vlu-combined-method-conversion-table-unpublished',
     label:
       'Phương thức 3 (kết hợp học bạ 20% + 1 trong 5 kỳ thi: V-ACT/HSA/TSA/V-SAT/SAT, trọng số 80%) cần công thức/bảng quy đổi từng loại điểm đầu vào (thang điểm khác nhau: V-ACT 1200, V-SAT theo thang riêng, SAT 1600...) về cùng 1 thang trước khi áp trọng số 20%/80% — chưa tìm thấy công thức quy đổi cụ thể trên 2 nguồn đã đọc.',
-    status: 'incomplete',
-    sourceId: 'vlu-admission-info-2026',
-    scoreAffecting: true,
-    implemented: false,
-    impact: 'exact-final-score-blocking',
-  },
-  {
-    id: 'vlu-transcript-semester-granularity-gap',
-    label:
-      'Công thức học bạ chính thức ("tổng điểm trung bình 03 môn theo tổ hợp xét tuyển của 06 học kỳ") cần điểm trung bình TỪNG HỌC KỲ (lớp 10/11/12, mỗi lớp 2 học kỳ) — `ApplicantProfile.transcript` hiện chỉ lưu điểm theo NĂM (`grade10`/`grade11`/`grade12`), không có độ chi tiết theo học kỳ. Đây là data-model gap thật (cùng loại đã ghi nhận ở HUTECH/UFM), không phải thiếu nguồn — không xấp xỉ bằng điểm trung bình năm để "cho ra" một con số gần đúng.',
     status: 'incomplete',
     sourceId: 'vlu-admission-info-2026',
     scoreAffecting: true,

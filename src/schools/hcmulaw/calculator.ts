@@ -37,3 +37,13 @@ export function calculateHcmulawVsat4SubjectGroupScore(input: { subject1Converte
 export function calculateHcmulawVsat4FinalScore(input: { subjectGroupScore30: number; priority30: number }): number {
   return round2(Math.min(30, input.subjectGroupScore30 + input.priority30));
 }
+
+/**
+ * Phương thức 3 (mã 200, học bạ trường ưu tiên ĐHQG-HCM) — "điểm tổ hợp môn" = điểm học bạ 6 học kỳ
+ * ĐÃ quy đổi tương đương thi TN THPT qua `conversionTable.ts:convertHcmulawTranscriptCombinationScore`
+ * (y = x - k). ĐXT = y + điểm ưu tiên, kẹp trần 30 — nguồn KHÔNG mô tả thành phần "điểm khuyến
+ * khích" nào cho Phương thức 3 (khác Phương thức 2, vốn có bảng quy đổi chứng chỉ ngoại ngữ/SAT).
+ */
+export function calculateHcmulawPriorityHighschool3FinalScore(input: { subjectGroupScore30: number; priority30: number }): number {
+  return round2(Math.min(30, input.subjectGroupScore30 + input.priority30));
+}

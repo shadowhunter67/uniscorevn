@@ -6,20 +6,31 @@ import type { KnowledgeGap } from '../../core/knowledgeStatus';
  * TỒN TẠI (chờ kết quả thi TN THPT 2026). Batch tiếp theo, CÙNG NGÀY 2026-08-20 (kết quả thi đã
  * công bố trong lúc đó): bảng đã xuất hiện (`hcmulaw-equivalence-notice-2026`) — đóng gap cho
  * Phương thức 4 (V-SAT, `conversionTable.ts`), Phương thức 2/3 (học bạ) vẫn blocked nhưng vì lý do
- * KHÁC (granularity dữ liệu, xem `hcmulaw-hocba-semester-granularity-gap` dưới đây), không còn là
- * "bảng chưa tồn tại".
+ * KHÁC (granularity dữ liệu), không còn là "bảng chưa tồn tại".
+ *
+ * **Batch "6 học kỳ" (2026-09-07) — ĐÃ ĐÓNG `hcmulaw-hocba-semester-granularity-gap`** (xoá khỏi
+ * mảng dưới đây, đúng quy ước UFM khi đóng `ufm-hocba-semester-granularity-gap`). Hai việc cùng lúc:
+ * (1) `ApplicantProfile.transcript.bySemester` nay lưu đủ 6 học kỳ (`core/transcriptSemesters.ts`)
+ * nên tính được x = "điểm tổ hợp của học bạ cấp THPT (trung bình cộng của 6 học kỳ)"; (2) bảng "độ
+ * lệch k" (ảnh `LỆCH K.png`, 16 ô) ĐÃ transcribe vào `conversionTable.ts` — đọc qua chrome-devtools,
+ * cross-check khớp ví dụ minh họa dạng TEXT của chính trang nguồn (D01: k = 3,80).
+ *
+ * Kết quả: Phương thức 3 (200) lên `exactCalculator: true`. Phương thức 2 (410) VẪN `partial` nhưng
+ * vì một gap MỚI, khác hẳn: `hcmulaw-method2-bonus-certificate-model-gap` (điểm khuyến khích chứng
+ * chỉ ngoại ngữ/SAT), xem entry đầu tiên dưới đây.
  */
 export const hcmulawKnowledgeGaps: KnowledgeGap[] = [
   {
-    id: 'hcmulaw-hocba-semester-granularity-gap',
+    id: 'hcmulaw-method2-bonus-certificate-model-gap',
     label:
-      'Phương thức 2 (410, kết hợp học bạ + chứng chỉ/SAT) và Phương thức 3 (200, học bạ trường ưu tiên ĐHQG-HCM) đều quy đổi học bạ↔THPT bằng công thức y=x-k (bảng "độ lệch k" theo 16 tổ hợp/nhóm tổ hợp, ĐÃ có đủ) — nhưng x = "điểm tổ hợp của học bạ cấp THPT (TRUNG BÌNH CỘNG CỦA 6 HỌC KỲ)". `ApplicantProfile.transcript` chỉ lưu TB CẢ NĂM (`grade10`/`grade11`/`grade12`, 3 giá trị/môn), không lưu theo 6 học kỳ riêng lẻ — TB năm (Thông tư 22/2021, thường = (TB HK1 + 2×TB HK2)/3) KHÔNG tương đương phép tính trung bình cộng đơn giản của 6 học kỳ, nên không thể suy ngược đúng công thức HCMULAW từ dữ liệu hiện có mà không có rủi ro sai số — cùng loại blocker với HUTECH (`schools/hutech/knowledgeGaps.ts:hutech-hocba-semester-granularity-gap`).',
-    status: 'official-but-unparsed',
-    sourceId: 'hcmulaw-equivalence-notice-2026',
+      'Phương thức 2 (410) tính ĐXT = điểm tổ hợp học bạ đã quy đổi + ĐIỂM KHUYẾN KHÍCH từ chứng chỉ ngoại ngữ/SAT (tối đa 1,50) + điểm ưu tiên. Bảng điểm khuyến khích ĐÃ đọc được đầy đủ dạng text (mục 2(c)(ii)), nhưng `ApplicantProfile.certificates` chưa mô hình hoá đủ để chọn đúng mức: (1) không có chứng chỉ tiếng Pháp (DELF/TCF)/Nhật (JLPT)/Trung (HSK) — nguồn tính cả 3 loại này và quy định "chỉ công nhận 1 loại cao nhất", nên thí sinh có chứng chỉ tiếng Pháp/Nhật/Trung cao hơn chứng chỉ tiếng Anh sẽ bị cộng THIẾU; (2) `toeflIbt` không kèm ngày dự thi, trong khi nguồn dùng 2 THANG TOEFL iBT khác nhau theo mốc 21/01/2026 (65-96+ so với 3.0-5.0) — cùng một con số có thể rơi vào 2 mức khuyến khích khác nhau.',
+    status: 'incomplete',
+    sourceId: 'hcmulaw-method-notice-2026',
     scoreAffecting: true,
     implemented: false,
-    whyNotInferred: 'Không mở rộng `ApplicantProfile` sang lưu theo học kỳ trong batch này (ngoài phạm vi — tránh redesign model dùng chung chỉ để phục vụ 1-2 trường), giữ Phương thức 2/3 ở mức unavailable thay vì dùng TB năm làm proxy không chính xác.',
-    impact: 'exact-blocking-for-method-2-3',
+    whyNotInferred:
+      'Cộng thiếu điểm khuyến khích cho ra ĐXT THẤP HƠN thực tế — sai theo hướng nguy hiểm cho thí sinh (tưởng trượt trong khi đủ điểm). Mở rộng `ApplicantProfile.certificates` sang chứng chỉ Pháp/Nhật/Trung + ngày dự thi TOEFL là thay đổi core dùng chung, để làm follow-up riêng thay vì đoán trong batch này. Phần ĐÃ tính được (điểm tổ hợp học bạ quy đổi y=x-k) vẫn hiển thị trong `explanation`.',
+    impact: 'exact-blocking-for-method-2-only',
   },
   {
     id: 'hcmulaw-foreign-language-combinations-not-modeled',

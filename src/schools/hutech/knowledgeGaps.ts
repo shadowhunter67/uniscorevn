@@ -5,6 +5,15 @@ import type { KnowledgeGap } from '../../core/knowledgeStatus';
  * phương thức + ngưỡng đầu vào 4 nhóm ngành (công bố 04/7/2026, không còn "sẽ công bố sau"). Các
  * khoảng trống dưới đây là phần đã tìm kỹ nhưng KHÔNG định vị được nguồn chính thức đọc được, hoặc
  * là hạn chế thật của mô hình dữ liệu dùng chung hiện tại.
+ *
+ * **Batch "6 học kỳ" — ĐÃ ĐÓNG `hutech-hocba-semester-granularity-gap`** (xoá khỏi mảng dưới đây,
+ * cùng quy ước UFM đã dùng khi đóng `ufm-hocba-semester-granularity-gap`): blocker vốn KHÔNG phải
+ * thiếu nguồn mà là mô hình dữ liệu dùng chung chỉ lưu TB cả năm. `ApplicantProfile.transcript`
+ * nay có nhánh `bySemester` lưu đủ 6 học kỳ (`core/transcriptSemesters.ts`), nên phương thức xét
+ * học bạ tính được đúng công thức "TB 3 môn theo tổ hợp của 6 học kỳ" và lên `exactCalculator: true`
+ * (xem `methods.ts`/`evaluate.ts`). Gap được đóng bằng DỮ LIỆU THẬT, không phải bằng xấp xỉ: thí
+ * sinh chưa nhập đủ 6 học kỳ thì evaluator trả `partial` + liệt kê đúng học kỳ còn thiếu, tuyệt đối
+ * không lấy TB cả năm làm proxy.
  */
 export const hutechKnowledgeGaps: KnowledgeGap[] = [
   {
@@ -27,17 +36,6 @@ export const hutechKnowledgeGaps: KnowledgeGap[] = [
     implemented: true,
     whyNotInferred: 'Bảng số dùng cross-check nội bộ với 6 trường khác trong repo đã verified/cross-checked cùng công thức tỉ lệ quốc gia — verification level giữ `cross-checked`.',
     impact: 'evidence-verification-level-only',
-  },
-  {
-    id: 'hutech-hocba-semester-granularity-gap',
-    label:
-      'Công thức học bạ chính thức dùng "TB 3 môn theo tổ hợp CỦA 6 HỌC KỲ" (lớp 10/11/12, mỗi năm 2 học kỳ) — `ApplicantProfile.transcript` dùng chung hiện chỉ lưu TB CẢ NĂM (`grade10`/`grade11`/`grade12`, 3 giá trị/môn), không lưu theo 6 học kỳ riêng lẻ. TB cả năm (theo Thông tư 22/2021, thường = (TB HK1 + 2×TB HK2)/3) KHÔNG tương đương phép tính trung bình cộng đơn giản của 6 học kỳ, nên không thể suy ngược đúng công thức HUTECH từ dữ liệu hiện có mà không có rủi ro sai số.',
-    status: 'official-but-unparsed',
-    sourceId: 'hutech-admission-plan-2026',
-    scoreAffecting: true,
-    implemented: false,
-    whyNotInferred: 'Không mở rộng `ApplicantProfile` sang lưu theo học kỳ trong batch này (ngoài phạm vi PHẦN K — tránh redesign model dùng chung chỉ để phục vụ 1 trường); giữ phương thức học bạ ở mức partial thay vì dùng TB năm làm proxy không chính xác.',
-    impact: 'exact-blocking',
   },
   {
     id: 'hutech-vsat-scale-conflicting',

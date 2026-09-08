@@ -15,6 +15,28 @@ export const vluThptExamThresholdEvidence = {
   ],
 } satisfies SourcedRule<Record<'standard' | 'law' | 'medicine-dentistry' | 'pharmacy' | 'nursing-medlab', number>>;
 
+/**
+ * Công thức điểm học bạ Phương thức 2/3 — trích nguyên văn cụm định nghĩa phạm vi tính điểm. Batch
+ * "6 học kỳ": trước đây KHÔNG tính được vì `ApplicantProfile.transcript` chỉ lưu TB cả năm; nay
+ * `transcript.bySemester` lưu đủ 6 học kỳ nên `evaluate.ts` tính và hiển thị được con số này.
+ *
+ * LƯU Ý phạm vi: đây là ĐIỂM HỌC BẠ THEO TỔ HỢP, CHƯA phải điểm xét tuyển cuối — hệ số 2 của "môn
+ * thi chính" (chưa biết áp dụng cho ngành nào) và điểm ưu tiên/điểm cộng vẫn là gap mở, xem
+ * `knowledgeGaps.ts`.
+ */
+export const vluTranscriptFormulaEvidence = {
+  value: { description: 'tổng điểm trung bình 03 môn theo tổ hợp xét tuyển của 06 học kỳ (thang 30)', semesterCount: 6, subjectCount: 3 },
+  evidence: [
+    {
+      sourceId: 'vlu-admission-info-2026',
+      location: 'Mục "Phương thức 2: Xét kết quả học tập cấp THPT (học bạ)" — "tổng điểm trung bình 03 môn theo tổ hợp xét tuyển của 06 học kỳ".',
+      verification: 'verified' as const,
+      effectiveYear: 2026,
+      verifiedAt: '2026-08-20',
+    },
+  ],
+} satisfies SourcedRule<{ description: string; semesterCount: number; subjectCount: number }>;
+
 export const vluTranscriptExtraRequirementEvidence = {
   value: {
     law: { minRank: 'gioi', altThptTotal30: 18, altGraduationScore10: 8.5 },

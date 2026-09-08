@@ -201,6 +201,37 @@ describe('sanitizeApplicantProfile', () => {
     expect(result).toEqual({ transcript: { grade10: { math: 8 }, grade12: { math: 9 } } });
   });
 
+  it('transcript.bySemester được giữ nguyên bên cạnh TB năm (field opt-in thêm sau, không migration)', () => {
+    const result = sanitizeApplicantProfile({
+      transcript: {
+        grade10: { math: 8 },
+        bySemester: { grade10Sem1: { math: 7.5 }, grade12Sem2: { math: 9 } },
+      },
+    });
+    expect(result).toEqual({
+      transcript: { grade10: { math: 8 }, bySemester: { grade10Sem1: { math: 7.5 }, grade12Sem2: { math: 9 } } },
+    });
+  });
+
+  it('transcript.bySemester lồng bị hỏng — key học kỳ lạ/môn lạ/ngoài range bị drop, giữ entry hợp lệ', () => {
+    const result = sanitizeApplicantProfile({
+      transcript: {
+        bySemester: {
+          grade10Sem1: { math: 8, notASubject: 5, physics: 99 },
+          grade11Sem9: { math: 8 },
+          grade12Sem1: 'not-an-object',
+        },
+      },
+    });
+    expect(result).toEqual({ transcript: { bySemester: { grade10Sem1: { math: 8 } } } });
+  });
+
+  it('hồ sơ cũ KHÔNG có bySemester vẫn hợp lệ nguyên trạng (không sinh field rỗng)', () => {
+    const result = sanitizeApplicantProfile({ transcript: { grade10: { math: 8 } } });
+    expect(result).toEqual({ transcript: { grade10: { math: 8 } } });
+    expect(result.transcript && 'bySemester' in result.transcript).toBe(false);
+  });
+
   it('NaN/Infinity qua direct object (không đi qua JSON.parse) bị coi là invalid, drop field', () => {
     const result = sanitizeApplicantProfile({
       thpt: { scores: { math: Number.NaN, literature: Number.POSITIVE_INFINITY, english: 7 } },

@@ -43,6 +43,42 @@ export const hcmulawVsatConversionEvidence = {
   ],
 } satisfies SourcedRule<{ formula: string; subjectsCovered: string[] }>;
 
+/**
+ * Quy đổi ĐIỂM HỌC BẠ (Phương thức 2/3) — công thức y = x - k + bảng "độ lệch k" 16 ô, transcribe
+ * 2026-09-07 từ ảnh `LỆCH K.png` qua chrome-devtools (xem `conversionTable.ts`). Điều kiện sàn học
+ * bạ khác nhau giữa 2 phương thức (PT2: x ≥ 22,50; PT3: x ≥ 24,50) — trích nguyên văn từ
+ * `hcmulaw-method-notice-2026`.
+ */
+export const hcmulawTranscriptConversionEvidence = {
+  value: {
+    formula: 'y = x - k (x = tổng TB 6 học kỳ của 3 môn tổ hợp, k = độ lệch theo tổ hợp), làm tròn 2 chữ số thập phân',
+    minTranscriptCombined30: { method2: 22.5, method3: 24.5 },
+    combinationGroupCount: 16,
+  },
+  evidence: [
+    {
+      sourceId: 'hcmulaw-equivalence-notice-2026',
+      location:
+        'Mục 2.1 "Quy đổi điểm học bạ cấp THPT tương đương với điểm thi tốt nghiệp THPT năm 2026 theo từng tổ hợp môn (đối với Phương thức 2 và Phương thức 3)" + ảnh "LỆCH K.png" (bảng độ lệch k, 5 tổ hợp đứng riêng + 11 nhóm tổ hợp = 16 ô) + ví dụ minh họa verbatim trong phần text: "tổ hợp môn D01 (x = 28,0 điểm); ... k = 3,80 điểm ... y = x - k = 28,00 - 3,80 = 24,20".',
+      verification: 'verified' as const,
+      effectiveYear: 2026,
+      publishedAt: '2026-07-09',
+      verifiedAt: '2026-09-07',
+      note: 'Bảng đọc bằng chrome-devtools (phóng to 2,4–3x, screenshot từng nửa bảng, đối chiếu 2 lượt), KHÔNG qua OCR/mirror. Cross-check độc lập: ô D01 transcribe = 3,8 khớp đúng con số k trong ví dụ minh họa dạng TEXT của chính trang đó.',
+    },
+    {
+      sourceId: 'hcmulaw-method-notice-2026',
+      location:
+        'Mục 2(b) (Phương thức 2): "có tổng điểm trung bình cộng của 6 học kỳ THPT (gồm năm Lớp 10, Lớp 11 và Lớp 12) của 03 môn thuộc Tổ hợp của ngành xét tuyển đạt từ 22,50 điểm trở lên (... làm tròn đến 02 (hai) chữ số thập phân)". Mục 3(c) (Phương thức 3): cùng câu, mức "đạt từ 24,50 điểm trở lên". Mục 3(b): "phải học đủ 3 năm tại một trong các trường có tên trong Danh sách ... của Đại học Quốc gia Thành phố Hồ Chí Minh; và có kết quả học tập của từng năm Lớp 10, Lớp 11 và Lớp 12 đạt mức Tốt".',
+      verification: 'verified' as const,
+      effectiveYear: 2026,
+      publishedAt: '2026-04-28',
+      verifiedAt: '2026-09-07',
+      note: 'Đọc lại trực tiếp (innerText, ~22.700 ký tự) qua chrome-devtools 2026-09-07 — Phương thức 3 KHÔNG có thành phần "điểm khuyến khích"; chỉ Phương thức 2 có (bảng chứng chỉ ngoại ngữ/SAT, mục 2(c)(ii)).',
+    },
+  ],
+} satisfies SourcedRule<{ formula: string; minTranscriptCombined30: { method2: number; method3: number }; combinationGroupCount: number }>;
+
 /** Ngưỡng đầu vào theo ngành (thang 30) — bảng ảnh gốc, transcribe đủ 11 ngành, xem
  * `programs.ts`/`sources.ts:hcmulaw-quality-threshold-2026`. */
 export const hcmulawThresholdEvidence = {

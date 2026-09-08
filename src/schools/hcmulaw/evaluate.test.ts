@@ -89,15 +89,103 @@ describe('evaluateHcmulawThpt5Admission', () => {
   });
 });
 
-describe('evaluateHcmulawCombined2Admission / evaluateHcmulawPriorityHighschool3Admission — always unavailable (6-semester granularity gap)', () => {
-  it('never returns a score and reports the hocba-granularity gap', () => {
-    for (const evaluate of [evaluateHcmulawCombined2Admission, evaluateHcmulawPriorityHighschool3Admission]) {
-      const result = evaluate();
-      expect(result.confidence).toBe('unavailable');
-      expect(result.score).toBeUndefined();
-      expect(result.eligibility?.status).toBe('unknown');
-      expect(result.missingRequirements?.some((r) => r.code === 'hcmulaw-hocba-semester-granularity-gap')).toBe(true);
-    }
+/**
+ * Fixture học bạ 6 học kỳ dùng cho Phương thức 2/3 — tổ hợp D01 (Ngữ văn, Tiếng Anh, Toán), k = 3,8.
+ * TB tay: literature = 48/6 = 8,00 · english = 54/6 = 9,00 · math = 54/6 = 9,00 → x = 26,00/30.
+ * Quy đổi: y = x - k = 26,00 - 3,80 = 22,20.
+ */
+function semestersFor(literature: number, english: number, math: number) {
+  const one = { literature, english, math };
+  return { grade10Sem1: one, grade10Sem2: one, grade11Sem1: one, grade11Sem2: one, grade12Sem1: one, grade12Sem2: one };
+}
+
+const D01_CONTEXT = { programId: '7380101' as const, combinationCode: 'D01' };
+
+describe('evaluateHcmulawPriorityHighschool3Admission (PT3, mã 200 — học bạ trường ưu tiên ĐHQG-HCM)', () => {
+  it('tính đúng x = 26,00 và y = x - k = 22,20 (tính tay, k(D01) = 3,80)', () => {
+    const profile: ApplicantProfile = { transcript: { bySemester: semestersFor(8, 9, 9) } };
+    const result = evaluateHcmulawPriorityHighschool3Admission(profile, {
+      ...D01_CONTEXT,
+      studiedAtPriorityHighSchool: true,
+      allYearsRankedGood: true,
+    });
+    expect(result.explanation.find((s) => s.id === 'hcmulaw-priority-highschool3-2026-transcript-total')?.output).toBe(26);
+    expect(result.explanation.find((s) => s.id === 'hcmulaw-priority-highschool3-2026-transcript-conversion')?.output).toBe(22.2);
+    expect(result.confidence).toBe('exact-verified');
+    expect(result.score).toEqual({ value: 22.2, scale: 30 });
+    expect(result.eligibility?.status).toBe('eligible'); // 26,00 >= 24,50 và 22,20 >= ngưỡng ngành Luật 20,00
+  });
+
+  it('cộng điểm ưu tiên KV1 khi y < 22,5 (không giảm): 22,20 + 0,75 = 22,95', () => {
+    const profile: ApplicantProfile = { transcript: { bySemester: semestersFor(8, 9, 9) }, priority: { region: 'KV1' } };
+    const result = evaluateHcmulawPriorityHighschool3Admission(profile, { ...D01_CONTEXT, studiedAtPriorityHighSchool: true, allYearsRankedGood: true });
+    expect(result.score?.value).toBe(22.95);
+  });
+
+  it('giảm điểm ưu tiên khi y >= 22,5: x=27,00 → y=23,20; ĐUT=((30-23,20)/7,5)×0,75=0,68 → 23,88', () => {
+    const profile: ApplicantProfile = { transcript: { bySemester: semestersFor(9, 9, 9) }, priority: { region: 'KV1' } };
+    const result = evaluateHcmulawPriorityHighschool3Admission(profile, { ...D01_CONTEXT, studiedAtPriorityHighSchool: true, allYearsRankedGood: true });
+    expect(result.explanation.find((s) => s.id === 'hcmulaw-priority-highschool3-2026-transcript-conversion')?.output).toBe(23.2);
+    expect(result.explanation.find((s) => s.id === 'hcmulaw-priority-highschool3-2026-priority')?.output).toBe(0.68);
+    expect(result.score?.value).toBe(23.88);
+  });
+
+  it('x dưới sàn riêng 24,50 của PT3 -> ineligible (vẫn tính được điểm)', () => {
+    const profile: ApplicantProfile = { transcript: { bySemester: semestersFor(8, 8, 8) } }; // x = 24,00
+    const result = evaluateHcmulawPriorityHighschool3Admission(profile, { ...D01_CONTEXT, studiedAtPriorityHighSchool: true, allYearsRankedGood: true });
+    expect(result.explanation.find((s) => s.id === 'hcmulaw-priority-highschool3-2026-transcript-total')?.output).toBe(24);
+    expect(result.eligibility?.status).toBe('ineligible');
+    expect(result.score?.value).toBe(20.2); // 24,00 - 3,80
+  });
+
+  it('chưa xác nhận trường ưu tiên/học lực -> eligibility unknown + missingRequirements, điểm vẫn exact', () => {
+    const profile: ApplicantProfile = { transcript: { bySemester: semestersFor(8, 9, 9) } };
+    const result = evaluateHcmulawPriorityHighschool3Admission(profile, D01_CONTEXT);
+    expect(result.eligibility?.status).toBe('unknown');
+    expect(result.missingRequirements?.some((r) => r.code === 'hcmulaw-priority-highschool')).toBe(true);
+    expect(result.missingRequirements?.some((r) => r.code === 'hcmulaw-all-years-ranked-good')).toBe(true);
+    expect(result.score?.value).toBe(22.2);
+  });
+
+  it('KHÔNG lấy TB cả năm làm proxy — chỉ có grade10/11/12 thì báo thiếu học kỳ', () => {
+    const profile: ApplicantProfile = { transcript: { grade10: { math: 9 }, grade11: { math: 9 }, grade12: { math: 9 } } };
+    const result = evaluateHcmulawPriorityHighschool3Admission(profile, D01_CONTEXT);
+    expect(result.confidence).toBe('partial');
+    expect(result.score).toBeUndefined();
+    expect(result.missingRequirements?.some((r) => r.code === 'hcmulaw-transcript-semester-literature')).toBe(true);
+  });
+
+  it('có điểm xét thưởng thành tích -> partial (phạm vi áp dụng chưa rõ từ nguồn)', () => {
+    const profile: ApplicantProfile = { transcript: { bySemester: semestersFor(8, 9, 9) } };
+    const result = evaluateHcmulawPriorityHighschool3Admission(profile, { ...D01_CONTEXT, hasBonusAchievement: true });
+    expect(result.confidence).toBe('partial');
+    expect(result.score).toBeUndefined();
+  });
+});
+
+describe('evaluateHcmulawCombined2Admission (PT2, mã 410) — quy đổi học bạ tính được, ĐXT vẫn partial', () => {
+  it('hiện y = x - k nhưng KHÔNG trả score (thiếu mô hình điểm khuyến khích chứng chỉ)', () => {
+    const profile: ApplicantProfile = { transcript: { bySemester: semestersFor(8, 9, 9) } };
+    const result = evaluateHcmulawCombined2Admission(profile, D01_CONTEXT);
+    expect(result.explanation.find((s) => s.id === 'hcmulaw-combined2-2026-transcript-conversion')?.output).toBe(22.2);
+    expect(result.confidence).toBe('partial');
+    expect(result.score).toBeUndefined();
+    expect(result.missingRequirements?.some((r) => r.code === 'hcmulaw-method2-bonus-certificate-model-gap')).toBe(true);
+  });
+
+  it('sàn học bạ riêng của PT2 là 22,50 (thấp hơn PT3) — x = 24,00 vẫn qua sàn', () => {
+    const profile: ApplicantProfile = { transcript: { bySemester: semestersFor(8, 8, 8) } };
+    const result = evaluateHcmulawCombined2Admission(profile, D01_CONTEXT);
+    expect(result.eligibility?.status).not.toBe('ineligible');
+
+    const below: ApplicantProfile = { transcript: { bySemester: semestersFor(7, 7, 7) } }; // x = 21,00 < 22,50
+    expect(evaluateHcmulawCombined2Admission(below, D01_CONTEXT).eligibility?.status).toBe('ineligible');
+  });
+
+  it('gap granularity cũ đã biến mất khỏi missingRequirements', () => {
+    const profile: ApplicantProfile = { transcript: { bySemester: semestersFor(8, 9, 9) } };
+    const result = evaluateHcmulawCombined2Admission(profile, D01_CONTEXT);
+    expect(result.missingRequirements?.some((r) => r.code === 'hcmulaw-hocba-semester-granularity-gap')).toBe(false);
   });
 });
 
