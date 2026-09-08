@@ -805,3 +805,175 @@ a corroborating source.
 5. This batch's experience (a "needs-review" lead resolving to an already-cataloged entry, not a
    gap) is a reminder to grep the *actual content* of candidate source files, not just check
    file-level `grep -l` hits, before concluding an institution is missing.
+
+---
+
+# Batch 6 (2026-09-08) — closing out Batch 5's two leftover items
+
+This batch worked the two specific leftover items Batch 5 flagged (the Ngoại thương domain
+ambiguity and the HCMC GDNN sweep), both previously blocked for multiple batches. Net result:
+**+24 new catalog-only vocational-college entries** (1 from Task 1, 23 from Task 2) — the first
+catalog growth in two batches.
+
+## Summary
+
+| Metric | Before (Batch 5 end) | After Batch 6 |
+|---|---:|---:|
+| Total catalog entries (search/compare) | 319 | **343** |
+| Independent education institutions (KPI) | 307 | **331** |
+| Vocational colleges | 41 | **65** |
+| **Verified calculator** | **134** | **134 (unchanged)** |
+
+## Task 1 — Trường Cao đẳng Công nghệ - Ngoại thương domain disambiguation: RESOLVED
+
+Three batches (3, 4, 5) had flagged 5+ competing domains for this school and deliberately declined
+to force-pick one on a "looks most plausible" guess. This batch resolved it with two independent,
+corroborating pieces of primary evidence neither previous batch had checked:
+
+1. **VNNIC WHOIS** (`whois.vnnic.vn`, the Vietnamese ccTLD registry's own authoritative lookup —
+   not any candidate site's self-description) on each of the 5 candidate domains:
+   - `cnnt.edu.vn` — registrant "Trường Cao Đẳng Công Nghệ - Ngoại Thương" (exact legal-name match),
+     registered 2025-03-11, registrar Công ty TNHH P.A Việt Nam.
+   - `ftcollege.edu.vn` — registrant "TRƯỜNG CAO ĐẲNG CÔNG NGHỆ - NGOẠI THƯƠNG" (exact match),
+     registered 2023-12-09 (earliest of the three, right after the school's 2023 rename decision),
+     same registrar.
+   - `ngoaithuongcollege.edu.vn` — registrant "TRƯỜNG CAO ĐẲNG CÔNG NGHỆ - NGOẠI THƯƠNG" (exact
+     match), registered 2024-04-03, same registrar.
+   - `cdcnnt.edu.vn` — registrant "CÔNG TY TNHH THƯƠNG MẠI VÀ ĐẦU TƯ QUỐC TẾ DƯỢC MỸ PHẨM HÀ NỘI", an
+     unrelated Hanoi pharma/cosmetics trading company — confirms this domain is a reseller/lead-gen
+     mirror, NOT the school itself.
+   - `truongcaodangngoaithuong.edu.vn` — WHOIS status "chưa cấp phát" (currently unregistered/
+     expired).
+
+   So 3 of the 5 domains are directly registered to the institution's own exact legal name (a much
+   stronger signal than the "carries live 2026 admission content" heuristic Batch 5 used), one is
+   confirmed NOT the school (registered to an unrelated company), and one is dead.
+
+2. **Tax registry cross-check** (`masothue.com`, MST 0401342635): registered legal name "Trường Cao
+   Đẳng Công nghệ - Ngoại thương", HQ address "42-46 Phan Chu Trinh, Hải Châu, Đà Nẵng". Both
+   `cnnt.edu.vn` and `ftcollege.edu.vn` independently cite the near-identical address ("42-44-46
+   Phan Châu Trinh, Hải Châu") and the same founding/rename decision numbers (5996/QĐ-BGDĐT 2008 as
+   Trường Cao đẳng Lạc Việt; renamed via 1279/QĐ-LĐTBXH, 30/8/2023) — a second, independent
+   corroborating signal agreeing with the WHOIS finding.
+
+**Added to catalog** as `cnnt` (catalog-only, `vocational_college`, private ownership, Đà Nẵng),
+with `ftcollege.edu.vn` as the primary source (earliest school-owned registration, fullest official
+narrative) and `cnnt.edu.vn` cited as a secondary official source. `ngoaithuongcollege.edu.vn` (also
+WHOIS-confirmed school-owned) was not additionally cited to keep sourcing minimal but is available
+for a future enrichment pass. `cdcnnt.edu.vn` and `truongcaodangngoaithuong.edu.vn` are NOT cited
+anywhere (confirmed non-official / dead). See `uniscorevn-data/normalized/runtime-source-snapshot/collegeCatalog.ts`
+for the full evidence-chain comment above the entry.
+
+## Task 2 — HCMC GDNN vocational-college directory sweep: SUCCEEDED (3rd attempt)
+
+Batches 3-5 were blocked by a JS/AJAX-appearing directory and, in Batch 5's case, a concurrent
+session already holding the browser profile. Neither blocker held this session:
+
+- `chrome-devtools` had exclusive access this time.
+- On actually driving the live page, the "31-page paginated directory" turned out to be **plain
+  server-rendered HTML** behind a simple `?pagenumber=N` query parameter — no AJAX endpoint, no
+  `TrinhDoID` select interaction needed at all (that filter control still exists in the DOM but
+  isn't required to page through the full unfiltered list). This was confirmed by both a direct
+  `fetch()` from within the browser page (`evaluate_script`) and independently via plain `WebFetch`
+  on `?pagenumber=2` returning fully-populated listing content. This directly contradicts Batch 5's
+  finding that "a plain WebFetch re-check... exposes no discoverable AJAX endpoint" — that check
+  was evidently done against the bare `/co-so-giao-duc-nghe-nghiep` URL without the pagination
+  parameter, which does look empty/JS-shaped without it.
+- Paginated through all 31 pages (306 listed institutions total; some pages beyond ~24 return an
+  empty listing panel despite the "31" page-count link being present — the true content stops
+  earlier, so nothing was missed by treating page ~24 onward as exhausted). Filtered to `Trường Cao
+  đẳng` (college) tier — `Trường Trung cấp` (intermediate) and `Trung tâm GDNN-GDTX` (district-level
+  continuing-education centers) are below this catalog's tertiary scope by schema (no
+  `entityLevel` exists for them), and entries suffixed "(địa điểm đào tạo)"/"Phân hiệu" are branch
+  training locations of institutions headquartered elsewhere, excluded per the standing
+  campus/branch dedup rule.
+- Of 68 unique Cao đẳng-tier names found, cross-referencing against the existing registry (by name
+  **and** by each institution's own domain — some existing entries cite only the GDNN directory URL
+  as source rather than the school's direct domain, so a domain-only diff would have under-counted)
+  found most already cataloged. One stale-registry case was caught: `ctd.edu.vn`, listed by the
+  GDNN registry for the already-cataloged Trường Cao đẳng Kinh tế - Kỹ thuật Thủ Đức (`ctdthuduc`),
+  does not resolve (DNS `NXDOMAIN`) — the school's real live domain is
+  `tuyensinh.ctdthuduc.edu.vn`, which is what's already correctly cataloged; no change needed there.
+- **23 confirmed-new institutions added** (catalog-only, `vocational_college`), each with its own
+  official domain live-checked (HTTP 200) this batch: Trường Cao đẳng Xây dựng TP.HCM (`hcc2`),
+  Trường Cao đẳng nghề Thành phố Hồ Chí Minh (`cdnghehcm`), Trường Cao đẳng Kỹ thuật Nguyễn Trường
+  Tộ (`cdntt`), Trường Cao đẳng Y tế Bình Dương (`cdytbd`), Trường Cao đẳng Việt Nam - Hàn Quốc Bình
+  Dương (`viethanbd`), Trường Cao đẳng Kỹ thuật Công nghệ Bà Rịa - Vũng Tàu (`bctech`), Trường Cao
+  đẳng Y tế tỉnh BRVT (`cdytbrvt`), Trường Cao đẳng Dầu khí (`pvc`), Trường Cao đẳng Kinh tế đối
+  ngoại (`cofer`), Trường Cao đẳng Phát thanh - Truyền hình II (`vov2`), Trường Cao đẳng Kỹ thuật
+  Cao Thắng (`caothang`), Trường Cao đẳng Công thương TP.HCM (`hitu`), Trường Cao đẳng Hàng Hải và
+  Đường thủy II (`cdhh2`), Trường Cao đẳng Giao thông Vận tải Trung ương III (`cvct3`), Trường Cao
+  đẳng Công nghệ TP. Hồ Chí Minh (`vetc`), Trường Cao đẳng Bình Minh Sài Gòn (`aurora`), Trường Cao
+  đẳng Bách Khoa Sài Gòn (`bkc`), Trường Cao đẳng Viễn Đông (`viendong`), Trường Cao đẳng An ninh
+  mạng iSPACE (`ispace`), Trường Cao đẳng Việt Mỹ (`vietmy`), Trường Cao đẳng Quốc tế Kent
+  (`kentc`), Trường Cao đẳng Bách khoa Bách Việt (`bachviet`), Trường Cao đẳng Công nghệ cao Đồng An
+  (`dongan`).
+- **Ownership discipline**: the GDNN directory detail pages do carry a "Loại hình" (ownership)
+  field, but it proved unreliable when spot-checked against independent sources — it labeled the
+  well-documented-private Trường Cao đẳng Viễn Đông as "Công lập" (public), contradicted by the
+  school's own "ngoài công lập" self-description on its own site and by third-party admissions
+  aggregators. Ownership for each of the 23 added entries was set only where corroborated by an
+  explicit supervising ministry/agency/state-corporation citation (Bộ Công Thương, Bộ Giao thông
+  Vận tải, Cục Hàng hải và Đường thủy VN, UBND TP.HCM, Tập đoàn Dệt May/Tập đoàn Công nghiệp-Năng
+  lượng Quốc gia) for `public`, or well-established public brand identity (cross-checked, not
+  inferred from the name alone) for `private`. See the batch-6 comment block in
+  `collegeCatalog.ts` for the full list.
+
+## Not added / needs review (new this batch)
+
+A further ~14 Cao đẳng-tier names surfaced in the same sweep with live official-looking domains but
+**no reliable ownership signal**, so they were left out rather than guess the `ownership` field
+(which the schema requires be factual, never inferred from the name):
+
+| Institution | Domain (unverified for ownership) | Note |
+|---|---|---|
+| Trường Cao đẳng Miền Nam | cdmiennam.edu.vn | GDNN page said "Công lập"; unconfirmed independently (same reliability concern as Viễn Đông) |
+| Trường Cao đẳng Sài Gòn | caodangsaigon.edu.vn | Not checked this batch |
+| Trường Cao đẳng Sài Gòn Gia Định | sgc.edu.vn | Not checked this batch |
+| Trường Cao đẳng Đại Việt Sài Gòn | daivietsaigon.edu.vn | Not checked this batch |
+| Trường Cao đẳng Văn Lang Sài Gòn | vanlangsaigon.edu.vn | Not checked this batch |
+| Trường Cao đẳng Quốc tế TP.HCM (ICH) | ich.edu.vn | Not checked this batch |
+| Trường Cao đẳng Kinh tế - Công nghệ TP.HCM (HIAST) | hiast.edu.vn | GDNN page said "Công lập"; unconfirmed independently |
+| Trường Cao đẳng Kỹ thuật - Du lịch Sài Gòn (STC) | stc.edu.vn | Not checked this batch |
+| Trường Cao đẳng Khoa học - Công nghệ TP.HCM (HCST) | hcst.edu.vn | Not checked this batch |
+| Trường Cao đẳng Du lịch Sài Gòn | dulichsaigon.edu.vn | Not checked this batch |
+| Trường Cao đẳng Công nghệ thông tin TP.HCM (ITC) | itc.edu.vn | Not checked this batch |
+| Trường Cao đẳng Du lịch Vũng Tàu (VTVC) | vtvc.edu.vn | Not checked this batch |
+| Trường Cao đẳng quốc tế VABIS | caodangtueduc.edu.vn | Domain doesn't match the school's own name/brand at all — needs individual re-check (possible rename/rebrand) before trusting as this school's official site |
+| Trường Cao đẳng nghề Kỹ thuật thiết bị y tế miền Nam | sp.edu.vn | Suspiciously generic 2-letter domain for this specific school name — needs individual re-check |
+| Trường Cao đẳng Y dược Hồng Đức | hongduccollege.edu.vn | DNS resolves but connection refused (site currently down) — not confirmed live |
+| Trường Cao đẳng Kinh tế - Kỹ thuật Thủ Đức | ctd.edu.vn (GDNN-listed) | Already cataloged as `ctdthuduc` under its real live domain `tuyensinh.ctdthuduc.edu.vn`; the GDNN-listed `ctd.edu.vn` is stale/dead — no action needed |
+| Trường Cao đẳng Văn hóa Nghệ thuật và Du lịch Sài Gòn | daihocdulich.edu.vn (GDNN-listed) | DNS does not resolve — domain likely stale in the registry; needs a fresh domain search in a future batch |
+
+## Test/build status (Batch 6)
+
+- `npm run validate` (private): OK.
+- `npm run export:runtime` (private): wrote all 4 generated artifacts.
+- `npx tsc -b`: clean.
+- `npm run audit:data`: 0 catalog audit errors, 0 catalog audit warnings; confirms final counts
+  (343 catalog entries / 331 independent institutions / 65 vocational colleges / 134 verified
+  calculators, unchanged).
+- `npm run test`: 371/371 test files, 2922/2922 tests passing after updating count-drift assertions
+  (`src/schools/index.test.ts`, `src/data/institutionCoverage.test.ts`,
+  `src/components/landingCatalog.test.ts`, `src/compare/evaluateApplicantAcrossSchools.test.ts`) and
+  appending the 24 new shortNames to `docs/school-status.md` (required by the drift-detection test).
+- `npm run lint`: clean (pre-existing, unrelated `TextSizeContext.tsx` fast-refresh warning only).
+- `npm run validate:generated`: OK, 4 runtime artifacts validated.
+- `npm run check:docs` / `npm run stats:coverage -- --write` / `npm run coverage:chart`: README KPI
+  table and `docs/coverage-chart.svg` regenerated to match; `check:docs` confirms no drift.
+- `npm run build`: succeeds.
+
+## Recommendation for next batch (Batch 7, if any)
+
+1. The 14 "not added / needs review" institutions above are the natural next-batch lead — most just
+   need an individual ownership confirmation pass (ministry/agency citation or an independent
+   secondary source, not the GDNN "Loại hình" field alone, which proved unreliable this batch).
+2. VABIS's domain mismatch (`caodangtueduc.edu.vn`) and the two dead/refused domains
+   (`hongduccollege.edu.vn`, `daihocdulich.edu.vn`) need a fresh domain search rather than reuse of
+   the GDNN-listed value.
+3. Re-check `cdct` again for an executed (decision-numbered) merger (open since Batch 4).
+4. Re-check AUAD for a live domain (open since Batch 3/4/5).
+5. Consider a similar live browser-driven sweep of other provincial GDNN directories (Bình Dương,
+   Bà Rịa - Vũng Tàu, Đồng Nai) now that several BR-VT/Bình Dương schools turned up inside the HCMC
+   directory itself (a side effect of the 2025 administrative merger) — there may be a similar
+   "looked JS-blocked, actually plain paginated HTML" situation elsewhere.

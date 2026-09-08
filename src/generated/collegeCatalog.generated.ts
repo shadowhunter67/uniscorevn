@@ -399,6 +399,60 @@ export const collegeCatalogSchools: readonly CollegeCatalogSchool[] = [
       },
     ],
   },
+  // Catalog-expansion batch 6 (2026-09-08): resolves the "Trường Cao đẳng Công nghệ - Ngoại
+  // thương" 5+-competing-domain ambiguity flagged since batch 3 (see docs/catalog-expansion-
+  // report.md). VNNIC's own WHOIS lookup (whois.vnnic.vn) — not a candidate site's self-
+  // description — shows `cnnt.edu.vn`, `ftcollege.edu.vn`, and `ngoaithuongcollege.edu.vn` are
+  // ALL registered directly to registrant "TRƯỜNG CAO ĐẲNG CÔNG NGHỆ - NGOẠI THƯƠNG" (exact legal
+  // name match) via registrar Công ty TNHH P.A Việt Nam, while `cdcnnt.edu.vn` is registered to
+  // an unrelated Hanoi trading company ("CÔNG TY TNHH THƯƠNG MẠI VÀ ĐẦU TƯ QUỐC TẾ DƯỢC MỸ PHẨM
+  // HÀ NỘI" — confirms that one is a reseller/lead-gen mirror, NOT the school) and
+  // `truongcaodangngoaithuong.edu.vn` is currently unregistered ("chưa cấp phát"). Both `cnnt` and
+  // `ftcollege` also independently cite the same Đà Nẵng HQ address (42-44-46 Phan Châu Trinh,
+  // Hải Châu) matching the school's tax-registry record (MST 0401342635, masothue.com) and the
+  // same rename decision (1279/QĐ-LĐTBXH, 30/8/2023, renamed from Trường Cao đẳng Lạc Việt).
+  // `ftcollege.edu.vn` chosen as primary: registered 2023-12-09 (earliest of the 3 school-owned
+  // domains, right after the rename decision) and carries the fullest official narrative
+  // (founding/rename decision numbers, mission/vision). `cnnt.edu.vn` and `ngoaithuongcollege.
+  // edu.vn` kept as aliases/secondary sources since WHOIS confirms the school owns them too.
+  {
+    id: 'cnnt',
+    shortName: 'CNNT',
+    name: 'Trường Cao đẳng Công nghệ - Ngoại thương',
+    location: 'Đà Nẵng',
+    province: 'Đà Nẵng',
+    ownership: 'private',
+    region: 'other',
+    entityLevel: 'vocational_college',
+    aliases: ['FT College', 'Trường Cao đẳng Lạc Việt'],
+    catalogSources: [
+      {
+        title: 'Trường Cao Đẳng Công Nghệ - Ngoại Thương (ftcollege.edu.vn) — Giới thiệu',
+        url: 'https://ftcollege.edu.vn/gioi-thieu/',
+        type: 'official-institution',
+        checkedAt: '2026-09-08',
+      },
+      {
+        title: 'TRƯỜNG CAO ĐẲNG CÔNG NGHỆ – NGOẠI THƯƠNG (cnnt.edu.vn)',
+        url: 'https://cnnt.edu.vn/',
+        type: 'official-institution',
+        checkedAt: '2026-09-08',
+      },
+      {
+        title: 'WHOIS ftcollege.edu.vn — registrant "TRƯỜNG CAO ĐẲNG CÔNG NGHỆ - NGOẠI THƯƠNG"',
+        url: 'https://whois.vnnic.vn/',
+        type: 'official-document',
+        authority: 'Trung tâm Internet Việt Nam (VNNIC)',
+        checkedAt: '2026-09-08',
+      },
+      {
+        title: 'Mã số thuế 0401342635 — Trường Cao Đẳng Công nghệ - Ngoại thương (42-46 Phan Chu Trinh, Hải Châu, Đà Nẵng)',
+        url: 'https://masothue.com/0401342635-truong-cao-dang-cong-nghe-ngoai-thuong',
+        type: 'secondary',
+        checkedAt: '2026-09-08',
+      },
+    ],
+  },
   {
     id: 'dvtc',
     shortName: 'DVTC',
@@ -981,6 +1035,370 @@ export const collegeCatalogSchools: readonly CollegeCatalogSchool[] = [
     entityLevel: 'vocational_college',
     catalogSources: [
       { title: 'Trường Cao đẳng Cần Thơ - Cổng thông tin tuyển sinh', url: 'https://tuyensinh.cdct.edu.vn/', type: 'official-institution', checkedAt: '2026-09-07' },
+    ],
+  },
+  // Catalog-expansion batch 6 (2026-09-08): full HCMC GDNN directory sweep (gdnn.tphcm.gov.vn),
+  // driven live via chrome-devtools (blocked in batches 3-5 by a shared/concurrent browser profile —
+  // not a blocker this session). The directory's own search-results HTML turned out to be plain
+  // server-rendered markup (no AJAX endpoint needed) once fetched with the right pagenumber query
+  // param; paginated through all 31 pages (306 listed institutions total). Filtered to `Trường Cao
+  // đẳng` (college) tier only — `Trường Trung cấp` (intermediate) and `Trung tâm GDNN-GDTX`
+  // (district-level continuing-ed centers) are below this catalog's tertiary scope, and entries
+  // suffixed "(địa điểm đào tạo)"/"Phân hiệu" are branch training locations of institutions
+  // headquartered elsewhere, not independent entities per the dedup rule. Of 68 unique Cao đẳng-tier
+  // names found, most were already cataloged (cross-checked by name AND by each institution's own
+  // domain, since some existing entries only cite the GDNN directory URL as source rather than the
+  // school's direct domain); a few had stale/dead domains in the registry (`ctd.edu.vn` for the
+  // already-cataloged Cao đẳng Kinh tế - Kỹ thuật Thủ Đức doesn't resolve — its real live domain is
+  // `tuyensinh.ctdthuduc.edu.vn`, already correctly cataloged as `ctdthuduc`) and were left alone.
+  // The 23 entries below are the confirmed-new remainder: each one's own official domain (as listed
+  // by the GDNN directory) was independently live-checked (HTTP 200) this batch. Ownership
+  // (`public`/`private`) was set only where a reliable signal existed — an explicit supervising
+  // ministry/agency (Bộ Công Thương, Bộ GTVT, Cục Hàng hải và Đường thủy VN, UBND TP.HCM, a state
+  // corporation) for `public`, or well-established public identity for well-known private brands
+  // (iSPACE, Việt Mỹ, Kent, Bách Việt, Aurora/Bình Minh Sài Gòn, BKC, Đồng An) for `private` — cross-
+  // checked against independent web search where the GDNN detail page's own "Loại hình" field proved
+  // unreliable (it mislabeled the well-documented-private Trường Cao đẳng Viễn Đông as "Công lập";
+  // corrected here using the school's own public-facing "ngoài công lập" self-description instead).
+  // A further ~14 Cao đẳng-tier names surfaced in the same sweep (Trường Cao đẳng Miền Nam, Sài Gòn,
+  // Sài Gòn Gia Định, Đại Việt Sài Gòn, Văn Lang Sài Gòn, Quốc tế TP.HCM/ICH, Kinh tế - Công nghệ
+  // TP.HCM/HIAST, Kỹ thuật - Du lịch Sài Gòn/STC, Khoa học - Công nghệ TP.HCM/HCST, Du lịch Sài Gòn,
+  // Công nghệ thông tin TP.HCM/ITC, Du lịch Vũng Tàu/VTVC, Cao đẳng quốc tế VABIS, Cao đẳng nghề Kỹ
+  // thuật thiết bị y tế miền Nam) with live official-looking domains but NO reliable ownership signal
+  // (VABIS's registry-listed domain `caodangtueduc.edu.vn` doesn't match the school's own name/brand
+  // at all — needs individual re-check before adding) — left OUT of this batch rather than guess the
+  // ownership field; see "Not added / needs review" in docs/catalog-expansion-report.md Batch 6.
+  {
+    id: 'hcc2',
+    shortName: 'HCC2',
+    name: 'Trường Cao đẳng Xây dựng TP.HCM',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'public',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Xây dựng TP.HCM', url: 'http://www.hcc2.edu.vn', type: 'official-institution', checkedAt: '2026-09-08' },
+    ],
+  },
+  {
+    id: 'cdnghehcm',
+    shortName: 'CĐN TP.HCM',
+    name: 'Trường Cao đẳng nghề Thành phố Hồ Chí Minh',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'public',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng nghề Thành phố Hồ Chí Minh', url: 'http://www.caodangnghehcm.edu.vn', type: 'official-institution', checkedAt: '2026-09-08' },
+    ],
+  },
+  {
+    id: 'cdntt',
+    shortName: 'NTT',
+    name: 'Trường Cao đẳng Kỹ thuật Nguyễn Trường Tộ',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'public',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Kỹ thuật Nguyễn Trường Tộ', url: 'https://www.nguyentruongto.edu.vn', type: 'official-institution', checkedAt: '2026-09-08' },
+    ],
+  },
+  {
+    id: 'cdytbd',
+    shortName: 'CĐYT BD',
+    name: 'Trường Cao đẳng Y tế Bình Dương',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'public',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Y tế Bình Dương', url: 'https://cdytbinhduong.edu.vn/', type: 'official-institution', checkedAt: '2026-09-08' },
+    ],
+  },
+  {
+    id: 'viethanbd',
+    shortName: 'VKC',
+    name: 'Trường Cao đẳng Việt Nam - Hàn Quốc Bình Dương',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'public',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Việt Nam - Hàn Quốc Bình Dương', url: 'https://viethanbd.edu.vn/', type: 'official-institution', checkedAt: '2026-09-08' },
+    ],
+  },
+  {
+    id: 'bctech',
+    shortName: 'BCTECH',
+    name: 'Trường Cao đẳng Kỹ thuật Công nghệ Bà Rịa - Vũng Tàu',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'public',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Kỹ thuật Công nghệ Bà Rịa - Vũng Tàu', url: 'https://bctech.edu.vn', type: 'official-institution', checkedAt: '2026-09-08' },
+    ],
+  },
+  {
+    id: 'cdytbrvt',
+    shortName: 'CĐYT BRVT',
+    name: 'Trường Cao đẳng Y tế tỉnh BRVT',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'public',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Y tế tỉnh BRVT', url: 'https://hsbrvt.edu.vn', type: 'official-institution', checkedAt: '2026-09-08' },
+    ],
+  },
+  {
+    id: 'pvc',
+    shortName: 'PVC',
+    name: 'Trường Cao đẳng Dầu khí',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'public',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    aliases: ['PetroVietnam College'],
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Dầu khí (Tập đoàn Công nghiệp-Năng lượng Quốc gia Việt Nam)', url: 'https://pvcollege.edu.vn/', type: 'official-institution', checkedAt: '2026-09-08' },
+    ],
+  },
+  {
+    id: 'cofer',
+    shortName: 'COFER',
+    name: 'Trường Cao đẳng Kinh tế đối ngoại',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'public',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Kinh tế đối ngoại (Bộ Công Thương)', url: 'http://www.cofer.edu.vn/', type: 'official-institution', checkedAt: '2026-09-08' },
+    ],
+  },
+  {
+    id: 'vov2',
+    shortName: 'PTTH II',
+    name: 'Trường Cao đẳng Phát thanh - Truyền hình II',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'public',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    aliases: ['Trường Cao đẳng Phát thanh Truyền hình II'],
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Phát thanh - Truyền hình II', url: 'http://www.vov.edu.vn', type: 'official-institution', checkedAt: '2026-09-08' },
+    ],
+  },
+  {
+    id: 'caothang',
+    shortName: 'CAO THẮNG',
+    name: 'Trường Cao đẳng Kỹ thuật Cao Thắng',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'public',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Kỹ thuật Cao Thắng (Bộ Công Thương)', url: 'http://www.caothang.edu.vn', type: 'official-institution', checkedAt: '2026-09-08' },
+    ],
+  },
+  {
+    id: 'hitu',
+    shortName: 'HITU',
+    name: 'Trường Cao đẳng Công thương TP.HCM',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'public',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Công thương TP.HCM', url: 'http://www.hitu.edu.vn', type: 'official-institution', checkedAt: '2026-09-08' },
+    ],
+  },
+  {
+    id: 'cdhh2',
+    shortName: 'HÀNG HẢI II',
+    name: 'Trường Cao đẳng Hàng Hải và Đường thủy II',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'public',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    aliases: ['Trường Cao đẳng Hàng Hải II'],
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Hàng Hải và Đường thủy II (Cục Hàng hải và Đường thủy Việt Nam)', url: 'https://www.cdhanghai.edu.vn', type: 'official-institution', checkedAt: '2026-09-08' },
+    ],
+  },
+  {
+    id: 'cvct3',
+    shortName: 'GTVT TW3',
+    name: 'Trường Cao đẳng Giao thông Vận tải Trung ương III',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'public',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Giao thông Vận tải Trung ương III (Bộ Giao thông Vận tải)', url: 'http://www.cvct3.edu.vn', type: 'official-institution', checkedAt: '2026-09-08' },
+    ],
+  },
+  {
+    id: 'vetc',
+    shortName: 'VETC',
+    name: 'Trường Cao đẳng Công nghệ TP. Hồ Chí Minh',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'public',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Công nghệ TP. Hồ Chí Minh (Tập đoàn Dệt May Việt Nam)', url: 'http://vetc.edu.vn', type: 'official-institution', checkedAt: '2026-09-08' },
+    ],
+  },
+  {
+    id: 'aurora',
+    shortName: 'AURORA',
+    name: 'Trường Cao đẳng Bình Minh Sài Gòn',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'private',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    aliases: ['Aurora Saigon College'],
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Bình Minh Sài Gòn', url: 'http://www.aurora.edu.vn', type: 'official-institution', checkedAt: '2026-09-08' },
+    ],
+  },
+  {
+    id: 'bkc',
+    shortName: 'BKC',
+    name: 'Trường Cao đẳng Bách Khoa Sài Gòn',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'private',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Bách Khoa Sài Gòn', url: 'https://www.bkc.edu.vn', type: 'official-institution', checkedAt: '2026-09-08' },
+    ],
+  },
+  {
+    id: 'viendong',
+    shortName: 'VIỄN ĐÔNG',
+    name: 'Trường Cao đẳng Viễn Đông',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'private',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Viễn Đông', url: 'http://www.viendong.edu.vn', type: 'official-institution', checkedAt: '2026-09-08' },
+      {
+        title: 'Trường Cao Đẳng Viễn Đông đạt danh hiệu "Trường Cao đẳng chất lượng cao" (self-description confirms "ngoài công lập")',
+        url: 'https://www.viendong.edu.vn/truong-cao-dang-vien-dong-dat-danh-hieu-truong-cao-dang-chat-luong-cao.html',
+        type: 'official-institution',
+        checkedAt: '2026-09-08',
+      },
+    ],
+  },
+  {
+    id: 'ispace',
+    shortName: 'iSPACE',
+    name: 'Trường Cao đẳng An ninh mạng iSPACE',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'private',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng An ninh mạng iSPACE', url: 'http://www.ispace.edu.vn', type: 'official-institution', checkedAt: '2026-09-08' },
+    ],
+  },
+  {
+    id: 'vietmy',
+    shortName: 'VIỆT MỸ',
+    name: 'Trường Cao đẳng Việt Mỹ',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'private',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Việt Mỹ', url: 'http://www.caodangvietmy.edu.vn', type: 'official-institution', checkedAt: '2026-09-08' },
+    ],
+  },
+  {
+    id: 'kentc',
+    shortName: 'KENT',
+    name: 'Trường Cao đẳng Quốc tế Kent',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'private',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    aliases: ['Kent International College'],
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Quốc tế Kent', url: 'http://www.kent.edu.vn', type: 'official-institution', checkedAt: '2026-09-08' },
+    ],
+  },
+  {
+    id: 'bachviet',
+    shortName: 'BÁCH VIỆT',
+    name: 'Trường Cao đẳng Bách khoa Bách Việt',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'private',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Bách khoa Bách Việt', url: 'https://www.bachvietpolytechnic.edu.vn/', type: 'official-institution', checkedAt: '2026-09-08' },
+    ],
+  },
+  {
+    id: 'dongan',
+    shortName: 'ĐỒNG AN',
+    name: 'Trường Cao đẳng Công nghệ cao Đồng An',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'private',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Công nghệ cao Đồng An', url: 'https://dongan.edu.vn/', type: 'official-institution', checkedAt: '2026-09-08' },
     ],
   },
 ];

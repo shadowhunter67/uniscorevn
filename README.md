@@ -37,19 +37,19 @@ Snapshot hiện tại được tính từ `schoolRegistry` bằng `npm run stats
 <!-- coverage:kpi:start (generated bởi `npm run stats:coverage -- --write`, xem scripts/stats-coverage.ts — KHÔNG sửa tay) -->
 | KPI | Số lượng |
 |---|---:|
-| Mục trong danh mục/search/compare | 319 |
-| Cơ sở giáo dục độc lập trong danh mục | 307 |
+| Mục trong danh mục/search/compare | 343 |
+| Cơ sở giáo dục độc lập trong danh mục | 331 |
 | Đơn vị nội bộ/không tính vào KPI cơ sở | 12 |
 | Đại học / cơ sở hệ đại học | 235 |
 | Học viện | 22 |
 | Cao đẳng sư phạm/GDMN | 9 |
-| Cao đẳng giáo dục nghề nghiệp | 41 |
+| Cao đẳng giáo dục nghề nghiệp | 65 |
 | Nhóm độc lập khác | 0 |
 | Có dữ liệu tuyển sinh hoặc capability cao hơn | 226 |
 | Chỉ kiểm tra điều kiện/ngưỡng | 22 |
 | Có calculator một phần | 3 |
 | Calculator đã xác minh | 134 |
-| Chỉ có trong danh mục | 93 |
+| Chỉ có trong danh mục | 117 |
 <!-- coverage:kpi:end -->
 
 Catalog coverage != calculator coverage. Con số danh mục là độ phủ search/compare, không phải 100% calculator. Một số mục trong danh mục là school/faculty nội bộ của hệ thống đại học lớn; các mục này vẫn có thể giữ cho navigation hoặc mapping chương trình, nhưng không làm tăng KPI "cơ sở đào tạo tuyển sinh độc lập".
@@ -67,7 +67,7 @@ Danh sách đầy đủ 319 trường theo từng mức hỗ trợ đổi thư�
 | 🟡 Tính được một phần | 3 | Có công thức thật nhưng chưa phủ hết mọi phương thức xét tuyển của trường. |
 | 🟡 Kiểm tra được điều kiện | 22 | Có ngưỡng điểm sàn/điều kiện chính thức, chưa tính được điểm xét tuyển đầy đủ. |
 | ⚪ Đã có thông tin tuyển sinh | 67 | Đã có thông tin tuyển sinh chính thức, nhưng chưa đủ để tính điểm hay kết luận điều kiện. |
-| ⚪ Chưa có dữ liệu tuyển sinh | 93 | Trường có trong danh mục nhưng UniScoreVN chưa tìm được nguồn tuyển sinh chính thức nào. |
+| ⚪ Chưa có dữ liệu tuyển sinh | 117 | Trường có trong danh mục nhưng UniScoreVN chưa tìm được nguồn tuyển sinh chính thức nào. |
 <!-- coverage:support-status:end -->
 
 "Đã xác minh"/"chính xác" nghĩa là công thức, ngưỡng, điểm cộng và điểm ưu tiên đều có nguồn chính thức xác minh trong phạm vi đã công bố — một số trường chỉ chính xác trong phạm vi cụ thể (ví dụ thí sinh không có thành tích cộng điểm). Toàn bộ roster catalog đã được nối vào registry/search/compare; UniScoreVN sẽ không kết luận đủ điều kiện hoặc tính điểm cho một trường cho đến khi có nguồn chính thức đủ rõ ràng — không đoán công thức.

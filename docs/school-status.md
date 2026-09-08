@@ -409,4 +409,28 @@ whose domain (uad.edu.vn) briefly caused confusion during this batch's research.
 - **VUTM** — Học viện Y Dược học cổ truyền Việt Nam
 - **VXUT** — Trường Đại học Công nghệ Vạn Xuân
 - **YDLU** — Trường Đại học Yersin Đà Lạt
+- **CNNT** — Trường Cao đẳng Công nghệ - Ngoại thương
+- **HCC2** — Trường Cao đẳng Xây dựng TP.HCM
+- **CĐN TP.HCM** — Trường Cao đẳng nghề Thành phố Hồ Chí Minh
+- **NTT** — Trường Cao đẳng Kỹ thuật Nguyễn Trường Tộ
+- **CĐYT BD** — Trường Cao đẳng Y tế Bình Dương
+- **VKC** — Trường Cao đẳng Việt Nam - Hàn Quốc Bình Dương
+- **BCTECH** — Trường Cao đẳng Kỹ thuật Công nghệ Bà Rịa - Vũng Tàu
+- **CĐYT BRVT** — Trường Cao đẳng Y tế tỉnh BRVT
+- **PVC** — Trường Cao đẳng Dầu khí
+- **COFER** — Trường Cao đẳng Kinh tế đối ngoại
+- **PTTH II** — Trường Cao đẳng Phát thanh - Truyền hình II
+- **CAO THẮNG** — Trường Cao đẳng Kỹ thuật Cao Thắng
+- **HITU** — Trường Cao đẳng Công thương TP.HCM
+- **HÀNG HẢI II** — Trường Cao đẳng Hàng Hải và Đường thủy II
+- **GTVT TW3** — Trường Cao đẳng Giao thông Vận tải Trung ương III
+- **VETC** — Trường Cao đẳng Công nghệ TP. Hồ Chí Minh
+- **AURORA** — Trường Cao đẳng Bình Minh Sài Gòn
+- **BKC** — Trường Cao đẳng Bách Khoa Sài Gòn
+- **VIỄN ĐÔNG** — Trường Cao đẳng Viễn Đông
+- **iSPACE** — Trường Cao đẳng An ninh mạng iSPACE
+- **VIỆT MỸ** — Trường Cao đẳng Việt Mỹ
+- **KENT** — Trường Cao đẳng Quốc tế Kent
+- **BÁCH VIỆT** — Trường Cao đẳng Bách khoa Bách Việt
+- **ĐỒNG AN** — Trường Cao đẳng Công nghệ cao Đồng An
 

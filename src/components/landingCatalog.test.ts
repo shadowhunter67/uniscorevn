@@ -90,7 +90,7 @@ describe('landing catalog helpers', () => {
     // Partial-calculator schools are a small subset that fits inside the initial visible window.
     const smallSubset = filterSchoolsForLanding(Object.values(schoolRegistry), { ...defaultFilters, tierFilter: 'partial-calculator' });
 
-    expect(allResults).toHaveLength(319);
+    expect(allResults).toHaveLength(343);
     expect(getVisibleSchoolCountAfterReset(allResults.length)).toBe(INITIAL_VISIBLE_SCHOOL_COUNT);
     expect(smallSubset.length).toBeGreaterThan(0);
     expect(smallSubset.length).toBeLessThan(INITIAL_VISIBLE_SCHOOL_COUNT);
