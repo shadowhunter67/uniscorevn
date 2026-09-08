@@ -24,6 +24,48 @@ const THPT_EXAM_THRESHOLD_30: Record<VluThresholdGroup, number> = {
   'nursing-medlab': 18,
 };
 
+/**
+ * Phương thức 2/3 (học bạ / kết hợp) — ĐIỂM SÀN NHẬN HỒ SƠ tính trên chính điểm học bạ theo tổ hợp
+ * (thang 30). Nguồn: ảnh bảng điểm sàn chính thức, cột "XÉT HỌC BẠ THPT" (xem
+ * `evidence.ts:vluTranscriptThresholdEvidence`). Khác với `TRANSCRIPT_EXTRA_REQUIREMENT` bên dưới:
+ * ngưỡng này áp dụng cho MỌI nhóm ngành (kể cả `standard`), còn điều kiện học lực lớp 12 + điểm thay
+ * thế chỉ áp dụng khối Sức khỏe/Luật.
+ */
+const TRANSCRIPT_THRESHOLD_30: Record<VluThresholdGroup, number> = {
+  standard: 18,
+  law: 20,
+  'medicine-dentistry': 23,
+  pharmacy: 22,
+  'nursing-medlab': 19,
+};
+
+/** Điều kiện ĐỒNG THỜI đi kèm ngưỡng học bạ ở trên ("đồng thời điểm thi tốt nghiệp THPT từ X điểm
+ * trở lên"). Với 4 nhóm Sức khỏe/Luật, con số này TRÙNG `TRANSCRIPT_EXTRA_REQUIREMENT.altThptTotal30`
+ * — 2 lần đọc độc lập (ảnh 2026-09-08 vs text 2026-08-20) cho cùng kết quả. */
+const TRANSCRIPT_CONCURRENT_THPT_30: Record<VluThresholdGroup, number> = {
+  standard: 15,
+  law: 18,
+  'medicine-dentistry': 20,
+  pharmacy: 20,
+  'nursing-medlab': 16.5,
+};
+
+/**
+ * Phương thức 2/3: đối chiếu ĐIỂM HỌC BẠ theo tổ hợp (tổng TB 6 học kỳ của 3 môn, thang 30) với
+ * điểm sàn nhận hồ sơ của nhóm ngành. `transcriptTotal30 === undefined` = chưa đủ dữ liệu học kỳ →
+ * `pass: false` kèm `known: false` để caller phân biệt "chưa biết" với "trượt sàn".
+ */
+export function checkVluTranscriptThreshold(
+  transcriptTotal30: number | undefined,
+  group: VluThresholdGroup
+): VluEligibilityResult & { known: boolean } {
+  const min = TRANSCRIPT_THRESHOLD_30[group];
+  const concurrent = TRANSCRIPT_CONCURRENT_THPT_30[group];
+  const requiredText = `Điểm học bạ theo tổ hợp ≥ ${min.toFixed(2)}/30, đồng thời tổng 3 môn thi TN THPT ≥ ${concurrent}/30 — nhóm ngành ${GROUP_LABELS[group]}.`;
+  if (transcriptTotal30 === undefined) return { pass: false, known: false, requiredText };
+  return { pass: transcriptTotal30 >= min, known: true, requiredText };
+}
+
 export type VluAcademicRank = 'kha' | 'gioi';
 
 const RANK_ORDER: Record<VluAcademicRank, number> = { kha: 1, gioi: 2 };

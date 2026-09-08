@@ -6,17 +6,40 @@ import { SUBJECT_LABELS } from '../../core/subjects';
 import { sumCombinationAveragesAcrossSemesters, TRANSCRIPT_SEMESTER_LABELS } from '../../core/transcriptSemesters';
 import { vluAdmissionMethods } from './methods';
 import { vluKnowledgeGaps } from './knowledgeGaps';
-import { vluTranscriptFormulaEvidence } from './evidence';
+import { vluTranscriptFormulaEvidence, vluTranscriptThresholdEvidence } from './evidence';
 import {
   checkVluThptExamThreshold,
   checkVluTranscriptOrCombinedEligibility,
+  checkVluTranscriptThreshold,
   type VluAcademicRank,
   type VluThresholdGroup,
 } from './eligibility';
+import { inferVluThresholdGroup } from './programs';
 
 export interface VluSubjectContext {
   combinationId?: string;
   subjects: readonly SubjectId[];
+}
+
+/**
+ * Nhóm ngưỡng dùng cho một lần đánh giá. Thứ tự ưu tiên: `thresholdGroup` caller truyền thẳng (giữ
+ * nguyên hành vi cũ, không breaking) → suy từ `programId` qua danh mục 64 ngành (`programs.ts`) →
+ * `'standard'`.
+ *
+ * Vì sao vẫn fallback `'standard'` ở ĐÂY (trong khi `inferVluThresholdGroup` cố tình trả `undefined`
+ * cho mã lạ): caller cũ gọi hàm này KHÔNG truyền gì cả và trước batch này cũng nhận `'standard'` —
+ * đổi thành lỗi sẽ là breaking change ngoài phạm vi. Mã ngành SAI thì khác: nếu caller có truyền
+ * `programId` mà không tra được, `resolveThresholdGroup` báo lại qua `unknownProgramId` để evaluator
+ * gắn `missingRequirement`, KHÔNG âm thầm hạ ngưỡng.
+ */
+function resolveThresholdGroup(context: { thresholdGroup?: VluThresholdGroup; programId?: string }): {
+  group: VluThresholdGroup;
+  unknownProgramId: boolean;
+} {
+  if (context.thresholdGroup) return { group: context.thresholdGroup, unknownProgramId: false };
+  if (context.programId === undefined) return { group: 'standard', unknownProgramId: false };
+  const inferred = inferVluThresholdGroup(context.programId);
+  return inferred ? { group: inferred, unknownProgramId: false } : { group: 'standard', unknownProgramId: true };
 }
 
 function sumSubjectTotal(profile: ApplicantProfile, subjects: readonly SubjectId[]): { total30?: number; missingSubjects: SubjectId[] } {
@@ -33,7 +56,19 @@ function sumSubjectTotal(profile: ApplicantProfile, subjects: readonly SubjectId
 
 export interface VluThptExamEvaluationContext {
   thresholdGroup?: VluThresholdGroup;
+  /** Mã ngành trong danh mục 64 ngành Chương trình tiêu chuẩn (`programs.ts`) — dùng để tự suy
+   * `thresholdGroup` khi caller không truyền thẳng. */
+  programId?: string;
   subjectContext?: VluSubjectContext;
+}
+
+/** Dùng chung cho cả 3 phương thức khi `programId` không tra được trong danh mục đã import. */
+function unknownProgramRequirement(programId: string | undefined): MissingRequirement {
+  return {
+    kind: 'school-context',
+    code: 'vlu-program-unknown',
+    label: `Mã ngành "${programId}" không có trong danh mục 64 ngành Chương trình tiêu chuẩn đã import — có thể là ngành Chương trình Global Elite (ngưỡng cao hơn hẳn, chưa import) hoặc mã sai. Đang tạm áp ngưỡng nhóm tiêu chuẩn.`,
+  };
 }
 
 /** Phương thức 1: Xét kết quả thi TN THPT 2026. */
@@ -42,7 +77,8 @@ export function evaluateVluThptExamAdmission(profile: ApplicantProfile, context:
   const explanation: CalculationStep[] = [];
   const missingInputs: string[] = [];
   const missingRequirements: MissingRequirement[] = [];
-  const group: VluThresholdGroup = context.thresholdGroup ?? 'standard';
+  const { group, unknownProgramId } = resolveThresholdGroup(context);
+  if (unknownProgramId) missingRequirements.push(unknownProgramRequirement(context.programId));
 
   let total30: number | undefined;
   if (context.subjectContext) {
@@ -87,6 +123,9 @@ export function evaluateVluThptExamAdmission(profile: ApplicantProfile, context:
 
 export interface VluTranscriptEvaluationContext {
   thresholdGroup?: VluThresholdGroup;
+  /** Mã ngành trong danh mục 64 ngành Chương trình tiêu chuẩn (`programs.ts`) — dùng để tự suy
+   * `thresholdGroup` khi caller không truyền thẳng. */
+  programId?: string;
   academicRank12?: VluAcademicRank;
   /** Tổng 3 môn thi TN THPT theo tổ hợp xét tuyển (dùng làm điều kiện thay thế cho khối Sức khỏe/Luật). */
   subjectContext?: VluSubjectContext;
@@ -111,7 +150,8 @@ function evaluateVluTranscriptFamilyAdmission(method: (typeof vluAdmissionMethod
   const explanation: CalculationStep[] = [];
   const missingInputs: string[] = [];
   const missingRequirements: MissingRequirement[] = [];
-  const group: VluThresholdGroup = context.thresholdGroup ?? 'standard';
+  const { group, unknownProgramId } = resolveThresholdGroup(context);
+  if (unknownProgramId) missingRequirements.push(unknownProgramRequirement(context.programId));
 
   let thptExamTotal30: number | undefined;
   if (context.subjectContext) {
@@ -124,6 +164,7 @@ function evaluateVluTranscriptFamilyAdmission(method: (typeof vluAdmissionMethod
 
   // Điểm học bạ theo công thức chính thức: TB 6 học kỳ của 3 môn tổ hợp (`transcript.bySemester`).
   // KHÔNG lấy TB cả năm (`grade10/11/12`) thay thế — 2 cách tính ra số khác nhau.
+  let transcriptTotal30: number | undefined;
   if (context.subjectContext) {
     const transcriptTotal = sumCombinationAveragesAcrossSemesters(profile.transcript?.bySemester, context.subjectContext.subjects);
     if (transcriptTotal.total30 === undefined) {
@@ -136,6 +177,7 @@ function evaluateVluTranscriptFamilyAdmission(method: (typeof vluAdmissionMethod
         });
       }
     } else {
+      transcriptTotal30 = transcriptTotal.total30;
       for (const { subjectId, average } of transcriptTotal.subjectAverages ?? []) {
         explanation.push({
           id: `${method.id}-subject-average-${subjectId}`,
@@ -170,8 +212,25 @@ function evaluateVluTranscriptFamilyAdmission(method: (typeof vluAdmissionMethod
     thptExamTotal30,
     graduationScore10: context.graduationScore10,
   });
+
+  // Điểm sàn nhận hồ sơ tính TRÊN CHÍNH điểm học bạ (18/20/23/22/19 theo nhóm ngành) — dữ liệu mới
+  // đọc được 2026-09-08 từ ảnh bảng điểm sàn. Trước batch này nhóm `standard` bị coi là "không có
+  // điều kiện bổ sung nào" ở phương thức học bạ, tức BỎ SÓT một ngưỡng thật.
+  const transcriptThreshold = checkVluTranscriptThreshold(transcriptTotal30, group);
+  if (transcriptThreshold.known) {
+    explanation.push({
+      id: `${method.id}-transcript-threshold`,
+      label: 'Điểm sàn nhận hồ sơ xét học bạ',
+      output: transcriptTotal30 ?? 0,
+      scale: 30,
+      formula: transcriptThreshold.requiredText,
+      evidence: vluTranscriptThresholdEvidence.evidence,
+    });
+  }
+
   const hasEnoughInfo = group === 'standard' || (context.academicRank12 !== undefined && (thptExamTotal30 !== undefined || context.graduationScore10 !== undefined));
-  const status: 'eligible' | 'ineligible' | 'unknown' = hasEnoughInfo ? (result.pass ? 'eligible' : 'ineligible') : 'unknown';
+  const status: 'eligible' | 'ineligible' | 'unknown' =
+    transcriptThreshold.known && !transcriptThreshold.pass ? 'ineligible' : hasEnoughInfo ? (result.pass ? 'eligible' : 'ineligible') : 'unknown';
   explanation.push({ id: `${method.id}-threshold`, label: `Ngưỡng đảm bảo chất lượng VLU 2026 (${method.name})`, output: thptExamTotal30 ?? 0, scale: 30, formula: result.requiredText });
 
   return {
@@ -179,7 +238,7 @@ function evaluateVluTranscriptFamilyAdmission(method: (typeof vluAdmissionMethod
     year: method.year,
     methodId: method.id,
     confidence: 'partial',
-    eligibility: { status, reasons: [result.requiredText] },
+    eligibility: { status, reasons: [transcriptThreshold.requiredText, result.requiredText] },
     missingInputs,
     missingRules: (method.knowledgeGaps ?? vluKnowledgeGaps).map((gap) => gap.label),
     missingRequirements: [...missingRequirements, ...(method.knowledgeGaps ?? vluKnowledgeGaps).map((gap) => ({ kind: 'official-rule' as const, code: gap.id, label: gap.label }))],

@@ -3,12 +3,17 @@ import { vluKnowledgeGaps } from './knowledgeGaps';
 
 const gapById = (id: string) => vluKnowledgeGaps.filter((gap) => gap.id === id);
 
-const thptExamGaps = [...gapById('vlu-primary-subject-list-unpublished'), ...gapById('vlu-priority-bonus-table-not-found'), ...gapById('vlu-program-catalog-not-imported')];
+const thptExamGaps = [
+  ...gapById('vlu-primary-subject-list-unpublished'),
+  ...gapById('vlu-priority-bonus-table-not-found'),
+  ...gapById('vlu-global-tier-program-lists-not-published'),
+];
 
 const transcriptGaps = [
   ...gapById('vlu-primary-subject-list-unpublished'),
   ...gapById('vlu-priority-bonus-table-not-found'),
-  ...gapById('vlu-program-catalog-not-imported'),
+  ...gapById('vlu-global-tier-program-lists-not-published'),
+  ...gapById('vlu-foreign-language-conversion-table-not-imported'),
 ];
 
 const combinedGaps = [...transcriptGaps, ...gapById('vlu-combined-method-conversion-table-unpublished')];
@@ -27,6 +32,11 @@ const combinedGaps = [...transcriptGaps, ...gapById('vlu-combined-method-convers
  * Batch "6 học kỳ": `vlu-transcript-semester-granularity-gap` ĐÃ ĐÓNG (xem `knowledgeGaps.ts`) —
  * PT2/PT3 nay tính và hiện được ĐIỂM HỌC BẠ theo tổ hợp trong `explanation`, nhưng capability giữ
  * nguyên `false` vì 2 gap score-affecting còn lại vẫn chặn điểm xét tuyển CUỐI.
+ *
+ * Batch "danh mục ngành" (2026-09-08): `vlu-program-catalog-not-imported` ĐÃ ĐÓNG — nhóm ngưỡng nay
+ * suy được từ mã ngành (`programs.ts`), và PT2/PT3 có thêm điểm sàn nhận hồ sơ tính trên chính điểm
+ * học bạ. Capability VẪN giữ nguyên: 2 gap `exact-final-score-blocking` đã research lại cùng ngày và
+ * vẫn mở, nên không có method nào lên `exactCalculator`.
  */
 export const vluAdmissionMethods: AdmissionMethodDescriptor[] = [
   {

@@ -189,3 +189,93 @@ describe('VLU học bạ — TB 3 môn của 6 học kỳ (transcript.bySemester
     expect(evaluation.missingRules.some((label) => label.includes('06 học kỳ'))).toBe(false);
   });
 });
+
+/**
+ * Batch "danh mục ngành" (2026-09-08) — điểm sàn nhận hồ sơ tính TRÊN CHÍNH điểm học bạ, và nhóm
+ * ngưỡng suy được từ mã ngành.
+ *
+ * `SIX_SEMESTERS` ở trên cho tổng học bạ = 23,50/30 (đã tính tay). Đối chiếu bảng điểm sàn:
+ *   standard            18,00 -> 23,50 ≥ 18,00  => đạt
+ *   law                 20,00 -> 23,50 ≥ 20,00  => đạt
+ *   medicine-dentistry  23,00 -> 23,50 ≥ 23,00  => đạt (sát ngưỡng, chỉ hơn 0,50)
+ *
+ * `LOW_SEMESTERS` cho mọi môn đúng 5,0 ở cả 6 học kỳ => TB mỗi môn 5,00, tổng = 15,00/30:
+ *   standard            18,00 -> 15,00 < 18,00  => TRƯỢT sàn
+ */
+const LOW_SEMESTERS = {
+  grade10Sem1: { math: 5, physics: 5, english: 5 },
+  grade10Sem2: { math: 5, physics: 5, english: 5 },
+  grade11Sem1: { math: 5, physics: 5, english: 5 },
+  grade11Sem2: { math: 5, physics: 5, english: 5 },
+  grade12Sem1: { math: 5, physics: 5, english: 5 },
+  grade12Sem2: { math: 5, physics: 5, english: 5 },
+};
+
+describe('VLU học bạ — điểm sàn nhận hồ sơ theo nhóm ngành', () => {
+  const subjectContext = { combinationId: 'A01', subjects: A01_SUBJECTS };
+
+  it('nhóm standard, học bạ 23,50 ≥ sàn 18,00 -> eligible + hiện bước ngưỡng', () => {
+    const evaluation = evaluateVluTranscriptAdmission({ transcript: { bySemester: SIX_SEMESTERS } }, { thresholdGroup: 'standard', subjectContext });
+    const step = evaluation.explanation.find((s) => s.id === 'vlu-transcript-2026-transcript-threshold');
+    expect(step?.output).toBe(23.5);
+    expect(step?.formula).toContain('18.00/30');
+    expect(evaluation.eligibility?.status).toBe('eligible');
+  });
+
+  it('nhóm standard, học bạ 15,00 < sàn 18,00 -> ineligible (trước batch này nhóm standard luôn eligible)', () => {
+    const evaluation = evaluateVluTranscriptAdmission({ transcript: { bySemester: LOW_SEMESTERS } }, { thresholdGroup: 'standard', subjectContext });
+    expect(evaluation.explanation.find((s) => s.id === 'vlu-transcript-2026-transcript-threshold')?.output).toBe(15);
+    expect(evaluation.eligibility?.status).toBe('ineligible');
+  });
+
+  it('nhóm medicine-dentistry: 23,50 vừa đủ sàn học bạ 23,00 (điều kiện học lực/điểm thay thế vẫn còn thiếu -> unknown)', () => {
+    const evaluation = evaluateVluTranscriptAdmission({ transcript: { bySemester: SIX_SEMESTERS } }, { thresholdGroup: 'medicine-dentistry', subjectContext });
+    expect(evaluation.explanation.find((s) => s.id === 'vlu-transcript-2026-transcript-threshold')?.formula).toContain('23.00/30');
+    expect(evaluation.eligibility?.status).toBe('unknown');
+  });
+
+  it('chưa đủ 6 học kỳ -> KHÔNG hiện bước ngưỡng học bạ (không kết luận trượt khi chưa biết điểm)', () => {
+    const evaluation = evaluateVluTranscriptAdmission({}, { thresholdGroup: 'standard', subjectContext });
+    expect(evaluation.explanation.some((s) => s.id === 'vlu-transcript-2026-transcript-threshold')).toBe(false);
+  });
+});
+
+describe('VLU — nhóm ngưỡng suy từ programId (danh mục 64 ngành)', () => {
+  const subjectContext = { combinationId: 'A01', subjects: A01_SUBJECTS };
+
+  it('Phương thức 1, programId ngành Luật -> áp ngưỡng 20, tổng 15 => ineligible', () => {
+    const evaluation = evaluateVluThptExamAdmission(profileWithThpt({ math: 5, physics: 5, english: 5 }), {
+      programId: '7380101',
+      subjectContext,
+    });
+    expect(evaluation.eligibility?.status).toBe('ineligible');
+    expect(evaluation.explanation[0].formula).toContain('≥ 20');
+  });
+
+  it('Phương thức 1, programId ngành Kế toán -> áp ngưỡng standard 15, tổng 15 => eligible', () => {
+    const evaluation = evaluateVluThptExamAdmission(profileWithThpt({ math: 5, physics: 5, english: 5 }), {
+      programId: '7340301',
+      subjectContext,
+    });
+    expect(evaluation.eligibility?.status).toBe('eligible');
+  });
+
+  it('thresholdGroup caller truyền thẳng ĐÈ programId (giữ hành vi cũ, không breaking)', () => {
+    const evaluation = evaluateVluThptExamAdmission(profileWithThpt({ math: 5, physics: 5, english: 5 }), {
+      programId: '7380101',
+      thresholdGroup: 'standard',
+      subjectContext,
+    });
+    expect(evaluation.eligibility?.status).toBe('eligible');
+  });
+
+  it('programId lạ -> missingRequirement cảnh báo, KHÔNG âm thầm hạ ngưỡng', () => {
+    const evaluation = evaluateVluTranscriptAdmission({ transcript: { bySemester: SIX_SEMESTERS } }, { programId: '7999999', subjectContext });
+    expect(evaluation.missingRequirements?.some((r) => r.code === 'vlu-program-unknown')).toBe(true);
+  });
+
+  it('Phương thức 2, programId ngành Y khoa -> sàn học bạ 23,00 (suy từ mã ngành, caller không truyền group)', () => {
+    const evaluation = evaluateVluTranscriptAdmission({ transcript: { bySemester: SIX_SEMESTERS } }, { programId: '7720101', subjectContext });
+    expect(evaluation.explanation.find((s) => s.id === 'vlu-transcript-2026-transcript-threshold')?.formula).toContain('23.00/30');
+  });
+});
