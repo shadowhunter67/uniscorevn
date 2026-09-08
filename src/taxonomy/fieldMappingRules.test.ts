@@ -4,7 +4,7 @@ import { FIELDS } from './fields';
 
 describe('fieldMappingRules', () => {
   it('ngành không khớp alias nào trả về mảng rỗng — không đoán field', () => {
-    expect(mapProgramNameToFields('Kỹ thuật hạt nhân vũ trụ')).toEqual([]);
+    expect(mapProgramNameToFields('Khảo cổ học thiên văn ngoài hành tinh')).toEqual([]);
   });
 
   it('map đúng field cho tên ngành rõ ràng', () => {

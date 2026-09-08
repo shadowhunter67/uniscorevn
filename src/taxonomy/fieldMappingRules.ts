@@ -21,7 +21,11 @@ const RULES: readonly FieldMappingRule[] = FIELDS.flatMap((field) =>
  * Ghi đè thủ công cho 1 ngành cụ thể của 1 trường khi rule chung map sai/thiếu — key dạng
  * "schoolId:programId". KHÔNG dùng để "gán" field cho ngành chưa rõ nội dung; chỉ sửa lỗi rule.
  */
-export const MAJOR_FIELD_OVERRIDES: Readonly<Record<string, readonly FieldId[]>> = {};
+export const MAJOR_FIELD_OVERRIDES: Readonly<Record<string, readonly FieldId[]>> = {
+  // "Rang - Ham - Mat" (tên ngành nhập tay có dấu gạch nối/khoảng trắng khác chuẩn) không khớp
+  // substring "răng hàm mặt" do format khác — ghi đè thủ công thay vì nới lỏng rule chung.
+  'uhs:uhs-7720501': ['y-duoc-suc-khoe'],
+};
 
 /** Map 1 tên ngành (chưa normalize) sang danh sách field khớp — không khớp gì → mảng rỗng, KHÔNG
  * đoán field gần đúng nhất. */
