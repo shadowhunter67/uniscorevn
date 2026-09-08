@@ -25,6 +25,25 @@ export const MAJOR_FIELD_OVERRIDES: Readonly<Record<string, readonly FieldId[]>>
   // "Rang - Ham - Mat" (tên ngành nhập tay có dấu gạch nối/khoảng trắng khác chuẩn) không khớp
   // substring "răng hàm mặt" do format khác — ghi đè thủ công thay vì nới lỏng rule chung.
   'uhs:uhs-7720501': ['y-duoc-suc-khoe'],
+
+  /**
+   * Audit alias rộng 'kinh doanh' (2026-09-08) — 3 ngành LUẬT của UEL bị alias này kéo nhầm vào
+   * `kinh-te-quan-tri`. Tên ngành là "Luật kinh doanh ...": danh từ chính là "Luật", "kinh doanh"
+   * chỉ là bổ ngữ chỉ LĨNH VỰC LUẬT ĐIỀU CHỈNH, không biến ngành luật thành ngành kinh doanh.
+   * Đây đúng lớp lỗi mà alias 'toán' từng gây với "Kế toán".
+   *
+   * Vì sao ghi đè thay vì siết alias: 'kinh doanh' vẫn cần thiết và ĐÚNG cho 13 ngành khác
+   * ("Kinh doanh số", "Kinh doanh nông nghiệp", "Thống kê kinh doanh"...), và siết theo ranh giới
+   * từ cũng không cứu được — "Luật kinh doanh" có "kinh doanh" đứng đúng ranh giới từ. Lỗi nằm ở
+   * TRẬT TỰ TỪ (bổ ngữ đứng sau danh từ chính), thứ mà so khớp substring không biểu diễn được.
+   *
+   * Ghi đè REPLACE cả danh sách field (xem `buildMajorOfferings`), nên tiện thể sửa luôn một lỗi
+   * thứ hai của biến thể "(Tiếng Anh)": hậu tố này chỉ nói ngành DẠY BẰNG tiếng Anh, nhưng alias
+   * 'tiếng anh' của field `ngon-ngu-quoc-te` bắt phải — ngành luật không phải ngành ngoại ngữ.
+   */
+  'uel:luat-kinh-doanh': ['luat'],
+  'uel:luat-thuong-mai-quoc-te': ['luat'],
+  'uel:luat-thuong-mai-quoc-te-ta': ['luat'],
 };
 
 /** Map 1 tên ngành (chưa normalize) sang danh sách field khớp — không khớp gì → mảng rỗng, KHÔNG
