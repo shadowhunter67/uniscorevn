@@ -3,7 +3,10 @@ import { assertGoldenCaseProvenance } from '../../core/goldenAdmissionCase';
 import { calculateHcmulawSubjectGroupScore, calculateHcmulawThpt5FinalScore, calculateHcmulawPriorityHighschool3FinalScore } from './calculator';
 import { calculateHcmulawPriority30, lookupHcmulawStandardPriority30 } from './priority';
 import { convertHcmulawVsatSubjectScore, convertHcmulawTranscriptCombinationScore, HCMULAW_TRANSCRIPT_K_BY_COMBINATION } from './conversionTable';
-import { hcmulawThpt5GoldenCases, hcmulawVsat4GoldenCases, hcmulawTranscript3GoldenCases } from './__fixtures__/officialExamples2026';
+import { hcmulawThpt5GoldenCases, hcmulawVsat4GoldenCases, hcmulawTranscript3GoldenCases, hcmulawCombined2GoldenCases } from './__fixtures__/officialExamples2026';
+import { calculateHcmulawCombined2FinalScore } from './calculator';
+import { calculateHcmulawMethod2Bonus } from './bonus';
+import type { HcmulawProgramId } from './programs';
 import { hcmulawPrograms } from './programs';
 
 describe('HCMULAW 2026 golden conformance — Phương thức 5, thi TN THPT (Tier C — sourceId hcmulaw-method-notice-2026)', () => {
@@ -26,6 +29,23 @@ describe('HCMULAW 2026 golden conformance — Phương thức 4, V-SAT (Tier A o
   it.each(hcmulawVsat4GoldenCases)('$id', (goldenCase) => {
     const y = convertHcmulawVsatSubjectScore(goldenCase.input.subjectId, goldenCase.input.x);
     expect(y).toBe(goldenCase.expected.y);
+  });
+});
+
+describe('HCMULAW 2026 golden conformance — Phương thức 2, học bạ quy đổi + điểm khuyến khích chứng chỉ (mục 2(c)(ii))', () => {
+  assertGoldenCaseProvenance(hcmulawCombined2GoldenCases);
+
+  it.each(hcmulawCombined2GoldenCases)('$id', (goldenCase) => {
+    const converted30 = convertHcmulawTranscriptCombinationScore(goldenCase.input.combinationCode, goldenCase.input.x30);
+    expect(converted30).toBe(goldenCase.expected.converted30);
+
+    const bonus = calculateHcmulawMethod2Bonus(goldenCase.input.certificates, goldenCase.input.programId as HcmulawProgramId);
+    expect(bonus.bonus30).toBe(goldenCase.expected.bonus30);
+
+    const standardPriority30 = lookupHcmulawStandardPriority30(goldenCase.input.priorityRegion, goldenCase.input.priorityCategory);
+    const priority = calculateHcmulawPriority30({ academicScore30: converted30!, standardPriority30 });
+    const finalScore = calculateHcmulawCombined2FinalScore({ subjectGroupScore30: converted30!, bonus30: bonus.bonus30!, priority30: priority.effectivePriority30 });
+    expect(finalScore).toBe(goldenCase.expected.finalScore);
   });
 });
 

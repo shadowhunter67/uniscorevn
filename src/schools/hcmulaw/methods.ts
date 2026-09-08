@@ -1,7 +1,4 @@
 import type { AdmissionMethodDescriptor } from '../../core/admissionMethod';
-import { hcmulawKnowledgeGaps } from './knowledgeGaps';
-
-const method2BonusGap = hcmulawKnowledgeGaps.filter((gap) => gap.id === 'hcmulaw-method2-bonus-certificate-model-gap');
 
 /**
  * HCMULAW 2026 — 4/5 phương thức có công thức điểm (mã 410/200/417/100; Phương thức 1 mã 301 xét
@@ -20,10 +17,15 @@ const method2BonusGap = hcmulawKnowledgeGaps.filter((gap) => gap.id === 'hcmulaw
  *   có "điểm xét thưởng" thành tích (cùng semantics conditional-exact HUTECH/USSH/IU/TDTU/HUFLIT) —
  *   KHÔNG gắn `knowledgeGaps` vào descriptor này (`auditMethods()` coi `exactCalculator:true` +
  *   `knowledgeGaps` non-empty là lỗi EXACT_METHOD_HAS_UNRESOLVED_GAPS).
- * - `combined2`: vẫn `exactCalculator: false`, nhưng vì gap MỚI khác hẳn —
- *   `hcmulaw-method2-bonus-certificate-model-gap` (điểm khuyến khích chứng chỉ ngoại ngữ/SAT không
- *   mô hình hoá được từ `ApplicantProfile.certificates` hiện tại). Phần điểm tổ hợp học bạ quy đổi
- *   (y = x - k) ĐÃ tính được và hiện trong `explanation`, nên `scoreConversion: true`.
+ * - `combined2`: khi đó vẫn `exactCalculator: false` vì gap MỚI khác hẳn —
+ *   `hcmulaw-method2-bonus-certificate-model-gap`.
+ * Batch "chứng chỉ PT2" (2026-09-08) — gap đó ĐÃ ĐÓNG (`ApplicantProfile.certificates` nay có
+ * DELF/TCF/JLPT/HSK theo bậc + ngày dự thi TOEFL; bảng điểm khuyến khích vào `bonus.ts`):
+ * - `combined2`: lên `exactCalculator: true` + `bonus: true`. ĐXT = (x - k) + điểm khuyến khích
+ *   (tối đa 1,50, chỉ 1 loại chứng chỉ cao nhất) + điểm ưu tiên, kẹp 30. Exact trong phạm vi thí
+ *   sinh không có "điểm xét thưởng" thành tích (cùng semantics conditional-exact với PT3) — KHÔNG
+ *   gắn `knowledgeGaps` vào descriptor này (`auditMethods()` coi `exactCalculator:true` +
+ *   `knowledgeGaps` non-empty là lỗi EXACT_METHOD_HAS_UNRESOLVED_GAPS).
  */
 export const hcmulawAdmissionMethods: AdmissionMethodDescriptor[] = [
   {
@@ -31,9 +33,8 @@ export const hcmulawAdmissionMethods: AdmissionMethodDescriptor[] = [
     schoolId: 'hcmulaw',
     name: 'Xét tuyển kết hợp kết quả học tập THPT với chứng chỉ ngoại ngữ quốc tế/SAT (mã PT 410)',
     year: 2026,
-    applicantTypes: ['Thí sinh tốt nghiệp THPT, có chứng chỉ ngoại ngữ quốc tế hoặc kết quả SAT'],
-    capabilities: { eligibility: true, scoreConversion: true, bonus: false, priority: false, exactCalculator: false },
-    knowledgeGaps: method2BonusGap,
+    applicantTypes: ['Thí sinh tốt nghiệp THPT, có chứng chỉ ngoại ngữ quốc tế hoặc kết quả SAT, không có điểm xét thưởng thành tích'],
+    capabilities: { eligibility: true, scoreConversion: true, bonus: true, priority: true, exactCalculator: true },
   },
   {
     id: 'hcmulaw-priority-highschool3-2026',

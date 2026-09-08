@@ -47,3 +47,13 @@ export function calculateHcmulawVsat4FinalScore(input: { subjectGroupScore30: nu
 export function calculateHcmulawPriorityHighschool3FinalScore(input: { subjectGroupScore30: number; priority30: number }): number {
   return round2(Math.min(30, input.subjectGroupScore30 + input.priority30));
 }
+
+/**
+ * Phương thức 2 (mã 410, kết hợp học bạ + chứng chỉ ngoại ngữ quốc tế/SAT) — cùng dạng ĐXT chung
+ * ("điểm tổ hợp môn + điểm cộng (nếu có) + điểm ưu tiên (nếu có)"), khác Phương thức 3 ở chỗ điểm
+ * cộng KHÁC 0: đây là "điểm khuyến khích" quy đổi từ chứng chỉ (`bonus.ts`, tối đa 1,50).
+ * "Điểm tổ hợp môn" vẫn là y = x - k như Phương thức 3. Kẹp trần 30.
+ */
+export function calculateHcmulawCombined2FinalScore(input: { subjectGroupScore30: number; bonus30: number; priority30: number }): number {
+  return round2(Math.min(30, input.subjectGroupScore30 + input.bonus30 + input.priority30));
+}

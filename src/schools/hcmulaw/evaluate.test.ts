@@ -163,29 +163,132 @@ describe('evaluateHcmulawPriorityHighschool3Admission (PT3, mã 200 — học b�
   });
 });
 
-describe('evaluateHcmulawCombined2Admission (PT2, mã 410) — quy đổi học bạ tính được, ĐXT vẫn partial', () => {
-  it('hiện y = x - k nhưng KHÔNG trả score (thiếu mô hình điểm khuyến khích chứng chỉ)', () => {
-    const profile: ApplicantProfile = { transcript: { bySemester: semestersFor(8, 9, 9) } };
+/**
+ * ===== Phương thức 2 (mã 410) — ĐXT = (x - k) + điểm khuyến khích + điểm ưu tiên, kẹp 30 =====
+ *
+ * Hồ sơ nền dùng chung cho cả nhóm test dưới đây: `semestersFor(8, 9, 9)` -> x = 8 + 9 + 9 = 26,00;
+ * tổ hợp D01 có k = 3,80 -> y = 26,00 - 3,80 = 22,20. Không có điểm ưu tiên.
+ *
+ * Mọi con số kỳ vọng dưới đây TÍNH TAY từ 2 bảng của mục 2(c)(ii) (xem `bonus.ts`), không lấy lại
+ * output của chính hàm đang test.
+ */
+describe('evaluateHcmulawCombined2Admission (PT2, mã 410) — ĐXT exact sau khi đóng gap chứng chỉ', () => {
+  it('IELTS 6.5 -> khuyến khích 1,00; ĐXT = 22,20 + 1,00 = 23,20', () => {
+    const profile: ApplicantProfile = { transcript: { bySemester: semestersFor(8, 9, 9) }, certificates: { ielts: 6.5 } };
     const result = evaluateHcmulawCombined2Admission(profile, D01_CONTEXT);
     expect(result.explanation.find((s) => s.id === 'hcmulaw-combined2-2026-transcript-conversion')?.output).toBe(22.2);
-    expect(result.confidence).toBe('partial');
-    expect(result.score).toBeUndefined();
-    expect(result.missingRequirements?.some((r) => r.code === 'hcmulaw-method2-bonus-certificate-model-gap')).toBe(true);
+    expect(result.explanation.find((s) => s.id === 'hcmulaw-combined2-2026-bonus')?.output).toBe(1);
+    expect(result.confidence).toBe('exact-verified');
+    expect(result.score).toEqual({ value: 23.2, scale: 30 });
+    expect(result.eligibility?.status).toBe('eligible'); // 23,20 >= ngưỡng ngành Luật 20,00
   });
 
-  it('sàn học bạ riêng của PT2 là 22,50 (thấp hơn PT3) — x = 24,00 vẫn qua sàn', () => {
-    const profile: ApplicantProfile = { transcript: { bySemester: semestersFor(8, 8, 8) } };
-    const result = evaluateHcmulawCombined2Admission(profile, D01_CONTEXT);
-    expect(result.eligibility?.status).not.toBe('ineligible');
+  it('IELTS 7.5 (mức trần) -> 1,50; ĐXT = 22,20 + 1,50 = 23,70', () => {
+    const profile: ApplicantProfile = { transcript: { bySemester: semestersFor(8, 9, 9) }, certificates: { ielts: 7.5 } };
+    expect(evaluateHcmulawCombined2Admission(profile, D01_CONTEXT).score?.value).toBe(23.7);
+  });
 
-    const below: ApplicantProfile = { transcript: { bySemester: semestersFor(7, 7, 7) } }; // x = 21,00 < 22,50
+  it('SAT 1330 -> 1,25 (khoảng 1330-1380); ĐXT = 22,20 + 1,25 = 23,45', () => {
+    const profile: ApplicantProfile = { transcript: { bySemester: semestersFor(8, 9, 9) }, certificates: { sat: 1330 } };
+    expect(evaluateHcmulawCombined2Admission(profile, D01_CONTEXT).score?.value).toBe(23.45);
+  });
+
+  it('CHỈ CÔNG NHẬN 1 LOẠI CAO NHẤT: IELTS 5.5 (0,50) + SAT 1390 (1,50) -> 1,50, KHÔNG cộng dồn thành 2,00', () => {
+    const profile: ApplicantProfile = { transcript: { bySemester: semestersFor(8, 9, 9) }, certificates: { ielts: 5.5, sat: 1390 } };
+    const result = evaluateHcmulawCombined2Admission(profile, D01_CONTEXT);
+    expect(result.explanation.find((s) => s.id === 'hcmulaw-combined2-2026-bonus')?.output).toBe(1.5);
+    expect(result.score?.value).toBe(23.7);
+  });
+
+  it('bảng bậc: JLPT N2 (1,25) cao hơn IELTS 5.5 (0,50) -> lấy 1,25; ĐXT = 23,45', () => {
+    const profile: ApplicantProfile = { transcript: { bySemester: semestersFor(8, 9, 9) }, certificates: { ielts: 5.5, jlpt: 'N2' } };
+    const result = evaluateHcmulawCombined2Admission(profile, D01_CONTEXT);
+    expect(result.explanation.find((s) => s.id === 'hcmulaw-combined2-2026-bonus')?.label).toContain('JLPT');
+    expect(result.score?.value).toBe(23.45);
+  });
+
+  it('DELF C2 rơi vào mức "C1 trở lên" -> 1,50; TCF "Tương đương B1" -> 1,00', () => {
+    const base = { transcript: { bySemester: semestersFor(8, 9, 9) } };
+    expect(evaluateHcmulawCombined2Admission({ ...base, certificates: { delf: 'C2' } }, D01_CONTEXT).score?.value).toBe(23.7);
+    expect(evaluateHcmulawCombined2Admission({ ...base, certificates: { tcf: 'B1' } }, D01_CONTEXT).score?.value).toBe(23.2);
+  });
+
+  it('bậc DƯỚI ngưỡng bảng (JLPT N4, HSK2, DELF A2) -> 0 điểm khuyến khích + chưa đủ điều kiện chứng chỉ', () => {
+    const profile: ApplicantProfile = { transcript: { bySemester: semestersFor(8, 9, 9) }, certificates: { jlpt: 'N4', hsk: 'HSK2', delf: 'A2' } };
+    const result = evaluateHcmulawCombined2Admission(profile, D01_CONTEXT);
+    expect(result.explanation.find((s) => s.id === 'hcmulaw-combined2-2026-bonus')?.output).toBe(0);
+    expect(result.eligibility?.status).toBe('ineligible');
+    expect(result.missingRequirements?.some((r) => r.code === 'hcmulaw-method2-certificate')).toBe(true);
+  });
+
+  it('ràng buộc ngành: JLPT N1 dùng cho Quản trị kinh doanh -> bỏ qua (chỉ ngành Luật được dùng tiếng Nhật)', () => {
+    const profile: ApplicantProfile = { transcript: { bySemester: semestersFor(8, 9, 9) }, certificates: { jlpt: 'N1' } };
+    const result = evaluateHcmulawCombined2Admission(profile, { programId: '7340101', combinationCode: 'D01' });
+    expect(result.explanation.find((s) => s.id === 'hcmulaw-combined2-2026-bonus')?.output).toBe(0);
+    expect(result.missingRequirements?.some((r) => r.code === 'hcmulaw-certificate-not-valid-for-program')).toBe(true);
+  });
+
+  it('ràng buộc ngành: HSK5 dùng được cho ngành Ngôn ngữ Trung Quốc (7220204) -> 1,50', () => {
+    const profile: ApplicantProfile = { transcript: { bySemester: semestersFor(8, 9, 9) }, certificates: { hsk: 'HSK5' } };
+    const result = evaluateHcmulawCombined2Admission(profile, { programId: '7220204', combinationCode: 'D01' });
+    expect(result.explanation.find((s) => s.id === 'hcmulaw-combined2-2026-bonus')?.output).toBe(1.5);
+  });
+
+  it('TOEFL iBT 90 KHÔNG kèm ngày dự thi -> 2 thang cho 2 mức khác nhau (1,25 vs 1,50) -> partial, KHÔNG đoán', () => {
+    const profile: ApplicantProfile = { transcript: { bySemester: semestersFor(8, 9, 9) }, certificates: { toeflIbt: 90 } };
+    const result = evaluateHcmulawCombined2Admission(profile, D01_CONTEXT);
+    expect(result.confidence).toBe('partial');
+    expect(result.score).toBeUndefined();
+    expect(result.missingRequirements?.some((r) => r.code === 'hcmulaw-toefl-exam-date')).toBe(true);
+  });
+
+  it('TOEFL iBT 90 dự thi TRƯỚC 21/01/2026 -> thang cũ (89-95) = 1,25; ĐXT = 23,45', () => {
+    const profile: ApplicantProfile = { transcript: { bySemester: semestersFor(8, 9, 9) }, certificates: { toeflIbt: 90, toeflIbtExamDate: '2026-01-20' } };
+    expect(evaluateHcmulawCombined2Admission(profile, D01_CONTEXT).score?.value).toBe(23.45);
+  });
+
+  it('TOEFL iBT 90 dự thi ĐÚNG NGÀY 21/01/2026 -> thang mới (>= 5.0) = 1,50; ĐXT = 23,70 (biên "từ ngày ... trở về sau")', () => {
+    const profile: ApplicantProfile = { transcript: { bySemester: semestersFor(8, 9, 9) }, certificates: { toeflIbt: 90, toeflIbtExamDate: '2026-01-21' } };
+    expect(evaluateHcmulawCombined2Admission(profile, D01_CONTEXT).score?.value).toBe(23.7);
+  });
+
+  it('TOEFL iBT 4.0 thiếu ngày NHƯNG đã có IELTS 7.5 (1,50 = trần) -> không cần hỏi ngày, ĐXT = 23,70', () => {
+    const profile: ApplicantProfile = { transcript: { bySemester: semestersFor(8, 9, 9) }, certificates: { toeflIbt: 4, ielts: 7.5 } };
+    const result = evaluateHcmulawCombined2Admission(profile, D01_CONTEXT);
+    expect(result.missingRequirements?.some((r) => r.code === 'hcmulaw-toefl-exam-date')).toBe(false);
+    expect(result.score?.value).toBe(23.7);
+  });
+
+  it('TOEFL iBT 100 thiếu ngày -> cả 2 thang đều ra 1,50, không cần hỏi ngày; ĐXT = 23,70', () => {
+    const profile: ApplicantProfile = { transcript: { bySemester: semestersFor(8, 9, 9) }, certificates: { toeflIbt: 100 } };
+    const result = evaluateHcmulawCombined2Admission(profile, D01_CONTEXT);
+    expect(result.missingRequirements?.some((r) => r.code === 'hcmulaw-toefl-exam-date')).toBe(false);
+    expect(result.score?.value).toBe(23.7);
+  });
+
+  it('điểm ưu tiên KV1 (+0,75) cộng vào sau điểm khuyến khích: 22,20 + 1,00 + 0,75 = 23,95', () => {
+    const profile: ApplicantProfile = {
+      transcript: { bySemester: semestersFor(8, 9, 9) },
+      certificates: { ielts: 6.5 },
+      priority: { region: 'KV1' },
+    };
+    expect(evaluateHcmulawCombined2Admission(profile, D01_CONTEXT).score?.value).toBe(23.95);
+  });
+
+  it('sàn học bạ riêng của PT2 là 22,50 (thấp hơn PT3) — x = 24,00 qua sàn, x = 21,00 thì trượt', () => {
+    const certificates = { ielts: 6.5 } as const;
+    const pass: ApplicantProfile = { transcript: { bySemester: semestersFor(8, 8, 8) }, certificates }; // x = 24,00
+    expect(evaluateHcmulawCombined2Admission(pass, D01_CONTEXT).eligibility?.status).not.toBe('ineligible');
+
+    const below: ApplicantProfile = { transcript: { bySemester: semestersFor(7, 7, 7) }, certificates }; // x = 21,00 < 22,50
     expect(evaluateHcmulawCombined2Admission(below, D01_CONTEXT).eligibility?.status).toBe('ineligible');
   });
 
-  it('gap granularity cũ đã biến mất khỏi missingRequirements', () => {
-    const profile: ApplicantProfile = { transcript: { bySemester: semestersFor(8, 9, 9) } };
+  it('gap granularity cũ và gap chứng chỉ cũ đều đã biến mất khỏi missingRequirements', () => {
+    const profile: ApplicantProfile = { transcript: { bySemester: semestersFor(8, 9, 9) }, certificates: { ielts: 6.5 } };
     const result = evaluateHcmulawCombined2Admission(profile, D01_CONTEXT);
     expect(result.missingRequirements?.some((r) => r.code === 'hcmulaw-hocba-semester-granularity-gap')).toBe(false);
+    expect(result.missingRequirements?.some((r) => r.code === 'hcmulaw-method2-bonus-certificate-model-gap')).toBe(false);
   });
 });
 

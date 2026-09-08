@@ -79,6 +79,29 @@ export const hcmulawTranscriptConversionEvidence = {
   ],
 } satisfies SourcedRule<{ formula: string; minTranscriptCombined30: { method2: number; method3: number }; combinationGroupCount: number }>;
 
+/**
+ * ĐIỂM KHUYẾN KHÍCH Phương thức 2 (mã 410) — 2 bảng quy đổi chứng chỉ, xem `bonus.ts` cho bảng số
+ * đầy đủ và 3 quyết định mô hình hoá. Đọc lại verbatim 2026-09-08 bằng cách tải HTML gốc của trang
+ * (`ts.hcmulaw.edu.vn/...733.html`) và strip tag — 2 bảng nằm dạng TEXT thật trong DOM, KHÔNG phải
+ * ảnh, nên không có rủi ro đọc nhầm chữ số như các bảng ảnh khác của trường này.
+ */
+export const hcmulawMethod2BonusEvidence = {
+  value: { maxBonus30: 1.5, toeflScaleCutoffDate: '2026-01-21', highestOnly: true },
+  evidence: [
+    {
+      sourceId: 'hcmulaw-method-notice-2026',
+      location:
+        'Mục 2(c)(ii): "Điểm của tiêu chí, điều kiện nêu trên được quy đổi thành điểm khuyến khích (tối đa 1,50 điểm) để xét tuyển, cụ thể như sau:" — bảng (*) "Quy đổi điểm chứng chỉ tiếng Anh, hoặc kết quả Kỳ thi SAT của Mỹ (thí sinh chỉ được Trường công nhận điểm quy đổi tương ứng với duy nhất một loại chứng chỉ (hoặc kết quả Kỳ thi SAT) cao nhất)": IELTS 5.5/6.0/6.5/7.0/7.5-trở-lên, TOEFL iBT "Dự thi trước ngày 21/01/2026" 65-72/73-80/81-88/89-95/96-trở-lên, TOEFL iBT "Dự thi từ ngày 21/01/2026" 3.0/3.5/4.0/4.5/5.0-trở-lên, SAT 1150-1200/1210-1260/1270-1320/1330-1380/1390-trở-lên → 0,50/0,75/1,00/1,25/1,50. Bảng (**) "Quy đổi điểm chứng chỉ tiếng Pháp, hoặc tiếng Nhật, hoặc tiếng Trung (... duy nhất một loại chứng chỉ cao nhất)": DELF B1/B2/C1-trở-lên, TCF "Tương đương B1"/"Tương đương B2"/"Tương đương C1 trở lên", JLPT N3/N2/N1, HSK HSK3/HSK4/HSK5-trở-lên → 1,00/1,25/1,50. Mục 2(c)(i) ràng buộc ngành: tiếng Pháp "(chỉ xét tuyển đối với ngành Luật)", tiếng Nhật "(chỉ xét tuyển đối với ngành Luật)", tiếng Trung "(chỉ xét tuyển đối với ngành Luật và ngành Ngôn ngữ Trung Quốc)".',
+      verification: 'verified' as const,
+      effectiveYear: 2026,
+      publishedAt: '2026-04-28',
+      verifiedAt: '2026-09-08',
+      note:
+        'Đọc bằng cách tải HTML gốc + strip tag (không dùng tool tóm tắt): lần đọc qua tool tóm tắt trước đó trả về bảng (**) với ô "B1 equiv." — nghi ngờ là chữ mô hình tự chèn, đọc lại raw mới xác nhận nguyên văn nguồn đúng là "Tương đương B1". Bài học: bảng số không nhận từ tóm tắt.',
+    },
+  ],
+} satisfies SourcedRule<{ maxBonus30: number; toeflScaleCutoffDate: string; highestOnly: boolean }>;
+
 /** Ngưỡng đầu vào theo ngành (thang 30) — bảng ảnh gốc, transcribe đủ 11 ngành, xem
  * `programs.ts`/`sources.ts:hcmulaw-quality-threshold-2026`. */
 export const hcmulawThresholdEvidence = {

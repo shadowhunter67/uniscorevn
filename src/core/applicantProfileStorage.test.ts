@@ -281,6 +281,43 @@ describe('sanitizeApplicantProfile', () => {
     expect(result).toEqual({ certificates: { toeflIbt: 90, act: 36 } });
   });
 
+  /**
+   * Batch "chứng chỉ PT2" — field `certificates` mới thêm phải có mặt trong whitelist
+   * `sanitizeCertificates`, nếu không sanitizer sẽ âm thầm xoá dữ liệu mỗi lần load (đúng cái bẫy
+   * batch "6 học kỳ" đã gặp với `bySemester`). 4 test dưới đây chính là lưới chặn cho việc đó.
+   */
+  it('chứng chỉ theo BẬC (DELF/TCF/JLPT/HSK) được giữ lại — không bị sanitizer xoá', () => {
+    const result = sanitizeApplicantProfile({ certificates: { delf: 'B2', tcf: 'C1', jlpt: 'N1', hsk: 'HSK5' } });
+    expect(result).toEqual({ certificates: { delf: 'B2', tcf: 'C1', jlpt: 'N1', hsk: 'HSK5' } });
+  });
+
+  it('bậc chứng chỉ không hợp lệ bị drop riêng lẻ, giữ nguyên bậc hợp lệ khác', () => {
+    const result = sanitizeApplicantProfile({
+      certificates: { delf: 'B3', jlpt: 'N0', hsk: 'HSK9', tcf: 'B1', ielts: 6.5 },
+    });
+    expect(result).toEqual({ certificates: { ielts: 6.5, tcf: 'B1' } });
+  });
+
+  it('bậc chứng chỉ sai type (số/object) bị drop, không throw', () => {
+    expect(sanitizeApplicantProfile({ certificates: { jlpt: 2, hsk: { level: 5 }, delf: null } })).toEqual({});
+  });
+
+  it('toeflIbtExamDate: giữ khi có điểm TOEFL + ngày có thật; drop khi mồ côi hoặc ngày không hợp lệ', () => {
+    expect(sanitizeApplicantProfile({ certificates: { toeflIbt: 90, toeflIbtExamDate: '2026-01-20' } })).toEqual({
+      certificates: { toeflIbt: 90, toeflIbtExamDate: '2026-01-20' },
+    });
+    // Mồ côi (không có điểm TOEFL) -> drop, không tạo "chứng chỉ" giả.
+    expect(sanitizeApplicantProfile({ certificates: { toeflIbtExamDate: '2026-01-20' } })).toEqual({});
+    // Ngày không tồn tại / sai định dạng -> drop, giữ lại điểm TOEFL.
+    expect(sanitizeApplicantProfile({ certificates: { toeflIbt: 90, toeflIbtExamDate: '2026-02-31' } })).toEqual({ certificates: { toeflIbt: 90 } });
+    expect(sanitizeApplicantProfile({ certificates: { toeflIbt: 90, toeflIbtExamDate: '20/01/2026' } })).toEqual({ certificates: { toeflIbt: 90 } });
+  });
+
+  it('hồ sơ ĐỜI CŨ (chỉ có ielts/sat) đi qua sanitizer nguyên vẹn — thêm field mới là additive, không cần migration/bump version', () => {
+    const legacy = { graduationYear: 2026, thpt: { scores: { math: 8 } }, certificates: { ielts: 7, sat: 1400 } };
+    expect(sanitizeApplicantProfile(legacy)).toEqual(legacy);
+  });
+
   it('graduationYear không phải integer hợp lý bị drop, không ảnh hưởng field khác', () => {
     expect(sanitizeApplicantProfile({ graduationYear: 2026.5, thpt: { scores: { math: 8 } } })).toEqual({ thpt: { scores: { math: 8 } } });
     expect(sanitizeApplicantProfile({ graduationYear: 30000, thpt: { scores: { math: 8 } } })).toEqual({ thpt: { scores: { math: 8 } } });

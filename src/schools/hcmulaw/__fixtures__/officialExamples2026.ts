@@ -100,3 +100,83 @@ export const hcmulawTranscript3GoldenCases: GoldenAdmissionCase<
     expected: { converted30: 23.2, finalScore: 23.88 },
   },
 ];
+
+/**
+ * Phương thức 2 (mã 410) — ĐXT = y + điểm khuyến khích + điểm ưu tiên, kẹp 30. Khác Phương thức 3
+ * ĐÚNG một thành phần: điểm khuyến khích quy đổi từ chứng chỉ (bảng mục 2(c)(ii), xem `bonus.ts`).
+ *
+ * Tier C — nguồn công bố BẢNG quy đổi nhưng KHÔNG có ví dụ minh họa bằng số cho Phương thức 2 (khác
+ * mục 2.1 vốn có ví dụ D01 x=28,00). Mọi con số dưới đây suy ra từ chính bảng + công thức ĐXT chung,
+ * tính tay trong `derivation`.
+ */
+export const hcmulawCombined2GoldenCases: GoldenAdmissionCase<
+  {
+    programId: string;
+    combinationCode: string;
+    x30: number;
+    certificates: { ielts?: number; sat?: number; hsk?: 'HSK1' | 'HSK2' | 'HSK3' | 'HSK4' | 'HSK5' | 'HSK6' };
+    priorityRegion?: string;
+    priorityCategory?: string;
+  },
+  { converted30: number; bonus30: number; finalScore: number }
+>[] = [
+  {
+    id: 'hcmulaw-2026-combined2-ielts-6-5-no-priority',
+    schoolId: 'hcmulaw',
+    methodId: 'hcmulaw-combined2-2026',
+    year: 2026,
+    tier: 'C',
+    sourceId: 'hcmulaw-method-notice-2026',
+    sourceNote:
+      'Bảng (*) mục 2(c)(ii): IELTS 6.5 -> điểm khuyến khích 1,00. Công thức ĐXT chung: "ĐXT = điểm tổ hợp môn + điểm cộng (nếu có) + điểm ưu tiên (nếu có)"; điểm tổ hợp môn của PT2 quy đổi theo mục 2.1 (y = x - k).',
+    derivation: `
+      x = 28.00, k(D01) = 3.80 -> y = 28.00 - 3.80 = 24.20 (dùng lại đúng ví dụ chính thức của mục 2.1)
+      IELTS 6.5 -> tra bảng (*) dòng 3 -> điểm khuyến khích = 1.00
+      không khai KV/ĐT -> effectivePriority30 = 0
+      finalScore = round(min(30, 24.20 + 1.00 + 0)) = 25.20
+    `,
+    boundaryNote: 'Anchor: nếu điểm khuyến khích bị bỏ qua (bug hồi quy về hành vi partial cũ), finalScore sẽ ra 24.20 và case fail ngay.',
+    input: { programId: '7380101', combinationCode: 'D01', x30: 28, certificates: { ielts: 6.5 } },
+    expected: { converted30: 24.2, bonus30: 1, finalScore: 25.2 },
+  },
+  {
+    id: 'hcmulaw-2026-combined2-highest-only-plus-priority-reduction',
+    schoolId: 'hcmulaw',
+    methodId: 'hcmulaw-combined2-2026',
+    year: 2026,
+    tier: 'C',
+    sourceId: 'hcmulaw-method-notice-2026',
+    sourceNote:
+      'Bảng (*) kèm câu "thí sinh chỉ được Trường công nhận điểm quy đổi tương ứng với duy nhất một loại chứng chỉ (hoặc kết quả Kỳ thi SAT) cao nhất" — IELTS 7.5 (1,50) và SAT 1150 (0,50) KHÔNG cộng dồn.',
+    derivation: `
+      x = 27.00, k(D01) = 3.80 -> y = 27.00 - 3.80 = 23.20
+      IELTS 7.5 -> 1.50 ; SAT 1150 -> 0.50 ; chỉ lấy loại CAO NHẤT -> điểm khuyến khích = 1.50 (không phải 2.00)
+      standardPriority30 = KV1 = 0.75 ; y = 23.20 >= 22.5 -> GIẢM:
+        effectivePriority30 = round(((30 - 23.20)/7.5) x 0.75) = round((6.8/7.5) x 0.75) = round(0.68) = 0.68
+      finalScore = round(min(30, 23.20 + 1.50 + 0.68)) = 25.38
+    `,
+    boundaryNote:
+      'Kiểm 2 việc cùng lúc: (1) không cộng dồn 2 chứng chỉ; (2) mốc giảm ưu tiên áp lên điểm tổ hợp môn y (23,20), KHÔNG áp lên y + điểm khuyến khích.',
+    input: { programId: '7380101', combinationCode: 'D01', x30: 27, certificates: { ielts: 7.5, sat: 1150 }, priorityRegion: 'KV1' },
+    expected: { converted30: 23.2, bonus30: 1.5, finalScore: 25.38 },
+  },
+  {
+    id: 'hcmulaw-2026-combined2-hsk4-chinese-language-program',
+    schoolId: 'hcmulaw',
+    methodId: 'hcmulaw-combined2-2026',
+    year: 2026,
+    tier: 'C',
+    sourceId: 'hcmulaw-method-notice-2026',
+    sourceNote:
+      'Bảng (**) mục 2(c)(ii): HSK4 -> 1,25. Mục 2(c)(i): chứng chỉ tiếng Trung "chỉ xét tuyển đối với ngành Luật và ngành Ngôn ngữ Trung Quốc" — ngành 7220204 nằm trong diện được dùng.',
+    derivation: `
+      x = 29.00, k(D01) = 3.80 -> y = 29.00 - 3.80 = 25.20
+      HSK4 -> tra bảng (**) dòng 2 -> điểm khuyến khích = 1.25
+      không khai KV/ĐT -> effectivePriority30 = 0
+      finalScore = round(min(30, 25.20 + 1.25 + 0)) = 26.45
+    `,
+    boundaryNote: 'Phủ nhánh bảng (**) (chứng chỉ theo BẬC) và ràng buộc ngành — nếu ràng buộc ngành bị áp sai, bonus về 0 và case fail.',
+    input: { programId: '7220204', combinationCode: 'D01', x30: 29, certificates: { hsk: 'HSK4' } },
+    expected: { converted30: 25.2, bonus30: 1.25, finalScore: 26.45 },
+  },
+];

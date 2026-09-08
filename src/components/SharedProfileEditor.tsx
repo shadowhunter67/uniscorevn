@@ -1,7 +1,8 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { X } from 'lucide-react';
 import { Disclosure } from './Disclosure';
-import type { ApplicantProfile } from '../core/applicantProfile';
+import { CEFR_LEVELS, HSK_LEVELS, JLPT_LEVELS, type ApplicantProfile } from '../core/applicantProfile';
+import type { CERTIFICATE_RANGES } from '../core/applicantProfileStorage';
 import type { ApplicantProfileContextValue } from '../core/applicantProfileContextCore';
 import type { SubjectId } from '../core/subjects';
 import { COMMON_SUBJECT_COMBINATIONS, SUBJECT_LABELS } from '../core/subjects';
@@ -43,13 +44,28 @@ const PRIORITY_CATEGORY_OPTIONS = [
   { code: 'UT2', label: 'UT2 (đối tượng 04-06)' },
 ];
 
-const CERTIFICATE_FIELDS: { key: keyof NonNullable<ApplicantProfile['certificates']>; label: string; hint: string }[] = [
+type CertificateScoreKey = keyof typeof CERTIFICATE_RANGES;
+
+const CERTIFICATE_FIELDS: { key: CertificateScoreKey; label: string; hint: string }[] = [
   { key: 'ielts', label: 'IELTS', hint: '0 - 9' },
   { key: 'toeflIbt', label: 'TOEFL iBT', hint: '0 - 120' },
   { key: 'toeic', label: 'TOEIC', hint: '0 - 990' },
   { key: 'sat', label: 'SAT', hint: '0 - 1600' },
   { key: 'act', label: 'ACT', hint: '0 - 36' },
   { key: 'ib', label: 'IB', hint: '0 - 45' },
+];
+
+/**
+ * Chứng chỉ tính theo BẬC, không theo điểm — dùng `<select>` (cùng kiểu với ô Khu vực/Đối tượng ưu
+ * tiên ở trên) thay vì ô nhập số: người dùng chọn đúng nhãn in trên chứng chỉ ("B2", "N2", "HSK4"),
+ * không phải tự quy nhãn đó ra một con số. Bậc trong `options` xếp TỪ CAO XUỐNG THẤP để bậc hay gặp
+ * ở hồ sơ xét tuyển nằm gần đầu danh sách.
+ */
+const CERTIFICATE_LEVEL_FIELDS: { key: 'delf' | 'tcf' | 'jlpt' | 'hsk'; label: string; options: readonly string[] }[] = [
+  { key: 'delf', label: 'DELF (tiếng Pháp)', options: [...CEFR_LEVELS].reverse() },
+  { key: 'tcf', label: 'TCF (tiếng Pháp)', options: [...CEFR_LEVELS].reverse() },
+  { key: 'jlpt', label: 'JLPT (tiếng Nhật)', options: [...JLPT_LEVELS].reverse() },
+  { key: 'hsk', label: 'HSK (tiếng Trung)', options: [...HSK_LEVELS].reverse() },
 ];
 
 function parseScore(raw: string): number | undefined {
@@ -313,9 +329,18 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
     updateProfile((current) => ({ ...current, priority: { ...current.priority, category: category || undefined } }));
   }
 
-  function commitCertificate(key: keyof NonNullable<ApplicantProfile['certificates']>, raw: string) {
+  function commitCertificate(key: CertificateScoreKey, raw: string) {
     const value = parseScore(raw);
     updateProfile((current) => ({ ...current, certificates: { ...current.certificates, [key]: value } }));
+  }
+
+  /** Chuỗi rỗng = "Không chọn" -> `undefined` (xoá khỏi hồ sơ), không lưu chuỗi rỗng. */
+  function commitCertificateLevel(key: 'delf' | 'tcf' | 'jlpt' | 'hsk', raw: string) {
+    updateProfile((current) => ({ ...current, certificates: { ...current.certificates, [key]: raw || undefined } }));
+  }
+
+  function commitToeflExamDate(raw: string) {
+    updateProfile((current) => ({ ...current, certificates: { ...current.certificates, toeflIbtExamDate: raw || undefined } }));
   }
 
   const thptSubjectIds = new Set<SubjectId>(pendingThptSubjects);
@@ -606,6 +631,51 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
               onCommit={(raw) => commitCertificate(key, raw)}
               validate={(raw) => validateCertificateScore(key, label, raw)}
             />
+          ))}
+        </div>
+
+        {/* Ngày dự thi TOEFL chỉ hiện khi ĐÃ có điểm TOEFL — hỏi ngày của một kỳ thi chưa nhập điểm
+            là câu hỏi thừa. Một số trường (vd HCMULAW) quy đổi TOEFL iBT theo 2 thang điểm khác
+            nhau tuỳ ngày dự thi, nên cùng một con số có thể ra 2 mức điểm cộng khác nhau. */}
+        {profile.certificates?.toeflIbt !== undefined && (
+          <div className="mt-3">
+            <label htmlFor="shared-profile-certificate-toefl-date" className="text-sm font-medium text-ink">
+              Ngày dự thi TOEFL iBT
+            </label>
+            <input
+              id="shared-profile-certificate-toefl-date"
+              type="date"
+              value={profile.certificates?.toeflIbtExamDate ?? ''}
+              onChange={(e) => commitToeflExamDate(e.target.value)}
+              className={`mt-1 block w-52 max-w-full ${SELECT_CLASS}`}
+            />
+            <p className="mt-1 text-sm text-muted">
+              ETS đã đổi thang điểm TOEFL iBT — có trường quy đổi điểm cộng theo 2 bảng khác nhau tuỳ ngày dự thi. Nhập ngày ghi trên chứng chỉ.
+            </p>
+          </div>
+        )}
+
+        <p className="mt-4 text-sm font-medium text-ink">Chứng chỉ theo bậc</p>
+        <div className="mt-2 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {CERTIFICATE_LEVEL_FIELDS.map(({ key, label, options }) => (
+            <div key={key}>
+              <label htmlFor={`shared-profile-certificate-${key}`} className="text-sm font-medium text-ink">
+                {label}
+              </label>
+              <select
+                id={`shared-profile-certificate-${key}`}
+                value={profile.certificates?.[key] ?? ''}
+                onChange={(e) => commitCertificateLevel(key, e.target.value)}
+                className={`mt-1 block w-full ${SELECT_CLASS}`}
+              >
+                <option value="">Không chọn</option>
+                {options.map((level) => (
+                  <option key={level} value={level}>
+                    {level}
+                  </option>
+                ))}
+              </select>
+            </div>
           ))}
         </div>
       </ProfileChecklistSection>

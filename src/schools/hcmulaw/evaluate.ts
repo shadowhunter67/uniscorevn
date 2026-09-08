@@ -4,7 +4,6 @@ import type { CalculationStep } from '../../core/calculationStep';
 import type { SubjectId } from '../../core/subjects';
 import { SUBJECT_LABELS } from '../../core/subjects';
 import { hcmulawAdmissionMethods } from './methods';
-import { hcmulawKnowledgeGaps } from './knowledgeGaps';
 import { findHcmulawProgram, findHcmulawCombination, type HcmulawProgramId } from './programs';
 import { checkHcmulawThreshold, checkHcmulawThpt5Threshold } from './eligibility';
 import {
@@ -13,11 +12,20 @@ import {
   calculateHcmulawVsat4SubjectGroupScore,
   calculateHcmulawVsat4FinalScore,
   calculateHcmulawPriorityHighschool3FinalScore,
+  calculateHcmulawCombined2FinalScore,
 } from './calculator';
+import { calculateHcmulawMethod2Bonus, hasHcmulawMethod2QualifyingCertificate, type HcmulawMethod2BonusResult } from './bonus';
 import { calculateHcmulawPriority30, lookupHcmulawStandardPriority30 } from './priority';
 import { convertHcmulawVsatSubjectScore, convertHcmulawTranscriptCombinationScore, getHcmulawTranscriptK } from './conversionTable';
 import { sumCombinationAveragesAcrossSemesters, TRANSCRIPT_SEMESTER_LABELS } from '../../core/transcriptSemesters';
-import { hcmulawFormulaEvidence, hcmulawThresholdEvidence, hcmulawPriorityEvidence, hcmulawVsatConversionEvidence, hcmulawTranscriptConversionEvidence } from './evidence';
+import {
+  hcmulawFormulaEvidence,
+  hcmulawThresholdEvidence,
+  hcmulawPriorityEvidence,
+  hcmulawVsatConversionEvidence,
+  hcmulawTranscriptConversionEvidence,
+  hcmulawMethod2BonusEvidence,
+} from './evidence';
 
 function partial(methodId: string, year: number, input: { missingInputs: string[]; missingRequirements: MissingRequirement[]; explanation: CalculationStep[]; eligibilityReason: string }): AdmissionEvaluation {
   return {
@@ -220,17 +228,32 @@ export function evaluateHcmulawThpt5Admission(profile: ApplicantProfile, context
   };
 }
 
+const CERTIFICATE_LABELS: Record<NonNullable<HcmulawMethod2BonusResult['source']>, string> = {
+  ielts: 'IELTS',
+  toeflIbt: 'TOEFL iBT',
+  sat: 'Kỳ thi SAT của Mỹ',
+  delf: 'DELF (tiếng Pháp)',
+  tcf: 'TCF (tiếng Pháp)',
+  jlpt: 'JLPT (tiếng Nhật)',
+  hsk: 'HSK (tiếng Trung)',
+};
+
 /**
- * Phương thức 2 (mã 410, kết hợp học bạ + chứng chỉ ngoại ngữ quốc tế/SAT) — điểm tổ hợp học bạ đã
- * quy đổi (y = x - k) nay TÍNH ĐƯỢC, nhưng kết quả vẫn `partial`, KHÔNG trả `score`:
+ * Phương thức 2 (mã 410, kết hợp học bạ + chứng chỉ ngoại ngữ quốc tế/SAT) — EXACT trong phạm vi
+ * thí sinh không có "điểm xét thưởng" thành tích (cùng semantics conditional-exact với Phương thức 3
+ * và với HUTECH/USSH/IU/TDTU/HUFLIT).
  *
- * ĐXT của phương thức này = y + ĐIỂM KHUYẾN KHÍCH (tối đa 1,50, bắt buộc có chứng chỉ mới đủ điều
- * kiện xét) + điểm ưu tiên. Bảng điểm khuyến khích đọc được đầy đủ dạng text, NHƯNG hồ sơ dùng chung
- * chưa mô hình hoá đủ để chọn đúng mức — xem `knowledgeGaps.ts:hcmulaw-method2-bonus-certificate-model-gap`
- * (2 lý do độc lập: `ApplicantProfile.certificates` không có chứng chỉ tiếng Pháp/Nhật/Trung dù nguồn
- * tính chúng và "chỉ công nhận 1 loại cao nhất"; và `toeflIbt` không kèm ngày dự thi trong khi nguồn
- * dùng 2 thang TOEFL iBT khác nhau theo mốc 21/01/2026). Cộng thiếu điểm khuyến khích sẽ ra ĐXT THẤP
- * HƠN thực tế — sai theo hướng nguy hiểm cho thí sinh, nên không đưa ra con số.
+ * ĐXT = y + điểm khuyến khích + điểm ưu tiên (kẹp 30), với y = x - k (`conversionTable.ts`) và điểm
+ * khuyến khích quy đổi từ chứng chỉ (`bonus.ts`, tối đa 1,50).
+ *
+ * Batch "chứng chỉ PT2" (2026-09-08) — `hcmulaw-method2-bonus-certificate-model-gap` ĐÃ ĐÓNG. Blocker
+ * là MÔ HÌNH DỮ LIỆU, không phải nguồn: bảng điểm khuyến khích vốn đã đọc được đầy đủ dạng text, chỉ
+ * thiếu chỗ để lưu chứng chỉ tiếng Pháp/Nhật/Trung và thang TOEFL. Nay `ApplicantProfile.certificates`
+ * có `delf`/`tcf`/`jlpt`/`hsk` (theo bậc) + `toeflIbtExamDate` (chọn 1 trong 2 thang TOEFL theo mốc
+ * 21/01/2026), nên chọn đúng "duy nhất một loại chứng chỉ cao nhất" được.
+ *
+ * Vẫn KHÔNG đoán khi thiếu dữ liệu: thiếu ngày dự thi TOEFL mà ngày đó thật sự đổi mức khuyến khích
+ * -> trả `partial` + `missingRequirement`, không chọn bừa một thang.
  */
 export function evaluateHcmulawCombined2Admission(profile: ApplicantProfile = {}, context: HcmulawTranscriptEvaluationContext = {}): AdmissionEvaluation {
   const explanation: CalculationStep[] = [];
@@ -242,30 +265,90 @@ export function evaluateHcmulawCombined2Admission(profile: ApplicantProfile = {}
   if (resolved.partialResult) return resolved.partialResult;
 
   const x30 = resolved.x30!;
+  const converted30 = resolved.converted30!;
+  const program = resolved.program!;
+
   const minTranscript = hcmulawTranscriptConversionEvidence.value.minTranscriptCombined30.method2;
   const transcriptFloorPass = x30 >= minTranscript;
-  const requiredText = `Tổng TB 6 học kỳ của 3 môn tổ hợp ≥ ${minTranscript.toFixed(2)}/30 (điều kiện riêng của Phương thức 2)`;
-  explanation.push({ id: `${methodId}-transcript-floor`, label: 'Điều kiện điểm học bạ (Phương thức 2)', output: x30, scale: 30, formula: requiredText, evidence: hcmulawTranscriptConversionEvidence.evidence });
+  const transcriptFloorText = `Tổng TB 6 học kỳ của 3 môn tổ hợp ≥ ${minTranscript.toFixed(2)}/30 (điều kiện riêng của Phương thức 2)`;
+  explanation.push({ id: `${methodId}-transcript-floor`, label: 'Điều kiện điểm học bạ (Phương thức 2)', output: x30, scale: 30, formula: transcriptFloorText, evidence: hcmulawTranscriptConversionEvidence.evidence });
 
-  const bonusGap = hcmulawKnowledgeGaps.find((gap) => gap.id === 'hcmulaw-method2-bonus-certificate-model-gap')!;
-  missingRequirements.push({ kind: 'unsupported', code: bonusGap.id, label: bonusGap.label });
+  const bonus = calculateHcmulawMethod2Bonus(profile.certificates, program.id);
+
+  if (bonus.needsToeflExamDate) {
+    missingRequirements.push({
+      kind: 'profile-input',
+      code: 'hcmulaw-toefl-exam-date',
+      label:
+        'Ngày dự thi TOEFL iBT — nguồn dùng 2 thang TOEFL khác nhau theo mốc 21/01/2026 và với điểm bạn đã nhập, 2 thang cho ra 2 mức điểm khuyến khích khác nhau.',
+    });
+    return partial(methodId, year, {
+      missingInputs: ['Thiếu ngày dự thi TOEFL iBT để biết áp thang điểm nào — không chọn bừa thang.'],
+      missingRequirements,
+      explanation,
+      eligibilityReason: transcriptFloorText,
+    });
+  }
+
+  const certificateText =
+    'Điểm khuyến khích: chỉ công nhận DUY NHẤT một loại chứng chỉ (hoặc kết quả SAT) cao nhất, tối đa 1,50 điểm. Chứng chỉ tiếng Pháp/Nhật chỉ dùng được cho ngành Luật; tiếng Trung cho ngành Luật và Ngôn ngữ Trung Quốc.';
+  const certificatePass = hasHcmulawMethod2QualifyingCertificate(bonus);
+  const bonus30 = bonus.bonus30 ?? 0;
+  explanation.push({
+    id: `${methodId}-bonus`,
+    label: bonus.source ? `Điểm khuyến khích (${CERTIFICATE_LABELS[bonus.source]} — loại cao nhất)` : 'Điểm khuyến khích',
+    output: bonus30,
+    scale: 30,
+    formula: certificateText,
+    evidence: hcmulawMethod2BonusEvidence.evidence,
+  });
+  if (bonus.ignoredForProgram.length > 0) {
+    missingRequirements.push({
+      kind: 'unsupported',
+      code: 'hcmulaw-certificate-not-valid-for-program',
+      label: `Chứng chỉ ${bonus.ignoredForProgram.map((key) => CERTIFICATE_LABELS[key]).join(', ')} không dùng được để xét tuyển ngành ${program.name} theo Phương thức 2 — đã bỏ qua khi tính điểm khuyến khích.`,
+    });
+  }
+  if (!certificatePass) {
+    missingRequirements.push({
+      kind: 'profile-input',
+      code: 'hcmulaw-method2-certificate',
+      label: `Chưa có chứng chỉ nào đạt ngưỡng tối thiểu của Phương thức 2 dùng được cho ngành ${program.name} (IELTS ≥ 5.5, TOEFL iBT ≥ 65 hoặc ≥ 3.0 tuỳ thang, SAT ≥ 1150, hoặc DELF/TCF ≥ B1, JLPT ≥ N3, HSK ≥ HSK3 với ngành được phép).`,
+    });
+  }
+
+  const standardPriority30 = lookupHcmulawStandardPriority30(profile.priority?.region, profile.priority?.category);
+  const priority = calculateHcmulawPriority30({ academicScore30: converted30, standardPriority30 });
+  explanation.push({
+    id: `${methodId}-priority`,
+    label: priority.reduced ? 'Điểm ưu tiên đã giảm' : 'Điểm ưu tiên',
+    output: priority.effectivePriority30,
+    scale: 30,
+    formula: priority.reduced ? '[(30 – Điểm tổ hợp môn)/7,5] × Mức ưu tiên' : 'Mức điểm ưu tiên quy đổi',
+    evidence: hcmulawPriorityEvidence.evidence,
+  });
+
+  const finalScore = calculateHcmulawCombined2FinalScore({ subjectGroupScore30: converted30, bonus30, priority30: priority.effectivePriority30 });
+  explanation.push({ id: `${methodId}-final`, label: 'Điểm xét tuyển (Phương thức 2) cuối cùng', output: finalScore, scale: 30, formula: 'ĐXT = điểm tổ hợp môn (đã quy đổi) + điểm khuyến khích + điểm ưu tiên' });
+
+  const threshold = checkHcmulawThreshold(finalScore, program.id, 'Phương thức 2, kết hợp học bạ + chứng chỉ quốc tế/SAT');
+  explanation.push({ id: `${methodId}-eligibility-threshold`, label: 'Ngưỡng đầu vào', output: finalScore, scale: 30, formula: threshold.requiredText, evidence: hcmulawThresholdEvidence.evidence });
 
   return {
     schoolId: 'hcmulaw',
     year,
     methodId,
-    confidence: 'partial',
+    confidence: 'exact-verified',
     eligibility: {
-      status: transcriptFloorPass ? 'unknown' : 'ineligible',
-      reasons: transcriptFloorPass
-        ? [requiredText, 'Đạt điều kiện điểm học bạ — nhưng còn phụ thuộc chứng chỉ ngoại ngữ/SAT và tổng 3 môn thi TN THPT, chưa kết luận được.']
-        : [requiredText],
+      status: transcriptFloorPass && certificatePass && threshold.pass ? 'eligible' : 'ineligible',
+      reasons: [transcriptFloorText, certificateText, threshold.requiredText],
     },
-    missingInputs: ['Điểm khuyến khích từ chứng chỉ ngoại ngữ/SAT chưa mô hình hoá được từ hồ sơ dùng chung — không lắp ráp được điểm xét tuyển cuối.'],
-    missingRules: [bonusGap.label],
+    score: { value: finalScore, scale: 30 },
+    missingInputs: [],
+    missingRules: [],
     missingRequirements,
     explanation,
-    evidence: [...hcmulawTranscriptConversionEvidence.evidence],
+    evidence: [...hcmulawTranscriptConversionEvidence.evidence, ...hcmulawMethod2BonusEvidence.evidence, ...hcmulawThresholdEvidence.evidence, ...hcmulawPriorityEvidence.evidence],
   };
 }
 

@@ -17,21 +17,27 @@ import type { KnowledgeGap } from '../../core/knowledgeStatus';
  *
  * Kết quả: Phương thức 3 (200) lên `exactCalculator: true`. Phương thức 2 (410) VẪN `partial` nhưng
  * vì một gap MỚI, khác hẳn: `hcmulaw-method2-bonus-certificate-model-gap` (điểm khuyến khích chứng
- * chỉ ngoại ngữ/SAT), xem entry đầu tiên dưới đây.
+ * chỉ ngoại ngữ/SAT).
+ *
+ * **Batch "chứng chỉ PT2" (2026-09-08) — ĐÃ ĐÓNG `hcmulaw-method2-bonus-certificate-model-gap`**
+ * (xoá khỏi mảng dưới đây, đúng quy ước UFM/VLU/HUTECH khi đóng gap). Gap này là gap MÔ HÌNH DỮ LIỆU
+ * chứ không phải thiếu nguồn — bảng điểm khuyến khích vốn đã đọc được đầy đủ. Cách đóng, đúng 2 lý do
+ * mà gap đã nêu:
+ * (1) `ApplicantProfile.certificates` nay có `delf`/`tcf`/`jlpt`/`hsk` (string union theo BẬC, không
+ *     phải số — JLPT N5 thấp nhất/N1 cao nhất là chỗ dễ sai nếu lưu bằng số), thêm additive đúng cách
+ *     `transcript.bySemester` đã làm: hồ sơ cũ không cần migration, chỉ cần bổ sung whitelist trong
+ *     `core/applicantProfileStorage.ts:sanitizeCertificates` (nếu quên, sanitizer sẽ âm thầm xoá dữ
+ *     liệu mỗi lần load — đúng cái bẫy batch "6 học kỳ" đã gặp).
+ * (2) `certificates.toeflIbtExamDate` (ngày dự thi, `YYYY-MM-DD`) chọn 1 trong 2 thang TOEFL iBT theo
+ *     mốc 21/01/2026. Lưu NGÀY chứ không phải enum thang điểm vì mốc là quy định của từng trường,
+ *     không phải thuộc tính hồ sơ thí sinh.
+ * Thiếu ngày dự thi TOEFL vẫn KHÔNG đoán: `bonus.ts` tính cả 2 thang, chỉ chốt khi 2 thang không làm
+ * đổi đáp án cuối, còn lại trả `partial` + `missingRequirement`.
+ *
+ * Kết quả: Phương thức 2 (410) lên `exactCalculator: true`, cùng semantics conditional-exact với
+ * Phương thức 3 (exact trong phạm vi thí sinh không có "điểm xét thưởng" thành tích).
  */
 export const hcmulawKnowledgeGaps: KnowledgeGap[] = [
-  {
-    id: 'hcmulaw-method2-bonus-certificate-model-gap',
-    label:
-      'Phương thức 2 (410) tính ĐXT = điểm tổ hợp học bạ đã quy đổi + ĐIỂM KHUYẾN KHÍCH từ chứng chỉ ngoại ngữ/SAT (tối đa 1,50) + điểm ưu tiên. Bảng điểm khuyến khích ĐÃ đọc được đầy đủ dạng text (mục 2(c)(ii)), nhưng `ApplicantProfile.certificates` chưa mô hình hoá đủ để chọn đúng mức: (1) không có chứng chỉ tiếng Pháp (DELF/TCF)/Nhật (JLPT)/Trung (HSK) — nguồn tính cả 3 loại này và quy định "chỉ công nhận 1 loại cao nhất", nên thí sinh có chứng chỉ tiếng Pháp/Nhật/Trung cao hơn chứng chỉ tiếng Anh sẽ bị cộng THIẾU; (2) `toeflIbt` không kèm ngày dự thi, trong khi nguồn dùng 2 THANG TOEFL iBT khác nhau theo mốc 21/01/2026 (65-96+ so với 3.0-5.0) — cùng một con số có thể rơi vào 2 mức khuyến khích khác nhau.',
-    status: 'incomplete',
-    sourceId: 'hcmulaw-method-notice-2026',
-    scoreAffecting: true,
-    implemented: false,
-    whyNotInferred:
-      'Cộng thiếu điểm khuyến khích cho ra ĐXT THẤP HƠN thực tế — sai theo hướng nguy hiểm cho thí sinh (tưởng trượt trong khi đủ điểm). Mở rộng `ApplicantProfile.certificates` sang chứng chỉ Pháp/Nhật/Trung + ngày dự thi TOEFL là thay đổi core dùng chung, để làm follow-up riêng thay vì đoán trong batch này. Phần ĐÃ tính được (điểm tổ hợp học bạ quy đổi y=x-k) vẫn hiển thị trong `explanation`.',
-    impact: 'exact-blocking-for-method-2-only',
-  },
   {
     id: 'hcmulaw-foreign-language-combinations-not-modeled',
     label:

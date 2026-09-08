@@ -31,7 +31,7 @@ export interface ApplicantProfileSubjectSummary {
   grades?: Partial<Record<'grade10' | 'grade11' | 'grade12', number>>;
 }
 
-function countDefinedKeys(record: Partial<Record<string, number>> | undefined): number {
+function countDefinedKeys(record: Partial<Record<string, unknown>> | undefined): number {
   if (!record) return 0;
   return Object.values(record).filter((value) => value !== undefined).length;
 }
@@ -63,7 +63,10 @@ export function summarizeApplicantProfile(profile: ApplicantProfile): ApplicantP
   }));
 
   const hasPriority = Boolean(profile.priority?.region || profile.priority?.category);
-  const certificateCount = countDefinedKeys(profile.certificates);
+  // `toeflIbtExamDate` là METADATA của chứng chỉ TOEFL (thang điểm nào), không phải một chứng chỉ
+  // riêng — đếm nó sẽ hiện "Đã nhập 2 chứng chỉ" khi thí sinh mới chỉ nhập đúng 1 (TOEFL).
+  const { toeflIbtExamDate: _examDate, ...countableCertificates } = profile.certificates ?? {};
+  const certificateCount = countDefinedKeys(countableCertificates);
   const hasData = vactTotal !== undefined || thptSubjectCount > 0 || transcriptSubjectIds.size > 0;
 
   return {

@@ -1,4 +1,4 @@
-import type { ApplicantProfile } from './applicantProfile';
+import { CEFR_LEVELS, HSK_LEVELS, JLPT_LEVELS, type ApplicantProfile } from './applicantProfile';
 import { readWithMigration } from './storage';
 import { safeRemoveItem, safeSetItem } from './safeStorage';
 import {
@@ -145,6 +145,29 @@ function sanitizeVact(value: unknown): VactProfile | undefined {
   return emptyToUndefined(result);
 }
 
+/**
+ * Chứng chỉ tính theo BẬC (không phải điểm số) — whitelist theo DANH SÁCH BẬC HỢP LỆ thay vì range
+ * số. Cùng chính sách với nhánh số ở trên: bậc lạ ("B3", "N0", "HSK9", số, object...) bị drop lặng
+ * lẽ, không làm mất các chứng chỉ hợp lệ khác trong cùng object.
+ *
+ * ĐÂY LÀ CHỖ BẮT BUỘC PHẢI CẬP NHẬT khi thêm field `certificates` mới (cùng bài học của batch
+ * "6 học kỳ" với `sanitizeTranscriptBySemester`): field thêm vào `ApplicantProfile` mà KHÔNG khai ở
+ * đây sẽ bị sanitizer âm thầm xoá mỗi lần load, không lỗi, không cảnh báo.
+ */
+const CERTIFICATE_LEVELS = {
+  delf: CEFR_LEVELS,
+  tcf: CEFR_LEVELS,
+  jlpt: JLPT_LEVELS,
+  hsk: HSK_LEVELS,
+} as const;
+
+/** `YYYY-MM-DD` VÀ phải là ngày có thật (chặn `2026-02-31`, `2026-13-01`). */
+function isIsoDateString(value: unknown): value is string {
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const parsed = new Date(`${value}T00:00:00Z`);
+  return !Number.isNaN(parsed.getTime()) && parsed.toISOString().slice(0, 10) === value;
+}
+
 function sanitizeCertificates(value: unknown): ApplicantProfile['certificates'] | undefined {
   if (!isPlainObject(value)) return undefined;
   const result: NonNullable<ApplicantProfile['certificates']> = {};
@@ -154,6 +177,19 @@ function sanitizeCertificates(value: unknown): ApplicantProfile['certificates'] 
       result[key] = raw;
     }
   });
+  (Object.keys(CERTIFICATE_LEVELS) as (keyof typeof CERTIFICATE_LEVELS)[]).forEach((key) => {
+    const raw = value[key];
+    if (typeof raw === 'string' && (CERTIFICATE_LEVELS[key] as readonly string[]).includes(raw)) {
+      // `as never` — TS không tự thu hẹp union theo `key` động; danh sách bậc ở trên đã đảm bảo
+      // giá trị đúng kiểu của đúng field đó.
+      result[key] = raw as never;
+    }
+  });
+  // Ngày dự thi TOEFL chỉ có ý nghĩa khi CÓ điểm TOEFL — giữ mồ côi sẽ tạo profile "có chứng chỉ"
+  // giả (`certificateCount` đếm nhầm) từ một field không tự nó là chứng chỉ.
+  if (result.toeflIbt !== undefined && isIsoDateString(value.toeflIbtExamDate)) {
+    result.toeflIbtExamDate = value.toeflIbtExamDate;
+  }
   return emptyToUndefined(result);
 }
 
