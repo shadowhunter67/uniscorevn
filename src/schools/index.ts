@@ -151,6 +151,7 @@ import { tbuModule } from './tbu';
 import { dthuModule } from './dthu';
 import { ltvuniModule } from './ltvuni';
 import { pxuModule } from './pxu';
+import { epuModule } from './epu';
 import { dhvModule } from './dhv';
 import { pyuModule } from './pyu';
 import { nluModule } from './nlu';
@@ -365,6 +366,7 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   dthu: dthuModule,
   ltvuni: ltvuniModule,
   pxu: pxuModule,
+  epu: epuModule,
   dhv: dhvModule,
   pyu: pyuModule,
   nlu: nluModule,
