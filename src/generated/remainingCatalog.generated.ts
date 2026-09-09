@@ -717,6 +717,7 @@ const explicitRuntimeSchoolIds = new Set([
   'epu',
   'uneti',
   'huph',
+  'vutm',
 ]);
 const remainingCatalogRuntimeSchools = remainingCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 

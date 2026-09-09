@@ -160,6 +160,7 @@ import { epuAdmissionMethods } from '../schools/epu/methods';
 import { unetiAdmissionMethods } from '../schools/uneti/methods';
 import { ulsaAdmissionMethods } from '../schools/ulsa/methods';
 import { huphAdmissionMethods } from '../schools/huph/methods';
+import { vutmAdmissionMethods } from '../schools/vutm/methods';
 import { dhvAdmissionMethods } from '../schools/dhv/methods';
 import { pyuAdmissionMethods } from '../schools/pyu/methods';
 import { nluAdmissionMethods } from '../schools/nlu/methods';
@@ -341,6 +342,7 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   uneti: unetiAdmissionMethods,
   ulsa: ulsaAdmissionMethods,
   huph: huphAdmissionMethods,
+  vutm: vutmAdmissionMethods,
   dhv: dhvAdmissionMethods,
   pyu: pyuAdmissionMethods,
   nlu: nluAdmissionMethods,
