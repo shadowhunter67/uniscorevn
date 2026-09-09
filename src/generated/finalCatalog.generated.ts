@@ -535,7 +535,7 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     url: 'https://ldxh.edu.vn/truong-dai-hoc-lao-dong-xa-hoi-cong-bo-phuong-thuc-chi-tieu-tuyen-sinh-nam-2026.html',
     checkedAt: '2026-08-24',
     note:
-      'Batch expand-15 (2026-08-24): official ldxh.edu.vn 2026 admission page was fetched directly and confirms 5 admission methods and per-method quotas, but does NOT state numeric floor scores in the fetched content. Secondary aggregators (thi.tuyensinh247.com, khoahoc.vietjack.com) report a 15/30 general baseline with 2 program-code exceptions (7220201 needs English >=5; 7380107/law needs "Khá" academic rank, unmodeled field), but this single-source secondary figure could not be cross-checked against the primary page in this pass. Left at researched; do not fabricate the exact number.',
+      'Superseded (2026-09-09 batch): verified-calculator upgrade shipped for all 42 rows of Phương thức 100 (28 chương trình DLX Hà Nội + 14 chương trình DLS TP.HCM), using the signed Thông báo 2752/TB-HĐTSĐH2026 (11/8/2026, PDF read via vision — its own column header states "PT 100, PT gốc, thang 30" and it prints the per-program tổ hợp) plus the school admission portal tuyensinh.ulsa.edu.vn for the formula (mục 4.1.3). See normalized/runtime-source-snapshot/ulsa/sources.ts. This entry is unused because ulsa is now in explicitRuntimeSchoolIds; kept only as a research trail. Original note: Batch expand-15 (2026-08-24): official ldxh.edu.vn 2026 admission page was fetched directly and confirms 5 admission methods and per-method quotas, but does NOT state numeric floor scores in the fetched content. Secondary aggregators (thi.tuyensinh247.com, khoahoc.vietjack.com) report a 15/30 general baseline with 2 program-code exceptions (7220201 needs English >=5; 7380107/law needs "Khá" academic rank, unmodeled field), but this single-source secondary figure could not be cross-checked against the primary page in this pass. Left at researched; do not fabricate the exact number.',
   },
   // Batch expand-16 (2026-08-24):
   vnam: {
@@ -831,7 +831,7 @@ export const finalCatalogKnowledgeGap = {
 // thi), priority table quoted verbatim in the school's own Quyết định 261/QĐ-HVTTNVN (not a
 // national-framework judgment call substitute, same precedent as vhs.
 // They stay listed in `finalCatalogSchools` above for identity/location metadata only.
-const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus', 'tuaf', 'uhd', 'umt', 'utm', 'utt', 'eaut', 'vwa', 'hau', 'tbu', 'ltvuni', 'dhv', 'ush', 'hcmupes', 'hnmu', 'cmcu', 'vttu', 'hbu', 'vhs', 'vya', 'trungvuong', 'pxu']);
+const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus', 'tuaf', 'uhd', 'umt', 'utm', 'utt', 'eaut', 'vwa', 'hau', 'tbu', 'ltvuni', 'dhv', 'ush', 'hcmupes', 'hnmu', 'cmcu', 'vttu', 'hbu', 'vhs', 'vya', 'trungvuong', 'pxu', 'ulsa']);
 const finalCatalogRuntimeSchools = finalCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const finalCatalogMethods: AdmissionMethodDescriptor[] = finalCatalogRuntimeSchools.map((school) => ({
