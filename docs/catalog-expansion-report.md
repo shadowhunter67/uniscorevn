@@ -977,3 +977,91 @@ A further ~14 Cao đẳng-tier names surfaced in the same sweep with live offici
    Bà Rịa - Vũng Tàu, Đồng Nai) now that several BR-VT/Bình Dương schools turned up inside the HCMC
    directory itself (a side effect of the 2025 administrative merger) — there may be a similar
    "looked JS-blocked, actually plain paginated HTML" situation elsewhere.
+
+---
+
+# Batch 7 (2026-09-09) — Batch 6's "needs-review" ownership-ambiguity leftovers
+
+This batch worked the ~14 GDNN candidates Batch 6 explicitly left out for lack of a reliable
+ownership signal, applying the same WHOIS + tax-registry method that resolved the Ngoại thương
+domain-ambiguity case in Batch 6. Net result: **+12 new catalog-only vocational-college entries**,
+2 candidates still excluded for lack of a reliable ownership signal, and 2 dead-domain candidates
+re-confirmed dead with a stronger (WHOIS-authoritative, not just DNS/HTTP) signal.
+
+## Method
+
+For each candidate: (1) **VNNIC WHOIS** (`whois.vnnic.vn`, driven live via `chrome-devtools` —
+the site requires a per-query image CAPTCHA read via `take_screenshot`, so no scripted bulk lookup
+was possible; ~30 individual lookups were run this batch) on the candidate's own domain, checking
+the registrant organization name against the school's legal name (including any pre-rename legal
+name, cross-checked against decision-numbered rename history via `WebSearch`); (2) **ownership type**
+determined NOT from the GDNN directory's own "Loại hình" field (established unreliable in Batch 6),
+but from one of three independent signals, in order of how they came up per candidate:
+   - **masothue.com business-type field** — a "Công ty TNHH ... ngoài NN" (non-state LLC) or "Công ty
+     cổ phần" value is an unambiguous private signal. Note: masothue's generic "Các tổ chức kinh tế
+     khác" and "Đơn vị hành chính, đơn vị sự nghiệp" bucket values turned out NOT reliable on their
+     own — both public and private non-profit-structured schools can show either value (confirmed by
+     spot-checking STC, independently known private, which shows the same "Đơn vị hành chính, đơn vị
+     sự nghiệp" bucket as ICH) — so these two generic values were treated as inconclusive and a
+     secondary signal was sought.
+   - **"Hội đồng quản trị" (Board of Directors) structural signal** — under Vietnamese education law,
+     a "Hội đồng quản trị" with a "Chủ tịch Hội đồng quản trị" is a governance structure exclusive to
+     trường tư thục (private colleges); public colleges have a "Hội đồng trường" instead
+     (`thuvienphapluat.vn` and multiple government-procedure pages confirm this is a legal
+     distinction, not a naming convention). A school publicly naming a "Chủ tịch Hội đồng quản trị"
+     was treated as an authoritative private signal, equal in strength to an explicit ministry
+     citation for public.
+   - **Explicit supervising-ministry/agency citation** (e.g. "đơn vị sự nghiệp công lập trực thuộc Bộ
+     Văn hóa, Thể thao và Du lịch") or a reputable third-party news source's explicit "công lập"
+     statement, matching the Batch 6 pattern for public confirmation — used only where the citation
+     named a specific state agency, not inferred from "chịu quản lý hành chính theo lãnh thổ của
+     UBND ..." reasoning (rejected once as unreliable — see HIAST below; every institution in a
+     city is nominally under some territorial administrative jurisdiction, which does not establish
+     state ownership).
+
+Each surviving candidate's domain was also live-checked this batch (2026 admission content present).
+
+## Resolved and added (12)
+
+| Institution | Domain | Ownership signal used |
+|---|---|---|
+| Trường Cao đẳng Miền Nam (`cdmiennam`) | cdmiennam.edu.vn | WHOIS registrant = "Trường Cao Đẳng Kinh Tế - Kỹ Thuật Miền Nam", the school's pre-2016-rename legal name (renamed via QĐ 1088/QĐ-BGDĐT, 4/4/2016, per `WebSearch` + the school's own site confirms the rename) — same institution, domain confirmed school-owned. Ownership: `edu2review.com`'s own description "Cao đẳng Miền Nam là cơ sở giáo dục dân lập" (private/people-founded) — independent third-party source, not the GDNN field. |
+| Trường Cao đẳng Sài Gòn / SaigonTech (`saigontech`) | caodangsaigon.edu.vn | WHOIS registrant = "Trường Cao Đẳng Nghề Sài Gòn"; site self-identifies "Trường Cao Đẳng Sài Gòn" / SaigonTech — same institution across multiple independent sources (Wikipedia EN, official site, Facebook). Ownership: multiple independent sources describe SaigonTech as one of HCMC's leading private (tư thục) vocational colleges, American-community-college model. |
+| Trường Cao đẳng Sài Gòn Gia Định (`sgc`) | sgc.edu.vn | WHOIS registrant = "Trường Cao Đẳng Sài Gòn Gia Định" (exact match). Ownership: masothue.com MST 0303655728 business type = "Công ty trách nhiệm hữu hạn 2 thành viên trở lên ngoài NN" — unambiguous private LLC. |
+| Trường Cao đẳng Đại Việt Sài Gòn (`daivietsg`) | daivietsaigon.edu.vn | WHOIS registrant = "Trường Cao đẳng Đại Việt Sài Gòn" (exact match). Ownership: school publishes a "Hội đồng quản trị" with TS. Lê Lâm as "Chủ tịch Hội đồng quản trị kiêm Hiệu trưởng" — Hội đồng quản trị structural signal (private-exclusive). |
+| Trường Cao đẳng Văn Lang Sài Gòn (`vlsc`) | vanlangsaigon.edu.vn | WHOIS registrant = "TRƯỜNG CAO ĐẲNG VĂN LANG SÀI GÒN" (exact match). Ownership: established as a training unit directly under the (well-documented private) Văn Lang Education Group, same system as Văn Lang University — well-established private brand identity, cross-checked (not inferred from name alone). |
+| Trường Cao đẳng Quốc tế TP.HCM / ICH (`ich`) | ich.edu.vn | WHOIS registrant = "Trường Cao đẳng Quốc tế Thành phố Hồ Chí Minh" (exact match). Ownership: multiple independent sources (search aggregation) explicitly classify ICH as tư thục/ngoài công lập. |
+| Trường Cao đẳng Kỹ thuật - Du lịch Sài Gòn / STC (`stc`) | stc.edu.vn | WHOIS registrant = "Trường Cao Đẳng Kỹ Thuật - Du Lịch Sài Gòn" (exact match). Ownership: the school's own published article `sttc.edu.vn/cao-dang-ky-thuat-du-lich-sai-gon-la-truong-cong-hay-tu/` states "Trường Cao đẳng Kỹ thuật – Du lịch Sài Gòn là trường thuộc hệ thống các trường ngoài công lập" (established via QĐ 689/QĐ-LĐTBXH). |
+| Trường Cao đẳng Khoa học - Công nghệ TP.HCM / HCST (`hcst`) | hcst.edu.vn | WHOIS registrant = "TRƯỜNG CAO ĐẲNG KHOA HỌC - CÔNG NGHỆ TP.HCM" (exact match). Ownership: school publicly names Ths. Bùi Xuân Hiệp as "Chủ tịch hội đồng quản trị" — Hội đồng quản trị structural signal (private-exclusive); masothue's own "Các tổ chức kinh tế khác" bucket for this entity was inconclusive on its own. |
+| Trường Cao đẳng Du lịch Sài Gòn (`dlsg`) | dulichsaigon.edu.vn | WHOIS registrant = "TRƯỜNG CAO ĐẲNG DU LỊCH SÀI GÒN" (exact match). Ownership: the school's own official history page states its predecessor "Trường Trung cấp nghề tư thục Du lịch Sài Gòn ... được thành lập theo quyết định số 150/QĐ-DN ngày 16/10/1991" — "tư thục" appears repeatedly through its own institutional history. |
+| Trường Cao đẳng Công nghệ Thông tin TP.HCM / ITC (`itc`) | itc.edu.vn | WHOIS registrant = "Trường Cao đẳng Công nghệ Thông tin Tp. HCM" (exact match). Ownership: the school's own former official name was "Trường Cao Đẳng Dân Lập Công Nghệ Thông Tin TP HCM" ("dân lập" = private, in the legal name itself, established 27/4/2001 via QĐ 2054/QĐ-BGD&ĐT-TCCB). |
+| Trường Cao đẳng Du lịch Vũng Tàu / VTVC (`vtvc`) | vtvc.edu.vn | WHOIS registrant = "Trường Cao đẳng Du lịch Vũng Tàu" (exact match). Ownership: **public** — explicitly "đơn vị sự nghiệp công lập trực thuộc Bộ Văn hóa, Thể thao và Du lịch" (established 16/9/2008, upgraded from Vũng Tàu Tourism Vocational High School). |
+| Trường Cao đẳng Kỹ thuật Thiết bị Y tế Miền Nam / SPMET (`spmet`) | sp.edu.vn | WHOIS registrant = "TRƯỜNG CAO ĐẲNG KỸ THUẬT THIẾT BỊ Y TẾ MIỀN NAM" (exact match — resolves Batch 6's suspicion that the generic 2-letter domain might not be school-owned; WHOIS confirms it genuinely is, registered 2024-11-13). Ownership: **public** — tuoitre.vn (reputable news source) states "Trường Cao Đẳng Kỹ Thuật Thiết Bị Y Tế Miền Nam là trường cao đẳng công lập duy nhất ở khu vực phía Nam đào tạo về ngành Kỹ Thuật Thiết Bị Y Tế" (the only public college in the South for this field; located Bình Dương, formerly CĐ nghề Kỹ thuật Thiết bị y tế Bình Dương). |
+
+All 12 use `catalogSources: [HCMC_GDNN_SOURCE, <school's own domain>]`, matching the Batch 6 pattern.
+See the batch-7 comment block above these entries in
+`uniscorevn-data/normalized/runtime-source-snapshot/collegeCatalog.ts` for the full evidence chain.
+
+## Still not added / needs review (2)
+
+| Institution | Domain | What was specifically tried and found |
+|---|---|---|
+| Trường Cao đẳng Kinh tế - Công nghệ TP.HCM (HIAST) | hiast.edu.vn | Domain: WHOIS registrant = "Trường Cao đẳng Kinh tế Công nghệ Thành phố Hồ Chí Minh" (exact match) — domain-owned signal CONFIRMED. Ownership: NOT confirmed. Tried (a) masothue.com search — the only tax-code match found (MST 0304387165) has a registered address ("8 đường số 3, Cư Xá Lữ Gia, Phường Phú Thọ") that does not match HIAST's known campus addresses (138 Hà Huy Giáp / 275/8 Lý Thường Kiệt) — likely the wrong entity, discarded; (b) searched for a "Hội đồng quản trị"/"Chủ tịch HĐQT" structural signal — none found; (c) a `WebSearch` aggregation surfaced one claim that HIAST is "công lập" reasoning "chịu sự quản lý hành chính theo lãnh thổ của UBND TP. Hồ Chí Minh" — rejected per this batch's own stated rule (territorial administrative jurisdiction ≠ state ownership; every HCMC institution is nominally under this); (d) HIAST's predecessor name "Cao Đẳng Nghề Kinh Tế Kỹ Thuật Thiện Trụ" ("Thiện Trụ" reads as a private/charitable-sounding name, atypical for a public-institution naming convention) is suggestive but not a citable primary signal. Left out — genuinely unconfirmable this batch, not merely unchecked. |
+| Trường Cao đẳng quốc tế VABIS | caodangtueduc.edu.vn | Domain: WHOIS registrant = "Công ty cổ phần giáo dục Tuệ Đức Bách Khoa" — an unrelated private education-investment company, NOT the school's own name at all (confirms Batch 6's suspicion about the name/brand mismatch). This is a domain-ownership FAILURE, not merely an unconfirmed ownership type — the domain itself cannot be cited as VABIS's official site. No alternative VABIS domain was searched for this batch; a fresh domain search (not just re-checking the same one) is the next step if this school is revisited. |
+
+## Dead-domain re-checks (both still dead, stronger confirmation)
+
+| Institution | Domain | Result |
+|---|---|---|
+| Trường Cao đẳng Y Dược Hồng Đức | hongduccollege.edu.vn | WHOIS (whois.vnnic.vn) confirms the domain IS registered to "Trường Cao đẳng Y Dược Hồng Đức" (exact legal-name match, registered 2015, registrar P.A Việt Nam) — the domain-ownership signal is actually positive. However a fresh `WebFetch` this batch still gets `ECONNREFUSED` (site down) — unlike the VABIS case, this is a real school-owned domain that is simply offline, not a wrong/squatted domain. NOT added: no reachable content to verify current admission info or corroborate ownership type. Worth a periodic re-check — this one may come back. |
+| Trường Cao đẳng Văn hóa Nghệ thuật và Du lịch Sài Gòn | daihocdulich.edu.vn | WHOIS (whois.vnnic.vn) now returns status "chưa cấp phát" (currently unregistered) rather than the DNS-non-resolving state Batch 6 found — stronger confirmation the domain is genuinely dead/abandoned, not a transient DNS issue. No alternative live domain was found for this batch. NOT added. |
+
+## Test/build status (Batch 7)
+
+- `npm run validate` (private): OK.
+- `npm run export:runtime` (private): wrote all 4 generated artifacts; public repo diff was exactly
+  the 12 new catalog-only entries appended to `collegeCatalog.generated.ts` (no other file touched,
+  no entry-count change elsewhere).
+- `npm run audit:data`: 0 catalog audit errors, 0 catalog audit warnings; confirms new counts
+  (355 catalog entries / 343 independent institutions / 77 vocational colleges / 134 verified
+  calculators, verified calculators unchanged).

@@ -433,4 +433,16 @@ whose domain (uad.edu.vn) briefly caused confusion during this batch's research.
 - **KENT** — Trường Cao đẳng Quốc tế Kent
 - **BÁCH VIỆT** — Trường Cao đẳng Bách khoa Bách Việt
 - **ĐỒNG AN** — Trường Cao đẳng Công nghệ cao Đồng An
+- **CĐ MIỀN NAM** — Trường Cao đẳng Miền Nam
+- **CĐ SÀI GÒN** — Trường Cao đẳng Sài Gòn
+- **SGC** — Trường Cao đẳng Sài Gòn Gia Định
+- **ĐẠI VIỆT SG** — Trường Cao đẳng Đại Việt Sài Gòn
+- **VLSC** — Trường Cao đẳng Văn Lang Sài Gòn
+- **ICH** — Trường Cao đẳng Quốc tế Thành phố Hồ Chí Minh
+- **STC** — Trường Cao đẳng Kỹ thuật - Du lịch Sài Gòn
+- **HCST** — Trường Cao đẳng Khoa học - Công nghệ TP.HCM
+- **CĐ DU LỊCH SG** — Trường Cao đẳng Du lịch Sài Gòn
+- **ITC** — Trường Cao đẳng Công nghệ Thông tin TP.HCM
+- **VTVC** — Trường Cao đẳng Du lịch Vũng Tàu
+- **SPMET** — Trường Cao đẳng Kỹ thuật Thiết bị Y tế Miền Nam
 

@@ -1401,6 +1401,208 @@ export const collegeCatalogSchools: readonly CollegeCatalogSchool[] = [
       { title: 'Trường Cao đẳng Công nghệ cao Đồng An', url: 'https://dongan.edu.vn/', type: 'official-institution', checkedAt: '2026-09-08' },
     ],
   },
+  // Catalog-expansion batch 7 (2026-09-09): resolves 12 of the ~14 Batch-6 "needs review" leftovers
+  // using the same WHOIS + tax-registry method that closed the Ngoại thương case in batch 6. For each
+  // candidate: (1) VNNIC WHOIS (whois.vnnic.vn, official web lookup form) confirmed the domain is
+  // registered directly to the school's own legal name (or a decision-numbered predecessor name — see
+  // per-entry note), ruling out reseller/mirror domains; (2) ownership type was NOT taken from the
+  // GDNN directory's own unreliable "Loại hình" field, but from an independent structural/documentary
+  // signal: masothue.com business-type "Công ty TNHH ... ngoài NN" (non-state LLC) is unambiguous
+  // private; a school-published "Hội đồng quản trị" (Board of Directors, with a "Chủ tịch HĐQT") is
+  // legally exclusive to trường tư thục under Vietnamese education law (public colleges instead have a
+  // "Hội đồng trường") and was used as an equally authoritative private signal where masothue's generic
+  // "Các tổ chức kinh tế khác" bucket was ambiguous; an explicit supervising-ministry citation (e.g.
+  // "đơn vị sự nghiệp công lập trực thuộc Bộ Văn hóa, Thể thao và Du lịch") was used for public. Each
+  // domain was also live-checked (2026 admission content) this batch. Two Batch-6 leftovers remain
+  // excluded — HIAST (hiast.edu.vn: domain WHOIS-confirmed school-owned, but no reliable ownership
+  // signal found after masothue address-mismatch + no Hội đồng quản trị/trường evidence located; the
+  // GDNN "Công lập" field and a web search's own inferred "chịu quản lý hành chính theo lãnh thổ của
+  // UBND TP.HCM ⇒ công lập" reasoning were both rejected as unreliable, per the standing rule) and
+  // VABIS (caodangtueduc.edu.vn WHOIS-confirmed registered to an unrelated private company, "Công ty
+  // cổ phần giáo dục Tuệ Đức Bách Khoa" — domain fails the ownership-signal test, not just unconfirmed
+  // ownership). Also re-checked the two dead-domain leftovers: Trường Cao đẳng Y Dược Hồng Đức
+  // (hongduccollege.edu.vn — WHOIS confirms registrant "Trường Cao đẳng Y Dược Hồng Đức", exact legal
+  // name match, but the site itself still returns `ECONNREFUSED` on a fresh check — content
+  // unreachable, so NOT added) and Trường Cao đẳng Văn hóa Nghệ thuật và Du lịch Sài Gòn
+  // (daihocdulich.edu.vn — WHOIS now returns "chưa cấp phát", i.e. currently unregistered, confirming
+  // the domain is dead rather than merely unresolving — no live official domain found, NOT added). See
+  // "Batch 7" in docs/catalog-expansion-report.md for the full per-candidate evidence.
+  {
+    id: 'cdmiennam',
+    shortName: 'CĐ MIỀN NAM',
+    name: 'Trường Cao đẳng Miền Nam',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'private',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    aliases: ['Trường Cao đẳng Kinh tế - Kỹ thuật Miền Nam'],
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao Đẳng Miền Nam (cdmiennam.edu.vn)', url: 'https://cdmiennam.edu.vn/', type: 'official-institution', checkedAt: '2026-09-09' },
+    ],
+  },
+  {
+    id: 'saigontech',
+    shortName: 'CĐ SÀI GÒN',
+    name: 'Trường Cao đẳng Sài Gòn',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'private',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    aliases: ['SaigonTech', 'Trường Cao đẳng Nghề Sài Gòn'],
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Cao Đẳng Sài Gòn / SaigonTech (caodangsaigon.edu.vn)', url: 'https://caodangsaigon.edu.vn/', type: 'official-institution', checkedAt: '2026-09-09' },
+    ],
+  },
+  {
+    id: 'sgc',
+    shortName: 'SGC',
+    name: 'Trường Cao đẳng Sài Gòn Gia Định',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'private',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao Đẳng Sài Gòn Gia Định (sgc.edu.vn)', url: 'https://sgc.edu.vn/', type: 'official-institution', checkedAt: '2026-09-09' },
+    ],
+  },
+  {
+    id: 'daivietsg',
+    shortName: 'ĐẠI VIỆT SG',
+    name: 'Trường Cao đẳng Đại Việt Sài Gòn',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'private',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Đại Việt Sài Gòn (daivietsaigon.edu.vn)', url: 'https://daivietsaigon.edu.vn/', type: 'official-institution', checkedAt: '2026-09-09' },
+    ],
+  },
+  {
+    id: 'vlsc',
+    shortName: 'VLSC',
+    name: 'Trường Cao đẳng Văn Lang Sài Gòn',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'private',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao Đẳng Văn Lang Sài Gòn (vanlangsaigon.edu.vn)', url: 'https://vanlangsaigon.edu.vn/', type: 'official-institution', checkedAt: '2026-09-09' },
+    ],
+  },
+  {
+    id: 'ich',
+    shortName: 'ICH',
+    name: 'Trường Cao đẳng Quốc tế Thành phố Hồ Chí Minh',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'private',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    aliases: ['ICH'],
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao Đẳng Quốc Tế TP.HCM (ich.edu.vn)', url: 'https://ich.edu.vn/', type: 'official-institution', checkedAt: '2026-09-09' },
+    ],
+  },
+  {
+    id: 'stc',
+    shortName: 'STC',
+    name: 'Trường Cao đẳng Kỹ thuật - Du lịch Sài Gòn',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'private',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    aliases: ['STC'],
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Kỹ thuật – Du lịch Sài Gòn (stc.edu.vn)', url: 'https://stc.edu.vn/', type: 'official-institution', checkedAt: '2026-09-09' },
+    ],
+  },
+  {
+    id: 'hcst',
+    shortName: 'HCST',
+    name: 'Trường Cao đẳng Khoa học - Công nghệ TP.HCM',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'private',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    aliases: ['HCST'],
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Khoa học – Công nghệ TP.HCM (hcst.edu.vn)', url: 'https://hcst.edu.vn/', type: 'official-institution', checkedAt: '2026-09-09' },
+    ],
+  },
+  {
+    id: 'dlsg',
+    shortName: 'CĐ DU LỊCH SG',
+    name: 'Trường Cao đẳng Du lịch Sài Gòn',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'private',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao Đẳng Du Lịch Sài Gòn (dulichsaigon.edu.vn)', url: 'https://dulichsaigon.edu.vn/', type: 'official-institution', checkedAt: '2026-09-09' },
+    ],
+  },
+  {
+    id: 'itc',
+    shortName: 'ITC',
+    name: 'Trường Cao đẳng Công nghệ Thông tin TP.HCM',
+    location: 'TP.HCM',
+    province: 'TP.HCM',
+    ownership: 'private',
+    region: 'hcm',
+    entityLevel: 'vocational_college',
+    aliases: ['ITC', 'Trường Cao Đẳng Dân Lập Công Nghệ Thông Tin TP.HCM'],
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Công nghệ Thông tin TP.Hồ Chí Minh (itc.edu.vn)', url: 'https://itc.edu.vn/', type: 'official-institution', checkedAt: '2026-09-09' },
+    ],
+  },
+  {
+    id: 'vtvc',
+    shortName: 'VTVC',
+    name: 'Trường Cao đẳng Du lịch Vũng Tàu',
+    location: 'Bà Rịa - Vũng Tàu',
+    province: 'Bà Rịa - Vũng Tàu',
+    ownership: 'public',
+    region: 'other',
+    entityLevel: 'vocational_college',
+    aliases: ['VTVC'],
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Du lịch Vũng Tàu (vtvc.edu.vn)', url: 'http://vtvc.edu.vn/', type: 'official-institution', checkedAt: '2026-09-09' },
+    ],
+  },
+  {
+    id: 'spmet',
+    shortName: 'SPMET',
+    name: 'Trường Cao đẳng Kỹ thuật Thiết bị Y tế Miền Nam',
+    location: 'Bình Dương',
+    province: 'Bình Dương',
+    ownership: 'public',
+    region: 'other',
+    entityLevel: 'vocational_college',
+    aliases: ['SPMET'],
+    catalogSources: [
+      HCMC_GDNN_SOURCE,
+      { title: 'Trường Cao đẳng Kỹ thuật Thiết bị Y tế Miền Nam (sp.edu.vn)', url: 'https://sp.edu.vn/', type: 'official-institution', checkedAt: '2026-09-09' },
+    ],
+  },
 ];
 
 export const collegeCatalogKnowledgeGap = {
