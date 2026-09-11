@@ -584,7 +584,7 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
     url: 'https://www.vmu.edu.vn/tuyen-sinh-dao-tao/dai-hoc-chinh-quy/tuyen-sinh',
     checkedAt: '2026-08-24',
     note:
-      'Cổng tuyển sinh chính thức (vmu.edu.vn) xác nhận qua tìm kiếm: 1.060 chỉ tiêu, 4 phương thức (mã 301 tuyển thẳng, 100 thi TN THPT, 200 học bạ THPT, 500 khác). Trường công bố "ngưỡng đảm bảo chất lượng đầu vào" và bảng quy đổi tương đương học bạ/THPT trước 17h00 10/7/2026, nhưng số liệu ngưỡng cụ thể theo ngành (5 ngành: Y khoa, Dược, Y học dự phòng, Điều dưỡng, Kỹ thuật xét nghiệm y học) không trích xuất được có cấu trúc trong lượt research này. Để ở researched, không suy diễn số liệu.',
+      'Superseded (2026-09-11 batch): verified-calculator upgrade shipped for all 5/5 regular undergraduate programmes of Phương thức 100, using the school-hosted Thông tin tuyển sinh đại học năm 2026 PDF (mục IV.4.1.a formula, read via vision because the text layer is broken OCR) plus Thông báo 809/TB-ĐHYKV (10/8/2026), whose cutoff table also prints the per-programme subject combinations. See normalized/runtime-source-snapshot/vmuvinh/sources.ts. This entry is unused because vmuvinh is now in explicitRuntimeSchoolIds; kept only as a research trail. Original note: Cổng tuyển sinh chính thức (vmu.edu.vn) xác nhận qua tìm kiếm: 1.060 chỉ tiêu, 4 phương thức (mã 301 tuyển thẳng, 100 thi TN THPT, 200 học bạ THPT, 500 khác). Trường công bố "ngưỡng đảm bảo chất lượng đầu vào" và bảng quy đổi tương đương học bạ/THPT trước 17h00 10/7/2026, nhưng số liệu ngưỡng cụ thể theo ngành (5 ngành: Y khoa, Dược, Y học dự phòng, Điều dưỡng, Kỹ thuật xét nghiệm y học) không trích xuất được có cấu trúc trong lượt research này. Để ở researched, không suy diễn số liệu.',
   },
   vnusis: {
     sourceId: 'vnusis-admission-2026',
@@ -831,7 +831,7 @@ export const finalCatalogKnowledgeGap = {
 // thi), priority table quoted verbatim in the school's own Quyết định 261/QĐ-HVTTNVN (not a
 // national-framework judgment call substitute, same precedent as vhs.
 // They stay listed in `finalCatalogSchools` above for identity/location metadata only.
-const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus', 'tuaf', 'uhd', 'umt', 'utm', 'utt', 'eaut', 'vwa', 'hau', 'tbu', 'ltvuni', 'dhv', 'ush', 'hcmupes', 'hnmu', 'cmcu', 'vttu', 'hbu', 'vhs', 'vya', 'trungvuong', 'pxu', 'ulsa']);
+const explicitRuntimeSchoolIds = new Set(['vgu', 'hpu2', 'apd', 'eiu', 'fbu', 'fpfu', 'ntuhn', 'tbdu', 'thanhdo', 'tnue', 'tnufl', 'tnus', 'tuaf', 'uhd', 'umt', 'utm', 'utt', 'eaut', 'vwa', 'hau', 'tbu', 'ltvuni', 'dhv', 'ush', 'hcmupes', 'hnmu', 'cmcu', 'vttu', 'hbu', 'vhs', 'vya', 'trungvuong', 'pxu', 'ulsa', 'vmuvinh']);
 const finalCatalogRuntimeSchools = finalCatalogSchools.filter((school) => !explicitRuntimeSchoolIds.has(school.id));
 
 export const finalCatalogMethods: AdmissionMethodDescriptor[] = finalCatalogRuntimeSchools.map((school) => ({

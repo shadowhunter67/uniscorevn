@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 232,
       admissionDataAvailable: 232,
       eligibilitySupported: 22,
-      calculatorSupported: 144,
+      calculatorSupported: 145,
       partialCalculator: 3,
-      fullyVerified: 141,
+      fullyVerified: 142,
       catalogOnly: 123,
     });
   });
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(66);
+    expect(researchedOnly).toBe(65);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuvju', 'hanu',
@@ -195,6 +195,7 @@ describe('institution coverage statistics', () => {
     expect(deriveInstitutionSupportStatus(schoolRegistry.vutm)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hmtu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.ndun)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.vmuvinh)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.fpfu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.dhv)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.pyu)).toBe('eligibility-only');

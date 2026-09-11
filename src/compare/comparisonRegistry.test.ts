@@ -163,6 +163,7 @@ import { huphAdmissionMethods } from '../schools/huph/methods';
 import { vutmAdmissionMethods } from '../schools/vutm/methods';
 import { hmtuAdmissionMethods } from '../schools/hmtu/methods';
 import { ndunAdmissionMethods } from '../schools/ndun/methods';
+import { vmuvinhAdmissionMethods } from '../schools/vmuvinh/methods';
 import { dhvAdmissionMethods } from '../schools/dhv/methods';
 import { pyuAdmissionMethods } from '../schools/pyu/methods';
 import { nluAdmissionMethods } from '../schools/nlu/methods';
@@ -347,6 +348,7 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   vutm: vutmAdmissionMethods,
   hmtu: hmtuAdmissionMethods,
   ndun: ndunAdmissionMethods,
+  vmuvinh: vmuvinhAdmissionMethods,
   dhv: dhvAdmissionMethods,
   pyu: pyuAdmissionMethods,
   nlu: nluAdmissionMethods,
