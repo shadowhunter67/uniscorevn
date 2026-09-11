@@ -64,13 +64,13 @@ describe('institution coverage statistics', () => {
       vocationalColleges: 77,
       otherIndependentInstitutions: 0,
       internalUnitEntries: 12,
-      researched: 230,
-      admissionDataAvailable: 230,
+      researched: 231,
+      admissionDataAvailable: 231,
       eligibilitySupported: 22,
-      calculatorSupported: 142,
+      calculatorSupported: 143,
       partialCalculator: 3,
-      fullyVerified: 139,
-      catalogOnly: 125,
+      fullyVerified: 140,
+      catalogOnly: 124,
     });
   });
 
@@ -193,6 +193,7 @@ describe('institution coverage statistics', () => {
     expect(deriveInstitutionSupportStatus(schoolRegistry.ulsa)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.huph)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vutm)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.hmtu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.fpfu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.dhv)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.pyu)).toBe('eligibility-only');
