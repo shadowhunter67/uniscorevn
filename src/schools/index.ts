@@ -157,6 +157,7 @@ import { ulsaModule } from './ulsa';
 import { huphModule } from './huph';
 import { vutmModule } from './vutm';
 import { hmtuModule } from './hmtu';
+import { ndunModule } from './ndun';
 import { dhvModule } from './dhv';
 import { pyuModule } from './pyu';
 import { nluModule } from './nlu';
@@ -377,6 +378,7 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   huph: huphModule,
   vutm: vutmModule,
   hmtu: hmtuModule,
+  ndun: ndunModule,
   dhv: dhvModule,
   pyu: pyuModule,
   nlu: nluModule,

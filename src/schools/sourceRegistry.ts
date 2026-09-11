@@ -69,6 +69,7 @@ import { ulsaSources } from './ulsa/sources';
 import { huphSources } from './huph/sources';
 import { vutmSources } from './vutm/sources';
 import { hmtuSources } from './hmtu/sources';
+import { ndunSources } from './ndun/sources';
 import { fpfuSources } from './fpfu/sources';
 import { uflsudnSources } from './uflsudn/sources';
 import { hcmupesSources } from './hcmupes/sources';
@@ -196,6 +197,7 @@ export const ulsaSourceRegistry: AdmissionSource[] = withSchoolId('ulsa', ulsaSo
 export const huphSourceRegistry: AdmissionSource[] = withSchoolId('huph', huphSources);
 export const vutmSourceRegistry: AdmissionSource[] = withSchoolId('vutm', vutmSources);
 export const hmtuSourceRegistry: AdmissionSource[] = withSchoolId('hmtu', hmtuSources);
+export const ndunSourceRegistry: AdmissionSource[] = withSchoolId('ndun', ndunSources);
 export const fpfuSourceRegistry: AdmissionSource[] = withSchoolId('fpfu', fpfuSources);
 export const uflsudnSourceRegistry: AdmissionSource[] = withSchoolId('uflsudn', uflsudnSources);
 export const hcmupesSourceRegistry: AdmissionSource[] = withSchoolId('hcmupes', hcmupesSources);
@@ -320,6 +322,7 @@ export const schoolSourceRegistries: Record<string, AdmissionSource[]> = {
   huph: huphSourceRegistry,
   vutm: vutmSourceRegistry,
   hmtu: hmtuSourceRegistry,
+  ndun: ndunSourceRegistry,
   fpfu: fpfuSourceRegistry,
   uflsudn: uflsudnSourceRegistry,
   hcmupes: hcmupesSourceRegistry,
@@ -442,6 +445,7 @@ export const allAdmissionSources: AdmissionSource[] = [
   ...huphSourceRegistry,
   ...vutmSourceRegistry,
   ...hmtuSourceRegistry,
+  ...ndunSourceRegistry,
   ...fpfuSourceRegistry,
   ...uflsudnSourceRegistry,
   ...hcmupesSourceRegistry,
