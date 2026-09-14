@@ -13,11 +13,13 @@ import {
 import { UNIVERSITY_SYSTEMS } from '../data/universitySystems';
 import { Disclosure } from './Disclosure';
 import { SharedProfileEditor } from './SharedProfileEditor';
+import { ProfileSummary } from './ProfileSummary';
 import { AboutDataSection } from './AboutDataSection';
 import { SchoolListItem } from './SchoolListItem';
 import {
   filterSchoolsForLanding,
   hasActiveLandingFilters,
+  isEvaluableSchool,
   INITIAL_VISIBLE_SCHOOL_COUNT,
   SUPPORT_TIER_ORDER,
   VISIBLE_SCHOOL_INCREMENT,
@@ -88,6 +90,8 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
   const [sortMode, setSortMode] = useState<LandingSortMode>('useful');
   const [onlyEvaluable, setOnlyEvaluable] = useState(false);
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_SCHOOL_COUNT);
+  /** Form hồ sơ mở/đóng có điều khiển (không dùng `<details>`) để nút CTA ở hero mở được nó. */
+  const [profileEditorOpen, setProfileEditorOpen] = useState(false);
   const schools = useMemo(() => Object.values(schoolRegistry), []);
   const filters = useMemo(
     () => ({ query, entityFilter, regionFilter, tierFilter, systemFilter, sortMode, onlyEvaluable }),
@@ -111,6 +115,9 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
 
   const { profile, updateProfile, updateVactTotal, clearProfile } = useApplicantProfile();
   const profileSummary = summarizeApplicantProfile(profile);
+  /** Số trường UniScoreVN có thể đánh giá (tính điểm hoặc kiểm tra điều kiện) — đọc từ registry
+   * thật qua `isEvaluableSchool`, KHÔNG hardcode. */
+  const evaluableSchoolCount = useMemo(() => schools.filter(isEvaluableSchool).length, [schools]);
 
   useEffect(() => {
     setVisibleCount(INITIAL_VISIBLE_SCHOOL_COUNT);
@@ -138,61 +145,93 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
       {/* Hero compact: navbar đã có logo nên phần này không lặp lại logo, chỉ giữ H1 (tên brand —
           không đổi để không ảnh hưởng SEO), tagline, số liệu phủ dữ liệu và 2 lối vào rõ ràng. */}
       <div className="mx-auto max-w-3xl text-center">
+        {/* H1 giữ nguyên tên brand (không đổi để không ảnh hưởng SEO); câu hỏi thật của người dùng
+            nằm ngay dưới, đủ to để trong 5 giây biết trang này trả lời gì. */}
         <h1 className="text-3xl font-bold text-ink sm:text-4xl">{siteConfig.name}</h1>
-        <p className="mt-1.5 text-base text-ink-soft sm:text-lg">{siteConfig.tagline}</p>
-        <p className="mx-auto mt-3 text-base leading-relaxed text-muted">
-          Hiện có {institutionCoverage.fullyVerified} trường có thể tính điểm xét tuyển đầy đủ, trong tổng số {institutionCoverage.independentEducationInstitutions} cơ sở
-          giáo dục độc lập. Nhập điểm một lần, so sánh theo quy tắc tuyển sinh riêng của từng cơ sở.
+        <p className="mx-auto mt-2 max-w-xl text-lg font-medium text-ink-soft sm:text-xl">
+          Điểm của bạn phù hợp với trường, ngành nào?
         </p>
-        <p className="mt-4 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm text-muted">
-          <span>Đã có trường muốn xem? Tìm bên dưới.</span>
+        <p className="mx-auto mt-2 text-base leading-relaxed text-muted">
+          Nhập điểm một lần, {siteConfig.name} áp theo quy tắc tuyển sinh riêng của từng trường rồi đối chiếu với điểm chuẩn đã công bố.
+        </p>
+
+        {/* 2 lối vào chính, ngang hàng nhau — trước đây chỉ có một link chữ nhỏ lẫn trong câu văn. */}
+        <div className="mt-5 flex flex-col items-center justify-center gap-2 sm:flex-row">
+          <button
+            type="button"
+            onClick={() => setProfileEditorOpen(true)}
+            className="inline-flex min-h-[--ui-tap-min] w-full max-w-xs cursor-pointer items-center justify-center rounded-md bg-primary px-5 py-2 text-sm font-semibold text-white transition-colors duration-150 hover:bg-primary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 sm:w-auto"
+          >
+            {profileSummary.hasData ? 'Chỉnh sửa điểm của bạn' : 'Nhập điểm của bạn'}
+          </button>
           <button
             type="button"
             onClick={onOpenFieldBrowse}
-            className="inline-flex min-h-9 items-center rounded-md px-1.5 font-medium text-accent underline-offset-2 transition-colors duration-150 hover:bg-accent/10 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+            className="inline-flex min-h-[--ui-tap-min] w-full max-w-xs cursor-pointer items-center justify-center rounded-md border border-accent/30 bg-accent/10 px-5 py-2 text-sm font-semibold text-accent transition-colors duration-150 hover:bg-accent/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 sm:w-auto"
           >
-            Chưa biết nên chọn trường nào? Xem theo lĩnh vực →
+            Xem theo ngành
           </button>
+        </div>
+
+        {/* Số liệu phủ dữ liệu nói RÕ NGHĨA từng con số, thay vì 3 số trần trụi cạnh nhau. */}
+        <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted">
+          {profileSummary.hasData ? (
+            <>
+              <span className="font-medium text-ink">Hồ sơ đã sẵn sàng</span> — {evaluableSchoolCount} trường có thể đánh giá ngay với dữ liệu bạn đã nhập.{' '}
+            </>
+          ) : null}
+          Danh mục hiện có {institutionCoverage.totalCatalogEntries} mục tra cứu thuộc {institutionCoverage.independentEducationInstitutions} cơ sở giáo dục
+          độc lập, trong đó {institutionCoverage.fullyVerified} cơ sở tính được đầy đủ điểm xét tuyển.
         </p>
       </div>
 
-      <div className="mx-auto mt-6 max-w-3xl rounded-md border border-accent/20 bg-accent/5 px-4 py-3 text-sm">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <p className="text-ink">
-            <span className="font-medium">Hồ sơ điểm dùng chung.</span>{' '}
-            <span className="text-muted">Nhập ở đây, rồi {siteConfig.name} áp cho từng cơ sở; thiếu gì sẽ báo khi so sánh.</span>
-          </p>
-          {profileSummary.hasData && (
+      {/* Panel hồ sơ: mặc định chỉ là BẢNG TÓM TẮT gọn (không chiếm nhiều chiều cao), ô nhập nằm
+          sau nút "Chỉnh sửa" — trước đây toàn bộ form xổ sẵn khi đã có dữ liệu, đẩy danh sách
+          trường xuống dưới màn hình đầu tiên. */}
+      <div id="ho-so-diem" className="mx-auto mt-6 max-w-3xl rounded-md border border-accent/20 bg-accent/5 px-4 py-3 text-sm">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+          <p className="font-medium text-ink">Hồ sơ điểm dùng chung</p>
+          <div className="flex flex-wrap items-center gap-x-3">
             <button
               type="button"
-              onClick={handleClearProfile}
-              className="shrink-0 text-sm font-medium text-muted underline-offset-2 hover:text-danger hover:underline"
+              onClick={() => setProfileEditorOpen((current) => !current)}
+              aria-expanded={profileEditorOpen}
+              aria-controls="ho-so-diem-editor"
+              className="inline-flex min-h-9 cursor-pointer items-center rounded-md px-1.5 text-sm font-medium text-accent underline-offset-2 transition-colors duration-150 hover:bg-accent/10 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
             >
-              Xóa hồ sơ đã lưu
+              {profileEditorOpen ? 'Thu gọn' : profileSummary.hasData ? 'Chỉnh sửa' : 'Nhập điểm'}
             </button>
-          )}
+            {profileSummary.hasData && (
+              <button
+                type="button"
+                onClick={handleClearProfile}
+                className="inline-flex min-h-9 shrink-0 cursor-pointer items-center rounded-md px-1.5 text-sm font-medium text-muted underline-offset-2 hover:text-danger hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+              >
+                Xóa hồ sơ
+              </button>
+            )}
+          </div>
         </div>
-        {profileSummary.hasData && (
-          <p className="mt-1.5 text-sm text-muted">
-            {[
-              profileSummary.vactTotal !== undefined ? `ĐGNL: ${profileSummary.vactTotal}` : null,
-              profileSummary.thptSubjectCount > 0 ? `THPT: ${profileSummary.thptSubjectCount} môn đã lưu` : null,
-              profileSummary.transcriptSubjectCount > 0 ? `Học bạ: ${profileSummary.transcriptSubjectCount} môn đã lưu` : null,
-            ]
-              .filter(Boolean)
-              .join(' · ')}
-          </p>
+
+        {profileSummary.hasData ? (
+          <ProfileSummary summary={profileSummary} profile={profile} />
+        ) : (
+          <p className="mt-1 text-muted">Chưa có điểm nào. Nhập một lần ở đây, {siteConfig.name} áp cho từng cơ sở; thiếu gì sẽ báo khi so sánh.</p>
         )}
-        <Disclosure summary="Nhập / chỉnh sửa điểm" defaultOpen={profileSummary.hasData} className="mt-2.5">
-          <SharedProfileEditor profile={profile} updateProfile={updateProfile} updateVactTotal={updateVactTotal} />
-        </Disclosure>
+
+        {profileEditorOpen && (
+          <div id="ho-so-diem-editor">
+            <SharedProfileEditor profile={profile} updateProfile={updateProfile} updateVactTotal={updateVactTotal} />
+          </div>
+        )}
+
         {profileSummary.hasData && (
           <button
             type="button"
             onClick={onOpenCompare}
             className="mt-3 min-h-[--ui-tap-min] rounded-md border border-accent/30 bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent transition hover:bg-accent/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
           >
-            So sánh với hồ sơ này
+            So sánh nguyện vọng với hồ sơ này
           </button>
         )}
       </div>

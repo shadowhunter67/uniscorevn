@@ -2,7 +2,7 @@ import type { MissingRequirement, MissingRequirementAction } from '../core/admis
 
 const SCHOOL_CONTEXT_ACTIONS: Record<string, Record<string, MissingRequirementAction>> = {
   hcmut: {
-    'hcmut-context': { href: '/hcmut#subject-context', label: 'Bổ sung ngữ cảnh HCMUT' },
+    'hcmut-context': { href: '/hcmut#subject-context', label: 'Chọn tổ hợp/điểm cộng HCMUT' },
     program: { href: '/hcmut#programs', label: 'Chọn ngành để so điểm chuẩn' },
   },
   uel: {

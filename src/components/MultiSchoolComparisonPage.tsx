@@ -28,6 +28,7 @@ import {
 } from '../compare/comparisonSelection';
 import {
   getCapabilityLabel,
+  getProgramCatalogLabel,
   getProgramCatalogEntry,
   getUniversityCatalogEntry,
   searchProgramCatalog,
@@ -36,6 +37,7 @@ import {
   type ProgramCatalogEntry,
   type UniversityCatalogEntry,
 } from '../compare/universityCatalog';
+import { Disclosure } from './Disclosure';
 import { ComparisonEntryCard } from './compare/ComparisonEntryCard';
 import { ComparisonOverview } from './compare/ComparisonOverview';
 import { ComparisonSummaryMatrix } from './compare/ComparisonSummaryMatrix';
@@ -181,7 +183,7 @@ function ComparePicker({
             <h2 id="compare-picker-title" className="text-base font-semibold text-ink sm:text-lg">
               {editingSelectionId ? 'Đổi nguyện vọng' : 'Thêm nguyện vọng'}
             </h2>
-            <p className="mt-0.5 text-[13px] text-muted">Chọn trường, ngành và ngữ cảnh riêng của trường. Hồ sơ cá nhân không nằm trong lựa chọn này.</p>
+            <p className="mt-0.5 text-[13px] text-muted">Chọn trường và ngành. Điểm trong hồ sơ dùng chung tự được áp vào, không phải nhập lại ở đây.</p>
           </div>
           <button
             type="button"
@@ -221,7 +223,7 @@ function ComparePicker({
                     <CapabilityBadge school={school} />
                   </div>
                   <p className="mt-1 text-[13px] text-muted">{school.fullName}</p>
-                  <p className="mt-0.5 text-xs text-muted">{school.programs.length} ngành có dữ liệu</p>
+                  <p className="mt-0.5 text-xs text-muted">{getProgramCatalogLabel(school.programs.length)}</p>
                 </button>
               ))}
             </div>
@@ -281,8 +283,13 @@ function ComparePicker({
                   </label>
                 )}
 
+                {/* Điểm ưu tiên/thưởng/xét thưởng/khuyến khích KHÔNG bắt buộc để thêm nguyện vọng
+                    (`buildSelectionFromDraft` không đòi) — gấp lại để mặc định modal chỉ hỏi đúng
+                    3 thứ: trường, ngành, tổ hợp. Ô năng khiếu của USH/HCMUPES thì KHÔNG gấp vì
+                    thiếu là không submit được. */}
                 {draft.schoolId === 'hcmut' && (
-                  <div className="mt-4 grid gap-2 sm:grid-cols-2">
+                  <Disclosure summary="+ Tùy chọn nâng cao (điểm ưu tiên, thưởng)" className="mt-4">
+                  <div className="grid gap-2 sm:grid-cols-2">
                     <ScoreInput
                       id="compare-hcmut-priority"
                       label="Điểm ưu tiên thang 30"
@@ -317,6 +324,7 @@ function ComparePicker({
                       compact
                     />
                   </div>
+                  </Disclosure>
                 )}
 
                 {draft.schoolId === 'ush' && (
@@ -381,14 +389,17 @@ function ComparePicker({
                 )}
 
                 {draft.schoolId === 'ussh' && (
-                  <label className="mt-4 flex items-center gap-2 text-xs font-medium text-ink">
-                    <input
-                      type="checkbox"
-                      checked={draft.hasUsshBonusAchievement}
-                      onChange={(event) => onDraftChange({ ...draft, hasUsshBonusAchievement: event.target.checked })}
-                    />
-                    Thí sinh có thành tích cộng điểm USSH
-                  </label>
+                  <Disclosure summary="+ Tùy chọn nâng cao (thành tích cộng điểm)" className="mt-4">
+                    <label className="flex min-h-[--ui-tap-min] cursor-pointer items-center gap-2 text-sm font-medium text-ink">
+                      <input
+                        type="checkbox"
+                        checked={draft.hasUsshBonusAchievement}
+                        onChange={(event) => onDraftChange({ ...draft, hasUsshBonusAchievement: event.target.checked })}
+                        className="h-5 w-5 cursor-pointer rounded border-border-strong text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                      />
+                      Thí sinh có thành tích cộng điểm USSH
+                    </label>
+                  </Disclosure>
                 )}
 
                 <div className="mt-5 rounded-md bg-surface-soft p-3 text-xs text-muted">
@@ -408,7 +419,7 @@ function ComparePicker({
                 </div>
               </>
             ) : (
-              <div className="rounded-md bg-surface-soft p-4 text-sm text-muted">Chọn trường trước, rồi chọn ngành từ registry thật của trường.</div>
+              <div className="rounded-md bg-surface-soft p-4 text-sm text-muted">Chọn một trường ở cột bên trái, danh sách ngành của trường đó sẽ hiện ở đây.</div>
             )}
           </section>
         </div>

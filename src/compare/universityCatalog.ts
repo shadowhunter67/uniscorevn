@@ -44,12 +44,27 @@ export function getUniversityCatalogEntry(schoolId: string): UniversityCatalogEn
 
 export const getProgramCatalogEntry = getProgramCatalogEntryFromCatalog;
 
+/**
+ * Nhãn nói UniScoreVN LÀM ĐƯỢC GÌ với trường này — KHÔNG nói gì về kết quả tuyển sinh, cũng KHÔNG
+ * nói hồ sơ của thí sinh đã đủ input hay chưa (đó là trạng thái thứ ba, chỉ biết được sau khi
+ * chọn xong ngành + chạy evaluator, xem `evaluationDisplayLabel`).
+ *
+ * 'exact' trước đây hiển thị "Chinh xac" — vừa mất dấu tiếng Việt, vừa dễ bị đọc thành "kết quả
+ * chính xác/cam kết đúng". Nay "Tính đầy đủ điểm", đồng bộ với nhãn "Tính đầy đủ" của kết quả.
+ */
 export function getCapabilityLabel(capability: UniversityCapability, schoolId?: string): string {
-  if (schoolId === 'ussh' && capability === 'exact') return 'Chinh xac voi ho so phu hop';
-  if (capability === 'exact') return 'Chinh xac';
-  if (capability === 'partial') return 'Mot phan';
-  if (capability === 'eligibility') return 'Kiem tra dieu kien';
-  return 'Thong tin';
+  if (schoolId === 'ussh' && capability === 'exact') return 'Tính đầy đủ (hồ sơ phù hợp)';
+  if (capability === 'exact') return 'Tính đầy đủ điểm';
+  if (capability === 'partial') return 'Tính được một phần';
+  if (capability === 'eligibility') return 'Chỉ kiểm tra điều kiện';
+  return 'Có quy tắc tuyển sinh';
+}
+
+/** Trạng thái RIÊNG: có danh mục ngành hay không — tách khỏi nhãn năng lực tính điểm ở trên, vì
+ * "trường có công thức" và "trường có dữ liệu ngành" là hai chuyện khác nhau. Trước đây hiển thị
+ * "0 ngành có dữ liệu", đọc như một lỗi/số liệu trống chứ không nói rõ nghĩa. */
+export function getProgramCatalogLabel(programCount: number): string {
+  return programCount === 0 ? 'Chưa có dữ liệu ngành' : `${programCount} ngành trong danh mục`;
 }
 
 export function searchUniversityCatalog(query: string, entries: readonly UniversityCatalogEntry[] = universityCatalog): UniversityCatalogEntry[] {
