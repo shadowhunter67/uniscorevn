@@ -1,6 +1,14 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { X } from 'lucide-react';
 import { Disclosure } from './Disclosure';
+import {
+  loadStoredProfileSections,
+  PROFILE_SECTION_IDS,
+  PROFILE_SECTION_META,
+  resolveVisibleSections,
+  saveStoredProfileSections,
+  type ProfileSectionId,
+} from '../core/profileSections';
 import { CEFR_LEVELS, HSK_LEVELS, JLPT_LEVELS, type ApplicantProfile } from '../core/applicantProfile';
 import type { CERTIFICATE_RANGES } from '../core/applicantProfileStorage';
 import type { ApplicantProfileContextValue } from '../core/applicantProfileContextCore';
@@ -156,16 +164,91 @@ const TRANSCRIPT_YEARS = [
   { key: 'grade12', label: 'Lớp 12', shortLabel: 'L12' },
 ] as const;
 
+/**
+ * 6 học kỳ gom theo NĂM HỌC — trên mobile 6 ô nằm ngang một hàng bị bóp còn ~45px/ô, nhãn
+ * "Lớp 10 · HK1" bị cắt cụt nên không đọc được ô nào là học kỳ nào. Nhóm theo năm cho phép mobile
+ * xếp 3 khối dọc (Lớp 10: HK1 HK2 / Lớp 11: … / Lớp 12: …), desktop vẫn trải đủ 6 cột ngang.
+ */
+const TRANSCRIPT_SEMESTER_YEAR_GROUPS = [
+  { year: 'Lớp 10', keys: ['grade10Sem1', 'grade10Sem2'] },
+  { year: 'Lớp 11', keys: ['grade11Sem1', 'grade11Sem2'] },
+  { year: 'Lớp 12', keys: ['grade12Sem1', 'grade12Sem2'] },
+] as const satisfies readonly { year: string; keys: readonly TranscriptSemesterKey[] }[];
+
+const SEMESTER_SHORT_LABELS: Record<TranscriptSemesterKey, string> = {
+  grade10Sem1: 'HK1',
+  grade10Sem2: 'HK2',
+  grade11Sem1: 'HK1',
+  grade11Sem2: 'HK2',
+  grade12Sem1: 'HK1',
+  grade12Sem2: 'HK2',
+};
+
+/**
+ * Bước đầu tiên của form: hỏi thí sinh CÓ NHỮNG LOẠI ĐIỂM NÀO trước khi render ô nhập nào. Mục
+ * nào đã có dữ liệu thì checkbox bị khoá ở trạng thái bật (`lockedIds`) — bỏ tick sẽ ẩn mất điểm
+ * đã nhập, gây cảm giác "mất dữ liệu"; muốn bỏ thì xoá điểm trong chính mục đó.
+ */
+function ScoreTypeChooser({
+  chosen,
+  lockedIds,
+  onToggle,
+  idPrefix,
+}: {
+  chosen: Set<ProfileSectionId>;
+  lockedIds: Set<ProfileSectionId>;
+  onToggle: (id: ProfileSectionId, next: boolean) => void;
+  idPrefix: string;
+}) {
+  return (
+    <fieldset className="space-y-1">
+      <legend className="sr-only">Chọn các loại điểm có trong hồ sơ của bạn</legend>
+      {PROFILE_SECTION_IDS.map((id) => {
+        const meta = PROFILE_SECTION_META[id];
+        const locked = lockedIds.has(id);
+        return (
+          <label
+            key={id}
+            htmlFor={`${idPrefix}-${id}`}
+            className="flex min-h-[--ui-tap-min] cursor-pointer items-start gap-2.5 rounded-md px-1.5 py-1.5 transition-colors duration-150 hover:bg-surface-soft"
+          >
+            <input
+              id={`${idPrefix}-${id}`}
+              type="checkbox"
+              checked={chosen.has(id)}
+              disabled={locked}
+              onChange={(event) => onToggle(id, event.target.checked)}
+              className="mt-0.5 h-5 w-5 shrink-0 cursor-pointer rounded border-border-strong text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 disabled:cursor-not-allowed"
+            />
+            <span className="min-w-0">
+              <span className="block text-sm font-medium text-ink">
+                {meta.label}
+                {meta.advanced && <span className="ml-1.5 font-normal text-muted">(nâng cao)</span>}
+              </span>
+              <span className="block text-sm leading-snug text-muted">
+                {locked ? 'Đã có dữ liệu trong hồ sơ — xoá điểm trong mục này nếu muốn bỏ.' : meta.hint}
+              </span>
+            </span>
+          </label>
+        );
+      })}
+    </fieldset>
+  );
+}
+
 /** 1 mục trong checklist hồ sơ — gấp lại mặc định trừ khi đã có dữ liệu, dòng tóm tắt "Đã nhập"/
  * "Chưa có" đứng ngay dưới tiêu đề (progressive disclosure, không hiện hết mọi mục 1 lúc). */
 function ProfileChecklistSection({
   title,
   statusLabel,
+  hint,
   hasData,
   children,
 }: {
   title: string;
   statusLabel: string;
+  /** "Khi nào cần / để làm gì" — hiện ngay đầu mục khi mở, để không phải đoán mục này phục vụ gì. */
+  hint?: string;
   hasData: boolean;
   children: ReactNode;
 }) {
@@ -175,6 +258,7 @@ function ProfileChecklistSection({
       defaultOpen={hasData}
       meta={<span className={hasData ? 'font-medium text-ink-soft' : undefined}>{hasData ? `✓ ${statusLabel}` : statusLabel}</span>}
     >
+      {hint && <p className="mb-2.5 text-sm leading-snug text-muted">{hint}</p>}
       {children}
     </Disclosure>
   );
@@ -239,6 +323,16 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
   // Môn user vừa bấm "Thêm" nhưng chưa gõ điểm nên chưa có trong profile — vẫn phải hiện ô nhập.
   const [pendingThptSubjects, setPendingThptSubjects] = useState<SubjectId[]>([]);
   const [pendingTranscriptSubjects, setPendingTranscriptSubjects] = useState<SubjectId[]>([]);
+  // Loại điểm người dùng CHỌN hiển thị (pref, không phải dữ liệu điểm — xem core/profileSections.ts).
+  const [chosenSections, setChosenSections] = useState<ProfileSectionId[]>(loadStoredProfileSections);
+
+  function toggleSection(id: ProfileSectionId, next: boolean) {
+    setChosenSections((current) => {
+      const updated = next ? [...new Set([...current, id])] : current.filter((item) => item !== id);
+      saveStoredProfileSections(updated);
+      return updated;
+    });
+  }
 
   function commitVactTotal(raw: string) {
     const value = parseScore(raw);
@@ -367,11 +461,29 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
   const hasSemesterData = hasAnySemesterScore(profile);
 
   const summary = summarizeApplicantProfile(profile);
+  const visibleSections = resolveVisibleSections(profile, chosenSections);
+  const lockedSections = resolveVisibleSections(profile, []);
+  const hiddenSectionCount = PROFILE_SECTION_IDS.filter((id) => !visibleSections.has(id)).length;
+
+  // Chưa chọn gì và chưa có điểm nào: CHỈ hiện bước chọn loại điểm, không render một ô nhập nào.
+  if (visibleSections.size === 0) {
+    return (
+      <div className="mt-2 mb-3 text-sm">
+        <p className="text-sm font-medium text-ink">Hồ sơ của bạn có những loại điểm nào?</p>
+        <p className="mt-1 mb-2.5 text-sm text-muted">
+          Chọn loại điểm bạn đang có — chỉ những mục đó mới hiện ô nhập. Có thể thêm loại khác bất cứ lúc nào.
+        </p>
+        <ScoreTypeChooser chosen={visibleSections} lockedIds={lockedSections} onToggle={toggleSection} idPrefix="profile-section-start" />
+      </div>
+    );
+  }
 
   return (
     <div className="mt-2 mb-3 space-y-2.5 text-sm">
+      {visibleSections.has('vact') && (
       <ProfileChecklistSection
         title="Đánh giá năng lực (ĐGNL)"
+        hint={PROFILE_SECTION_META.vact.hint}
         statusLabel={summary.hasVact ? `${summary.vactTotal}` : 'Chưa có'}
         hasData={summary.hasVact}
       >
@@ -392,9 +504,12 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
           </p>
         )}
       </ProfileChecklistSection>
+      )}
 
+      {visibleSections.has('thpt') && (
       <ProfileChecklistSection
         title="Điểm thi THPT"
+        hint={PROFILE_SECTION_META.thpt.hint}
         statusLabel={summary.hasThpt ? `Đã nhập ${summary.thptSubjectCount} môn` : 'Chưa có'}
         hasData={summary.hasThpt}
       >
@@ -453,9 +568,12 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
           />
         </div>
       </ProfileChecklistSection>
+      )}
 
+      {visibleSections.has('transcript') && (
       <ProfileChecklistSection
         title="Điểm học bạ"
+        hint={PROFILE_SECTION_META.transcript.hint}
         statusLabel={summary.hasTranscript ? `Đã nhập ${summary.transcriptSubjectCount} môn` : 'Chưa có'}
         hasData={summary.hasTranscript}
       >
@@ -521,9 +639,11 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
           />
         </div>
       </ProfileChecklistSection>
+      )}
 
       {/* Mục PHỤ, mặc định gấp — đường đi chính vẫn là TB cả năm ở trên. Chỉ mở khi thí sinh xét
           những trường công bố công thức tính trên 6 học kỳ. */}
+      {visibleSections.has('semesters') && (
       <ProfileChecklistSection
         title="Điểm học bạ theo từng học kỳ (nâng cao)"
         statusLabel={hasSemesterData ? `Đã nhập ${semesterSubjectIds.size} môn` : 'Không bắt buộc — chưa có'}
@@ -539,27 +659,38 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
         ) : (
           <div className="mt-3 space-y-4">
             {[...semesterSubjectIds].map((subjectId) => (
-              <div key={subjectId}>
+              <div key={subjectId} className="border-t border-border pt-3 first:border-t-0 first:pt-0">
                 <p className="text-sm font-medium text-ink">{SUBJECT_LABELS[subjectId]}</p>
-                <div className="mt-1.5 grid grid-cols-3 gap-2 sm:grid-cols-6">
-                  {TRANSCRIPT_SEMESTER_KEYS.map((semester) => (
-                    <div key={semester} className="min-w-0">
-                      <label
-                        htmlFor={`shared-profile-transcript-semester-${semester}-${subjectId}`}
-                        className="block truncate text-xs text-muted"
-                      >
-                        {TRANSCRIPT_SEMESTER_LABELS[semester]}
-                      </label>
-                      <BufferedScoreInput
-                        id={`shared-profile-transcript-semester-${semester}-${subjectId}`}
-                        label={`${SUBJECT_LABELS[subjectId]} ${TRANSCRIPT_SEMESTER_LABELS[semester]}`}
-                        hideLabel
-                        committedValue={profile.transcript?.bySemester?.[semester]?.[subjectId]}
-                        onCommit={(raw) => commitSemesterScore(semester, subjectId, raw)}
-                        validate={(raw) =>
-                          validateTranscriptScore(SUBJECT_LABELS[subjectId], TRANSCRIPT_SEMESTER_LABELS[semester], raw)
-                        }
-                      />
+                {/* Mobile: 1 khối / năm học (nhãn năm + 2 ô HK1-HK2). Từ sm: 3 khối nằm ngang thành
+                    đủ 6 cột như trước. Nhãn năm dùng `aria-hidden` vì mỗi ô đã có label đầy đủ. */}
+                <div className="mt-1.5 grid gap-x-3 gap-y-2.5 sm:grid-cols-3">
+                  {TRANSCRIPT_SEMESTER_YEAR_GROUPS.map((group) => (
+                    <div key={group.year} className="min-w-0">
+                      <span aria-hidden="true" className="block text-xs font-medium text-muted">
+                        {group.year}
+                      </span>
+                      <div className="mt-0.5 grid grid-cols-2 gap-2">
+                        {group.keys.map((semester) => (
+                          <div key={semester} className="min-w-0">
+                            <label
+                              htmlFor={`shared-profile-transcript-semester-${semester}-${subjectId}`}
+                              className="block truncate text-xs text-muted"
+                            >
+                              {SEMESTER_SHORT_LABELS[semester]}
+                            </label>
+                            <BufferedScoreInput
+                              id={`shared-profile-transcript-semester-${semester}-${subjectId}`}
+                              label={`${SUBJECT_LABELS[subjectId]} ${TRANSCRIPT_SEMESTER_LABELS[semester]}`}
+                              hideLabel
+                              committedValue={profile.transcript?.bySemester?.[semester]?.[subjectId]}
+                              onCommit={(raw) => commitSemesterScore(semester, subjectId, raw)}
+                              validate={(raw) =>
+                                validateTranscriptScore(SUBJECT_LABELS[subjectId], TRANSCRIPT_SEMESTER_LABELS[semester], raw)
+                              }
+                            />
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -568,6 +699,7 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
           </div>
         )}
       </ProfileChecklistSection>
+      )}
 
       <ProfileChecklistSection
         title="Khu vực & đối tượng ưu tiên"
@@ -615,6 +747,7 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
         <p className="mt-1 text-sm text-muted">Mã chuẩn Bộ GD&ĐT — mỗi trường tự quy đổi ra điểm cộng riêng, không hiện số điểm chung ở đây.</p>
       </ProfileChecklistSection>
 
+      {visibleSections.has('certificates') && (
       <ProfileChecklistSection
         title="Chứng chỉ quốc tế"
         statusLabel={summary.hasCertificates ? `Đã nhập ${summary.certificateCount} chứng chỉ` : 'Không bắt buộc — chưa có'}
@@ -679,6 +812,13 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
           ))}
         </div>
       </ProfileChecklistSection>
+      )}
+
+      {hiddenSectionCount > 0 && (
+        <Disclosure summary={`Thêm loại điểm khác (${hiddenSectionCount})`}>
+          <ScoreTypeChooser chosen={visibleSections} lockedIds={lockedSections} onToggle={toggleSection} idPrefix="profile-section-more" />
+        </Disclosure>
+      )}
 
       <p className="text-sm text-muted">Sửa xong bấm ra ngoài ô là tự lưu.</p>
     </div>
