@@ -1,5 +1,9 @@
 <p align="center">
-  <img src="public/brand/wordmark-color.png" alt="UniScoreVN" width="360" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="public/brand/wordmark-white.png" />
+    <source media="(prefers-color-scheme: light)" srcset="public/brand/wordmark-color.png" />
+    <img src="public/brand/wordmark-color.png" alt="UniScoreVN" width="360" />
+  </picture>
 </p>
 
 <p align="center">
