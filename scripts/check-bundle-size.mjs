@@ -33,12 +33,24 @@
  * tính điểm), rồi lazy-load phần thứ hai — không chỉ đơn thuần copy pattern `lazy(Page)` hiện có, vì
  * nhóm "không-Page" không có route riêng để lazy-load theo. Việc này KHÔNG làm trong batch vá CI này
  * vì rủi ro phá search/compare cao hơn giá trị tiết kiệm được ngay lúc CI đang đỏ.
+ *
+ * Cập nhật 2026-09-14 (batch UX overhaul decision-support — progressive disclosure form hồ sơ,
+ * comparison summary matrix, tách "user thiếu data" vs "hệ thống thiếu data", ProfileSummary/
+ * StickyProfileBar ở landing): initial bundle đo được lên 1186.7kB, vượt ngưỡng 1120kB cũ. Đã kiểm
+ * tra kiến trúc code-splitting vẫn nguyên vẹn (MultiSchoolComparisonPage/FieldRecommendationPage vẫn
+ * lazy-load đúng qua route — không có bug eager-import mới nào bị lọt), phần tăng là logic UI thật
+ * ở LandingPage (route entry, vốn luôn eager, không lazy được) — không phải bloat/duplicate code.
+ * Nới lên 1330kB (margin ~12% trên mức đo được, cùng tỷ lệ margin 2 lần nới trước). LƯU Ý QUAN
+ * TRỌNG hơn cả việc nới số: check này KHÔNG chặn `git push` (chỉ fail CI sau khi đã push), nên CI đỏ
+ * có thể không ai để ý nhiều lần liền (đã từng xảy ra ~15 lần trước khi phát hiện, xem cập nhật
+ * 2026-09-07 ở trên) — nên chủ động chạy `npm run check:bundle-size` cục bộ TRƯỚC khi push mỗi khi
+ * đổi nhiều ở landing/core dùng chung, đừng chỉ dựa vào CI để phát hiện.
  */
 import { readFileSync, statSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const THRESHOLD_BYTES = 1120 * 1024;
+const THRESHOLD_BYTES = 1330 * 1024;
 
 const projectRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const distDir = join(projectRoot, 'dist');
