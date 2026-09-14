@@ -1,4 +1,5 @@
 import type { summarizeApplicantProfile } from '../../core/applicantProfileSummary';
+import { COMPETITIVENESS_DISCLAIMER } from '../../evaluation/competitiveness/competitivenessLanguage';
 
 interface ComparisonOverviewProps {
   selectionCount: number;
@@ -38,8 +39,11 @@ export function ComparisonOverview({ selectionCount, uniqueSchoolCount, statusCo
     <>
       <header className="mt-4">
         <h1 className="text-2xl font-bold text-ink sm:text-3xl">So sánh nguyện vọng</h1>
+        {/* Disclaimer đặt MỘT LẦN ở đầu trang (trước đây lặp trong từng card) — trong card chỉ còn
+            năm tham chiếu, độ tin cậy và nguồn. */}
         <p className="mt-2 max-w-3xl text-sm text-muted">
-          Một hồ sơ dùng chung, mỗi nguyện vọng đi qua evaluator riêng của trường. Điểm chuẩn chỉ hiện khi dùng cùng ngữ cảnh, phương thức, ngành và thang điểm.
+          Mỗi nguyện vọng được tính theo quy tắc tuyển sinh riêng của từng trường, từ cùng một hồ sơ điểm. Điểm chuẩn chỉ đem ra
+          đối chiếu khi cùng phương thức, ngành và thang điểm. {COMPETITIVENESS_DISCLAIMER}
         </p>
         {/* Chip tóm tắt: viền/nền trung tính, chỉ khác nhau ở sắc độ rất nhẹ theo trạng thái —
             không mỗi trạng thái một màu mạnh. */}

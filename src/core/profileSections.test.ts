@@ -11,7 +11,7 @@ describe('profileSections', () => {
   });
 
   it('mục đã có dữ liệu LUÔN hiện kể cả khi pref không chọn', () => {
-    const profile: ApplicantProfile = { thpt: { scores: { toan: 8.5 } } };
+    const profile: ApplicantProfile = { thpt: { scores: { math: 8.5 } } };
     expect(resolveVisibleSections(profile, []).has('thpt')).toBe(true);
   });
 
@@ -21,7 +21,7 @@ describe('profileSections', () => {
   });
 
   it('có điểm học kỳ thì mở kèm mục học bạ năm (mục học kỳ mượn danh sách môn từ đó)', () => {
-    const profile: ApplicantProfile = { transcript: { bySemester: { grade10Sem1: { toan: 8 } } } };
+    const profile: ApplicantProfile = { transcript: { bySemester: { grade10Sem1: { math: 8 } } } };
     const visible = deriveSectionsWithData(profile);
     expect(visible.has('semesters')).toBe(true);
     expect(visible.has('transcript')).toBe(true);

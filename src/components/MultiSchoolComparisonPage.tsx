@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Plus, Search, X } from 'lucide-react';
 import { useFocusTrap } from '../hooks/useFocusTrap';
 import { activeAdmissionConfig } from '../schools/hcmut/config/admission-2026';
@@ -38,6 +38,9 @@ import {
 } from '../compare/universityCatalog';
 import { ComparisonEntryCard } from './compare/ComparisonEntryCard';
 import { ComparisonOverview } from './compare/ComparisonOverview';
+import { ComparisonSummaryMatrix } from './compare/ComparisonSummaryMatrix';
+import { CalculationBreakdownPanel } from './compare/CalculationBreakdownPanel';
+import { buildComparisonMatrixColumn } from '../compare/comparisonMatrix';
 import type { ProgramOption } from './compare/types';
 
 interface MultiSchoolComparisonPageProps {
@@ -176,7 +179,7 @@ function ComparePicker({
         <div className="flex shrink-0 items-start justify-between gap-3 border-b border-border p-4">
           <div>
             <h2 id="compare-picker-title" className="text-base font-semibold text-ink sm:text-lg">
-              {editingSelectionId ? 'Đổi nguyện vọng' : 'Thêm trường/ngành'}
+              {editingSelectionId ? 'Đổi nguyện vọng' : 'Thêm nguyện vọng'}
             </h2>
             <p className="mt-0.5 text-[13px] text-muted">Chọn trường, ngành và ngữ cảnh riêng của trường. Hồ sơ cá nhân không nằm trong lựa chọn này.</p>
           </div>
@@ -448,6 +451,37 @@ export function MultiSchoolComparisonPage({ onBackHome, onOpenSchool }: MultiSch
   const [pickerOpen, setPickerOpen] = useState(false);
   const [editingSelectionId, setEditingSelectionId] = useState<string | undefined>();
   const [draft, setDraft] = useState<PickerDraft>(EMPTY_DRAFT);
+  // Nguyện vọng đang mở panel "cách ra kết quả" (nội dung kỹ thuật dài, xem CalculationBreakdownPanel).
+  const [breakdownSelectionId, setBreakdownSelectionId] = useState<string | undefined>();
+  /**
+   * Nút đã mở panel, để trả focus về đúng chỗ khi đóng.
+   *
+   * KHÔNG dựa được vào `previouslyFocused.focus()` trong `useFocusTrap`: cleanup của nó chạy trong
+   * lúc container danh sách vẫn còn `inert`, mà focus() trên cây inert là no-op — focus rơi về
+   * <body>, người dùng bàn phím mất vị trí. Đây khôi phục ở effect SAU khi `inert` đã gỡ.
+   */
+  const breakdownTriggerRef = useRef<HTMLElement | null>(null);
+  /** Cùng lý do như `breakdownTriggerRef` — áp cho modal chọn nguyện vọng. */
+  const pickerTriggerRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (breakdownSelectionId !== undefined) return;
+    const trigger = breakdownTriggerRef.current;
+    breakdownTriggerRef.current = null;
+    trigger?.focus();
+  }, [breakdownSelectionId]);
+
+  useEffect(() => {
+    if (pickerOpen) return;
+    const trigger = pickerTriggerRef.current;
+    pickerTriggerRef.current = null;
+    trigger?.focus();
+  }, [pickerOpen]);
+
+  function openBreakdown(selectionId: string | undefined) {
+    breakdownTriggerRef.current = document.activeElement as HTMLElement | null;
+    setBreakdownSelectionId(selectionId);
+  }
 
   useEffect(() => {
     saveStoredComparisonSelections(selections);
@@ -466,16 +500,37 @@ export function MultiSchoolComparisonPage({ onBackHome, onOpenSchool }: MultiSch
     [summaries]
   );
   const uniqueSchoolCount = useMemo(() => new Set(selections.map((selection) => selection.schoolId)).size, [selections]);
+  const matrixColumns = useMemo(
+    () =>
+      summaries.map((summary, index) => {
+        const selection = selections.find((item) => item.id === summary.selectionId);
+        const program = getProgramCatalogEntry(summary.schoolId, selection?.programId);
+        return buildComparisonMatrixColumn(summary, index, program ? `${program.code ? `${program.code} - ` : ''}${program.name}` : undefined);
+      }),
+    [summaries, selections]
+  );
+  const breakdownSummary = summaries.find((summary) => summary.selectionId === breakdownSelectionId);
+  const breakdownProgram = breakdownSummary
+    ? getProgramCatalogEntry(breakdownSummary.schoolId, selections.find((item) => item.id === breakdownSummary.selectionId)?.programId)
+    : undefined;
+
+  /** Bấm tên trường trong bảng so sánh nhanh -> cuộn tới đúng card chi tiết bên dưới. */
+  function focusEntryCard(selectionId: string) {
+    const target = document.getElementById(`comparison-entry-${selectionId}`);
+    target?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 
   function openAddPicker() {
     setEditingSelectionId(undefined);
     setDraft(EMPTY_DRAFT);
+    pickerTriggerRef.current = document.activeElement as HTMLElement | null;
     setPickerOpen(true);
   }
 
   function openEditPicker(selection: ComparisonSelection) {
     setEditingSelectionId(selection.id);
     setDraft(selectionToDraft(selection));
+    pickerTriggerRef.current = document.activeElement as HTMLElement | null;
     setPickerOpen(true);
   }
 
@@ -492,7 +547,7 @@ export function MultiSchoolComparisonPage({ onBackHome, onOpenSchool }: MultiSch
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:py-10">
-      <div inert={pickerOpen || undefined} aria-hidden={pickerOpen || undefined}>
+      <div inert={pickerOpen || breakdownSelectionId !== undefined || undefined} aria-hidden={pickerOpen || breakdownSelectionId !== undefined || undefined}>
       <button
         type="button"
         onClick={onBackHome}
@@ -509,6 +564,8 @@ export function MultiSchoolComparisonPage({ onBackHome, onOpenSchool }: MultiSch
         onEditProfile={onBackHome}
       />
 
+      {selections.length > 0 && <ComparisonSummaryMatrix columns={matrixColumns} onFocusEntry={focusEntryCard} />}
+
       <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <button
           type="button"
@@ -517,7 +574,7 @@ export function MultiSchoolComparisonPage({ onBackHome, onOpenSchool }: MultiSch
           className="inline-flex min-h-[--ui-tap-min] cursor-pointer items-center justify-center gap-2 rounded-md bg-primary px-4 text-sm font-semibold text-white transition-colors duration-150 hover:bg-primary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 disabled:cursor-not-allowed disabled:bg-border-strong disabled:text-surface"
         >
           <Plus size={16} aria-hidden="true" />
-          Thêm trường/ngành
+          Thêm nguyện vọng
         </button>
         {selections.length > COMPARE_SELECTION_SOFT_LIMIT && (
           <p className="text-[13px] text-muted">Bạn đang so sánh nhiều nguyện vọng. Nên giữ khoảng 3-6 để dễ đọc.</p>
@@ -534,7 +591,7 @@ export function MultiSchoolComparisonPage({ onBackHome, onOpenSchool }: MultiSch
             className="mt-5 inline-flex min-h-[--ui-tap-min] cursor-pointer items-center gap-2 rounded-md bg-primary px-4 text-sm font-semibold text-white transition-colors duration-150 hover:bg-primary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
           >
             <Plus size={16} aria-hidden="true" />
-            Thêm trường/ngành
+            Thêm nguyện vọng
           </button>
           <div className="mt-5 flex flex-wrap justify-center gap-2 text-[13px]">
             {universityCatalog
@@ -547,7 +604,8 @@ export function MultiSchoolComparisonPage({ onBackHome, onOpenSchool }: MultiSch
                   onClick={() => {
                     setEditingSelectionId(undefined);
                     setDraft({ ...EMPTY_DRAFT, schoolId: school.schoolId });
-                    setPickerOpen(true);
+                    pickerTriggerRef.current = document.activeElement as HTMLElement | null;
+    setPickerOpen(true);
                   }}
                   className="min-h-9 cursor-pointer rounded-md border border-border px-3 font-medium text-ink-soft transition-colors duration-150 hover:border-border-strong hover:bg-surface-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
                 >
@@ -557,24 +615,29 @@ export function MultiSchoolComparisonPage({ onBackHome, onOpenSchool }: MultiSch
           </div>
         </section>
       ) : (
-        <section className="mt-5 grid gap-4 lg:grid-cols-2">
+        /* `items-start`: card KHÔNG kéo dãn theo card cao nhất cùng hàng — trước đây card ngắn bị
+           kéo cao bằng card dài, để lại mảng trắng lớn bên trong chính nó. */
+        <section className="mt-5 grid items-start gap-4 lg:grid-cols-2">
           {summaries.map((summary, index) => {
             const selection = selections.find((item) => item.id === summary.selectionId);
             const program = toProgramOption(getProgramCatalogEntry(summary.schoolId, selection?.programId));
             return (
-              <ComparisonEntryCard
-                key={summary.selectionId ?? `${summary.schoolId}-${index}`}
-                summary={summary}
-                program={program}
-                combinationId={selection?.context?.combinationId}
-                canMoveUp={index > 0}
-                canMoveDown={index < selections.length - 1}
-                onEdit={() => selection && openEditPicker(selection)}
-                onRemove={() => selection && setSelections((current) => removeComparisonSelection(current, selection.id))}
-                onMoveUp={() => selection && setSelections((current) => moveComparisonSelection(current, selection.id, 'up'))}
-                onMoveDown={() => selection && setSelections((current) => moveComparisonSelection(current, selection.id, 'down'))}
-                onOpenSchool={onOpenSchool}
-              />
+              <div key={summary.selectionId ?? `${summary.schoolId}-${index}`} id={summary.selectionId ? `comparison-entry-${summary.selectionId}` : undefined}>
+                <ComparisonEntryCard
+                  summary={summary}
+                  program={program}
+                  combinationId={selection?.context?.combinationId}
+                  preferenceRank={index + 1}
+                  canMoveUp={index > 0}
+                  canMoveDown={index < selections.length - 1}
+                  onEdit={() => selection && openEditPicker(selection)}
+                  onRemove={() => selection && setSelections((current) => removeComparisonSelection(current, selection.id))}
+                  onMoveUp={() => selection && setSelections((current) => moveComparisonSelection(current, selection.id, 'up'))}
+                  onMoveDown={() => selection && setSelections((current) => moveComparisonSelection(current, selection.id, 'down'))}
+                  onOpenSchool={onOpenSchool}
+                  onOpenBreakdown={() => openBreakdown(summary.selectionId)}
+                />
+              </div>
             );
           })}
         </section>
@@ -589,6 +652,14 @@ export function MultiSchoolComparisonPage({ onBackHome, onOpenSchool }: MultiSch
           onDraftChange={setDraft}
           onClose={() => setPickerOpen(false)}
           onSubmit={submitPicker}
+        />
+      )}
+
+      {breakdownSummary && (
+        <CalculationBreakdownPanel
+          summary={breakdownSummary}
+          program={breakdownProgram ? `${breakdownProgram.code ? `${breakdownProgram.code} - ` : ''}${breakdownProgram.name}` : undefined}
+          onClose={() => setBreakdownSelectionId(undefined)}
         />
       )}
     </div>
