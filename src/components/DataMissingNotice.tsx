@@ -52,7 +52,7 @@ function OwnerBlock({ owner, requirements, limit }: { owner: MissingRequirementO
   );
 
   return (
-    <div className={`rounded-md p-3 text-[13px] ${isUser ? 'bg-accent/5' : 'bg-surface-soft'}`}>
+    <div className={`rounded-md p-3 text-sm ${isUser ? 'bg-accent/5' : 'bg-surface-soft'}`}>
       <p className="font-medium text-ink">
         <span aria-hidden="true" className="mr-1.5 text-muted">
           {isUser ? '→' : '○'}
@@ -61,7 +61,7 @@ function OwnerBlock({ owner, requirements, limit }: { owner: MissingRequirementO
       </p>
       <p className="mt-0.5 text-muted">{MISSING_OWNER_DESCRIPTIONS[owner]}</p>
       {shouldCollapseList ? (
-        <Disclosure summary={`Xem chi tiết (${requirements.length} mục)`} className="mt-1.5 bg-transparent">
+        <Disclosure variant="inline" summary={`Xem chi tiết (${requirements.length} mục)`} className="mt-1.5">
           {list}
         </Disclosure>
       ) : (

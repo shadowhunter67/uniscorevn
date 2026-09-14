@@ -48,7 +48,7 @@ function MatchRow({ match, onOpenSchool }: { match: FieldMatch; onOpenSchool: (s
 
       <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1">
         {competitiveness.rawMargin !== undefined && competitiveness.scale !== undefined && (
-          <Disclosure summary="Xem cách tính" className="border-0 bg-transparent px-0">
+          <Disclosure variant="inline" summary="Xem cách tính">
             <div className="space-y-1 text-[13px] text-muted">
               <p>
                 Chênh lệch so với mốc đối chiếu: {competitiveness.rawMargin >= 0 ? '+' : ''}

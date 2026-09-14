@@ -182,7 +182,7 @@ export function ComparisonEntryCard({
         </div>
 
         {/* (3)(4)(5) LỚP SỐ LIỆU — vẫn đầy đủ, chỉ không còn là thứ nổi nhất trên card. */}
-        <dl className="space-y-1.5 text-[13px]">
+        <dl className="space-y-1.5 text-sm">
           <div className="flex flex-wrap items-baseline gap-x-2">
             <dt className="text-muted">Điểm của bạn</dt>
             <dd className="font-semibold text-ink">
@@ -230,8 +230,8 @@ export function ComparisonEntryCard({
         {/* Mốc các năm cũ KHÔNG đặt ngang hàng với mốc chính — ẩn sau "Xem lịch sử" để không có 2
             con số cùng cỡ mà không nói rõ cái nào đang dùng để đánh giá. */}
         {olderComparisons.length > 0 && (
-          <Disclosure summary={`Xem lịch sử điểm chuẩn (${olderComparisons.length} năm)`}>
-            <ul className="space-y-1.5 text-[13px] text-muted">
+          <Disclosure variant="inline" summary={`Xem lịch sử điểm chuẩn (${olderComparisons.length} năm)`}>
+            <ul className="space-y-1.5 text-sm leading-relaxed text-muted">
               {olderComparisons.map((comparison) => (
                 <li key={comparison.year}>
                   <span className="font-medium text-ink">

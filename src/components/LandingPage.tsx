@@ -14,6 +14,7 @@ import { UNIVERSITY_SYSTEMS } from '../data/universitySystems';
 import { Disclosure } from './Disclosure';
 import { SharedProfileEditor } from './SharedProfileEditor';
 import { ProfileSummary } from './ProfileSummary';
+import { StickyProfileBar } from './StickyProfileBar';
 import { AboutDataSection } from './AboutDataSection';
 import { SchoolListItem } from './SchoolListItem';
 import {
@@ -238,6 +239,15 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
 
       {/* Danh sách trường dùng hết bề ngang container (max-w-6xl ≈ 1150px ở App.tsx) — trước đây bị
           bó thêm ở max-w-5xl nên màn hình lớn thừa nhiều khoảng trắng hai bên. */}
+      <StickyProfileBar
+        summary={profileSummary}
+        anchorId="ho-so-diem"
+        onEdit={() => {
+          setProfileEditorOpen(true);
+          document.getElementById('ho-so-diem')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }}
+      />
+
       <div className="mt-9">
         <h2 className="text-lg font-semibold text-ink sm:text-xl">Chọn cơ sở để bắt đầu</h2>
 

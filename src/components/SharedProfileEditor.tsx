@@ -1,6 +1,7 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { X } from 'lucide-react';
 import { Disclosure } from './Disclosure';
+import { measureProfileReach } from '../compare/profileReach';
 import {
   loadStoredProfileSections,
   PROFILE_SECTION_IDS,
@@ -462,6 +463,7 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
 
   const summary = summarizeApplicantProfile(profile);
   const visibleSections = resolveVisibleSections(profile, chosenSections);
+  const reach = useMemo(() => (summary.hasData ? measureProfileReach(profile) : undefined), [profile, summary.hasData]);
   const lockedSections = resolveVisibleSections(profile, []);
   const hiddenSectionCount = PROFILE_SECTION_IDS.filter((id) => !visibleSections.has(id)).length;
 
@@ -818,6 +820,20 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
         <Disclosure summary={`Thêm loại điểm khác (${hiddenSectionCount})`}>
           <ScoreTypeChooser chosen={visibleSections} lockedIds={lockedSections} onToggle={toggleSection} idPrefix="profile-section-more" />
         </Disclosure>
+      )}
+
+      {/* Phần thưởng sớm: nhập một phần là đã thấy mình chạm tới được bao nhiêu trường, thay vì
+          phải nhập hết mọi thứ rồi mới biết. Số THẬT, chạy evaluator thật (`measureProfileReach`). */}
+      {reach !== undefined && reach.programsWithScore > 0 && (
+        <p className="rounded-md bg-accent/5 px-3 py-2 text-sm text-ink" aria-live="polite">
+          <span className="font-medium">
+            Với dữ liệu này, UniScoreVN đã tính ra điểm cho ít nhất {reach.programsWithScore} ngành
+            {reach.schoolsWithScore > 0 ? ` ở ${reach.schoolsWithScore} trường` : ''}.
+          </span>{' '}
+          <span className="text-muted">
+            Nhiều trường còn cần chọn tổ hợp riêng ở trang trường nên con số thật có thể cao hơn. Nhập thêm loại điểm để mở rộng phạm vi.
+          </span>
+        </p>
       )}
 
       <p className="text-sm text-muted">Sửa xong bấm ra ngoài ô là tự lưu.</p>

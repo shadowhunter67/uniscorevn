@@ -31,7 +31,7 @@ export function CalculationBreakdownPanel({ summary, program, onClose }: { summa
             <h2 id="calculation-breakdown-title" className="text-base font-semibold text-ink">
               {score ? `Cách ra kết quả ${score.value.toFixed(2)}` : 'Cách tính điểm'}
             </h2>
-            <p className="mt-0.5 text-[13px] text-muted">
+            <p className="mt-0.5 text-sm text-muted">
               {summary.shortName}
               {program ? ` · ${program}` : ''} · {summary.methodName}
             </p>
@@ -51,7 +51,7 @@ export function CalculationBreakdownPanel({ summary, program, onClose }: { summa
           {summary.evaluation.explanation.length === 0 ? (
             <p className="text-sm text-muted">Nguyện vọng này chưa có bước tính nào để hiển thị.</p>
           ) : (
-            <ol className="space-y-3 text-[13px] text-muted">
+            <ol className="space-y-3 text-sm text-muted">
               {summary.evaluation.explanation.map((step, index) => (
                 <li key={step.id} className="border-b border-border pb-3 last:border-b-0 last:pb-0">
                   <p className="font-medium text-ink">
