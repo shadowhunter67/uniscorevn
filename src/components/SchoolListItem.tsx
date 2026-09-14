@@ -69,7 +69,7 @@ export function SchoolListItem({ school, onSelectSchool, onOpenCompare }: School
               if (ctaAction.kind === 'compare') onOpenCompare();
               else onSelectSchool(school.id);
             }}
-            className="min-h-[--ui-tap-min] w-full cursor-pointer rounded-md border border-accent/30 bg-accent/10 px-4 py-2 text-sm font-medium text-accent transition-colors duration-150 hover:bg-accent/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+            className="min-h-(--ui-tap-min) w-full cursor-pointer rounded-md border border-accent/30 bg-accent/10 px-4 py-2 text-sm font-medium text-accent transition-colors duration-150 hover:bg-accent/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
           >
             {buttonLabel}
           </button>

@@ -75,7 +75,7 @@ export function ComparisonSummaryMatrix({
                     <button
                       type="button"
                       onClick={() => onFocusEntry(column.selectionId!)}
-                      className="mt-0.5 cursor-pointer text-left font-semibold text-ink underline-offset-2 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                      className="mt-0.5 inline-flex min-h-9 cursor-pointer items-center text-left font-semibold text-ink underline-offset-2 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
                     >
                       {column.shortName}
                     </button>

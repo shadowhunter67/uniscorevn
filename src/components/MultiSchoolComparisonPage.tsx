@@ -390,7 +390,7 @@ function ComparePicker({
 
                 {draft.schoolId === 'ussh' && (
                   <Disclosure summary="+ Tùy chọn nâng cao (thành tích cộng điểm)" className="mt-4">
-                    <label className="flex min-h-[--ui-tap-min] cursor-pointer items-center gap-2 text-sm font-medium text-ink">
+                    <label className="flex min-h-(--ui-tap-min) cursor-pointer items-center gap-2 text-sm font-medium text-ink">
                       <input
                         type="checkbox"
                         checked={draft.hasUsshBonusAchievement}
@@ -435,7 +435,7 @@ function ComparePicker({
               <button
                 type="button"
                 onClick={onClose}
-                className="min-h-[--ui-tap-min] cursor-pointer rounded-md border border-border px-4 text-sm font-medium text-ink-soft transition-colors duration-150 hover:bg-surface-soft hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                className="min-h-(--ui-tap-min) cursor-pointer rounded-md border border-border px-4 text-sm font-medium text-ink-soft transition-colors duration-150 hover:bg-surface-soft hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
               >
                 Hủy
               </button>
@@ -443,7 +443,7 @@ function ComparePicker({
                 type="button"
                 onClick={onSubmit}
                 disabled={!canSubmit}
-                className="min-h-[--ui-tap-min] cursor-pointer rounded-md bg-primary px-4 text-sm font-semibold text-white transition-colors duration-150 hover:bg-primary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 disabled:cursor-not-allowed disabled:bg-border-strong disabled:text-surface"
+                className="min-h-(--ui-tap-min) cursor-pointer rounded-md bg-primary px-4 text-sm font-semibold text-white transition-colors duration-150 hover:bg-primary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 disabled:cursor-not-allowed disabled:bg-border-strong disabled:text-surface"
               >
                 {editingSelectionId ? 'Lưu thay đổi' : 'Thêm vào so sánh'}
               </button>
@@ -582,7 +582,7 @@ export function MultiSchoolComparisonPage({ onBackHome, onOpenSchool }: MultiSch
           type="button"
           onClick={openAddPicker}
           disabled={selections.length >= COMPARE_SELECTION_HARD_LIMIT}
-          className="inline-flex min-h-[--ui-tap-min] cursor-pointer items-center justify-center gap-2 rounded-md bg-primary px-4 text-sm font-semibold text-white transition-colors duration-150 hover:bg-primary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 disabled:cursor-not-allowed disabled:bg-border-strong disabled:text-surface"
+          className="inline-flex min-h-(--ui-tap-min) cursor-pointer items-center justify-center gap-2 rounded-md bg-primary px-4 text-sm font-semibold text-white transition-colors duration-150 hover:bg-primary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 disabled:cursor-not-allowed disabled:bg-border-strong disabled:text-surface"
         >
           <Plus size={16} aria-hidden="true" />
           Thêm nguyện vọng
@@ -599,7 +599,7 @@ export function MultiSchoolComparisonPage({ onBackHome, onOpenSchool }: MultiSch
           <button
             type="button"
             onClick={openAddPicker}
-            className="mt-5 inline-flex min-h-[--ui-tap-min] cursor-pointer items-center gap-2 rounded-md bg-primary px-4 text-sm font-semibold text-white transition-colors duration-150 hover:bg-primary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+            className="mt-5 inline-flex min-h-(--ui-tap-min) cursor-pointer items-center gap-2 rounded-md bg-primary px-4 text-sm font-semibold text-white transition-colors duration-150 hover:bg-primary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
           >
             <Plus size={16} aria-hidden="true" />
             Thêm nguyện vọng

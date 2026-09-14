@@ -76,7 +76,7 @@ export function InstitutionProfilePage({ school, onChangeSchool, onOpenCompare }
         <div className="sticky bottom-0 z-10 border-t border-border bg-surface/95 backdrop-blur lg:hidden" aria-live="polite">
           <a
             href="#generic-result"
-            className="mx-auto flex min-h-[--ui-tap-min] w-full max-w-5xl items-center justify-between gap-3 px-4 py-2.5 text-sm"
+            className="mx-auto flex min-h-(--ui-tap-min) w-full max-w-5xl items-center justify-between gap-3 px-4 py-2.5 text-sm"
           >
             <span className="text-ink-soft">
               {result.score !== undefined ? 'Kết quả tạm tính' : statusLabel(result)}

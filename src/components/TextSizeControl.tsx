@@ -13,7 +13,7 @@ export function TextSizeControl() {
           type="button"
           aria-pressed={textSize === size}
           onClick={() => setTextSize(size)}
-          className={`min-h-[--ui-tap-min] min-w-[--ui-tap-min] rounded px-2 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 ${
+          className={`min-h-(--ui-tap-min) min-w-(--ui-tap-min) rounded px-2 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 ${
             textSize === size ? 'bg-accent/10 text-accent' : 'text-muted hover:text-ink'
           }`}
         >

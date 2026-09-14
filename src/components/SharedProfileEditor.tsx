@@ -211,7 +211,7 @@ function ScoreTypeChooser({
           <label
             key={id}
             htmlFor={`${idPrefix}-${id}`}
-            className="flex min-h-[--ui-tap-min] cursor-pointer items-start gap-2.5 rounded-md px-1.5 py-1.5 transition-colors duration-150 hover:bg-surface-soft"
+            className="flex min-h-(--ui-tap-min) cursor-pointer items-start gap-2.5 rounded-md px-1.5 py-1.5 transition-colors duration-150 hover:bg-surface-soft"
           >
             <input
               id={`${idPrefix}-${id}`}

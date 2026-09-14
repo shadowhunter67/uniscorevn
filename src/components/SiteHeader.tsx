@@ -35,7 +35,7 @@ function NavLink({ item, active, onNavigate }: { item: NavItem; active: boolean;
         event.preventDefault();
         onNavigate(item.path);
       }}
-      className={`flex min-h-[--ui-tap-min] items-center rounded-md px-2.5 text-sm font-medium transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 ${
+      className={`flex min-h-(--ui-tap-min) items-center rounded-md px-2.5 text-sm font-medium transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 ${
         active ? 'bg-accent/10 text-accent' : 'text-ink-soft hover:bg-surface-soft hover:text-ink'
       }`}
     >
@@ -85,7 +85,7 @@ export function SiteHeader({ pathname, onNavigate }: SiteHeaderProps) {
             aria-expanded={mobileMenuOpen}
             aria-controls="site-mobile-menu"
             onClick={() => setMobileMenuOpen((open) => !open)}
-            className="flex min-h-[--ui-tap-min] min-w-[--ui-tap-min] items-center justify-center rounded-md border border-border text-ink sm:hidden"
+            className="flex min-h-(--ui-tap-min) min-w-(--ui-tap-min) items-center justify-center rounded-md border border-border text-ink sm:hidden"
           >
             {mobileMenuOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
             <span className="sr-only">{mobileMenuOpen ? 'Đóng menu' : 'Mở menu'}</span>
@@ -112,7 +112,7 @@ export function SiteHeader({ pathname, onNavigate }: SiteHeaderProps) {
                   event.preventDefault();
                   navigate(item.path);
                 }}
-                className={`min-h-[--ui-tap-min] rounded-md px-2 py-2.5 text-base font-medium ${
+                className={`min-h-(--ui-tap-min) rounded-md px-2 py-2.5 text-base font-medium ${
                   pathname === item.path ? 'bg-accent/10 text-accent' : 'text-ink-soft'
                 }`}
               >

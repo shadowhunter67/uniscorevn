@@ -69,7 +69,7 @@ function FilterSelect<T extends string>({
       <select
         value={value}
         onChange={(event) => onChange(event.target.value as OptionalLandingFilter<T>)}
-        className="min-h-[--ui-tap-min] rounded-md border border-border bg-surface px-2.5 py-1.5 text-sm font-normal text-ink transition-colors duration-150 hover:border-border-strong focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+        className="min-h-(--ui-tap-min) rounded-md border border-border bg-surface px-2.5 py-1.5 text-sm font-normal text-ink transition-colors duration-150 hover:border-border-strong focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
       >
         <option value="all">Tất cả</option>
         {options.map((option) => (
@@ -161,14 +161,14 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
           <button
             type="button"
             onClick={() => setProfileEditorOpen(true)}
-            className="inline-flex min-h-[--ui-tap-min] w-full max-w-xs cursor-pointer items-center justify-center rounded-md bg-primary px-5 py-2 text-sm font-semibold text-white transition-colors duration-150 hover:bg-primary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 sm:w-auto"
+            className="inline-flex min-h-(--ui-tap-min) w-full max-w-xs cursor-pointer items-center justify-center rounded-md bg-primary px-5 py-2 text-sm font-semibold text-white transition-colors duration-150 hover:bg-primary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 sm:w-auto"
           >
             {profileSummary.hasData ? 'Chỉnh sửa điểm của bạn' : 'Nhập điểm của bạn'}
           </button>
           <button
             type="button"
             onClick={onOpenFieldBrowse}
-            className="inline-flex min-h-[--ui-tap-min] w-full max-w-xs cursor-pointer items-center justify-center rounded-md border border-accent/30 bg-accent/10 px-5 py-2 text-sm font-semibold text-accent transition-colors duration-150 hover:bg-accent/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 sm:w-auto"
+            className="inline-flex min-h-(--ui-tap-min) w-full max-w-xs cursor-pointer items-center justify-center rounded-md border border-accent/30 bg-accent/10 px-5 py-2 text-sm font-semibold text-accent transition-colors duration-150 hover:bg-accent/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 sm:w-auto"
           >
             Xem theo ngành
           </button>
@@ -230,7 +230,7 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
           <button
             type="button"
             onClick={onOpenCompare}
-            className="mt-3 min-h-[--ui-tap-min] rounded-md border border-accent/30 bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent transition hover:bg-accent/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+            className="mt-3 min-h-(--ui-tap-min) rounded-md border border-accent/30 bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent transition hover:bg-accent/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
           >
             So sánh nguyện vọng với hồ sơ này
           </button>
@@ -261,7 +261,7 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Tìm theo tên, mã trường hoặc tên viết tắt..."
-            className="min-h-[--ui-tap-min] w-full rounded-md border border-border bg-surface px-4 py-2.5 text-base text-ink placeholder:text-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+            className="min-h-(--ui-tap-min) w-full rounded-md border border-border bg-surface px-4 py-2.5 text-base text-ink placeholder:text-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
           />
         </div>
 
@@ -284,7 +284,7 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
               label,
             }))}
           />
-          <label className="flex min-h-[--ui-tap-min] cursor-pointer items-center gap-2 rounded-md px-1 text-sm font-medium text-ink-soft transition-colors duration-150 hover:text-ink">
+          <label className="flex min-h-(--ui-tap-min) cursor-pointer items-center gap-2 rounded-md px-1 text-sm font-medium text-ink-soft transition-colors duration-150 hover:text-ink">
             <input
               type="checkbox"
               checked={onlyEvaluable}
@@ -302,7 +302,7 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
                 type="button"
                 onClick={() => setTierFilter('all')}
                 aria-pressed={tierFilter === 'all'}
-                className={`min-h-[--ui-tap-min] rounded-md border px-3 py-1.5 text-sm font-medium transition ${
+                className={`min-h-(--ui-tap-min) rounded-md border px-3 py-1.5 text-sm font-medium transition ${
                   tierFilter === 'all' ? 'border-accent bg-accent/10 text-accent' : 'border-border bg-surface text-muted hover:border-border-strong'
                 }`}
               >
@@ -314,7 +314,7 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
                   type="button"
                   onClick={() => setTierFilter(tier)}
                   aria-pressed={tierFilter === tier}
-                  className={`min-h-[--ui-tap-min] rounded-md border px-3 py-1.5 text-sm font-medium transition ${
+                  className={`min-h-(--ui-tap-min) rounded-md border px-3 py-1.5 text-sm font-medium transition ${
                     tierFilter === tier ? 'border-accent bg-accent/10 text-accent' : 'border-border bg-surface text-muted hover:border-border-strong'
                   }`}
                 >
@@ -334,7 +334,7 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
                 <select
                   value={sortMode}
                   onChange={(event) => setSortMode(event.target.value as LandingSortMode)}
-                  className="min-h-[--ui-tap-min] rounded-md border border-border bg-surface px-2.5 py-1.5 text-sm font-normal text-ink transition-colors duration-150 hover:border-border-strong focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                  className="min-h-(--ui-tap-min) rounded-md border border-border bg-surface px-2.5 py-1.5 text-sm font-normal text-ink transition-colors duration-150 hover:border-border-strong focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
                 >
                   {(Object.entries(SORT_LABELS) as [LandingSortMode, string][]).map(([value, label]) => (
                     <option key={value} value={value}>
@@ -351,7 +351,7 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
           <button
             type="button"
             onClick={resetFilters}
-            className="mt-2 min-h-[--ui-tap-min] rounded-md border border-border px-3 py-1.5 text-sm font-medium text-muted transition hover:border-danger/30 hover:text-danger focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+            className="mt-2 min-h-(--ui-tap-min) rounded-md border border-border px-3 py-1.5 text-sm font-medium text-muted transition hover:border-danger/30 hover:text-danger focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
           >
             Xóa bộ lọc
           </button>
@@ -370,7 +370,7 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
               <button
                 type="button"
                 onClick={resetFilters}
-                className="mt-3 min-h-[--ui-tap-min] rounded-md border border-accent/30 bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent transition hover:bg-accent/20"
+                className="mt-3 min-h-(--ui-tap-min) rounded-md border border-accent/30 bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent transition hover:bg-accent/20"
               >
                 Xóa bộ lọc
               </button>
@@ -389,7 +389,7 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
             <button
               type="button"
               onClick={() => setVisibleCount((current) => Math.min(current + VISIBLE_SCHOOL_INCREMENT, filteredSchools.length))}
-              className="min-h-[--ui-tap-min] rounded-md border border-accent/30 bg-accent/10 px-4 py-2 text-sm font-medium text-accent transition hover:bg-accent/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+              className="min-h-(--ui-tap-min) rounded-md border border-accent/30 bg-accent/10 px-4 py-2 text-sm font-medium text-accent transition hover:bg-accent/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
             >
               Xem thêm {Math.min(VISIBLE_SCHOOL_INCREMENT, filteredSchools.length - visibleSchools.length)}
             </button>

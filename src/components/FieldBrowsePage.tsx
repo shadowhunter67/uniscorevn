@@ -58,7 +58,7 @@ export function FieldBrowsePage({ onOpenField, onBackHome }: FieldBrowsePageProp
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Tìm lĩnh vực..."
-            className="min-h-[--ui-tap-min] w-full rounded-md border border-border bg-surface px-4 text-base text-ink transition-colors duration-150 placeholder:text-muted hover:border-border-strong focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/25"
+            className="min-h-(--ui-tap-min) w-full rounded-md border border-border bg-surface px-4 text-base text-ink transition-colors duration-150 placeholder:text-muted hover:border-border-strong focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/25"
           />
         </div>
 
@@ -77,7 +77,7 @@ export function FieldBrowsePage({ onOpenField, onBackHome }: FieldBrowsePageProp
                 <button
                   type="button"
                   onClick={() => onOpenField(field.id)}
-                  className="-mx-2 flex min-h-[--ui-tap-min] w-[calc(100%+1rem)] cursor-pointer items-center justify-between gap-3 rounded-md px-2 py-3.5 text-left transition-colors duration-150 hover:bg-surface-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                  className="-mx-2 flex min-h-(--ui-tap-min) w-[calc(100%+1rem)] cursor-pointer items-center justify-between gap-3 rounded-md px-2 py-3.5 text-left transition-colors duration-150 hover:bg-surface-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
                 >
                   <span className="text-base font-medium text-ink">{field.name}</span>
                   <span className="flex shrink-0 items-center gap-1 text-sm text-muted">
