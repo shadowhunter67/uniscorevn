@@ -23,6 +23,10 @@ public/sitemap.xml
 private-data/
 local-research/
 
+# Worktree scratch dirs (agent isolation) — không phải nội dung repo, thỉnh thoảng để lại rác nếu
+# process bị kill giữa chừng thay vì git tự dọn.
+.claude/worktrees/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
