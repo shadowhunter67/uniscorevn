@@ -1,16 +1,21 @@
 import type { SchoolComparisonAdapter, SchoolComparisonResult } from '../../compare/schoolComparisonAdapter';
 import { getSubjectContext } from '../../compare/schoolComparisonAdapter';
 import type { ComparisonSelection } from '../../compare/comparisonSelection';
-import { evaluatePyuThptExamAdmission, type PyuThptExamEvaluationContext } from './evaluate';
+import { evaluatePyuThptExamAdmission } from './evaluate';
+import { PYU_FIELD_THRESHOLDS_2026 } from './thresholds';
 import { pyuAdmissionMethods } from './methods';
 
-/** PYU chưa có mapping ngành->nhóm ở `/compare` — dùng `group` mặc định `'tierChung'` (ngưỡng thấp
- * hơn trong 2 nhóm), giống cách CTUMP/VWA/HAU xử lý khi thiếu mapping. */
-function buildContext(selection: Omit<ComparisonSelection, 'id'>): PyuThptExamEvaluationContext {
-  return { subjectContext: getSubjectContext(selection.context?.combinationId), group: 'tierChung' };
+interface PyuComparisonContext {
+  fieldCode?: string;
+  subjectContext?: ReturnType<typeof getSubjectContext>;
 }
 
-export const pyuComparisonAdapter: SchoolComparisonAdapter<PyuThptExamEvaluationContext> = {
+function buildContext(selection: Omit<ComparisonSelection, 'id'>): PyuComparisonContext {
+  const fieldCode = selection.programId ?? PYU_FIELD_THRESHOLDS_2026[0]?.code;
+  return { fieldCode, subjectContext: getSubjectContext(selection.context?.combinationId) };
+}
+
+export const pyuComparisonAdapter: SchoolComparisonAdapter<PyuComparisonContext> = {
   schoolId: 'pyu',
   methodId: pyuAdmissionMethods[0].id,
   methodName: pyuAdmissionMethods[0].name,

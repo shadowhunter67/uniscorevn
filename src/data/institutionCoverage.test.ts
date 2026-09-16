@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 232,
       admissionDataAvailable: 232,
-      eligibilitySupported: 22,
-      calculatorSupported: 145,
+      eligibilitySupported: 20,
+      calculatorSupported: 147,
       partialCalculator: 3,
-      fullyVerified: 142,
+      fullyVerified: 144,
       catalogOnly: 123,
     });
   });
@@ -197,8 +197,8 @@ describe('institution coverage statistics', () => {
     expect(deriveInstitutionSupportStatus(schoolRegistry.ndun)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vmuvinh)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.fpfu)).toBe('verified-calculator');
-    expect(deriveInstitutionSupportStatus(schoolRegistry.dhv)).toBe('eligibility-only');
-    expect(deriveInstitutionSupportStatus(schoolRegistry.pyu)).toBe('eligibility-only');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.dhv)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.pyu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.nlu)).toBe('verified-calculator');
     // Batch 5 (2026-08-28): AJC/FBU/USH/VNU-UMP graduated to verified-calculator — mỗi trường đọc
     // trực tiếp 1 văn bản/PDF chính thức (hoặc đối chiếu chéo báo chí cho AJC, PDF gốc host nội bộ

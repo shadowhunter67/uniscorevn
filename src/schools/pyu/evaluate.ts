@@ -3,9 +3,11 @@ import type { ApplicantProfile } from '../../core/applicantProfile';
 import type { CalculationStep } from '../../core/calculationStep';
 import type { SubjectId } from '../../core/subjects';
 import { SUBJECT_LABELS } from '../../core/subjects';
-import { checkPyuThptExamThreshold, type PyuProgramGroup } from './eligibility';
+import { round2 } from '../../core/round2';
 import { pyuAdmissionMethods } from './methods';
-import { pyuKnowledgeGaps } from './knowledgeGaps';
+import { PYU_FIELD_THRESHOLD_BY_CODE, type PyuFieldThreshold } from './thresholds';
+import { lookupPyuStandardPriority30, calculatePyuEffectivePriority30 } from './priority';
+import { pyuExactFormulaEvidence, pyuFieldThresholdEvidence } from './evidence';
 
 export interface PyuSubjectContext {
   combinationId?: string;
@@ -13,11 +15,11 @@ export interface PyuSubjectContext {
 }
 
 export interface PyuThptExamEvaluationContext {
-  group?: PyuProgramGroup;
+  fieldCode?: string;
   subjectContext?: PyuSubjectContext;
 }
 
-function sumThptTotal(profile: ApplicantProfile, subjects: readonly SubjectId[]): { total30?: number; missingSubjects: SubjectId[] } {
+function readSubjectTotal(profile: ApplicantProfile, subjects: readonly SubjectId[]): { total30?: number; missingSubjects: SubjectId[] } {
   let total = 0;
   const missingSubjects: SubjectId[] = [];
   for (const subjectId of subjects) {
@@ -26,62 +28,142 @@ function sumThptTotal(profile: ApplicantProfile, subjects: readonly SubjectId[])
     else total += score;
   }
   if (missingSubjects.length > 0) return { missingSubjects };
-  return { total30: Math.round(total * 100) / 100, missingSubjects };
+  return { total30: round2(total), missingSubjects };
 }
 
-export function evaluatePyuThptExamAdmission(profile: ApplicantProfile, context: PyuThptExamEvaluationContext = {}): AdmissionEvaluation {
-  const method = pyuAdmissionMethods[0];
-  const explanation: CalculationStep[] = [];
-  const missingInputs: string[] = [];
-  const missingRequirements: MissingRequirement[] = [];
-  const group: PyuProgramGroup = context.group ?? 'tierChung';
-  const gapExtras = {
-    missingRules: pyuKnowledgeGaps.map((gap) => gap.label),
-    missingRequirements: pyuKnowledgeGaps.map((gap) => ({ kind: 'official-rule' as const, code: gap.id, label: gap.label })),
+const PYU_METHOD = pyuAdmissionMethods[0];
+
+function pyuPartial(input: { missingRequirements?: MissingRequirement[]; reason: string }): AdmissionEvaluation {
+  return {
+    schoolId: 'pyu',
+    year: PYU_METHOD.year,
+    methodId: PYU_METHOD.id,
+    confidence: 'partial',
+    eligibility: { status: 'unknown', reasons: [input.reason] },
+    missingInputs: [],
+    missingRules: [],
+    missingRequirements: input.missingRequirements ?? [],
+    explanation: [],
+    evidence: [],
   };
+}
 
-  let status: 'eligible' | 'ineligible' | 'unknown' = 'unknown';
-  const reasons: string[] = [];
+/**
+ * PYU 2026 — nhánh xét kết quả thi TN THPT. Điểm xét = tổng thô 3 môn theo tổ hợp (không hệ số) +
+ * điểm ưu tiên KV/ĐT (khung quốc gia hiện hành, judgment call, `priority.ts`). So với điểm chuẩn
+ * chính thức theo NGÀNH đã chọn — chỉ chấp nhận tổ hợp nằm trong danh sách tổ hợp CHÍNH THỨC của
+ * ngành đó (`thresholds.ts`, giới hạn 10/11 ngành, loại Giáo dục Mầm non).
+ */
+export function evaluatePyuThptExamAdmission(profile: ApplicantProfile, context: PyuThptExamEvaluationContext = {}): AdmissionEvaluation {
+  const explanation: CalculationStep[] = [];
+  const missingRequirements: MissingRequirement[] = [];
 
-  if (!context.subjectContext) {
-    missingRequirements.push({ kind: 'school-context', code: 'pyu-subject-combination', label: 'Chọn tổ hợp môn xét tuyển PYU.' });
-  } else {
-    const { total30, missingSubjects } = sumThptTotal(profile, context.subjectContext.subjects);
-    if (missingSubjects.length > 0) {
-      missingInputs.push('Chưa đủ điểm 3 môn thi TN THPT trong tổ hợp đã chọn.');
-      missingRequirements.push(
-        ...missingSubjects.map((subjectId) => ({
-          kind: 'profile-input' as const,
-          code: `pyu-thpt-${subjectId}`,
-          label: `Điểm thi TN THPT môn ${SUBJECT_LABELS[subjectId]} cho tổ hợp PYU.`,
-        }))
-      );
-    }
-    if (total30 !== undefined) {
-      const result = checkPyuThptExamThreshold(total30, group);
-      reasons.push(result.requiredText);
-      explanation.push({
-        id: 'pyu-thpt-exam-threshold',
-        label: 'Ngưỡng đầu vào PYU 2026 (thi TN THPT)',
-        output: total30,
-        scale: 30,
-        formula: result.requiredText,
-        evidence: [{ sourceId: 'pyu-admission-score-2026', location: 'Báo Tuổi Trẻ, 10/07/2026', verification: 'verified', effectiveYear: 2026 }],
-      });
-      status = result.pass ? 'eligible' : 'ineligible';
-    }
+  if (!context.fieldCode) {
+    missingRequirements.push({ kind: 'school-context', code: 'pyu-field', label: 'Chọn ngành PYU để tra điểm chuẩn và tính Điểm xét.' });
+    return pyuPartial({ missingRequirements, reason: 'Cần chọn ngành PYU để áp điểm chuẩn và tính Điểm xét.' });
+  }
+  const entry: PyuFieldThreshold | undefined = PYU_FIELD_THRESHOLD_BY_CODE.get(context.fieldCode);
+  if (!entry) {
+    missingRequirements.push({
+      kind: 'school-context',
+      code: 'pyu-field',
+      label: `Ngành "${context.fieldCode}" không có trong bảng điểm chuẩn PYU 2026 đã mô hình hoá (10/11 ngành, Giáo dục Mầm non chưa mô hình hoá).`,
+    });
+    return pyuPartial({ missingRequirements, reason: `Ngành "${context.fieldCode}" không có trong bảng điểm chuẩn PYU 2026 đã mô hình hoá.` });
+  }
+  if (!context.subjectContext || context.subjectContext.subjects.length !== 3) {
+    missingRequirements.push({ kind: 'school-context', code: 'pyu-subject-combination', label: `Chọn tổ hợp xét tuyển cho ${entry.name}.` });
+    return pyuPartial({ missingRequirements, reason: `Cần chọn tổ hợp xét tuyển cho ${entry.name}.` });
+  }
+  if (!context.subjectContext.combinationId || !entry.combinationIds.includes(context.subjectContext.combinationId)) {
+    missingRequirements.push({
+      kind: 'school-context',
+      code: 'pyu-subject-combination',
+      label: `Tổ hợp đã chọn không nằm trong danh sách tổ hợp chính thức của ${entry.name} (${entry.combinationIds.join(', ')}).`,
+    });
+    return pyuPartial({ missingRequirements, reason: `Tổ hợp đã chọn không thuộc danh sách tổ hợp chính thức của ${entry.name}.` });
+  }
+
+  const { total30, missingSubjects } = readSubjectTotal(profile, context.subjectContext.subjects);
+  if (missingSubjects.length > 0) {
+    missingRequirements.push(
+      ...missingSubjects.map((subjectId) => ({
+        kind: 'profile-input' as const,
+        code: `pyu-thpt-${subjectId}`,
+        label: `Điểm thi TN THPT môn ${SUBJECT_LABELS[subjectId]} cho tổ hợp đã chọn.`,
+      }))
+    );
+    return pyuPartial({ missingRequirements, reason: 'Cần đủ điểm 3 môn thi TN THPT để tính Điểm xét PYU.' });
+  }
+  const raw30 = total30 as number;
+
+  const standardPriority30 = lookupPyuStandardPriority30(profile.priority?.region, profile.priority?.category);
+  const priority = calculatePyuEffectivePriority30({ rawTotal30: raw30, standardPriority30 });
+  const finalScore = round2(Math.min(30, raw30 + priority.effectivePriority30));
+
+  const threshold30 = entry.threshold30;
+  const eligible = finalScore >= threshold30;
+  const status: 'eligible' | 'ineligible' = eligible ? 'eligible' : 'ineligible';
+
+  const reasons: string[] = [
+    `Điểm chuẩn ${entry.name} (thi TN THPT 2026): tổng 3 môn + điểm ưu tiên KV/ĐT >= ${threshold30}/30 — tổng của bạn = ${finalScore}/30.`,
+    eligible ? 'Đạt/vượt điểm chuẩn đã công bố chính thức năm 2026.' : 'Chưa đạt điểm chuẩn đã công bố chính thức năm 2026.',
+  ];
+
+  explanation.push({
+    id: 'pyu-exact-raw',
+    label: 'Tổng điểm 3 môn thi (thô)',
+    output: raw30,
+    scale: 30,
+    formula: context.subjectContext.subjects.map((s) => SUBJECT_LABELS[s]).join(' + '),
+    evidence: pyuExactFormulaEvidence.evidence,
+  });
+  explanation.push({
+    id: 'pyu-exact-priority',
+    label: priority.reduced ? 'Điểm ưu tiên (đã giảm)' : 'Điểm ưu tiên',
+    output: priority.effectivePriority30,
+    scale: 30,
+    formula: priority.reduced
+      ? '[(30 − tổng thô)/7,5] × Mức điểm ưu tiên KV/ĐT (khung quốc gia hiện hành, judgment call)'
+      : 'Mức điểm ưu tiên KV/ĐT (khung quốc gia hiện hành, judgment call)',
+    evidence: pyuExactFormulaEvidence.evidence,
+  });
+  explanation.push({
+    id: 'pyu-exact-final',
+    label: 'Điểm xét (đã cộng ưu tiên)',
+    output: finalScore,
+    scale: 30,
+    formula: 'Tổng thô 3 môn + Điểm ưu tiên',
+    evidence: pyuExactFormulaEvidence.evidence,
+  });
+  explanation.push({
+    id: 'pyu-exact-threshold',
+    label: `Điểm chuẩn — ${entry.name}`,
+    output: threshold30,
+    scale: 30,
+    formula: reasons[0],
+    evidence: pyuFieldThresholdEvidence.evidence,
+  });
+
+  if (profile.priority?.region === undefined && profile.priority?.category === undefined) {
+    missingRequirements.push({
+      kind: 'profile-input',
+      code: 'pyu-priority-region-category',
+      label: 'Khu vực / đối tượng ưu tiên (chưa nhập — Điểm xét đang tính với điểm ưu tiên = 0).',
+    });
   }
 
   return {
     schoolId: 'pyu',
-    year: method.year,
-    methodId: method.id,
-    confidence: 'partial',
-    eligibility: { status, reasons: reasons.length > 0 ? reasons : ['Cần chọn tổ hợp môn và nhập đủ điểm để kiểm tra ngưỡng PYU.'] },
-    missingInputs,
-    missingRules: gapExtras.missingRules,
-    missingRequirements: [...missingRequirements, ...gapExtras.missingRequirements],
+    year: PYU_METHOD.year,
+    methodId: PYU_METHOD.id,
+    confidence: 'exact-verified',
+    eligibility: { status, reasons },
+    score: { value: finalScore, scale: 30 },
+    missingInputs: [],
+    missingRules: [],
+    missingRequirements,
     explanation,
-    evidence: [{ sourceId: 'pyu-admission-score-2026', location: 'Báo Tuổi Trẻ, 10/07/2026', verification: 'verified', effectiveYear: 2026 }],
+    evidence: [...pyuExactFormulaEvidence.evidence, ...pyuFieldThresholdEvidence.evidence],
   };
 }

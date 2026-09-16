@@ -6,18 +6,18 @@ export const dhvModule: SchoolModule = {
   id: 'dhv',
   name: 'Trường Đại học Hùng Vương TP.HCM',
   shortName: 'DHV',
-  about: 'Trường đại học tư thục tại TP.HCM, tuyển sinh 20 ngành học năm 2026.',
+  about: 'Trường đại học tư thục tại TP.HCM, tuyển sinh 23 mã xét tuyển năm 2026.',
   year: 2026,
   status: 'researching',
   ownership: 'private',
   region: 'hcm',
   vnuhcm: false,
   summary:
-    'Đã xác minh ngưỡng đảm bảo chất lượng đầu vào 2026 của DHV qua báo chí nhà nước (Báo Tuổi Trẻ, 04/07/2026): ngưỡng đồng nhất 15/30 (thi TN THPT) cho các ngành trừ Luật và Tâm lý học (chưa công bố, chờ Bộ GD&ĐT). Phương thức học bạ (18/30) và ĐGNL ĐHQG-HCM (600 điểm) chưa được mô hình hoá.',
+    'Đã xác minh điểm chuẩn trúng tuyển chính thức 2026 (đợt 1) của DHV qua ảnh công bố CHÍNH CHỦ trên dhv.edu.vn (09/8/2026, đối chiếu 2 báo nhà nước độc lập): 23/23 mã xét tuyển, nhánh xét kết quả thi TN THPT — Điểm xét = tổng 3 môn + điểm ưu tiên KV/ĐT (khung quốc gia hiện hành). Tâm lý học/Luật/Luật kinh tế 20/30, 20 mã còn lại 15/30. Trường không công bố tổ hợp môn riêng theo mã — chấp nhận tổ hợp bất kỳ. Phương thức học bạ và ĐGNL ĐHQG-HCM chưa được mô hình hoá.',
   capabilities: {
     admissionInfo: true,
     programs: false,
-    cutoffs: false,
+    cutoffs: true,
     ...aggregateSchoolCapabilities(dhvAdmissionMethods),
   },
   catalogSources: [
@@ -28,10 +28,10 @@ export const dhvModule: SchoolModule = {
       checkedAt: '2026-08-26',
     },
     {
-      title: 'Điểm sàn xét tuyển Trường đại học Văn Hiến và Hùng Vương TP.HCM (Báo Tuổi Trẻ)',
-      url: 'https://tuoitre.vn/diem-san-xet-tuyen-truong-dai-hoc-van-hien-va-hung-vuong-tphcm-100260704104342801.htm',
+      title: 'Trường Đại học Hùng Vương TP. Hồ Chí Minh công bố điểm chuẩn trúng tuyển Đại học chính quy 2026',
+      url: 'https://dhv.edu.vn/truong-dai-hoc-hung-vuong-tp-ho-chi-minh-cong-bo-diem-trung-tuyen-dai-hoc-he-chinh-quy-dot-1-nam-2026/',
       type: 'official-institution',
-      checkedAt: '2026-08-26',
+      checkedAt: '2026-09-16',
     },
   ],
 };

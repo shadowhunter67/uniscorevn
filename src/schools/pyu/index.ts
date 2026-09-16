@@ -13,11 +13,11 @@ export const pyuModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'Đã xác minh điểm sàn 2026 của PYU qua báo chí nhà nước (Báo Tuổi Trẻ, 10/07/2026): khối ngành sư phạm (6 ngành) 20/30, các ngành khác (5 ngành) 15/30 — cả hai chỉ theo phương thức thi TN THPT. Phương thức học bạ (18/30) và ĐGNL ĐHQG-HCM (500 điểm) chưa được mô hình hoá.',
+    'Đã xác minh điểm chuẩn trúng tuyển chính thức 2026 (đợt 1) của PYU qua Thông báo điểm trúng tuyển (Quyết định số 497/QĐ-ĐHPY, 10/8/2026): 10/11 ngành đại học chính quy, nhánh xét kết quả thi TN THPT — Điểm xét = tổng 3 môn + điểm ưu tiên KV/ĐT (khung quốc gia hiện hành). Giáo dục Mầm non (tổ hợp năng khiếu M03/M09) chưa mô hình hoá. Phương thức học bạ và ĐGNL ĐHQG TP.HCM (cùng công bố trong Thông báo) chưa được mô hình hoá.',
   capabilities: {
     admissionInfo: true,
     programs: false,
-    cutoffs: false,
+    cutoffs: true,
     ...aggregateSchoolCapabilities(pyuAdmissionMethods),
   },
   catalogSources: [
@@ -28,10 +28,10 @@ export const pyuModule: SchoolModule = {
       checkedAt: '2026-08-26',
     },
     {
-      title: 'Các ngành sư phạm ở Trường Đại học Phú Yên có điểm sàn 20 điểm (Báo Tuổi Trẻ)',
-      url: 'https://tuoitre.vn/cac-nganh-su-pham-o-truong-dai-hoc-phu-yen-co-diem-san-20-diem-100260710185427395.htm',
+      title: 'Thông báo điểm trúng tuyển Đại học hệ chính quy năm 2026 (đợt 1) — Quyết định số 497/QĐ-ĐHPY',
+      url: 'https://tuyensinh.pyu.edu.vn/tuyen-sinh/tin-tuc/diem-trung-tuyen-dai-hoc-chinh-quy-n-m-2026-dot-1',
       type: 'official-institution',
-      checkedAt: '2026-08-26',
+      checkedAt: '2026-09-16',
     },
   ],
 };
