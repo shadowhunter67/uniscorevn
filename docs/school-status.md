@@ -144,6 +144,14 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-UMP** — Truong Dai hoc Y Duoc - Dai hoc Quoc gia Ha Noi
 - **THUV** — Trường Đại học Y khoa Tokyo Việt Nam (2026-09-16: PT2 thi TN THPT, không chứng chỉ JLPT — điểm chuẩn 18,0/30 đồng nhất 4 ngành)
 - **HVTA** — Học viện Tòa án (2026-09-16: ngành Luật duy nhất, thi TN THPT — ngưỡng 18,0/30 + Toán/Văn≥6/10; LƯU Ý còn điều kiện "Đạt sơ tuyển" tại TAND/Học viện ngoài phạm vi điểm số, chưa model)
+- **BAFU** — Trường Đại học Nông - Lâm Bắc Giang (2026-09-16: PT2 thi TN THPT, ĐXT=ĐM1+ĐM2+ĐM3+ĐƯT, so RAW 15/30 đồng nhất 20 ngành)
+- **QTU** — Trường Đại học Quang Trung (2026-09-16: thi TN THPT, ĐXT gồm ưu tiên, Điều dưỡng ≥18/30, 10 ngành còn lại ≥15/30)
+- **DNTU** — Trường Đại học Công nghệ Đồng Nai (2026-09-16: thi TN THPT, so RAW, 20 ngành ≥15/30, Điều dưỡng/Xét nghiệm y học ≥18/30)
+- **SIU** — Trường Đại học Quốc tế Sài Gòn (2026-09-16: thi TN THPT, so RAW 15/30 đồng nhất, trừ Luật kinh tế ngoài phạm vi)
+- **MTU** — Trường Đại học Xây dựng Miền Tây (2026-09-16: PT1 thi TN THPT, so RAW 15/30 đồng nhất 28 ngành, ĐXT gồm ưu tiên+điểm cộng)
+- **DAU** — Trường Đại học Kiến trúc Đà Nẵng (2026-09-16: thi TN THPT thuần, so RAW sàn 15/30 ghi rõ không gồm ưu tiên; LƯU Ý điểm chuẩn thật theo ngành 16,5-18/30 cao hơn sàn)
+- **HPU** — Trường Đại học Quản lý và Công nghệ Hải Phòng (2026-09-16: thi TN THPT, so RAW theo mã ngành 15,0-18,5/30, điểm chuẩn thật)
+- **Intracom** — Trường Đại học Intracom, tiền thân Chu Văn An (2026-09-16: thi TN THPT, so RAW, 12 ngành ≥15/30, Luật Kinh tế ≥20/30)
 - **VNU-USSH** — Trường Đại học Khoa học Xã hội và Nhân văn - ĐHQG Hà Nội
 - **VNUA** — Hoc vien Nong nghiep Viet Nam
 - **VTTU** — Trường Đại học Võ Trường Toản
@@ -335,7 +343,6 @@ whose domain (uad.edu.vn) briefly caused confusion during this batch's research.
 `docs/catalog-expansion-report.md` for full detail.
 
 - **AIU** — Trường Đại học Quốc tế Á Châu
-- **BAFU** — Trường Đại học Nông - Lâm Bắc Giang
 - **BHU** — Trường Đại học Quốc tế Bắc Hà
 - **CCO** — Trường Đại học Sĩ quan Phòng hóa
 - **CCST** — Trường Cao đẳng Xây dựng và Công nghệ - Xã hội
@@ -356,14 +363,12 @@ whose domain (uad.edu.vn) briefly caused confusion during this batch's research.
 - **CTD-TĐ** — Trường Cao đẳng Kinh tế - Kỹ thuật Thủ Đức
 - **CTIM** — Trường Cao đẳng Bán công Công nghệ và Quản trị doanh nghiệp
 - **CUWC** — Trường Cao đẳng Xây dựng Công trình đô thị
-- **DAU** — Trường Đại học Kiến trúc Đà Nẵng
 - **CĐSPBRVT** — Trường Cao đẳng Sư phạm Bà Rịa - Vũng Tàu
 - **CĐSPKG** — Trường Cao đẳng Sư phạm Kiên Giang
 - **CĐSPTB** — Trường Cao đẳng Sư phạm Thái Bình
 - **DNC** — Trường Cao đẳng Đà Nẵng
 - **DPC** — Trường Cao đẳng Bách khoa Đà Nẵng
 - **DQC** — Trường Cao đẳng Kỹ nghệ Dung Quất
-- **DNTU** — Trường Đại học Công nghệ Đồng Nai
 - **DVTC** — Trường Cao đẳng Du lịch Đà Nẵng
 - **ĐVC-ĐN** — Trường Cao đẳng Đại Việt Đà Nẵng
 - **GTVT TW V** — Trường Cao đẳng Giao thông vận tải Trung ương V
@@ -374,17 +379,14 @@ whose domain (uad.edu.vn) briefly caused confusion during this batch's research.
 - **HEPC** — Trường Cao đẳng Điện lực TP.HCM
 - **HHT** — Trường Đại học Hà Hoa Tiên
 - **HOTEC** — Trường Cao đẳng Kinh tế - Kỹ thuật Thành phố Hồ Chí Minh
-- **HPU** — Trường Đại học Quản lý và Công nghệ Hải Phòng
 - **HSC** — Trường Cao đẳng nghề Hoa Sen (cơ sở Đà Nẵng)
 - **HUArt** — Trường Đại học Nghệ thuật, Đại học Huế
 - **HVCT** — Trường Cao đẳng Kỹ nghệ II
-- **Intracom** — Trường Đại học Intracom
 - **IUV** — Trường Đại học Công nghiệp Vinh
 - **KTXD-HCM** — Trường Cao đẳng Kiến trúc - Xây dựng Thành phố Hồ Chí Minh
 - **Lilama 2** — Trường Cao đẳng Công nghệ Quốc tế Lilama 2
 - **LTTC** — Trường Cao đẳng Lý Tự Trọng TP.HCM
 - **MIT** — Trường Đại học Công nghệ Miền Đông
-- **MTU** — Trường Đại học Xây dựng Miền Tây
 - **NCEPA** — Trường Kinh tế và Quản lý công - Đại học Kinh tế Quốc dân
 - **NCT-NEU** — Trường Công nghệ - Đại học Kinh tế Quốc dân
 - **NEU-CoB** — Trường Kinh doanh - Đại học Kinh tế Quốc dân
@@ -392,10 +394,8 @@ whose domain (uad.edu.vn) briefly caused confusion during this batch's research.
 - **NQU-SQCB** — Trường Sĩ quan Công binh - Đại học Ngô Quyền
 - **NSPC** — Trường Cao đẳng Bách khoa Nam Sài Gòn
 - **NVTC** — Trường Cao đẳng Nguyễn Văn Trỗi
-- **QTU** — Trường Đại học Quang Trung
 - **QUI** — Trường Đại học Công nghiệp Quảng Ninh
 - **SCLS** — Trường Hóa và Khoa học sự sống - Đại học Bách khoa Hà Nội
-- **SIU** — Trường Đại học Quốc tế Sài Gòn
 - **SDU** — Trường Đại học Sao Đỏ
 - **SEEE** — Trường Điện - Điện tử - Đại học Bách khoa Hà Nội
 - **SEM-HUST** — Trường Kinh tế - Đại học Bách khoa Hà Nội

@@ -103,6 +103,14 @@ import { tuafModule } from './tuaf';
 import { ttuModule } from './ttu';
 import { thuvModule } from './thuv';
 import { hvtaModule } from './hvta';
+import { bafuModule } from './bafu';
+import { qtuModule } from './qtu';
+import { dntuModule } from './dntu';
+import { siuModule } from './siu';
+import { mtuModule } from './mtu';
+import { dauModule } from './dau';
+import { hpuModule } from './hpu';
+import { intracomModule } from './intracom';
 import { udaModule } from './uda';
 import { uhdModule } from './uhd';
 import { umtModule } from './umt';
@@ -327,6 +335,14 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   ttu: ttuModule,
   thuv: thuvModule,
   hvta: hvtaModule,
+  bafu: bafuModule,
+  qtu: qtuModule,
+  dntu: dntuModule,
+  siu: siuModule,
+  mtu: mtuModule,
+  dau: dauModule,
+  hpu: hpuModule,
+  intracom: intracomModule,
   uda: udaModule,
   uhd: uhdModule,
   umt: umtModule,

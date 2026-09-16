@@ -109,6 +109,14 @@ import { tuafAdmissionMethods } from '../schools/tuaf/methods';
 import { ttuAdmissionMethods } from '../schools/ttu/methods';
 import { thuvAdmissionMethods } from '../schools/thuv/methods';
 import { hvtaAdmissionMethods } from '../schools/hvta/methods';
+import { bafuAdmissionMethods } from '../schools/bafu/methods';
+import { qtuAdmissionMethods } from '../schools/qtu/methods';
+import { dntuAdmissionMethods } from '../schools/dntu/methods';
+import { siuAdmissionMethods } from '../schools/siu/methods';
+import { mtuAdmissionMethods } from '../schools/mtu/methods';
+import { dauAdmissionMethods } from '../schools/dau/methods';
+import { hpuAdmissionMethods } from '../schools/hpu/methods';
+import { intracomAdmissionMethods } from '../schools/intracom/methods';
 import { udaAdmissionMethods } from '../schools/uda/methods';
 import { uhdAdmissionMethods } from '../schools/uhd/methods';
 import { umtAdmissionMethods } from '../schools/umt/methods';
@@ -295,6 +303,14 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   ttu: ttuAdmissionMethods,
   thuv: thuvAdmissionMethods,
   hvta: hvtaAdmissionMethods,
+  bafu: bafuAdmissionMethods,
+  qtu: qtuAdmissionMethods,
+  dntu: dntuAdmissionMethods,
+  siu: siuAdmissionMethods,
+  mtu: mtuAdmissionMethods,
+  dau: dauAdmissionMethods,
+  hpu: hpuAdmissionMethods,
+  intracom: intracomAdmissionMethods,
   uda: udaAdmissionMethods,
   uhd: uhdAdmissionMethods,
   umt: umtAdmissionMethods,

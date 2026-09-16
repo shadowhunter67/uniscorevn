@@ -89,6 +89,14 @@ import { tuafComparisonAdapter } from '../schools/tuaf/comparison';
 import { ttuComparisonAdapter } from '../schools/ttu/comparison';
 import { thuvComparisonAdapter } from '../schools/thuv/comparison';
 import { hvtaComparisonAdapter } from '../schools/hvta/comparison';
+import { bafuComparisonAdapter } from '../schools/bafu/comparison';
+import { qtuComparisonAdapter } from '../schools/qtu/comparison';
+import { dntuComparisonAdapter } from '../schools/dntu/comparison';
+import { siuComparisonAdapter } from '../schools/siu/comparison';
+import { mtuComparisonAdapter } from '../schools/mtu/comparison';
+import { dauComparisonAdapter } from '../schools/dau/comparison';
+import { hpuComparisonAdapter } from '../schools/hpu/comparison';
+import { intracomComparisonAdapter } from '../schools/intracom/comparison';
 import { udaComparisonAdapter } from '../schools/uda/comparison';
 import { uhdComparisonAdapter } from '../schools/uhd/comparison';
 import { umtComparisonAdapter } from '../schools/umt/comparison';
@@ -276,6 +284,14 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   ttuComparisonAdapter,
   thuvComparisonAdapter,
   hvtaComparisonAdapter,
+  bafuComparisonAdapter,
+  qtuComparisonAdapter,
+  dntuComparisonAdapter,
+  siuComparisonAdapter,
+  mtuComparisonAdapter,
+  dauComparisonAdapter,
+  hpuComparisonAdapter,
+  intracomComparisonAdapter,
   udaComparisonAdapter,
   uhdComparisonAdapter,
   umtComparisonAdapter,
@@ -368,7 +384,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
       ![
         'huce', 'dav', 'hlu', 'humg', 'hdu', 'vmu', 'ttn', 'tnu', 'dlu', 'vnuulis',
         'hce', 'hul', 'husc', 'huaf', 'hueedu',
-        'dut', 'dueudn', 'uedudn', 'uflsudn', 'uteudn', 'vku', 'thuv', 'hvta',
+        'dut', 'dueudn', 'uedudn', 'uflsudn', 'uteudn', 'vku', 'thuv', 'hvta', 'bafu', 'dntu', 'siu', 'mtu', 'dau', 'hpu', 'intracom',
         'hup', 'ajc', 'vnuf', 'dtu', 'hpu2', 'hust', 'hmu', 'haui', 'aof', 'bav', 'phenikaa', 'hou', 'fptu', 'hubt', 'dainam', 'vnulaw', 'vnuump',
         'tmu', 'tlu', 'hpmu', 'vnueb', 'vnued', 'vnuuet', 'vnuhus', 'vnussh', 'hump', 'qnu', 'qbu', 'qnamu', 'pctu', 'htu', 'dumtp', 'bmtu',
         'hat', 'thanglong', 'hvu', 'epu', 'uneti', 'huph', 'vutm', 'hmtu', 'ndun', 'vmuvinh',
@@ -381,7 +397,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
    * đè trong `schoolComparisonAdapterRegistry` (last-write-wins theo `schoolId`). 'thanglong' đã loại
    * trừ ở filter `remainingCatalogComparisonAdapters` phía trên (đã có adapter thật
    * `schools/thanglong/comparison.ts`). */
-  ...finalCatalogComparisonAdapters.filter((adapter) => !['hdiu', 'huc', 'hunre', 'tueba', 'tump', 'tnut', 'hca', 'naem', 'hluv', 'vhs', 'trungvuong', 'dsu', 'pxu', 'ulsa'].includes(adapter.schoolId)),
+  ...finalCatalogComparisonAdapters.filter((adapter) => !['hdiu', 'huc', 'hunre', 'tueba', 'tump', 'tnut', 'hca', 'naem', 'hluv', 'vhs', 'trungvuong', 'dsu', 'pxu', 'ulsa', 'qtu'].includes(adapter.schoolId)),
   ...collegeCatalogComparisonAdapters,
 ];
 
