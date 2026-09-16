@@ -55,10 +55,10 @@ Snapshot hiện tại được tính từ `schoolRegistry` bằng `npm run stats
 <!-- coverage:kpi:start (generated bởi `npm run stats:coverage -- --write`, xem scripts/stats-coverage.ts — KHÔNG sửa tay) -->
 | KPI | Số lượng |
 |---|---:|
-| Mục trong danh mục/search/compare | 355 |
-| Cơ sở giáo dục độc lập trong danh mục | 343 |
+| Mục trong danh mục/search/compare | 354 |
+| Cơ sở giáo dục độc lập trong danh mục | 342 |
 | Đơn vị nội bộ/không tính vào KPI cơ sở | 12 |
-| Đại học / cơ sở hệ đại học | 235 |
+| Đại học / cơ sở hệ đại học | 234 |
 | Học viện | 22 |
 | Cao đẳng sư phạm/GDMN | 9 |
 | Cao đẳng giáo dục nghề nghiệp | 77 |
@@ -67,7 +67,7 @@ Snapshot hiện tại được tính từ `schoolRegistry` bằng `npm run stats
 | Chỉ kiểm tra điều kiện/ngưỡng | 14 |
 | Có calculator một phần | 3 |
 | Calculator đã xác minh | 150 |
-| Chỉ có trong danh mục | 123 |
+| Chỉ có trong danh mục | 122 |
 <!-- coverage:kpi:end -->
 
 Catalog coverage != calculator coverage. Con số danh mục là độ phủ search/compare, không phải 100% calculator. Một số mục trong danh mục là school/faculty nội bộ của hệ thống đại học lớn; các mục này vẫn có thể giữ cho navigation hoặc mapping chương trình, nhưng không làm tăng KPI "cơ sở đào tạo tuyển sinh độc lập".
@@ -85,7 +85,7 @@ Mức hỗ trợ đổi thường xuyên (mỗi batch nghiên cứu mới lại 
 | 🟡 Tính được một phần | 3 | Có công thức thật nhưng chưa phủ hết mọi phương thức xét tuyển của trường. |
 | 🟡 Kiểm tra được điều kiện | 14 | Có ngưỡng điểm sàn/điều kiện chính thức, chưa tính được điểm xét tuyển đầy đủ. |
 | ⚪ Đã có thông tin tuyển sinh | 65 | Đã có thông tin tuyển sinh chính thức, nhưng chưa đủ để tính điểm hay kết luận điều kiện. |
-| ⚪ Chưa có dữ liệu tuyển sinh | 123 | Trường có trong danh mục nhưng UniScoreVN chưa tìm được nguồn tuyển sinh chính thức nào. |
+| ⚪ Chưa có dữ liệu tuyển sinh | 122 | Trường có trong danh mục nhưng UniScoreVN chưa tìm được nguồn tuyển sinh chính thức nào. |
 <!-- coverage:support-status:end -->
 
 "Tính đầy đủ điểm xét tuyển" nghĩa là công thức, ngưỡng, điểm cộng và điểm ưu tiên đều có nguồn chính thức xác minh trong phạm vi đã công bố — một số trường chỉ chính xác trong phạm vi cụ thể (ví dụ thí sinh không có thành tích cộng điểm). Đây là mức độ đủ dữ liệu để áp dụng công thức, **không phải** xác suất trúng tuyển — UniScoreVN không đoán công thức khi nguồn chưa đủ rõ ràng.

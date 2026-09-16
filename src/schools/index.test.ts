@@ -128,7 +128,7 @@ describe('schoolRegistry', () => {
     ];
     const catalogIds = [...southernCatalogSchools, ...remainingCatalogSchools, ...finalCatalogSchools, ...collegeCatalogSchools].map((school) => school.id);
     expect(ids).toEqual([...coreIds, ...catalogIds].sort());
-    expect(ids).toHaveLength(355);
+    expect(ids).toHaveLength(354);
   });
 
   it('docs/school-status.md nhắc tên mọi trường trong registry (phát hiện drift)', () => {

@@ -634,8 +634,18 @@ export const remainingCatalogSchools: readonly RemainingCatalogSchool[] = [
   // official .edu.vn domain with active 2026 admission content, and no id/name collision was found
   // across all 4 catalog files. Bắc Hà itself is separately confirmed to have temporarily paused
   // 2025-2026 admissions per its own site (iubh.edu.vn) — noted for context, not a reason to exclude
-  // it (it's already cataloged) or these 4 (all actively admitting for 2026).
-  { id: 'intracom', shortName: 'Intracom', name: 'Trường Đại học Intracom', location: 'Hà Nội', ownership: 'private', region: 'hanoi' },
+  // it (it's already cataloged) or these 4.
+  // CORRECTION (2026-09-16): the "no id/name collision" check above missed one — `intracom` is the
+  // SAME school as `cvauni` (finalCatalog.ts, now removed), just under its post-rebrand name.
+  // intracomuni.edu.vn confirms "predecessor was Chu Văn An University" (QĐ 135/2006/QĐ-TTg),
+  // main campus Khu Đại học Phố Hiến, Hưng Yên — matching `cvauni`'s location exactly; the "Hà Nội"
+  // location originally recorded here was the Intracom Group parent office (Intracom Riverside
+  // Building), not the school's own campus. Fixed location/region below; `cvauni` entry deleted.
+  // Also CORRECTION: HHT (next line) is NOT "actively admitting for 2026" as claimed above —
+  // confirmed 2026-09-16 that MOET suspended its operations 2026-06-17 for ineffectiveness; kept
+  // catalog-only per the Bắc Hà precedent (paused/suspended school still gets a catalog entry, just
+  // never a calculator), but do not trust the "actively admitting" line for it.
+  { id: 'intracom', shortName: 'Intracom', name: 'Trường Đại học Intracom', location: 'Hưng Yên', ownership: 'private', region: 'other' },
   { id: 'hht', shortName: 'HHT', name: 'Trường Đại học Hà Hoa Tiên', location: 'Hà Nam', ownership: 'private', region: 'other' },
   { id: 'thanhdong', shortName: 'Thành Đông', name: 'Trường Đại học Thành Đông', location: 'Hải Dương', ownership: 'private', region: 'other' },
   { id: 'vxut', shortName: 'VXUT', name: 'Trường Đại học Công nghệ Vạn Xuân', location: 'Nghệ An', ownership: 'private', region: 'other' },

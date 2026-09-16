@@ -291,6 +291,16 @@ content: **Intracom** (Trường Đại học Intracom, Hà Nội, intracomuni.e
 Hà Hoa Tiên, Hà Nam, hahoatien.edu.vn), **Thành Đông** (Trường Đại học Thành Đông, Hải Dương,
 thanhdong.edu.vn), **VXUT** (Trường Đại học Công nghệ Vạn Xuân, Nghệ An, vxut.edu.vn).
 
+**CORRECTION (2026-09-16)**: the "no id/name collision" claim above missed one — `intracom` turned
+out to be the SAME school as the pre-existing `cvauni` entry (Trường Đại học Chu Văn An, Hưng Yên),
+just under its post-rebrand name. intracomuni.edu.vn confirms "predecessor was Chu Văn An
+University" (QĐ 135/2006/QĐ-TTg), main campus Khu Đại học Phố Hiến, Hưng Yên — matching `cvauni`'s
+location exactly; the "Hà Nội" location above was the Intracom Group parent office, not the
+school's own campus. `cvauni` was deleted and `intracom`'s location/region corrected to Hưng Yên /
+`other`. Also, HHT's "active 2026 admission" claim above is stale: MOET suspended its operations
+2026-06-17 for ineffectiveness — kept catalog-only (same precedent as the paused `bhu`), but it is
+not actually admitting.
+
 Batch catalog-expansion 4 (2026-09-07): cross-referenced the registry against a secondary-source
 "mã trường" admission-code roster (vietjack.com, spanning every province — used only as a lead
 generator per the source-priority rule, never as sole evidence) plus a full sweep of the
@@ -344,7 +354,6 @@ whose domain (uad.edu.vn) briefly caused confusion during this batch's research.
 - **CTD-TĐ** — Trường Cao đẳng Kinh tế - Kỹ thuật Thủ Đức
 - **CTIM** — Trường Cao đẳng Bán công Công nghệ và Quản trị doanh nghiệp
 - **CUWC** — Trường Cao đẳng Xây dựng Công trình đô thị
-- **CVAUni** — Trường Đại học Chu Văn An
 - **DAU** — Trường Đại học Kiến trúc Đà Nẵng
 - **CĐSPBRVT** — Trường Cao đẳng Sư phạm Bà Rịa - Vũng Tàu
 - **CĐSPKG** — Trường Cao đẳng Sư phạm Kiên Giang
