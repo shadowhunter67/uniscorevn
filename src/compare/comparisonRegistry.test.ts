@@ -107,6 +107,7 @@ import { tnuflAdmissionMethods } from '../schools/tnufl/methods';
 import { tnusAdmissionMethods } from '../schools/tnus/methods';
 import { tuafAdmissionMethods } from '../schools/tuaf/methods';
 import { ttuAdmissionMethods } from '../schools/ttu/methods';
+import { thuvAdmissionMethods } from '../schools/thuv/methods';
 import { udaAdmissionMethods } from '../schools/uda/methods';
 import { uhdAdmissionMethods } from '../schools/uhd/methods';
 import { umtAdmissionMethods } from '../schools/umt/methods';
@@ -291,6 +292,7 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   tnus: tnusAdmissionMethods,
   tuaf: tuafAdmissionMethods,
   ttu: ttuAdmissionMethods,
+  thuv: thuvAdmissionMethods,
   uda: udaAdmissionMethods,
   uhd: uhdAdmissionMethods,
   umt: umtAdmissionMethods,

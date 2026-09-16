@@ -142,6 +142,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-UET** — Trường Đại học Công nghệ - ĐHQG Hà Nội
 - **VNU-ULIS** — Truong Dai hoc Ngoai ngu - Dai hoc Quoc gia Ha Noi
 - **VNU-UMP** — Truong Dai hoc Y Duoc - Dai hoc Quoc gia Ha Noi
+- **THUV** — Trường Đại học Y khoa Tokyo Việt Nam (2026-09-16: PT2 thi TN THPT, không chứng chỉ JLPT — điểm chuẩn 18,0/30 đồng nhất 4 ngành)
 - **VNU-USSH** — Trường Đại học Khoa học Xã hội và Nhân văn - ĐHQG Hà Nội
 - **VNUA** — Hoc vien Nong nghiep Viet Nam
 - **VTTU** — Trường Đại học Võ Trường Toản
@@ -405,7 +406,6 @@ whose domain (uad.edu.vn) briefly caused confusion during this batch's research.
 - **TDNU** — Trường Đại học Trần Đại Nghĩa (Trường Sĩ quan Kỹ thuật Quân sự)
 - **TGH** — Trường Sĩ quan Tăng - Thiết giáp
 - **Thành Đông** — Trường Đại học Thành Đông
-- **THUV** — Trường Đại học Y khoa Tokyo Việt Nam
 - **TKS** — Trường Đại học Kiểm sát Hà Nội
 - **TNU-IS** — Khoa Quốc tế - Đại học Thái Nguyên
 - **TSQĐC** — Trường Sĩ quan Đặc công

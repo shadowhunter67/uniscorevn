@@ -87,6 +87,7 @@ import { tnuflComparisonAdapter } from '../schools/tnufl/comparison';
 import { tnusComparisonAdapter } from '../schools/tnus/comparison';
 import { tuafComparisonAdapter } from '../schools/tuaf/comparison';
 import { ttuComparisonAdapter } from '../schools/ttu/comparison';
+import { thuvComparisonAdapter } from '../schools/thuv/comparison';
 import { udaComparisonAdapter } from '../schools/uda/comparison';
 import { uhdComparisonAdapter } from '../schools/uhd/comparison';
 import { umtComparisonAdapter } from '../schools/umt/comparison';
@@ -272,6 +273,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   tnusComparisonAdapter,
   tuafComparisonAdapter,
   ttuComparisonAdapter,
+  thuvComparisonAdapter,
   udaComparisonAdapter,
   uhdComparisonAdapter,
   umtComparisonAdapter,
@@ -364,7 +366,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
       ![
         'huce', 'dav', 'hlu', 'humg', 'hdu', 'vmu', 'ttn', 'tnu', 'dlu', 'vnuulis',
         'hce', 'hul', 'husc', 'huaf', 'hueedu',
-        'dut', 'dueudn', 'uedudn', 'uflsudn', 'uteudn', 'vku',
+        'dut', 'dueudn', 'uedudn', 'uflsudn', 'uteudn', 'vku', 'thuv',
         'hup', 'ajc', 'vnuf', 'dtu', 'hpu2', 'hust', 'hmu', 'haui', 'aof', 'bav', 'phenikaa', 'hou', 'fptu', 'hubt', 'dainam', 'vnulaw', 'vnuump',
         'tmu', 'tlu', 'hpmu', 'vnueb', 'vnued', 'vnuuet', 'vnuhus', 'vnussh', 'hump', 'qnu', 'qbu', 'qnamu', 'pctu', 'htu', 'dumtp', 'bmtu',
         'hat', 'thanglong', 'hvu', 'epu', 'uneti', 'huph', 'vutm', 'hmtu', 'ndun', 'vmuvinh',

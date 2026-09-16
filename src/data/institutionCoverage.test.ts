@@ -64,13 +64,13 @@ describe('institution coverage statistics', () => {
       vocationalColleges: 77,
       otherIndependentInstitutions: 0,
       internalUnitEntries: 12,
-      researched: 232,
-      admissionDataAvailable: 232,
+      researched: 233,
+      admissionDataAvailable: 233,
       eligibilitySupported: 14,
-      calculatorSupported: 153,
+      calculatorSupported: 154,
       partialCalculator: 3,
-      fullyVerified: 150,
-      catalogOnly: 122,
+      fullyVerified: 151,
+      catalogOnly: 121,
     });
   });
 

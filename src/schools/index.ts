@@ -101,6 +101,7 @@ import { tnuflModule } from './tnufl';
 import { tnusModule } from './tnus';
 import { tuafModule } from './tuaf';
 import { ttuModule } from './ttu';
+import { thuvModule } from './thuv';
 import { udaModule } from './uda';
 import { uhdModule } from './uhd';
 import { umtModule } from './umt';
@@ -323,6 +324,7 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   tnus: tnusModule,
   tuaf: tuafModule,
   ttu: ttuModule,
+  thuv: thuvModule,
   uda: udaModule,
   uhd: uhdModule,
   umt: umtModule,
