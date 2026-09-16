@@ -2,23 +2,37 @@ import type { KnowledgeGap } from '../../core/knowledgeStatus';
 
 export const tnueKnowledgeGaps: KnowledgeGap[] = [
   {
-    id: 'tnue-program-threshold-table-not-imported',
-    label: 'TNUE 2026 cong bo nguong dam bao chat luong dau vao theo nhom nganh (17,00-22,50/30); chua nhap duoc bang day du tung nganh cu the va to hop mon tuong ung.',
-    status: 'official-but-unparsed',
-    sourceId: 'tnue-threshold-2026',
+    id: 'tnue-priority-value-silent',
+    label:
+      'Thông báo điểm trúng tuyển (tuyensinh.tnue.edu.vn, 09/8/2026) KHÔNG tự công bố bảng mức điểm ưu tiên khu vực/đối tượng cụ thể. Dùng khung điểm ưu tiên quốc gia hiện hành làm judgment call cho GIÁ TRỊ bảng (`priority.ts`), cùng tiền lệ DLA/BMTU/DNU/TUEBA/PVU/HTU/TUMP/NAEM/MKU/PYU/DHV/HPU2.',
+    status: 'incomplete',
+    sourceId: 'tnue-cutoff-2026',
     scoreAffecting: true,
-    knownData: [
-      'Cao nhat 22,50/30: Su pham Ngu van, Su pham Lich su, Su pham Dia ly',
-      '21,00-22,00/30: Su pham Toan hoc, Su pham Vat ly, Su pham Hoa hoc, Su pham Lich su-Dia ly',
-      '20,00-20,50/30: Giao duc Mam non, Giao duc Tieu hoc, Giao duc Chinh tri, Giao duc Cong dan, Su pham Tin hoc, Su pham Sinh hoc, Su pham Tieng Anh, Su pham Khoa hoc tu nhien',
-      '17,00-19,00/30: Giao duc The chat, Su pham Am nhac, Giao duc hoc, Tam ly hoc giao duc, Sinh hoc ung dung, Ngon ngu Anh, Huan luyen the thao',
-    ],
-    impact: 'Runtime chi kiem tra duoc ngoai le duoi nguong thap nhat (17/30 = ineligible chac chan); tu 17/30 den 22,5/30 can chon nganh cu the de ket luan chinh xac.',
+    impact: 'Điểm ưu tiên hiển thị dùng khung quốc gia hiện hành, không phải bảng riêng của trường (trường không công bố bảng riêng).',
+  },
+  {
+    id: 'tnue-aptitude-programs-not-modeled',
+    label:
+      'Giáo dục Thể chất (T01), Sư phạm Âm nhạc (N01), Huấn luyện thể thao (T11) dùng tổ hợp năng khiếu — không có SubjectId tương ứng trong hệ thống — chưa mô hình hoá.',
+    status: 'incomplete',
+    sourceId: 'tnue-cutoff-2026',
+    scoreAffecting: false,
+    impact: 'Thí sinh xét tuyển 3 ngành này chưa tính được qua UniScoreVN cho TNUE.',
+  },
+  {
+    id: 'tnue-tiebreak-criteria-not-modeled',
+    label:
+      'Một số ngành (Sư phạm Hoá học, Sư phạm Tiếng Anh, Sư phạm Tin học) công bố "Tiêu chí phụ" (vd Điểm cộng=0 & Điểm môn cốt lõi >= ngưỡng riêng) áp dụng cho thí sinh ở cuối danh sách trúng tuyển (bằng điểm chuẩn) — chưa mô hình hoá trong bộ tính điểm.',
+    status: 'incomplete',
+    sourceId: 'tnue-cutoff-2026',
+    scoreAffecting: false,
+    impact: 'Thí sinh có điểm xét tuyển đúng bằng điểm chuẩn ở 3 ngành này có thể được báo "eligible" dù thực tế cần đáp ứng thêm tiêu chí phụ — chỉ ảnh hưởng trường hợp biên đúng ngưỡng.',
   },
   {
     id: 'tnue-other-methods-not-modeled',
-    label: 'TNUE 2026 co the co them phuong thuc hoc ba/danh gia nang luc ngoai thi TN THPT (theo he thong Dai hoc Thai Nguyen); chua duoc xac minh/mo hinh hoa rieng cho TNUE.',
-    status: 'official-but-unparsed',
-    sourceId: 'tnue-threshold-2026',
+    label: 'TNUE 2026 còn phương thức học bạ/đánh giá năng lực (V-SAT-TNU, HSA, ĐGNL ĐH Sư phạm Hà Nội), xét tuyển thẳng — chỉ phương thức thi TN THPT được mô hình hoá.',
+    status: 'incomplete',
+    sourceId: 'tnue-cutoff-2026',
+    scoreAffecting: false,
   },
 ];

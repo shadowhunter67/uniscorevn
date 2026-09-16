@@ -13,11 +13,11 @@ export const tnueModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'TNUE 2026 THPT threshold is modeled from the official Thai Nguyen University system page: a per-category band of 17,00-22,50/30. Runtime models the band conservatively (ineligible below 17, unresolved above); per-major mapping and other admission methods are not modeled yet.',
+    'Đã xác minh điểm chuẩn trúng tuyển chính thức 2026 của TNUE qua trang chính chủ tuyensinh.tnue.edu.vn (09/8/2026, HTML text thật): 19/22 ngành, nhánh xét kết quả thi TN THPT — Điểm xét = tổng 3 môn theo tổ hợp gốc đã công bố + điểm ưu tiên KV/ĐT (khung quốc gia hiện hành). 3 ngành tổ hợp năng khiếu (Giáo dục Thể chất, Sư phạm Âm nhạc, Huấn luyện thể thao) chưa mô hình hoá. Phương thức học bạ/đánh giá năng lực chưa được mô hình hoá.',
   capabilities: {
     admissionInfo: true,
     programs: false,
-    cutoffs: false,
+    cutoffs: true,
     ...aggregateSchoolCapabilities(tnueAdmissionMethods),
   },
   catalogSources: [
@@ -26,6 +26,12 @@ export const tnueModule: SchoolModule = {
       url: 'https://tnu.edu.vn/dao-tao/thong-tin-tuyen-sinh/thong-tin-tuyen-sinh-dh-cd/truong-dai-hoc-su-pham-dai-hoc-thai-nguyen-cong-bo-nguong-dam-bao-chat-luong-dau-vao-nam-2026.html',
       type: 'official-institution',
       checkedAt: '2026-08-24',
+    },
+    {
+      title: 'Thông báo điểm trúng tuyển đại học chính quy năm 2026',
+      url: 'https://tuyensinh.tnue.edu.vn/thong-bao-diem-trung-tuyen-dai-hoc-chinh-quy-nam-2026',
+      type: 'official-institution',
+      checkedAt: '2026-09-16',
     },
   ],
 };
