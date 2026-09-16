@@ -25,7 +25,7 @@ export const pyuSources: PyuSource[] = [
     publishedAt: '2026-07-10',
     sourceType: 'official-admission',
     verification: 'verified',
-    lifecycle: { effectiveYear: 2026, status: 'superseded' },
+    lifecycle: { effectiveYear: 2026, status: 'superseded', supersededBy: 'pyu-cutoff-2026' },
     note:
       'Trường Đại học Phú Yên (PYU) công bố điểm sàn 2026 trên cổng chính thức tuyensinh.pyu.edu.vn/pyu.edu.vn, nhưng WebFetch chỉ đọc được tiêu đề thông báo, không lấy được bảng số. Số liệu đối chiếu trực tiếp qua bài báo Tuổi Trẻ (cơ quan báo chí nhà nước), trích nguyên văn: khối ngành sư phạm (6 ngành: Giáo dục mầm non, Giáo dục tiểu học, Sư phạm toán học, Sư phạm ngữ văn, Sư phạm tiếng Anh, Sư phạm khoa học tự nhiên) điểm sàn 20/30 (CHỈ phương thức thi TN THPT, không xét học bạ/ĐGNL cho khối này); 5 ngành còn lại (Ngôn ngữ Anh, Quản trị kinh doanh, Công nghệ thông tin, Nông nghiệp, Du lịch) điểm sàn 15/30 (thi TN THPT), 18/30 (học bạ), 500 điểm (ĐGNL ĐHQG-HCM). Bị thay thế bởi điểm chuẩn trúng tuyển chính thức `pyu-cutoff-2026` — giữ lại làm nguồn lịch sử điểm sàn (trước kỳ thi), không còn dùng cho tính điểm.',
   },

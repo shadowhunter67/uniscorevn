@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 232,
       admissionDataAvailable: 232,
-      eligibilitySupported: 20,
-      calculatorSupported: 147,
+      eligibilitySupported: 19,
+      calculatorSupported: 148,
       partialCalculator: 3,
-      fullyVerified: 144,
+      fullyVerified: 145,
       catalogOnly: 123,
     });
   });
@@ -113,9 +113,13 @@ describe('institution coverage statistics', () => {
     // Batch (2026-08-29): HUST graduated to eligibility-only — official ts.hust.edu.vn 2026
     // quality-assurance threshold read via vision from the embedded image, banded by khối nhóm
     // ngành (Kỹ thuật >=20/30; Kinh tế/Giáo dục/Ngoại ngữ >=19,5/30); no per-program mapping found.
-    for (const schoolId of ['vnuf', 'vgu', 'hpu2']) {
+    for (const schoolId of ['vnuf', 'vgu']) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
     }
+    // Batch (2026-09-16, roadmap 142 -> ...): HPU2 graduated to verified-calculator — Cổng TTĐT
+    // Chính phủ đăng lại bảng điểm chuẩn chính thức 2026 (25/25 ngành nhóm 3-môn chuẩn, đối chiếu
+    // VnExpress độc lập), thay cho ngưỡng nhận hồ sơ (sàn) cũ.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.hpu2)).toBe('verified-calculator');
     // Batch (2026-09-03, roadmap 100 -> 150, Phase A remainder): HUST graduated to verified-
     // calculator — found the ACTUAL per-chương-trình/tổ-hợp cutoff table for the adjacent 2025
     // cycle (tuyensinh247, cross-check TUYỆT ĐỐI 4 mức top/bottom qua vnexpress/nhandan/chinhphu.vn)

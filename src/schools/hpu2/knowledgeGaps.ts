@@ -2,30 +2,46 @@ import type { KnowledgeGap } from '../../core/knowledgeStatus';
 
 export const hpu2KnowledgeGaps: KnowledgeGap[] = [
   {
-    id: 'hpu2-program-threshold-table-not-imported',
-    label: 'HPU2 2026 phan biet nguong theo nhom nganh su pham va ngoai su pham; chua chon duoc nganh cu the de ap dung dung muc.',
-    status: 'official-but-unparsed',
-    sourceId: 'hpu2-admission-info-2026',
+    id: 'hpu2-priority-value-silent',
+    label:
+      'Nguồn điểm chuẩn (Cổng TTĐT Chính phủ, 10/8/2026) KHÔNG kèm bảng mức điểm ưu tiên khu vực/đối tượng cụ thể của trường. Dùng khung điểm ưu tiên quốc gia hiện hành làm judgment call cho GIÁ TRỊ bảng (`priority.ts`), cùng tiền lệ DLA/BMTU/DNU/TUEBA/PVU/HTU/TUMP/NAEM/MKU/PYU/DHV.',
+    status: 'incomplete',
+    sourceId: 'hpu2-cutoff-2026',
     scoreAffecting: true,
-    knownData: [
-      'Nganh dao tao giao vien (Toan, Ly, Hoa, Sinh, Van, Su, GDCD, Tieng Anh, Khoa hoc tu nhien, Giao duc tieu hoc, GD Quoc phong An ninh...): >= 18,0/30 (thi TN THPT) hoac hoc luc lop 12 >= 8,5/10',
-      'Cac nganh khac (Ngon ngu Anh, Ngon ngu Trung, Tam ly giao duc, Viet Nam hoc, Cong nghe sinh hoc, Khoa hoc vat lieu, Cong nghe ky thuat hoa hoc, CNTT, Toan ung dung): >= 15,0/30',
-      'Giao duc the chat: to hop 2 mon (khong tinh nang khieu) >= 11,0/30 hoac >= 6,5/10, hoc luc xep loai kha tro len',
-      'Giao duc mam non: to hop 2 mon (khong tinh nang khieu) >= 12,0/30',
-      'Quan ly the thao: >= 10,0/30 (khong tinh nang khieu)',
-    ],
-    impact: 'Runtime chi loai duoc ho so duoi 15/30 (chac chan khong dat cac nganh 3-mon chuan) va xac nhan dat tren 18/30 (dat moi nhom); giua 15/30 va 18/30 can chon nhom nganh de ket luan chinh xac. Giao duc the chat/mam non/Quan ly the thao dung to hop 2-mon rieng, khong duoc mo hinh boi bo tinh 3-mon nay.',
+    impact: 'Điểm ưu tiên hiển thị dùng khung quốc gia hiện hành, không phải bảng riêng của trường (trường không công bố bảng riêng).',
+  },
+  {
+    id: 'hpu2-combinations-not-modeled',
+    label:
+      'HPU2 KHÔNG công bố tổ hợp môn xét tuyển riêng theo từng ngành trong nguồn đã đọc được (bảng điểm chuẩn chỉ có mã ngành + điểm, không có cột tổ hợp) — module chấp nhận bất kỳ tổ hợp 3 môn nào người dùng chọn, không giới hạn theo ngành.',
+    status: 'incomplete',
+    sourceId: 'hpu2-cutoff-2026',
+    scoreAffecting: false,
+    impact: 'Không loại được tổ hợp không hợp lệ theo quy định thực tế của từng ngành (nếu có) — người dùng cần tự xác nhận tổ hợp mình chọn được ngành đó chấp nhận.',
+  },
+  {
+    id: 'hpu2-two-subject-programs-not-modeled',
+    label:
+      'Giáo dục Thể chất, Giáo dục Mầm non, Quản lý thể dục thể thao dùng tổ hợp 2 môn văn hoá + thi năng khiếu (không phải 3-môn chuẩn) — chưa mô hình hoá vì không có SubjectId/kết cấu đầu vào cho điểm năng khiếu.',
+    status: 'incomplete',
+    sourceId: 'hpu2-admission-info-2026',
+    scoreAffecting: false,
+    impact: 'Thí sinh xét tuyển 3 ngành này chưa tính được qua UniScoreVN cho HPU2.',
   },
   {
     id: 'hpu2-other-methods-not-modeled',
-    label: 'HPU2 con xet tuyen thang/uu tien, hoc ba (mot so nganh), danh gia nang luc SP2E (truong tu to chuc) hoac H-SCA (DH Su pham TPHCM), va ket hop thi nang khieu; chi phuong thuc thi TN THPT 3-mon duoc mo hinh hoa.',
-    status: 'official-but-unparsed',
-    sourceId: 'hpu2-admission-info-2026',
-  },
-  {
-    id: 'hpu2-bonus-priority-not-modeled',
-    label: 'Diem uu tien toi da 10% thang diem, va thu tu uu tien khi xet tuyen (diem uu tien thap hon, nguyen vong cao hon, diem mon cot loi cao hon) duoc cong bo nhung chua duoc trien khai trong bo tinh diem.',
+    label:
+      'HPU2 còn xét tuyển thẳng/ưu tiên, học bạ (một số ngành), đánh giá năng lực SP2E (trường tự tổ chức) hoặc H-SCA (ĐH Sư phạm TP.HCM) — chỉ phương thức thi TN THPT 3-môn được mô hình hoá.',
     status: 'incomplete',
     sourceId: 'hpu2-admission-info-2026',
+    scoreAffecting: false,
+  },
+  {
+    id: 'hpu2-tiebreak-not-modeled',
+    label: 'Không tìm thấy văn bản nêu tiêu chí phụ khi bằng điểm chuẩn ở phương thức thi TN THPT — module không mô hình hoá tiêu chí phụ cho trường hợp bằng điểm chuẩn.',
+    status: 'incomplete',
+    sourceId: 'hpu2-cutoff-2026',
+    scoreAffecting: false,
+    impact: 'Thí sinh có điểm xét tuyển đúng bằng điểm chuẩn có thể được báo "eligible" dù thực tế cần tiêu chí phụ khác (nếu có) để trúng tuyển — chỉ ảnh hưởng trường hợp biên đúng ngưỡng.',
   },
 ];

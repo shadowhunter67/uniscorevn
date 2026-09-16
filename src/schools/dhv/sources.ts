@@ -25,7 +25,7 @@ export const dhvSources: DhvSource[] = [
     publishedAt: '2026-07-04',
     sourceType: 'official-admission',
     verification: 'verified',
-    lifecycle: { effectiveYear: 2026, status: 'superseded' },
+    lifecycle: { effectiveYear: 2026, status: 'superseded', supersededBy: 'dhv-cutoff-2026' },
     note:
       'Trường Đại học Hùng Vương TP.HCM (DHV) công bố ngưỡng đảm bảo chất lượng đầu vào 2026 trên cổng chính thức tuyensinh.dhv.edu.vn, nhưng WebFetch chỉ đọc được nội dung mô tả phương thức, không lấy được con số ngưỡng. Số liệu đối chiếu trực tiếp qua bài báo Tuổi Trẻ (cơ quan báo chí nhà nước), trích nguyên văn: "THPT Exit Exam: từ 15 điểm; High School Transcript: 18 điểm; National University Assessment (ĐGNL ĐHQG-HCM): 600 điểm". Riêng nhóm ngành Luật và Tâm lý học: "sẽ cập nhật ngưỡng đầu vào ngay sau khi Bộ GD&ĐT ban hành quy định" — KHÔNG áp dụng ngưỡng 15/30 chung, loại khỏi phạm vi mô hình hoá. Bị thay thế bởi điểm chuẩn trúng tuyển chính thức `dhv-cutoff-2026` (đã công bố ngưỡng Luật/Tâm lý học) — giữ lại làm nguồn lịch sử điểm sàn (trước kỳ thi), không còn dùng cho tính điểm.',
   },
