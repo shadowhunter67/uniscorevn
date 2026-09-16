@@ -36,8 +36,21 @@ export const dutSources: (Omit<AdmissionSource, 'schoolId'> & { note?: string })
     publishedAt: '2026-07-13',
     sourceType: 'secondary',
     verification: 'cross-checked',
+    lifecycle: { effectiveYear: 2026, status: 'superseded', supersededBy: 'dut-cutoff-2026' },
+    note:
+      'Bài tổng hợp trên trang tuyển sinh chính thức của VNUK (một CSĐT thành viên ĐHĐN) đối chiếu ngưỡng đảm bảo chất lượng đầu vào 2026 đã công bố của các CSĐT thành viên ĐHĐN, bao gồm DUT. Dùng verification cross-checked vì đây là nguồn tổng hợp lại thông báo gốc của từng trường, không phải thông báo gốc trực tiếp của DUT. Bị thay thế bởi điểm chuẩn trúng tuyển chính thức theo NGÀNH `dut-cutoff-2026` — giữ lại làm nguồn lịch sử điểm sàn (trước kỳ thi).',
+  },
+  {
+    id: 'dut-cutoff-2026',
+    publisher: 'Đại học Đà Nẵng (Ban Đào tạo & Đảm bảo chất lượng giáo dục)',
+    title: 'Điểm chuẩn vào các cơ sở đào tạo thuộc Đại học Đà Nẵng năm 2026',
+    url: 'https://ts.udn.vn/DHCD/Chinhquy/diemchuan/19567',
+    accessedAt: '2026-09-16',
+    publishedAt: '2026-08-09',
+    sourceType: 'official-admission',
+    verification: 'verified',
     lifecycle: { effectiveYear: 2026, status: 'current' },
     note:
-      'Bài tổng hợp trên trang tuyển sinh chính thức của VNUK (một CSĐT thành viên ĐHĐN) đối chiếu ngưỡng đảm bảo chất lượng đầu vào 2026 đã công bố của các CSĐT thành viên ĐHĐN, bao gồm DUT. Dùng verification cross-checked vì đây là nguồn tổng hợp lại thông báo gốc của từng trường, không phải thông báo gốc trực tiếp của DUT.',
+      'Trang chính chủ hệ thống Đại học Đà Nẵng (ts.udn.vn) — bảng HTML text thật (đọc trực tiếp được, không cần vision), gộp điểm chuẩn trúng tuyển 2026 của TẤT CẢ cơ sở đào tạo thành viên/trực thuộc ĐHĐN trong 1 trang, có cột mã ngành, tên ngành/chuyên ngành, điểm trúng tuyển (đã quy về thang 30, theo ghi chú cuối bảng), và phương thức tuyển sinh tương ứng. Mục I (mã trường DDK) = TRƯỜNG ĐẠI HỌC BÁCH KHOA (DUT), 49 ngành/chuyên ngành, TẤT CẢ đều ghi phương thức "Xét điểm thi THPT" (không phải phương thức kết hợp) — module này dùng nguyên bảng con DUT. KHÔNG có cột tổ hợp môn xét tuyển — người dùng tự chọn tổ hợp, xem `knowledgeGaps.ts`.',
   },
 ];

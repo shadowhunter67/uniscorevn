@@ -2,40 +2,38 @@ import type { KnowledgeGap } from '../../core/knowledgeStatus';
 
 export const dutKnowledgeGaps: KnowledgeGap[] = [
   {
-    id: 'dut-program-threshold-table-not-imported',
+    id: 'dut-priority-value-silent',
     label:
-      'Bảng ngưỡng đảm bảo chất lượng đầu vào 2026 theo từng ngành/chương trình của DUT chưa được nhập đầy đủ thành dataset runtime (mới có khoảng min-max tổng hợp).',
-    status: 'official-but-unparsed',
-    sourceId: 'dut-quality-threshold-2026',
+      'Bảng "Điểm chuẩn vào các cơ sở đào tạo thuộc Đại học Đà Nẵng năm 2026" (ts.udn.vn) KHÔNG kèm bảng mức điểm ưu tiên khu vực/đối tượng cụ thể của DUT. Dùng khung điểm ưu tiên quốc gia hiện hành làm judgment call cho GIÁ TRỊ bảng (`priority.ts`), cùng tiền lệ DLA/BMTU/DNU/TUEBA/PVU/HTU/TUMP/NAEM/MKU/PYU/DHV/HPU2/TNUE/TNUFL.',
+    status: 'incomplete',
+    sourceId: 'dut-cutoff-2026',
     scoreAffecting: true,
-    knownData: ['Ngưỡng DUT 2026 dao động khoảng 16-22.75/30 theo ngành/chương trình'],
-    impact: 'So sánh chỉ loại chắc chắn hồ sơ dưới 16/30; chưa kết luận đạt cho từng ngành cụ thể.',
+    impact: 'Điểm ưu tiên hiển thị dùng khung quốc gia hiện hành, không phải bảng riêng của trường (trường không công bố bảng riêng).',
   },
   {
-    id: 'dut-conversion-and-bonus-appendices-not-imported',
-    label: 'Phụ lục quy đổi giữa các phương thức/tổ hợp và bảng điểm cộng, điểm ưu tiên của DUT 2026 chưa được nhập.',
-    status: 'official-but-unparsed',
-    sourceId: 'dut-admission-info-2026',
-    scoreAffecting: true,
-    impact: 'Chưa bật scoreConversion/exactCalculator; cần đọc phụ lục chính thức hoặc file đính kèm dạng ảnh/PDF quét.',
+    id: 'dut-combinations-not-modeled',
+    label:
+      'DUT KHÔNG công bố tổ hợp môn xét tuyển riêng theo từng ngành trong bảng điểm chuẩn đã đọc được (chỉ có mã ngành + điểm, không có cột tổ hợp) — module chấp nhận bất kỳ tổ hợp 3 môn nào người dùng chọn, không giới hạn theo ngành.',
+    status: 'incomplete',
+    sourceId: 'dut-cutoff-2026',
+    scoreAffecting: false,
+    impact: 'Không loại được tổ hợp không hợp lệ theo quy định thực tế của từng ngành (nếu có) — người dùng cần tự xác nhận tổ hợp mình chọn được ngành đó chấp nhận.',
   },
   {
-    id: 'dut-conversion-coefficient-missing',
+    id: 'dut-conversion-coefficient-not-needed',
     label:
-      'DUT công bố áp dụng MỘT ngưỡng chung sau khi quy đổi tương đương giữa các phương thức (thi TN THPT, Đánh giá tư duy ĐHBK Hà Nội, xét tuyển thẳng), nhưng hệ số/công thức quy đổi cụ thể giữa các thang điểm chưa tìm được ở dạng máy đọc được trong đợt research này.',
+      'DUT công bố áp dụng MỘT ngưỡng chung sau khi quy đổi tương đương giữa các phương thức (thi TN THPT, Đánh giá tư duy ĐHBK Hà Nội, xét tuyển thẳng). Bảng điểm chuẩn theo ngành đã đọc được (`dut-cutoff-2026`) ghi RIÊNG cột phương thức "Xét điểm thi THPT" cho mọi ngành DUT — module chỉ dùng đúng cột này, không cần hệ số quy đổi giữa các phương thức khác.',
     status: 'incomplete',
     sourceId: 'dut-admission-info-2026',
-    scoreAffecting: true,
-    impact:
-      'Không đủ căn cứ để dựng scoreConversion/exactCalculator cho DUT; theo nguyên tắc "không đoán công thức", DUT giữ ở mức eligibility-only thay vì partial như kỳ vọng ban đầu trong backlog.',
+    scoreAffecting: false,
+    impact: 'Thí sinh xét tuyển bằng Đánh giá tư duy ĐHBK Hà Nội hoặc xét tuyển thẳng chưa tính được qua UniscoreVN cho DUT (dù điểm chuẩn thi TN THPT đã công bố và mô hình hoá đầy đủ).',
   },
   {
-    id: 'dut-recheck-2026-08-28',
-    label:
-      'Recheck 2026-08-28 (WebSearch + WebFetch trực tiếp `tuyensinh.dut.udn.vn/phuong-thuc-tuyen-sinh`): không tìm thêm được hệ số/bảng quy đổi tương đương máy đọc được giữa thi TN THPT và Đánh giá tư duy ĐHBK Hà Nội — trang chỉ liệt kê tên phương thức kèm link "Xem chi tiết" tới các trang con chưa fetch được nội dung số liệu. Báo chí (vietnamnet/vnexpress/tuyensinh247) chỉ có điểm CHUẨN (kết quả trúng tuyển cuối) theo ngành, không phải bảng hệ số quy đổi — không dùng thay thế được. Giữ nguyên eligibility-only.',
+    id: 'dut-tiebreak-not-modeled',
+    label: 'Không tìm thấy văn bản nêu tiêu chí phụ khi bằng điểm chuẩn ở phương thức thi TN THPT — module không mô hình hoá tiêu chí phụ cho trường hợp bằng điểm chuẩn.',
     status: 'incomplete',
-    sourceId: 'dut-admission-info-2026',
-    scoreAffecting: true,
-    impact: 'Không có thay đổi so với đợt research trước; DUT tiếp tục ở mức eligibility-only.',
+    sourceId: 'dut-cutoff-2026',
+    scoreAffecting: false,
+    impact: 'Thí sinh có điểm xét tuyển đúng bằng điểm chuẩn có thể được báo "eligible" dù thực tế cần tiêu chí phụ khác (nếu có) để trúng tuyển — chỉ ảnh hưởng trường hợp biên đúng ngưỡng.',
   },
 ];
