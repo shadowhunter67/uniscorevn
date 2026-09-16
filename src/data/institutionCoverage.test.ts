@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 232,
       admissionDataAvailable: 232,
-      eligibilitySupported: 18,
-      calculatorSupported: 149,
+      eligibilitySupported: 17,
+      calculatorSupported: 150,
       partialCalculator: 3,
-      fullyVerified: 146,
+      fullyVerified: 147,
       catalogOnly: 123,
     });
   });

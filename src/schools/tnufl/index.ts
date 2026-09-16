@@ -13,11 +13,11 @@ export const tnuflModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'TNUFL 2026 THPT-exam-route cutoff is modeled from the official Thai Nguyen University system page: a per-major band of 16,00-26,60/30. Runtime models the band conservatively (ineligible below 16, unresolved above); per-major mapping and other admission methods are not modeled yet.',
+    'Đã xác minh điểm chuẩn trúng tuyển chính thức 2026 của TNUFL qua trang hệ thống tnu.edu.vn: 2/5 ngành liên quan Tiếng Anh (Ngôn ngữ Anh, Sư phạm Tiếng Anh) lên exact — Điểm xét = tổng 3 môn (tổ hợp D01/D14/D15/X78) + điểm ưu tiên KV/ĐT (khung quốc gia hiện hành). 3 ngành dùng ngoại ngữ Trung/Hàn (Ngôn ngữ Trung Quốc, Ngôn ngữ Hàn Quốc, Sư phạm Tiếng Trung Quốc) chưa mô hình hoá — hệ thống chỉ có SubjectId cho Tiếng Anh.',
   capabilities: {
     admissionInfo: true,
     programs: false,
-    cutoffs: false,
+    cutoffs: true,
     ...aggregateSchoolCapabilities(tnuflAdmissionMethods),
   },
   catalogSources: [
