@@ -64,9 +64,9 @@ Snapshot hiện tại được tính từ `schoolRegistry` bằng `npm run stats
 | Cao đẳng giáo dục nghề nghiệp | 77 |
 | Nhóm độc lập khác | 0 |
 | Có dữ liệu tuyển sinh hoặc capability cao hơn | 232 |
-| Chỉ kiểm tra điều kiện/ngưỡng | 15 |
+| Chỉ kiểm tra điều kiện/ngưỡng | 14 |
 | Có calculator một phần | 3 |
-| Calculator đã xác minh | 149 |
+| Calculator đã xác minh | 150 |
 | Chỉ có trong danh mục | 123 |
 <!-- coverage:kpi:end -->
 
@@ -81,9 +81,9 @@ Mức hỗ trợ đổi thường xuyên (mỗi batch nghiên cứu mới lại 
 <!-- coverage:support-status:start (generated bởi `npm run stats:coverage -- --write`, xem scripts/stats-coverage.ts — KHÔNG sửa tay) -->
 | Mức hỗ trợ | Số trường | Ý nghĩa |
 |---|---:|---|
-| ✅ Tính được điểm xét tuyển | 149 | Công thức, ngưỡng, điểm cộng và điểm ưu tiên đều có nguồn chính thức trong phạm vi đã công bố. |
+| ✅ Tính được điểm xét tuyển | 150 | Công thức, ngưỡng, điểm cộng và điểm ưu tiên đều có nguồn chính thức trong phạm vi đã công bố. |
 | 🟡 Tính được một phần | 3 | Có công thức thật nhưng chưa phủ hết mọi phương thức xét tuyển của trường. |
-| 🟡 Kiểm tra được điều kiện | 15 | Có ngưỡng điểm sàn/điều kiện chính thức, chưa tính được điểm xét tuyển đầy đủ. |
+| 🟡 Kiểm tra được điều kiện | 14 | Có ngưỡng điểm sàn/điều kiện chính thức, chưa tính được điểm xét tuyển đầy đủ. |
 | ⚪ Đã có thông tin tuyển sinh | 65 | Đã có thông tin tuyển sinh chính thức, nhưng chưa đủ để tính điểm hay kết luận điều kiện. |
 | ⚪ Chưa có dữ liệu tuyển sinh | 123 | Trường có trong danh mục nhưng UniScoreVN chưa tìm được nguồn tuyển sinh chính thức nào. |
 <!-- coverage:support-status:end -->
