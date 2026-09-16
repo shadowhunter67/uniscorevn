@@ -36,8 +36,21 @@ export const dueudnSources: (Omit<AdmissionSource, 'schoolId'> & { note?: string
     publishedAt: '2026-07-13',
     sourceType: 'secondary',
     verification: 'cross-checked',
+    lifecycle: { effectiveYear: 2026, status: 'superseded', supersededBy: 'dueudn-cutoff-2026' },
+    note:
+      'Bài tổng hợp trên trang tuyển sinh chính thức của VNUK (một CSĐT thành viên ĐHĐN) đối chiếu ngưỡng đảm bảo chất lượng đầu vào 2026 đã công bố của các CSĐT thành viên ĐHĐN, bao gồm DUE. Dùng verification cross-checked vì đây là nguồn tổng hợp lại thông báo gốc của từng trường, không phải thông báo gốc trực tiếp của DUE. Bị thay thế bởi điểm chuẩn trúng tuyển chính thức theo NGÀNH `dueudn-cutoff-2026` — giữ lại làm nguồn lịch sử điểm sàn (trước kỳ thi).',
+  },
+  {
+    id: 'dueudn-cutoff-2026',
+    publisher: 'Đại học Đà Nẵng (Ban Đào tạo & Đảm bảo chất lượng giáo dục)',
+    title: 'Điểm chuẩn vào các cơ sở đào tạo thuộc Đại học Đà Nẵng năm 2026',
+    url: 'https://ts.udn.vn/DHCD/Chinhquy/diemchuan/19567',
+    accessedAt: '2026-09-16',
+    publishedAt: '2026-08-09',
+    sourceType: 'official-admission',
+    verification: 'verified',
     lifecycle: { effectiveYear: 2026, status: 'current' },
     note:
-      'Bài tổng hợp trên trang tuyển sinh chính thức của VNUK (một CSĐT thành viên ĐHĐN) đối chiếu ngưỡng đảm bảo chất lượng đầu vào 2026 đã công bố của các CSĐT thành viên ĐHĐN, bao gồm DUE. Dùng verification cross-checked vì đây là nguồn tổng hợp lại thông báo gốc của từng trường, không phải thông báo gốc trực tiếp của DUE.',
+      'Trang chính chủ hệ thống Đại học Đà Nẵng (ts.udn.vn) — bảng HTML text thật, gộp điểm chuẩn trúng tuyển 2026 của TẤT CẢ CSĐT thành viên ĐHĐN trong 1 trang. Mục II (mã trường DDQ) = TRƯỜNG ĐẠI HỌC KINH TẾ (DUE), 36 mã xét tuyển chia 2 nhóm: "ST - Tiêu chuẩn" (19 mã, phương thức "Xét điểm thi THPT" thuần) và "PR/GB/EL" (17 mã, phương thức "Xét kết hợp HB + tiếng Anh", KHÔNG mô hình hoá — công thức trọng số khác, cần chứng chỉ tiếng Anh quốc tế). Module này CHỈ dùng 19 mã "ST". KHÔNG có cột tổ hợp môn xét tuyển — người dùng tự chọn tổ hợp, xem `knowledgeGaps.ts`.',
   },
 ];

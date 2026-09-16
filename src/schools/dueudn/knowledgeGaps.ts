@@ -2,32 +2,38 @@ import type { KnowledgeGap } from '../../core/knowledgeStatus';
 
 export const dueudnKnowledgeGaps: KnowledgeGap[] = [
   {
-    id: 'dueudn-program-threshold-table-not-imported',
+    id: 'dueudn-priority-value-silent',
     label:
-      'Bảng ngưỡng đảm bảo chất lượng đầu vào 2026 theo từng ngành/chương trình của DUE chưa được nhập đầy đủ thành dataset runtime (mới có khoảng min-max tổng hợp).',
-    status: 'official-but-unparsed',
-    sourceId: 'dueudn-quality-threshold-2026',
+      'Bảng "Điểm chuẩn vào các cơ sở đào tạo thuộc Đại học Đà Nẵng năm 2026" (ts.udn.vn) KHÔNG kèm bảng mức điểm ưu tiên khu vực/đối tượng cụ thể của DUE. Dùng khung điểm ưu tiên quốc gia hiện hành làm judgment call cho GIÁ TRỊ bảng (`priority.ts`), cùng tiền lệ DLA/BMTU/DNU/TUEBA/PVU/HTU/TUMP/NAEM/MKU/PYU/DHV/HPU2/TNUE/TNUFL/DUT.',
+    status: 'incomplete',
+    sourceId: 'dueudn-cutoff-2026',
     scoreAffecting: true,
-    knownData: ['Ngưỡng DUE 2026 dao động khoảng 17-24/30 theo ngành/chương trình'],
-    impact: 'So sánh chỉ loại chắc chắn hồ sơ dưới 17/30; chưa kết luận đạt cho từng ngành cụ thể.',
+    impact: 'Điểm ưu tiên hiển thị dùng khung quốc gia hiện hành, không phải bảng riêng của trường (trường không công bố bảng riêng).',
   },
   {
-    id: 'dueudn-conversion-and-bonus-appendices-not-imported',
-    label: 'Phụ lục quy đổi giữa các phương thức/tổ hợp và bảng điểm cộng, điểm ưu tiên của DUE 2026 chưa được nhập.',
-    status: 'official-but-unparsed',
-    sourceId: 'dueudn-admission-info-2026',
-    scoreAffecting: true,
-    impact: 'Chưa bật scoreConversion/exactCalculator; cần đọc phụ lục chính thức hoặc file đính kèm dạng ảnh/PDF quét.',
-    knownData: [
-      'Cross-check thứ cấp (VNUK, tuyensinh247, không phải nguồn gốc DUE): ngưỡng nhóm ngành thường 17,00/30; chương trình tiếng Anh toàn phần/bán phần (GB/PR) 18,00/30; DUE-Elite (Cử nhân tài năng) 24,00/30.',
-      'Cross-check thứ cấp ghi chú "số đã công bố ĐÃ GỒM điểm cộng (nếu có) và điểm ưu tiên khu vực, đối tượng" — khác pattern raw-only của UDA/TBDU/FPTU/HCMUE, nên KHÔNG áp dụng judgment call so tổng thô nếu chưa xác minh lại từ nguồn gốc DUE.',
-    ],
-    attemptedSources: [
-      '2026-08-28: due.udn.vn/vi-vn/tuvantuyensinh (cổng tuyển sinh 2026 DUE) — trang điều hướng, không có ngưỡng/công thức trực tiếp.',
-      '2026-08-28: due.udn.vn/vi-vn/ThongBao/ThongbaoDS/bid/456 (danh sách thông báo) — không thấy thông báo ngưỡng đảm bảo chất lượng đầu vào 2026 hay công thức điểm xét tuyển trong danh sách hiển thị.',
-      '2026-08-28: tìm kiếm due.udn.vn qua site-search — không ra trang thông báo ngưỡng cụ thể; chỉ ra lại các trang cổng thông tin đã thử.',
-    ],
-    whyNotInferred:
-      'Chưa xác minh được từ nguồn gốc DUE (due.udn.vn) liệu ngưỡng 17/18/24 có thật sự đã gồm điểm cộng+ưu tiên như cross-check nói hay không — nếu áp dụng nhầm công thức (so tổng thô thay vì ĐXT-với-ưu-tiên hoặc ngược lại) sẽ sai kết luận eligible/ineligible cho thí sinh biên. Giữ nguyên eligibility-only, không nâng lên exact.',
+    id: 'dueudn-combinations-not-modeled',
+    label:
+      'DUE KHÔNG công bố tổ hợp môn xét tuyển riêng theo từng mã trong bảng điểm chuẩn đã đọc được (chỉ có mã xét tuyển + điểm, không có cột tổ hợp) — module chấp nhận bất kỳ tổ hợp 3 môn nào người dùng chọn, không giới hạn theo mã.',
+    status: 'incomplete',
+    sourceId: 'dueudn-cutoff-2026',
+    scoreAffecting: false,
+    impact: 'Không loại được tổ hợp không hợp lệ theo quy định thực tế của từng mã (nếu có) — người dùng cần tự xác nhận tổ hợp mình chọn được ngành đó chấp nhận.',
+  },
+  {
+    id: 'dueudn-pr-gb-el-not-modeled',
+    label:
+      'DUE công bố 17/36 mã xét tuyển thuộc nhóm "PR - Bán phần tiếng Anh" / "GB - Toàn phần tiếng Anh" / "EL - DUE-Elite", phương thức "Xét kết hợp HB + tiếng Anh" (không phải thi TN THPT thuần, cần điểm học bạ + chứng chỉ tiếng Anh quốc tế) — công thức trọng số cụ thể chưa xác minh, không mô hình hoá.',
+    status: 'incomplete',
+    sourceId: 'dueudn-cutoff-2026',
+    scoreAffecting: false,
+    impact: 'Thí sinh xét tuyển các chương trình song ngữ/toàn phần tiếng Anh (Marketing số, Ngoại thương, Kinh tế quốc tế PR...) chưa tính được qua UniscoreVN cho DUE.',
+  },
+  {
+    id: 'dueudn-tiebreak-not-modeled',
+    label: 'Không tìm thấy văn bản nêu tiêu chí phụ khi bằng điểm chuẩn ở phương thức thi TN THPT — module không mô hình hoá tiêu chí phụ cho trường hợp bằng điểm chuẩn.',
+    status: 'incomplete',
+    sourceId: 'dueudn-cutoff-2026',
+    scoreAffecting: false,
+    impact: 'Thí sinh có điểm xét tuyển đúng bằng điểm chuẩn có thể được báo "eligible" dù thực tế cần tiêu chí phụ khác (nếu có) để trúng tuyển — chỉ ảnh hưởng trường hợp biên đúng ngưỡng.',
   },
 ];

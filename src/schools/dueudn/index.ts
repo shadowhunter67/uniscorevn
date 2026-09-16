@@ -13,11 +13,11 @@ export const dueudnModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'Đã xác minh lại nguồn tuyển sinh chính thức 2026 (thông báo hệ thống ĐHĐN + trang/tài liệu tuyển sinh riêng của DUE) · Ngưỡng đảm bảo chất lượng đầu vào (thi TN THPT) khoảng 17-24/30 theo ngành · Chưa nhập bảng ngành chi tiết, phụ lục quy đổi và bảng điểm cộng/ưu tiên.',
+    'Đã xác minh điểm chuẩn trúng tuyển chính thức 2026 của DUE qua trang hệ thống ts.udn.vn (09/8/2026, bảng HTML text thật): 19/36 mã xét tuyển (chương trình "ST - Tiêu chuẩn"), nhánh xét kết quả thi TN THPT thuần — Điểm xét = tổng 3 môn + điểm ưu tiên KV/ĐT (khung quốc gia hiện hành). 17 mã chương trình song ngữ/toàn phần tiếng Anh (PR/GB/EL, cần học bạ + chứng chỉ quốc tế) chưa mô hình hoá. Trường không công bố tổ hợp môn riêng theo mã — chấp nhận tổ hợp bất kỳ.',
   capabilities: {
     admissionInfo: true,
     programs: false,
-    cutoffs: false,
+    cutoffs: true,
     ...aggregateSchoolCapabilities(dueudnAdmissionMethods),
   },
   catalogSources: [
@@ -28,10 +28,10 @@ export const dueudnModule: SchoolModule = {
       checkedAt: '2026-08-24',
     },
     {
-      title: 'DUE - Trang tuyển sinh chính thức',
-      url: 'http://due.udn.vn',
+      title: 'Điểm chuẩn vào các cơ sở đào tạo thuộc Đại học Đà Nẵng năm 2026',
+      url: 'https://ts.udn.vn/DHCD/Chinhquy/diemchuan/19567',
       type: 'official-institution',
-      checkedAt: '2026-08-24',
+      checkedAt: '2026-09-16',
     },
   ],
 };
