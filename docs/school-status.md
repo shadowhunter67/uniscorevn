@@ -143,6 +143,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-ULIS** — Truong Dai hoc Ngoai ngu - Dai hoc Quoc gia Ha Noi
 - **VNU-UMP** — Truong Dai hoc Y Duoc - Dai hoc Quoc gia Ha Noi
 - **THUV** — Trường Đại học Y khoa Tokyo Việt Nam (2026-09-16: PT2 thi TN THPT, không chứng chỉ JLPT — điểm chuẩn 18,0/30 đồng nhất 4 ngành)
+- **HVTA** — Học viện Tòa án (2026-09-16: ngành Luật duy nhất, thi TN THPT — ngưỡng 18,0/30 + Toán/Văn≥6/10; LƯU Ý còn điều kiện "Đạt sơ tuyển" tại TAND/Học viện ngoài phạm vi điểm số, chưa model)
 - **VNU-USSH** — Trường Đại học Khoa học Xã hội và Nhân văn - ĐHQG Hà Nội
 - **VNUA** — Hoc vien Nong nghiep Viet Nam
 - **VTTU** — Trường Đại học Võ Trường Toản
@@ -377,7 +378,6 @@ whose domain (uad.edu.vn) briefly caused confusion during this batch's research.
 - **HSC** — Trường Cao đẳng nghề Hoa Sen (cơ sở Đà Nẵng)
 - **HUArt** — Trường Đại học Nghệ thuật, Đại học Huế
 - **HVCT** — Trường Cao đẳng Kỹ nghệ II
-- **HVTA** — Học viện Tòa án
 - **Intracom** — Trường Đại học Intracom
 - **IUV** — Trường Đại học Công nghiệp Vinh
 - **KTXD-HCM** — Trường Cao đẳng Kiến trúc - Xây dựng Thành phố Hồ Chí Minh
