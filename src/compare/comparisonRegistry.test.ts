@@ -117,6 +117,11 @@ import { mtuAdmissionMethods } from '../schools/mtu/methods';
 import { dauAdmissionMethods } from '../schools/dau/methods';
 import { hpuAdmissionMethods } from '../schools/hpu/methods';
 import { intracomAdmissionMethods } from '../schools/intracom/methods';
+import { saodoAdmissionMethods } from '../schools/saodo/methods';
+import { viuAdmissionMethods } from '../schools/viu/methods';
+import { vuiAdmissionMethods } from '../schools/vui/methods';
+import { quiAdmissionMethods } from '../schools/qui/methods';
+import { tksAdmissionMethods } from '../schools/tks/methods';
 import { udaAdmissionMethods } from '../schools/uda/methods';
 import { uhdAdmissionMethods } from '../schools/uhd/methods';
 import { umtAdmissionMethods } from '../schools/umt/methods';
@@ -311,6 +316,11 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   dau: dauAdmissionMethods,
   hpu: hpuAdmissionMethods,
   intracom: intracomAdmissionMethods,
+  saodo: saodoAdmissionMethods,
+  viu: viuAdmissionMethods,
+  vui: vuiAdmissionMethods,
+  qui: quiAdmissionMethods,
+  tks: tksAdmissionMethods,
   uda: udaAdmissionMethods,
   uhd: uhdAdmissionMethods,
   umt: umtAdmissionMethods,

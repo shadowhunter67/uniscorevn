@@ -152,6 +152,11 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **DAU** — Trường Đại học Kiến trúc Đà Nẵng (2026-09-16: thi TN THPT thuần, so RAW sàn 15/30 ghi rõ không gồm ưu tiên; LƯU Ý điểm chuẩn thật theo ngành 16,5-18/30 cao hơn sàn)
 - **HPU** — Trường Đại học Quản lý và Công nghệ Hải Phòng (2026-09-16: thi TN THPT, so RAW theo mã ngành 15,0-18,5/30, điểm chuẩn thật)
 - **Intracom** — Trường Đại học Intracom, tiền thân Chu Văn An (2026-09-16: thi TN THPT, so RAW, 12 ngành ≥15/30, Luật Kinh tế ≥20/30)
+- **SDU** — Trường Đại học Sao Đỏ (2026-09-17: điểm chuẩn thật đọc qua ảnh chụp màn hình, so RAW, 18 ngành ≥15/30, Luật ≥20/30)
+- **VIU** — Trường Đại học Công nghiệp Việt-Hưng (2026-09-17: điểm sàn đọc qua ảnh scan, so RAW 15/30 đồng nhất 21 ngành)
+- **VUI** — Trường Đại học Công nghiệp Việt Trì (2026-09-17: điểm chuẩn thật qua báo Công Thương — cơ quan chủ quản, so RAW 15/30 đồng nhất 18 ngành)
+- **QUI** — Trường Đại học Công nghiệp Quảng Ninh (2026-09-17: ngưỡng sàn, so RAW 15/30 đồng nhất 12 ngành)
+- **TKS** — Trường Đại học Kiểm sát Hà Nội (2026-09-17: nhóm Luật/Luật kinh tế/Ngôn ngữ Anh — không gồm chuyên ngành Kiểm sát vì cutoff theo giới tính; ĐXT quy đổi tổ hợp về D01 + độ lệch + ưu tiên)
 - **VNU-USSH** — Trường Đại học Khoa học Xã hội và Nhân văn - ĐHQG Hà Nội
 - **VNUA** — Hoc vien Nong nghiep Viet Nam
 - **VTTU** — Trường Đại học Võ Trường Toản
@@ -394,9 +399,7 @@ whose domain (uad.edu.vn) briefly caused confusion during this batch's research.
 - **NQU-SQCB** — Trường Sĩ quan Công binh - Đại học Ngô Quyền
 - **NSPC** — Trường Cao đẳng Bách khoa Nam Sài Gòn
 - **NVTC** — Trường Cao đẳng Nguyễn Văn Trỗi
-- **QUI** — Trường Đại học Công nghiệp Quảng Ninh
 - **SCLS** — Trường Hóa và Khoa học sự sống - Đại học Bách khoa Hà Nội
-- **SDU** — Trường Đại học Sao Đỏ
 - **SEEE** — Trường Điện - Điện tử - Đại học Bách khoa Hà Nội
 - **SEM-HUST** — Trường Kinh tế - Đại học Bách khoa Hà Nội
 - **SME-HUST** — Trường Cơ khí - Đại học Bách khoa Hà Nội
@@ -406,7 +409,6 @@ whose domain (uad.edu.vn) briefly caused confusion during this batch's research.
 - **TDNU** — Trường Đại học Trần Đại Nghĩa (Trường Sĩ quan Kỹ thuật Quân sự)
 - **TGH** — Trường Sĩ quan Tăng - Thiết giáp
 - **Thành Đông** — Trường Đại học Thành Đông
-- **TKS** — Trường Đại học Kiểm sát Hà Nội
 - **TNU-IS** — Khoa Quốc tế - Đại học Thái Nguyên
 - **TSQĐC** — Trường Sĩ quan Đặc công
 - **TTC** — Trường Cao đẳng Thủ Thiêm Thành phố Hồ Chí Minh
@@ -414,8 +416,6 @@ whose domain (uad.edu.vn) briefly caused confusion during this batch's research.
 - **VCTE** — Trường Cao đẳng nghề Kỹ thuật công nghệ
 - **VHNT-HCM** — Trường Cao đẳng Văn hóa Nghệ thuật TP.HCM
 - **Việt-Xô 1** — Trường Cao đẳng nghề Việt - Xô số 1
-- **VIU** — Trường Đại học Công nghiệp Việt-Hung
-- **VUI** — Trường Đại học Công nghiệp Việt Trì
 - **VXUT** — Trường Đại học Công nghệ Vạn Xuân
 - **YDLU** — Trường Đại học Yersin Đà Lạt
 - **CNNT** — Trường Cao đẳng Công nghệ - Ngoại thương

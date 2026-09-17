@@ -111,6 +111,11 @@ import { mtuModule } from './mtu';
 import { dauModule } from './dau';
 import { hpuModule } from './hpu';
 import { intracomModule } from './intracom';
+import { saodoModule } from './saodo';
+import { viuModule } from './viu';
+import { vuiModule } from './vui';
+import { quiModule } from './qui';
+import { tksModule } from './tks';
 import { udaModule } from './uda';
 import { uhdModule } from './uhd';
 import { umtModule } from './umt';
@@ -343,6 +348,11 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   dau: dauModule,
   hpu: hpuModule,
   intracom: intracomModule,
+  saodo: saodoModule,
+  viu: viuModule,
+  vui: vuiModule,
+  qui: quiModule,
+  tks: tksModule,
   uda: udaModule,
   uhd: uhdModule,
   umt: umtModule,

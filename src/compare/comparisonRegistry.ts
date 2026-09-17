@@ -97,6 +97,11 @@ import { mtuComparisonAdapter } from '../schools/mtu/comparison';
 import { dauComparisonAdapter } from '../schools/dau/comparison';
 import { hpuComparisonAdapter } from '../schools/hpu/comparison';
 import { intracomComparisonAdapter } from '../schools/intracom/comparison';
+import { saodoComparisonAdapter } from '../schools/saodo/comparison';
+import { viuComparisonAdapter } from '../schools/viu/comparison';
+import { vuiComparisonAdapter } from '../schools/vui/comparison';
+import { quiComparisonAdapter } from '../schools/qui/comparison';
+import { tksComparisonAdapter } from '../schools/tks/comparison';
 import { udaComparisonAdapter } from '../schools/uda/comparison';
 import { uhdComparisonAdapter } from '../schools/uhd/comparison';
 import { umtComparisonAdapter } from '../schools/umt/comparison';
@@ -292,6 +297,11 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   dauComparisonAdapter,
   hpuComparisonAdapter,
   intracomComparisonAdapter,
+  saodoComparisonAdapter,
+  viuComparisonAdapter,
+  vuiComparisonAdapter,
+  quiComparisonAdapter,
+  tksComparisonAdapter,
   udaComparisonAdapter,
   uhdComparisonAdapter,
   umtComparisonAdapter,
@@ -384,7 +394,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
       ![
         'huce', 'dav', 'hlu', 'humg', 'hdu', 'vmu', 'ttn', 'tnu', 'dlu', 'vnuulis',
         'hce', 'hul', 'husc', 'huaf', 'hueedu',
-        'dut', 'dueudn', 'uedudn', 'uflsudn', 'uteudn', 'vku', 'thuv', 'hvta', 'bafu', 'dntu', 'siu', 'mtu', 'dau', 'hpu', 'intracom',
+        'dut', 'dueudn', 'uedudn', 'uflsudn', 'uteudn', 'vku', 'thuv', 'hvta', 'bafu', 'dntu', 'siu', 'mtu', 'dau', 'hpu', 'intracom', 'saodo', 'viu', 'vui', 'qui', 'tks',
         'hup', 'ajc', 'vnuf', 'dtu', 'hpu2', 'hust', 'hmu', 'haui', 'aof', 'bav', 'phenikaa', 'hou', 'fptu', 'hubt', 'dainam', 'vnulaw', 'vnuump',
         'tmu', 'tlu', 'hpmu', 'vnueb', 'vnued', 'vnuuet', 'vnuhus', 'vnussh', 'hump', 'qnu', 'qbu', 'qnamu', 'pctu', 'htu', 'dumtp', 'bmtu',
         'hat', 'thanglong', 'hvu', 'epu', 'uneti', 'huph', 'vutm', 'hmtu', 'ndun', 'vmuvinh',
