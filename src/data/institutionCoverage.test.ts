@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 247,
       admissionDataAvailable: 247,
-      eligibilitySupported: 13,
-      calculatorSupported: 169,
+      eligibilitySupported: 12,
+      calculatorSupported: 170,
       partialCalculator: 2,
-      fullyVerified: 167,
+      fullyVerified: 168,
       catalogOnly: 107,
     });
   });
@@ -153,7 +153,7 @@ describe('institution coverage statistics', () => {
     // independent admission formula); its member schools carry dedicated runtime modules. Five
     // stay eligibility-only; VKU graduated to a verified exact calculator (2026-08-27, combined
     // method) and is asserted separately below.
-    expect(deriveInstitutionSupportStatus(schoolRegistry.uteudn)).toBe('eligibility-only');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.uteudn)).toBe('verified-calculator');
     // Batch (2026-09-16, roadmap 142 -> ...): DUT/DUE graduated to verified-calculator — ts.udn.vn
     // (hệ thống Đại học Đà Nẵng) đăng bảng điểm chuẩn trúng tuyển 2026 gộp mọi CSĐT thành viên. DUT
     // (mã DDK) 49/49 ngành/chuyên ngành đều ghi phương thức "Xét điểm thi THPT" thuần. DUE (mã DDQ)
@@ -442,7 +442,7 @@ describe('institution coverage statistics', () => {
     for (const schoolId of ['husc', 'huaf', 'hueedu', 'humg', 'vmu']) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('verified-calculator');
     }
-    expect(deriveInstitutionSupportStatus(schoolRegistry.uteudn)).toBe('eligibility-only');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.uteudn)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.dut)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.dueudn)).toBe('verified-calculator');
     // UFLS graduated to verified-calculator (2026-08-28) — 4 ngành đào tạo giáo viên ngoại ngữ,

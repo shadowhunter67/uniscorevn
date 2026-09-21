@@ -13,7 +13,7 @@ export const uteudnModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'Đã xác minh lại nguồn tuyển sinh chính thức 2026 (thông báo hệ thống ĐHĐN + trang/tài liệu tuyển sinh riêng của UTE) · Ngưỡng đảm bảo chất lượng đầu vào (thi TN THPT) khoảng 15-20/30 theo ngành · Chưa nhập bảng ngành chi tiết, phụ lục quy đổi và bảng điểm cộng/ưu tiên.',
+    'UTE-ĐN 2026, xét điểm thi TN THPT kết hợp học bạ, 23/25 ngành/chuyên ngành (trừ Thiết kế vi mạch bán dẫn và Kiến trúc): ĐXT = điểm THPT × hệ số + điểm học bạ (TB 3 năm từng môn) × hệ số + điểm ưu tiên giảm dần khi ≥ 22,5 (hệ số 0,7/0,3; Công nghệ thông tin 1/0), tổ hợp theo từng ngành (bảng chính thức); đủ điều kiện xét tuyển ⟺ đạt ngưỡng đầu vào của ngành (15–20/30, bảng ảnh chính thức; Sư phạm KT công nghiệp so tổng 3 môn THPT + ưu tiên, ngành còn lại so ĐXT). Đúng cho thí sinh không có điểm cộng thành tích học tập (chưa có trong hồ sơ). Ngoài phạm vi: Thiết kế vi mạch bán dẫn (ngưỡng theo phân vị toàn quốc), Kiến trúc (tổ hợp Vẽ mỹ thuật), các phương thức khác. Chưa nhập điểm chuẩn trúng tuyển 2026 để so sánh.',
   capabilities: {
     admissionInfo: true,
     programs: false,
