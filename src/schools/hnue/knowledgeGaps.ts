@@ -3,7 +3,7 @@ import type { KnowledgeGap } from '../../core/knowledgeStatus';
 export const hnueKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'hnue-program-threshold-table-not-imported',
-    label: 'Bảng ngưỡng đầu vào theo từng ngành/chương trình HNUE 2026 chưa được nhập thành dataset runtime.',
+    label: 'Bảng ngưỡng đầu vào theo từng ngành HNUE 2026 chỉ được dùng ở nhánh kiểm tra điểm sàn theo ngành (`hnue-thpt-exam-floor-exact-2026`, 51/57 ngành); baseline chung (chưa chọn ngành) vẫn chỉ loại chắc chắn hồ sơ dưới mức tối thiểu.',
     status: 'official-but-unparsed',
     sourceId: 'hnue-quality-threshold-2026',
     scoreAffecting: true,

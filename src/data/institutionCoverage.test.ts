@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 247,
       admissionDataAvailable: 247,
-      eligibilitySupported: 12,
-      calculatorSupported: 170,
+      eligibilitySupported: 10,
+      calculatorSupported: 172,
       partialCalculator: 2,
-      fullyVerified: 168,
+      fullyVerified: 170,
       catalogOnly: 107,
     });
   });
@@ -169,6 +169,7 @@ describe('institution coverage statistics', () => {
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnua)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.dav)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vgu)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.hnue)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hlu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hdu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.ptit)).toBe('verified-calculator');
@@ -178,7 +179,7 @@ describe('institution coverage statistics', () => {
     expect(deriveInstitutionSupportStatus(schoolRegistry.ttn)).toBe("verified-calculator");
     expect(deriveInstitutionSupportStatus(schoolRegistry.tnu)).toBe('eligibility-only');
     expect(deriveInstitutionSupportStatus(schoolRegistry.dlu)).toBe('verified-calculator');
-    expect(deriveInstitutionSupportStatus(schoolRegistry.eaut)).toBe('eligibility-only');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.eaut)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vwa)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hau)).toBe('verified-calculator');
     // Batch (2026-08-28): CTUMP graduated to verified-calculator — mức điểm nhận hồ sơ đợt 1 (4

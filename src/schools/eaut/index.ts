@@ -13,7 +13,7 @@ export const eautModule: SchoolModule = {
   region: 'hanoi',
   vnuhcm: false,
   summary:
-    'Đã xác minh bài đăng chính thức 2026 (đối chiếu chéo với Congluan.vn, 21/06/2026): phương thức 1 (xét học bạ) có ngưỡng rõ — điểm trung bình tổ hợp 3 môn qua 6 học kỳ >= 18,0/30, kèm điều kiện điểm thi tốt nghiệp THPT >= 15,0/30. Module hiện chỉ kiểm tra được phương thức 1; phương thức 2 (chỉ điểm thi TN THPT) không có ngưỡng công bố riêng, phương thức 3/4 chưa model.',
+    'Đã xác minh bài đăng chính thức 2026 (đối chiếu chéo với Congluan.vn, 21/06/2026): phương thức 1 (xét học bạ) có ngưỡng rõ — điểm trung bình tổ hợp 3 môn qua 6 học kỳ >= 18,0/30, kèm điều kiện điểm thi tốt nghiệp THPT >= 15,0/30. Khi chọn ngành: kiểm tra phương thức 1 theo tổ hợp xét tuyển hợp lệ của từng ngành (24/26 mã ngành, ảnh bảng ngành chính thức; trừ khối Sức khỏe áp ngưỡng Bộ), dùng đúng dữ liệu 6 học kỳ (`transcript.bySemester`) — không lấy TB năm làm proxy — không cộng ưu tiên vì điều kiện không nhắc. Chưa chọn ngành: baseline chung. Phương thức 2 (chỉ điểm thi TN THPT) không có ngưỡng công bố riêng, phương thức 3/4, khối H/V năng khiếu chưa model.',
   capabilities: {
     admissionInfo: true,
     programs: false,
