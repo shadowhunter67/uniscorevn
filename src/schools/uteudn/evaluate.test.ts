@@ -2,7 +2,10 @@ import { describe, expect, it } from 'vitest';
 import type { ApplicantProfile } from '../../core/applicantProfile';
 import type { SubjectId } from '../../core/subjects';
 import { evaluateSchool, evaluateSchools } from '../../evaluation/schoolEvaluation';
+import { uteudnComparisonAdapter } from './comparison';
+import { uteudnCutoffs2026 } from './data/cutoffs';
 import { evaluateUteudnCombinedExactAdmission, evaluateUteudnThptExamAdmission } from './evaluate';
+import { getUteProgram } from './programs';
 
 const a00Context = { subjectContext: { combinationId: 'A00', subjects: ['math', 'physics', 'chemistry'] as const } };
 
@@ -140,6 +143,29 @@ describe('evaluateUteudnCombinedExactAdmission (THPT kết hợp học bạ, ng�
   it('luôn công khai giới hạn điểm cộng thành tích', () => {
     const r = evaluateUteudnCombinedExactAdmission(profileOf([8, 7.5, 7.5], [7, 6.75, 6.75]), withProgram('7510201'));
     expect(r.missingRequirements?.map((m) => m.code)).toContain('uteudn-bonus-not-modeled');
+  });
+
+  it('adapter so điểm với điểm chuẩn 2026 của đúng ngành (Cơ khí chế tạo 22,11)', () => {
+    const profile = profileOf([9, 9, 9], [9, 9, 9]);
+    const result = uteudnComparisonAdapter.evaluate(profile, withProgram('7510201'));
+    const cutoff = result.cutoffComparisons?.[0];
+    expect(result.evaluation.score?.value).toBe(27);
+    expect(cutoff?.cutoff).toBe(22.11);
+    expect(cutoff?.year).toBe(2026);
+    expect(cutoff?.comparable).toBe(true);
+    expect(cutoff?.difference).toBe(4.89);
+  });
+
+  it('điểm chuẩn khớp danh sách ngành: 25/25 mã có trong bảng ngành, không trùng', () => {
+    const codes = uteudnCutoffs2026.map((cutoff) => cutoff.programId);
+    expect(new Set(codes).size).toBe(25);
+    for (const code of codes) expect(getUteProgram(code), code).toBeDefined();
+    for (const cutoff of uteudnCutoffs2026) expect(cutoff.score).toBeGreaterThanOrEqual(getUteProgram(cutoff.programId)!.threshold30 || 15);
+  });
+
+  it('ngoài phạm vi exact (không có score) thì không so điểm chuẩn', () => {
+    const result = uteudnComparisonAdapter.evaluate(profileOf([9, 9, 9], [9, 9, 9]), withProgram('7510302A'));
+    expect(result.cutoffComparisons).toBeUndefined();
   });
 
   it('adapter: có chọn ngành dùng nhánh exact, chưa chọn ngành giữ baseline', () => {
