@@ -20,6 +20,24 @@ export const DAV_PROGRAMS_2026: readonly DavProgram[] = [
   { programCode: 'HQT11', name: 'Trung Quoc hoc', majorCode: '7310612', quota: 120, isLawField: false },
 ];
 
+/** Bảng 1 PDF thông tin tuyển sinh 2026 (PT4): tổ hợp xét tuyển theo từng ngành. Chỉ liệt kê tổ hợp
+ * mô hình hoá được trong `COMMON_SUBJECT_COMBINATIONS`; D03/D04/D06/DD2 (môn ngoại ngữ Pháp/Trung/
+ * Nhật/Hàn) chưa có SubjectId riêng nên nằm ngoài phạm vi exact. */
+const DAV_ALL_MODELED = ['A00', 'A01', 'C00', 'D01', 'D07', 'D09', 'D10', 'D14', 'D15'] as const;
+export const DAV_THPT_COMBINATIONS_BY_PROGRAM: Record<string, readonly string[]> = {
+  HQT01: DAV_ALL_MODELED,
+  HQT02: ['A01', 'D01', 'D07', 'D09', 'D10', 'D14', 'D15'],
+  HQT03: ['A00', 'A01', 'D01', 'D07', 'D09', 'D10'],
+  HQT04: DAV_ALL_MODELED,
+  HQT05: DAV_ALL_MODELED,
+  HQT06: ['A00', 'A01', 'D01', 'D07', 'D09', 'D10'],
+  HQT07: DAV_ALL_MODELED,
+  HQT08: ['A00', 'A01', 'C00', 'D01', 'D07', 'D09', 'D10', 'D14', 'D15'],
+  HQT09: ['A00', 'A01', 'C00', 'D01', 'D07', 'D09', 'D10', 'D14', 'D15'],
+  HQT10: ['A00', 'A01', 'C00', 'D01', 'D07', 'D09', 'D10', 'D14', 'D15'],
+  HQT11: ['A00', 'A01', 'C00', 'D01', 'D07', 'D09', 'D10', 'D14', 'D15'],
+};
+
 export function getDavProgram(programCode: string | undefined): DavProgram | undefined {
   return DAV_PROGRAMS_2026.find((program) => program.programCode === programCode);
 }

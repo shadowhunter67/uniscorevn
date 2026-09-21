@@ -13,7 +13,7 @@ export const davModule: SchoolModule = {
   region: 'hanoi',
   vnuhcm: false,
   summary:
-    'Official DAV 2026 sources are decomposed into programs, method scope, thresholds, certificate conversions, bonus/priority notes, law-field constraints, and rounding. Runtime support checks threshold eligibility for THPT, transcript-plus-certificate, and SAT/ACT-plus-certificate contexts; it does not calculate final admitted score.',
+    'DAV 2026, phương thức 4 (thi TN THPT), 9 ngành không phải Luật, tổ hợp A00/A01/C00/D01/D07/D09/D10/D14/D15: điểm xét = tổng 3 môn (môn Anh tự chọn phương án có lợi hơn giữa điểm thi và IELTS/TOEFL iBT quy đổi) + điểm ưu tiên giảm dần [(30 − tổng)/7,5] × mức khi tổng ≥ 22,5, so ngưỡng 22,0 (C00: 23,0) — ngưỡng theo thông báo 10/07/2026 đã bao gồm điểm cộng và ưu tiên. Kết quả đúng cho thí sinh KHÔNG có điểm xét thưởng học sinh giỏi (Bảng 5, chưa có trong hồ sơ). Ngoài phạm vi: ngành Luật quốc tế/Luật thương mại quốc tế, tổ hợp ngoại ngữ Pháp/Trung/Nhật/Hàn (D03/D04/D06/DD2), chứng chỉ ngoài tiếng Anh; các phương thức học bạ + chứng chỉ, SAT/ACT + chứng chỉ chỉ kiểm tra ngưỡng, xét tuyển thẳng chưa tính được. Chưa có điểm chuẩn 2026 để so sánh.',
   capabilities: {
     admissionInfo: true,
     programs: true,

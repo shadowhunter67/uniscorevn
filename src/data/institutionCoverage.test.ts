@@ -68,8 +68,8 @@ describe('institution coverage statistics', () => {
       admissionDataAvailable: 247,
       eligibilitySupported: 14,
       calculatorSupported: 168,
-      partialCalculator: 3,
-      fullyVerified: 165,
+      partialCalculator: 2,
+      fullyVerified: 166,
       catalogOnly: 107,
     });
   });
@@ -167,7 +167,7 @@ describe('institution coverage statistics', () => {
     // Batch (2026-08-28): VNUA graduated to verified-calculator — ngưỡng theo nhóm ngành (19/23
     // nhóm) đã xác minh, điểm ưu tiên KV/ĐT hiển thị tham khảo (trích công thức từ chính thông báo).
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnua)).toBe('verified-calculator');
-    expect(deriveInstitutionSupportStatus(schoolRegistry.dav)).toBe('partial-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.dav)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hlu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hdu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.ptit)).toBe('verified-calculator');

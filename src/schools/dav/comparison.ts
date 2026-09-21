@@ -10,16 +10,16 @@ function isDavMethodId(value: string | undefined): value is DavEvaluationContext
 
 export const davComparisonAdapter: SchoolComparisonAdapter<DavEvaluationContext> = {
   schoolId: 'dav',
-  methodId: 'dav-thpt-exam-2026',
-  methodName: 'THPT exam threshold eligibility',
+  methodId: 'dav-thpt-exam-exact-2026',
+  methodName: 'THPT exam admission score and threshold (non-law programs)',
   buildContext(selection) {
     return {
-      methodId: isDavMethodId(selection.methodId) ? selection.methodId : 'dav-thpt-exam-2026',
+      methodId: isDavMethodId(selection.methodId) ? selection.methodId : 'dav-thpt-exam-exact-2026',
       programCode: selection.programId,
       subjectContext: getSubjectContext(selection.context?.combinationId),
     };
   },
   evaluate(profile: ApplicantProfile, context: DavEvaluationContext): SchoolComparisonResult {
-    return { evaluation: evaluateDavAdmission(profile, context) };
+    return { evaluation: evaluateDavAdmission(profile, { ...context, methodId: context.methodId ?? 'dav-thpt-exam-exact-2026' }) };
   },
 };

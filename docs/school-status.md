@@ -144,6 +144,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-UMP** — Truong Dai hoc Y Duoc - Dai hoc Quoc gia Ha Noi
 - **THUV** — Trường Đại học Y khoa Tokyo Việt Nam (2026-09-16: PT2 thi TN THPT, không chứng chỉ JLPT — điểm chuẩn 18,0/30 đồng nhất 4 ngành)
 - **HVTA** — Học viện Tòa án (2026-09-16: ngành Luật duy nhất, thi TN THPT — ngưỡng 18,0/30 + Toán/Văn≥6/10; LƯU Ý còn điều kiện "Đạt sơ tuyển" tại TAND/Học viện ngoài phạm vi điểm số, chưa model)
+- **DAV** — Hoc vien Ngoai giao (2026-09-21: PT4 thi TN THPT, 9 ngành không phải Luật, tổ hợp A00/A01/C00/D01/D07/D09/D10/D14/D15 — điểm xét = tổng 3 môn + ưu tiên giảm dần, ngưỡng 22/C00 23 đã gồm ưu tiên; LƯU Ý chưa tính điểm xét thưởng HSG, ngành Luật, tổ hợp Pháp/Trung/Nhật/Hàn)
 - **BAFU** — Trường Đại học Nông - Lâm Bắc Giang (2026-09-16: PT2 thi TN THPT, ĐXT=ĐM1+ĐM2+ĐM3+ĐƯT, so RAW 15/30 đồng nhất 20 ngành)
 - **QTU** — Trường Đại học Quang Trung (2026-09-16: thi TN THPT, ĐXT gồm ưu tiên, Điều dưỡng ≥18/30, 10 ngành còn lại ≥15/30)
 - **DNTU** — Trường Đại học Công nghệ Đồng Nai (2026-09-16: thi TN THPT, so RAW, 20 ngành ≥15/30, Điều dưỡng/Xét nghiệm y học ≥18/30)
@@ -164,9 +165,8 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VWA** — Học viện Phụ nữ Việt Nam
 - **VYA** — Học viện Thanh thiếu niên Việt Nam
 
-## Calculator một phần (3)
+## Calculator một phần (2)
 
-- **DAV** — Hoc vien Ngoai giao
 - **NEU** — Trường Đại học Kinh tế Quốc dân
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 

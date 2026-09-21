@@ -6,7 +6,8 @@ import { SUBJECT_LABELS } from '../../core/subjects';
 import type { ThptSubjectContext } from '../thptThresholdOnly';
 import { getBestDavInternationalTestConversion, getBestDavLanguageConversion, type DavConversionBand } from './conversion';
 import { davAdmissionMethods, type DavMethodId } from './methods';
-import { getDavProgram } from './programs';
+import { calculateDavEffectivePriority30, lookupDavStandardPriority30 } from './priority';
+import { DAV_THPT_COMBINATIONS_BY_PROGRAM, getDavProgram } from './programs';
 
 export interface DavEvaluationContext {
   methodId?: DavMethodId;
@@ -252,7 +253,144 @@ function evaluateMethod3(profile: ApplicantProfile): ScoreResult {
   };
 }
 
+const DAV_EXACT_METHOD = davAdmissionMethods.find((method) => method.id === 'dav-thpt-exam-exact-2026')!;
+const DAV_EXACT_EVIDENCE = [
+  {
+    sourceId: 'dav-threshold-conversion-pdf-2026',
+    location: 'Thông báo 10/07/2026, mục I.1 — ngưỡng bảo đảm chất lượng đầu vào 22,0 (C00: 23,0), thang 30, "đã bao gồm cả điểm cộng xét thưởng và điểm ưu tiên khu vực, đối tượng"',
+    verification: 'verified' as const,
+    effectiveYear: 2026,
+    verifiedAt: '2026-09-21',
+  },
+  {
+    sourceId: 'dav-admission-info-pdf-2026',
+    location: 'Thông tin tuyển sinh 2026 mục 2.4.2 (điểm xét tuyển = M1+M2+M3 + xét thưởng + ưu tiên giảm dần khi ≥22,5) và Bảng 1 (tổ hợp theo ngành)',
+    verification: 'verified' as const,
+    effectiveYear: 2026,
+    verifiedAt: '2026-09-21',
+  },
+];
+
+/** DAV 2026 PT4 (thi TN THPT), ngành không phải Luật: điểm xét = tổng 3 môn (môn Anh lấy phương án có lợi
+ * hơn giữa điểm thi và điểm quy đổi IELTS/TOEFL) + ưu tiên giảm dần; đủ điều kiện ⟺ điểm xét ≥ 22 (C00: 23).
+ * Ngoài phạm vi (trả `unknown`): ngành Luật, tổ hợp không mô hình hoá được, tổ hợp không thuộc ngành. */
+export function evaluateDavThptExamExactAdmission(profile: ApplicantProfile, context: DavEvaluationContext = {}): AdmissionEvaluation {
+  const missingRequirements: MissingRequirement[] = [];
+  const unknown = (reason: string, missingInputs: string[] = []): AdmissionEvaluation => ({
+    schoolId: 'dav',
+    year: DAV_EXACT_METHOD.year,
+    methodId: DAV_EXACT_METHOD.id,
+    confidence: 'partial',
+    eligibility: { status: 'unknown', reasons: [reason] },
+    missingInputs,
+    missingRules: [],
+    missingRequirements,
+    explanation: [],
+    evidence: [],
+  });
+
+  const program = getDavProgram(context.programCode);
+  if (!program) {
+    missingRequirements.push({ kind: 'school-context', code: 'dav-program', label: 'Chọn ngành DAV (mã HQT01–HQT11).' });
+    return unknown('Cần chọn ngành DAV để áp dụng tổ hợp xét tuyển theo ngành.');
+  }
+  if (program.isLawField) {
+    missingRequirements.push({ kind: 'official-rule', code: 'dav-law-out-of-exact-scope', label: 'Luật quốc tế / Luật thương mại quốc tế có điều kiện riêng (Toán/Ngữ văn, ngưỡng thô theo khu vực) — chưa nằm trong phạm vi exact.' });
+    return unknown('Ngành Luật của DAV có điều kiện riêng nên chưa tính exact.');
+  }
+  if (!context.subjectContext || context.subjectContext.subjects.length !== 3) {
+    missingRequirements.push({ kind: 'school-context', code: 'dav-subject-combination', label: 'Chọn tổ hợp 3 môn xét tuyển của DAV.' });
+    return unknown('Cần chọn tổ hợp 3 môn để tính điểm xét tuyển DAV.');
+  }
+  const { combinationId, subjects } = context.subjectContext;
+  if (!combinationId || !DAV_THPT_COMBINATIONS_BY_PROGRAM[program.programCode]?.includes(combinationId)) {
+    missingRequirements.push({ kind: 'school-context', code: 'dav-combination-for-program', label: `Tổ hợp ${combinationId} không có trong Bảng 1 của ngành ${program.programCode} (hoặc chưa mô hình hoá được: D03/D04/D06/DD2).` });
+    return unknown(`Tổ hợp ${combinationId} không thuộc phạm vi tính exact của ngành ${program.programCode}.`);
+  }
+
+  const certificate = getBestDavLanguageConversion(profile);
+  let total = 0;
+  const missing: SubjectId[] = [];
+  let usedCertificate = false;
+  for (const subjectId of subjects) {
+    let score = profile.thpt?.scores?.[subjectId];
+    if (subjectId === 'english' && certificate && (score === undefined || certificate.convertedScore > score)) {
+      score = certificate.convertedScore;
+      usedCertificate = true;
+    }
+    if (score === undefined) missing.push(subjectId);
+    else total += score;
+  }
+  if (missing.length > 0) {
+    missingRequirements.push(...missing.map((subjectId) => ({ kind: 'profile-input' as const, code: `dav-thpt-${subjectId}`, label: `Điểm thi TN THPT môn ${SUBJECT_LABELS[subjectId]} cho tổ hợp DAV.` })));
+    return unknown('Cần đủ điểm 3 môn của tổ hợp để tính điểm xét tuyển DAV.', ['Chưa đủ điểm 3 môn thi TN THPT trong tổ hợp đã chọn.']);
+  }
+
+  const raw30 = round2(total);
+  const standardPriority30 = lookupDavStandardPriority30(profile.priority?.region, profile.priority?.category);
+  const priority = calculateDavEffectivePriority30({ rawTotal30: raw30, standardPriority30 });
+  const dxt30 = round2(Math.min(30, raw30 + priority.effectivePriority30));
+  const threshold = combinationId === 'C00' ? 23 : 22;
+  const eligible = dxt30 >= threshold;
+
+  const explanation: CalculationStep[] = [
+    {
+      id: 'dav-exact-raw',
+      label: usedCertificate ? 'Tổng điểm 3 môn (môn Anh dùng điểm quy đổi chứng chỉ vì có lợi hơn)' : 'Tổng điểm 3 môn thi TN THPT',
+      output: raw30,
+      scale: 30,
+      formula: subjects.map((subjectId) => SUBJECT_LABELS[subjectId]).join(' + '),
+      evidence: DAV_EXACT_EVIDENCE,
+    },
+    {
+      id: 'dav-exact-priority',
+      label: priority.reduced ? 'Điểm ưu tiên (đã giảm)' : 'Điểm ưu tiên',
+      output: priority.effectivePriority30,
+      scale: 30,
+      formula: priority.reduced ? '[(30 − tổng điểm đạt được)/7,5] × Mức ưu tiên KV/ĐT (Điều 7 TT 06/2026)' : 'Mức ưu tiên KV/ĐT (Điều 7 TT 06/2026)',
+      evidence: DAV_EXACT_EVIDENCE,
+    },
+    {
+      id: 'dav-exact-dxt',
+      label: 'Điểm xét tuyển',
+      output: dxt30,
+      scale: 30,
+      formula: 'round2(min(30, tổng 3 môn + điểm ưu tiên))',
+      evidence: DAV_EXACT_EVIDENCE,
+    },
+  ];
+
+  if (profile.priority?.region === undefined && profile.priority?.category === undefined) {
+    missingRequirements.push({ kind: 'profile-input', code: 'dav-priority-region-category', label: 'Khu vực / đối tượng ưu tiên (chưa nhập — điểm xét đang tính với ưu tiên = 0).' });
+  }
+  missingRequirements.push(
+    { kind: 'official-rule', code: 'dav-bonus-not-modeled', label: 'Điểm xét thưởng học sinh giỏi của Học viện (Bảng 5, tối đa 0,8) chưa có trong hồ sơ — kết quả đúng cho thí sinh không có giải.' },
+    { kind: 'official-rule', code: 'dav-other-language-certificate-not-modeled', label: 'Chứng chỉ ngoại ngữ khác tiếng Anh (Pháp/Trung/Nhật/Hàn/Đức) chưa mô hình hoá — chỉ IELTS/TOEFL iBT được dùng thay điểm môn Anh.' }
+  );
+
+  return {
+    schoolId: 'dav',
+    year: DAV_EXACT_METHOD.year,
+    methodId: DAV_EXACT_METHOD.id,
+    confidence: 'exact-verified',
+    eligibility: {
+      status: eligible ? 'eligible' : 'ineligible',
+      reasons: [
+        `Ngưỡng bảo đảm chất lượng đầu vào DAV 2026: ${threshold}/30 (tính trên điểm xét gồm ưu tiên).`,
+        `Điểm xét tuyển ${dxt30}/30 → ${eligible ? 'đạt' : 'chưa đạt'} ngưỡng.`,
+      ],
+    },
+    score: { value: dxt30, scale: 30 },
+    missingInputs: [],
+    missingRules: [],
+    missingRequirements,
+    explanation,
+    evidence: [...DAV_EXACT_EVIDENCE],
+  };
+}
+
 export function evaluateDavAdmission(profile: ApplicantProfile, context: DavEvaluationContext = {}): AdmissionEvaluation {
+  if (context.methodId === 'dav-thpt-exam-exact-2026') return evaluateDavThptExamExactAdmission(profile, context);
   const methodId = context.methodId ?? 'dav-thpt-exam-2026';
   if (!METHOD_IDS.has(methodId)) {
     return result({
