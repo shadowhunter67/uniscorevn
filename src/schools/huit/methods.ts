@@ -40,4 +40,19 @@ export const huitAdmissionMethods: AdmissionMethodDescriptor[] = [
     capabilities: { eligibility: true, scoreConversion: false, bonus: false, priority: false, exactCalculator: false },
     knowledgeGaps: transcriptGaps,
   },
+  /**
+   * Nhánh HẸP exact — kiểm tra ngưỡng thi TN THPT 2026 theo ngành (39 ngành đại học chính quy, bảng tổ hợp mục 1.3
+   * Thông tin tuyển sinh; trừ 5 chương trình liên kết quốc tế). Ngưỡng cuối (bài 10/07/2026): Luật, Luật kinh tế
+   * ≥ 20/30 kèm Toán/Ngữ văn (môn có trong tổ hợp) ≥ 6,0; các ngành còn lại ≥ 16/30; mọi ngành tổng thô ≥ 15.
+   * `eligible` ⟺ tổng thô ≥ ngưỡng; `ineligible` ⟺ cộng ưu tiên tối đa vẫn < ngưỡng; vùng giữa ⇒ `unknown` (nguồn
+   * không nói ưu tiên tính trước hay sau ngưỡng). Không trả `score`: điểm xét tuyển cuối/điểm chuẩn chưa công bố.
+   */
+  {
+    id: 'huit-thpt-exam-program-exact-2026',
+    schoolId: 'huit',
+    name: 'Kiểm tra ngưỡng thi TN THPT 2026 theo ngành (39 ngành chính quy)',
+    year: 2026,
+    applicantTypes: ['Thí sinh xét kết quả thi tốt nghiệp THPT 2026 vào chương trình đại học chính quy'],
+    capabilities: { eligibility: true, scoreConversion: false, bonus: false, priority: false, exactCalculator: true },
+  },
 ];

@@ -5,7 +5,9 @@ import type { SubjectId } from '../../core/subjects';
 import { SUBJECT_LABELS } from '../../core/subjects';
 import { eiuAdmissionMethods } from './methods';
 import { eiuKnowledgeGaps } from './knowledgeGaps';
-import { checkEiuThptExamThreshold, checkEiuTranscriptThreshold, checkEiuVactThreshold, type EiuProgram } from './eligibility';
+import { sumCombinationAveragesAcrossSemesters, TRANSCRIPT_SEMESTER_LABELS } from '../../core/transcriptSemesters';
+import { checkEiuThptExamThreshold, checkEiuTranscriptThreshold, checkEiuVactThreshold, EIU_THPT_EXAM_THRESHOLD_30, EIU_TRANSCRIPT_THRESHOLD_30, type EiuProgram } from './eligibility';
+import { getEiuProgram } from './programs';
 
 export interface EiuSubjectContext {
   combinationId?: string;
@@ -271,5 +273,154 @@ export function evaluateEiuVactAdmission(profile: ApplicantProfile, context: Eiu
     missingRequirements: [...missingRequirements, ...gapExtras.missingRequirements],
     explanation,
     evidence: [],
+  };
+}
+
+const EIU_EXACT_METHOD = eiuAdmissionMethods.find((method) => method.id === 'eiu-program-exact-2026')!;
+const EIU_EXACT_EVIDENCE = [
+  {
+    sourceId: 'eiu-admission-scheme-2026',
+    location:
+      'Đề án tuyển sinh 2026 (eiu.edu.vn): bảng ngành + tổ hợp; PT1 tổng 3 môn thi TN THPT ≥ 15; PT2 tổng TB học bạ 6 kỳ của 3 môn ≥ 18 kèm điểm thi TN THPT ≥ 15 (tổ hợp hoặc Toán, Văn + môn khác); Điều dưỡng theo ngưỡng Bộ GD&ĐT',
+    verification: 'verified' as const,
+    effectiveYear: 2026,
+    verifiedAt: '2026-09-21',
+  },
+];
+
+export type EiuExactPathway = 'thpt' | 'transcript';
+
+export interface EiuProgramExactContext {
+  /** Mã ngành (VD '7480103'). */
+  programCode?: string;
+  subjectContext?: EiuSubjectContext;
+  /** 'thpt' (mặc định): xét điểm thi TN THPT; 'transcript': xét học bạ 6 học kỳ. */
+  pathway?: EiuExactPathway;
+}
+
+function roundTwo(value: number): number {
+  return Math.round(value * 100) / 100;
+}
+
+/** EIU 2026 theo ngành (trừ Điều dưỡng): PT thi TN THPT (≥15) hoặc PT học bạ 6 học kỳ (≥18 kèm điều kiện điểm thi ≥15). */
+export function evaluateEiuProgramExactAdmission(profile: ApplicantProfile, context: EiuProgramExactContext = {}): AdmissionEvaluation {
+  const missingRequirements: MissingRequirement[] = [];
+  const pathway: EiuExactPathway = context.pathway ?? 'thpt';
+  const unknown = (reason: string, missingInputs: string[] = []): AdmissionEvaluation => ({
+    schoolId: 'eiu',
+    year: EIU_EXACT_METHOD.year,
+    methodId: EIU_EXACT_METHOD.id,
+    confidence: 'partial',
+    eligibility: { status: 'unknown', reasons: [reason] },
+    missingInputs,
+    missingRules: [],
+    missingRequirements,
+    explanation: [],
+    evidence: [],
+  });
+
+  const program = getEiuProgram(context.programCode);
+  if (!program) {
+    missingRequirements.push({ kind: 'school-context', code: 'eiu-program', label: 'Chọn ngành EIU (mã ngành, VD 7480103).' });
+    return unknown('Cần chọn ngành EIU để kiểm tra tổ hợp xét tuyển hợp lệ.');
+  }
+  if (!program.combinations) {
+    missingRequirements.push({ kind: 'official-rule', code: 'eiu-program-out-of-exact-scope', label: `${program.name}: ${program.outOfScopeReason ?? 'chưa mô hình hoá.'}` });
+    return unknown(`Ngành ${program.name} của EIU chưa nằm trong phạm vi tính exact.`);
+  }
+  if (!context.subjectContext || context.subjectContext.subjects.length !== 3) {
+    missingRequirements.push({ kind: 'school-context', code: 'eiu-subject-combination', label: 'Chọn tổ hợp 3 môn xét tuyển của EIU.' });
+    return unknown('Cần chọn tổ hợp 3 môn để kiểm tra ngưỡng EIU.');
+  }
+  const { combinationId, subjects } = context.subjectContext;
+  if (!combinationId || !program.combinations.includes(combinationId)) {
+    missingRequirements.push({ kind: 'school-context', code: 'eiu-combination-for-program', label: `Tổ hợp ${combinationId ?? ''} không có trong danh sách xét tuyển của ngành ${program.name}.` });
+    return unknown(`Tổ hợp ${combinationId ?? ''} không thuộc ngành ${program.name}.`);
+  }
+
+  const thptScores = profile.thpt?.scores ?? {};
+  const comboMissing = subjects.filter((subjectId) => thptScores[subjectId] === undefined);
+  const comboTotal = comboMissing.length === 0 ? roundTwo(subjects.reduce((sum, subjectId) => sum + thptScores[subjectId]!, 0)) : undefined;
+  const explanation: CalculationStep[] = [];
+
+  if (pathway === 'thpt') {
+    if (comboTotal === undefined) {
+      missingRequirements.push(...comboMissing.map((subjectId) => ({ kind: 'profile-input' as const, code: `eiu-thpt-${subjectId}`, label: `Điểm thi TN THPT môn ${SUBJECT_LABELS[subjectId]} cho tổ hợp EIU.` })));
+      return unknown('Cần đủ điểm 3 môn của tổ hợp để kiểm tra ngưỡng EIU.', ['Chưa đủ điểm 3 môn thi TN THPT trong tổ hợp đã chọn.']);
+    }
+    explanation.push({ id: 'eiu-exact-thpt', label: 'Tổng điểm 3 môn thi TN THPT 2026 (thô)', output: comboTotal, scale: 30, formula: subjects.map((subjectId) => SUBJECT_LABELS[subjectId]).join(' + '), evidence: EIU_EXACT_EVIDENCE });
+    const pass = comboTotal >= EIU_THPT_EXAM_THRESHOLD_30;
+    missingRequirements.push({ kind: 'official-rule', code: 'eiu-final-score-not-modeled', label: 'Chỉ kiểm tra ngưỡng nhận hồ sơ: không cộng ưu tiên (điều kiện không nhắc), chưa có điểm xét tuyển cuối/điểm chuẩn, ĐGNL và xét tuyển thẳng chưa hỗ trợ.' });
+    return {
+      schoolId: 'eiu',
+      year: EIU_EXACT_METHOD.year,
+      methodId: EIU_EXACT_METHOD.id,
+      confidence: 'exact-verified',
+      eligibility: { status: pass ? 'eligible' : 'ineligible', reasons: [`Tổng ${comboTotal}/30 ${pass ? 'đạt' : 'chưa đạt'} ngưỡng ${EIU_THPT_EXAM_THRESHOLD_30}/30 (thi TN THPT 2026, ngành ${program.name}).`] },
+      missingInputs: [],
+      missingRules: [],
+      missingRequirements,
+      explanation,
+      evidence: [...EIU_EXACT_EVIDENCE],
+    };
+  }
+
+  const transcript = sumCombinationAveragesAcrossSemesters(profile.transcript?.bySemester, subjects);
+  if (transcript.total30 === undefined) {
+    for (const { subjectId, missingSemesters } of transcript.missingBySubject) {
+      missingRequirements.push({
+        kind: 'profile-input',
+        code: `eiu-transcript-semesters-${subjectId}`,
+        label: `Điểm học bạ 6 học kỳ môn ${SUBJECT_LABELS[subjectId]} (thiếu ${missingSemesters.map((key) => TRANSCRIPT_SEMESTER_LABELS[key]).join(', ')}).`,
+      });
+    }
+    return unknown('Cần đủ điểm học bạ 6 học kỳ của 3 môn trong tổ hợp để kiểm tra ngưỡng học bạ EIU.', ['Chưa đủ điểm học bạ 6 học kỳ của 3 môn trong tổ hợp đã chọn.']);
+  }
+  explanation.push({ id: 'eiu-exact-transcript', label: 'Tổng TB 6 học kỳ của 3 môn tổ hợp', output: transcript.total30, scale: 30, formula: 'Σ (TB 6 học kỳ từng môn)', evidence: EIU_EXACT_EVIDENCE });
+  const transcriptPass = transcript.total30 >= EIU_TRANSCRIPT_THRESHOLD_30;
+
+  // Điều kiện điểm thi TN THPT ≥ 15: tổ hợp xét tuyển, hoặc Toán + Ngữ văn + 1 môn thi khác.
+  const math = thptScores.math;
+  const literature = thptScores.literature;
+  const otherScores = (Object.entries(thptScores) as [SubjectId, number | undefined][])
+    .filter(([subjectId, score]) => subjectId !== 'math' && subjectId !== 'literature' && score !== undefined)
+    .map(([, score]) => score!);
+  const altTotal = math !== undefined && literature !== undefined && otherScores.length > 0 ? roundTwo(math + literature + Math.max(...otherScores)) : undefined;
+  let thptCondition: 'pass' | 'fail' | 'unknown';
+  if ((comboTotal !== undefined && comboTotal >= EIU_THPT_EXAM_THRESHOLD_30) || (altTotal !== undefined && altTotal >= EIU_THPT_EXAM_THRESHOLD_30)) thptCondition = 'pass';
+  else if (comboTotal !== undefined && altTotal !== undefined) thptCondition = 'fail';
+  else thptCondition = 'unknown';
+  if (comboTotal !== undefined) {
+    explanation.push({ id: 'eiu-exact-thpt-condition', label: 'Điều kiện kèm theo: tổng 3 môn thi TN THPT 2026 của tổ hợp', output: comboTotal, scale: 30, formula: subjects.map((subjectId) => SUBJECT_LABELS[subjectId]).join(' + '), evidence: EIU_EXACT_EVIDENCE });
+  }
+
+  const reasons = [`Học bạ 6 học kỳ ${transcript.total30}/30 ${transcriptPass ? 'đạt' : 'chưa đạt'} ngưỡng ${EIU_TRANSCRIPT_THRESHOLD_30}/30.`];
+  let status: 'eligible' | 'ineligible' | 'unknown';
+  if (!transcriptPass || thptCondition === 'fail') {
+    status = 'ineligible';
+    if (thptCondition === 'fail') reasons.push(`Điểm thi TN THPT (tổ hợp ${comboTotal}/30${altTotal !== undefined ? `, hoặc Toán + Văn + môn khác ${altTotal}/30` : ''}) chưa đạt điều kiện kèm theo ${EIU_THPT_EXAM_THRESHOLD_30}/30.`);
+  } else if (thptCondition === 'pass') {
+    status = 'eligible';
+    reasons.push(`Điểm thi TN THPT đạt điều kiện kèm theo ${EIU_THPT_EXAM_THRESHOLD_30}/30.`);
+  } else {
+    status = 'unknown';
+    reasons.push('Đủ điều kiện học bạ nhưng chưa đủ điểm thi TN THPT để kiểm tra điều kiện kèm theo (≥ 15/30, tổ hợp hoặc Toán + Văn + môn khác).');
+    missingRequirements.push(
+      ...comboMissing.map((subjectId) => ({ kind: 'profile-input' as const, code: `eiu-thpt-${subjectId}`, label: `Điểm thi TN THPT môn ${SUBJECT_LABELS[subjectId]} (điều kiện kèm theo của phương thức học bạ).` }))
+    );
+  }
+  missingRequirements.push({ kind: 'official-rule', code: 'eiu-final-score-not-modeled', label: 'Chỉ kiểm tra ngưỡng nhận hồ sơ: không cộng ưu tiên (điều kiện không nhắc), chưa có điểm xét tuyển cuối/điểm chuẩn, ĐGNL và xét tuyển thẳng chưa hỗ trợ.' });
+
+  return {
+    schoolId: 'eiu',
+    year: EIU_EXACT_METHOD.year,
+    methodId: EIU_EXACT_METHOD.id,
+    confidence: 'exact-verified',
+    eligibility: { status, reasons },
+    missingInputs: [],
+    missingRules: [],
+    missingRequirements,
+    explanation,
+    evidence: [...EIU_EXACT_EVIDENCE],
   };
 }

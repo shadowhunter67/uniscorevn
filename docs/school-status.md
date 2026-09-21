@@ -149,6 +149,8 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **UTE** — Trường Đại học Sư phạm Kỹ thuật - Đại học Đà Nẵng (2026-09-21: xét điểm thi THPT kết hợp học bạ, 23/25 ngành — ĐXT = THPT×hệ số + học bạ TB 3 năm×hệ số + ưu tiên giảm dần, ngưỡng 15–20/30 theo ngành từ ảnh chính thức; LƯU Ý chưa tính điểm cộng thành tích, ngoài phạm vi Thiết kế vi mạch bán dẫn và Kiến trúc)
 - **HNUE** — Trường Đại học Sư phạm Hà Nội (2026-09-21: kiểm tra điểm sàn thi TN THPT theo ngành, 51/57 ngành từ bảng chính thức 9 lĩnh vực — tổng 3 môn không hệ số/không cộng, khu vực 3; LƯU Ý vùng ưu tiên trả chưa kết luận, không có điểm xét cuối/điểm chuẩn, 6 ngành năng khiếu ngoài phạm vi)
 - **EAUT** — Trường Đại học Công nghệ Đông Á (2026-09-21: phương thức 1 học bạ 6 học kỳ ≥ 18 + điểm thi TN THPT ≥ 15 theo tổ hợp hợp lệ của 24/26 mã ngành; LƯU Ý dùng đúng dữ liệu 6 học kỳ, khối Sức khỏe ngoài phạm vi, chưa có phương thức 2-4)
+- **HUIT** — Trường Đại học Công Thương TP.HCM (2026-09-21: kiểm tra ngưỡng thi TN THPT theo 39 ngành chính quy + tổ hợp — Luật/Luật kinh tế ≥ 20 kèm Toán, Văn ≥ 6, ngành còn lại ≥ 16; LƯU Ý vùng ưu tiên trả chưa kết luận, không có điểm xét cuối/điểm chuẩn, chưa hỗ trợ liên kết quốc tế/học bạ/ĐGNL)
+- **EIU** — Trường Đại học Quốc tế Miền Đông (2026-09-21: 9/10 ngành trừ Điều dưỡng, thi TN THPT ≥ 15 hoặc học bạ 6 học kỳ ≥ 18 kèm điểm thi ≥ 15 theo tổ hợp hợp lệ của ngành; LƯU Ý không cộng ưu tiên, chưa có ĐGNL/điểm chuẩn)
 - **BAFU** — Trường Đại học Nông - Lâm Bắc Giang (2026-09-16: PT2 thi TN THPT, ĐXT=ĐM1+ĐM2+ĐM3+ĐƯT, so RAW 15/30 đồng nhất 20 ngành)
 - **QTU** — Trường Đại học Quang Trung (2026-09-16: thi TN THPT, ĐXT gồm ưu tiên, Điều dưỡng ≥18/30, 10 ngành còn lại ≥15/30)
 - **DNTU** — Trường Đại học Công nghệ Đồng Nai (2026-09-16: thi TN THPT, so RAW, 20 ngành ≥15/30, Điều dưỡng/Xét nghiệm y học ≥18/30)
@@ -174,15 +176,13 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **NEU** — Trường Đại học Kinh tế Quốc dân
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 
-## Chỉ kiểm tra điều kiện/ngưỡng (18)
+## Chỉ kiểm tra điều kiện/ngưỡng (16)
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
 - **DHV** — Trường Đại học Hùng Vương TP.HCM
 - **DUE** — Trường Đại học Kinh tế - Đại học Đà Nẵng
 - **DUT** — Trường Đại học Bách khoa - Đại học Đà Nẵng
-- **EIU** — Trường Đại học Quốc tế Miền Đông
 - **HPU2** — Truong Dai hoc Su pham Ha Noi 2
-- **HUIT** — Trường Đại học Công Thương TP.HCM
 - **NTTU** — Trường Đại học Nguyễn Tất Thành
 - **PYU** — Trường Đại học Phú Yên
 - **TNU** — Dai hoc Thai Nguyen

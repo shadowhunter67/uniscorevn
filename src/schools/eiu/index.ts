@@ -21,7 +21,7 @@ export const eiuModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'Ngưỡng đầu vào chung đã xác minh từ đề án tuyển sinh chính thức eiu.edu.vn cho 3 phương thức: thi TN THPT (thang 30 — ≥15), học bạ (thang 30, điểm trung bình chung 6 học kỳ lớp 10/11/12 — ≥18, thí sinh tốt nghiệp từ 2026 cần thêm điều kiện thi TN THPT), ĐGNL ĐHQG-HCM (thang 1200 — ≥600, cùng điều kiện kết hợp). Ngành Điều dưỡng dùng ngưỡng riêng của Bộ GD&ĐT, chưa model · Đây là điểm SÀN NHẬN HỒ SƠ, KHÔNG PHẢI điểm chuẩn trúng tuyển cuối — bảng điểm ưu tiên/điểm cộng riêng của trường chưa tìm được nguồn.',
+    'Ngưỡng đầu vào chung đã xác minh từ đề án tuyển sinh chính thức eiu.edu.vn cho 3 phương thức: thi TN THPT (thang 30 — ≥15), học bạ (thang 30, điểm trung bình chung 6 học kỳ lớp 10/11/12 — ≥18, thí sinh tốt nghiệp từ 2026 cần thêm điều kiện thi TN THPT), ĐGNL ĐHQG-HCM (thang 1200 — ≥600, cùng điều kiện kết hợp). Khi chọn ngành (9/10 ngành, bảng ngành + tổ hợp chính thức; trừ Điều dưỡng dùng ngưỡng riêng của Bộ GD&ĐT): kiểm tra phương thức thi TN THPT và học bạ 6 học kỳ theo tổ hợp hợp lệ của ngành, dùng đúng dữ liệu 6 học kỳ (không lấy TB năm làm proxy), không cộng ưu tiên vì điều kiện không nhắc; chưa chọn ngành: baseline chung · Đây là điểm SÀN NHẬN HỒ SƠ, KHÔNG PHẢI điểm chuẩn trúng tuyển cuối — bảng điểm ưu tiên/điểm cộng riêng của trường chưa tìm được nguồn.',
   capabilities: {
     admissionInfo: true,
     programs: false,

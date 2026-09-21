@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 247,
       admissionDataAvailable: 247,
-      eligibilitySupported: 10,
-      calculatorSupported: 172,
+      eligibilitySupported: 8,
+      calculatorSupported: 174,
       partialCalculator: 2,
-      fullyVerified: 170,
+      fullyVerified: 172,
       catalogOnly: 107,
     });
   });
@@ -170,6 +170,7 @@ describe('institution coverage statistics', () => {
     expect(deriveInstitutionSupportStatus(schoolRegistry.dav)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.vgu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hnue)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.huit)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hlu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hdu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.ptit)).toBe('verified-calculator');
@@ -195,7 +196,7 @@ describe('institution coverage statistics', () => {
     expect(deriveInstitutionSupportStatus(schoolRegistry.bvu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.tbu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.uhd)).toBe('verified-calculator');
-    expect(deriveInstitutionSupportStatus(schoolRegistry.eiu)).toBe('eligibility-only');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.eiu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.dthu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.ltvuni)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.pxu)).toBe('verified-calculator');

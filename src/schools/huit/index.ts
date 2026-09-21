@@ -23,7 +23,7 @@ export const huitModule: SchoolModule = {
   region: 'hcm',
   vnuhcm: false,
   summary:
-    'Ngưỡng đảm bảo chất lượng đầu vào theo nhóm ngành (thi TN THPT: 16/20; học tập THPT: 20/20 — Luật/Luật kinh tế so với các ngành còn lại) đã xác minh từ 1 bài công bố chính thức trên ts.huit.edu.vn · Calculator chính xác đang chờ danh mục ngành, bảng điểm ưu tiên/điểm cộng, và phương pháp tính điểm học bạ chi tiết',
+    'Ngưỡng đảm bảo chất lượng đầu vào theo nhóm ngành (thi TN THPT: 16/20; học tập THPT: 20/20 — Luật/Luật kinh tế so với các ngành còn lại) đã xác minh từ 1 bài công bố chính thức trên ts.huit.edu.vn · Khi chọn ngành (39 ngành chính quy, bảng tổ hợp chính thức): kiểm tra ngưỡng thi TN THPT — Luật/Luật kinh tế ≥ 20 kèm Toán, Ngữ văn ≥ 6, ngành còn lại ≥ 16, tổng thô ≥ 15; đủ điều kiện khi tổng thô ≥ ngưỡng, không đủ khi cộng ưu tiên tối đa vẫn < ngưỡng, còn lại chưa kết luận (nguồn không nói ưu tiên tính trước hay sau ngưỡng). Chưa có điểm xét tuyển cuối, điểm chuẩn, phương thức học bạ/ĐGNL, chương trình liên kết quốc tế',
   capabilities: {
     admissionInfo: true,
     programs: false,

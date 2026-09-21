@@ -43,4 +43,19 @@ export const eiuAdmissionMethods: AdmissionMethodDescriptor[] = [
     capabilities: { eligibility: true, scoreConversion: false, bonus: false, priority: false, exactCalculator: false },
     knowledgeGaps: eiuKnowledgeGaps,
   },
+  /**
+   * Nhánh HẸP exact — theo ngành (9/10 ngành, trừ Điều dưỡng: ngưỡng do Bộ công bố), 2 phương thức của trang đề án:
+   * (1) thi TN THPT 2026: tổng 3 môn của tổ hợp ngành ≥ 15/30; (2) học bạ: tổng TB 6 HỌC KỲ của 3 môn tổ hợp ≥ 18/30
+   * kèm điều kiện điểm thi TN THPT ≥ 15/30 (tổ hợp, hoặc Toán + Văn + 1 môn thi khác). Dùng đúng dữ liệu 6 học kỳ
+   * (`transcript.bySemester`). Điều kiện nêu trên tổng điểm, không nhắc ưu tiên nên không cộng ưu tiên. Ngoài phạm vi:
+   * ĐGNL, xét tuyển thẳng, quy đổi IELTS thay môn ngoại ngữ, điểm xét tuyển cuối.
+   */
+  {
+    id: 'eiu-program-exact-2026',
+    schoolId: 'eiu',
+    name: 'Ngưỡng theo ngành: thi TN THPT 2026 hoặc học bạ 6 học kỳ (trừ Điều dưỡng)',
+    year: 2026,
+    applicantTypes: ['Thí sinh tốt nghiệp THPT 2026 có điểm thi TN THPT và (nếu xét học bạ) học bạ đủ 6 học kỳ'],
+    capabilities: { eligibility: true, scoreConversion: false, bonus: false, priority: false, exactCalculator: true },
+  },
 ];

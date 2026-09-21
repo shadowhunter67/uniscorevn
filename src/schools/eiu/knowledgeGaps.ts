@@ -30,7 +30,7 @@ export const eiuKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'eiu-program-catalog-not-imported',
     label:
-      'Danh mục 10 ngành đào tạo 2026, mã ngành, và tổ hợp môn xét tuyển đầy đủ (tổ hợp nguồn liệt kê gồm cả các mã ít phổ biến như X05, X06, A07, C01-C04, X01, X02, D09, D10, X25, X26) chưa import — `COMMON_SUBJECT_COMBINATIONS` dùng chung hiện chỉ có A00/A01/B00/D01/D07 trong danh sách EIU công bố, các tổ hợp còn lại chưa có trong danh mục dùng chung của UniscoreVN.',
+      '(Đã import cho nhánh exact `eiu-program-exact-2026`: 10 ngành + tổ hợp phương thức 1-2; baseline chung chưa chọn ngành và phương thức ĐGNL vẫn dùng ngưỡng chung.) Danh mục 10 ngành đào tạo 2026, mã ngành, và tổ hợp môn xét tuyển đầy đủ (tổ hợp nguồn liệt kê gồm cả các mã ít phổ biến như X05, X06, A07, C01-C04, X01, X02, D09, D10, X25, X26) chưa import — `COMMON_SUBJECT_COMBINATIONS` dùng chung hiện chỉ có A00/A01/B00/D01/D07 trong danh sách EIU công bố, các tổ hợp còn lại chưa có trong danh mục dùng chung của UniscoreVN.',
     status: 'incomplete',
     sourceId: 'eiu-admission-scheme-2026',
     scoreAffecting: false,

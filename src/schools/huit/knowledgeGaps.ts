@@ -41,7 +41,7 @@ export const huitKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'huit-program-catalog-not-imported',
     label:
-      'Danh mục ngành đầy đủ + tổ hợp môn xét tuyển từng ngành (bảng 39 ngành đào tạo chính quy + 5 ngành liên kết quốc tế đã đọc được ở nguồn, nhưng chưa import vào dataset) và bảng ánh xạ ngành → nhóm ngưỡng (Luật/Luật kinh tế vs. còn lại) chưa import — evaluator nhận `HuitThresholdGroup` trực tiếp từ caller thay vì tự suy từ tên/mã ngành (cùng pattern UFM/HUTECH/VLU).',
+      '(Đã import 39 ngành chính quy + tổ hợp cho nhánh exact `huit-thpt-exam-program-exact-2026`; 5 chương trình liên kết quốc tế và baseline chưa chọn ngành chưa dùng.) Danh mục ngành đầy đủ + tổ hợp môn xét tuyển từng ngành (bảng 39 ngành đào tạo chính quy + 5 ngành liên kết quốc tế đã đọc được ở nguồn, nhưng chưa import vào dataset) và bảng ánh xạ ngành → nhóm ngưỡng (Luật/Luật kinh tế vs. còn lại) chưa import — evaluator nhận `HuitThresholdGroup` trực tiếp từ caller thay vì tự suy từ tên/mã ngành (cùng pattern UFM/HUTECH/VLU).',
     status: 'incomplete',
     sourceId: 'huit-quality-threshold-2026',
     scoreAffecting: false,
