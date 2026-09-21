@@ -24,10 +24,22 @@ export const vguSources: VguSource[] = [
     accessedAt: '2026-08-24',
     publishedAt: '2026-07-09',
     sourceType: 'official-admission',
-    verification: 'incomplete',
+    verification: 'verified',
     lifecycle: { effectiveYear: 2026, status: 'current' },
     note:
-      'Official VGU announcement states 5 admission methods, THPT floor range 17-22 (including priority/bonus points), English score requirement (avg >=8,0/10, or >=7,5 for Construction), and international certificate minimums (SAT>=1150, ACT>=23, IB>=28); the per-program numeric table is embedded as images, not machine-readable text.',
+      'Official VGU announcement states 5 admission methods, THPT floor range 17-22 (including priority/bonus points), English score requirement (avg >=8,0/10, or >=7,5 for Construction), and international certificate minimums (SAT>=1150, ACT>=23, IB>=28). The per-program numeric table is embedded as 2 images; read at native resolution on 2026-09-21: 13 programs with PT5 floors (Architecture 18, Construction 17, BBA/BFA/CSE/MEN/BSE/BDE 19, ECE 18.5, SPE/SME/BME 18, Mechatronics 22), plus the IELTS-to-THPT-English conversion table and the English requirement box.',
+  },
+  {
+    id: 'vgu-nhaphoc-method5-2026',
+    publisher: 'Vietnamese-German University (Truong Dai hoc Viet Duc)',
+    title: 'VGU 2026 admission process page — Method 5 (THPT exam): conditions, program list and subject combinations',
+    url: 'https://tuyensinh.vgu.edu.vn/nhaphoc',
+    accessedAt: '2026-09-21',
+    sourceType: 'official-admission',
+    verification: 'verified',
+    lifecycle: { effectiveYear: 2026, status: 'current' },
+    note:
+      'Method 5 text: total of 3 exam subjects (no coefficient) INCLUDING Ministry priority points must reach the program floor; English requirement; raw 3-subject total >= 15.00. Per-program subject combinations come from the embedded program table on that page (12 programs; Architecture has none listed).',
   },
   {
     id: 'vgu-floor-score-press-2026',

@@ -145,6 +145,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **THUV** — Trường Đại học Y khoa Tokyo Việt Nam (2026-09-16: PT2 thi TN THPT, không chứng chỉ JLPT — điểm chuẩn 18,0/30 đồng nhất 4 ngành)
 - **HVTA** — Học viện Tòa án (2026-09-16: ngành Luật duy nhất, thi TN THPT — ngưỡng 18,0/30 + Toán/Văn≥6/10; LƯU Ý còn điều kiện "Đạt sơ tuyển" tại TAND/Học viện ngoài phạm vi điểm số, chưa model)
 - **DAV** — Hoc vien Ngoai giao (2026-09-21: PT4 thi TN THPT, 9 ngành không phải Luật, tổ hợp A00/A01/C00/D01/D07/D09/D10/D14/D15 — điểm xét = tổng 3 môn + ưu tiên giảm dần, ngưỡng 22/C00 23 đã gồm ưu tiên; LƯU Ý chưa tính điểm xét thưởng HSG, ngành Luật, tổ hợp Pháp/Trung/Nhật/Hàn)
+- **VGU** — Truong Dai hoc Viet Duc (2026-09-21: PT5 thi TN THPT, 12 ngành trừ Kiến trúc, tổ hợp A00/A01/A02/B00/D01/D07 theo ngành — điểm 3 môn + ưu tiên ≥ điểm sàn 17–22/30 (bảng chính thức đọc từ ảnh) + tổng thô ≥ 15 + yêu cầu tiếng Anh; LƯU Ý chưa xét bài thi tiếng Anh VGU, TOEFL, IELTS 5,5, Kiến trúc)
 - **BAFU** — Trường Đại học Nông - Lâm Bắc Giang (2026-09-16: PT2 thi TN THPT, ĐXT=ĐM1+ĐM2+ĐM3+ĐƯT, so RAW 15/30 đồng nhất 20 ngành)
 - **QTU** — Trường Đại học Quang Trung (2026-09-16: thi TN THPT, ĐXT gồm ưu tiên, Điều dưỡng ≥18/30, 10 ngành còn lại ≥15/30)
 - **DNTU** — Trường Đại học Công nghệ Đồng Nai (2026-09-16: thi TN THPT, so RAW, 20 ngành ≥15/30, Điều dưỡng/Xét nghiệm y học ≥18/30)
@@ -170,7 +171,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **NEU** — Trường Đại học Kinh tế Quốc dân
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 
-## Chỉ kiểm tra điều kiện/ngưỡng (22)
+## Chỉ kiểm tra điều kiện/ngưỡng (21)
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
 - **DHV** — Trường Đại học Hùng Vương TP.HCM
@@ -190,7 +191,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **UIT** — Trường Đại học Công nghệ Thông tin – ĐHQG TP.HCM
 - **UTE** — Trường Đại học Sư phạm Kỹ thuật - Đại học Đà Nẵng
 - **VAA** — Học viện Hàng không Việt Nam
-- **VGU** — Truong Dai hoc Viet Duc
 - **VLU** — Trường Đại học Văn Lang
 - **VNU-LS** — Truong Dai hoc Luat - Dai hoc Quoc gia Ha Noi
 - **VNUF** — Truong Dai hoc Lam nghiep

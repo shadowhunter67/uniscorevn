@@ -13,7 +13,7 @@ export const vguModule: SchoolModule = {
   region: 'other',
   vnuhcm: false,
   summary:
-    'VGU 2026 THPT floor scores are cross-checked from state-run press coverage (SGGP) of the official 09/07/2026 notice, since the score table on tuyensinh.vgu.edu.vn is image-embedded: per-program floors range 17-22/30 (Mechatronics highest, Construction lowest), already including priority/bonus points per VGU\'s own wording. English-score condition, international-certificate route (Method 4), TestAS (Method 1), and transcript (Method 2) are documented as knowledge gaps rather than modeled.',
+    'VGU 2026, phương thức 5 (thi TN THPT), 12 ngành (trừ Kiến trúc), tổ hợp A00/A01/A02/B00/D01/D07 theo từng ngành: đủ điều kiện xét tuyển ⟺ tổng 3 môn (không hệ số, môn Anh có thể thay bằng IELTS quy đổi) + điểm ưu tiên giảm dần ≥ điểm sàn của ngành (17–22/30, bảng chính thức 09/07/2026, đã gồm ưu tiên/điểm cộng) VÀ tổng thô ≥ 15 VÀ đạt yêu cầu tiếng Anh (IELTS ≥ 5,0 hoặc điểm TB Anh 3 năm ≥ 8,0; Xây dựng ≥ 7,5). Đúng cho thí sinh không có điểm cộng riêng; thí sinh chỉ đạt tiếng Anh qua bài thi VGU (75/100) sẽ ở trạng thái chưa kết luận. Ngoài phạm vi: Kiến trúc, tổ hợp D03/D05/D26, TOEFL iBT, IELTS 5,5, phương thức 1–4 (TestAS, học bạ, chứng chỉ quốc tế, xét thẳng).',
   capabilities: {
     admissionInfo: true,
     programs: false,

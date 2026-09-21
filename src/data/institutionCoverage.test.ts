@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 247,
       admissionDataAvailable: 247,
-      eligibilitySupported: 14,
-      calculatorSupported: 168,
+      eligibilitySupported: 13,
+      calculatorSupported: 169,
       partialCalculator: 2,
-      fullyVerified: 166,
+      fullyVerified: 167,
       catalogOnly: 107,
     });
   });
@@ -113,7 +113,7 @@ describe('institution coverage statistics', () => {
     // Batch (2026-08-29): HUST graduated to eligibility-only — official ts.hust.edu.vn 2026
     // quality-assurance threshold read via vision from the embedded image, banded by khối nhóm
     // ngành (Kỹ thuật >=20/30; Kinh tế/Giáo dục/Ngoại ngữ >=19,5/30); no per-program mapping found.
-    for (const schoolId of ['vnuf', 'vgu']) {
+    for (const schoolId of ['vnuf']) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
     }
     // Batch (2026-09-16, roadmap 142 -> ...): HPU2 graduated to verified-calculator — Cổng TTĐT
@@ -168,6 +168,7 @@ describe('institution coverage statistics', () => {
     // nhóm) đã xác minh, điểm ưu tiên KV/ĐT hiển thị tham khảo (trích công thức từ chính thông báo).
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnua)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.dav)).toBe('verified-calculator');
+    expect(deriveInstitutionSupportStatus(schoolRegistry.vgu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hlu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.hdu)).toBe('verified-calculator');
     expect(deriveInstitutionSupportStatus(schoolRegistry.ptit)).toBe('verified-calculator');
