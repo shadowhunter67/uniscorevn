@@ -13,12 +13,20 @@ export const neuModule: SchoolModule = {
   region: 'hanoi',
   vnuhcm: false,
   summary:
-    'Thông báo chính thức số 1613/TB-ĐHKTQD (2026) công bố ngưỡng 22/30 và bảng quy đổi tương đương điểm trúng tuyển giữa các phương thức THPT/HSA/SAT/V-ACT/TSA theo từng khoảng điểm. UniscoreVN mới báo khoảng điểm chính thức; quy đổi chi tiết trong từng khoảng và điểm chuẩn chưa được model hoá.',
+    'NEU 2026, PTXT5 (thi TN THPT thuần): Điểm xét tuyển = tổng thô 3 môn (A00/A01/D01/D07, hệ số 1) + điểm ưu tiên (công thức chính chủ, không judgment call), so với điểm chuẩn thật theo 42/88 mã ngành CHUẨN (Thông báo 1890/TB-ĐHKTQD, 09/8/2026). Loại chương trình tiên tiến/chất lượng cao/POHE/xét kết hợp riêng (EPxx). Thông báo 1613/TB-ĐHKTQD công bố thêm bảng quy đổi tương đương HSA/SAT/V-ACT/TSA — chưa mô hình hoá chi tiết trong khoảng.',
   capabilities: {
     admissionInfo: true,
-    programs: false,
-    cutoffs: false,
+    programs: true,
+    cutoffs: true,
     ...aggregateSchoolCapabilities(neuAdmissionMethods),
   },
+  catalogSources: [
+    {
+      title: 'Thông báo 1890/TB-ĐHKTQD: Điểm chuẩn trúng tuyển đại học chính quy năm 2026',
+      url: 'https://xaydungchinhsach.chinhphu.vn/diem-chuan-trung-tuyen-dai-hoc-kinh-te-quoc-dan-2026-119260809120816394.htm',
+      type: 'official-institution',
+      checkedAt: '2026-09-22',
+    },
+  ],
 };
 

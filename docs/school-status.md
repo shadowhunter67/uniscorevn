@@ -170,6 +170,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **USTH** — Trường Đại học Khoa học và Công nghệ Hà Nội (2026-09-22: mới, nâng thẳng lên exact — Quyết định 171/QĐ-ĐHKHCN (công thức: tổng 3 môn + điểm ưu tiên, điểm khuyến khích) + trang điểm chuẩn chính chủ, cùng năm 2026, 16/17 mã ngành PT4 (thi TN THPT); loại Kỹ thuật Hàng không và 3 chương trình song bằng (chỉ xét thang 100) — đưa tổng lên 175)
 - **HANU** — Trường Đại học Hà Nội (2026-09-22: mới, nâng thẳng lên exact — công thức nhân hệ số (Toán hoặc Văn + Ngoại ngữ ×2, tổng tối đa 50 quy đổi thang 40) từ trang thông tin tuyển sinh chính chủ + Quyết định 3222/QĐ-ĐHHN (điểm chuẩn thật, ký/đóng dấu, đọc bằng vision), cùng năm 2026, 29/30 mã ngành; chỉ hỗ trợ tổ hợp dùng tiếng Anh làm Ngoại ngữ (taxonomy chưa có Nga/Pháp/Trung/Đức/Nhật/Hàn), điểm ưu tiên quy đổi ×4/3 theo tiền lệ AJC — đưa tổng lên 176)
 - **NTTU** — Trường Đại học Nguyễn Tất Thành (2026-09-22: thêm phương thức thi TN THPT lên exact — điểm chuẩn thật (công bố 09/8/2026) theo 6 nhóm ngành (Y khoa/RHM 22, Dược/YHCT 20, Điều dưỡng nhóm 18, Luật 20, còn lại 15, thang 30), so tổng thô; nguồn không có anchor điểm ưu tiên nên KHÔNG hiển thị kể cả dạng tham khảo (khác precedent QUI/HPU) — phương thức học bạ (eligibility-only, đã có từ trước) giữ nguyên — đưa tổng lên 177)
+- **NEU** — Trường Đại học Kinh tế Quốc dân (2026-09-22: thêm PTXT5 (thi TN THPT thuần) lên exact — công thức + điểm ưu tiên trích nguyên văn chính chủ (KHÔNG judgment call, hiếm gặp), tổ hợp A00/A01/D01/D07 hệ số 1; điểm chuẩn thật Thông báo 1890/TB-ĐHKTQD (09/8/2026) cho 42/88 mã ngành CHUẨN, loại chương trình tiên tiến/chất lượng cao/POHE/xét kết hợp riêng (EPxx); bảng quy đổi HSA/SAT/V-ACT/TSA (method cũ) giữ nguyên partial — đưa tổng lên 178)
 - **VNUA** — Hoc vien Nong nghiep Viet Nam
 - **VTTU** — Trường Đại học Võ Trường Toản
 - **VUTM** — Học viện Y Dược học cổ truyền Việt Nam
@@ -178,7 +179,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 
 ## Calculator một phần (2)
 
-- **NEU** — Trường Đại học Kinh tế Quốc dân
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 
 ## Chỉ kiểm tra điều kiện/ngưỡng (16)

@@ -27,3 +27,23 @@ export const neuEquivalenceBandEvidence = {
   ],
 } satisfies SourcedRule<typeof NEU_EQUIVALENCE_BANDS>;
 
+export const neuThptExamExactEvidence = {
+  ruleId: 'neu-thpt-exam-exact-2026',
+  evidence: [
+    {
+      sourceId: 'neu-admission-info-2026',
+      location: 'Trang 3, mục 2.2: "ĐHKTQD sử dụng 04 tổ hợp xét tuyển là A00, A01, D01, D07, các môn trong tổ hợp là hệ số 1." Trang 9, mục 7.1: công thức điểm ưu tiên.',
+      verification: 'verified' as const,
+      effectiveYear: 2026,
+      verifiedAt: '2026-09-22',
+    },
+    {
+      sourceId: 'neu-cutoff-2026',
+      location: 'Thông báo 1890/TB-ĐHKTQD, bảng điểm chuẩn 42/88 mã ngành chuẩn (thang 30).',
+      verification: 'verified' as const,
+      effectiveYear: 2026,
+      verifiedAt: '2026-09-22',
+    },
+  ],
+};
+

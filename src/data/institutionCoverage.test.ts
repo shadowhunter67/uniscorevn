@@ -68,8 +68,8 @@ describe('institution coverage statistics', () => {
       admissionDataAvailable: 247,
       eligibilitySupported: 5,
       calculatorSupported: 179,
-      partialCalculator: 2,
-      fullyVerified: 177,
+      partialCalculator: 1,
+      fullyVerified: 178,
       catalogOnly: 107,
     });
   });

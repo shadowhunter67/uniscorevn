@@ -39,7 +39,21 @@ export const neuSources: NeuSource[] = [
     sourceType: 'official-admission',
     verification: 'verified',
     lifecycle: { effectiveYear: 2026, status: 'current' },
-    note: 'Official signed admission-information PDF linked from neu.edu.vn, used for lifecycle/source inventory and program-admission context only.',
+    note:
+      'Official signed admission-information PDF linked from neu.edu.vn. Trang 3 (mục 2.2): "ĐHKTQD sử dụng 04 tổ hợp xét tuyển là A00, A01, D01, D07, các môn trong tổ hợp là hệ số 1" cho PTXT5 (thi TN THPT). Trang 9 (mục 7.1): công thức điểm ưu tiên chính chủ đầy đủ (KV1/KV2-NT/KV2/KV3, ƯT1/ƯT2, công thức giảm dần khi tổng ≥22,5/30).',
+  },
+  {
+    id: 'neu-cutoff-2026',
+    publisher: 'Trường Đại học Kinh tế Quốc dân (Hội đồng tuyển sinh)',
+    title: 'Thông báo 1890/TB-ĐHKTQD (09/8/2026): Điểm chuẩn trúng tuyển đại học chính quy năm 2026',
+    url: 'https://xaydungchinhsach.chinhphu.vn/diem-chuan-trung-tuyen-dai-hoc-kinh-te-quoc-dan-2026-119260809120816394.htm',
+    accessedAt: '2026-09-22',
+    publishedAt: '2026-08-09',
+    sourceType: 'official-republication',
+    verification: 'verified',
+    lifecycle: { effectiveYear: 2026, status: 'current' },
+    note:
+      'Cổng TTĐT Chính phủ đăng lại nguyên văn Thông báo 1890/TB-ĐHKTQD (ảnh văn bản ký/đóng dấu Giám đốc, đọc bằng chrome-devtools screenshot + vision). Bảng 88 mã tuyển sinh. Ghi chú cuối bảng: "Điểm chuẩn trúng tuyển là điểm quy đổi tương đương giữa các phương thức xét tuyển, tổ hợp xét tuyển thang điểm 30 theo điểm TN THPT năm 2026" — áp dụng mọi phương thức. Runtime CHỈ dùng 42/88 mã ngành CHUẨN (mã 7 chữ số, không gồm TT1/TT2/CLC1-3/POHEx/EPxx — các mã này thuộc chương trình tiên tiến/chất lượng cao/xét tuyển kết hợp riêng, dùng phương thức/tổ hợp khác PTXT5).',
   },
 ];
 

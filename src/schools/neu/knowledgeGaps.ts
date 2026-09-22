@@ -11,17 +11,11 @@ export const neuKnowledgeGaps: KnowledgeGap[] = [
   },
   {
     id: 'neu-program-catalog-not-imported',
-    label: 'NEU full 2026 program catalog/admission-code dataset has not been imported.',
+    label:
+      '42/88 mã tuyển sinh CHUẨN (PTXT5) đã import (xem `thresholds.ts`); 46 mã còn lại thuộc chương trình tiên tiến (TT1/TT2), chất lượng cao (CLC1-3), POHE, hoặc xét tuyển kết hợp riêng (EPxx) — dùng phương thức/tổ hợp khác, chưa import.',
     status: 'incomplete',
-    impact: 'The module checks general threshold/equivalence but does not provide program-level context or cutoffs.',
-    sourceId: '',
-  },
-  {
-    id: 'neu-cutoffs-2026-not-imported',
-    label: 'NEU 2026 final admitted cutoffs have not been imported.',
-    status: 'incomplete',
-    impact: 'NEU does not have cutoff comparison in /compare yet.',
-    sourceId: '',
+    impact: 'method-out-of-scope',
+    sourceId: 'neu-cutoff-2026',
   },
 ];
 
