@@ -167,6 +167,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-USSH** — Trường Đại học Khoa học Xã hội và Nhân văn - ĐHQG Hà Nội
 - **TNUS** — Trường Đại học Khoa học - Đại học Thái Nguyên (2026-09-22: nâng lên exact — Điểm xét tuyển = tổng thô 3 môn + điểm ưu tiên, so với điểm chuẩn thật theo 39/40 mã xét tuyển; nguồn Thông báo 517/TB-ĐHKH (ngưỡng+công thức) + infographic điểm chuẩn chính chủ, cùng năm 2026; Luật/Luật kinh tế kèm điều kiện Toán hoặc Văn ≥6, Công nghệ bán dẫn kèm Toán ≥7,5; loại Ngôn ngữ Anh định hướng giảng dạy do điều kiện IELTS/học bạ riêng — đưa tổng lên 173)
 - **VNUF** — Trường Đại học Lâm nghiệp (2026-09-22: nâng lên exact — điểm chuẩn thật (công bố 13/8/2026) đồng nhất 15,00/30 cho mọi ngành/cơ sở (Hà Nội/Đồng Nai/Gia Lai), khớp đúng ngưỡng nguồn xét tuyển đầu vào (Thông báo điểm sàn 16/7/2026, "không tính điểm ưu tiên, điểm cộng") — so tổng thô, đưa tổng lên 174)
+- **USTH** — Trường Đại học Khoa học và Công nghệ Hà Nội (2026-09-22: mới, nâng thẳng lên exact — Quyết định 171/QĐ-ĐHKHCN (công thức: tổng 3 môn + điểm ưu tiên, điểm khuyến khích) + trang điểm chuẩn chính chủ, cùng năm 2026, 16/17 mã ngành PT4 (thi TN THPT); loại Kỹ thuật Hàng không và 3 chương trình song bằng (chỉ xét thang 100) — đưa tổng lên 175)
 - **VNUA** — Hoc vien Nong nghiep Viet Nam
 - **VTTU** — Trường Đại học Võ Trường Toản
 - **VUTM** — Học viện Y Dược học cổ truyền Việt Nam
@@ -248,7 +249,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **UKH** — Trường Đại học Khánh Hòa
 - **UPES1** — Trường Đại học Thể dục Thể thao Bắc Ninh
 - **UPT** — Trường Đại học Phan Thiết
-- **USTH** — Trường Đại học Khoa học và Công nghệ Hà Nội
 - **UTH** — Trường Đại học Giao thông vận tải TP.HCM
 - **VinUni** — Trường Đại học VinUni
 - **VJU** — Trường Đại học Việt Nhật - ĐHQG Hà Nội

@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 247,
       admissionDataAvailable: 247,
       eligibilitySupported: 6,
-      calculatorSupported: 176,
+      calculatorSupported: 177,
       partialCalculator: 2,
-      fullyVerified: 174,
+      fullyVerified: 175,
       catalogOnly: 107,
     });
   });
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(65);
+    expect(researchedOnly).toBe(64);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuvju', 'hanu',
