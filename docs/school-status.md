@@ -22,6 +22,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **DLU** — Truong Dai hoc Da Lat
 - **DNU** — Trường Đại học Đồng Nai
 - **DNU-HN** — Trường Đại học Đại Nam
+- **DPD** — Trường Đại học Phương Đông
 - **DSU** — Trường Đại học Thể dục Thể thao Đà Nẵng
 - **DTHU** — Trường Đại học Đồng Tháp
 - **DTU** — Truong Dai hoc Duy Tan

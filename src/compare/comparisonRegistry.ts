@@ -62,6 +62,7 @@ import { pntuComparisonAdapter } from '../schools/pntu/comparison';
 import { vnufComparisonAdapter } from '../schools/vnuf/comparison';
 import { usthComparisonAdapter } from '../schools/usth/comparison';
 import { hanuComparisonAdapter } from '../schools/hanu/comparison';
+import { dpdComparisonAdapter } from '../schools/dpd/comparison';
 import { dtuComparisonAdapter } from '../schools/dtu/comparison';
 import { uahComparisonAdapter } from '../schools/uah/comparison';
 import { vguComparisonAdapter } from '../schools/vgu/comparison';
@@ -264,6 +265,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   vnufComparisonAdapter,
   usthComparisonAdapter,
   hanuComparisonAdapter,
+  dpdComparisonAdapter,
   dtuComparisonAdapter,
   uahComparisonAdapter,
   vguComparisonAdapter,

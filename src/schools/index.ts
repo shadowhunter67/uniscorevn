@@ -188,6 +188,7 @@ import { trungvuongModule } from './trungvuong';
 import { dsuModule } from './dsu';
 import { usthModule } from './usth';
 import { hanuModule } from './hanu';
+import { dpdModule } from './dpd';
 import { southernCatalogModules } from './southernCatalog';
 import { remainingCatalogModules } from './remainingCatalog';
 import { finalCatalogModules } from './finalCatalog';
@@ -427,4 +428,5 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   dsu: dsuModule,
   usth: usthModule,
   hanu: hanuModule,
+  dpd: dpdModule,
 };

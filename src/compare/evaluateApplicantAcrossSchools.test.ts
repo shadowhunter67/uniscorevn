@@ -105,7 +105,7 @@ describe('evaluateApplicantAcrossSchools', () => {
     const roster = evaluateApplicantAcrossSchools(profile).map((summary) => summary.schoolId);
 
     expect(roster).toEqual(COMPARE_SCHOOL_ORDER);
-    expect(roster).toHaveLength(354);
+    expect(roster).toHaveLength(355);
     expect(roster).toEqual(expect.arrayContaining(['nce', 'ncspnt', 'ncehcm', 'vcte', 'hctb']));
   });
 

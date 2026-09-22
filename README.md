@@ -55,18 +55,18 @@ Snapshot hiện tại được tính từ `schoolRegistry` bằng `npm run stats
 <!-- coverage:kpi:start (generated bởi `npm run stats:coverage -- --write`, xem scripts/stats-coverage.ts — KHÔNG sửa tay) -->
 | KPI | Số lượng |
 |---|---:|
-| Mục trong danh mục/search/compare | 354 |
-| Cơ sở giáo dục độc lập trong danh mục | 342 |
+| Mục trong danh mục/search/compare | 355 |
+| Cơ sở giáo dục độc lập trong danh mục | 343 |
 | Đơn vị nội bộ/không tính vào KPI cơ sở | 12 |
-| Đại học / cơ sở hệ đại học | 234 |
+| Đại học / cơ sở hệ đại học | 235 |
 | Học viện | 22 |
 | Cao đẳng sư phạm/GDMN | 9 |
 | Cao đẳng giáo dục nghề nghiệp | 77 |
 | Nhóm độc lập khác | 0 |
-| Có dữ liệu tuyển sinh hoặc capability cao hơn | 247 |
+| Có dữ liệu tuyển sinh hoặc capability cao hơn | 248 |
 | Chỉ kiểm tra điều kiện/ngưỡng | 5 |
 | Có calculator một phần | 1 |
-| Calculator đã xác minh | 178 |
+| Calculator đã xác minh | 179 |
 | Chỉ có trong danh mục | 107 |
 <!-- coverage:kpi:end -->
 
@@ -81,7 +81,7 @@ Mức hỗ trợ đổi thường xuyên (mỗi batch nghiên cứu mới lại 
 <!-- coverage:support-status:start (generated bởi `npm run stats:coverage -- --write`, xem scripts/stats-coverage.ts — KHÔNG sửa tay) -->
 | Mức hỗ trợ | Số trường | Ý nghĩa |
 |---|---:|---|
-| ✅ Tính được điểm xét tuyển | 178 | Công thức, ngưỡng, điểm cộng và điểm ưu tiên đều có nguồn chính thức trong phạm vi đã công bố. |
+| ✅ Tính được điểm xét tuyển | 179 | Công thức, ngưỡng, điểm cộng và điểm ưu tiên đều có nguồn chính thức trong phạm vi đã công bố. |
 | 🟡 Tính được một phần | 1 | Có công thức thật nhưng chưa phủ hết mọi phương thức xét tuyển của trường. |
 | 🟡 Kiểm tra được điều kiện | 5 | Có ngưỡng điểm sàn/điều kiện chính thức, chưa tính được điểm xét tuyển đầy đủ. |
 | ⚪ Đã có thông tin tuyển sinh | 63 | Đã có thông tin tuyển sinh chính thức, nhưng chưa đủ để tính điểm hay kết luận điều kiện. |
