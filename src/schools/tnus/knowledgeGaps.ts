@@ -2,23 +2,25 @@ import type { KnowledgeGap } from '../../core/knowledgeStatus';
 
 export const tnusKnowledgeGaps: KnowledgeGap[] = [
   {
-    id: 'tnus-program-threshold-table-not-imported',
-    label: 'TNUS 2026 cong bo diem chuan trung tuyen thi TN THPT rieng cho tung nganh/chuong trinh (16,35-22,50/30, ~40 nganh); chua nhap duoc bang day du.',
+    id: 'tnus-other-methods-not-modeled',
+    label: 'TNUS 2026 còn phương thức xét học bạ, xét tuyển thẳng, đánh giá đầu vào V-SAT/DGNL ĐHQG Hà Nội/DGTD ĐHBK Hà Nội; chỉ phương thức thi TN THPT (mã 100) được mô hình hoá.',
     status: 'official-but-unparsed',
-    sourceId: 'tnus-cutoff-2026',
-    scoreAffecting: true,
-    knownData: [
-      'Cao nhat 22,50/30: Cong nghe Ban dan',
-      '21,75/30: Ngon ngu Trung Quoc',
-      '21,00/30: Lich su-Dia ly, Kinh te-Luat',
-      '20,43/30: Sinh hoc',
-    ],
-    impact: 'Runtime chi kiem tra duoc ngoai le duoi nguong thap nhat (16,35/30 = ineligible chac chan); tu 16,35/30 den 22,5/30 can chon nganh cu the de ket luan chinh xac.',
+    sourceId: 'tnus-methods-2026',
   },
   {
-    id: 'tnus-other-methods-not-modeled',
-    label: 'TNUS 2026 co them phuong thuc xet hoc ba, xet tuyen thang, danh gia nang luc V-SAT/DHQG Ha Noi/DHBK Ha Noi; chi phuong thuc thi TN THPT duoc mo hinh hoa.',
+    id: 'tnus-english-teacher-track-not-modeled',
+    label: 'Ngành Ngôn ngữ Anh định hướng giảng dạy (mã 7220201GV) có điều kiện thay thế riêng (điểm môn Tiếng Anh ≥ 6,5 theo THPT hoặc quy đổi IELTS ≥ 5,5) khác cấu trúc "tổng 3 môn" chung — không đưa vào bảng điểm chuẩn exact.',
     status: 'official-but-unparsed',
-    sourceId: 'tnus-cutoff-2026',
+    sourceId: 'tnus-threshold-2026',
+    scoreAffecting: false,
+    impact: 'method-out-of-scope',
+  },
+  {
+    id: 'tnus-combination-scope-not-full',
+    label: 'Không ràng buộc tổ hợp môn theo từng mã xét tuyển cụ thể trong nhánh exact — model theo tập tổ hợp CHUNG nằm trong taxonomy hiện có (dữ liệu tổ hợp gốc theo từng mã đã có ở trang thông tin tuyển sinh nhưng chưa wire vào UI).',
+    status: 'official-but-unparsed',
+    sourceId: 'tnus-nganh-2026',
+    scoreAffecting: false,
+    impact: 'method-out-of-scope',
   },
 ];

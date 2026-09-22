@@ -165,6 +165,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **QUI** — Trường Đại học Công nghiệp Quảng Ninh (2026-09-17: ngưỡng sàn, so RAW 15/30 đồng nhất 12 ngành)
 - **TKS** — Trường Đại học Kiểm sát Hà Nội (2026-09-17: nhóm Luật/Luật kinh tế/Ngôn ngữ Anh — không gồm chuyên ngành Kiểm sát vì cutoff theo giới tính; ĐXT quy đổi tổ hợp về D01 + độ lệch + ưu tiên)
 - **VNU-USSH** — Trường Đại học Khoa học Xã hội và Nhân văn - ĐHQG Hà Nội
+- **TNUS** — Trường Đại học Khoa học - Đại học Thái Nguyên (2026-09-22: nâng lên exact — Điểm xét tuyển = tổng thô 3 môn + điểm ưu tiên, so với điểm chuẩn thật theo 39/40 mã xét tuyển; nguồn Thông báo 517/TB-ĐHKH (ngưỡng+công thức) + infographic điểm chuẩn chính chủ, cùng năm 2026; Luật/Luật kinh tế kèm điều kiện Toán hoặc Văn ≥6, Công nghệ bán dẫn kèm Toán ≥7,5; loại Ngôn ngữ Anh định hướng giảng dạy do điều kiện IELTS/học bạ riêng — đưa tổng lên 173)
 - **VNUA** — Hoc vien Nong nghiep Viet Nam
 - **VTTU** — Trường Đại học Võ Trường Toản
 - **VUTM** — Học viện Y Dược học cổ truyền Việt Nam
@@ -188,7 +189,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **TNU** — Dai hoc Thai Nguyen
 - **TNUE** — Truong Dai hoc Su pham - Dai hoc Thai Nguyen
 - **TNUFL** — Truong Ngoai ngu - Dai hoc Thai Nguyen
-- **TNUS** — Truong Dai hoc Khoa hoc - Dai hoc Thai Nguyen
 - **UIT** — Trường Đại học Công nghệ Thông tin – ĐHQG TP.HCM
 - **VAA** — Học viện Hàng không Việt Nam
 - **VLU** — Trường Đại học Văn Lang
