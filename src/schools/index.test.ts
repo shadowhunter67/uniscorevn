@@ -89,9 +89,10 @@ describe('schoolRegistry', () => {
   it('có đủ các trường đã research (ĐHQG-HCM + UEH ngoài hệ thống)', () => {
     const ids = Object.keys(schoolRegistry).sort();
     const coreIds = [
-      // 'dpd' - trường mới hoàn toàn (scaffold-school.ts, không qua batch catalog sinh sẵn),
-      // không thuộc nhóm ĐHQG-HCM/UEH nhưng cần liệt kê ở đây để khớp schoolRegistry.
+      // 'dpd'/'vhu' - trường mới hoàn toàn (scaffold-school.ts, không qua batch catalog sinh
+      // sẵn), không thuộc nhóm ĐHQG-HCM/UEH nhưng cần liệt kê ở đây để khớp schoolRegistry.
       'dpd',
+      'vhu',
       'agu',
       'ctu',
       'ftu',
@@ -131,7 +132,7 @@ describe('schoolRegistry', () => {
     ];
     const catalogIds = [...southernCatalogSchools, ...remainingCatalogSchools, ...finalCatalogSchools, ...collegeCatalogSchools].map((school) => school.id);
     expect(ids).toEqual([...coreIds, ...catalogIds].sort());
-    expect(ids).toHaveLength(355);
+    expect(ids).toHaveLength(356);
   });
 
   it('docs/school-status.md nhắc tên mọi trường trong registry (phát hiện drift)', () => {

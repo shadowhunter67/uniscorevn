@@ -67,6 +67,7 @@ import { vnufAdmissionMethods } from '../schools/vnuf/methods';
 import { usthAdmissionMethods } from '../schools/usth/methods';
 import { hanuAdmissionMethods } from '../schools/hanu/methods';
 import { dpdAdmissionMethods } from '../schools/dpd/methods';
+import { vhuAdmissionMethods } from '../schools/vhu/methods';
 import { dtuAdmissionMethods } from '../schools/dtu/methods';
 import { uahAdmissionMethods } from '../schools/uah/methods';
 import { vguAdmissionMethods } from '../schools/vgu/methods';
@@ -269,6 +270,7 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   usth: usthAdmissionMethods,
   hanu: hanuAdmissionMethods,
   dpd: dpdAdmissionMethods,
+  vhu: vhuAdmissionMethods,
   dtu: dtuAdmissionMethods,
   uah: uahAdmissionMethods,
   vgu: vguAdmissionMethods,

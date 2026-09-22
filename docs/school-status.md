@@ -133,6 +133,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **UTM** — Trường Đại học Công nghệ và Quản lý hữu nghị
 - **UTT** — Trường Đại học Công nghệ Giao thông vận tải
 - **VHS** — Trường Đại học Văn hóa Thành phố Hồ Chí Minh
+- **VHU** — Trường Đại học Văn Hiến
 - **VKU** — Trường Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn
 - **VinhUni** — Trường Đại học Vinh
 - **VMU** — Trường Đại học Hàng hải Việt Nam
