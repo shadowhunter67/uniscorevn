@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 249,
       admissionDataAvailable: 249,
       eligibilitySupported: 5,
-      calculatorSupported: 181,
+      calculatorSupported: 182,
       partialCalculator: 1,
-      fullyVerified: 180,
+      fullyVerified: 181,
       catalogOnly: 107,
     });
   });
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(63);
+    expect(researchedOnly).toBe(62);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuvju',
@@ -473,6 +473,13 @@ describe('institution coverage statistics', () => {
     // văn Điều 7 Quy chế tuyển sinh của chính trường (Quyết định 261/QĐ-HVTTNVN), không phải
     // judgment call khung quốc gia thay thế. 130 -> 131.
     expect(deriveInstitutionSupportStatus(schoolRegistry.vya)).toBe('verified-calculator');
+    // Batch (2026-09-22): PDU (Trường Đại học Phạm Văn Đồng) moi hoan toan, graduated to
+    // verified-calculator — nguon CHINH CHU tuyensinh.pdu.edu.vn: PDF "Thong bao diem trung tuyen
+    // dot 1" ky ten Hieu truong + dong dau do (So 997/TB-DHPVD, 10/8/2026) cho diem chuan that theo
+    // ma nganh + PDF "Thong tin tuyen sinh nam 2026" (Quyet dinh 131/QD-DHPVD) cho cong thuc Tong
+    // diem xet tuyen = M1+M2+M3+diem uu tien + bang to hop mon theo nganh. 13/14 chuong trinh dai
+    // hoc chinh quy mo hinh hoa (loai Giao duc Mam non - cao dang, to hop nang khieu).
+    expect(deriveInstitutionSupportStatus(schoolRegistry.pdu)).toBe('verified-calculator');
   });
 
   it('requires catalog source metadata for college identity entries', () => {

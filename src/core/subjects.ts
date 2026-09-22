@@ -106,6 +106,10 @@ export const COMMON_SUBJECT_COMBINATIONS: readonly SubjectCombination[] = [
   { id: 'D12', subjects: ['literature', 'chemistry', 'english'] },
   { id: 'D13', subjects: ['literature', 'biology', 'english'] },
   { id: 'X05', subjects: ['math', 'physics', 'civic-economic-law'] },
+  /** X09 — thêm khi implement PDU 2026 (Trường Đại học Phạm Văn Đồng, ngành Sư phạm Hoá học dùng tổ
+   * hợp Toán/Hoá học/GDKT&PL, chú giải "X09: Toán, Hóa học, GDKT&PL" đọc trực tiếp từ bảng chú giải
+   * mã tổ hợp trong PDF chính thức, xem `schools/pdu/thresholds.ts`). */
+  { id: 'X09', subjects: ['math', 'chemistry', 'civic-economic-law'] },
   { id: 'X13', subjects: ['math', 'biology', 'civic-economic-law'] },
   { id: 'X14', subjects: ['math', 'biology', 'informatics'] },
   { id: 'X25', subjects: ['math', 'civic-economic-law', 'english'] },
