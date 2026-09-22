@@ -158,6 +158,10 @@ export const COMMON_SUBJECT_COMBINATIONS: readonly SubjectCombination[] = [
   { id: 'X15', subjects: ['math', 'biology', 'technology'] },
   { id: 'X18', subjects: ['math', 'history', 'informatics'] },
   { id: 'X71', subjects: ['literature', 'history', 'informatics'] },
+  /** A03 — thêm khi implement VNKGU 2026 (Trường Đại học Kiên Giang, ngành Công nghệ kỹ thuật ô tô/
+   * Kỹ thuật điều khiển và Tự động hóa dùng tổ hợp Toán/Vật lý/Lịch sử, chú giải "A03 (Toán, Vật lý,
+   * Lịch sử)" đọc trực tiếp từ bảng chú giải mã tổ hợp chính thức, xem `schools/vnkgu/thresholds.ts`). */
+  { id: 'A03', subjects: ['math', 'physics', 'history'] },
 ];
 
 /** Nhãn tiếng Việt — dùng ở bất kỳ trường nào cần hiển thị tên môn cho người dùng chọn. */
