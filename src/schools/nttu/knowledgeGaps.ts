@@ -17,17 +17,6 @@ export const nttuKnowledgeGaps: KnowledgeGap[] = [
     impact: 'method-out-of-scope',
   },
   {
-    id: 'nttu-thpt-exam-method-not-modeled',
-    label:
-      'Bài công bố chính thức đã đọc chỉ có bảng cho phương thức Học bạ + ĐGNL, KHÔNG có bảng ngưỡng riêng cho phương thức xét kết quả thi TN THPT (dù nguồn có nhắc tổng quát "ngưỡng điểm đạt quy định chung đối với các ngành còn lại: tổng điểm 3 môn thi từ 15.0 điểm trở lên" — không rõ đây là ngưỡng cho phương thức thi TN THPT riêng biệt hay chỉ là điều kiện tham chiếu chung). Không suy đoán ngưỡng phương thức thi TN THPT cho nhóm Sức khỏe/Luật từ số liệu học bạ.',
-    status: 'incomplete',
-    sourceId: 'nttu-quality-threshold-2026',
-    scoreAffecting: false,
-    implemented: false,
-    whyNotInferred: 'Không gán ngưỡng học bạ cho phương thức thi TN THPT dù 2 phương thức có thể trùng số ở 1 vài trường khác — NTTU không nêu rõ trong nguồn đã đọc.',
-    impact: 'method-out-of-scope',
-  },
-  {
     id: 'nttu-priority-bonus-table-not-found',
     label: 'Bảng điểm ưu tiên khu vực/đối tượng theo Thông tư hiện hành (nếu NTTU tự công bố lại) — không tìm thấy trong nguồn đã đọc.',
     status: 'incomplete',

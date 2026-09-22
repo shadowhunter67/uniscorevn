@@ -86,4 +86,14 @@ export function checkNttuTranscriptEligibility(input: {
   return { pass: basePass && rankPass && altScorePass, requiredText };
 }
 
+/** Phương thức thi TN THPT — thang 30 (nguồn: `nttu-cutoff-2026`, điểm chuẩn thật công bố 09/8/2026). */
+export const NTTU_THPT_EXAM_THRESHOLD_30: Record<NttuThresholdGroup, number> = {
+  standard: 15,
+  law: 20,
+  medicine: 22,
+  dentistry: 22,
+  'traditional-medicine-pharmacy': 20,
+  'nursing-prevention': 18,
+};
+
 export { GROUP_LABELS as NTTU_THRESHOLD_GROUP_LABELS };

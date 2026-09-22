@@ -1,8 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import type { ApplicantProfile } from '../../core/applicantProfile';
-import { evaluateNttuTranscriptAdmission } from './evaluate';
+import { evaluateNttuTranscriptAdmission, evaluateNttuThptExamExactAdmission } from './evaluate';
 
 const EMPTY_PROFILE: ApplicantProfile = {};
+const a00Context = { subjectContext: { combinationId: 'A00', subjects: ['math', 'physics', 'chemistry'] as const } };
 
 describe('evaluateNttuTranscriptAdmission', () => {
   it('chưa nhập gì -> unknown + missingRequirement tổng điểm', () => {
@@ -89,5 +90,42 @@ describe('evaluateNttuTranscriptAdmission', () => {
 
   it('methodId khớp phương thức học bạ', () => {
     expect(evaluateNttuTranscriptAdmission(EMPTY_PROFILE, { transcriptTotal30: 18 }).methodId).toBe('nttu-transcript-2026');
+  });
+});
+
+describe('evaluateNttuThptExamExactAdmission (so tổng thô theo nhóm ngành, không có điểm ưu tiên)', () => {
+  const p = (scores: Record<string, number>): ApplicantProfile => ({ thpt: { scores } });
+
+  it('chưa chọn nhóm ngành -> partial', () => {
+    const r = evaluateNttuThptExamExactAdmission(p({ math: 5, physics: 5, chemistry: 5 }), a00Context);
+    expect(r.confidence).toBe('partial');
+  });
+
+  it('chưa chọn tổ hợp -> partial', () => {
+    const r = evaluateNttuThptExamExactAdmission(p({ math: 5, physics: 5, chemistry: 5 }), { group: 'standard' });
+    expect(r.confidence).toBe('partial');
+  });
+
+  it('standard (ngưỡng 15): tổng 16 -> eligible', () => {
+    const r = evaluateNttuThptExamExactAdmission(p({ math: 6, physics: 5, chemistry: 5 }), { group: 'standard', ...a00Context });
+    expect(r.confidence).toBe('exact-verified');
+    expect(r.score).toEqual({ value: 16, scale: 30 });
+    expect(r.eligibility?.status).toBe('eligible');
+  });
+
+  it('standard: tổng 14 -> ineligible', () => {
+    const r = evaluateNttuThptExamExactAdmission(p({ math: 4, physics: 5, chemistry: 5 }), { group: 'standard', ...a00Context });
+    expect(r.eligibility?.status).toBe('ineligible');
+  });
+
+  it('medicine (ngưỡng 22): tổng 21 -> ineligible', () => {
+    const r = evaluateNttuThptExamExactAdmission(p({ math: 7, physics: 7, chemistry: 7 }), { group: 'medicine', ...a00Context });
+    expect(r.score).toEqual({ value: 21, scale: 30 });
+    expect(r.eligibility?.status).toBe('ineligible');
+  });
+
+  it('không có điểm ưu tiên trong evidence/explanation', () => {
+    const r = evaluateNttuThptExamExactAdmission(p({ math: 7, physics: 7, chemistry: 7 }), { group: 'standard', ...a00Context });
+    expect(r.explanation.some((e) => e.id.includes('priority'))).toBe(false);
   });
 });

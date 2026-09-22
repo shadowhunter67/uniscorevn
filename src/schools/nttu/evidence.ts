@@ -14,6 +14,20 @@ export const nttuTranscriptThresholdEvidence = {
   ],
 } satisfies SourcedRule<Record<'standard' | 'law' | 'medicine' | 'dentistry' | 'traditional-medicine-pharmacy' | 'nursing-prevention', number>>;
 
+export const nttuThptExamThresholdEvidence = {
+  value: { standard: 15, law: 20, medicine: 22, dentistry: 22, 'traditional-medicine-pharmacy': 20, 'nursing-prevention': 18 },
+  evidence: [
+    {
+      sourceId: 'nttu-cutoff-2026',
+      location:
+        '"Y khoa và Răng Hàm Mặt có điểm chuẩn cao nhất là 22 điểm", "Dược học và Y học cổ truyền có mức điểm chuẩn là 20 điểm", "Y học dự phòng, Điều dưỡng, Kỹ thuật xét nghiệm y học, Kỹ thuật phục hồi chức năng có mức điểm chuẩn 18 điểm", "Luật và Luật kinh tế cũng có mức điểm chuẩn là 20 điểm", "các ngành học còn lại... mức điểm chuẩn công bố lần lượt là 15 điểm" (phương thức thi TN THPT).',
+      verification: 'verified' as const,
+      effectiveYear: 2026,
+      verifiedAt: '2026-09-22',
+    },
+  ],
+} satisfies SourcedRule<Record<'standard' | 'law' | 'medicine' | 'dentistry' | 'traditional-medicine-pharmacy' | 'nursing-prevention', number>>;
+
 export const nttuTranscriptExtraRequirementEvidence = {
   value: {
     law: { minRank: 'tot', altThptTotal30: 18, altGraduationScore10: 8.5 },

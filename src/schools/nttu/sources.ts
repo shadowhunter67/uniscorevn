@@ -35,4 +35,17 @@ export const nttuSources: NttuSource[] = [
     note:
       'Đọc trực tiếp qua chrome-devtools (`document.body.innerText`) 2026-08-21. Trang KHÔNG có meta/time tag publish date đọc được qua DOM (đã kiểm tra `<meta>`/`<time>`, không có) — không đặt `publishedAt` để tránh suy đoán; đăng ký nguyện vọng bài viết ghi "từ ngày 02/07 đến 14/07" nên bài viết chắc chắn thuộc khoảng cuối 6/đầu 7/2026 nhưng không có ngày chính xác đọc được trực tiếp từ trang. Bảng điểm sàn (Học bạ|ĐGNL HCM|ĐGNL HN): Y khoa 23|650|85; Răng-Hàm-Mặt 23|600|75; Y học cổ truyền & Dược học 21|570|70 (3 nhóm trên cùng điều kiện đi kèm: học lực lớp 12 Tốt + tổng 3 môn TN THPT ≥20 HOẶC điểm xét tốt nghiệp ≥8.5); Điều dưỡng/Y học dự phòng/Kỹ thuật xét nghiệm y học/Kỹ thuật phục hồi chức năng 19|550|70 (điều kiện đi kèm: học lực lớp 12 Khá + tổng 3 môn ≥16.5 HOẶC điểm xét tốt nghiệp ≥6.5); Luật/Luật Kinh tế/Luật Kinh tế (Chuẩn quốc tế): học bạ từ 18 điểm, KHÔNG áp dụng điểm sàn ĐGNL (điều kiện đi kèm: học lực Tốt + tổng 3 môn ≥18 HOẶC điểm xét tốt nghiệp ≥8.5); Tất cả các ngành còn lại: 18|550|70. Chỉ dùng cột Học bạ trong batch này (xem `nttu-dgnl-methods-not-modeled` — cột ĐGNL HCM/HN có số liệu nhưng ngoài scope batch).',
   },
+  {
+    id: 'nttu-cutoff-2026',
+    publisher: 'Trường Đại học Nguyễn Tất Thành (NTTU) — Hội đồng Tuyển sinh',
+    title: 'Điểm chuẩn cao nhất Trường ĐH Nguyễn Tất Thành là 22 điểm',
+    url: 'https://ntt.edu.vn/diem-chuan-cao-nhat-truong-dh-nguyen-tat-thanh-la-22-diem/',
+    accessedAt: '2026-09-22',
+    publishedAt: '2026-08-09',
+    sourceType: 'official-school',
+    verification: 'verified',
+    lifecycle: { effectiveYear: 2026, status: 'current' },
+    note:
+      'Trang chính chủ ntt.edu.vn (HTML text, không phải ảnh), điểm chuẩn thật (không phải ngưỡng sàn) công bố 09/8/2026 cho phương thức xét kết quả thi TN THPT: Y khoa & Răng-Hàm-Mặt 22/30; Dược học & Y học cổ truyền 20/30; Y học dự phòng/Điều dưỡng/Kỹ thuật xét nghiệm y học/Kỹ thuật phục hồi chức năng 18/30; Luật & Luật kinh tế 20/30; các ngành còn lại 15/30. Trang không có câu chữ nào nhắc tới điểm ưu tiên/điểm cộng gần bảng điểm chuẩn (đã kiểm tra `document.body.innerText`, không có "khu vực"/"đối tượng"/"ưu tiên" liên quan công thức) — tiếp tục theo precedent `nttu-priority-bonus-recheck-2026-08-28`: KHÔNG áp dụng judgment call điểm ưu tiên cho NTTU, kể cả dạng tham khảo. So RAW.',
+  },
 ];
