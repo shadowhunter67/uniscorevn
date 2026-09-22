@@ -65,6 +65,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HUC** — Trường Đại học Văn hóa Hà Nội
 - **HUCE** — Truong Dai hoc Xay dung Ha Noi
 - **HUED** — Trường Đại học Sư phạm, Đại học Huế
+- **HUFL** — Trường Đại học Ngoại ngữ, Đại học Huế (2026-09-22: nâng cấp từ identity-only lên exact — công thức Phương thức 1 (thi TN THPT) trích nguyên văn Đề án tuyển sinh chính chủ (tổng thô 3 môn + điểm ưu tiên theo quy chế Bộ GD&ĐT) + ảnh điểm chuẩn chính chủ (đợt 1, 9/8/2026) cho đủ 13/13 ngành; chỉ hỗ trợ tổ hợp dùng môn đã có trong hệ thống (D01/D14/D15/C00/X78) — nhiều tổ hợp dùng ngoại ngữ Pháp/Trung/Nhật/Nga/Hàn làm môn thi chưa mô hình hoá được; điểm cộng thành tích chưa tính (app chưa thu thập input này) — đưa tổng lên 182)
 - **HUFLIT** — Trường Đại học Ngoại ngữ - Tin học TP. Hồ Chí Minh
 - **HUL** — Trường Đại học Luật, Đại học Huế
 - **HUMG** — Trường Đại học Mỏ - Địa chất
@@ -216,7 +217,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HCMUFA** — Trường Đại học Mỹ thuật TP.HCM
 - **HCMUNRE** — Trường Đại học Tài nguyên và Môi trường TP.HCM
 - **HueU** — Đại học Huế
-- **HUFL** — Trường Đại học Ngoại ngữ - Đại học Huế
 - **HUPES** — Trường Đại học Sư phạm Thể dục Thể thao Hà Nội
 - **KBU** — Trường Đại học Kinh Bắc
 - **MAL** — Học viện Hậu cần

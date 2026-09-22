@@ -64,6 +64,7 @@ import { usthComparisonAdapter } from '../schools/usth/comparison';
 import { hanuComparisonAdapter } from '../schools/hanu/comparison';
 import { dpdComparisonAdapter } from '../schools/dpd/comparison';
 import { vhuComparisonAdapter } from '../schools/vhu/comparison';
+import { huflComparisonAdapter } from '../schools/hufl/comparison';
 import { dtuComparisonAdapter } from '../schools/dtu/comparison';
 import { uahComparisonAdapter } from '../schools/uah/comparison';
 import { vguComparisonAdapter } from '../schools/vgu/comparison';
@@ -268,6 +269,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   hanuComparisonAdapter,
   dpdComparisonAdapter,
   vhuComparisonAdapter,
+  huflComparisonAdapter,
   dtuComparisonAdapter,
   uahComparisonAdapter,
   vguComparisonAdapter,
@@ -406,6 +408,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
         'hup', 'ajc', 'vnuf', 'dtu', 'hpu2', 'hust', 'hmu', 'haui', 'aof', 'bav', 'phenikaa', 'hou', 'fptu', 'hubt', 'dainam', 'vnulaw', 'vnuump',
         'tmu', 'tlu', 'hpmu', 'vnueb', 'vnued', 'vnuuet', 'vnuhus', 'vnussh', 'hump', 'qnu', 'qbu', 'qnamu', 'pctu', 'htu', 'dumtp', 'bmtu',
         'hat', 'thanglong', 'hvu', 'epu', 'uneti', 'huph', 'vutm', 'hmtu', 'ndun', 'vmuvinh', 'hanu',
+        'hufl',
       ].includes(adapter.schoolId)
   ),
   /** 'hdiu'/'huc'/'tueba'/'tump'/'tnut'/'hca'/'naem'/'hluv' loại trừ — đã có adapter thật (`schools/hdiu/comparison.ts`,

@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 249,
       admissionDataAvailable: 249,
       eligibilitySupported: 5,
-      calculatorSupported: 181,
+      calculatorSupported: 182,
       partialCalculator: 1,
-      fullyVerified: 180,
+      fullyVerified: 181,
       catalogOnly: 107,
     });
   });
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(63);
+    expect(researchedOnly).toBe(62);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuvju',
@@ -473,6 +473,14 @@ describe('institution coverage statistics', () => {
     // văn Điều 7 Quy chế tuyển sinh của chính trường (Quyết định 261/QĐ-HVTTNVN), không phải
     // judgment call khung quốc gia thay thế. 130 -> 131.
     expect(deriveInstitutionSupportStatus(schoolRegistry.vya)).toBe('verified-calculator');
+    // Batch (2026-09-22): HUFL (Trường Đại học Ngoại ngữ, Đại học Huế) graduated to
+    // verified-calculator — nâng cấp từ identity-only (remainingCatalog). Đề án tuyển sinh chính
+    // chủ (tuyensinh.huflis.edu.vn) mục III.3.1 xác nhận công thức Phương thức 1 (thi TN THPT):
+    // tổng 3 môn không hệ số + điểm ưu tiên theo quy chế Bộ GD&ĐT; ảnh infographic chính chủ
+    // "ĐIỂM CHUẨN ĐẠI HỌC CHÍNH QUY (ĐỢT 1) NĂM 2026" (9/8/2026) cho đủ 13/13 ngành. Chỉ tổ hợp
+    // dùng môn đã có trong SubjectId (D01/D14/D15/C00/X78) được mô hình hoá — nhiều tổ hợp dùng
+    // ngoại ngữ Pháp/Trung/Nhật/Nga/Hàn làm môn thi chưa hỗ trợ được. 181 -> 182.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.hufl)).toBe('verified-calculator');
   });
 
   it('requires catalog source metadata for college identity entries', () => {
