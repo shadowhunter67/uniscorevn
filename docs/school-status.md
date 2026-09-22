@@ -174,6 +174,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **NTTU** — Trường Đại học Nguyễn Tất Thành (2026-09-22: thêm phương thức thi TN THPT lên exact — điểm chuẩn thật (công bố 09/8/2026) theo 6 nhóm ngành (Y khoa/RHM 22, Dược/YHCT 20, Điều dưỡng nhóm 18, Luật 20, còn lại 15, thang 30), so tổng thô; nguồn không có anchor điểm ưu tiên nên KHÔNG hiển thị kể cả dạng tham khảo (khác precedent QUI/HPU) — phương thức học bạ (eligibility-only, đã có từ trước) giữ nguyên — đưa tổng lên 177)
 - **NEU** — Trường Đại học Kinh tế Quốc dân (2026-09-22: thêm PTXT5 (thi TN THPT thuần) lên exact — công thức + điểm ưu tiên trích nguyên văn chính chủ (KHÔNG judgment call, hiếm gặp), tổ hợp A00/A01/D01/D07 hệ số 1; điểm chuẩn thật Thông báo 1890/TB-ĐHKTQD (09/8/2026) cho 42/88 mã ngành CHUẨN, loại chương trình tiên tiến/chất lượng cao/POHE/xét kết hợp riêng (EPxx); bảng quy đổi HSA/SAT/V-ACT/TSA (method cũ) giữ nguyên partial — đưa tổng lên 178)
 - **PDU** — Trường Đại học Phạm Văn Đồng (2026-09-22: mới, nâng thẳng lên exact — Phương thức 1 (thi TN THPT), điểm trúng tuyển thật theo mã ngành (Thông báo 997/TB-ĐHPVĐ, 10/8/2026, ký tên + đóng dấu) 13/14 chương trình (15,00-22,30/30, loại Giáo dục Mầm non cao đẳng — tổ hợp năng khiếu); công thức Tổng điểm xét tuyển = M1+M2+M3+điểm ưu tiên trích nguyên văn "Thông tin tuyển sinh năm 2026" (Quyết định 131/QĐ-ĐHPVĐ), điểm ưu tiên dẫn chiếu TT 06/2026/TT-BGDĐT (khung quốc gia) — đưa tổng lên 181)
+- **UKH** — Trường Đại học Khánh Hòa (2026-09-22: mới, nâng thẳng lên exact — điểm trúng tuyển thật theo 21/21 mã xét tuyển (Thông báo 07/TB-HĐTS, 09/8/2026, ký tên + đóng dấu) 15,00-24,88/30, tổ hợp môn + Phụ lục IV bảng điểm ưu tiên ĐẦY ĐỦ (khớp khung quốc gia) từ "Thông tin tuyển sinh năm 2026 (cập nhật)"; điểm cộng thành tích (tối đa 3,00) KHÔNG mô hình hoá — kết quả "chưa đạt" là cận dưới cho thí sinh có thành tích; loại tổ hợp có môn Tiếng Trung (D04/D45/D65, chưa có SubjectId) — đưa tổng lên 182)
 - **VNUA** — Hoc vien Nong nghiep Viet Nam
 - **VTTU** — Trường Đại học Võ Trường Toản
 - **VUTM** — Học viện Y Dược học cổ truyền Việt Nam
@@ -248,7 +249,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **TUU** — Trường Đại học Công đoàn
 - **UAD** — Trường Đại học Mỹ thuật Công nghiệp
 - **UDN** — Đại học Đà Nẵng
-- **UKH** — Trường Đại học Khánh Hòa
 - **UPES1** — Trường Đại học Thể dục Thể thao Bắc Ninh
 - **UPT** — Trường Đại học Phan Thiết
 - **UTH** — Trường Đại học Giao thông vận tải TP.HCM

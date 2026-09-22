@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 249,
       admissionDataAvailable: 249,
       eligibilitySupported: 5,
-      calculatorSupported: 182,
+      calculatorSupported: 183,
       partialCalculator: 1,
-      fullyVerified: 181,
+      fullyVerified: 182,
       catalogOnly: 107,
     });
   });
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(62);
+    expect(researchedOnly).toBe(61);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuvju',
@@ -480,6 +480,14 @@ describe('institution coverage statistics', () => {
     // diem xet tuyen = M1+M2+M3+diem uu tien + bang to hop mon theo nganh. 13/14 chuong trinh dai
     // hoc chinh quy mo hinh hoa (loai Giao duc Mam non - cao dang, to hop nang khieu).
     expect(deriveInstitutionSupportStatus(schoolRegistry.pdu)).toBe('verified-calculator');
+    // Batch (2026-09-22): UKH (Trường Đại học Khánh Hòa) moi hoan toan, graduated to
+    // verified-calculator — nguon CHINH CHU ukh.edu.vn/tuyensinh: PDF "Thong bao diem trung tuyen"
+    // ky ten Chu tich HDTS + dong dau do (So 07/TB-HDTS, 09/8/2026) cho diem chuan that theo 21/21
+    // ma xet tuyen (15,00-24,88/30) + PDF "Thong tin tuyen sinh nam 2026 (cap nhat)" cho to hop mon
+    // theo nganh + Phu luc IV bang diem uu tien day du (KV1=0,75/KV2-NT=0,50/KV2=0,25/KV3=0;
+    // Nhom1=2,00/Nhom2=1,00, khop khung quoc gia). Diem cong thanh tich (toi da 3,00) KHONG mo hinh
+    // hoa (knowledgeGap rieng, ket qua "chua dat" la can duoi cho thi sinh co thanh tich).
+    expect(deriveInstitutionSupportStatus(schoolRegistry.ukh)).toBe('verified-calculator');
   });
 
   it('requires catalog source metadata for college identity entries', () => {
