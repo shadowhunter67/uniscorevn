@@ -69,6 +69,7 @@ import { hanuAdmissionMethods } from '../schools/hanu/methods';
 import { dpdAdmissionMethods } from '../schools/dpd/methods';
 import { vhuAdmissionMethods } from '../schools/vhu/methods';
 import { huflAdmissionMethods } from '../schools/hufl/methods';
+import { tuuAdmissionMethods } from '../schools/tuu/methods';
 import { dtuAdmissionMethods } from '../schools/dtu/methods';
 import { uahAdmissionMethods } from '../schools/uah/methods';
 import { vguAdmissionMethods } from '../schools/vgu/methods';
@@ -273,6 +274,7 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   dpd: dpdAdmissionMethods,
   vhu: vhuAdmissionMethods,
   hufl: huflAdmissionMethods,
+  tuu: tuuAdmissionMethods,
   dtu: dtuAdmissionMethods,
   uah: uahAdmissionMethods,
   vgu: vguAdmissionMethods,

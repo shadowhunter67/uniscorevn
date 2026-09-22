@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 249,
       admissionDataAvailable: 249,
       eligibilitySupported: 5,
-      calculatorSupported: 182,
+      calculatorSupported: 183,
       partialCalculator: 1,
-      fullyVerified: 181,
+      fullyVerified: 182,
       catalogOnly: 107,
     });
   });
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(62);
+    expect(researchedOnly).toBe(61);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuvju',
@@ -481,6 +481,13 @@ describe('institution coverage statistics', () => {
     // dùng môn đã có trong SubjectId (D01/D14/D15/C00/X78) được mô hình hoá — nhiều tổ hợp dùng
     // ngoại ngữ Pháp/Trung/Nhật/Nga/Hàn làm môn thi chưa hỗ trợ được. 181 -> 182.
     expect(deriveInstitutionSupportStatus(schoolRegistry.hufl)).toBe('verified-calculator');
+    // Batch (2026-09-22): TUU (Trường Đại học Công đoàn) graduated to verified-calculator — ảnh
+    // thông báo điểm trúng tuyển chính chủ có chữ ký + con dấu (Cổng TTĐT Chính phủ đăng lại,
+    // 10/8/2026) cho đủ 25/25 ngành; công thức ĐXT = tổng thô 3 môn + điểm ưu tiên trích từ Đề án
+    // tuyển sinh (nêu rõ cho phương thức học bạ/ĐGNL chị em trong cùng đề án — điểm ưu tiên PT thi
+    // THPT dùng judgment call khung quốc gia, nguồn không loại trừ). Loại 4/25 ngành có điều kiện
+    // phụ (Luật/Luật kinh tế/Ngôn ngữ Anh/QTKD-IPOP). 182 -> 183.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.tuu)).toBe('verified-calculator');
   });
 
   it('requires catalog source metadata for college identity entries', () => {

@@ -113,6 +113,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **TUAF** — Truong Dai hoc Nong Lam - Dai hoc Thai Nguyen
 - **TUEBA** — Trường Đại học Kinh tế và Quản trị kinh doanh - Đại học Thái Nguyên
 - **TUMP** — Trường Đại học Y - Dược, Đại học Thái Nguyên
+- **TUU** — Trường Đại học Công đoàn (2026-09-22: nâng cấp từ researched lên exact — ảnh thông báo điểm trúng tuyển chính chủ có chữ ký + con dấu (Cổng TTĐT Chính phủ đăng lại, 10/8/2026) cho đủ 25/25 ngành; công thức ĐXT = tổng thô 3 môn + điểm ưu tiên trích từ Đề án tuyển sinh (nêu rõ cho phương thức học bạ/ĐGNL chị em trong cùng đề án, không lặp lại nhưng cũng không loại trừ cho phương thức thi THPT — điểm ưu tiên dùng judgment call khung quốc gia); loại 4/25 ngành có điều kiện phụ (Luật/Luật kinh tế: Toán+Văn ≥6, tổng ≥18; Ngôn ngữ Anh/QTKD-IPOP: Tiếng Anh ≥7,0) — đưa tổng lên 183)
 - **TVU** — Trường Đại học Trà Vinh
 - **TVUni** — Trường Đại học Trưng Vương
 - **UAH** — Truong Dai hoc Kien truc TP.HCM
@@ -245,7 +246,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **STU** — Trường Đại học Công nghệ Sài Gòn
 - **TQT** — Trường Đại học Trần Quốc Tuấn - Sĩ quan Lục quân 1
 - **TQU** — Trường Đại học Tân Trào
-- **TUU** — Trường Đại học Công đoàn
 - **UAD** — Trường Đại học Mỹ thuật Công nghiệp
 - **UDN** — Đại học Đà Nẵng
 - **UKH** — Trường Đại học Khánh Hòa
