@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 247,
       admissionDataAvailable: 247,
       eligibilitySupported: 6,
-      calculatorSupported: 177,
+      calculatorSupported: 178,
       partialCalculator: 2,
-      fullyVerified: 175,
+      fullyVerified: 176,
       catalogOnly: 107,
     });
   });
@@ -79,16 +79,20 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(64);
+    expect(researchedOnly).toBe(63);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
-      'vnuvju', 'hanu',
+      'vnuvju',
       'ntu', 'hueu',
       'udn',
       'uth', 'rmitvn', 'vinuni',
     ]) {
       expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('researched');
     }
+    // Batch (2026-09-22): HANU graduated to verified-calculator — cong thuc nhan he so (Toan/Van
+    // + Ngoai ngu x2, thang 40) tu trang thong tin tuyen sinh chinh chu + Quyet dinh 3222/QD-DHHN
+    // (diem chuan that 29 ma nganh, doc bang chrome-devtools screenshot + vision).
+    expect(deriveInstitutionSupportStatus(schoolRegistry.hanu), 'hanu').toBe('verified-calculator');
     // Batch (2026-09-03, roadmap 100 -> 150): TLU-HN (Trường Đại học Thăng Long) graduated to
     // verified-calculator — official Thông báo số 25082205/TB-ĐHTL (22/8/2025, PDF gốc có chữ ký +
     // con dấu, đọc bằng vision) publishes per-ngành điểm trúng tuyển for the "tổ hợp gốc" of each

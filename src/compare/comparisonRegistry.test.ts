@@ -65,6 +65,7 @@ import { ajcAdmissionMethods } from '../schools/ajc/methods';
 import { pntuAdmissionMethods } from '../schools/pntu/methods';
 import { vnufAdmissionMethods } from '../schools/vnuf/methods';
 import { usthAdmissionMethods } from '../schools/usth/methods';
+import { hanuAdmissionMethods } from '../schools/hanu/methods';
 import { dtuAdmissionMethods } from '../schools/dtu/methods';
 import { uahAdmissionMethods } from '../schools/uah/methods';
 import { vguAdmissionMethods } from '../schools/vgu/methods';
@@ -265,6 +266,7 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   pntu: pntuAdmissionMethods,
   vnuf: vnufAdmissionMethods,
   usth: usthAdmissionMethods,
+  hanu: hanuAdmissionMethods,
   dtu: dtuAdmissionMethods,
   uah: uahAdmissionMethods,
   vgu: vguAdmissionMethods,
