@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 247,
       admissionDataAvailable: 247,
-      eligibilitySupported: 7,
-      calculatorSupported: 175,
+      eligibilitySupported: 6,
+      calculatorSupported: 176,
       partialCalculator: 2,
-      fullyVerified: 173,
+      fullyVerified: 174,
       catalogOnly: 107,
     });
   });
@@ -110,11 +110,12 @@ describe('institution coverage statistics', () => {
     // dụ minh hoạ). 13/15 ngành đại học chính quy modeled, nhánh thi TN THPT (loại trừ Giáo dục Mầm
     // non — trình độ cao đẳng khác cấp + tổ hợp năng khiếu).
     expect(deriveInstitutionSupportStatus(schoolRegistry.blu)).toBe('verified-calculator');
-    // Batch (2026-08-29): HUST graduated to eligibility-only — official ts.hust.edu.vn 2026
-    // quality-assurance threshold read via vision from the embedded image, banded by khối nhóm
-    // ngành (Kỹ thuật >=20/30; Kinh tế/Giáo dục/Ngoại ngữ >=19,5/30); no per-program mapping found.
+    // Batch (2026-09-22): VNUF graduated to verified-calculator — Thông báo điểm chuẩn thật
+    // 13/8/2026 (đọc qua chrome-devtools, SPA) xác nhận điểm chuẩn = 15,00/30 đồng nhất mọi
+    // ngành/cơ sở (Hà Nội/Đồng Nai/Gia Lai), khớp đúng ngưỡng nguồn xét tuyển đầu vào (16/7/2026)
+    // vốn nói rõ "không tính điểm ưu tiên, điểm cộng" → so tổng thô.
     for (const schoolId of ['vnuf']) {
-      expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('eligibility-only');
+      expect(deriveInstitutionSupportStatus(schoolRegistry[schoolId]), schoolId).toBe('verified-calculator');
     }
     // Batch (2026-09-16, roadmap 142 -> ...): HPU2 graduated to verified-calculator — Cổng TTĐT
     // Chính phủ đăng lại bảng điểm chuẩn chính thức 2026 (25/25 ngành nhóm 3-môn chuẩn, đối chiếu

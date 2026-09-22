@@ -13,19 +13,25 @@ export const vnufModule: SchoolModule = {
   region: 'hanoi',
   vnuhcm: false,
   summary:
-    'VNUF 2026 THPT eligibility is modeled from the official training-affairs office admission scheme: a single common baseline (total 3 subjects >= 15,0/30) for the THPT exam method. Transcript, aptitude-assessment, and direct-admission methods, plus any per-program variation and priority-point calculation, remain unresolved.',
+    'VNUF 2026 (thi TN THPT): Điểm chuẩn thật (công bố 13/8/2026) đồng nhất 15,00/30 cho mọi ngành/cơ sở (Hà Nội, Đồng Nai, Gia Lai), khớp đúng ngưỡng nguồn xét tuyển đầu vào — nguồn nói rõ ngưỡng KHÔNG tính điểm ưu tiên/điểm cộng nên so tổng thô. Loại 2 ngành tổ hợp năng khiếu (Kiến trúc cảnh quan, Thiết kế nội thất). Phương thức học bạ, đánh giá năng lực/tư duy, xét tuyển thẳng chưa mô hình hoá.',
   capabilities: {
     admissionInfo: true,
-    programs: false,
-    cutoffs: false,
+    programs: true,
+    cutoffs: true,
     ...aggregateSchoolCapabilities(vnufAdmissionMethods),
   },
   catalogSources: [
     {
-      title: 'Official 2026 admission scheme (De an tuyen sinh)',
-      url: 'https://daotao.vnuf.edu.vn/thong-bao?_101_assetEntryId=211376951&_101_struts_action=%2Fasset_publisher%2Fview_content&_101_type=content&_101_urlTitle=thong-tin-%C4%91e-an-tuyen-sinh-trinh-%C4%91o-%C4%91ai-hoc-nam-2026',
+      title: 'Thông báo (Điểm sàn): Nguồn xét tuyển đầu vào và ngưỡng đảm bảo chất lượng đầu vào năm 2026',
+      url: 'https://tuyensinh.vnuf.edu.vn/Detail.aspx?id=23',
       type: 'official-institution',
-      checkedAt: '2026-08-24',
+      checkedAt: '2026-09-22',
+    },
+    {
+      title: 'Thông báo Điểm trúng tuyển (điểm chuẩn) các ngành tuyển sinh đại học chính quy đợt 1 năm 2026',
+      url: 'https://tuyensinh.vnuf.edu.vn/Detail.aspx?id=26',
+      type: 'official-institution',
+      checkedAt: '2026-09-22',
     },
   ],
 };
