@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 249,
       admissionDataAvailable: 249,
       eligibilitySupported: 5,
-      calculatorSupported: 183,
+      calculatorSupported: 186,
       partialCalculator: 1,
-      fullyVerified: 182,
+      fullyVerified: 185,
       catalogOnly: 107,
     });
   });
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(61);
+    expect(researchedOnly).toBe(58);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuvju',
@@ -488,6 +488,31 @@ describe('institution coverage statistics', () => {
     // THPT dùng judgment call khung quốc gia, nguồn không loại trừ). Loại 4/25 ngành có điều kiện
     // phụ (Luật/Luật kinh tế/Ngôn ngữ Anh/QTKD-IPOP). 182 -> 183.
     expect(deriveInstitutionSupportStatus(schoolRegistry.tuu)).toBe('verified-calculator');
+    // Batch (2026-09-22): PDU (Trường Đại học Phạm Văn Đồng) moi hoan toan, graduated to
+    // verified-calculator — nguon CHINH CHU tuyensinh.pdu.edu.vn: PDF "Thong bao diem trung tuyen
+    // dot 1" ky ten Hieu truong + dong dau do (So 997/TB-DHPVD, 10/8/2026) cho diem chuan that theo
+    // ma nganh + PDF "Thong tin tuyen sinh nam 2026" (Quyet dinh 131/QD-DHPVD) cho cong thuc Tong
+    // diem xet tuyen = M1+M2+M3+diem uu tien + bang to hop mon theo nganh. 13/14 chuong trinh dai
+    // hoc chinh quy mo hinh hoa (loai Giao duc Mam non - cao dang, to hop nang khieu).
+    expect(deriveInstitutionSupportStatus(schoolRegistry.pdu)).toBe('verified-calculator');
+    // Batch (2026-09-22): UKH (Trường Đại học Khánh Hòa) moi hoan toan, graduated to
+    // verified-calculator — nguon CHINH CHU ukh.edu.vn/tuyensinh: PDF "Thong bao diem trung tuyen"
+    // ky ten Chu tich HDTS + dong dau do (So 07/TB-HDTS, 09/8/2026) cho diem chuan that theo 21/21
+    // ma xet tuyen (15,00-24,88/30) + PDF "Thong tin tuyen sinh nam 2026 (cap nhat)" cho to hop mon
+    // theo nganh + Phu luc IV bang diem uu tien day du (KV1=0,75/KV2-NT=0,50/KV2=0,25/KV3=0;
+    // Nhom1=2,00/Nhom2=1,00, khop khung quoc gia). Diem cong thanh tich (toi da 3,00) KHONG mo hinh
+    // hoa (knowledgeGap rieng, ket qua "chua dat" la can duoi cho thi sinh co thanh tich).
+    expect(deriveInstitutionSupportStatus(schoolRegistry.ukh)).toBe('verified-calculator');
+    // Batch (2026-09-22): VNKGU (Trường Đại học Kiên Giang) moi hoan toan, graduated to
+    // verified-calculator. Batch nghien cuu truoc (xem docs/school-status.md) tung dung vi KHONG
+    // tim duoc phat bieu chinh chu ve cach cau thanh Diem xet tuyen (co cong diem uu tien hay
+    // khong) va bang muc diem uu tien day du, du da co diem chuan/to hop/nguong dau vao. Batch nay
+    // tim duoc 2 nguon bo sung: De an tuyen sinh 2026 chinh thuc noi ro "Diem xet tuyen =
+    // [(DM1+DM2+DM3) + Diem cong (neu co)] + Diem uu tien (neu co)" + trang "Diem cong va diem Uu
+    // tien" cong bo DAY DU bang so (KV1=0,75/KV2-NT=0,50/KV2=0,25/KV3=0; nhom01-03=2,00/nhom04-06=
+    // 1,00, khop khung quoc gia). Diem chuan that theo 28/28 ma xet tuyen (So 04/TB-HDTS, 10/8/2026,
+    // ky ten + dong dau). Diem cong thanh tich (toi da 3,00) KHONG mo hinh hoa.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.vnkgu)).toBe('verified-calculator');
   });
 
   it('requires catalog source metadata for college identity entries', () => {

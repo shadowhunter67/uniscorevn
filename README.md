@@ -66,7 +66,7 @@ Snapshot hiện tại được tính từ `schoolRegistry` bằng `npm run stats
 | Có dữ liệu tuyển sinh hoặc capability cao hơn | 249 |
 | Chỉ kiểm tra điều kiện/ngưỡng | 5 |
 | Có calculator một phần | 1 |
-| Calculator đã xác minh | 182 |
+| Calculator đã xác minh | 185 |
 | Chỉ có trong danh mục | 107 |
 <!-- coverage:kpi:end -->
 
@@ -81,10 +81,10 @@ Mức hỗ trợ đổi thường xuyên (mỗi batch nghiên cứu mới lại 
 <!-- coverage:support-status:start (generated bởi `npm run stats:coverage -- --write`, xem scripts/stats-coverage.ts — KHÔNG sửa tay) -->
 | Mức hỗ trợ | Số trường | Ý nghĩa |
 |---|---:|---|
-| ✅ Tính được điểm xét tuyển | 182 | Công thức, ngưỡng, điểm cộng và điểm ưu tiên đều có nguồn chính thức trong phạm vi đã công bố. |
+| ✅ Tính được điểm xét tuyển | 185 | Công thức, ngưỡng, điểm cộng và điểm ưu tiên đều có nguồn chính thức trong phạm vi đã công bố. |
 | 🟡 Tính được một phần | 1 | Có công thức thật nhưng chưa phủ hết mọi phương thức xét tuyển của trường. |
 | 🟡 Kiểm tra được điều kiện | 5 | Có ngưỡng điểm sàn/điều kiện chính thức, chưa tính được điểm xét tuyển đầy đủ. |
-| ⚪ Đã có thông tin tuyển sinh | 61 | Đã có thông tin tuyển sinh chính thức, nhưng chưa đủ để tính điểm hay kết luận điều kiện. |
+| ⚪ Đã có thông tin tuyển sinh | 58 | Đã có thông tin tuyển sinh chính thức, nhưng chưa đủ để tính điểm hay kết luận điều kiện. |
 | ⚪ Chưa có dữ liệu tuyển sinh | 107 | Trường có trong danh mục nhưng UniScoreVN chưa tìm được nguồn tuyển sinh chính thức nào. |
 <!-- coverage:support-status:end -->
 

@@ -63,6 +63,9 @@ import { vnufComparisonAdapter } from '../schools/vnuf/comparison';
 import { usthComparisonAdapter } from '../schools/usth/comparison';
 import { hanuComparisonAdapter } from '../schools/hanu/comparison';
 import { dpdComparisonAdapter } from '../schools/dpd/comparison';
+import { pduComparisonAdapter } from '../schools/pdu/comparison';
+import { ukhComparisonAdapter } from '../schools/ukh/comparison';
+import { vnkguComparisonAdapter } from '../schools/vnkgu/comparison';
 import { vhuComparisonAdapter } from '../schools/vhu/comparison';
 import { huflComparisonAdapter } from '../schools/hufl/comparison';
 import { tuuComparisonAdapter } from '../schools/tuu/comparison';
@@ -272,6 +275,9 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   vhuComparisonAdapter,
   huflComparisonAdapter,
   tuuComparisonAdapter,
+  pduComparisonAdapter,
+  ukhComparisonAdapter,
+  vnkguComparisonAdapter,
   dtuComparisonAdapter,
   uahComparisonAdapter,
   vguComparisonAdapter,
@@ -400,7 +406,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
    * (last-write-wins theo `schoolId`, cùng hazard đã fix cho HDIU/TMU/TLU/HPMU/VNU-UEB/VNU-UED). Lưu ý:
    * catalog placeholder của DLA từng bị key nhầm 'due' (đã fix ở private repo + regenerate, xem
    * `southernCatalog.generated.ts`) — đã xác nhận placeholder của MKU key ĐÚNG 'mku' (không lặp lại lỗi). */
-  ...southernCatalogComparisonAdapters.filter((adapter) => !['tvu', 'pvu', 'ctuet', 'dnu', 'blu', 'dla', 'mku'].includes(adapter.schoolId)),
+  ...southernCatalogComparisonAdapters.filter((adapter) => !['tvu', 'pvu', 'ctuet', 'dnu', 'blu', 'dla', 'mku', 'vnkgu'].includes(adapter.schoolId)),
   ...remainingCatalogComparisonAdapters.filter(
     (adapter) =>
       ![
@@ -410,7 +416,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
         'hup', 'ajc', 'vnuf', 'dtu', 'hpu2', 'hust', 'hmu', 'haui', 'aof', 'bav', 'phenikaa', 'hou', 'fptu', 'hubt', 'dainam', 'vnulaw', 'vnuump',
         'tmu', 'tlu', 'hpmu', 'vnueb', 'vnued', 'vnuuet', 'vnuhus', 'vnussh', 'hump', 'qnu', 'qbu', 'qnamu', 'pctu', 'htu', 'dumtp', 'bmtu',
         'hat', 'thanglong', 'hvu', 'epu', 'uneti', 'huph', 'vutm', 'hmtu', 'ndun', 'vmuvinh', 'hanu',
-        'hufl',
+        'hufl', 'pdu', 'ukh',
       ].includes(adapter.schoolId)
   ),
   /** 'hdiu'/'huc'/'tueba'/'tump'/'tnut'/'hca'/'naem'/'hluv' loại trừ — đã có adapter thật (`schools/hdiu/comparison.ts`,

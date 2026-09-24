@@ -106,6 +106,10 @@ export const COMMON_SUBJECT_COMBINATIONS: readonly SubjectCombination[] = [
   { id: 'D12', subjects: ['literature', 'chemistry', 'english'] },
   { id: 'D13', subjects: ['literature', 'biology', 'english'] },
   { id: 'X05', subjects: ['math', 'physics', 'civic-economic-law'] },
+  /** X09 — thêm khi implement PDU 2026 (Trường Đại học Phạm Văn Đồng, ngành Sư phạm Hoá học dùng tổ
+   * hợp Toán/Hoá học/GDKT&PL, chú giải "X09: Toán, Hóa học, GDKT&PL" đọc trực tiếp từ bảng chú giải
+   * mã tổ hợp trong PDF chính thức, xem `schools/pdu/thresholds.ts`). */
+  { id: 'X09', subjects: ['math', 'chemistry', 'civic-economic-law'] },
   { id: 'X13', subjects: ['math', 'biology', 'civic-economic-law'] },
   { id: 'X14', subjects: ['math', 'biology', 'informatics'] },
   { id: 'X25', subjects: ['math', 'civic-economic-law', 'english'] },
@@ -143,6 +147,21 @@ export const COMMON_SUBJECT_COMBINATIONS: readonly SubjectCombination[] = [
    * và Quản trị dịch vụ du lịch và lữ hành dùng tổ hợp Toán/Hóa học/Lịch sử, xem
    * `schools/trungvuong/thresholds.ts`). */
   { id: 'A05', subjects: ['math', 'chemistry', 'history'] },
+  /** B02/C06/X15/X18/X71 — thêm khi implement UKH 2026 (Trường Đại học Khánh Hòa dùng đủ các tổ hợp
+   * này trong "Thông tin tuyển sinh năm 2026 (cập nhật)" — bảng chú giải mã tổ hợp đọc trực tiếp:
+   * B02 (Toán - Sinh học - Địa lí), C06 (Ngữ văn - Vật lí - Sinh học), X15 (Toán - Sinh học - Công
+   * nghệ), X18 (Toán - Lịch sử - Tin học), X71 (Ngữ văn - Lịch sử - Tin học). D04/D45/D65 (có môn
+   * Tiếng Trung) của UKH KHÔNG có SubjectId tương ứng — chưa mô hình hoá, xem
+   * `schools/ukh/knowledgeGaps.ts`. */
+  { id: 'B02', subjects: ['math', 'biology', 'geography'] },
+  { id: 'C06', subjects: ['literature', 'physics', 'biology'] },
+  { id: 'X15', subjects: ['math', 'biology', 'technology'] },
+  { id: 'X18', subjects: ['math', 'history', 'informatics'] },
+  { id: 'X71', subjects: ['literature', 'history', 'informatics'] },
+  /** A03 — thêm khi implement VNKGU 2026 (Trường Đại học Kiên Giang, ngành Công nghệ kỹ thuật ô tô/
+   * Kỹ thuật điều khiển và Tự động hóa dùng tổ hợp Toán/Vật lý/Lịch sử, chú giải "A03 (Toán, Vật lý,
+   * Lịch sử)" đọc trực tiếp từ bảng chú giải mã tổ hợp chính thức, xem `schools/vnkgu/thresholds.ts`). */
+  { id: 'A03', subjects: ['math', 'physics', 'history'] },
 ];
 
 /** Nhãn tiếng Việt — dùng ở bất kỳ trường nào cần hiển thị tên môn cho người dùng chọn. */
