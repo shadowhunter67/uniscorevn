@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 249,
       admissionDataAvailable: 249,
       eligibilitySupported: 5,
-      calculatorSupported: 189,
+      calculatorSupported: 190,
       partialCalculator: 1,
-      fullyVerified: 188,
+      fullyVerified: 189,
       catalogOnly: 106,
     });
   });
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(55);
+    expect(researchedOnly).toBe(54);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuvju',
@@ -527,6 +527,12 @@ describe('institution coverage statistics', () => {
     // chuan 2026 duoc cross-check tu nguon tong hop. Chi mo hinh hoa 17 chuong trinh nguong 15/30,
     // loai tru Duoc hoc va Luat kinh te do can them dieu kien/chinh sach nganh dac thu.
     expect(deriveInstitutionSupportStatus(schoolRegistry.mdu)).toBe('verified-calculator');
+    // Batch (2026-09-27): HCMUNRE (Truong Dai hoc Tai nguyen va Moi truong TP.HCM) nang tu researched
+    // len exact. Nguon chinh chu tuyensinh.hcmunre.edu.vn: Quyet dinh diem trung tuyen dot 1 2026 +
+    // file dinh kem PT1.pdf (doc bang vision) cho Phuong thuc 1 (thi TN THPT), du 20/20 nganh. LUU Y:
+    // batch truoc (Codex) tung lay nham so lieu cua HUNRE (Ha Noi, truong khac hoan toan) gan vao
+    // schoolId nay - da doi chieu lai dung domain/tieu de trang truoc khi nang, xem sources.ts.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.hcmunre)).toBe('verified-calculator');
   });
 
   it('requires catalog source metadata for college identity entries', () => {
