@@ -58,8 +58,8 @@ describe('institution coverage statistics', () => {
       totalCatalogEntries: 356,
       institutionEntries: 344,
       independentEducationInstitutions: 344,
-      universityInstitutions: 236,
-      academies: 22,
+      universityInstitutions: 237,
+      academies: 21,
       pedagogicalColleges: 9,
       vocationalColleges: 77,
       otherIndependentInstitutions: 0,
@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 249,
       admissionDataAvailable: 249,
       eligibilitySupported: 5,
-      calculatorSupported: 187,
+      calculatorSupported: 188,
       partialCalculator: 1,
-      fullyVerified: 186,
+      fullyVerified: 187,
       catalogOnly: 107,
     });
   });
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(57);
+    expect(researchedOnly).toBe(56);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuvju',
@@ -488,6 +488,12 @@ describe('institution coverage statistics', () => {
     // THPT dùng judgment call khung quốc gia, nguồn không loại trừ). Loại 4/25 ngành có điều kiện
     // phụ (Luật/Luật kinh tế/Ngôn ngữ Anh/QTKD-IPOP). 182 -> 183.
     expect(deriveInstitutionSupportStatus(schoolRegistry.tuu)).toBe('verified-calculator');
+    // Batch (2026-09-26): NAPA graduated to verified-calculator in a narrow exact scope. Official
+    // APAG/NAPA notice 1738-TB/HDTS (10/8/2026, signed/stamped images) publishes 2026 cutoffs
+    // converted to the original THPT method and original D01 combination, scale 30, across Ha Noi,
+    // Da Nang, TP.HCM and Dak Lak. This module models only D01; other combination conversions stay
+    // unsupported until the official conversion table is parsed cleanly.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.napa)).toBe('verified-calculator');
     // Batch (2026-09-22): PDU (Trường Đại học Phạm Văn Đồng) moi hoan toan, graduated to
     // verified-calculator — nguon CHINH CHU tuyensinh.pdu.edu.vn: PDF "Thong bao diem trung tuyen
     // dot 1" ky ten Hieu truong + dong dau do (So 997/TB-DHPVD, 10/8/2026) cho diem chuan that theo

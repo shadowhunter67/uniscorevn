@@ -82,6 +82,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **LTVUni** — Trường Đại học Lương Thế Vinh
 - **MKU** — Trường Đại học Cửu Long
 - **NAEM** — Học viện Quản lý giáo dục
+- **NAPA** — Học viện Hành chính và Quản trị công (2026-09-26: nâng cấp từ researched lên exact trong phạm vi hẹp D01 — nguồn CHÍNH CHỦ apaghcm.edu.vn/apag.edu.vn: Thông báo 1738-TB/HĐTS ngày 10/8/2026, ảnh gốc có chữ ký + con dấu, công bố điểm trúng tuyển 2026 đã quy đổi về phương thức gốc/tổ hợp môn gốc D01, thang 30, cho Hà Nội/Đà Nẵng/TP.HCM/Đắk Lắk; trang thông tin tuyển sinh 2026 xác nhận phương thức xét kết quả thi TN THPT; điều kiện riêng Luật/Thanh tra lấy từ thông báo ngưỡng ngành Luật 10/7/2026; các tổ hợp khác D01 chưa mô hình hoá vì cần bảng quy đổi đọc sạch)
 - **NCTU** — Truong Dai hoc Nam Can Tho
 - **NDUN** — Trường Đại học Điều dưỡng Nam Định
 - **NLU** — Trường Đại học Nông Lâm TP.HCM
@@ -230,7 +231,6 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **MSA** — Học viện Khoa học Quân sự
 - **MTA** — Học viện Kỹ thuật Quân sự
 - **MUCE** — Trường Đại học Xây dựng Miền Trung
-- **NAPA** — Học viện Hành chính Quốc gia
 - **NAUE** — Trường Đại học Nghệ An (trước đây là Trường Đại học Kinh tế Nghệ An)
 - **NCC** — Trường Cao đẳng Xây dựng Nam Định
 - **NCE** — Trường Cao đẳng Sư phạm Trung ương
