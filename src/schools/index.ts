@@ -84,6 +84,7 @@ import { hluvModule } from './hluv';
 import { bluModule } from './blu';
 import { dlaModule } from './dla';
 import { mkuModule } from './mku';
+import { stuModule } from './stu';
 import { thanglongModule } from './thanglong';
 import { eiuModule } from './eiu';
 import { fbuModule } from './fbu';
@@ -327,6 +328,7 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   blu: bluModule,
   dla: dlaModule,
   mku: mkuModule,
+  stu: stuModule,
   thanglong: thanglongModule,
   eiu: eiuModule,
   fptu: fptuModule,

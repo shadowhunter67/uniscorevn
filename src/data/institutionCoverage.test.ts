@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 249,
       admissionDataAvailable: 249,
       eligibilitySupported: 5,
-      calculatorSupported: 186,
+      calculatorSupported: 187,
       partialCalculator: 1,
-      fullyVerified: 185,
+      fullyVerified: 186,
       catalogOnly: 107,
     });
   });
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(58);
+    expect(researchedOnly).toBe(57);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuvju',
@@ -513,6 +513,9 @@ describe('institution coverage statistics', () => {
     // 1,00, khop khung quoc gia). Diem chuan that theo 28/28 ma xet tuyen (So 04/TB-HDTS, 10/8/2026,
     // ky ten + dong dau). Diem cong thanh tich (toi da 3,00) KHONG mo hinh hoa.
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnkgu)).toBe('verified-calculator');
+    // Batch (2026-09-26): STU graduated from researched to verified-calculator — official STU
+    // admissions sources publish PT02 2026 formula and 20/20 major cutoffs.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.stu)).toBe('verified-calculator');
   });
 
   it('requires catalog source metadata for college identity entries', () => {

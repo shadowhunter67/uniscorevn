@@ -152,6 +152,7 @@ import { hluvComparisonAdapter } from '../schools/hluv/comparison';
 import { bluComparisonAdapter } from '../schools/blu/comparison';
 import { dlaComparisonAdapter } from '../schools/dla/comparison';
 import { mkuComparisonAdapter } from '../schools/mku/comparison';
+import { stuComparisonAdapter } from '../schools/stu/comparison';
 import { vttuComparisonAdapter } from '../schools/vttu/comparison';
 import { hbuComparisonAdapter } from '../schools/hbu/comparison';
 import { hvuComparisonAdapter } from '../schools/hvu/comparison';
@@ -362,6 +363,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
   bluComparisonAdapter,
   dlaComparisonAdapter,
   mkuComparisonAdapter,
+  stuComparisonAdapter,
   vttuComparisonAdapter,
   hbuComparisonAdapter,
   hvuComparisonAdapter,
@@ -406,7 +408,7 @@ export const schoolComparisonAdapters: readonly SchoolComparisonAdapter[] = [
    * (last-write-wins theo `schoolId`, cùng hazard đã fix cho HDIU/TMU/TLU/HPMU/VNU-UEB/VNU-UED). Lưu ý:
    * catalog placeholder của DLA từng bị key nhầm 'due' (đã fix ở private repo + regenerate, xem
    * `southernCatalog.generated.ts`) — đã xác nhận placeholder của MKU key ĐÚNG 'mku' (không lặp lại lỗi). */
-  ...southernCatalogComparisonAdapters.filter((adapter) => !['tvu', 'pvu', 'ctuet', 'dnu', 'blu', 'dla', 'mku', 'vnkgu'].includes(adapter.schoolId)),
+  ...southernCatalogComparisonAdapters.filter((adapter) => !['tvu', 'pvu', 'ctuet', 'dnu', 'blu', 'dla', 'mku', 'stu', 'vnkgu'].includes(adapter.schoolId)),
   ...remainingCatalogComparisonAdapters.filter(
     (adapter) =>
       ![

@@ -73,6 +73,7 @@ import { tuuAdmissionMethods } from '../schools/tuu/methods';
 import { pduAdmissionMethods } from '../schools/pdu/methods';
 import { ukhAdmissionMethods } from '../schools/ukh/methods';
 import { vnkguAdmissionMethods } from '../schools/vnkgu/methods';
+import { stuAdmissionMethods } from '../schools/stu/methods';
 import { dtuAdmissionMethods } from '../schools/dtu/methods';
 import { uahAdmissionMethods } from '../schools/uah/methods';
 import { vguAdmissionMethods } from '../schools/vgu/methods';
@@ -281,6 +282,7 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   pdu: pduAdmissionMethods,
   ukh: ukhAdmissionMethods,
   vnkgu: vnkguAdmissionMethods,
+  stu: stuAdmissionMethods,
   dtu: dtuAdmissionMethods,
   uah: uahAdmissionMethods,
   vgu: vguAdmissionMethods,
