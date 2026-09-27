@@ -6,7 +6,7 @@ import { napaAdmissionMethods } from './methods';
 
 function buildContext(selection: Omit<ComparisonSelection, 'id'>): NapaThptExamExactEvaluationContext {
   return {
-    programCode: selection.context?.programCode,
+    programCode: selection.programId,
     subjectContext: getSubjectContext(selection.context?.combinationId),
   };
 }

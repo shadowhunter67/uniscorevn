@@ -12,7 +12,7 @@ import { collegeCatalogSchools } from '../schools/collegeCatalog';
 
 describe('institution coverage statistics', () => {
   it('separates catalog coverage from institution KPI coverage', () => {
-    expect(institutionCoverage.totalCatalogEntries).toBe(356);
+    expect(institutionCoverage.totalCatalogEntries).toBe(355);
     expect(institutionCoverage.institutionEntries).toBeLessThan(institutionCoverage.totalCatalogEntries);
     expect(institutionCoverage.internalUnitEntries).toBe(12);
     expect(institutionCoverage.institutionEntries + institutionCoverage.internalUnitEntries).toBe(institutionCoverage.totalCatalogEntries);
@@ -55,10 +55,10 @@ describe('institution coverage statistics', () => {
 
   it('derives stable public KPI counts from the registry', () => {
     expect(summarizeInstitutionCoverage()).toEqual({
-      totalCatalogEntries: 356,
-      institutionEntries: 344,
-      independentEducationInstitutions: 344,
-      universityInstitutions: 237,
+      totalCatalogEntries: 355,
+      institutionEntries: 343,
+      independentEducationInstitutions: 343,
+      universityInstitutions: 236,
       academies: 21,
       pedagogicalColleges: 9,
       vocationalColleges: 77,
@@ -67,10 +67,10 @@ describe('institution coverage statistics', () => {
       researched: 249,
       admissionDataAvailable: 249,
       eligibilitySupported: 5,
-      calculatorSupported: 188,
+      calculatorSupported: 189,
       partialCalculator: 1,
-      fullyVerified: 187,
-      catalogOnly: 107,
+      fullyVerified: 188,
+      catalogOnly: 106,
     });
   });
 
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(56);
+    expect(researchedOnly).toBe(55);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuvju',
@@ -522,6 +522,11 @@ describe('institution coverage statistics', () => {
     // Batch (2026-09-26): STU graduated from researched to verified-calculator — official STU
     // admissions sources publish PT02 2026 formula and 20/20 major cutoffs.
     expect(deriveInstitutionSupportStatus(schoolRegistry.stu)).toBe('verified-calculator');
+    // Batch (2026-09-26): MDU/MIT (Truong Dai hoc Cong nghe Mien Dong) nang tu researched len exact.
+    // Nguon chinh chu mit.vn cong bo PT xet ket qua thi TN THPT 2026 theo tong 3 mon; bang diem
+    // chuan 2026 duoc cross-check tu nguon tong hop. Chi mo hinh hoa 17 chuong trinh nguong 15/30,
+    // loai tru Duoc hoc va Luat kinh te do can them dieu kien/chinh sach nganh dac thu.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.mdu)).toBe('verified-calculator');
   });
 
   it('requires catalog source metadata for college identity entries', () => {

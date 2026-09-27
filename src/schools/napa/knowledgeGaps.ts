@@ -1,4 +1,4 @@
-import type { KnowledgeGap } from '../../core/admissionMethod';
+import type { KnowledgeGap } from '../../core/knowledgeStatus';
 
 export const napaKnowledgeGaps: KnowledgeGap[] = [
   {

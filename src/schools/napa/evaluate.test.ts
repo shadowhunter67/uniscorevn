@@ -15,7 +15,7 @@ describe('NAPA exact D01 admission evaluation', () => {
     });
 
     expect(result.confidence).toBe('exact-verified');
-    expect(result.eligibility.status).toBe('ineligible');
+    expect(result.eligibility?.status).toBe('ineligible');
     expect(result.score?.value).toBe(24);
   });
 
@@ -29,7 +29,7 @@ describe('NAPA exact D01 admission evaluation', () => {
     );
 
     expect(result.score?.value).toBe(25.4);
-    expect(result.eligibility.status).toBe('eligible');
+    expect(result.eligibility?.status).toBe('eligible');
   });
 
   it('rejects law programs when the D01 Math/Literature floor is not met', () => {
@@ -42,7 +42,7 @@ describe('NAPA exact D01 admission evaluation', () => {
     );
 
     expect(result.confidence).toBe('exact-verified');
-    expect(result.eligibility.status).toBe('ineligible');
+    expect(result.eligibility?.status).toBe('ineligible');
   });
 
   it('returns partial for non-D01 combinations', () => {
@@ -52,6 +52,6 @@ describe('NAPA exact D01 admission evaluation', () => {
     });
 
     expect(result.confidence).toBe('partial');
-    expect(result.missingRequirements.map((item) => item.code)).toContain('napa-combination-not-modeled');
+    expect(result.missingRequirements?.map((item) => item.code)).toContain('napa-combination-not-modeled');
   });
 });

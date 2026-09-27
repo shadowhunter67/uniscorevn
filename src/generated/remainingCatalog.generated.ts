@@ -666,7 +666,10 @@ export const remainingCatalogSchools: readonly RemainingCatalogSchool[] = [
   // resolution at verification time) — do not confuse with the already-cataloged public
   // `uad`/Trường Đại học Mỹ thuật Công nghiệp, a different, older institution.
   { id: 'iuv', shortName: 'IUV', name: 'Trường Đại học Công nghiệp Vinh', location: 'Nghệ An', ownership: 'private', region: 'other' },
-  { id: 'mit', shortName: 'MIT', name: 'Trường Đại học Công nghệ Miền Đông', location: 'Đồng Nai', ownership: 'private', region: 'other' },
+  // CORRECTION (2026-09-27): removed duplicate `mit` catalog-only stub — same institution as `mdu`
+  // (Trường Đại học Công nghệ Miền Đông, domain hiện tại mit.vn, id lịch sử `mdu` giữ nguyên vì đã
+  // có exact-verified calculator thật dưới schools/mdu/). Phát hiện qua audit trùng canonical name
+  // khi merge batch STU/NAPA/MDU (2026-09-27).
   { id: 'thuv', shortName: 'THUV', name: 'Trường Đại học Y khoa Tokyo Việt Nam', location: 'Hưng Yên', ownership: 'private', region: 'other' },
   { id: 'hpu', shortName: 'HPU', name: 'Trường Đại học Quản lý và Công nghệ Hải Phòng', location: 'Hải Phòng', ownership: 'private', region: 'other' },
   { id: 'dau', shortName: 'DAU', name: 'Trường Đại học Kiến trúc Đà Nẵng', location: 'Đà Nẵng', ownership: 'private', region: 'other' },
