@@ -192,6 +192,7 @@ import { dpdModule } from './dpd';
 import { vhuModule } from './vhu';
 import { huflModule } from './hufl';
 import { tuuModule } from './tuu';
+import { napaModule } from './napa';
 import { pduModule } from './pdu';
 import { ukhModule } from './ukh';
 import { vnkguModule } from './vnkgu';
@@ -438,6 +439,7 @@ export const schoolRegistry: Record<string, SchoolModule> = {
   vhu: vhuModule,
   hufl: huflModule,
   tuu: tuuModule,
+  napa: napaModule,
   pdu: pduModule,
   ukh: ukhModule,
   vnkgu: vnkguModule,
