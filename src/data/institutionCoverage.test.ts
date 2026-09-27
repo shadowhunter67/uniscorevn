@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 249,
       admissionDataAvailable: 249,
       eligibilitySupported: 5,
-      calculatorSupported: 190,
+      calculatorSupported: 191,
       partialCalculator: 1,
-      fullyVerified: 189,
+      fullyVerified: 190,
       catalogOnly: 106,
     });
   });
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(54);
+    expect(researchedOnly).toBe(53);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuvju',
@@ -533,6 +533,12 @@ describe('institution coverage statistics', () => {
     // batch truoc (Codex) tung lay nham so lieu cua HUNRE (Ha Noi, truong khac hoan toan) gan vao
     // schoolId nay - da doi chieu lai dung domain/tieu de trang truoc khi nang, xem sources.ts.
     expect(deriveInstitutionSupportStatus(schoolRegistry.hcmunre)).toBe('verified-calculator');
+    // Batch (2026-09-27): VNU-IS (Truong Quoc te - DHQGHN) nang tu researched len exact. Nguon
+    // CHINH THUC ket hop: thong bao tong hop diem chuan cua DHQGHN (vnu.edu.vn) + thong bao chi tiet
+    // cong thuc/to hop cua chinh Truong Quoc te (is.vnu.edu.vn), du 14/14 chuong trinh; bang diem uu
+    // tien day du (khong phai judgment call) do truong tu cong bo. Diem cong thanh tich KHONG mo
+    // hinh hoa.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.vnuis)).toBe('verified-calculator');
   });
 
   it('requires catalog source metadata for college identity entries', () => {
