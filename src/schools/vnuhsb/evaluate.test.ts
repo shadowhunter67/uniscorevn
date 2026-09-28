@@ -1,0 +1,59 @@
+import { describe, expect, it } from 'vitest';
+import type { ApplicantProfile } from '../../core/applicantProfile';
+import { evaluateVnuhsbThptExamAdmission } from './evaluate';
+
+const baseProfile: ApplicantProfile = {
+  thpt: { scores: { math: 6, literature: 6, english: 6.5 } },
+  priority: { region: 'KV3' },
+};
+
+describe('VNU-HSB THPT-exam admission evaluation', () => {
+  it('is ineligible when below the field cutoff (18.5/30 for MET)', () => {
+    const result = evaluateVnuhsbThptExamAdmission(baseProfile, {
+      fieldCode: 'MET',
+      subjectContext: { combinationId: 'D01', subjects: ['math', 'literature', 'english'] },
+    });
+
+    expect(result.confidence).toBe('exact-verified');
+    expect(result.eligibility?.status).toBe('ineligible');
+    expect(result.score?.value).toBe(18.5);
+  });
+
+  it('is eligible when the raw total meets the threshold', () => {
+    const result = evaluateVnuhsbThptExamAdmission(
+      { thpt: { scores: { math: 7, literature: 7, english: 7 } }, priority: { region: 'KV3' } },
+      { fieldCode: 'HAT', subjectContext: { combinationId: 'D01', subjects: ['math', 'literature', 'english'] } }
+    );
+
+    expect(result.eligibility?.status).toBe('eligible');
+    expect(result.score?.value).toBe(21);
+  });
+
+  it('applies priority reduction above 22.5/30', () => {
+    const result = evaluateVnuhsbThptExamAdmission(
+      { thpt: { scores: { math: 8, literature: 8, english: 8 } }, priority: { region: 'KV1', category: 'UT2' } },
+      { fieldCode: 'MAC', subjectContext: { combinationId: 'D01', subjects: ['math', 'literature', 'english'] } }
+    );
+
+    // raw = 24, standard priority = 1.75, reduced = ((30-24)/7.5)*1.75 = 1.4 -> 25.4
+    expect(result.score?.value).toBe(25.4);
+    expect(result.eligibility?.status).toBe('eligible');
+  });
+
+  it('rejects an unofficial combination', () => {
+    const result = evaluateVnuhsbThptExamAdmission(baseProfile, {
+      fieldCode: 'MET',
+      subjectContext: { combinationId: 'A00', subjects: ['math', 'physics', 'chemistry'] },
+    });
+
+    expect(result.confidence).toBe('partial');
+    expect(result.missingRequirements?.map((item) => item.code)).toContain('vnuhsb-subject-combination');
+  });
+
+  it('returns partial when no field is selected', () => {
+    const result = evaluateVnuhsbThptExamAdmission(baseProfile, {});
+
+    expect(result.confidence).toBe('partial');
+    expect(result.missingRequirements?.map((item) => item.code)).toContain('vnuhsb-field');
+  });
+});

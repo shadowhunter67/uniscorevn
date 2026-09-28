@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 249,
       admissionDataAvailable: 249,
       eligibilitySupported: 5,
-      calculatorSupported: 191,
+      calculatorSupported: 192,
       partialCalculator: 1,
-      fullyVerified: 190,
+      fullyVerified: 191,
       catalogOnly: 106,
     });
   });
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(53);
+    expect(researchedOnly).toBe(52);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'vnuvju',
@@ -539,6 +539,13 @@ describe('institution coverage statistics', () => {
     // tien day du (khong phai judgment call) do truong tu cong bo. Diem cong thanh tich KHONG mo
     // hinh hoa.
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnuis)).toBe('verified-calculator');
+    // Batch (2026-09-28): VNU-HSB (Truong Quan tri va Kinh doanh - DHQGHN) nang tu researched len
+    // exact. Nguon ket hop CHINH THUC: thong bao tong hop diem chuan cua DHQGHN (vnu.edu.vn) + thong
+    // bao chi tiet to hop cua chinh HSB (hsb.edu.vn), xac nhan ca 6 chuong trinh dung chung 1 bo to
+    // hop, du 6/7 chuong trinh (BBNS thong bao rieng, chua co diem chuan). LUU Y: mot lan giao Codex
+    // truoc do da bi tu bien so lieu hoan toan sai (nguong 15 khong khop nguon that) - da huy bo,
+    // batch nay Claude tu viet truc tiep tu nguon da xac minh.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.vnuhsb)).toBe('verified-calculator');
   });
 
   it('requires catalog source metadata for college identity entries', () => {
