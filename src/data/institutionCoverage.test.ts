@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 249,
       admissionDataAvailable: 249,
       eligibilitySupported: 4,
-      calculatorSupported: 195,
+      calculatorSupported: 196,
       partialCalculator: 1,
-      fullyVerified: 194,
+      fullyVerified: 195,
       catalogOnly: 106,
     });
   });
@@ -79,10 +79,10 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(50);
+    expect(researchedOnly).toBe(49);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
-      'ntu', 'hueu',
+      'hueu',
       'udn',
       'uth', 'rmitvn', 'vinuni',
     ]) {
@@ -561,6 +561,11 @@ describe('institution coverage statistics', () => {
     // Thong bao tuyen sinh 2026 (to hop, he so 1, khong chenh lech giua cac to hop). Diem cong chung chi
     // tieng Anh khong mo hinh hoa (knowledgeGaps).
     expect(deriveInstitutionSupportStatus(schoolRegistry.actvn)).toBe('verified-calculator');
+    // Batch (2026-10-01): NTU (Truong Dai hoc Nha Trang) nang tu researched len exact (chot moc 195). Nguon
+    // CHINH THUC tuyensinh.ntu.edu.vn: Thong bao diem chuan 2026 (Bang 1: 53 chuong trinh x diem rieng tung
+    // to hop; Bang 2: dien giai 24 ma to hop) + Bang quy doi 30/07/2026 xac nhan THANG 40. Uu tien: khung quoc gia
+    // x4/3 la judgment call (tien le HANU/AJC); to hop Tieng Nhat/Phap, dieu kien tieng Anh khong mo hinh hoa.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.ntu)).toBe('verified-calculator');
   });
 
   it('requires catalog source metadata for college identity entries', () => {
