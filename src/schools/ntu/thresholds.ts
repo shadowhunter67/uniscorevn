@@ -5,8 +5,8 @@
  * năm 2026", Bảng 1, đăng 12/08/2026 (`sources.ts:ntu-cutoff-2026`, bảng HTML đọc trực tiếp). Hai dòng
  * 7520320 và 7620301 gộp ô "TVAH TVLH" với CÙNG một điểm (20,93) — tách thành 2 tổ hợp.
  *
- * Tổ hợp T2VN (Toán*2, Văn, Tiếng Nhật) và T2VP (Toán*2, Văn, Tiếng Pháp) vẫn được giữ trong bảng nhưng KHÔNG
- * tính được vì hệ thống chưa có SubjectId Tiếng Nhật/Tiếng Pháp (xem combos.ts, knowledgeGaps.ts). Cột điểm ĐGNL và cột "Điều kiện tiếng Anh" không mô hình hoá.
+ * Tổ hợp T2VN (Toán*2, Văn, Tiếng Nhật) và T2VP (Toán*2, Văn, Tiếng Pháp) tính được từ khi hệ thống có SubjectId
+ * `japanese`/`french` (2026-10-01, xem combos.ts). Cột điểm ĐGNL và cột "Điều kiện tiếng Anh" không mô hình hoá.
  */
 export interface NtuProgramThreshold {
   /** Mã xét tuyển chính thức của NTU. */

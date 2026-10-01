@@ -66,16 +66,42 @@ describe('NTU THPT-exam admission evaluation 2026 (thang 40)', () => {
     expect(evaluateNtuThptExamAdmission(profile, { programCode: 'X' }).confidence).toBe('partial');
   });
 
-  it('models 53 programs and every non-Japanese/French combo has slot definitions', () => {
+  it('models 53 programs and every combo in the cutoff table has slot definitions', () => {
     expect(NTU_PROGRAM_THRESHOLDS_2026).toHaveLength(53);
     for (const entry of NTU_PROGRAM_THRESHOLDS_2026) {
       for (const comboCode of Object.keys(entry.cutoffs40)) {
-        if (comboCode === 'T2VN' || comboCode === 'T2VP') continue;
         expect(NTU_COMBO_SLOTS[comboCode], `${entry.code} ${comboCode}`).toBeDefined();
       }
     }
     const all = NTU_PROGRAM_THRESHOLDS_2026.flatMap((entry) => Object.values(entry.cutoffs40));
     expect(Math.min(...all)).toBe(19.62);
     expect(Math.max(...all)).toBe(27.66);
+  });
+});
+
+describe('NTU Japanese and French combinations', () => {
+  it('computes T2VN (Toan*2 + Van + Tieng Nhat) for the Viet - Nhat IT program', () => {
+    // 7480201B: T2VN cutoff 22. 8*2 + 7 + 8 = 31 -> eligible
+    const result = evaluateNtuThptExamAdmission(
+      { thpt: { scores: { math: 8, literature: 7, japanese: 8 } }, priority: { region: 'KV3' } },
+      { programCode: '7480201B' }
+    );
+
+    expect(result.confidence).toBe('exact-verified');
+    expect(result.score?.value).toBe(31);
+    expect(result.explanation?.[0]?.label).toContain('T2VN');
+    expect(result.eligibility?.status).toBe('eligible');
+  });
+
+  it('computes T2VP (Toan*2 + Van + Tieng Phap) for a program that lists it', () => {
+    const entry = NTU_PROGRAM_THRESHOLDS_2026.find((item) => 'T2VP' in item.cutoffs40);
+    expect(entry).toBeDefined();
+    const result = evaluateNtuThptExamAdmission(
+      { thpt: { scores: { math: 9, literature: 8, french: 9 } }, priority: { region: 'KV3' } },
+      { programCode: entry!.code }
+    );
+
+    expect(result.score?.value).toBe(35);
+    expect(result.explanation?.[0]?.label).toContain('T2VP');
   });
 });

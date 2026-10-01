@@ -11,15 +11,6 @@ export const ntuKnowledgeGaps: KnowledgeGap[] = [
     impact: 'Thí sinh có ưu tiên KV/ĐT có thể chênh lệch nhỏ (tối đa 2,67 điểm thang 40) so với cách trường thực tế cộng.',
   },
   {
-    id: 'ntu-japanese-french-combinations-not-modeled',
-    label:
-      'Tổ hợp T2VN (Toán*2, Ngữ văn, Tiếng Nhật) và T2VP (Toán*2, Ngữ văn, Tiếng Pháp) không có SubjectId tương ứng trong hệ thống UniscoreVN — thí sinh dùng các tổ hợp còn lại của từng chương trình vẫn tính bình thường.',
-    status: 'incomplete',
-    sourceId: 'ntu-cutoff-2026',
-    scoreAffecting: false,
-    impact: 'Thí sinh thi tổ hợp có Tiếng Nhật/Tiếng Pháp chưa tính được qua UniscoreVN cho NTU.',
-  },
-  {
     id: 'ntu-english-condition-not-checked',
     label:
       'Bảng 1 có cột "Điều kiện tiếng Anh" (mức 5-7) cho các chương trình đặc biệt/chất lượng cao; UniscoreVN không kiểm tra điều kiện này, chỉ so điểm xét với điểm trúng tuyển theo tổ hợp.',

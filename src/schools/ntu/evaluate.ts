@@ -4,7 +4,7 @@ import type { CalculationStep } from '../../core/calculationStep';
 import { SUBJECT_LABELS } from '../../core/subjects';
 import { round2 } from '../../core/round2';
 import { ntuAdmissionMethods } from './methods';
-import { NTU_COMBO_LABELS, NTU_COMBO_SLOTS, NTU_UNMODELED_COMBO_CODES } from './combos';
+import { NTU_COMBO_LABELS, NTU_COMBO_SLOTS } from './combos';
 import { NTU_PROGRAM_THRESHOLD_BY_CODE, type NtuProgramThreshold } from './thresholds';
 import { calculateNtuEffectivePriority30, lookupNtuStandardPriority30 } from './priority';
 import { ntuExactFormulaEvidence, ntuProgramThresholdEvidence } from './evidence';
@@ -67,7 +67,7 @@ export function evaluateNtuThptExamAdmission(profile: ApplicantProfile, context:
     return ntuPartial({ missingRequirements, reason: `Mã chương trình "${context.programCode}" không có trong bảng điểm trúng tuyển NTU 2026.` });
   }
 
-  const comboCodes = Object.keys(entry.cutoffs40).filter((code) => !NTU_UNMODELED_COMBO_CODES.includes(code) && NTU_COMBO_SLOTS[code]);
+  const comboCodes = Object.keys(entry.cutoffs40).filter((code) => NTU_COMBO_SLOTS[code]);
   const computed: ComboResult[] = [];
   for (const comboCode of comboCodes) {
     const raw40 = computeCombo(comboCode, profile);

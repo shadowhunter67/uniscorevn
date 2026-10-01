@@ -19,6 +19,8 @@ export const NTU_COMBO_SLOTS: Readonly<Record<string, readonly NtuComboSlot[]>> 
   T2VH: [{ subject: 'math', weight: 2 }, { subject: 'literature', weight: 1 }, { subject: 'chemistry', weight: 1 }],
   T2VL: [{ subject: 'math', weight: 2 }, { subject: 'literature', weight: 1 }, { subject: 'physics', weight: 1 }],
   T2VSi: [{ subject: 'math', weight: 2 }, { subject: 'literature', weight: 1 }, { subject: 'biology', weight: 1 }],
+  T2VN: [{ subject: 'math', weight: 2 }, { subject: 'literature', weight: 1 }, { subject: 'japanese', weight: 1 }],
+  T2VP: [{ subject: 'math', weight: 2 }, { subject: 'literature', weight: 1 }, { subject: 'french', weight: 1 }],
   T2VSu: [{ subject: 'math', weight: 2 }, { subject: 'literature', weight: 1 }, { subject: 'history', weight: 1 }],
   T2VTi: [{ subject: 'math', weight: 2 }, { subject: 'literature', weight: 1 }, { subject: 'informatics', weight: 1 }],
   TV2A: [{ subject: 'math', weight: 1 }, { subject: 'literature', weight: 2 }, { subject: 'english', weight: 1 }],
@@ -36,9 +38,6 @@ export const NTU_COMBO_SLOTS: Readonly<Record<string, readonly NtuComboSlot[]>> 
   V2SuD: [{ subject: 'literature', weight: 2 }, { subject: 'history', weight: 1 }, { subject: 'geography', weight: 1 }],
 };
 
-/** T2VN (Toán*2, Văn, Tiếng Nhật), T2VP (Toán*2, Văn, Tiếng Pháp): không có SubjectId — không tính được. */
-export const NTU_UNMODELED_COMBO_CODES: readonly string[] = ['T2VN', 'T2VP'];
-
 export const NTU_COMBO_LABELS: Readonly<Record<string, string>> = {
   T2VA: 'Toán*2, Ngữ văn, Tiếng Anh',
   T2VC: 'Toán*2, Ngữ văn, Công nghệ',
@@ -46,6 +45,8 @@ export const NTU_COMBO_LABELS: Readonly<Record<string, string>> = {
   T2VG: 'Toán*2, Ngữ văn, Giáo dục kinh tế và pháp luật',
   T2VH: 'Toán*2, Ngữ văn, Hóa học',
   T2VL: 'Toán*2, Ngữ văn, Vật lý',
+  T2VN: 'Toán*2, Ngữ văn, Tiếng Nhật',
+  T2VP: 'Toán*2, Ngữ văn, Tiếng Pháp',
   T2VSi: 'Toán*2, Ngữ văn, Sinh học',
   T2VSu: 'Toán*2, Ngữ văn, Lịch sử',
   T2VTi: 'Toán*2, Ngữ văn, Tin học',
