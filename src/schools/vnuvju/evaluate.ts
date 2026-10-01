@@ -8,7 +8,7 @@ import { vnuvjuAdmissionMethods } from './methods';
 import { VNUVJU_FIELD_THRESHOLD_BY_CODE, type VnuvjuFieldThreshold } from './thresholds';
 import { lookupVnuvjuStandardPriority30, calculateVnuvjuEffectivePriority30 } from './priority';
 import { vnuvjuExactFormulaEvidence, vnuvjuFieldThresholdEvidence } from './evidence';
-import { applyVnuvjuEnglishCertificate } from './certificate';
+import { applyVnuvjuLanguageCertificates } from './certificate';
 
 export interface VnuvjuSubjectContext {
   combinationId?: string;
@@ -79,7 +79,7 @@ export function evaluateVnuvjuThptExamAdmission(
     return vnuvjuPartial({ missingRequirements, reason: `Tổ hợp đã chọn không thuộc danh sách tổ hợp chính thức của ${entry.name}.` });
   }
 
-  const certificate = applyVnuvjuEnglishCertificate(profile.thpt?.scores ?? {}, profile.certificates);
+  const certificate = applyVnuvjuLanguageCertificates(profile.thpt?.scores ?? {}, profile.certificates);
   const { total30, missingSubjects } = readSubjectTotal(certificate.scores, context.subjectContext.subjects);
   if (missingSubjects.length > 0) {
     missingRequirements.push(
@@ -104,9 +104,12 @@ export function evaluateVnuvjuThptExamAdmission(
   const reasons: string[] = [
     `Điểm trúng tuyển ${entry.name} (Phương thức 100, thi TN THPT 2026): tổng 3 môn + điểm ưu tiên KV/ĐT >= ${threshold30}/30 — tổng của bạn = ${finalScore}/30.`,
     eligible ? 'Đạt/vượt điểm trúng tuyển đã công bố chính thức năm 2026.' : 'Chưa đạt điểm trúng tuyển đã công bố chính thức năm 2026.',
-    certificate.used
-      ? `Môn Tiếng Anh dùng điểm quy đổi chứng chỉ (${certificate.converted}/10, Phụ lục I) vì cao hơn điểm thi.`
+    certificate.english?.used
+      ? `Môn Tiếng Anh dùng điểm quy đổi chứng chỉ (${certificate.english.converted}/10, Phụ lục I) vì cao hơn điểm thi.`
       : 'Môn Tiếng Anh dùng điểm thi TN THPT (không có chứng chỉ quy đổi cao hơn).',
+    ...(certificate.japanese?.used
+      ? [`Môn Tiếng Nhật dùng điểm quy đổi JLPT (${certificate.japanese.converted}/10, Phụ lục I) vì cao hơn điểm thi hoặc chưa có điểm thi.`]
+      : []),
     'Chưa kiểm tra điều kiện ngoại ngữ đầu vào của chương trình chất lượng cao (Phụ lục II thông tin tuyển sinh VJU) và điểm thưởng/khuyến khích — xem phần giới hạn dữ liệu.',
   ];
 

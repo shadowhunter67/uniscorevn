@@ -14,7 +14,7 @@ export const vnuvjuModule: SchoolModule = {
   region: 'hanoi',
   vnuhcm: false,
   summary:
-    'VJU 2026 (Phương thức 100, xét kết quả thi TN THPT): điểm trúng tuyển theo chương trình, nguồn điểm CHÍNH THỨC từ thông báo tổng hợp của ĐHQGHN (`sources.ts:vnuvju-cutoff-vnu-2026`) + thông tin tuyển sinh chi tiết của chính VJU (`vnuvju-notice-2026`: tổ hợp từng chương trình, "không có độ chênh lệch điểm chuẩn giữa các tổ hợp", không hệ số môn). Mô hình hoá đủ 9/9 chương trình, điểm trúng tuyển từ 20,00 đến 21,25/30. Điểm ưu tiên dùng khung quốc gia hiện hành (xem knowledgeGaps.ts). Các tổ hợp có Tiếng Nhật, quy đổi chứng chỉ ngoại ngữ, điều kiện ngoại ngữ đầu vào và điểm thưởng/khuyến khích chưa mô hình hoá (xem knowledgeGaps.ts).',
+    'VJU 2026 (Phương thức 100, xét kết quả thi TN THPT): điểm trúng tuyển theo chương trình, nguồn điểm CHÍNH THỨC từ thông báo tổng hợp của ĐHQGHN (`sources.ts:vnuvju-cutoff-vnu-2026`) + thông tin tuyển sinh chi tiết của chính VJU (`vnuvju-notice-2026`: tổ hợp từng chương trình, "không có độ chênh lệch điểm chuẩn giữa các tổ hợp", không hệ số môn). Mô hình hoá đủ 9/9 chương trình, điểm trúng tuyển từ 20,00 đến 21,25/30. Điểm ưu tiên dùng khung quốc gia hiện hành (xem knowledgeGaps.ts). Tổ hợp có Tiếng Nhật và quy đổi IELTS/TOEFL iBT/JLPT đã mô hình hoá; điều kiện ngoại ngữ đầu vào, Vstep và điểm thưởng/khuyến khích chưa (xem knowledgeGaps.ts).',
   capabilities: {
     admissionInfo: true,
     programs: false,

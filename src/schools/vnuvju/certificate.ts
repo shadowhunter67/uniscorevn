@@ -1,4 +1,4 @@
-import type { ApplicantProfile } from '../../core/applicantProfile';
+import { JLPT_LEVELS, isAtLeastLevel, type ApplicantProfile, type JlptLevel } from '../../core/applicantProfile';
 import type { SubjectId } from '../../core/subjects';
 
 /**
@@ -52,4 +52,37 @@ export function applyVnuvjuEnglishCertificate(
   const exam = scores.english;
   if (exam !== undefined && exam >= converted) return { scores, converted, used: false };
   return { scores: { ...scores, english: converted }, converted, used: true };
+}
+
+/** JLPT -> điểm môn Tiếng Nhật thang 10 (Phụ lục I): N3 = 9,0; N2 = 9,5; N1 = 10. N4/N5 không quy đổi. */
+export function convertVnuvjuJlpt(level: JlptLevel | undefined): number | undefined {
+  if (isAtLeastLevel(JLPT_LEVELS, level, 'N1')) return 10;
+  if (isAtLeastLevel(JLPT_LEVELS, level, 'N2')) return 9.5;
+  if (isAtLeastLevel(JLPT_LEVELS, level, 'N3')) return 9;
+  return undefined;
+}
+
+export interface VnuvjuCertificateResult {
+  scores: Partial<Record<SubjectId, number>>;
+  english?: { converted: number; used: boolean };
+  japanese?: { converted: number; used: boolean };
+}
+
+/** Áp quy đổi chứng chỉ cho môn Tiếng Anh (IELTS/TOEFL iBT) và Tiếng Nhật (JLPT): lấy điểm cao hơn. */
+export function applyVnuvjuLanguageCertificates(
+  scores: Partial<Record<SubjectId, number>>,
+  certificates: ApplicantProfile['certificates']
+): VnuvjuCertificateResult {
+  const englishApplied = applyVnuvjuEnglishCertificate(scores, certificates);
+  const result: VnuvjuCertificateResult = { scores: englishApplied.scores };
+  if (englishApplied.converted !== undefined) result.english = { converted: englishApplied.converted, used: englishApplied.used };
+
+  const japaneseConverted = convertVnuvjuJlpt(certificates?.jlpt);
+  if (japaneseConverted !== undefined) {
+    const exam = result.scores.japanese;
+    const used = exam === undefined || exam < japaneseConverted;
+    if (used) result.scores = { ...result.scores, japanese: japaneseConverted };
+    result.japanese = { converted: japaneseConverted, used };
+  }
+  return result;
 }

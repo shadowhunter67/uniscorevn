@@ -2,7 +2,8 @@ import { describe, expect, it } from 'vitest';
 import type { ApplicantProfile } from '../../core/applicantProfile';
 import { evaluateVnuvjuThptExamAdmission } from './evaluate';
 import { VNUVJU_FIELD_THRESHOLDS_2026 } from './thresholds';
-import { convertVnuvjuEnglishCertificate } from './certificate';
+import { convertVnuvjuEnglishCertificate, convertVnuvjuJlpt } from './certificate';
+import { getSubjectContext } from '../../compare/schoolComparisonAdapter';
 
 const baseProfile: ApplicantProfile = {
   thpt: { scores: { math: 6, literature: 6, english: 6.5 } },
@@ -97,5 +98,63 @@ describe('VJU English certificate conversion (Phu luc I)', () => {
     });
 
     expect(result.score?.value).toBe(23);
+  });
+});
+
+describe('VJU Japanese combinations and JLPT', () => {
+  it('maps JLPT N3/N2/N1 to 9 / 9.5 / 10 and ignores N4/N5', () => {
+    expect(convertVnuvjuJlpt('N3')).toBe(9);
+    expect(convertVnuvjuJlpt('N2')).toBe(9.5);
+    expect(convertVnuvjuJlpt('N1')).toBe(10);
+    expect(convertVnuvjuJlpt('N4')).toBeUndefined();
+    expect(convertVnuvjuJlpt('N5')).toBeUndefined();
+    expect(convertVnuvjuJlpt(undefined)).toBeUndefined();
+  });
+
+  it('every official combination id of every program resolves to a subject context', () => {
+    for (const entry of VNUVJU_FIELD_THRESHOLDS_2026) {
+      for (const combinationId of entry.combinationIds) {
+        expect(getSubjectContext(combinationId), `${entry.code} ${combinationId}`).toBeDefined();
+      }
+    }
+  });
+
+  it('computes a Japanese-language combination (D06 = Toan + Van + Tieng Nhat) for Nhat Ban hoc', () => {
+    const profile: ApplicantProfile = {
+      thpt: { scores: { math: 7, literature: 7, japanese: 7.5 } },
+      priority: { region: 'KV3' },
+    };
+    const result = evaluateVnuvjuThptExamAdmission(profile, {
+      fieldCode: 'VJU1',
+      subjectContext: getSubjectContext('D06'),
+    });
+
+    expect(result.confidence).toBe('exact-verified');
+    expect(result.score?.value).toBe(21.5);
+    expect(result.eligibility?.status).toBe('eligible');
+  });
+
+  it('uses JLPT instead of a missing or lower Japanese exam score', () => {
+    const base: ApplicantProfile = { thpt: { scores: { math: 7, literature: 7 } }, priority: { region: 'KV3' } };
+    const context = { fieldCode: 'VJU1', subjectContext: getSubjectContext('D06') };
+    const missing = evaluateVnuvjuThptExamAdmission(base, context);
+    const withJlpt = evaluateVnuvjuThptExamAdmission({ ...base, certificates: { jlpt: 'N2' } }, context);
+    const lowExam = evaluateVnuvjuThptExamAdmission(
+      { ...base, thpt: { scores: { math: 7, literature: 7, japanese: 5 } }, certificates: { jlpt: 'N1' } },
+      context
+    );
+
+    expect(missing.confidence).toBe('partial');
+    expect(withJlpt.score?.value).toBe(23.5);
+    expect(lowExam.score?.value).toBe(24);
+  });
+
+  it('does not accept a Japanese combination for a program that does not list it', () => {
+    const result = evaluateVnuvjuThptExamAdmission(
+      { thpt: { scores: { math: 7, literature: 7, japanese: 8 } } },
+      { fieldCode: 'VJU7', subjectContext: getSubjectContext('D06') }
+    );
+
+    expect(result.confidence).toBe('partial');
   });
 });
