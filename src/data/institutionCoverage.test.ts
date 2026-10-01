@@ -66,10 +66,10 @@ describe('institution coverage statistics', () => {
       internalUnitEntries: 12,
       researched: 249,
       admissionDataAvailable: 249,
-      eligibilitySupported: 5,
-      calculatorSupported: 193,
+      eligibilitySupported: 4,
+      calculatorSupported: 194,
       partialCalculator: 1,
-      fullyVerified: 192,
+      fullyVerified: 193,
       catalogOnly: 106,
     });
   });
@@ -551,6 +551,11 @@ describe('institution coverage statistics', () => {
     // hop'), du 9/9 chuong trinh. To hop co Tieng Nhat khong co SubjectId nen bi loai khoi
     // combinationIds.
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnuvju)).toBe('verified-calculator');
+    // Batch (2026-10-01): VAA (Hoc vien Hang khong Viet Nam) nang tu eligibility-only len exact. Nguon
+    // CHINH THUC (thong bao diem trung tuyen + Thong tin tuyen sinh 2026, doc bang vision tu anh): 36 ma xet
+    // tuyen, cong thuc (mon1 x3 + mon2 x2 + mon3)/2 + uu tien theo nhom THXT TA01/TA02/DT01/DT02. Diem cong
+    // giai thuong va quy doi chung chi ngoai ngu khong mo hinh hoa (knowledgeGaps).
+    expect(deriveInstitutionSupportStatus(schoolRegistry.vaa)).toBe('verified-calculator');
   });
 
   it('requires catalog source metadata for college identity entries', () => {

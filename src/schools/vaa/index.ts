@@ -13,7 +13,7 @@ export const vaaModule: SchoolModule = {
   region: 'hcm',
   vnuhcm: false,
   summary:
-    'Official 2026 VAA sources confirm a common eligibility gate for transcript/ĐGNL-based admission: total of 3 THPT exam subjects must reach at least 15/30. Transcript-method passing scores (18-27/30, varying by program) and other methods (direct admission, ĐGNL, international certificates) are not modeled yet.',
+    'VAA 2026 (Phương thức 1, xét điểm thi TN THPT): điểm trúng tuyển CHÍNH THỨC theo 36 mã xét tuyển (18–27,5/30, `sources.ts:vaa-cutoff-2026`). Điểm xét = (môn thứ nhất x 3 + môn thứ hai x 2 + môn thứ ba)/2 + điểm ưu tiên (`vaa-notice-2026`), môn theo nhóm tổ hợp TA01/TA02/DT01/DT02 (môn tự chọn lấy theo điểm cao nhất, trường không quy định độ lệch giữa các tổ hợp); điểm ưu tiên theo bảng mức và công thức giảm của chính VAA. Điểm cộng giải thưởng, quy đổi chứng chỉ ngoại ngữ, môn Tiếng Hàn/Tiếng Trung và điều kiện phụ ngoại ngữ chưa mô hình hoá (xem knowledgeGaps.ts); các phương thức học bạ, ĐGNL, SAT/ACT/IB chưa tính.',
   capabilities: {
     admissionInfo: true,
     programs: false,
@@ -32,6 +32,18 @@ export const vaaModule: SchoolModule = {
       url: 'https://tuyensinh.vaa.edu.vn/vi/tin-tuc/lam-sao-de-xet-hoc-ba-vao-hoc-vien-hang-khong-viet-nam-2026',
       type: 'official-institution',
       checkedAt: '2026-08-24',
+    },
+    {
+      title: 'Chính thức công bố điểm trúng tuyển đại học chính quy VAA 2026',
+      url: 'https://vau.edu.vn/chinh-thuc-cong-bo-diem-trung-tuyen-dai-hoc-chinh-quy-vaa-2026/',
+      type: 'official-institution',
+      checkedAt: '2026-10-01',
+    },
+    {
+      title: 'Thông tin tuyển sinh đại học chính quy năm 2026 — Học viện Hàng không Việt Nam',
+      url: 'https://vau.edu.vn/chi-tiet-sinh-vien/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026-chinh-thuc/',
+      type: 'official-institution',
+      checkedAt: '2026-10-01',
     },
   ],
 };

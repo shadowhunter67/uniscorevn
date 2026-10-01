@@ -2,33 +2,37 @@ import type { KnowledgeGap } from '../../core/knowledgeStatus';
 
 export const vaaKnowledgeGaps: KnowledgeGap[] = [
   {
-    id: 'vaa-hocba-passing-range-not-modeled',
+    id: 'vaa-bonus-points-not-modeled',
     label:
-      'VAA cong bo diem chuan xet hoc ba THPT dao dong 18-27/30 tuy nganh nam 2026, nhung bang diem chuan theo tung nganh chua duoc trich xuat co cau truc; runtime chi kiem tra dieu kien san chung 15/30, khong ket luan duoc trung tuyen cuoi cung.',
-    status: 'official-but-unparsed',
-    sourceId: 'vaa-hocba-notice-2026',
+      'VAA cộng điểm cho thí sinh đạt giải HSG/KHKT (mục 2.3: 3 / 1,5 / 1 / 0,5 điểm theo thang 30) và điểm trúng tuyển công bố "đã có điểm cộng, điểm quy đổi từ chứng chỉ ngoại ngữ" — điểm cộng và quy đổi chứng chỉ chưa mô hình hoá, mô hình chỉ tính trên điểm thi TN THPT thô + điểm ưu tiên.',
+    status: 'incomplete',
+    sourceId: 'vaa-notice-2026',
     scoreAffecting: true,
-    impact: 'Runtime chi loai duoc ho so duoi 15/30; tren muc do van chua ket luan duoc dau vao/truot theo tung nganh.',
+    impact: 'Thí sinh có giải thưởng hoặc chứng chỉ ngoại ngữ quy đổi sẽ thấy Điểm xét thấp hơn thực tế.',
+  },
+  {
+    id: 'vaa-foreign-language-subject-not-modeled',
+    label:
+      'Ngành Ngôn ngữ Hàn Quốc được chọn Tiếng Hàn và Ngôn ngữ Trung Quốc được chọn Tiếng Trung làm môn ngoại ngữ (nhân 3) — hệ thống chưa có SubjectId tương ứng, mô hình chỉ dùng Tiếng Anh cho nhóm TA01/TA02.',
+    status: 'incomplete',
+    sourceId: 'vaa-notice-2026',
+    scoreAffecting: false,
+    impact: 'Thí sinh xét Ngôn ngữ Hàn/Trung bằng môn Tiếng Hàn/Tiếng Trung chưa tính được qua UniscoreVN.',
+  },
+  {
+    id: 'vaa-language-condition-not-checked',
+    label:
+      'Các ngành Ngôn ngữ và chương trình học bằng Tiếng Anh (nhóm TA01/TA02) có tiêu chí phụ về điều kiện Ngoại ngữ khi xét tuyển; UniscoreVN không kiểm tra điều kiện này, chỉ so điểm xét với điểm trúng tuyển. Ngưỡng đầu vào (15–20/30 tuỳ ngành) cũng không kiểm tra riêng vì thấp hơn điểm trúng tuyển.',
+    status: 'incomplete',
+    sourceId: 'vaa-cutoff-2026',
+    scoreAffecting: false,
+    impact: 'Kết quả "đạt điểm trúng tuyển" chưa bao gồm điều kiện ngoại ngữ phụ của các ngành này.',
   },
   {
     id: 'vaa-other-methods-not-modeled',
-    label: 'VAA con xet tuyen thang, DGNL DHQG Ha Noi/TP.HCM, va chung chi quoc te (SAT/ACT/IB); chi phuong thuc dieu kien san THPT duoc mo hinh hoa.',
-    status: 'incomplete',
-    sourceId: 'vaa-admission-notice-2026',
-  },
-  {
-    id: 'vaa-bonus-priority-not-modeled',
-    label: 'Quy dinh cong diem uu tien khu vuc/doi tuong chua duoc trien khai trong bo tinh diem.',
-    status: 'incomplete',
-    sourceId: 'vaa-admission-notice-2026',
-  },
-  {
-    id: 'vaa-recheck-2026-08-28',
     label:
-      'Recheck 2026-08-28 (WebSearch + WebFetch trực tiếp vaa-hocba-notice-2026): trang không còn (hoặc chưa từng có, tuỳ lần crawl) bảng điểm sàn học bạ theo từng ngành ở dạng đọc được — chỉ có điều kiện sàn chung "tổng 3 môn thi TN THPT >= 15 điểm" và mô tả quy trình đăng ký nguyện vọng. Báo chí (vietnamnet/dantri/vnexpress, công bố 09/08/2026) chỉ có ĐIỂM CHUẨN (kết quả trúng tuyển cuối, 18-27.5/30) theo ngành cho phương thức tổng hợp — đây là kết quả trúng tuyển sau cùng, KHÔNG phải ngưỡng sàn xét học bạ theo từng ngành mà knowledge gap này cần; không dùng thay thế được vì 2 khái niệm khác nhau (điểm chuẩn phụ thuộc số lượng thí sinh đăng ký năm đó, không tính lại được từ công thức). Giữ nguyên gap.',
-    status: 'incomplete',
-    sourceId: 'vaa-hocba-notice-2026',
-    scoreAffecting: true,
-    impact: 'Không có thay đổi so với đợt research trước; VAA tiếp tục ở mức eligibility-only.',
+      'VAA còn xét tuyển bằng học bạ (cùng công thức hệ số 3/2/1, nhưng dùng điểm TB 3 năm và điểm trúng tuyển riêng), điểm ĐGNL ĐHQG-HCM/Hà Nội, SAT/ACT/IB và xét tuyển thẳng; chỉ phương thức thi TN THPT (PT1) được mô hình hoá.',
+    status: 'official-but-unparsed',
+    sourceId: 'vaa-notice-2026',
   },
 ];
