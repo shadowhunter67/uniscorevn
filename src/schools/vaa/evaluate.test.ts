@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import type { ApplicantProfile } from '../../core/applicantProfile';
 import { evaluateVaaThptExamAdmission, evaluateVaaTranscriptAdmission } from './evaluate';
 import { VAA_FIELD_THRESHOLDS_2026 } from './thresholds';
-import { convertVaaEnglishCertificate } from './certificate';
+import { convertVaaEnglishCertificate, convertVaaKoreanChineseCertificate } from './certificate';
 
 const strongProfile: ApplicantProfile = {
   thpt: { scores: { math: 9, literature: 8, english: 8, physics: 7, chemistry: 6 } },
@@ -173,5 +173,47 @@ describe('VAA transcript (hoc ba) method 2026', () => {
     for (const entry of VAA_FIELD_THRESHOLDS_2026) {
       expect(entry.transcriptThreshold30, entry.code).toBeGreaterThanOrEqual(entry.threshold30);
     }
+  });
+});
+
+describe('VAA Korean and Chinese language majors', () => {
+  it('converts TOPIK and HSK per the official table (4 -> 10, 3 -> 8)', () => {
+    expect(convertVaaKoreanChineseCertificate('korean', { topik: 'TOPIK4' })).toBe(10);
+    expect(convertVaaKoreanChineseCertificate('korean', { topik: 'TOPIK6' })).toBe(10);
+    expect(convertVaaKoreanChineseCertificate('korean', { topik: 'TOPIK3' })).toBe(8);
+    expect(convertVaaKoreanChineseCertificate('korean', { topik: 'TOPIK2' })).toBeUndefined();
+    expect(convertVaaKoreanChineseCertificate('chinese', { hsk: 'HSK4' })).toBe(10);
+    expect(convertVaaKoreanChineseCertificate('chinese', { hsk: 'HSK3' })).toBe(8);
+    expect(convertVaaKoreanChineseCertificate('chinese', { hsk: 'HSK1' })).toBeUndefined();
+    // TOPIK does not apply to the Chinese major and vice versa
+    expect(convertVaaKoreanChineseCertificate('chinese', { topik: 'TOPIK6' })).toBeUndefined();
+  });
+
+  it('lets Ngon ngu Han Quoc use Tieng Han as the x3 foreign language', () => {
+    const profile: ApplicantProfile = { thpt: { scores: { math: 8, literature: 8, english: 5, korean: 9 } }, priority: { region: 'KV3' } };
+    // TA02 = Korean x3 + Math x2 + best other(literature 8): (27 + 16 + 8)/2 = 25.5; with English only: (15+16+8)/2 = 19.5
+    const korean = evaluateVaaThptExamAdmission(profile, { fieldCode: '7220210' });
+
+    expect(korean.score?.value).toBe(25.5);
+    expect(korean.explanation?.[0]?.formula).toContain('Tiếng Hàn');
+  });
+
+  it('does not allow Tieng Han for other majors', () => {
+    const profile: ApplicantProfile = { thpt: { scores: { math: 8, literature: 8, english: 5, korean: 9 } }, priority: { region: 'KV3' } };
+    const english = evaluateVaaThptExamAdmission(profile, { fieldCode: '7220201' });
+
+    expect(english.score?.value).toBe(19.5);
+  });
+
+  it('uses TOPIK 4 instead of a missing Korean exam score and HSK for the Chinese major', () => {
+    const base: ApplicantProfile = { thpt: { scores: { math: 8, literature: 8 } }, priority: { region: 'KV3' } };
+    const korean = evaluateVaaThptExamAdmission({ ...base, certificates: { topik: 'TOPIK4' } }, { fieldCode: '7220210' });
+    const chinese = evaluateVaaThptExamAdmission({ ...base, certificates: { hsk: 'HSK3' } }, { fieldCode: '7220204' });
+    const wrong = evaluateVaaThptExamAdmission({ ...base, certificates: { hsk: 'HSK4' } }, { fieldCode: '7220210' });
+
+    // Korean: (10*3 + 8*2 + 8)/2 = 27; Chinese: (8*3 + 8*2 + 8)/2 = 24
+    expect(korean.score?.value).toBe(27);
+    expect(chinese.score?.value).toBe(24);
+    expect(wrong.confidence).toBe('partial');
   });
 });

@@ -8,7 +8,7 @@ import { vaaAdmissionMethods } from './methods';
 import { VAA_FIELD_THRESHOLD_BY_CODE, type VaaComboGroup, type VaaFieldThreshold } from './thresholds';
 import { lookupVaaStandardPriority30, calculateVaaEffectivePriority30 } from './priority';
 import { vaaExactFormulaEvidence, vaaFieldThresholdEvidence } from './evidence';
-import { applyVaaEnglishCertificate } from './certificate';
+import { applyVaaEnglishCertificate, applyVaaKoreanChineseCertificate } from './certificate';
 
 /**
  * Môn tự chọn của nhóm THXT lấy trong danh sách này (mục 4.1 thông tin tuyển sinh VAA 2026); VAA
@@ -51,11 +51,11 @@ interface GroupResult {
 
 type Scores = Partial<Record<SubjectId, number>>;
 
-function evaluateGroup(group: VaaComboGroup, scores: Scores): GroupResult | undefined {
+function evaluateGroupWithForeign(group: VaaComboGroup, scores: Scores, foreign: SubjectId | undefined): GroupResult | undefined {
   const spec = GROUP_SPECS[group];
   const secondScore = scores[spec.second];
   if (secondScore === undefined) return undefined;
-  const fixedFirst = spec.first === 'best' ? undefined : spec.first;
+  const fixedFirst = spec.first === 'best' ? undefined : (foreign ?? spec.first);
   if (fixedFirst && scores[fixedFirst] === undefined) return undefined;
 
   const taken = new Set<SubjectId>([spec.second]);
@@ -77,6 +77,18 @@ function evaluateGroup(group: VaaComboGroup, scores: Scores): GroupResult | unde
   }
   const raw30 = round2(((scores[firstSubject] as number) * 3 + secondScore * 2 + (scores[thirdSubject] as number)) / 2);
   return { group, raw30, firstSubject, secondSubject: spec.second, thirdSubject };
+}
+
+/**
+ * Nhóm TA: môn ngoại ngữ nhân 3 là Tiếng Anh, riêng Ngôn ngữ Hàn Quốc được chọn thêm Tiếng Hàn và Ngôn ngữ Trung
+ * Quốc thêm Tiếng Trung — thử từng ngoại ngữ hợp lệ và giữ kết quả cao nhất.
+ */
+function evaluateGroup(group: VaaComboGroup, scores: Scores, extraForeign: readonly SubjectId[] = []): GroupResult | undefined {
+  if (GROUP_SPECS[group].first === 'best') return evaluateGroupWithForeign(group, scores, undefined);
+  const results = ['english' as SubjectId, ...extraForeign]
+    .map((foreign) => evaluateGroupWithForeign(group, scores, foreign))
+    .filter((result): result is GroupResult => result !== undefined);
+  return results.length > 0 ? results.reduce((a, b) => (b.raw30 > a.raw30 ? b : a)) : undefined;
 }
 
 const VAA_THPT_METHOD = vaaAdmissionMethods[0];
@@ -149,8 +161,15 @@ export function evaluateVaaAdmission(profile: ApplicantProfile, context: VaaEval
   }
 
   const certificate = applyVaaEnglishCertificate(transcript ? transcriptScores(profile) : (profile.thpt?.scores ?? {}), profile.certificates);
-  const scores: Scores = certificate.scores;
-  const results = entry.groups.map((group) => evaluateGroup(group, scores)).filter((result): result is GroupResult => result !== undefined);
+  let scores: Scores = certificate.scores;
+  const extraForeign = entry.extraForeignLanguages ?? [];
+  const extraCertificateNotes: string[] = [];
+  for (const language of extraForeign) {
+    const applied = applyVaaKoreanChineseCertificate(scores, language, profile.certificates);
+    scores = applied.scores;
+    if (applied.used) extraCertificateNotes.push(`Môn ${SUBJECT_LABELS[language]} dùng điểm quy đổi ${language === 'korean' ? 'TOPIK' : 'HSK'} (${applied.converted}/10, mục 2.5) vì cao hơn điểm ${transcript ? 'học bạ' : 'thi'} hoặc chưa có điểm.`);
+  }
+  const results = entry.groups.map((group) => evaluateGroup(group, scores, extraForeign)).filter((result): result is GroupResult => result !== undefined);
   if (results.length === 0) {
     missingRequirements.push({
       kind: 'profile-input',
@@ -174,6 +193,7 @@ export function evaluateVaaAdmission(profile: ApplicantProfile, context: VaaEval
   const reasons: string[] = [
     `Điểm trúng tuyển ${entry.name} (Phương thức ${transcript ? '2, học bạ' : '1, thi TN THPT'} 2026): >= ${threshold30}/30 — Điểm xét của bạn = ${finalScore}/30 (nhóm ${best.group}).`,
     eligible ? 'Đạt/vượt điểm trúng tuyển đã công bố chính thức năm 2026.' : 'Chưa đạt điểm trúng tuyển đã công bố chính thức năm 2026.',
+    ...extraCertificateNotes,
     certificate.used
       ? `Môn Tiếng Anh dùng điểm quy đổi chứng chỉ (${certificate.converted}/10) vì cao hơn điểm thi (quy tắc "điểm nào cao hơn giữ lại" của VAA).`
       : `Môn Tiếng Anh dùng điểm ${modeLabel} (không có chứng chỉ quy đổi cao hơn).`,

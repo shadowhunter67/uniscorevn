@@ -20,13 +20,13 @@ export const vaaKnowledgeGaps: KnowledgeGap[] = [
     impact: 'Thí sinh có TOEIC hoặc chứng chỉ hết hạn có thể thấy kết quả khác thực tế.',
   },
   {
-    id: 'vaa-foreign-language-subject-not-modeled',
+    id: 'vaa-korean-chinese-certificate-limits',
     label:
-      'Ngành Ngôn ngữ Hàn Quốc được chọn Tiếng Hàn và Ngôn ngữ Trung Quốc được chọn Tiếng Trung làm môn ngoại ngữ (nhân 3) — hệ thống chưa có SubjectId tương ứng, mô hình chỉ dùng Tiếng Anh cho nhóm TA01/TA02.',
+      'Ngành Ngôn ngữ Hàn Quốc/Trung Quốc được dùng Tiếng Hàn/Tiếng Trung làm môn ngoại ngữ (nhân 3) và quy đổi TOPIK/HSK (Topik 4 / HSK 4 -> 10, Topik 3 / HSK 3 -> 8, mục 2.5) — mô hình làm cả hai (`certificate.ts`); bảng chính thức chỉ in cấp 3 và 4 nên cấp cao hơn 4 được coi là 10, cấp dưới 3 không quy đổi (suy luận đơn điệu, không in nguyên văn).',
     status: 'incomplete',
     sourceId: 'vaa-notice-2026',
     scoreAffecting: false,
-    impact: 'Thí sinh xét Ngôn ngữ Hàn/Trung bằng môn Tiếng Hàn/Tiếng Trung chưa tính được qua UniscoreVN.',
+    impact: 'Thí sinh có TOPIK/HSK cấp 5-6 giả định được quy đổi 10 như cấp 4.',
   },
   {
     id: 'vaa-language-condition-not-checked',

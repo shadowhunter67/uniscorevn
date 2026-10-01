@@ -287,13 +287,13 @@ describe('sanitizeApplicantProfile', () => {
    * batch "6 học kỳ" đã gặp với `bySemester`). 4 test dưới đây chính là lưới chặn cho việc đó.
    */
   it('chứng chỉ theo BẬC (DELF/TCF/JLPT/HSK) được giữ lại — không bị sanitizer xoá', () => {
-    const result = sanitizeApplicantProfile({ certificates: { delf: 'B2', tcf: 'C1', jlpt: 'N1', hsk: 'HSK5' } });
-    expect(result).toEqual({ certificates: { delf: 'B2', tcf: 'C1', jlpt: 'N1', hsk: 'HSK5' } });
+    const result = sanitizeApplicantProfile({ certificates: { delf: 'B2', tcf: 'C1', jlpt: 'N1', hsk: 'HSK5', topik: 'TOPIK4' } });
+    expect(result).toEqual({ certificates: { delf: 'B2', tcf: 'C1', jlpt: 'N1', hsk: 'HSK5', topik: 'TOPIK4' } });
   });
 
   it('bậc chứng chỉ không hợp lệ bị drop riêng lẻ, giữ nguyên bậc hợp lệ khác', () => {
     const result = sanitizeApplicantProfile({
-      certificates: { delf: 'B3', jlpt: 'N0', hsk: 'HSK9', tcf: 'B1', ielts: 6.5 },
+      certificates: { delf: 'B3', jlpt: 'N0', hsk: 'HSK9', topik: 'TOPIK9', tcf: 'B1', ielts: 6.5 },
     });
     expect(result).toEqual({ certificates: { ielts: 6.5, tcf: 'B1' } });
   });

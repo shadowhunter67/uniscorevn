@@ -19,10 +19,13 @@ import type { VactProfile } from './vactProfile';
 export const CEFR_LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'] as const;
 export const JLPT_LEVELS = ['N5', 'N4', 'N3', 'N2', 'N1'] as const;
 export const HSK_LEVELS = ['HSK1', 'HSK2', 'HSK3', 'HSK4', 'HSK5', 'HSK6'] as const;
+/** TOPIK (tiếng Hàn) theo cấp 1-6 (TOPIK I = cấp 1-2, TOPIK II = cấp 3-6), thứ tự tăng dần. */
+export const TOPIK_LEVELS = ['TOPIK1', 'TOPIK2', 'TOPIK3', 'TOPIK4', 'TOPIK5', 'TOPIK6'] as const;
 
 export type CefrLevel = (typeof CEFR_LEVELS)[number];
 export type JlptLevel = (typeof JLPT_LEVELS)[number];
 export type HskLevel = (typeof HSK_LEVELS)[number];
+export type TopikLevel = (typeof TOPIK_LEVELS)[number];
 
 /** `true` nếu `level` ĐẠT TỪ `minimum` TRỞ LÊN theo thứ tự của chính mảng bậc truyền vào. */
 export function isAtLeastLevel<T extends string>(levels: readonly T[], level: T | undefined, minimum: T): boolean {
@@ -95,6 +98,8 @@ export interface ApplicantProfile {
     tcf?: CefrLevel;
     jlpt?: JlptLevel;
     hsk?: HskLevel;
+    /** OPT-IN, additive (2026-10-01, VAA ngành Ngôn ngữ Hàn Quốc): TOPIK theo cấp 1-6, cùng quy ước với `hsk`. */
+    topik?: TopikLevel;
   };
 
   /** Chỉ lưu category/region dạng mã (vd 'KV1', 'UT1') — KHÔNG lưu lý do/hoàn cảnh cá nhân. */

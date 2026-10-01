@@ -13,7 +13,7 @@ export const vaaModule: SchoolModule = {
   region: 'hcm',
   vnuhcm: false,
   summary:
-    'VAA 2026 (Phương thức 1 xét điểm thi TN THPT và Phương thức 2 xét học bạ): điểm trúng tuyển CHÍNH THỨC theo 36 mã xét tuyển (THPT 18–27,5/30, học bạ 20–28,13/30, `sources.ts:vaa-cutoff-2026`). Điểm xét = (môn thứ nhất x 3 + môn thứ hai x 2 + môn thứ ba)/2 + điểm ưu tiên (`vaa-notice-2026`), môn theo nhóm tổ hợp TA01/TA02/DT01/DT02 (môn tự chọn lấy theo điểm cao nhất, trường không quy định độ lệch giữa các tổ hợp); điểm ưu tiên theo bảng mức và công thức giảm của chính VAA. Điểm cộng giải thưởng, quy đổi chứng chỉ ngoại ngữ, môn Tiếng Hàn/Tiếng Trung và điều kiện phụ ngoại ngữ chưa mô hình hoá (xem knowledgeGaps.ts); các phương thức ĐGNL, SAT/ACT/IB chưa tính.',
+    'VAA 2026 (Phương thức 1 xét điểm thi TN THPT và Phương thức 2 xét học bạ): điểm trúng tuyển CHÍNH THỨC theo 36 mã xét tuyển (THPT 18–27,5/30, học bạ 20–28,13/30, `sources.ts:vaa-cutoff-2026`). Điểm xét = (môn thứ nhất x 3 + môn thứ hai x 2 + môn thứ ba)/2 + điểm ưu tiên (`vaa-notice-2026`), môn theo nhóm tổ hợp TA01/TA02/DT01/DT02 (môn tự chọn lấy theo điểm cao nhất, trường không quy định độ lệch giữa các tổ hợp); điểm ưu tiên theo bảng mức và công thức giảm của chính VAA. Điểm cộng giải thưởng và điều kiện phụ ngoại ngữ chưa mô hình hoá (xem knowledgeGaps.ts); các phương thức ĐGNL, SAT/ACT/IB chưa tính.',
   capabilities: {
     admissionInfo: true,
     programs: false,

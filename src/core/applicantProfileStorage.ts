@@ -1,4 +1,4 @@
-import { CEFR_LEVELS, HSK_LEVELS, JLPT_LEVELS, type ApplicantProfile } from './applicantProfile';
+import { CEFR_LEVELS, HSK_LEVELS, JLPT_LEVELS, TOPIK_LEVELS, type ApplicantProfile } from './applicantProfile';
 import { readWithMigration } from './storage';
 import { safeRemoveItem, safeSetItem } from './safeStorage';
 import {
@@ -159,6 +159,7 @@ const CERTIFICATE_LEVELS = {
   tcf: CEFR_LEVELS,
   jlpt: JLPT_LEVELS,
   hsk: HSK_LEVELS,
+  topik: TOPIK_LEVELS,
 } as const;
 
 /** `YYYY-MM-DD` VÀ phải là ngày có thật (chặn `2026-02-31`, `2026-13-01`). */

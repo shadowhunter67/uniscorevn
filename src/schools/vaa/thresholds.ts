@@ -18,6 +18,8 @@ export interface VaaFieldThreshold {
   name: string;
   groups: readonly VaaComboGroup[];
   threshold30: number;
+  /** Ngoại ngữ được dùng làm môn ngoại ngữ (nhân 3) của nhóm TA ngoài Tiếng Anh: Ngôn ngữ Hàn Quốc thêm Tiếng Hàn, Ngôn ngữ Trung Quốc thêm Tiếng Trung (mục 4.1). */
+  extraForeignLanguages?: readonly ('korean' | 'chinese')[];
   /** Điểm trúng tuyển Phương thức 2 (học bạ), thang 30, cột "Học bạ" của cùng bảng điểm trúng tuyển. */
   transcriptThreshold30: number;
 }
@@ -28,8 +30,8 @@ const DT02: readonly VaaComboGroup[] = ['DT02'];
 
 export const VAA_FIELD_THRESHOLDS_2026: readonly VaaFieldThreshold[] = [
   { code: '7220201', name: 'Ngôn ngữ Anh', groups: TA, threshold30: 20, transcriptThreshold30: 22 },
-  { code: '7220204', name: 'Ngôn ngữ Trung Quốc', groups: TA, threshold30: 18, transcriptThreshold30: 20 },
-  { code: '7220210', name: 'Ngôn ngữ Hàn Quốc', groups: TA, threshold30: 18, transcriptThreshold30: 20 },
+  { code: '7220204', name: 'Ngôn ngữ Trung Quốc', groups: TA, threshold30: 18, transcriptThreshold30: 20, extraForeignLanguages: ['chinese'] },
+  { code: '7220210', name: 'Ngôn ngữ Hàn Quốc', groups: TA, threshold30: 18, transcriptThreshold30: 20, extraForeignLanguages: ['korean'] },
   { code: '7310109', name: 'Kinh tế số', groups: DT, threshold30: 18, transcriptThreshold30: 20 },
   { code: '7340101', name: 'Quản trị kinh doanh', groups: DT, threshold30: 21, transcriptThreshold30: 23 },
   { code: '7340101D', name: 'Kinh doanh số', groups: DT, threshold30: 22, transcriptThreshold30: 24 },

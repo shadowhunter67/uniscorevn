@@ -10,7 +10,7 @@ import {
   saveStoredProfileSections,
   type ProfileSectionId,
 } from '../core/profileSections';
-import { CEFR_LEVELS, HSK_LEVELS, JLPT_LEVELS, type ApplicantProfile } from '../core/applicantProfile';
+import { CEFR_LEVELS, HSK_LEVELS, JLPT_LEVELS, TOPIK_LEVELS, type ApplicantProfile } from '../core/applicantProfile';
 import type { CERTIFICATE_RANGES } from '../core/applicantProfileStorage';
 import type { ApplicantProfileContextValue } from '../core/applicantProfileContextCore';
 import type { SubjectId } from '../core/subjects';
@@ -70,11 +70,12 @@ const CERTIFICATE_FIELDS: { key: CertificateScoreKey; label: string; hint: strin
  * không phải tự quy nhãn đó ra một con số. Bậc trong `options` xếp TỪ CAO XUỐNG THẤP để bậc hay gặp
  * ở hồ sơ xét tuyển nằm gần đầu danh sách.
  */
-const CERTIFICATE_LEVEL_FIELDS: { key: 'delf' | 'tcf' | 'jlpt' | 'hsk'; label: string; options: readonly string[] }[] = [
+const CERTIFICATE_LEVEL_FIELDS: { key: 'delf' | 'tcf' | 'jlpt' | 'hsk' | 'topik'; label: string; options: readonly string[] }[] = [
   { key: 'delf', label: 'DELF (tiếng Pháp)', options: [...CEFR_LEVELS].reverse() },
   { key: 'tcf', label: 'TCF (tiếng Pháp)', options: [...CEFR_LEVELS].reverse() },
   { key: 'jlpt', label: 'JLPT (tiếng Nhật)', options: [...JLPT_LEVELS].reverse() },
   { key: 'hsk', label: 'HSK (tiếng Trung)', options: [...HSK_LEVELS].reverse() },
+  { key: 'topik', label: 'TOPIK (tiếng Hàn)', options: [...TOPIK_LEVELS].reverse() },
 ];
 
 function parseScore(raw: string): number | undefined {
@@ -430,7 +431,7 @@ export function SharedProfileEditor({ profile, updateProfile, updateVactTotal }:
   }
 
   /** Chuỗi rỗng = "Không chọn" -> `undefined` (xoá khỏi hồ sơ), không lưu chuỗi rỗng. */
-  function commitCertificateLevel(key: 'delf' | 'tcf' | 'jlpt' | 'hsk', raw: string) {
+  function commitCertificateLevel(key: 'delf' | 'tcf' | 'jlpt' | 'hsk' | 'topik', raw: string) {
     updateProfile((current) => ({ ...current, certificates: { ...current.certificates, [key]: raw || undefined } }));
   }
 

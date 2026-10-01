@@ -1,4 +1,4 @@
-import type { ApplicantProfile } from '../../core/applicantProfile';
+import { HSK_LEVELS, TOPIK_LEVELS, isAtLeastLevel, type ApplicantProfile } from '../../core/applicantProfile';
 import type { SubjectId } from '../../core/subjects';
 
 /**
@@ -9,7 +9,7 @@ import type { SubjectId } from '../../core/subjects';
  *  - TOEFL iBT 85+ -> 10; 79-84 -> 9,5; 65-78 -> 9,0; 59-64 -> 8,5; 46-58 -> 8,0
  * TOEIC (bảng 4 kỹ năng L&R/S/W) KHÔNG dùng: hồ sơ chỉ có 1 điểm TOEIC tổng nên không đối chiếu được
  * điều kiện từng kỹ năng. Điều kiện hiệu lực chứng chỉ (cấp không quá 02 năm đến 31/08/2026) không kiểm
- * tra được vì hồ sơ không lưu ngày cấp. Ngoại ngữ Hàn/Trung (TOPIK/HSK) không có SubjectId.
+ * tra được vì hồ sơ không lưu ngày cấp. TOPIK/HSK xem `convertVaaKoreanChineseCertificate`.
  */
 function ieltsToEnglish(score: number): number | undefined {
   if (score >= 7) return 10;
@@ -53,4 +53,38 @@ export function applyVaaEnglishCertificate(
   const exam = scores.english;
   if (exam !== undefined && exam >= converted) return { scores, converted, used: false };
   return { scores: { ...scores, english: converted }, converted, used: true };
+}
+
+/**
+ * VAA 2026 — mục 2.5, bảng quy đổi TOPIK/HSK sang điểm môn Ngoại ngữ: Topik 4 / HSK 4 -> 10; Topik 3 / HSK 3 -> 8.
+ * Chỉ dùng cho ngành Ngôn ngữ Hàn Quốc (TOPIK) và Ngôn ngữ Trung Quốc (HSK). Bảng chỉ in cấp 3 và 4; cấp cao hơn 4
+ * được coi là 10 (tương đương trở lên), cấp dưới 3 không quy đổi.
+ */
+function levelToScore(atLeast4: boolean, atLeast3: boolean): number | undefined {
+  if (atLeast4) return 10;
+  if (atLeast3) return 8;
+  return undefined;
+}
+
+export function convertVaaKoreanChineseCertificate(
+  language: 'korean' | 'chinese',
+  certificates: ApplicantProfile['certificates']
+): number | undefined {
+  if (language === 'korean') {
+    return levelToScore(isAtLeastLevel(TOPIK_LEVELS, certificates?.topik, 'TOPIK4'), isAtLeastLevel(TOPIK_LEVELS, certificates?.topik, 'TOPIK3'));
+  }
+  return levelToScore(isAtLeastLevel(HSK_LEVELS, certificates?.hsk, 'HSK4'), isAtLeastLevel(HSK_LEVELS, certificates?.hsk, 'HSK3'));
+}
+
+/** Thêm điểm quy đổi TOPIK/HSK cho môn Tiếng Hàn/Tiếng Trung (lấy điểm cao hơn điểm thi hoặc khi chưa có điểm thi). */
+export function applyVaaKoreanChineseCertificate(
+  scores: Partial<Record<SubjectId, number>>,
+  language: 'korean' | 'chinese',
+  certificates: ApplicantProfile['certificates']
+): { scores: Partial<Record<SubjectId, number>>; converted?: number; used: boolean } {
+  const converted = convertVaaKoreanChineseCertificate(language, certificates);
+  if (converted === undefined) return { scores, used: false };
+  const exam = scores[language];
+  if (exam !== undefined && exam >= converted) return { scores, converted, used: false };
+  return { scores: { ...scores, [language]: converted }, converted, used: true };
 }
