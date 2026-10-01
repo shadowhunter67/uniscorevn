@@ -35,3 +35,5 @@ npm run stats:coverage
 ## Compatibility
 
 Preserve existing localStorage migration chains and shared profile semantics. Missing input must remain missing/`undefined`, not coerced to `0`, except inside calculator-specific tolerant form boundaries.
+
+- 2026-10-01: dùng `npx tsx scripts/_tmp_list.ts` (tsx tải tạm vào npx cache, KHÔNG thêm vào package.json) để liệt kê trường theo `deriveInstitutionSupportStatus`; script tạm đã xoá sau khi chạy. Cần danh sách thật các trường chưa exact thì làm lại cách này vì `docs/school-status.md` từng lệch (VD VNU-LS đã exact nhưng docs vẫn ghi "chỉ kiểm tra điều kiện").
