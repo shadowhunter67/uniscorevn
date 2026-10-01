@@ -16,6 +16,12 @@ export type SubjectId =
   | 'informatics'
   | 'technology'
   | 'civic-economic-law'
+  /** Ngoại ngữ khác Tiếng Anh — thêm 2026-10-01 để mô hình hoá tổ hợp Tiếng Nhật (VJU, NTU), Tiếng Pháp
+   * (NTU, VNU-Luật) và môn ngoại ngữ của ngành Hàn/Trung (VAA). */
+  | 'japanese'
+  | 'french'
+  | 'korean'
+  | 'chinese'
   | 'other';
 
 export interface SubjectCombination {
@@ -162,6 +168,19 @@ export const COMMON_SUBJECT_COMBINATIONS: readonly SubjectCombination[] = [
    * Kỹ thuật điều khiển và Tự động hóa dùng tổ hợp Toán/Vật lý/Lịch sử, chú giải "A03 (Toán, Vật lý,
    * Lịch sử)" đọc trực tiếp từ bảng chú giải mã tổ hợp chính thức, xem `schools/vnkgu/thresholds.ts`). */
   { id: 'A03', subjects: ['math', 'physics', 'history'] },
+  /** D06/D28/D23/D33/D18/D43/D53/D63/X98 — thêm 2026-10-01 khi bổ sung môn Tiếng Nhật cho VJU (mục 3.6
+   * "Tổ hợp môn xét tuyển theo mã tổ hợp" của Thông tin tuyển sinh 2026, xem `schools/vnuvju/sources.ts`).
+   * D03 (Toán, Ngữ văn, Tiếng Pháp) — thêm cùng đợt, nguồn VNU-Luật 2026 (`schools/vnulaw`). */
+  { id: 'D06', subjects: ['math', 'literature', 'japanese'] },
+  { id: 'D28', subjects: ['math', 'physics', 'japanese'] },
+  { id: 'D23', subjects: ['math', 'chemistry', 'japanese'] },
+  { id: 'D33', subjects: ['math', 'biology', 'japanese'] },
+  { id: 'D18', subjects: ['math', 'geography', 'japanese'] },
+  { id: 'D43', subjects: ['literature', 'geography', 'japanese'] },
+  { id: 'D53', subjects: ['literature', 'physics', 'japanese'] },
+  { id: 'D63', subjects: ['literature', 'history', 'japanese'] },
+  { id: 'X98', subjects: ['literature', 'civic-economic-law', 'japanese'] },
+  { id: 'D03', subjects: ['math', 'literature', 'french'] },
 ];
 
 /** Nhãn tiếng Việt — dùng ở bất kỳ trường nào cần hiển thị tên môn cho người dùng chọn. */
@@ -177,6 +196,10 @@ export const SUBJECT_LABELS: Record<SubjectId, string> = {
   informatics: 'Tin học',
   technology: 'Công nghệ',
   'civic-economic-law': 'Giáo dục Kinh tế và Pháp luật',
+  japanese: 'Tiếng Nhật',
+  french: 'Tiếng Pháp',
+  korean: 'Tiếng Hàn',
+  chinese: 'Tiếng Trung',
   other: 'Môn khác',
 };
 
@@ -192,5 +215,9 @@ export const SELECTABLE_SUBJECT_IDS: readonly SubjectId[] = [
   'informatics',
   'technology',
   'civic-economic-law',
+  'japanese',
+  'french',
+  'korean',
+  'chinese',
   'other',
 ];
