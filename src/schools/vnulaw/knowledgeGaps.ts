@@ -11,14 +11,6 @@ export const vnulawKnowledgeGaps: KnowledgeGap[] = [
     impact: 'Điểm ưu tiên hiển thị dùng khung quốc gia hiện hành cho bảng mức; công thức giảm dần đã được chính trường xác nhận.',
   },
   {
-    id: 'vnulaw-combinations-not-modeled',
-    label: 'VNU-Luật công bố 10 tổ hợp (A01, A07, C01, C02, C03, C04, D01, D03, D14, D15) — D03 (Toán, Văn, Tiếng Pháp) không có SubjectId tương ứng, loại.',
-    status: 'incomplete',
-    sourceId: 'vnulaw-admission-notice-2026',
-    scoreAffecting: false,
-    impact: 'Thí sinh xét tuyển bằng tổ hợp D03 chưa tính được qua UniScoreVN cho VNU-Luật.',
-  },
-  {
     id: 'vnulaw-other-methods-not-modeled',
     label:
       'VNU-Luật còn 3 phương thức khác: xét tuyển thẳng/ưu tiên theo quy chế Bộ GDĐT (mã 301), xét kết quả thi Đánh giá năng lực HSA của ĐHQGHN (mã 401), và xét tuyển dự bị đại học (mã 500); chỉ phương thức thi TN THPT (mã 100) được mô hình hoá.',

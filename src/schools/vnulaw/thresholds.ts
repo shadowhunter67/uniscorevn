@@ -4,8 +4,8 @@
  * chinhphu.vn, đăng lại thông báo chính thức VNU-Luật, 09/8/2026, `sources.ts:vnulaw-cutoff-2026`) —
  * "Điểm trúng tuyển đã bao gồm điểm ưu tiên theo đối tượng và khu vực".
  *
- * Tổ hợp: 9/10 tổ hợp trường công bố (A01, A07, C01, C02, C03, C04, D01, D14, D15) khớp hệ thống —
- * D03 (Toán, Văn, Tiếng Pháp) không có SubjectId tương ứng, loại.
+ * Tổ hợp: đủ 10/10 tổ hợp trường công bố (A01, A07, C01, C02, C03, C04, D01, D03, D14, D15); D03 (Toán,
+ * Văn, Tiếng Pháp) tính được từ khi hệ thống có SubjectId `french` (2026-10-01).
  */
 export interface VnulawFieldThreshold {
   code: string;
@@ -19,7 +19,7 @@ export const VNULAW_FIELD_THRESHOLDS_2026: readonly VnulawFieldThreshold[] = [
   { code: '7380109', name: 'Luật Thương mại quốc tế', threshold30: 24.5 },
 ] as const;
 
-export const VNULAW_ACCEPTED_COMBINATION_IDS: readonly string[] = ['A01', 'A07', 'C01', 'C02', 'C03', 'C04', 'D01', 'D14', 'D15'];
+export const VNULAW_ACCEPTED_COMBINATION_IDS: readonly string[] = ['A01', 'A07', 'C01', 'C02', 'C03', 'C04', 'D01', 'D03', 'D14', 'D15'];
 
 export type VnulawFieldCode = (typeof VNULAW_FIELD_THRESHOLDS_2026)[number]['code'];
 

@@ -17,13 +17,23 @@ describe('VNU-Luật exact THPT admission calculator 2026 (3/3 ngành, phương 
     expect(result.missingRequirements).toContainEqual(expect.objectContaining({ kind: 'school-context', code: 'vnulaw-field' }));
   });
 
-  it('rejects a subject combination not in the accepted list (D03 excluded)', () => {
-    const profile: ApplicantProfile = { thpt: { scores: { math: 8, literature: 8, english: 8 } } };
+  it('rejects a subject combination not in the accepted list (A00)', () => {
+    const profile: ApplicantProfile = { thpt: { scores: { math: 8, physics: 8, chemistry: 8 } } };
 
-    const result = evaluateVnulawThptExamAdmission(profile, { ...luat, subjectContext: { combinationId: 'D03', subjects: ['math', 'literature', 'english'] } });
+    const result = evaluateVnulawThptExamAdmission(profile, { ...luat, subjectContext: { combinationId: 'A00', subjects: ['math', 'physics', 'chemistry'] } });
 
     expect(result.confidence).toBe('partial');
     expect(result.missingRequirements).toContainEqual(expect.objectContaining({ kind: 'school-context', code: 'vnulaw-subject-combination' }));
+  });
+
+  it('accepts the French combination D03 (Toan, Van, Tieng Phap) now that the subject exists', () => {
+    const profile: ApplicantProfile = { thpt: { scores: { math: 9, literature: 8.5, french: 8 } }, priority: { region: 'KV3' } };
+
+    const result = evaluateVnulawThptExamAdmission(profile, { ...luat, subjectContext: { combinationId: 'D03', subjects: ['math', 'literature', 'french'] } });
+
+    expect(result.confidence).toBe('exact-verified');
+    expect(result.score?.value).toBe(25.5);
+    expect(result.eligibility?.status).toBe('eligible');
   });
 
   it('marks ineligible below the Luật 24,52/30 threshold', () => {
