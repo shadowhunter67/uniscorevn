@@ -92,6 +92,7 @@ import { bluAdmissionMethods } from '../schools/blu/methods';
 import { hcmunreAdmissionMethods } from '../schools/hcmunre/methods';
 import { vnuisAdmissionMethods } from '../schools/vnuis/methods';
 import { vnuhsbAdmissionMethods } from '../schools/vnuhsb/methods';
+import { vnuvjuAdmissionMethods } from '../schools/vnuvju/methods';
 import { dlaAdmissionMethods } from '../schools/dla/methods';
 import { mkuAdmissionMethods } from '../schools/mku/methods';
 import { mduAdmissionMethods } from '../schools/mdu/methods';
@@ -306,6 +307,7 @@ const methodDescriptorsBySchool: Record<string, readonly { id: string }[]> = {
   hcmunre: hcmunreAdmissionMethods,
   vnuis: vnuisAdmissionMethods,
   vnuhsb: vnuhsbAdmissionMethods,
+  vnuvju: vnuvjuAdmissionMethods,
   dla: dlaAdmissionMethods,
   mku: mkuAdmissionMethods,
   mdu: mduAdmissionMethods,

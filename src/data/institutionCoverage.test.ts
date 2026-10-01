@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 249,
       admissionDataAvailable: 249,
       eligibilitySupported: 5,
-      calculatorSupported: 192,
+      calculatorSupported: 193,
       partialCalculator: 1,
-      fullyVerified: 191,
+      fullyVerified: 192,
       catalogOnly: 106,
     });
   });
@@ -79,10 +79,9 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(52);
+    expect(researchedOnly).toBe(51);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
-      'vnuvju',
       'ntu', 'hueu',
       'udn',
       'uth', 'rmitvn', 'vinuni',
@@ -546,6 +545,12 @@ describe('institution coverage statistics', () => {
     // truoc do da bi tu bien so lieu hoan toan sai (nguong 15 khong khop nguon that) - da huy bo,
     // batch nay Claude tu viet truc tiep tu nguon da xac minh.
     expect(deriveInstitutionSupportStatus(schoolRegistry.vnuhsb)).toBe('verified-calculator');
+    // Batch (2026-10-01): VJU (Truong Dai hoc Viet Nhat - DHQGHN) nang tu researched len exact. Nguon
+    // ket hop CHINH THUC: thong bao tong hop diem chuan cua DHQGHN (vnu.edu.vn) + thong tin tuyen sinh
+    // chi tiet cua chinh VJU (muc 3.5 to hop, 3.3.3 'khong co do chenh lech diem chuan giua cac to
+    // hop'), du 9/9 chuong trinh. To hop co Tieng Nhat khong co SubjectId nen bi loai khoi
+    // combinationIds.
+    expect(deriveInstitutionSupportStatus(schoolRegistry.vnuvju)).toBe('verified-calculator');
   });
 
   it('requires catalog source metadata for college identity entries', () => {
