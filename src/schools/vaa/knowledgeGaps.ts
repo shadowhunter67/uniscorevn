@@ -4,11 +4,20 @@ export const vaaKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'vaa-bonus-points-not-modeled',
     label:
-      'VAA cộng điểm cho thí sinh đạt giải HSG/KHKT (mục 2.3: 3 / 1,5 / 1 / 0,5 điểm theo thang 30) và điểm trúng tuyển công bố "đã có điểm cộng, điểm quy đổi từ chứng chỉ ngoại ngữ" — điểm cộng và quy đổi chứng chỉ chưa mô hình hoá, mô hình chỉ tính trên điểm thi TN THPT thô + điểm ưu tiên.',
+      'VAA cộng điểm cho thí sinh đạt giải HSG/KHKT (mục 2.3: 3 / 1,5 / 1 / 0,5 điểm theo thang 30) và điểm trúng tuyển công bố "đã có điểm cộng" — điểm cộng giải thưởng chưa mô hình hoá (hồ sơ chưa có field giải thưởng), mô hình chỉ tính điểm thi TN THPT (kèm quy đổi IELTS/TOEFL iBT thay môn Tiếng Anh, `certificate.ts`) + điểm ưu tiên.',
     status: 'incomplete',
     sourceId: 'vaa-notice-2026',
     scoreAffecting: true,
-    impact: 'Thí sinh có giải thưởng hoặc chứng chỉ ngoại ngữ quy đổi sẽ thấy Điểm xét thấp hơn thực tế.',
+    impact: 'Thí sinh có giải thưởng HSG/KHKT sẽ thấy Điểm xét thấp hơn thực tế tối đa 3 điểm.',
+  },
+  {
+    id: 'vaa-certificate-conversion-limits',
+    label:
+      'Quy đổi chứng chỉ Tiếng Anh sang điểm môn Tiếng Anh (mục 2.5) chỉ làm cho IELTS và TOEFL iBT; TOEIC (bảng 4 kỹ năng L&R/S/W) không dùng vì hồ sơ chỉ có 1 điểm TOEIC tổng; hiệu lực chứng chỉ (cấp không quá 02 năm đến 31/08/2026) không kiểm tra được vì hồ sơ không lưu ngày cấp. TOEFL iBT dùng thang cũ của bảng VAA (46-120).',
+    status: 'incomplete',
+    sourceId: 'vaa-notice-2026',
+    scoreAffecting: true,
+    impact: 'Thí sinh có TOEIC hoặc chứng chỉ hết hạn có thể thấy kết quả khác thực tế.',
   },
   {
     id: 'vaa-foreign-language-subject-not-modeled',

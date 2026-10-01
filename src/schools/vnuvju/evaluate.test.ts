@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import type { ApplicantProfile } from '../../core/applicantProfile';
 import { evaluateVnuvjuThptExamAdmission } from './evaluate';
 import { VNUVJU_FIELD_THRESHOLDS_2026 } from './thresholds';
+import { convertVnuvjuEnglishCertificate } from './certificate';
 
 const baseProfile: ApplicantProfile = {
   thpt: { scores: { math: 6, literature: 6, english: 6.5 } },
@@ -62,5 +63,39 @@ describe('VJU THPT-exam admission evaluation', () => {
     expect(VNUVJU_FIELD_THRESHOLDS_2026).toHaveLength(9);
     expect(Math.min(...VNUVJU_FIELD_THRESHOLDS_2026.map((entry) => entry.threshold30))).toBe(20);
     expect(Math.max(...VNUVJU_FIELD_THRESHOLDS_2026.map((entry) => entry.threshold30))).toBe(21.25);
+  });
+});
+
+describe('VJU English certificate conversion (Phu luc I)', () => {
+  it('maps IELTS and TOEFL iBT to the official 10-point scale', () => {
+    expect(convertVnuvjuEnglishCertificate({ ielts: 5.5 })).toBe(8);
+    expect(convertVnuvjuEnglishCertificate({ ielts: 6 })).toBe(8.5);
+    expect(convertVnuvjuEnglishCertificate({ ielts: 7 })).toBe(9.5);
+    expect(convertVnuvjuEnglishCertificate({ ielts: 8 })).toBe(10);
+    expect(convertVnuvjuEnglishCertificate({ ielts: 5 })).toBeUndefined();
+    expect(convertVnuvjuEnglishCertificate({ toeflIbt: 72 })).toBe(8);
+    expect(convertVnuvjuEnglishCertificate({ toeflIbt: 88 })).toBe(9);
+    expect(convertVnuvjuEnglishCertificate({ toeflIbt: 102 })).toBe(10);
+    expect(convertVnuvjuEnglishCertificate({ toeflIbt: 71 })).toBeUndefined();
+  });
+
+  it('uses the converted English score in a combination with English when it is higher', () => {
+    const base: ApplicantProfile = { thpt: { scores: { math: 7, literature: 7, english: 5 } }, priority: { region: 'KV3' } };
+    const context = { fieldCode: 'VJU6', subjectContext: { combinationId: 'D01', subjects: ['math', 'literature', 'english'] as const } };
+    const without = evaluateVnuvjuThptExamAdmission(base, context);
+    const withCert = evaluateVnuvjuThptExamAdmission({ ...base, certificates: { ielts: 7 } }, context);
+
+    expect(without.score?.value).toBe(19);
+    expect(withCert.score?.value).toBe(23.5);
+  });
+
+  it('works when the English exam score is missing but a certificate exists', () => {
+    const profile: ApplicantProfile = { thpt: { scores: { math: 7, literature: 7 } }, certificates: { ielts: 6.5 } };
+    const result = evaluateVnuvjuThptExamAdmission(profile, {
+      fieldCode: 'VJU6',
+      subjectContext: { combinationId: 'D01', subjects: ['math', 'literature', 'english'] },
+    });
+
+    expect(result.score?.value).toBe(23);
   });
 });

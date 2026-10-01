@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import type { ApplicantProfile } from '../../core/applicantProfile';
 import { evaluateVaaThptExamAdmission } from './evaluate';
 import { VAA_FIELD_THRESHOLDS_2026 } from './thresholds';
+import { convertVaaEnglishCertificate } from './certificate';
 
 const strongProfile: ApplicantProfile = {
   thpt: { scores: { math: 9, literature: 8, english: 8, physics: 7, chemistry: 6 } },
@@ -75,5 +76,39 @@ describe('VAA THPT-exam admission evaluation 2026', () => {
     expect(new Set(VAA_FIELD_THRESHOLDS_2026.map((entry) => entry.code)).size).toBe(36);
     expect(Math.min(...VAA_FIELD_THRESHOLDS_2026.map((entry) => entry.threshold30))).toBe(18);
     expect(Math.max(...VAA_FIELD_THRESHOLDS_2026.map((entry) => entry.threshold30))).toBe(27.5);
+  });
+});
+
+describe('VAA English certificate conversion', () => {
+  it('maps IELTS and TOEFL iBT to the official 10-point English score and keeps the higher', () => {
+    expect(convertVaaEnglishCertificate({ ielts: 7 })).toBe(10);
+    expect(convertVaaEnglishCertificate({ ielts: 6.5 })).toBe(9.5);
+    expect(convertVaaEnglishCertificate({ ielts: 5 })).toBe(8);
+    expect(convertVaaEnglishCertificate({ ielts: 4.5 })).toBe(7.5);
+    expect(convertVaaEnglishCertificate({ ielts: 4 })).toBeUndefined();
+    expect(convertVaaEnglishCertificate({ toeflIbt: 85 })).toBe(10);
+    expect(convertVaaEnglishCertificate({ toeflIbt: 79 })).toBe(9.5);
+    expect(convertVaaEnglishCertificate({ toeflIbt: 46 })).toBe(8);
+    expect(convertVaaEnglishCertificate({ toeflIbt: 45 })).toBeUndefined();
+    expect(convertVaaEnglishCertificate({ ielts: 5.5, toeflIbt: 85 })).toBe(10);
+  });
+
+  it('replaces a lower English exam score with the converted certificate score', () => {
+    const base: ApplicantProfile = { thpt: { scores: { math: 8, literature: 8, english: 5 } }, priority: { region: 'KV3' } };
+    const without = evaluateVaaThptExamAdmission(base, { fieldCode: '7220201' });
+    const withCert = evaluateVaaThptExamAdmission({ ...base, certificates: { ielts: 7 } }, { fieldCode: '7220201' });
+
+    // TA02 = English x3 + Math x2 + best other(8): exam (15+16+8)/2 = 19.5; cert 10: (30+16+8)/2 = 27
+    expect(without.score?.value).toBe(19.5);
+    expect(withCert.score?.value).toBe(27);
+    expect(withCert.eligibility?.reasons.join(' ')).toContain('quy đổi chứng chỉ');
+  });
+
+  it('does not lower the English score when the exam score is higher', () => {
+    const profile: ApplicantProfile = { thpt: { scores: { math: 8, literature: 8, english: 10 } }, certificates: { ielts: 5 } };
+    const result = evaluateVaaThptExamAdmission(profile, { fieldCode: '7220201' });
+
+    // (30 + 16 + 8)/2 = 27
+    expect(result.score?.value).toBe(27);
   });
 });

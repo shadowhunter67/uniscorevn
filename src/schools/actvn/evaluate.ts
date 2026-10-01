@@ -7,6 +7,7 @@ import { round2 } from '../../core/round2';
 import { actvnAdmissionMethods } from './methods';
 import { ACTVN_FIELD_THRESHOLD_BY_CODE, type ActvnFieldThreshold } from './thresholds';
 import { lookupActvnStandardPriority30, calculateActvnEffectivePriority30 } from './priority';
+import { calculateActvnEnglishBonus } from './bonus';
 import { actvnExactFormulaEvidence, actvnFieldThresholdEvidence } from './evidence';
 
 export interface ActvnSubjectContext {
@@ -92,17 +93,21 @@ export function evaluateActvnThptExamAdmission(
   const raw30 = total30 as number;
 
   const standardPriority30 = lookupActvnStandardPriority30(profile.priority?.region, profile.priority?.category);
-  const priority = calculateActvnEffectivePriority30({ rawTotal30: raw30, standardPriority30 });
-  const finalScore = round2(Math.min(30, raw30 + priority.effectivePriority30));
+  const englishBonus = calculateActvnEnglishBonus(profile.certificates);
+  const withBonus30 = round2(Math.min(30, raw30 + englishBonus.bonus30));
+  const priority = calculateActvnEffectivePriority30({ rawTotal30: withBonus30, standardPriority30 });
+  const finalScore = round2(Math.min(30, withBonus30 + priority.effectivePriority30));
 
   const threshold30 = entry.threshold30;
   const eligible = finalScore >= threshold30;
   const status: 'eligible' | 'ineligible' = eligible ? 'eligible' : 'ineligible';
 
   const reasons: string[] = [
-    `Điểm trúng tuyển ${entry.name} (thi TN THPT 2026): tổng 3 môn + điểm ưu tiên KV/ĐT >= ${threshold30}/30 — tổng của bạn = ${finalScore}/30.`,
+    `Điểm trúng tuyển ${entry.name} (thi TN THPT 2026): tổng 3 môn + điểm cộng chứng chỉ Anh + điểm ưu tiên KV/ĐT >= ${threshold30}/30 — tổng của bạn = ${finalScore}/30.`,
     eligible ? 'Đạt/vượt điểm trúng tuyển đã công bố chính thức năm 2026.' : 'Chưa đạt điểm trúng tuyển đã công bố chính thức năm 2026.',
-    'Điểm chuẩn ACTVN đã gồm điểm cộng chứng chỉ tiếng Anh (+0,5/+1/+1,5) — mô hình chưa tính khoản này (xem phần giới hạn dữ liệu).',
+    englishBonus.bonus30 > 0
+      ? `Đã cộng ${englishBonus.bonus30} điểm chứng chỉ tiếng Anh (${englishBonus.source}); Học viện không cộng cho TOEFL iBT Home Edition — UniscoreVN không phân biệt được hình thức thi.`
+      : 'Chưa có chứng chỉ tiếng Anh đạt ngưỡng cộng điểm của Học viện (IELTS >= 5,5 / TOEIC >= 650 / TOEFL iBT >= 65) — Điểm xét không có điểm cộng.',
   ];
 
   explanation.push({
@@ -114,21 +119,29 @@ export function evaluateActvnThptExamAdmission(
     evidence: actvnExactFormulaEvidence.evidence,
   });
   explanation.push({
+    id: 'actvn-exact-bonus',
+    label: 'Điểm cộng chứng chỉ tiếng Anh',
+    output: englishBonus.bonus30,
+    scale: 30,
+    formula: 'IELTS 5,5-6,0 / TOEIC 650-749 / TOEFL iBT 65-79: +0,5; IELTS 6,5-7,0 / TOEIC 750-849 / TOEFL iBT 80-94: +1; IELTS >= 7,5 / TOEIC >= 850 / TOEFL iBT >= 95: +1,5',
+    evidence: actvnExactFormulaEvidence.evidence,
+  });
+  explanation.push({
     id: 'actvn-exact-priority',
     label: priority.reduced ? 'Điểm ưu tiên (đã giảm)' : 'Điểm ưu tiên',
     output: priority.effectivePriority30,
     scale: 30,
     formula: priority.reduced
-      ? '[(30 − tổng thô)/7,5] × Mức điểm ưu tiên KV/ĐT (khung quốc gia hiện hành, trường không tự công bố bảng riêng)'
+      ? '[(30 − điểm xét đã gồm điểm cộng)/7,5] × Mức điểm ưu tiên KV/ĐT (khung quốc gia hiện hành, trường không tự công bố bảng riêng)'
       : 'Mức điểm ưu tiên KV/ĐT (khung quốc gia hiện hành, trường không tự công bố bảng riêng)',
     evidence: actvnExactFormulaEvidence.evidence,
   });
   explanation.push({
     id: 'actvn-exact-final',
-    label: 'Điểm xét (đã cộng ưu tiên)',
+    label: 'Điểm xét (đã cộng điểm cộng và ưu tiên)',
     output: finalScore,
     scale: 30,
-    formula: 'Tổng thô 3 môn + Điểm ưu tiên',
+    formula: 'Tổng thô 3 môn + Điểm cộng chứng chỉ Anh + Điểm ưu tiên',
     evidence: actvnExactFormulaEvidence.evidence,
   });
   explanation.push({

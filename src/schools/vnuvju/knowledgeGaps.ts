@@ -11,13 +11,13 @@ export const vnuvjuKnowledgeGaps: KnowledgeGap[] = [
     impact: 'Thí sinh thi tổ hợp có Tiếng Nhật chưa tính được qua UniscoreVN cho VJU.',
   },
   {
-    id: 'vnuvju-foreign-language-conversion-not-modeled',
+    id: 'vnuvju-foreign-language-conversion-limits',
     label:
-      'VJU cho phép dùng chứng chỉ ngoại ngữ (IELTS/TOEFL/Vstep/JLPT) quy đổi thay điểm môn ngoại ngữ trong tổ hợp (Phụ lục I) — chưa mô hình hoá, mô hình chỉ tính trên điểm thi TN THPT thô.',
+      'Quy đổi chứng chỉ ngoại ngữ sang điểm môn ngoại ngữ (Phụ lục I) chỉ làm cho IELTS và TOEFL iBT thay môn Tiếng Anh (`certificate.ts`, lấy điểm cao hơn điểm thi); chưa làm Vstep và JLPT (thay môn Tiếng Nhật, hệ thống chưa có môn này); điều kiện chứng chỉ phải đủ 4 kỹ năng, còn hạn 02 năm, không thi online không kiểm tra được vì hồ sơ không lưu.',
     status: 'incomplete',
     sourceId: 'vnuvju-notice-2026',
-    scoreAffecting: false,
-    impact: 'Thí sinh xét bằng chứng chỉ ngoại ngữ quy đổi chưa tính được qua UniscoreVN.',
+    scoreAffecting: true,
+    impact: 'Thí sinh dùng Vstep/JLPT hoặc chứng chỉ không đủ điều kiện có thể thấy kết quả khác thực tế.',
   },
   {
     id: 'vnuvju-language-entry-condition-not-checked',

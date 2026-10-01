@@ -2,13 +2,13 @@ import type { KnowledgeGap } from '../../core/knowledgeStatus';
 
 export const actvnKnowledgeGaps: KnowledgeGap[] = [
   {
-    id: 'actvn-english-certificate-bonus-not-modeled',
+    id: 'actvn-toefl-home-edition-not-distinguished',
     label:
-      'ACTVN cộng điểm chứng chỉ tiếng Anh quốc tế (IELTS/TOEIC/TOEFL: +0,5 / +1 / +1,5, tối đa 3 điểm trên thang 30) và điểm chuẩn công bố "bao gồm điểm ưu tiên, điểm cộng (nếu có)" — điểm cộng chưa mô hình hoá, mô hình chỉ tính trên điểm thi TN THPT thô + điểm ưu tiên.',
+      'ACTVN cộng điểm chứng chỉ tiếng Anh (+0,5/+1/+1,5, `bonus.ts`) nhưng KHÔNG cộng cho TOEFL iBT Home Edition; hồ sơ UniscoreVN chỉ lưu điểm TOEFL iBT, không phân biệt hình thức thi nên thí sinh thi Home Edition sẽ thấy điểm cộng cao hơn thực tế. TOEIC dùng điểm tổng (Listening & Reading) trong hồ sơ.',
     status: 'incomplete',
     sourceId: 'actvn-notice-2026',
     scoreAffecting: true,
-    impact: 'Thí sinh có chứng chỉ tiếng Anh quy định sẽ thấy Điểm xét thấp hơn thực tế tối đa 1,5 điểm.',
+    impact: 'Thí sinh dùng TOEFL iBT Home Edition (không được cộng điểm) có thể thấy Điểm xét cao hơn thực tế tối đa 1,5 điểm.',
   },
   {
     id: 'actvn-priority-table-not-published',

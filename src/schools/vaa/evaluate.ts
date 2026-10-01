@@ -8,6 +8,7 @@ import { vaaAdmissionMethods } from './methods';
 import { VAA_FIELD_THRESHOLD_BY_CODE, type VaaComboGroup, type VaaFieldThreshold } from './thresholds';
 import { lookupVaaStandardPriority30, calculateVaaEffectivePriority30 } from './priority';
 import { vaaExactFormulaEvidence, vaaFieldThresholdEvidence } from './evidence';
+import { applyVaaEnglishCertificate } from './certificate';
 
 /**
  * Môn tự chọn của nhóm THXT lấy trong danh sách này (mục 4.1 thông tin tuyển sinh VAA 2026); VAA
@@ -120,7 +121,8 @@ export function evaluateVaaThptExamAdmission(profile: ApplicantProfile, context:
     return vaaPartial({ missingRequirements, reason: `Mã xét tuyển "${context.fieldCode}" không có trong bảng điểm trúng tuyển VAA 2026.` });
   }
 
-  const scores: Scores = profile.thpt?.scores ?? {};
+  const certificate = applyVaaEnglishCertificate(profile.thpt?.scores ?? {}, profile.certificates);
+  const scores: Scores = certificate.scores;
   const results = entry.groups.map((group) => evaluateGroup(group, scores)).filter((result): result is GroupResult => result !== undefined);
   if (results.length === 0) {
     missingRequirements.push({
@@ -145,7 +147,10 @@ export function evaluateVaaThptExamAdmission(profile: ApplicantProfile, context:
   const reasons: string[] = [
     `Điểm trúng tuyển ${entry.name} (Phương thức 1, thi TN THPT 2026): >= ${threshold30}/30 — Điểm xét của bạn = ${finalScore}/30 (nhóm ${best.group}).`,
     eligible ? 'Đạt/vượt điểm trúng tuyển đã công bố chính thức năm 2026.' : 'Chưa đạt điểm trúng tuyển đã công bố chính thức năm 2026.',
-    'Điểm trúng tuyển VAA đã gồm điểm cộng (giải thưởng) và quy đổi chứng chỉ ngoại ngữ — mô hình chưa tính hai khoản này; ngành Ngôn ngữ/học bằng Tiếng Anh còn có tiêu chí phụ ngoại ngữ chưa kiểm tra (xem phần giới hạn dữ liệu).',
+    certificate.used
+      ? `Môn Tiếng Anh dùng điểm quy đổi chứng chỉ (${certificate.converted}/10) vì cao hơn điểm thi (quy tắc "điểm nào cao hơn giữ lại" của VAA).`
+      : 'Môn Tiếng Anh dùng điểm thi TN THPT (không có chứng chỉ quy đổi cao hơn).',
+    'Điểm trúng tuyển VAA đã gồm điểm cộng giải thưởng — mô hình chưa tính khoản này; ngành Ngôn ngữ/học bằng Tiếng Anh còn có tiêu chí phụ ngoại ngữ chưa kiểm tra (xem phần giới hạn dữ liệu).',
   ];
 
   const subjectText = `${SUBJECT_LABELS[best.firstSubject]} x 3 + ${SUBJECT_LABELS[best.secondSubject]} x 2 + ${SUBJECT_LABELS[best.thirdSubject]}`;
