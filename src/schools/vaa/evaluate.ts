@@ -79,13 +79,14 @@ function evaluateGroup(group: VaaComboGroup, scores: Scores): GroupResult | unde
   return { group, raw30, firstSubject, secondSubject: spec.second, thirdSubject };
 }
 
-const VAA_METHOD = vaaAdmissionMethods[0];
+const VAA_THPT_METHOD = vaaAdmissionMethods[0];
+const VAA_TRANSCRIPT_METHOD = vaaAdmissionMethods[1];
 
-function vaaPartial(input: { missingRequirements?: MissingRequirement[]; reason: string }): AdmissionEvaluation {
+function vaaPartial(input: { method: typeof VAA_THPT_METHOD; missingRequirements?: MissingRequirement[]; reason: string }): AdmissionEvaluation {
   return {
     schoolId: 'vaa',
-    year: VAA_METHOD.year,
-    methodId: VAA_METHOD.id,
+    year: input.method.year,
+    methodId: input.method.id,
     confidence: 'partial',
     eligibility: { status: 'unknown', reasons: [input.reason] },
     missingInputs: [],
@@ -98,6 +99,20 @@ function vaaPartial(input: { missingRequirements?: MissingRequirement[]; reason:
 
 export interface VaaEvaluationContext {
   fieldCode?: string;
+  /** `vaa-thpt-exam-exact-2026` (mặc định) hoặc `vaa-transcript-exact-2026`. */
+  methodId?: string;
+}
+
+/** Điểm TB 03 năm (TB3N) của từng môn = (TB cả năm lớp 10 + lớp 11 + lớp 12)/3, chỉ khi đủ cả 3 năm. */
+function transcriptScores(profile: ApplicantProfile): Scores {
+  const result: Scores = {};
+  for (const subject of VAA_ELECTIVE_POOL) {
+    const g10 = profile.transcript?.grade10?.[subject];
+    const g11 = profile.transcript?.grade11?.[subject];
+    const g12 = profile.transcript?.grade12?.[subject];
+    if (g10 !== undefined && g11 !== undefined && g12 !== undefined) result[subject] = round2((g10 + g11 + g12) / 3);
+  }
+  return result;
 }
 
 /**
@@ -108,31 +123,43 @@ export interface VaaEvaluationContext {
  * có độ lệch giữa các tổ hợp). So với điểm trúng tuyển CHÍNH THỨC của mã xét tuyển (`thresholds.ts`).
  */
 export function evaluateVaaThptExamAdmission(profile: ApplicantProfile, context: VaaEvaluationContext = {}): AdmissionEvaluation {
+  return evaluateVaaAdmission(profile, { ...context, methodId: VAA_THPT_METHOD.id });
+}
+
+/** VAA 2026 — Phương thức 2 (học bạ): cùng công thức hệ số 3/2/1 nhưng dùng TB3N từng môn và điểm trúng tuyển học bạ. */
+export function evaluateVaaTranscriptAdmission(profile: ApplicantProfile, context: VaaEvaluationContext = {}): AdmissionEvaluation {
+  return evaluateVaaAdmission(profile, { ...context, methodId: VAA_TRANSCRIPT_METHOD.id });
+}
+
+export function evaluateVaaAdmission(profile: ApplicantProfile, context: VaaEvaluationContext = {}): AdmissionEvaluation {
+  const transcript = context.methodId === VAA_TRANSCRIPT_METHOD.id;
+  const method = transcript ? VAA_TRANSCRIPT_METHOD : VAA_THPT_METHOD;
+  const modeLabel = transcript ? 'học bạ' : 'thi TN THPT';
   const explanation: CalculationStep[] = [];
   const missingRequirements: MissingRequirement[] = [];
 
   if (!context.fieldCode) {
     missingRequirements.push({ kind: 'school-context', code: 'vaa-field', label: 'Chọn mã xét tuyển VAA để tra điểm trúng tuyển và tính Điểm xét.' });
-    return vaaPartial({ missingRequirements, reason: 'Cần chọn mã xét tuyển VAA để áp điểm trúng tuyển và tính Điểm xét.' });
+    return vaaPartial({ method, missingRequirements, reason: 'Cần chọn mã xét tuyển VAA để áp điểm trúng tuyển và tính Điểm xét.' });
   }
   const entry: VaaFieldThreshold | undefined = VAA_FIELD_THRESHOLD_BY_CODE.get(context.fieldCode);
   if (!entry) {
     missingRequirements.push({ kind: 'school-context', code: 'vaa-field', label: `Mã xét tuyển "${context.fieldCode}" không có trong bảng điểm trúng tuyển VAA 2026.` });
-    return vaaPartial({ missingRequirements, reason: `Mã xét tuyển "${context.fieldCode}" không có trong bảng điểm trúng tuyển VAA 2026.` });
+    return vaaPartial({ method, missingRequirements, reason: `Mã xét tuyển "${context.fieldCode}" không có trong bảng điểm trúng tuyển VAA 2026.` });
   }
 
-  const certificate = applyVaaEnglishCertificate(profile.thpt?.scores ?? {}, profile.certificates);
+  const certificate = applyVaaEnglishCertificate(transcript ? transcriptScores(profile) : (profile.thpt?.scores ?? {}), profile.certificates);
   const scores: Scores = certificate.scores;
   const results = entry.groups.map((group) => evaluateGroup(group, scores)).filter((result): result is GroupResult => result !== undefined);
   if (results.length === 0) {
     missingRequirements.push({
       kind: 'profile-input',
-      code: 'vaa-thpt-scores',
-      label: `Điểm thi TN THPT đủ cho nhóm tổ hợp của ${entry.name} (${entry.groups.join('/')}): ${entry.groups
+      code: transcript ? 'vaa-transcript-scores' : 'vaa-thpt-scores',
+      label: `${transcript ? 'Điểm TB cả năm lớp 10, 11 và 12 (đủ cả 3 năm)' : 'Điểm thi TN THPT'} đủ cho nhóm tổ hợp của ${entry.name} (${entry.groups.join('/')}): ${entry.groups
         .map((group) => groupRequirementText(group))
         .join('; hoặc ')}.`,
     });
-    return vaaPartial({ missingRequirements, reason: `Cần đủ điểm thi TN THPT theo nhóm tổ hợp của ${entry.name} để tính Điểm xét VAA.` });
+    return vaaPartial({ method, missingRequirements, reason: `Cần đủ điểm ${transcript ? 'học bạ 3 năm' : 'thi TN THPT'} theo nhóm tổ hợp của ${entry.name} để tính Điểm xét VAA.` });
   }
   const best = results.reduce((a, b) => (b.raw30 > a.raw30 ? b : a));
 
@@ -140,16 +167,16 @@ export function evaluateVaaThptExamAdmission(profile: ApplicantProfile, context:
   const priority = calculateVaaEffectivePriority30({ rawTotal30: best.raw30, standardPriority30 });
   const finalScore = round2(Math.min(30, best.raw30 + priority.effectivePriority30));
 
-  const threshold30 = entry.threshold30;
+  const threshold30 = transcript ? entry.transcriptThreshold30 : entry.threshold30;
   const eligible = finalScore >= threshold30;
   const status: 'eligible' | 'ineligible' = eligible ? 'eligible' : 'ineligible';
 
   const reasons: string[] = [
-    `Điểm trúng tuyển ${entry.name} (Phương thức 1, thi TN THPT 2026): >= ${threshold30}/30 — Điểm xét của bạn = ${finalScore}/30 (nhóm ${best.group}).`,
+    `Điểm trúng tuyển ${entry.name} (Phương thức ${transcript ? '2, học bạ' : '1, thi TN THPT'} 2026): >= ${threshold30}/30 — Điểm xét của bạn = ${finalScore}/30 (nhóm ${best.group}).`,
     eligible ? 'Đạt/vượt điểm trúng tuyển đã công bố chính thức năm 2026.' : 'Chưa đạt điểm trúng tuyển đã công bố chính thức năm 2026.',
     certificate.used
       ? `Môn Tiếng Anh dùng điểm quy đổi chứng chỉ (${certificate.converted}/10) vì cao hơn điểm thi (quy tắc "điểm nào cao hơn giữ lại" của VAA).`
-      : 'Môn Tiếng Anh dùng điểm thi TN THPT (không có chứng chỉ quy đổi cao hơn).',
+      : `Môn Tiếng Anh dùng điểm ${modeLabel} (không có chứng chỉ quy đổi cao hơn).`,
     'Điểm trúng tuyển VAA đã gồm điểm cộng giải thưởng — mô hình chưa tính khoản này; ngành Ngôn ngữ/học bằng Tiếng Anh còn có tiêu chí phụ ngoại ngữ chưa kiểm tra (xem phần giới hạn dữ liệu).',
   ];
 
@@ -199,8 +226,8 @@ export function evaluateVaaThptExamAdmission(profile: ApplicantProfile, context:
 
   return {
     schoolId: 'vaa',
-    year: VAA_METHOD.year,
-    methodId: VAA_METHOD.id,
+    year: method.year,
+    methodId: method.id,
     confidence: 'exact-verified',
     eligibility: { status, reasons },
     score: { value: finalScore, scale: 30 },

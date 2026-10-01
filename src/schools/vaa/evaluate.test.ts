@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { ApplicantProfile } from '../../core/applicantProfile';
-import { evaluateVaaThptExamAdmission } from './evaluate';
+import { evaluateVaaThptExamAdmission, evaluateVaaTranscriptAdmission } from './evaluate';
 import { VAA_FIELD_THRESHOLDS_2026 } from './thresholds';
 import { convertVaaEnglishCertificate } from './certificate';
 
@@ -110,5 +110,68 @@ describe('VAA English certificate conversion', () => {
 
     // (30 + 16 + 8)/2 = 27
     expect(result.score?.value).toBe(27);
+  });
+});
+
+describe('VAA transcript (hoc ba) method 2026', () => {
+  const transcriptProfile: ApplicantProfile = {
+    transcript: {
+      grade10: { math: 8, literature: 7, english: 7, physics: 6 },
+      grade11: { math: 8.5, literature: 7.5, english: 7.5, physics: 6.5 },
+      grade12: { math: 9, literature: 8, english: 8, physics: 7 },
+    },
+    priority: { region: 'KV3' },
+  };
+
+  it('uses TB3N per subject with the same 3/2/1 weights and the transcript cutoff', () => {
+    // TB3N: math 8.5, literature 7.5, english 7.5, physics 6.5. 7480201S (DT02, hoc ba cutoff 21):
+    // best of pool without math = 7.5 (literature or english), second = 7.5 -> (7.5*3 + 8.5*2 + 7.5)/2 = 23.5
+    const result = evaluateVaaTranscriptAdmission(transcriptProfile, { fieldCode: '7480201S' });
+
+    expect(result.confidence).toBe('exact-verified');
+    expect(result.methodId).toBe('vaa-transcript-exact-2026');
+    expect(result.score?.value).toBe(23.5);
+    expect(result.eligibility?.status).toBe('eligible');
+  });
+
+  it('compares against the transcript cutoff, not the exam cutoff (7340120: exam 24, transcript 25.5)', () => {
+    // TB3N: DT01 = best(math 8.5)*3 + literature 7.5*2 + second best(7.5) = (25.5 + 15 + 7.5)/2 = 24
+    const result = evaluateVaaTranscriptAdmission(transcriptProfile, { fieldCode: '7340120' });
+
+    // 24 would meet the exam cutoff (24) but not the transcript cutoff (25.5)
+    expect(result.score?.value).toBe(24);
+    expect(result.eligibility?.status).toBe('ineligible');
+    expect(result.eligibility?.reasons[0]).toContain('25.5');
+  });
+
+  it('needs all three school years for a subject and is partial otherwise', () => {
+    const partial: ApplicantProfile = { transcript: { grade10: { math: 8 }, grade11: { math: 8 }, grade12: { math: 8, literature: 8 } } };
+    const result = evaluateVaaTranscriptAdmission(partial, { fieldCode: '7480201S' });
+
+    expect(result.confidence).toBe('partial');
+    expect(result.missingRequirements?.map((item) => item.code)).toContain('vaa-transcript-scores');
+  });
+
+  it('applies the English certificate conversion to the transcript English score too', () => {
+    const lowEnglish: ApplicantProfile = {
+      transcript: {
+        grade10: { math: 8, literature: 8, english: 5 },
+        grade11: { math: 8, literature: 8, english: 5 },
+        grade12: { math: 8, literature: 8, english: 5 },
+      },
+      priority: { region: 'KV3' },
+    };
+    const without = evaluateVaaTranscriptAdmission(lowEnglish, { fieldCode: '7220201' });
+    const withCert = evaluateVaaTranscriptAdmission({ ...lowEnglish, certificates: { ielts: 7 } }, { fieldCode: '7220201' });
+
+    // TA02 = English x3 + Math x2 + best other(8): (15 + 16 + 8)/2 = 19.5 vs (30 + 16 + 8)/2 = 27
+    expect(without.score?.value).toBe(19.5);
+    expect(withCert.score?.value).toBe(27);
+  });
+
+  it('every code has a transcript cutoff at least equal to its exam cutoff', () => {
+    for (const entry of VAA_FIELD_THRESHOLDS_2026) {
+      expect(entry.transcriptThreshold30, entry.code).toBeGreaterThanOrEqual(entry.threshold30);
+    }
   });
 });

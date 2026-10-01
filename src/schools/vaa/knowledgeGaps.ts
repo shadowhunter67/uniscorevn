@@ -38,9 +38,18 @@ export const vaaKnowledgeGaps: KnowledgeGap[] = [
     impact: 'Kết quả "đạt điểm trúng tuyển" chưa bao gồm điều kiện ngoại ngữ phụ của các ngành này.',
   },
   {
+    id: 'vaa-transcript-source-condition-not-checked',
+    label:
+      'Để xét học bạ (Phương thức 2), thí sinh phải đạt điều kiện nguồn tuyển (mục 2.1): tổng điểm 3 môn thi TN THPT 2026 theo tổ hợp xét học bạ >= 15,0/30 HOẶC điểm thi Toán, Ngữ văn và một môn tự chọn >= 15 (không dùng điểm quy đổi chứng chỉ; không áp dụng cho thí sinh tự do tốt nghiệp trước 2026, đặc cách, xét thẳng) — UniscoreVN không kiểm tra điều kiện này ở phương thức học bạ, chỉ so điểm học bạ với điểm trúng tuyển.',
+    status: 'incomplete',
+    sourceId: 'vaa-notice-2026',
+    scoreAffecting: false,
+    impact: 'Kết quả "đạt điểm trúng tuyển học bạ" chưa bao gồm điều kiện điểm thi TN THPT tối thiểu 15/30.',
+  },
+  {
     id: 'vaa-other-methods-not-modeled',
     label:
-      'VAA còn xét tuyển bằng học bạ (cùng công thức hệ số 3/2/1, nhưng dùng điểm TB 3 năm và điểm trúng tuyển riêng), điểm ĐGNL ĐHQG-HCM/Hà Nội, SAT/ACT/IB và xét tuyển thẳng; chỉ phương thức thi TN THPT (PT1) được mô hình hoá.',
+      'VAA còn xét điểm ĐGNL ĐHQG-HCM/Hà Nội, SAT/ACT/IB và xét tuyển thẳng; chỉ phương thức thi TN THPT (PT1) và học bạ (PT2) được mô hình hoá.',
     status: 'official-but-unparsed',
     sourceId: 'vaa-notice-2026',
   },
