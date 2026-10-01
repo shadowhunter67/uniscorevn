@@ -67,9 +67,9 @@ describe('institution coverage statistics', () => {
       researched: 249,
       admissionDataAvailable: 249,
       eligibilitySupported: 4,
-      calculatorSupported: 194,
+      calculatorSupported: 195,
       partialCalculator: 1,
-      fullyVerified: 193,
+      fullyVerified: 194,
       catalogOnly: 106,
     });
   });
@@ -79,7 +79,7 @@ describe('institution coverage statistics', () => {
     const researchedOnly = summary.admissionDataAvailable - summary.eligibilitySupported - summary.partialCalculator - summary.fullyVerified;
 
     expect(summary.researched).toBe(summary.admissionDataAvailable);
-    expect(researchedOnly).toBe(51);
+    expect(researchedOnly).toBe(50);
     expect(deriveInstitutionSupportStatus(schoolRegistry.uah), 'uah').toBe('verified-calculator');
     for (const schoolId of [
       'ntu', 'hueu',
@@ -556,6 +556,11 @@ describe('institution coverage statistics', () => {
     // tuyen, cong thuc (mon1 x3 + mon2 x2 + mon3)/2 + uu tien theo nhom THXT TA01/TA02/DT01/DT02. Diem cong
     // giai thuong va quy doi chung chi ngoai ngu khong mo hinh hoa (knowledgeGaps).
     expect(deriveInstitutionSupportStatus(schoolRegistry.vaa)).toBe('verified-calculator');
+    // Batch (2026-10-01): ACTVN (Hoc vien Ky thuat Mat ma) nang tu researched len exact. Nguon CHINH THUC:
+    // Quyet dinh 44/QD-HDTS ngay 13/08/2026 (diem chuan 4 ma xet tuyen, doc bang vision tu anh scan) +
+    // Thong bao tuyen sinh 2026 (to hop, he so 1, khong chenh lech giua cac to hop). Diem cong chung chi
+    // tieng Anh khong mo hinh hoa (knowledgeGaps).
+    expect(deriveInstitutionSupportStatus(schoolRegistry.actvn)).toBe('verified-calculator');
   });
 
   it('requires catalog source metadata for college identity entries', () => {
