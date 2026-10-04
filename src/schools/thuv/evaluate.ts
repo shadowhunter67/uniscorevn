@@ -25,9 +25,10 @@ export function evaluateThuvAdmission(profile: ApplicantProfile, context: Thresh
 const THUV_EXACT_METHOD = thuvAdmissionMethods[1];
 const THUV_THPT_EXAM_CUTOFF_30 = 18;
 
-/** 6 tổ hợp chung cho cả 4 ngành THUV, nằm trong taxonomy môn học hiện có. Xem
- * `knowledgeGaps.ts:thuv-combination-scope-not-full` cho các tổ hợp riêng từng ngành chưa model. */
-const THUV_MODELED_COMBINATION_IDS = new Set(['A00', 'A01', 'A02', 'B00', 'B08', 'D07']);
+/** 7 tổ hợp chung cho CẢ 4 ngành THUV (giao của các ngành, bảng mục 2.2 `sources.ts:thuv-admission-info-2026`):
+ * thêm D23 (Toán, Hóa, Tiếng Nhật) từ 2026-10-04 vì D23 có trong cả 4 ngành; D28 và D33 vắng ở 1 ngành nên KHÔNG
+ * thêm (module không chọn ngành). Xem `knowledgeGaps.ts:thuv-combination-scope-not-full`. */
+const THUV_MODELED_COMBINATION_IDS = new Set(['A00', 'A01', 'A02', 'B00', 'B08', 'D07', 'D23']);
 
 export interface ThuvThptExamExactEvaluationContext {
   subjectContext?: { combinationId?: string; subjects: readonly SubjectId[] };
@@ -66,7 +67,7 @@ export function evaluateThuvThptExamExactAdmission(
     missingRequirements.push({
       kind: 'school-context',
       code: 'thuv-combination-out-of-scope',
-      label: 'Tổ hợp đã chọn chưa được UniscoreVN model cho THUV (chỉ hỗ trợ A00/A01/A02/B00/B08/D07).',
+      label: 'Tổ hợp đã chọn chưa được UniscoreVN model cho THUV (chỉ hỗ trợ A00/A01/A02/B00/B08/D07/D23).',
     });
     return partial('Tổ hợp đã chọn nằm ngoài phạm vi UniscoreVN đã model cho THUV.');
   }

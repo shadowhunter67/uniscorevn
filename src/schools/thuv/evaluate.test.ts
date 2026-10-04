@@ -82,3 +82,25 @@ describe('evaluateThuvThptExamExactAdmission (PT2 — ĐXT = tổng thô + ưu t
     expect(r.methodId).toBe('thuv-thpt-exam-exact-2026');
   });
 });
+
+describe('THUV Japanese combination D23', () => {
+  it('computes D23 (Toan, Hoa, Tieng Nhat), common to all four programs', () => {
+    const result = evaluateThuvThptExamExactAdmission(
+      { thpt: { scores: { math: 6, chemistry: 6, japanese: 6 } }, priority: { region: 'KV3' } },
+      { subjectContext: { combinationId: 'D23', subjects: ['math', 'chemistry', 'japanese'] } }
+    );
+
+    expect(result.confidence).toBe('exact-verified');
+    expect(result.score?.value).toBe(18);
+    expect(result.eligibility?.status).toBe('eligible');
+  });
+
+  it('still rejects D28 which is not common to all four programs', () => {
+    const result = evaluateThuvThptExamExactAdmission(
+      { thpt: { scores: { math: 6, physics: 6, japanese: 6 } } },
+      { subjectContext: { combinationId: 'D28', subjects: ['math', 'physics', 'japanese'] } }
+    );
+
+    expect(result.confidence).toBe('partial');
+  });
+});
