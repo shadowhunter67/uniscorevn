@@ -111,3 +111,37 @@ describe('UKH exact THPT admission calculator 2026 (theo ngành)', () => {
     expect(evaluateSchools(profile, ['ukh'], { ukh: context })[0].status).toBe('calculated');
   });
 });
+
+describe('UKH Chinese-language combinations', () => {
+  it('computes D04, D45 and D65 for Ngon ngu Trung Quoc', () => {
+    const cases = [
+      { combinationId: 'D04', subjects: ['math', 'literature', 'chinese'] as const, scores: { math: 7, literature: 7, chinese: 7 } },
+      { combinationId: 'D45', subjects: ['literature', 'geography', 'chinese'] as const, scores: { literature: 7, geography: 7, chinese: 7 } },
+      { combinationId: 'D65', subjects: ['literature', 'history', 'chinese'] as const, scores: { literature: 7, history: 7, chinese: 7 } },
+    ];
+    for (const item of cases) {
+      const result = evaluateUkhThptExamAdmission(
+        { thpt: { scores: item.scores }, priority: { region: 'KV3' } },
+        { fieldCode: '7220204', subjectContext: { combinationId: item.combinationId, subjects: item.subjects } }
+      );
+
+      expect(result.confidence, item.combinationId).toBe('exact-verified');
+      expect(result.score?.value, item.combinationId).toBe(21);
+      expect(result.eligibility?.status, item.combinationId).toBe('eligible');
+    }
+  });
+
+  it('accepts D65 for Van hoc hoc but not D04', () => {
+    const d65 = evaluateUkhThptExamAdmission(
+      { thpt: { scores: { literature: 7, history: 7, chinese: 7 } } },
+      { fieldCode: '7229040', subjectContext: { combinationId: 'D65', subjects: ['literature', 'history', 'chinese'] } }
+    );
+    const d04 = evaluateUkhThptExamAdmission(
+      { thpt: { scores: { math: 7, literature: 7, chinese: 7 } } },
+      { fieldCode: '7229040', subjectContext: { combinationId: 'D04', subjects: ['math', 'literature', 'chinese'] } }
+    );
+
+    expect(d65.confidence).toBe('exact-verified');
+    expect(d04.confidence).toBe('partial');
+  });
+});
