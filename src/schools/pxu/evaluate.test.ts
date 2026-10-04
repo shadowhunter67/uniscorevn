@@ -80,3 +80,41 @@ describe('PXU transcript exact eligibility 2026 (pxu-transcript-exact-2026)', ()
     expect(result.missingRequirements?.some((r) => r.code === 'pxu-transcript-math')).toBe(true);
   });
 });
+
+describe('PXU Chinese-language combinations', () => {
+  it('computes D04 for Ngon ngu Trung Quoc and X37 for Quan tri kinh doanh', () => {
+    const d04 = evaluatePxuThptExamAdmission(
+      { thpt: { scores: { math: 6, literature: 6, chinese: 6 } }, priority: { region: 'KV3' } },
+      { programCode: 'nntq', subjectContext: { combinationId: 'D04', subjects: ['math', 'literature', 'chinese'] } }
+    );
+    const x37 = evaluatePxuThptExamAdmission(
+      { thpt: { scores: { math: 6, 'civic-economic-law': 6, chinese: 6 } }, priority: { region: 'KV3' } },
+      { programCode: 'qtkd', subjectContext: { combinationId: 'X37', subjects: ['math', 'civic-economic-law', 'chinese'] } }
+    );
+
+    expect(d04.confidence).toBe('exact-verified');
+    expect(d04.score?.value).toBe(18);
+    expect(d04.eligibility?.status).toBe('eligible');
+    expect(x37.confidence).toBe('exact-verified');
+    expect(x37.score?.value).toBe(18);
+  });
+
+  it('accepts D45/D65 for the five programs that list them and rejects them elsewhere', () => {
+    const profileD65 = { thpt: { scores: { literature: 6, history: 6, chinese: 6 } }, priority: { region: 'KV3' } };
+    const d65 = { combinationId: 'D65', subjects: ['literature', 'history', 'chinese'] as const };
+    for (const programCode of ['qtkd', 'nntq', 'qtdl', 'qlcn', 'ttdpt']) {
+      expect(evaluatePxuThptExamAdmission(profileD65, { programCode, subjectContext: d65 }).confidence, programCode).toBe('exact-verified');
+    }
+    for (const programCode of ['cntt', 'nna', 'cnkt-oto']) {
+      expect(evaluatePxuThptExamAdmission(profileD65, { programCode, subjectContext: d65 }).confidence, programCode).toBe('partial');
+    }
+  });
+
+  it('D04 is only for Ngon ngu Trung Quoc and Quan tri dich vu Du lich', () => {
+    const profile = { thpt: { scores: { math: 6, literature: 6, chinese: 6 } }, priority: { region: 'KV3' } };
+    const d04 = { combinationId: 'D04', subjects: ['math', 'literature', 'chinese'] as const };
+
+    expect(evaluatePxuThptExamAdmission(profile, { programCode: 'qtdl', subjectContext: d04 }).confidence).toBe('exact-verified');
+    expect(evaluatePxuThptExamAdmission(profile, { programCode: 'qtkd', subjectContext: d04 }).confidence).toBe('partial');
+  });
+});

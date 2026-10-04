@@ -16,15 +16,6 @@ export const pxuKnowledgeGaps: KnowledgeGap[] = [
     impact: 'Thí sinh có thành tích thuộc 1 trong 3 nhóm trên sẽ có Điểm xét tuyển thực tế CAO HƠN kết quả UniscoreVN tính hiện tại (chỉ thiếu điểm cộng, không sai điểm thô/điểm ưu tiên).',
   },
   {
-    id: 'pxu-chinese-combination-not-modeled',
-    label:
-      'Số 041/TB-PXU liệt kê 4 tổ hợp có môn Tiếng Trung Quốc (D04: Toán-Văn-Trung; D45: Văn-Địa-Trung; D65: Văn-Sử-Trung; X37: Toán-GDKTPL-Trung) cho các ngành Quản trị kinh doanh, Ngôn ngữ Trung Quốc, Quản trị dịch vụ Du lịch và Lữ hành, Quản lý công nghiệp, Truyền thông đa phương tiện. `core/subjects.ts` (dùng chung toàn hệ thống) hiện KHÔNG có subject id cho "Tiếng Trung Quốc" nên 4 tổ hợp này không mô hình hoá được ở batch này — `thresholds.ts` chỉ liệt kê tổ hợp KHÔNG dùng Tiếng Trung cho mỗi ngành (mọi ngành đều còn ít nhất 1 tổ hợp hợp lệ khác).',
-    status: 'incomplete',
-    sourceId: 'pxu-thongbao-041-2026',
-    scoreAffecting: false,
-    impact: 'Thí sinh muốn xét tuyển bằng tổ hợp có môn Tiếng Trung (đặc biệt ngành Ngôn ngữ Trung Quốc) chưa tính được qua UniscoreVN cho PXU — vẫn còn tổ hợp khác hợp lệ để chọn.',
-  },
-  {
     id: 'pxu-other-methods-not-modeled',
     label:
       'PXU 2026 có 5 phương thức tuyển sinh (Số 041/TB-PXU mục II.2): PT1 (thi TN THPT), PT2 (học bạ + phỏng vấn), PT3 (thi TN THPT/học bạ kết hợp chứng chỉ ngoại ngữ), PT4 (điểm ĐGNL ĐHQG Hà Nội/TP.HCM), PT5 (xét tuyển thẳng theo quy chế Bộ GD&ĐT). Module này CHỈ mô hình hoá PT1 và PT2 — PT3 cần bảng quy đổi chứng chỉ ngoại ngữ (đã đọc, Phụ lục 1.1/1.2, nhưng workflow riêng biệt CHƯA implement); PT4 cần bảng quy đổi điểm ĐGNL riêng của ĐHQG (không phải PXU công bố); PT5 là tuyển thẳng, không có công thức tính điểm.',

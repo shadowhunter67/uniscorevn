@@ -24,12 +24,11 @@ export interface PxuProgram {
   /** Tên ngành/chuyên ngành đúng nguyên văn bảng II.4. */
   name: string;
   /**
-   * Tổ hợp môn xét tuyển ĐÃ mô hình hoá được trong `core/subjects.ts` — là TẬP CON của tổ hợp
-   * chính thức trường công bố. Các tổ hợp có môn Tiếng Trung Quốc (D04, D45, D65, X37) BỊ LOẠI vì
-   * `core/subjects.ts` chưa có subject id cho "Tiếng Trung Quốc" (xem `knowledgeGaps.ts:
-   * pxu-chinese-combination-not-modeled`). Ngành Ngôn ngữ Trung Quốc (nntq) và Quản trị dịch vụ Du
-   * lịch và Lữ hành (qtdl) vẫn tính được qua các tổ hợp không-Tiếng-Trung còn lại trong danh sách
-   * chính thức của ngành đó.
+   * Tổ hợp môn xét tuyển theo bảng "Số lượng tuyển sinh" mục 4 của Thông tin tuyển sinh 2026 (số
+   * 041/TB-PXU). Từ 2026-10-04 gồm cả các tổ hợp Tiếng Trung (D04 Toán-Văn-Trung; D45 Văn-Địa-Trung; D65
+   * Văn-Sử-Trung; X37 Toán-GDKTPL-Trung): D04/D45/D65/X37 cho Ngôn ngữ Trung Quốc (nntq) và Quản trị dịch vụ
+   * Du lịch và Lữ hành (qtdl); D45/D65/X37 cho Quản trị kinh doanh (qtkd), Quản lý công nghiệp (qlcn) và
+   * Truyền thông đa phương tiện (ttdpt).
    */
   combinationIds: readonly string[];
 }
@@ -51,7 +50,7 @@ export const PXU_PROGRAMS: readonly PxuProgram[] = [
     code: 'qtkd',
     maNganh: '7340101',
     name: 'Quản trị kinh doanh (Kinh doanh số & Trí tuệ nhân tạo, Truyền thông và Marketing số)',
-    combinationIds: ['A00', 'A01', 'D01', 'D09', 'D10', 'X01', 'X25'],
+    combinationIds: ['A00', 'A01', 'D01', 'D09', 'D10', 'X01', 'X25', 'D45', 'D65', 'X37'],
   },
   {
     code: 'nna',
@@ -63,13 +62,13 @@ export const PXU_PROGRAMS: readonly PxuProgram[] = [
     code: 'nntq',
     maNganh: '7220204',
     name: 'Ngôn ngữ Trung Quốc (Tiếng Trung thương mại, Tiếng Trung du lịch)',
-    combinationIds: ['A01', 'C00', 'C03', 'C04', 'D01', 'X01'],
+    combinationIds: ['A01', 'C00', 'C03', 'C04', 'D01', 'X01', 'D04', 'D45', 'D65', 'X37'],
   },
   {
     code: 'qtdl',
     maNganh: '7810103',
     name: 'Quản trị dịch vụ Du lịch và Lữ hành (Quản trị du lịch và khách sạn, Quản trị du lịch và lữ hành)',
-    combinationIds: ['A01', 'C00', 'C03', 'C04', 'D01', 'X25'],
+    combinationIds: ['A01', 'C00', 'C03', 'C04', 'D01', 'X25', 'D04', 'D45', 'D65', 'X37'],
   },
   {
     code: 'cnkt-oto',
@@ -81,13 +80,13 @@ export const PXU_PROGRAMS: readonly PxuProgram[] = [
     code: 'qlcn',
     maNganh: '7510601',
     name: 'Quản lý công nghiệp',
-    combinationIds: ['A00', 'A01', 'D01', 'D09', 'D10', 'X01', 'X25'],
+    combinationIds: ['A00', 'A01', 'D01', 'D09', 'D10', 'X01', 'X25', 'D45', 'D65', 'X37'],
   },
   {
     code: 'ttdpt',
     maNganh: '7320104',
     name: 'Truyền thông đa phương tiện',
-    combinationIds: ['A00', 'A01', 'D01', 'D14', 'D15', 'X01', 'X25'],
+    combinationIds: ['A00', 'A01', 'D01', 'D14', 'D15', 'X01', 'X25', 'D45', 'D65', 'X37'],
   },
 ] as const;
 
