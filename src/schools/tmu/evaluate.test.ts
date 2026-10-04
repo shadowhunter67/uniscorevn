@@ -59,3 +59,22 @@ describe('TMU THPT exact calculator 2025', () => {
     expect(evaluateSchools(profile, ['tmu'], { tmu: a00Context })[0].status).toBe('calculated');
   });
 });
+
+describe('TMU French and Chinese combinations (D03, D04)', () => {
+  it('computes D03 and D04 against the single 20/30 threshold', () => {
+    const d03 = evaluateTmuThptExamAdmission(
+      { thpt: { scores: { math: 7, literature: 7, french: 7 } }, priority: { region: 'KV3' } },
+      { subjectContext: { combinationId: 'D03', subjects: ['math', 'literature', 'french'] } }
+    );
+    const d04 = evaluateTmuThptExamAdmission(
+      { thpt: { scores: { math: 6, literature: 6, chinese: 6 } }, priority: { region: 'KV3' } },
+      { subjectContext: { combinationId: 'D04', subjects: ['math', 'literature', 'chinese'] } }
+    );
+
+    expect(d03.confidence).toBe('exact-verified');
+    expect(d03.score?.value).toBe(21);
+    expect(d03.eligibility?.status).toBe('eligible');
+    expect(d04.score?.value).toBe(18);
+    expect(d04.eligibility?.status).toBe('ineligible');
+  });
+});

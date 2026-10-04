@@ -2,13 +2,13 @@ import type { KnowledgeGap } from '../../core/knowledgeStatus';
 
 export const tmuKnowledgeGaps: KnowledgeGap[] = [
   {
-    id: 'tmu-foreign-language-combos-not-modeled',
+    id: 'tmu-private-combination-not-modeled',
     label:
-      'TMU công bố 10 tổ hợp xét tuyển (A00/A01/D01/D03/D04/D07/D09/D10/D84 + tổ hợp riêng "TMU") — 3 tổ hợp KHÔNG mô hình hoá: D03 (Tiếng Pháp), D04 (Tiếng Trung) không có trong `SubjectId`; tổ hợp riêng "TMU" (Toán, Tin học/Công nghệ, Anh) không xác định chắc chắn môn thứ 2 áp dụng cho ngành nào.',
+      'TMU công bố 10 tổ hợp xét tuyển (A00/A01/D01/D03/D04/D07/D09/D10/D84 + tổ hợp riêng "TMU"). D03 (Toán, Văn, Tiếng Pháp) và D04 (Toán, Văn, Tiếng Trung) chọn được từ 2026-10-04 nhờ SubjectId `french`/`chinese`; tổ hợp riêng "TMU" (Toán, Tin học/Công nghệ, Anh) vẫn KHÔNG mô hình hoá vì không xác định chắc chắn môn thứ 2 áp dụng cho ngành nào.',
     status: 'official-but-unparsed',
     sourceId: 'tmu-admission-methods-2025',
     scoreAffecting: true,
-    impact: 'UniscoreVN không tính được 3/10 tổ hợp của TMU (7/10 tổ hợp còn lại vẫn tính được, đủ cho phần lớn thí sinh).',
+    impact: 'UniscoreVN không tính được tổ hợp riêng "TMU" (9/10 tổ hợp còn lại tính được).',
   },
   {
     id: 'tmu-priority-value-silent',
