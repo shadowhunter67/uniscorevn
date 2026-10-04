@@ -16,9 +16,9 @@ import type { SubjectId } from '../../core/subjects';
  * `priority.ts`).
  *
  * Mô hình hoá 15/19 ngành đại học chính quy (mã xét tuyển 7xxxxxx, phương thức 100) dùng tổ hợp
- * THPT chuẩn có trong `SubjectId`. LOẠI TRỪ tổ hợp riêng của 3 ngành ngôn ngữ (D04 Tiếng Trung, D06
- * Tiếng Nhật, DD2 Tiếng Hàn) do các ngoại ngữ này không có trong danh mục môn dùng chung — 3 ngành
- * Ngôn ngữ Trung/Nhật/Hàn vẫn mô hình hoá được qua các tổ hợp còn lại (A01/C00/C19/D01/D14). Các
+ * THPT chuẩn có trong `SubjectId`. Tổ hợp riêng của 3 ngành ngôn ngữ (D04 Tiếng Trung, D06 Tiếng Nhật, DD2
+ * Tiếng Hàn) chọn được từ 2026-10-04 khi danh mục môn dùng chung có Tiếng Trung/Nhật/Hàn (HDIU không kiểm
+ * tra tổ hợp theo ngành nên không cần sửa thêm bảng). Các
  * mã liên thông/VLVH/LTCD (không phải "Đại học chính quy" hệ thi TN THPT) KHÔNG đưa vào bảng này.
  */
 export type HdiuFieldId =

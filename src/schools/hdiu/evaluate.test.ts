@@ -95,3 +95,23 @@ describe('HDIU THPT exact per-field calculator 2025', () => {
     expect(result.missingRequirements).toContainEqual(expect.objectContaining({ kind: 'school-context', code: 'hdiu-field' }));
   });
 });
+
+describe('HDIU foreign-language combinations (D04, D06, DD2)', () => {
+  it('computes the Chinese, Japanese and Korean combinations now that the subjects exist', () => {
+    const cases = [
+      { fieldId: 'chinese-language' as const, combinationId: 'D04', subjects: ['math', 'literature', 'chinese'] as const, scores: { math: 5, literature: 5, chinese: 5 } },
+      { fieldId: 'japanese-language' as const, combinationId: 'D06', subjects: ['math', 'literature', 'japanese'] as const, scores: { math: 5, literature: 5, japanese: 5 } },
+      { fieldId: 'korean-language' as const, combinationId: 'DD2', subjects: ['math', 'literature', 'korean'] as const, scores: { math: 5, literature: 5, korean: 5 } },
+    ];
+    for (const item of cases) {
+      const result = evaluateHdiuThptExamExactAdmission(
+        { thpt: { scores: item.scores }, priority: { region: 'KV3' } },
+        { fieldId: item.fieldId, subjectContext: { combinationId: item.combinationId, subjects: item.subjects } }
+      );
+
+      expect(result.confidence, item.combinationId).toBe('exact-verified');
+      expect(result.score?.value, item.combinationId).toBe(15);
+      expect(result.eligibility?.status, item.combinationId).toBe('eligible');
+    }
+  });
+});

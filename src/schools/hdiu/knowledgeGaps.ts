@@ -2,15 +2,6 @@ import type { KnowledgeGap } from '../../core/knowledgeStatus';
 
 export const hdiuKnowledgeGaps: KnowledgeGap[] = [
   {
-    id: 'hdiu-foreign-language-combos-not-modeled',
-    label:
-      '3 ngành Ngôn ngữ (Trung Quốc, Nhật, Hàn Quốc) mỗi ngành công bố thêm 1 tổ hợp riêng dùng môn ngoại ngữ thứ 2 (D04 Toán/Văn/Tiếng Trung, D06 Toán/Văn/Tiếng Nhật, DD2 Toán/Văn/Tiếng Hàn) — 3 tổ hợp này KHÔNG mô hình hoá được (Tiếng Trung/Nhật/Hàn không có trong `SubjectId`). Cả 3 ngành vẫn tính được qua các tổ hợp còn lại (A01/C00/C19/D01/D14).',
-    status: 'official-but-unparsed',
-    sourceId: 'hdiu-admission-info-2025',
-    scoreAffecting: true,
-    impact: 'UniscoreVN không tính được tổ hợp dùng Tiếng Trung/Nhật/Hàn của 3 ngành Ngôn ngữ HDIU (các tổ hợp còn lại của 3 ngành này vẫn tính được).',
-  },
-  {
     id: 'hdiu-priority-value-silent',
     label:
       'Nguồn xác nhận trực tiếp điểm ưu tiên khu vực/đối tượng ĐƯỢC CỘNG vào tổng trước khi so ngưỡng, nhưng KHÔNG công bố mức điểm ưu tiên cụ thể — dùng khung quốc gia hiện hành làm judgment call cho giá trị bảng (`priority.ts`).',
