@@ -5,10 +5,10 @@
  * tuyển"). Điểm trúng tuyển CHÍNH THỨC đợt 1 (22/8/2025) lấy từ 3 nguồn tổng hợp ĐỘC LẬP khớp tuyệt
  * đối (`sources.ts:trungvuong-diemchuan-2025-crosscheck`).
  *
- * Một số tổ hợp trong thông báo gốc dùng ngoại ngữ không có SubjectId tương ứng trong hệ thống
- * (Tiếng Trung — D04; Tiếng Hàn — DD2) hoặc mã tổ hợp không xác định được thành phần môn rõ ràng
- * (B01, D02 của Quản trị dịch vụ du lịch và lữ hành) — các tổ hợp này bị LOẠI khỏi `combinationIds`
- * dưới đây (unsupported > guessed), các tổ hợp còn lại của mỗi ngành vẫn tính được bình thường.
+ * Từ 2026-10-04 Ngôn ngữ Trung Quốc có thêm D04 (Toán, Văn, Tiếng Trung) và Ngôn ngữ Hàn Quốc có thêm DD2
+ * (Toán, Văn, Tiếng Hàn) nhờ SubjectId `chinese`/`korean` (đủ 7/7 tổ hợp mỗi ngành). Vẫn LOẠI khỏi
+ * `combinationIds` các tổ hợp không xác định được thành phần môn (B01, D02 của Quản trị dịch vụ du lịch
+ * và lữ hành) và phần tổ hợp ngoại ngữ của ngành này chưa xác định được (unsupported > guessed).
  */
 export interface TrungVuongFieldThreshold {
   code: string;
@@ -26,8 +26,8 @@ const GROUP_CNTT = ['A00', 'A01', 'D01', 'D10'] as const;
 const GROUP_O_TO = ['A00', 'A01', 'D01', 'D10', 'A10', 'A05', 'A06', 'C01', 'C02', 'C14'] as const;
 const GROUP_LOGISTICS = ['A00', 'A01', 'A07', 'D01'] as const;
 const GROUP_NGON_NGU_ANH = ['D01', 'D09', 'D10', 'C00', 'C19', 'C20'] as const;
-const GROUP_NGON_NGU_TRUNG = ['D01', 'D09', 'D10', 'C00', 'C19', 'C20'] as const;
-const GROUP_NGON_NGU_HAN = ['C00', 'D01', 'D09', 'D66', 'A01', 'A00'] as const;
+const GROUP_NGON_NGU_TRUNG = ['D01', 'D09', 'D10', 'C00', 'C19', 'C20', 'D04'] as const;
+const GROUP_NGON_NGU_HAN = ['C00', 'D01', 'D09', 'D66', 'A01', 'A00', 'DD2'] as const;
 const GROUP_TRUYEN_THONG = ['A00', 'C00', 'D01', 'D14'] as const;
 const GROUP_DIEU_DUONG = ['A00', 'B00', 'A02', 'A01', 'B03', 'B04', 'B08', 'C02', 'C08', 'D07'] as const;
 const GROUP_QTKD = ['A00', 'A01', 'A07', 'D01', 'C01', 'C03', 'C14', 'C20'] as const;

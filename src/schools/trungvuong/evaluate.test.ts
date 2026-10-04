@@ -115,3 +115,31 @@ describe('TVUni exact THPT admission calculator 2025 (theo ngành)', () => {
     expect(evaluateSchools(profile, ['trungvuong'], { trungvuong: context })[0].status).toBe('calculated');
   });
 });
+
+describe('Trung Vuong foreign-language combinations', () => {
+  it('accepts D04 for Ngon ngu Trung Quoc and DD2 for Ngon ngu Han Quoc', () => {
+    const chinese = evaluateTrungVuongThptExamAdmission(
+      { thpt: { scores: { math: 6, literature: 6, chinese: 6 } }, priority: { region: 'KV3' } },
+      { fieldCode: '7220204', subjectContext: { combinationId: 'D04', subjects: ['math', 'literature', 'chinese'] } }
+    );
+    const korean = evaluateTrungVuongThptExamAdmission(
+      { thpt: { scores: { math: 6, literature: 6, korean: 6 } }, priority: { region: 'KV3' } },
+      { fieldCode: '7220210', subjectContext: { combinationId: 'DD2', subjects: ['math', 'literature', 'korean'] } }
+    );
+
+    expect(chinese.confidence).toBe('exact-verified');
+    expect(chinese.score?.value).toBe(18);
+    expect(chinese.eligibility?.status).toBe('eligible');
+    expect(korean.confidence).toBe('exact-verified');
+    expect(korean.score?.value).toBe(18);
+  });
+
+  it('rejects D04 for a program that does not list it (Cong nghe thong tin)', () => {
+    const result = evaluateTrungVuongThptExamAdmission(
+      { thpt: { scores: { math: 6, literature: 6, chinese: 6 } } },
+      { fieldCode: '7480201', subjectContext: { combinationId: 'D04', subjects: ['math', 'literature', 'chinese'] } }
+    );
+
+    expect(result.confidence).toBe('partial');
+  });
+});

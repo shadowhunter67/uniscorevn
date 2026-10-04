@@ -11,9 +11,10 @@
  *   thức 405/406 (kết hợp thi năng khiếu), KHÔNG có dòng mã 100 thuần — không mô hình hoá vì thiếu
  *   điểm năng khiếu trong ApplicantProfile.
  *
- * Mỗi ngành còn lại loại trừ tổ hợp D04 (Toán, Ngữ văn, Tiếng Trung — không có SubjectId Tiếng
- * Trung) và R01/R02/R03 (tổ hợp năng khiếu, chỉ áp dụng nhánh 405/406) khỏi danh sách tổ hợp hỗ trợ;
- * các tổ hợp còn lại của mỗi ngành vẫn tính được đầy đủ.
+ * Tổ hợp D04 (Toán, Ngữ văn, Tiếng Trung) được thêm từ 2026-10-04 cho các ngành mà nguồn liệt kê D04
+ * (Di sản học CN Di sản và phát triển du lịch, Du lịch, 2 chuyên ngành Quản trị dịch vụ du lịch và lữ hành,
+ * 3 chuyên ngành Văn hóa học, Văn hóa các dân tộc thiểu số Việt Nam). R01/R02/R03 (tổ hợp năng khiếu, chỉ
+ * áp dụng nhánh 405/406) vẫn bị loại khỏi danh sách tổ hợp hỗ trợ.
  */
 export interface VhsFieldThreshold {
   /** Mã ngành xét tuyển đúng nguyên văn Thông báo 207/TB-ĐHVHHCM (một số ngành có hậu tố A/B/C/D
@@ -30,9 +31,13 @@ const COMMON_COMBOS_NO_A06 = ['A07', 'C00', 'C03', 'C04', 'D01', 'D10', 'D14', '
 /** 15 tổ hợp (thêm A06) — dùng cho Di sản học (CN Di sản và phát triển du lịch) và Văn hóa các dân
  * tộc thiểu số Việt Nam (cả 2 chuyên ngành). */
 const COMMON_COMBOS_WITH_A06 = ['A06', ...COMMON_COMBOS_NO_A06] as const;
+/** + D04 (Toán, Ngữ văn, Tiếng Trung) — thêm 2026-10-04 cho các ngành mà nguồn liệt kê D04: 3 chuyên ngành Văn hóa học. */
+const CULTURE_STUDIES_COMBOS = [...COMMON_COMBOS_NO_A06, 'D04'] as const;
+/** 15 tổ hợp + D04 — Di sản học (CN Di sản và phát triển du lịch) và Văn hóa các dân tộc thiểu số Việt Nam. */
+const HERITAGE_TOURISM_COMBOS = [...COMMON_COMBOS_WITH_A06, 'D04'] as const;
 /** 13 tổ hợp (không A06/A07) — dùng cho Du lịch và cả 2 chuyên ngành Quản trị dịch vụ du lịch và lữ
  * hành. */
-const TOURISM_COMBOS = ['C00', 'C03', 'C04', 'D01', 'D10', 'D14', 'D15', 'X01', 'X17', 'X21', 'X22', 'X25', 'X78'] as const;
+const TOURISM_COMBOS = ['C00', 'C03', 'C04', 'D01', 'D10', 'D14', 'D15', 'X01', 'X17', 'X21', 'X22', 'X25', 'X78', 'D04'] as const;
 /** 14 tổ hợp riêng (có A08/A09/D09, không có X17/X21/X22) — dùng cho 2 chuyên ngành Quản lý văn hóa
  * còn mô hình hoá được (mã 100). */
 const CULTURE_MGMT_COMBOS = ['A07', 'A08', 'A09', 'C00', 'C03', 'C04', 'D01', 'D09', 'D10', 'D14', 'D15', 'X01', 'X25', 'X78'] as const;
@@ -41,7 +46,7 @@ const HERITAGE_MUSEUM_COMBOS = ['D10', 'D14', 'D15', 'X01', 'X17', 'X21', 'X22',
 
 export const VHS_FIELD_THRESHOLDS_2026: readonly VhsFieldThreshold[] = [
   { code: '7320201', name: 'Thông tin - Thư viện', threshold30: 21.6, combinationIds: COMMON_COMBOS_NO_A06 },
-  { code: '7229047A', name: 'Di sản học (Chuyên ngành Di sản và phát triển du lịch)', threshold30: 22.1, combinationIds: COMMON_COMBOS_WITH_A06 },
+  { code: '7229047A', name: 'Di sản học (Chuyên ngành Di sản và phát triển du lịch)', threshold30: 22.1, combinationIds: HERITAGE_TOURISM_COMBOS },
   { code: '7229047B', name: 'Di sản học (Chuyên ngành Di sản và bảo tàng)', threshold30: 21.0, combinationIds: HERITAGE_MUSEUM_COMBOS },
   { code: '7810101', name: 'Du lịch', threshold30: 23.5, combinationIds: TOURISM_COMBOS },
   { code: '7810103A', name: 'Quản trị dịch vụ du lịch và lữ hành (Chuyên ngành Quản trị lữ hành)', threshold30: 23.5, combinationIds: TOURISM_COMBOS },
@@ -49,11 +54,11 @@ export const VHS_FIELD_THRESHOLDS_2026: readonly VhsFieldThreshold[] = [
   { code: '7320402', name: 'Kinh doanh xuất bản phẩm', threshold30: 21.4, combinationIds: COMMON_COMBOS_NO_A06 },
   { code: '7229042A', name: 'Quản lý văn hóa (Chuyên ngành Quản lý hoạt động văn hóa xã hội)', threshold30: 23.3, combinationIds: CULTURE_MGMT_COMBOS },
   { code: '7229042D', name: 'Quản lý văn hóa (Chuyên ngành Tổ chức sự kiện văn hóa, thể thao, du lịch)', threshold30: 24.4, combinationIds: CULTURE_MGMT_COMBOS },
-  { code: '7229040A', name: 'Văn hóa học (Chuyên ngành Văn hóa Việt Nam)', threshold30: 22.5, combinationIds: COMMON_COMBOS_NO_A06 },
-  { code: '7229040B', name: 'Văn hóa học (Chuyên ngành Công nghiệp Văn hóa)', threshold30: 23.0, combinationIds: COMMON_COMBOS_NO_A06 },
-  { code: '7229040C', name: 'Văn hóa học (Chuyên ngành Truyền thông Văn hóa)', threshold30: 23.6, combinationIds: COMMON_COMBOS_NO_A06 },
-  { code: '7220112A', name: 'Văn hóa các dân tộc thiểu số Việt Nam (Chuyên ngành Tổ chức và quản lý văn hóa dân tộc)', threshold30: 21.3, combinationIds: COMMON_COMBOS_WITH_A06 },
-  { code: '7220112B', name: 'Văn hóa các dân tộc thiểu số Việt Nam (Chuyên ngành Phát triển du lịch vùng dân tộc)', threshold30: 20.3, combinationIds: COMMON_COMBOS_WITH_A06 },
+  { code: '7229040A', name: 'Văn hóa học (Chuyên ngành Văn hóa Việt Nam)', threshold30: 22.5, combinationIds: CULTURE_STUDIES_COMBOS },
+  { code: '7229040B', name: 'Văn hóa học (Chuyên ngành Công nghiệp Văn hóa)', threshold30: 23.0, combinationIds: CULTURE_STUDIES_COMBOS },
+  { code: '7229040C', name: 'Văn hóa học (Chuyên ngành Truyền thông Văn hóa)', threshold30: 23.6, combinationIds: CULTURE_STUDIES_COMBOS },
+  { code: '7220112A', name: 'Văn hóa các dân tộc thiểu số Việt Nam (Chuyên ngành Tổ chức và quản lý văn hóa dân tộc)', threshold30: 21.3, combinationIds: HERITAGE_TOURISM_COMBOS },
+  { code: '7220112B', name: 'Văn hóa các dân tộc thiểu số Việt Nam (Chuyên ngành Phát triển du lịch vùng dân tộc)', threshold30: 20.3, combinationIds: HERITAGE_TOURISM_COMBOS },
 ] as const;
 
 export type VhsFieldCode = (typeof VHS_FIELD_THRESHOLDS_2026)[number]['code'];

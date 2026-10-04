@@ -109,3 +109,22 @@ describe('VHS exact THPT admission calculator 2026 (theo ngành/chuyên ngành)'
     expect(evaluateSchools(profile, ['vhs'], { vhs: context })[0].status).toBe('calculated');
   });
 });
+
+describe('VHS Chinese-language combination D04', () => {
+  const d04 = { combinationId: 'D04', subjects: ['math', 'literature', 'chinese'] as const };
+  const profile: ApplicantProfile = { thpt: { scores: { math: 8, literature: 8, chinese: 8 } }, priority: { region: 'KV3' } };
+
+  it('computes D04 for the programs that list it (Du lich 7810101)', () => {
+    const result = evaluateVhsThptExamAdmission(profile, { fieldCode: '7810101', subjectContext: d04 });
+
+    expect(result.confidence).toBe('exact-verified');
+    expect(result.score?.value).toBe(24);
+    expect(result.eligibility?.status).toBe('eligible');
+  });
+
+  it('does not accept D04 for a program that does not list it (Thong tin - Thu vien 7320201)', () => {
+    const result = evaluateVhsThptExamAdmission(profile, { fieldCode: '7320201', subjectContext: d04 });
+
+    expect(result.confidence).toBe('partial');
+  });
+});

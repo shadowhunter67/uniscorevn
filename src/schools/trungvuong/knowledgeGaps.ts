@@ -22,11 +22,11 @@ export const trungvuongKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'trungvuong-foreign-language-combos-excluded',
     label:
-      'Các tổ hợp dùng ngoại ngữ không có SubjectId tương ứng trong hệ thống (D04 — Ngữ văn/Toán/Tiếng Trung Quốc; DD2 — Toán/Ngữ văn/Tiếng Hàn) và 2 mã tổ hợp không xác định rõ thành phần môn (B01, D02, riêng của ngành Quản trị dịch vụ du lịch và lữ hành) bị LOẠI khỏi `thresholds.ts` — các tổ hợp còn lại của mỗi ngành liên quan vẫn tính được (Ngôn ngữ Trung Quốc 6/7 tổ hợp; Ngôn ngữ Hàn Quốc 6/7 tổ hợp; Quản trị dịch vụ du lịch và lữ hành 5/8 tổ hợp).',
+      'D04 (Tiếng Trung) và DD2 (Tiếng Hàn) đã chọn được cho Ngôn ngữ Trung Quốc và Ngôn ngữ Hàn Quốc (7/7 tổ hợp mỗi ngành, từ 2026-10-04). Còn 2 mã tổ hợp không xác định rõ thành phần môn (B01, D02, riêng của ngành Quản trị dịch vụ du lịch và lữ hành) và một tổ hợp ngoại ngữ của ngành này chưa xác định được ngành nào dùng bị LOẠI khỏi `thresholds.ts` — Quản trị dịch vụ du lịch và lữ hành giữ 5/8 tổ hợp.',
     status: 'incomplete',
     sourceId: 'trungvuong-thongbao-387-2025',
     scoreAffecting: false,
-    impact: 'Thí sinh chỉ có điểm thi các tổ hợp bị loại (D04/DD2/B01/D02) không tính được qua UniscoreVN cho các ngành liên quan.',
+    impact: 'Thí sinh chỉ có điểm thi các tổ hợp bị loại (B01/D02 và tổ hợp ngoại ngữ của Quản trị dịch vụ du lịch và lữ hành) không tính được qua UniscoreVN cho ngành này.',
   },
   {
     id: 'trungvuong-health-quality-floor-not-modeled',
