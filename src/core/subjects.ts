@@ -181,6 +181,13 @@ export const COMMON_SUBJECT_COMBINATIONS: readonly SubjectCombination[] = [
   { id: 'D63', subjects: ['literature', 'history', 'japanese'] },
   { id: 'X98', subjects: ['literature', 'civic-economic-law', 'japanese'] },
   { id: 'D03', subjects: ['math', 'literature', 'french'] },
+  /** D04/D45/D65/X37 (Tiếng Trung) và DD2 (Tiếng Hàn) — thêm 2026-10-04 để khôi phục các tổ hợp ngoại ngữ đã bị loại ở
+   * HBU, HDIU, PXU, TMU, Trung Vương, UKH, VHS (thành phần môn do chính các trường liệt kê, xem knowledgeGaps cũ). */
+  { id: 'D04', subjects: ['math', 'literature', 'chinese'] },
+  { id: 'D45', subjects: ['literature', 'geography', 'chinese'] },
+  { id: 'D65', subjects: ['literature', 'history', 'chinese'] },
+  { id: 'X37', subjects: ['math', 'civic-economic-law', 'chinese'] },
+  { id: 'DD2', subjects: ['math', 'literature', 'korean'] },
 ];
 
 /** Nhãn tiếng Việt — dùng ở bất kỳ trường nào cần hiển thị tên môn cho người dùng chọn. */
