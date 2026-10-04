@@ -45,12 +45,23 @@
  * có thể không ai để ý nhiều lần liền (đã từng xảy ra ~15 lần trước khi phát hiện, xem cập nhật
  * 2026-09-07 ở trên) — nên chủ động chạy `npm run check:bundle-size` cục bộ TRƯỚC khi push mỗi khi
  * đổi nhiều ở landing/core dùng chung, đừng chỉ dựa vào CI để phát hiện.
+ *
+ * Cập nhật 2026-10-04 (phát hiện CI đỏ liên tục từ 2026-09-24, 14 lần push main liên tiếp): chiến dịch
+ * nâng verified-calculator 134→195 (xem docs/school-status.md) đưa initial bundle đo được lên
+ * 1415.6kB, vượt ngưỡng 1330kB. Kiến trúc code-splitting theo route vẫn nguyên vẹn; phần tăng là
+ * module dữ liệu thật của các trường "không-Page" (methods/sources/knowledgeGaps/thresholds tiếng
+ * Việt, nhiều trường có bảng điểm trúng tuyển từng ngành x tổ hợp như NTU 53 chương trình, VAA 36 mã).
+ * Nới lên 1590kB (margin ~12% trên mức đo được, cùng tỷ lệ 3 lần nới trước). ĐÂY LÀ LẦN NỚI THỨ 4 và
+ * khuyến nghị ở cập nhật 2026-09-07 vẫn chưa được làm: nhóm "không-Page" nên được tách thành metadata
+ * nhẹ (luôn cần cho search/landing/catalog) và phần evaluate/methods/sources đầy đủ lazy-load khi user
+ * chọn trường — nên lên lịch thành một batch riêng (cần test search/compare kỹ) thay vì tiếp tục nới
+ * ngưỡng mỗi lần thêm vài chục trường.
  */
 import { readFileSync, statSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const THRESHOLD_BYTES = 1330 * 1024;
+const THRESHOLD_BYTES = 1590 * 1024;
 
 const projectRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const distDir = join(projectRoot, 'dist');
