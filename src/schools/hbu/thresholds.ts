@@ -6,8 +6,8 @@
  * (`sources.ts:hbu-combination-2025`).
  *
  * Loại trừ 3/21 ngành: Thiết kế đồ họa/nội thất/thời trang (tổ hợp năng khiếu V00-V03, môn "Vẽ"
- * không có SubjectId — legend gốc còn thiếu định nghĩa V02/V03). Ngành Ngôn ngữ Trung Quốc chỉ giữ
- * 3/4 tổ hợp công bố (C00/C19/D14) — loại D65 (Văn/Sử/Tiếng Trung, không có SubjectId Tiếng Trung).
+ * không có SubjectId — legend gốc còn thiếu định nghĩa V02/V03). Ngành Ngôn ngữ Trung Quốc đủ 4/4 tổ hợp công bố
+ * (C00/C19/D14/D65) — D65 (Văn/Sử/Tiếng Trung) tính được từ khi có SubjectId `chinese` (2026-10-04).
  */
 export interface HbuFieldThreshold {
   code: string;
@@ -23,8 +23,7 @@ const BIZ_COMBINATIONS = ['A00', 'A01', 'A10', 'C01'] as const;
 const LAW_COMBINATIONS = ['C00', 'C03', 'C19', 'D14'] as const;
 const TOURISM_COMBINATIONS = ['C00', 'C04', 'C20', 'D15'] as const;
 const ENGLISH_COMBINATIONS = ['D01', 'D14', 'D15', 'D66'] as const;
-// Ngôn ngữ Trung Quốc: bảng gốc còn D65 (Văn/Sử/Tiếng Trung) — loại vì thiếu SubjectId Tiếng Trung.
-const CHINESE_COMBINATIONS = ['C00', 'C19', 'D14'] as const;
+const CHINESE_COMBINATIONS = ['C00', 'C19', 'D14', 'D65'] as const;
 const MEDIA_COMBINATIONS = ['C01', 'C04', 'C14', 'D01'] as const;
 
 export const HBU_FIELD_THRESHOLDS_2025: readonly HbuFieldThreshold[] = [

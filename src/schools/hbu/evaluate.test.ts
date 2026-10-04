@@ -78,12 +78,12 @@ describe('HBU exact THPT admission calculator 2025 (theo ngành)', () => {
     expect(result.eligibility?.status).toBe('eligible');
   });
 
-  it('rejects the unsupported Ngôn ngữ Trung Quốc D65 combination (not modeled — needs Tiếng Trung)', () => {
-    const profile: ApplicantProfile = { thpt: { scores: { literature: 8, history: 8, math: 8 } } };
+  it('rejects a combination that Ngôn ngữ Trung Quốc does not list (A00)', () => {
+    const profile: ApplicantProfile = { thpt: { scores: { math: 8, physics: 8, chemistry: 8 } } };
 
     const result = evaluateHbuThptExamAdmission(profile, {
       fieldCode: '7220204',
-      subjectContext: { combinationId: 'D65', subjects: ['literature', 'history', 'english'] as const },
+      subjectContext: { combinationId: 'A00', subjects: ['math', 'physics', 'chemistry'] as const },
     });
 
     expect(result.confidence).toBe('partial');
@@ -130,5 +130,18 @@ describe('HBU exact THPT admission calculator 2025 (theo ngành)', () => {
 
     expect(evaluateSchool(profile, 'hbu', { context }).status).toBe('calculated');
     expect(evaluateSchools(profile, ['hbu'], { hbu: context })[0].status).toBe('calculated');
+  });
+});
+
+describe('HBU Chinese-language combination D65', () => {
+  it('accepts D65 (Van, Su, Tieng Trung) for Ngon ngu Trung Quoc', () => {
+    const result = evaluateHbuThptExamAdmission(
+      { thpt: { scores: { literature: 6, history: 6, chinese: 6 } }, priority: { region: 'KV3' } },
+      { fieldCode: '7220204', subjectContext: { combinationId: 'D65', subjects: ['literature', 'history', 'chinese'] } }
+    );
+
+    expect(result.confidence).toBe('exact-verified');
+    expect(result.score?.value).toBe(18);
+    expect(result.eligibility?.status).toBe('eligible');
   });
 });

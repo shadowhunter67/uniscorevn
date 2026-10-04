@@ -29,15 +29,6 @@ export const hbuKnowledgeGaps: KnowledgeGap[] = [
     impact: 'Thí sinh xét tuyển vào 3 ngành Thiết kế của HBU chưa tính được qua UniscoreVN.',
   },
   {
-    id: 'hbu-chinese-combination-not-modeled',
-    label:
-      'Ngành Ngôn ngữ Trung Quốc (7220204) công bố 4 tổ hợp C00/C19/D14/D65 — D65 (Văn, Sử, Tiếng Trung) không mô hình hoá do "Tiếng Trung" không có SubjectId trong hệ thống. 3/4 tổ hợp còn lại (C00/C19/D14) vẫn tính được.',
-    status: 'incomplete',
-    sourceId: 'hbu-combination-2025',
-    scoreAffecting: false,
-    impact: 'Thí sinh Ngôn ngữ Trung Quốc chọn tổ hợp D65 (có môn Tiếng Trung) chưa tính được qua UniscoreVN; 3 tổ hợp còn lại vẫn tính bình thường.',
-  },
-  {
     id: 'hbu-other-methods-not-modeled',
     label: 'HBU 2025 còn phương thức 2 (xét học bạ THPT/tốt nghiệp Trung cấp-Cao đẳng-Đại học cùng nhóm ngành), phương thức 3 (điểm thi đánh giá năng lực của trường khác) và phương thức 4 (xét tuyển thẳng) — module này CHỈ mô hình hoá phương thức 1 (xét kết quả thi TN THPT).',
     status: 'incomplete',
