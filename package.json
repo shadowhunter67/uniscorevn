@@ -12,6 +12,7 @@
     "stats:coverage": "jiti scripts/stats-coverage.ts",
     "list:verified": "jiti scripts/list-verified-schools.ts",
     "check:docs": "jiti scripts/stats-coverage.ts --check",
+    "docs:status": "jiti scripts/sync-school-status.ts",
     "stats:taxonomy": "jiti scripts/stats-taxonomy.ts",
     "stats:ranking-coverage": "jiti scripts/stats-ranking-coverage.ts",
     "coverage:chart": "jiti scripts/generate-coverage-chart.ts",

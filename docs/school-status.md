@@ -6,27 +6,37 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 
 🎉 **Milestone: 100 calculator đã xác minh** — cột mốc kết thúc chiến dịch mở rộng bắt đầu từ 60 (2026-08-xx), đạt 100 tại batch 2026-09-02 với QNamU (Trường Đại học Quảng Nam). Roadmap mới (100 -> 150) bắt đầu ngay batch tiếp theo cùng ngày: +7 trường (VNU-UET/VNU-HUS/VNU-USSH — cụm VNU-Hà Nội; HUC — retry thành công qua rào cản SPA; HUNRE; HUMP — cụm Huế; AOF nâng cấp lên exact) đưa tổng lên 107. Batch 2026-09-03 (roadmap 100 -> 150, Phase A): HUST nâng cấp từ eligibility-only lên exact (điểm chuẩn 65/65 chương trình x tổ hợp, năm liền kề 2025, công thức "môn chính" xác nhận trực tiếp qua ts.hust.edu.vn) đưa tổng lên 108. Batch tiếp theo cùng ngày: PCTU (Trường Đại học Phan Châu Trinh) mới — nguồn CHÍNH CHỦ pctu.edu.vn cho cả formula 2025 ("Điểm xét tuyển = ĐM1+ĐM2+ĐM3+Điểm ƯT") và bảng điểm chuẩn 2025 (ảnh, đọc bằng vision), cùng năm, khác góc độ với research trước đó (dừng vì trang "năm 2026" có thêm điều kiện xếp loại học lực) — đưa tổng lên 109. Batch tiếp theo cùng ngày (roadmap Thái Nguyên/dầu khí): **PVU** (Trường Đại học Dầu khí Việt Nam) mới — nguồn CHÍNH CHỦ pvu.edu.vn 2026 cho cả điều kiện xét tuyển (tổng thô 3 môn theo tổ hợp) và điểm chuẩn đợt 1 (22,50/30, đồng nhất mọi ngành/tổ hợp trong 3 ngành 2026), cùng năm 2026; và **TUEBA** (Trường Đại học Kinh tế và QTKD - Đại học Thái Nguyên) mới — nguồn CHÍNH CHỦ tuyensinh.tueba.edu.vn 2026 cho ngưỡng đảm bảo chất lượng đầu vào theo ngành (3 mức 17,0/17,5/20,0/30) đã bao gồm điểm ưu tiên, retry thành công so với research trước đó (batch expand-14 từng dừng vì chỉ tìm thấy thông báo 2025) — đưa tổng lên 111. Batch tiếp theo cùng ngày (roadmap 100 -> 150, Phase B): **CTUET** (Trường Đại học Kỹ thuật - Công nghệ Cần Thơ, mã trường KCC) mới — nguồn CHÍNH CHỦ ctuet.edu.vn 2025 cho điểm trúng tuyển CHÍNH THỨC theo 22 ngành (20,15–24,68/30, thông báo 79/TB-ĐHKTCN ký tên đóng dấu), công thức ("Điểm xét tuyển = tổng 3 môn + Điểm ưu tiên + điểm cộng") và mức điểm ưu tiên KV/ĐT CHÍNH CHỦ công bố theo Phụ lục II/III Quy chế tuyển sinh (Quyết định 396/QĐ-ĐHKTCN) — không phải judgment call quốc gia thay thế như TUEBA/PVU, cùng năm 2025 cho cả 3 nguồn — đưa tổng lên 112. Batch tiếp theo cùng ngày (roadmap 100 -> 150, Phase C): **DNU** (Trường Đại học Đồng Nai, mã trường DNU — phân biệt với DNU-HN/Đại Nam) mới — nguồn CHÍNH CHỦ dnpu.edu.vn 2025 cho cả điểm trúng tuyển CHÍNH THỨC theo 9/11 ngành có phương thức thi TN THPT (16,00–26,51/30, Quyết định 1408/QĐ-HĐTS ký tên đóng dấu) và công thức/tổ hợp/điều kiện phụ (Thông tin tuyển sinh 2025, xác nhận điểm chuẩn áp dụng như nhau cho mọi tổ hợp/phương thức); điểm ưu tiên dùng khung quốc gia hiện hành (trường không tự công bố bảng riêng, judgment call — cùng tiền lệ TUEBA/PVU); cùng năm 2025 cho cả 2 nguồn — đưa tổng lên 113. Batch tiếp theo cùng ngày (roadmap Thái Nguyên): **TUMP** (Trường Đại học Y - Dược, Đại học Thái Nguyên, mã trường DTY) mới — nguồn CHÍNH CHỦ tuyensinh.tump.edu.vn cho cả điểm trúng tuyển CHÍNH THỨC 2025 theo cả 9/9 ngành đại học chính quy (18,30–26,15/30, Thông báo 996/TB-ĐHYD ký tên đóng dấu) và công thức/tổ hợp/điểm cộng (Thông báo 688/TB-ĐHYD "Công khai thông tin tuyển sinh 2025", có bảng điểm cộng riêng của trường — mô hình hoá bậc IELTS), cùng năm 2025 cho cả 2 nguồn; điểm ưu tiên dùng khung quốc gia hiện hành (trường chỉ dẫn chiếu quy chế Bộ GD&ĐT, không tự công bố mức riêng, judgment call — cùng tiền lệ DNU/TUEBA/PVU) — đưa tổng lên 114. Batch tiếp theo cùng ngày (roadmap Thái Nguyên): **TNUT** (Trường Đại học Kỹ thuật Công nghiệp - Đại học Thái Nguyên, mã trường DTK) mới — nguồn CHÍNH CHỦ tnut.edu.vn cho cả điểm trúng tuyển CHÍNH THỨC 2025 theo cả 26/26 mã xét tuyển (15,00–24,50/30, Thông báo 818/TB-ĐHKTCN ký tên đóng dấu) và công thức/tổ hợp ("Hướng dẫn xét tuyển 2025" + "Ngành và chỉ tiêu tuyển sinh 2025", trường xác nhận "điểm trúng tuyển giữa các tổ hợp là tương đương nhau" và "được quy đổi tương đương giữa các phương thức xét tuyển"), cùng năm 2025 cho cả 2 nguồn; điểm ưu tiên dùng khung quốc gia hiện hành (judgment call, cùng tiền lệ DNU/TUMP) — đưa tổng lên 115. Batch tiếp theo cùng ngày (roadmap Hà Tĩnh/Bắc Trung Bộ): **HTU** (Trường Đại học Hà Tĩnh, mã trường HHT) mới — nguồn CHÍNH CHỦ ts.htu.edu.vn cho cả điểm trúng tuyển CHÍNH THỨC 2025 theo cả 18/18 mã xét tuyển (15,00–26,35/30, Thông báo 72/TB-HĐTSCQ ký tên đóng dấu Hiệu trưởng) và công thức/tổ hợp ("Thông tin tuyển sinh năm 2025" — đề án 13 trang, có bảng tổ hợp xét tuyển riêng theo từng mã xét tuyển và công thức giảm điểm ưu tiên trích nguyên văn Văn bản hợp nhất 02/VBHN-BGDĐT), cùng năm 2025 cho cả 2 nguồn; điểm ưu tiên dùng khung quốc gia hiện hành (trường không tự công bố bảng riêng, judgment call — cùng tiền lệ TNUT/TUMP/DNU); điều kiện phụ ngành Luật (Toán/Văn) bị nêu khác nhau giữa 2 nguồn nên KHÔNG mô hình hoá (unsupported > guessed) — đưa tổng lên 116. Batch tiếp theo cùng ngày (roadmap y dược khu vực): **DUMTP** (Trường Đại học Kỹ thuật Y Dược Đà Nẵng, mã trường YDN) mới — nguồn CHÍNH CHỦ ydn.edu.vn cho cả điểm trúng tuyển CHÍNH THỨC 2025 theo cả 9/9 mã ngành/chuyên ngành (15,00–22,85/30, Quyết định 625/QĐ-ĐHKTYDĐN ký tên đóng dấu Hiệu trưởng) và công thức/tổ hợp ("Thông tin tuyển sinh đại học năm 2025", trường dùng ĐỒNG NHẤT 4 tổ hợp A00/B00/B08/D07 cho mọi ngành, công thức giảm điểm ưu tiên trích cùng công thức quốc gia đã dùng ở CTUET/TNUT/HTU/DNU/TUMP), cùng năm 2025 cho cả 2 nguồn; điểm ưu tiên dùng khung quốc gia hiện hành (judgment call, cùng tiền lệ); tiêu chí phụ khi bằng điểm (Toán, thứ tự nguyện vọng) KHÔNG mô hình hoá — đưa tổng lên 117. Batch tiếp theo (roadmap 100 -> 150, danh sách carry-over): **BMTU** (Trường Đại học Y Dược Buôn Ma Thuột, mã trường BMU) mới — nguồn CHÍNH CHỦ bmu.edu.vn (Quyết định 396/QĐ-YDBMT, đề án/thông tin tuyển sinh 2026 cập nhật, đọc trực tiếp PDF 20 trang) cho công thức phương thức 1 ("ĐXT = ĐM1+ĐM2+ĐM3+Điểm ưu tiên"), 5 tổ hợp môn (A00/A01/B00/B08/D07) và điều kiện phụ theo ngành (Sinh/Hóa lớp 12 >= 6,5); điểm chuẩn 2026 theo ngành từ Báo Thanh Niên đưa tin thông báo chính thức 10/8/2026 của trường (cross-checked, không phải đọc trực tiếp văn bản gốc — trang bmu.edu.vn render nội dung bài viết qua JS không lấy được text tĩnh). Chỉ mô hình hoá 2/7 ngành (Y khoa 22,0/30; Dược học 20,0/30) — 5 ngành còn lại bị gộp nhóm trong bản tin đã đọc. Điểm ưu tiên dùng khung quốc gia hiện hành (judgment call, cùng tiền lệ); điểm thưởng HSG (mục 7 đề án) mô hình hoá qua context tùy chọn (không có field chuẩn trong ApplicantProfile) — đưa tổng lên 118. Batch tiếp theo (roadmap 100 -> 150, danh sách carry-over): **HCA** (Học viện Cán bộ Thành phố Hồ Chí Minh, mã trường HVC) mới — nguồn CHÍNH CHỦ (bản PDF gốc có chữ ký/con dấu, mirror trên tuyensinh247.com vì tuyensinh.hcmca.edu.vn không truy cập được từ môi trường research): Thông báo 09-TB/HĐTS-HVCB (19/6/2025) cho tổ hợp môn 2025 theo từng ngành, và Quyết định 639-QĐ/HVCB (22/5/2026, đề án 2026) cho công thức phương thức 100 ("Điểm xét tuyển = M1+M2+M3+Điểm Khuyến khích+Điểm ưu tiên"), bảng điểm cộng khuyến khích (Phụ lục 3) và bảng điểm ưu tiên KV/ĐT (Phụ lục 4) — HCA TỰ công bố bảng ưu tiên trong chính văn bản của trường (không phải judgment call quốc gia như đa số trường khác trong campaign). Điểm chuẩn 2025 lấy từ bảng "tuyển sinh 2 năm gần nhất" tự công bố lại trong đề án 2026 (mục 11), cross-checked với Cổng TTĐT Chính phủ (23/8/2025). Mô hình hoá cả 5/5 ngành đại học chính quy của Học viện (Luật, Quản lý nhà nước, Xây dựng Đảng và Chính quyền nhà nước, Chính trị học, Công tác xã hội) — đưa tổng lên 119. Batch tiếp theo (roadmap 100 -> 150, danh sách carry-over): **NAEM** (Học viện Quản lý giáo dục) mới — nguồn CHÍNH CHỦ naem.edu.vn cho cả điểm trúng tuyển CHÍNH THỨC 2025 theo cả 7/7 ngành đại học chính quy (15,00–25,50/30, "Thông báo Điểm trúng tuyển đại học chính quy năm 2025", 22/8/2025) và công thức/tổ hợp ("Thông tin tuyển sinh đại học chính quy năm 2025" + trang riêng "Xét tuyển sử dụng kết quả thi tốt nghiệp THPT (Phương thức 100)", trường tự công bố công thức "Điểm xét tuyển = M1+M2+M3+Điểm ưu tiên" và công thức giảm dần điểm ưu tiên theo tổng điểm), cùng năm 2025 cho cả 2 nguồn; điểm ưu tiên dùng khung quốc gia hiện hành (trường không tự công bố bảng mức riêng theo khu vực/đối tượng, judgment call — cùng tiền lệ DNU/TUEBA/PVU/HUST); bảng quy đổi chứng chỉ ngoại ngữ quốc tế sang điểm môn Tiếng Anh KHÔNG mô hình hoá — đưa tổng lên 120. Batch tiếp theo (roadmap 100 -> 150, danh sách carry-over): **HAT** (Trường Du lịch - Đại học Huế) mới — nguồn gốc chính thức huht.hueuni.edu.vn không fetch trực tiếp được (connection refused, cùng hiện tượng batch trước), dùng 3 nguồn báo/tổng hợp ĐỘC LẬP khớp TUYỆT ĐỐI 7/7 ngành đại học chính quy (15,00–21,50/30: tuyensinh247, Báo Hà Tĩnh theo từng tổ hợp, Sforum/CellphoneS), cùng năm 2025 — tuyensinh247 xác nhận TRỰC TIẾP "Điểm chuẩn dưới đây là tổng điểm các môn xét tuyển + điểm ưu tiên nếu có" (đã cộng ưu tiên), cùng kỹ thuật cross-check đã chấp nhận cho HUMP/HUC/VNU-UET/HUS/USSH. Điểm ưu tiên dùng khung quốc gia hiện hành (judgment call, cùng tiền lệ HUMP); điểm cộng theo đề án chung Đại học Huế KHÔNG mô hình hoá (PDF 66 trang không đọc được text trực tiếp) — đưa tổng lên 121. Batch tiếp theo (roadmap 100 -> 150, danh sách carry-over): **HLUV** (Trường Đại học Hoa Lư) — hoàn thiện research bị ngắt quãng do rate limit phiên trước — nguồn gốc chính thức hluv.edu.vn không fetch được text sạch (news-portal template), dùng 1 ảnh chụp nguyên văn thông báo gốc của Hội đồng tuyển sinh (22/8/2025, đọc bằng vision) + 2 nguồn tổng hợp/báo cross-check khớp TUYỆT ĐỐI 8/8 ngành đại học chính quy (16,00–27,07/30: Hướng nghiệp HOCMAI, Báo Hà Tĩnh theo từng tổ hợp), cùng năm 2025 — nguồn tổng hợp trích công thức tự công bố "Điểm xét tuyển = Tổng điểm 3 môn trong tổ hợp xét tuyển + Điểm ưu tiên" (đã cộng ưu tiên), cùng kỹ thuật cross-check đã chấp nhận cho HAT/HUMP/HUC. Điểm ưu tiên dùng khung quốc gia hiện hành (judgment call, cùng tiền lệ HAT/HUMP); loại trừ ngành Giáo dục Mầm non (tổ hợp năng khiếu, không có SubjectId tương ứng) và nhánh học bạ song song — đưa tổng lên 122. Batch tiếp theo (roadmap 100 -> 150, danh sách carry-over): **TLU-HN** (Trường Đại học Thăng Long) mới — nguồn CHÍNH CHỦ thanglong.edu.vn, 2 thông báo PDF gốc có chữ ký + con dấu Hội đồng tuyển sinh (embed Google Drive trong trang Drupal, tải trực tiếp và đọc bằng vision): Thông báo số 25082205/TB-ĐHTL (22/8/2025) công bố điểm trúng tuyển CHÍNH THỨC 2025 theo 22/24 ngành đại học chính quy áp dụng cho "tổ hợp gốc" của từng nhóm ngành (16,00–23,75/30), và Thông báo số 25072301/TB-ĐHTL (23/7/2025) công bố quy tắc quy đổi tương đương điểm giữa các tổ hợp trong cùng nhóm (vd. Nhóm 1 gốc A00: A01/D01/D07/D09/D10 = -1,0; Nhóm 2 gốc D01: C00/X70/X74 = +2,0, C03/C04/D14/D15/X01/X78 = +1,0), cho phép tính điểm trúng tuyển hiệu lực cho MỌI tổ hợp trong nhóm chứ không chỉ tổ hợp gốc. Loại trừ Thanh nhạc/Thiết kế đồ hoạ (Nhóm 4, không có bảng quy đổi, tổ hợp năng khiếu) và các tổ hợp ngoại ngữ Trung/Nga/Đức (D04/D06/DD2, không có SubjectId tương ứng). Điểm ưu tiên dùng khung quốc gia hiện hành (judgment call — cả 2 thông báo gốc đều không tự công bố mức riêng, cùng tiền lệ HLUV/HAT/HUMP) — đưa tổng lên 123. Batch tiếp theo cùng ngày (roadmap 100 -> 150, danh sách carry-over): **BLU** (Trường Đại học Bạc Liêu, mã trường DBL) mới — nguồn CHÍNH CHỦ tuyensinh.blu.edu.vn (SPA render phía client, đọc đầy đủ qua chrome-devtools): ảnh "ĐIỂM CHUẨN TRÚNG TUYỂN NĂM 2026" đính kèm Thông báo 10/8/2026 (căn cứ Quyết định số 426/QĐ-ĐHBL của Hiệu trưởng, đọc bằng vision) công bố điểm trúng tuyển CHÍNH THỨC đợt 1 theo 13/15 ngành đại học chính quy (15,00–24,66/30), cross-referenced với trang HTML chính thức "Ngành, tổ hợp và số lượng tuyển sinh" (tổ hợp môn theo từng ngành) và trang HTML chính thức "Chính sách ưu tiên trong tuyển sinh" (công thức điểm ưu tiên tự công bố, xác nhận mức KV1=0,75/nhóm đối tượng ưu tiên 2=1,00 qua ví dụ minh hoạ nguyên văn — KHÔNG phải judgment call quốc gia thay thế, trường tự công bố công thức và 2 mức tham chiếu khớp khung quốc gia). Loại trừ ngành Giáo dục Mầm non (trình độ cao đẳng khác cấp + tổ hợp năng khiếu M00 không có SubjectId) và tổ hợp X04 (Toán/Văn/Công nghệ nông nghiệp, không có SubjectId — 4 ngành liên quan vẫn tính được 8/9 tổ hợp còn lại); thêm tổ hợp X79 (Văn/Tin/Anh) vào danh mục dùng chung. Chỉ mô hình hoá nhánh xét kết quả thi TN THPT — BLU còn nhánh học bạ và ĐGNL V-ACT đã công bố điểm chuẩn song song, chưa mô hình hoá — đưa tổng lên 124. Batch tiếp theo cùng ngày (roadmap 100 -> 150, danh sách carry-over): **DLA** (Trường Đại học Kinh tế Công nghiệp Long An, mã trường DLA) mới — cổng tuyensinh.daihoclongan.edu.vn dùng template cũ, cả bảng điểm chuẩn lẫn bảng tổ hợp môn đều được đăng dưới dạng ẢNH nhúng Google Drive (không phải text/HTML), đọc bằng vision qua chrome-devtools (điều hướng thẳng URL ảnh gốc, độ phân giải đầy đủ): ảnh CHÍNH CHỦ "CÔNG BỐ ĐIỂM CHUẨN TRÚNG TUYỂN ĐẠI HỌC CHÍNH QUY 2026" (đính kèm bài "DLA chính thức công bố điểm chuẩn đại học năm 2026") cho điểm trúng tuyển CHÍNH THỨC theo cả 9/9 ngành đại học chính quy nhánh thi TN THPT (15,00–20,00/30, Luật Kinh tế cao nhất), và ảnh CHÍNH CHỦ "NGÀNH / MÃ NGÀNH / TỔ HỢP MÔN" (đính kèm bài "công bố các phương thức tuyển sinh năm 2026") cho tổ hợp môn theo ngành (2 nhóm 6 tổ hợp: D01/C03/C04/C01/X02/C14 cho 7 ngành khối kinh tế-kỹ thuật; D01/D09/C14/D14/D15/C00 cho Ngôn ngữ Anh + Du lịch — toàn bộ 12 mã tổ hợp đã có sẵn trong subjects.ts từ các batch trước, không cần thêm SubjectId/combo mới), cùng năm 2026 cho cả 2 nguồn. Công thức "tổng 3 môn + điểm ưu tiên" cross-check qua trang chuyên đề riêng cho DLA của tuyensinh247.com (thứ cấp, không phải chính chủ — ghi rõ trong knowledgeGaps.ts) vì trang tổng quan/đề án của trường không có đoạn text trích dẫn công thức trực tiếp. Điểm ưu tiên dùng khung quốc gia hiện hành (bài "Điểm cộng chi tiết cho thí sinh đạt 22,5 điểm trở lên" của trường chỉ diễn giải lại quy định giảm dần của Bộ GD&ĐT, không tự công bố bảng riêng — judgment call, cùng tiền lệ DNU/TUEBA/PVU/HTU/TUMP/NAEM). Nhân dịp này sửa 1 bug dữ liệu tồn đọng ở private repo: catalog placeholder của DLA từng bị key nhầm thành `due` (copy-paste artifact không liên quan tới DUE-UDN) — đã đổi lại thành `dla` và regenerate `southernCatalog.generated.ts`. Chỉ mô hình hoá nhánh xét kết quả thi TN THPT — DLA còn nhánh học bạ và ĐGNL ĐHQG-HCM đã công bố điểm chuẩn song song, chưa mô hình hoá — đưa tổng lên 125. Batch tiếp theo cùng ngày (roadmap 100 -> 150, danh sách carry-over): **MKU** (Trường Đại học Cửu Long, mã trường DCL) mới — nguồn CHÍNH CHỦ tuyensinh.mku.edu.vn, khác DLA/BMTU (Quyết định số 3018/QĐ-ĐHCL công bố điểm chuẩn trúng tuyển 2026, khóa 27, đăng dưới dạng PDF CÓ TEXT LAYER thật, đọc trực tiếp không cần vision/chrome-devtools) cho điểm trúng tuyển CHÍNH THỨC theo 33/42 ngành đại học chính quy nhánh thi TN THPT (30 ngành FLAT 15,00/30; khối Luật — Luật/Luật kinh tế/Luật hiến pháp và luật hành chính — FLAT 20,00/30), loại trừ 9/42 ngành khối sức khỏe (threshold 18-22/30 kèm điều kiện phụ riêng theo Quyết định 1962/QĐ-BGDĐT chưa đối chiếu). Đối chiếu chéo với Thông báo điểm sàn 2613/TB-ĐHCL (ảnh, đọc bằng vision) xác nhận điểm sàn = điểm chuẩn thực tế cho toàn bộ 33 ngành này (không cạnh tranh vượt sàn). Tổ hợp môn theo cụm ngành lấy từ Thông báo 2344/TB-ĐHCL (ảnh, đọc bằng vision) — MKU công bố nhiều tổ hợp hơn `COMMON_SUBJECT_COMBINATIONS` hiện có (A03/X04/X08/X10/X12/X16/X17/A10/C07 dùng môn "Công nghệ nông nghiệp" hoặc thành phần không khớp SubjectId nào, hoặc trùng mã X10 nhưng khác thành phần môn với X10 đã có sẵn từ PVU — bị loại để tránh xung đột mã tổ hợp giữa 2 trường). Điểm ưu tiên dùng khung quốc gia hiện hành (trường không tự công bố bảng riêng, judgment call — cùng tiền lệ DLA/BMTU/DNU/TUEBA/PVU/HTU/TUMP/NAEM). Chỉ mô hình hoá nhánh xét kết quả thi TN THPT — MKU còn nhánh học bạ và điểm thi V-SAT đã công bố điểm chuẩn song song, chưa mô hình hoá — đưa tổng lên 126. Batch tiếp theo cùng ngày (roadmap 100 -> 150, danh sách carry-over): **VTTU** (Trường Đại học Võ Trường Toản, mã trường VTT, Cần Thơ — trước Hậu Giang) mới — cổng vttu.edu.vn dùng WordPress, cả bảng mức điểm nhận hồ sơ lẫn bảng tổ hợp môn đều đăng dưới dạng ẢNH nhúng thẳng từ WordPress media library (curl trực tiếp bị 403 hotlink protection), đọc bằng vision qua chrome-devtools: ảnh CHÍNH CHỦ "CÔNG BỐ MỨC ĐIỂM NHẬN HỒ SƠ XÉT TUYỂN" 2025 cho mức điểm nhận hồ sơ (đồng thời là mức trúng tuyển thực tế, trường tư thục không cạnh tranh) theo cả 9/9 ngành đại học chính quy nhánh thi TN THPT (15,00–20,50/30, Y khoa/Răng-Hàm-Mặt cao nhất), và ảnh CHÍNH CHỦ "NGÀNH TUYỂN SINH, HỌC PHÍ" + "PHƯƠNG THỨC TUYỂN SINH" cho tổ hợp môn/mã ngành/chỉ tiêu (6 tổ hợp B00/B03/D08/A00/A02/D01 cho khối sức khỏe, 3 tổ hợp A00/A02/D01 cho khối kinh tế-công nghệ-luật — toàn bộ đã có sẵn trong subjects.ts). Công thức "Điểm xét tuyển = Đ1+Đ2+Đ3+ĐƯT" trích nguyên văn ảnh accordion "HƯỚNG DẪN QUY ĐỔI TƯƠNG ĐƯƠNG GIỮA CÁC PHƯƠNG THỨC", cross-check khớp mức điểm theo khối ngành qua fptshop.com.vn (thứ cấp). Điểm ưu tiên dùng khung quốc gia hiện hành (trường không tự công bố bảng riêng, judgment call — cùng tiền lệ DLA/TUEBA/PVU/HTU/TUMP/NAEM). Chỉ mô hình hoá nhánh xét kết quả thi TN THPT — VTTU còn nhánh học bạ (bảng quy đổi bách phân vị có 1 hàng dữ liệu chồng chéo, không đủ tin cậy để mô hình hoá) và các phương thức 409/411 chưa mô hình hoá — đưa tổng lên 127. Batch tiếp theo cùng ngày (roadmap 100 -> 150, danh sách carry-over): **HBU** (Trường Đại học Hòa Bình, mã trường ETU, Hà Nội) mới — domain gốc daihochoabinh.edu.vn (bao gồm trang thông báo điểm trúng tuyển 2025 gốc) bị connection refused/timeout từ môi trường research (cả WebFetch lẫn chrome-devtools điều hướng thẳng), nhưng subdomain tuyensinh.daihochoabinh.edu.vn (cùng trường, khác server) truy cập được bình thường — dùng subdomain này cho ảnh CHÍNH CHỦ "THÔNG TIN TUYỂN SINH CÁC NGÀNH" (mã ngành/tổ hợp xét tuyển/chỉ tiêu 2025, đọc bằng vision qua chrome-devtools) và trang công thức "ĐXT = TĐ1 + ĐUT". Bảng điểm chuẩn 2025 (thang 30, đã cộng điểm ưu tiên theo xác nhận trực tiếp của nguồn: "Điểm chuẩn dưới đây là tổng điểm các môn xét tuyển + điểm ưu tiên nếu có") dùng 2 nguồn báo/tổng hợp ĐỘC LẬP (tuyensinh247 + navigates.vn, cross-check thêm giaoduc.net.vn/Sforum) khớp TUYỆT ĐỐI 21/21 ngành theo mã ngành — cùng kỹ thuật cross-check đã chấp nhận cho HAT/HLUV khi domain chính không fetch được. Mô hình hoá 18/21 ngành (15,00–20,50/30, Y khoa cao nhất); loại trừ 3 ngành Thiết kế (tổ hợp năng khiếu "Vẽ" V00-V03, không có SubjectId + chú giải gốc còn thiếu định nghĩa V02/V03) và tổ hợp D65 của Ngôn ngữ Trung Quốc (Tiếng Trung không có SubjectId, 3/4 tổ hợp còn lại vẫn tính được). Thêm 3 tổ hợp mới vào danh mục dùng chung: A10 (Toán/Vật lý/GDKTPL), A11 (Toán/Hóa học/GDKTPL), C20 (Ngữ văn/Địa lý/GDKTPL) — A10/C20 trùng thành phần môn với X05/X74 đã có sẵn (mã tổ hợp quốc gia khác nhau nhưng cùng 3 môn, cùng tiền lệ cặp C14/X01). Điểm ưu tiên dùng khung quốc gia hiện hành (trường không tự công bố bảng riêng, judgment call) — đưa tổng lên 128. Batch tiếp theo cùng ngày (roadmap 100 -> 150, danh sách carry-over): **HVU** (Trường Đại học Hùng Vương, Phú Thọ, mã trường THV — KHÁC "DHV" TP.HCM) mới — Quyết định 226/QĐ-ĐHHV (09/3/2026) nhúng qua Google Drive trên hvu.edu.vn, tải trực tiếp file PDF gốc 15 trang có chữ ký/con dấu (thay vì chỉ đọc preview) cho công thức (thang 30 không hệ số, KHÔNG tính điểm cộng thành tích/chứng chỉ ngoại ngữ — xác nhận trực tiếp) và tổ hợp môn theo 27 ngành. PDF này ký trước kỳ thi TN THPT 2026 nên tự ghi rõ ngưỡng/điểm chuẩn "được xác định SAU KHI có kết quả thi" — điểm chuẩn đợt 1 thực tế lấy từ 2 nguồn báo ĐỘC LẬP tường thuật thông báo chính thức của Hội đồng tuyển sinh sau kỳ thi (báo Phú Thọ — cơ quan báo tỉnh nơi trường trực thuộc + Giáo dục & Thời đại — báo của Bộ GD&ĐT), khớp TUYỆT ĐỐI cho 7 ngành có số liệu chính xác không làm tròn nhóm (22,63–26,50/30: Sư phạm Toán học/Ngữ văn/Lịch sử-Địa lí/Khoa học tự nhiên/Tiếng Anh, Giáo dục Tiểu học, Tâm lý học). Loại trừ 4 ngành năng khiếu (thang 40, môn năng khiếu không có SubjectId), 5 ngành chưa chốt điểm chuẩn đợt 1 (nguồn ghi rõ tuyển bổ sung: Ngôn ngữ Anh/Thú y/CNTT/Khoa học cây trồng/Chăn nuôi), và 11 ngành còn lại chỉ có số liệu nguồn thứ cấp làm tròn nhóm không đủ chính xác theo ngành. Điểm ưu tiên dùng khung quốc gia hiện hành (Điều 7 Thông tư 06/2026/TT-BGDĐT, đọc trực tiếp PDF gốc — giá trị/công thức không đổi so với Thông tư 06/2025) vì trường không tự công bố bảng riêng — đưa tổng lên 129. Batch tiếp theo (roadmap 100 -> 150, carry-over ưu tiên nhất): triage lại **UPT** (Trường Đại học Phan Thiết) — Giáo dục & Thời đại có bài "công bố điểm trúng tuyển đại học chính quy năm 2026" (10/8/2026) nhưng CHỈ nêu khoảng "15-20 điểm" cho nhánh thi TN THPT, KHÔNG có bảng theo từng ngành; site chính chủ upt.edu.vn/ts.upt.edu.vn hiện đang trả về trang cài đặt WordPress mặc định (genuinely down, không phải lỗi cert) nên không truy cập được nguồn gốc; không tìm được bảng điểm chuẩn 2026 theo ngành ở bất kỳ nguồn nào khác (kể cả Wayback Machine, bị rate-limit) — KHÔNG đủ granularity, declining (unsupported > guessed). Tiếp theo: **TUCST** (Trường Đại học Văn hóa, Thể thao và Du lịch Thanh Hóa) — phát hiện quan trọng: trường đã bị SÁP NHẬP vào Trường Đại học Hồng Đức (HDU, đã có calculator verified-exact trong campaign) theo Quyết định 1268/QĐ-TTg (14/7/2026) của Thủ tướng Chính phủ — tucst.edu.vn tự động chuyển hướng sang hdu.edu.vn kèm thông báo sáp nhập. TUCST không còn tồn tại như một trường độc lập cho chu kỳ tuyển sinh 2026 — loại khỏi danh sách "chưa đủ để tính" (không phải thiếu dữ liệu, mà là thực thể đã giải thể/hợp nhất). Cuối cùng: **VHS** (Trường Đại học Văn hóa Thành phố Hồ Chí Minh) mới — nguồn CHÍNH CHỦ hcmuc.edu.vn nhúng qua Google Drive (Thông báo 34/TB-ĐHVHHCM, 04/02/2026, tải trực tiếp PDF gốc 16 trang có đóng dấu, cùng kỹ thuật đã dùng cho HVU) cho công thức ("tổng điểm 3 môn thang 10 + điểm ưu tiên") và bảng mức điểm ưu tiên KV/ĐT TỰ CÔNG BỐ của trường (KHÔNG phải judgment call khung quốc gia thay thế như đa số trường khác, cùng tiền lệ HCA/CTUET), cùng tổ hợp môn theo 16 ngành/chuyên ngành. Điểm trúng tuyển đợt 1 năm 2026 lấy từ Thông báo 207/TB-ĐHVHHCM (10/8/2026, ký tên + đóng dấu Hiệu trưởng Lâm Nhân) — không tự fetch được từ hcmuc.edu.vn nhưng được Cổng thông tin điện tử Chính phủ (xaydungchinhsach.chinhphu.vn) đăng lại NGUYÊN VĂN 2 trang ảnh scan độ phân giải đầy đủ (không phải tóm tắt), tải trực tiếp từ CDN (bỏ tiền tố thumb_w) và đọc bằng vision — văn bản tự xác nhận "đã cộng điểm đối tượng và khu vực ưu tiên". Mô hình hoá 14/16 dòng mã phương thức 100 (20,30–24,40/30); loại trừ 1/16 ngành (7229042C, chỉ có mã 405/406 kết hợp thi năng khiếu), tổ hợp D04 (Tiếng Trung, không có SubjectId) ở các ngành có tổ hợp này, và điều kiện "môn chính x2 >= 2 môn còn lại" gắn theo từng mã tổ hợp (Điều 9 Thông tư 08/2022 — không ảnh hưởng công thức tính điểm, chỉ là điều kiện chọn tổ hợp, chưa enforce). Thêm 4 tổ hợp mới vào danh mục dùng chung: A06 (Toán/Hóa học/Địa lý), A08 (Toán/Lịch sử/GDKTPL), X17 (cùng 3 môn A08, mã tổ hợp quốc gia khác nhau — cùng tiền lệ cặp C14/X01), X22 (Toán/Địa lý/Tin học) — đưa tổng lên 130. Batch tiếp theo (roadmap 100 -> 150, danh sách carry-over): **VYA** (Học viện Thanh thiếu niên Việt Nam, mã trường HTN, trực thuộc Trung ương Đoàn TNCS Hồ Chí Minh) mới — cổng CHÍNH CHỦ tuyensinh.vya.edu.vn đăng trực tiếp PDF gốc có chữ ký/con dấu (không phải ảnh/preview, đọc trực tiếp) cho cả 3 nguồn: Quyết định 218/QĐ-HVTTNVN (11/6/2026, "Thông tin tuyển sinh năm 2026") cho công thức Phương thức 2/3 ("tổng 3 môn + Điểm cộng + Điểm ưu tiên", thang 30) theo 9/9 ngành đại học chính quy với tổ hợp môn (C00/X74/D01/X21/D10 khối xã hội, D01/A00/X21/D10/A04 cho CNTT/Kinh tế) và bảng điểm khuyến khích IELTS (trần 3,0/30); Quyết định 261/QĐ-HVTTNVN (30/3/2026, "Quy chế tuyển sinh") Điều 7 TỰ TRÍCH NGUYÊN VĂN bảng mức điểm ưu tiên KV/ĐT và công thức giảm khi tổng điểm >= 22,50/30 (KHÔNG phải judgment call khung quốc gia thay thế, cùng tiền lệ VHS/HCA/CTUET); và Thông báo 162/TB-HVTTNVN (19/8/2026) cho điểm trúng tuyển CHÍNH THỨC 9/9 ngành tại Hà Nội (17–22,7/30, cả 2 phương thức). Loại trừ Phân hiệu TP.HCM (chỉ tiêu/ngưỡng riêng, không mô hình hoá) và điểm thưởng xét tuyển thẳng 3,00 điểm cố định (không có field điều kiện trong hồ sơ dùng chung). Luật và Quan hệ công chúng chỉ mô hình hoá ở phương thức thi TN THPT (phương thức học bạ ghi "Không xét" cho 2 ngành này) — đưa tổng lên 131. **Sửa lỗi drift tồn đọng**: bảng liệt kê bên dưới thiếu **DLA** (Trường Đại học Kinh tế Công nghiệp Long An, đã verified từ batch trước — đưa tổng lên 125) — module/registry đã đúng từ đầu, chỉ thiếu trong bullet list + vẫn còn lặp lại trong danh sách "chưa đủ để tính"; đã bổ sung bullet và xoá khỏi danh sách chưa đủ trong batch này. Batch tiếp theo (roadmap 100 -> 150, danh sách carry-over, triage 8 ứng viên còn lại trong "chưa đủ để tính"): **TVUni** (Trường Đại học Trưng Vương, mã trường DVP, Vĩnh Phúc) mới — nguồn CHÍNH CHỦ tv-uni.edu.vn (Thông báo 387/TB-ĐHTV, 09/06/2025, chữ ký Hiệu trưởng + con dấu, mirror qua CDN tuyensinh247.com vì domain gốc không tải ổn định) cho công thức Phương thức 2 ("ĐXT = TN1+TN2+TN3+Điểm ưu tiên") và tổ hợp môn theo 16/16 ngành đại học chính quy. Điểm trúng tuyển đợt 1 năm 2025 (15,00–19,00/30) đối chiếu 3 nguồn tổng hợp ĐỘC LẬP khớp tuyệt đối (tuyensinh247, fptshop, trangedu) vì trang chính chủ không còn giữ bảng đầy đủ theo ngành cho năm 2025 — phát hiện và tránh được bẫy trộn năm: ảnh điểm chuẩn cùng slug CDN đã bị ghi đè bằng dữ liệu 2026 (17 ngành, có thêm Y khoa mới), xác minh lại đúng 16 mã ngành của thông báo 2025 trước khi tin số liệu tổng hợp. Điểm ưu tiên dùng khung quốc gia hiện hành (trường không tự công bố bảng riêng, judgment call — cùng tiền lệ DNU/TUEBA/PVU/HUST). Loại trừ 2 tổ hợp không có SubjectId (D04 Tiếng Trung, DD2 Tiếng Hàn) và 2 mã tổ hợp không rõ thành phần môn (B01, D02, riêng ngành Du lịch) — các ngành liên quan vẫn tính được với tổ hợp còn lại — đưa tổng lên 132. Batch tiếp theo cùng ngày (2026-09-04, triage 7 ứng viên mới trong "chưa đủ để tính" sau khi loại các trường thuộc danh sách stuck/military đã biết): **DSU** (Trường Đại học Thể dục Thể thao Đà Nẵng, mã trường TTD) mới — nguồn CHÍNH CHỦ dsu.edu.vn: Quyết định 1088/QĐ-TDTTĐN-HĐTS (22/8/2025, chữ ký + con dấu) cho điểm trúng tuyển Phương thức mã 100 (điểm thi TN THPT, CHỈ ngành Quản lý TDTT — 7810301, không cần năng khiếu TDTT) = 21,50/30; Thông báo 247/TB-TDTTĐN (07/3/2025) cho tổ hợp B03/C14; Quyết định 577/QĐ-TDTTĐN (12/5/2025, Quy chế tuyển sinh, Điều 7) tự công bố TRỰC TIẾP bảng điểm ưu tiên KV/ĐT + công thức giảm dần — không phải judgment call (khác đa số tiền lệ gần đây). Cross-checked với Thông báo 58/TB-TDTTĐN năm 2026 (mirror trên jsst.edu.vn) xác nhận cấu trúc phương thức 100/200 luôn không kèm năng khiếu qua cả 2 năm. 2 ngành còn lại (Huấn luyện thể thao, Giáo dục thể chất) bắt buộc điểm thi năng khiếu TDTT — chưa mô hình hoá — đưa tổng lên 133. Batch tiếp theo cùng ngày (2026-09-04): **PXU** (Trường Đại học Phú Xuân, mã trường DPX, Huế) — mới, KHÔNG thuộc danh sách "Đã research, chưa đủ để tính" (66/66 mục trong danh sách đó khớp trùng danh sách stuck/military đã biết ở batch này — 0 ứng viên mới khả dụng), chuyển sang triage nhóm "Chỉ có trong danh mục" thay thế. Domain cũ phuxuan.edu.vn nay 301-redirect sang pxu.edu.vn (đổi tên miền, không phải sáp nhập/giải thể). Nguồn CHÍNH CHỦ pxu.edu.vn: Thông tin tuyển sinh năm 2026 (Số 041/TB-PXU, 19/3/2026, PDF scan có chữ ký + con dấu Hiệu trưởng, đọc qua vision) cho công thức 2 phương thức — PT1 thi TN THPT "(T1+T2+T3) + điểm ưu tiên + điểm cộng", PT2 học bạ "(H1+H2+H3) + điểm ưu tiên + điểm cộng" — và bảng 9 ngành/mã ngành/tổ hợp môn; bảng điểm ưu tiên KV/ĐT + công thức giảm dần TỰ CÔNG BỐ (mục 5.3, không phải judgment call). Điểm trúng tuyển CHÍNH THỨC 2026 (ảnh "PXU công bố điểm trúng tuyển đại học chính quy năm 2026", 16/8/2026, đọc qua vision) xác nhận FLAT 15,00/30 (PT1) và 18,00/30 (PT2) cho CẢ 9/9 ngành — PT2 cao hơn ngưỡng đầu vào 16,00 công bố hồi tháng 3 (cạnh tranh thật, không chỉ lặp sàn), nên dùng giá trị cuối làm threshold. Loại trừ 4 tổ hợp có môn Tiếng Trung Quốc (D04/D45/D65/X37 — "chinese" chưa có SubjectId) và điểm cộng theo thành tích/chứng chỉ ngoại ngữ (mục 5.2, giá trị đã đọc đủ nhưng chưa wired vào runtime, xem knowledgeGaps.ts) — mọi ngành vẫn còn tổ hợp khác hợp lệ. Chỉ mô hình hoá PT1/PT2 — PT3 (kết hợp chứng chỉ ngoại ngữ), PT4 (ĐGNL ĐHQG), PT5 (tuyển thẳng) chưa mô hình hoá — đưa tổng lên 134. Batch tiếp theo (2026-09-09, roadmap 100 -> 150 — mở lại danh sách "Chỉ có trong danh mục", ưu tiên trường công lập lớn có đề án tuyển sinh rõ ràng): **EPU** (Trường Đại học Điện lực, mã trường DDL, Hà Nội, trực thuộc Bộ Công Thương) mới — cả 2 nguồn đều CHÍNH CHỦ epu.edu.vn, đăng dưới dạng PDF scan gốc có con dấu đỏ trên CDN nội bộ itc.epu.edu.vn (tải trực tiếp, đọc bằng vision vì không có text layer): Thông báo số 466/TB-ĐHĐL (26/02/2026, "Thông tin tuyển sinh năm 2026", 11 trang) cho công thức Phương thức 3 — mục II.2.3 ghi nguyên văn "Sử dụng kết quả điểm trong kỳ thi tốt nghiệp THPT năm 2026 của 3 môn theo tổ hợp xét tuyển và điểm ưu tiên (nếu có)", thang 30 không hệ số — và mục II.4.1 (trang 4-5) cho tổ hợp xét tuyển RIÊNG của nhánh thi TN THPT theo 6 khối ngành; Thông báo số 3020/TB-ĐHĐL (09/8/2026, căn cứ Biên bản họp 3019/BB-ĐHĐL của Hội đồng tuyển sinh) cho điểm trúng tuyển CHÍNH THỨC ĐỦ 38/38 mã xét tuyển (16,00–24,60/30, cao nhất là Công nghệ kỹ thuật điều khiển và tự động hoá). Điểm ưu tiên dùng khung quốc gia hiện hành (Điều 7 Thông tư 06/2026/TT-BGDĐT) vì Thông báo 466 chỉ dẫn chiếu "Quy chế tuyển sinh trình độ đại học hiện hành của Bộ GD&ĐT" mà không tự công bố bảng mức riêng (judgment call, cùng tiền lệ HVU/HBU/VTTU/DLA/PVU). Loại trừ: Phương thức 1 (học bạ) và Phương thức 2 (chứng chỉ tiếng Anh quốc tế + học bạ 2 môn còn lại) — công thức + bảng quy đổi IELTS/TOEFL đã đọc đủ nhưng trường KHÔNG công bố điểm trúng tuyển tương ứng nên không mô hình hoá; nhánh thay điểm thi tiếng Anh bằng chứng chỉ ngay trong Phương thức 3 (bảng quy đổi đã đọc, chưa wired); tổ hợp X56 của ngành Toán tin (chưa có trong danh mục tổ hợp dùng chung và nguồn không chú giải thành phần môn — không suy đoán, 5/6 tổ hợp còn lại vẫn tính được); và điều kiện "thí sinh tốt nghiệp từ năm 2024 trở về trước không được cộng điểm ưu tiên" (hồ sơ dùng chung không có trường năm tốt nghiệp) — đưa tổng lên 135. Batch tiếp theo cùng ngày: **UNETI** (Trường Đại học Kinh tế - Kỹ thuật Công nghiệp, mã trường DKK, Hà Nội + cơ sở Ninh Bình, Bộ Công Thương) mới — trường hợp CÔNG THỨC CÓ HỆ SỐ THEO VỊ TRÍ MÔN đầu tiên của roadmap này: "ĐXT = (ĐPT2 + KK) + UT" với "ĐPT2 = (M1 × 4,5 + M2 × 3,5 + M3 × 2) × 3/10" (thang 30, trần 30), trích nguyên văn Thông tin tuyển sinh năm 2026 chính chủ uneti.edu.vn (file Word gốc 20 trang, mục II.2.2.2). Vì hệ số gắn với VỊ TRÍ chứ không gắn với môn, thứ tự 3 môn trong mỗi mã tổ hợp là dữ liệu bắt buộc và KHÁC nhau giữa 4 nhóm tổ hợp (vd. D01 = Tiếng Anh/Toán/Ngữ văn ở nhóm 1, Toán/Tiếng Anh/Ngữ văn ở nhóm 2, Ngữ văn/Tiếng Anh/Toán ở nhóm 4) — danh mục tổ hợp dùng chung `core/subjects.ts` không mang được thông tin này nên module tự khai bảng tổ hợp CÓ THỨ TỰ, lấy nguyên văn từ `window.groups` trong mã nguồn công cụ tính điểm CHÍNH CHỦ dkxt.uneti.edu.vn/tinh-diem (bảng nhóm tổ hợp trong file Word bị mất nội dung ô khi trích text). Cùng công cụ chính chủ này cài đặt đúng công thức, mức điểm ưu tiên KV/ĐT (KV1 0,75 / KV2-NT 0,5 / KV2 0,25 / KV3 0; nhóm đối tượng 1 = 2,0; nhóm 2 = 1,0) và công thức giảm dần quanh mốc 22,50/30 — khớp Điều 7 Thông tư 06/2026/TT-BGDĐT, nên KHÔNG phải judgment call thuần. Điểm trúng tuyển CHÍNH THỨC theo TỪNG mã xét tuyển và TỪNG cơ sở từ Thông báo số 826/TB-ĐHKTKTCN ngày 09/8/2026 (file Word gốc đính kèm tuyensinh.uneti.edu.vn): 27/27 mã cơ sở Hà Nội (20,00–24,50/30) + 22/22 mã cơ sở Ninh Bình (19,00–21,00/30) = 49/49 mã. Có mô hình hoá thêm 2 điều kiện văn bản nêu rõ: nguồn tuyển (tổng THÔ 3 môn >= 15,00/30) và điều kiện riêng ngành Ngôn ngữ Anh (điểm môn Tiếng Anh trong tổ hợp >= 6,00). Ghi nhận 1 BẤT NHẤT giữa 2 nguồn chính chủ và KHÔNG áp dụng: công cụ tính điểm cộng thêm 3,00 điểm cho thí sinh chọn cơ sở Ninh Bình (`if (isNamDinh) raw += 3;`) để so với điểm chuẩn Hà Nội, trong khi Thông báo 826 công bố bảng điểm chuẩn RIÊNG thấp hơn cho Ninh Bình và độ chênh thực tế không đồng nhất 3,0 điểm — module dùng thẳng điểm chuẩn riêng từng cơ sở, không cộng gộp (xem knowledgeGaps.ts). Loại trừ: thành phần KK (bảng điểm xét thưởng thành tích 0,25–1,50 và điểm khuyến khích chứng chỉ ngoại ngữ 0,1–0,5, giá trị đã đọc đủ nhưng hồ sơ dùng chung chưa có field), quy đổi chứng chỉ tiếng Anh thay điểm thi môn Tiếng Anh, Phương thức 3 (học bạ — đã có đủ công thức lẫn cột điểm chuẩn, chưa implement ở batch này), Phương thức 4/5 (ĐGTD thang 100 / ĐGNL thang 150) và tiêu chí phụ thứ tự nguyện vọng — đưa tổng lên 136. Batch tiếp theo cùng ngày: **ULSA** (Trường Đại học Lao động - Xã hội, Bộ Nội vụ) — nâng từ "Đã research, chưa đủ để tính" (batch expand-15 dừng vì trang tuyển sinh không nêu con số ngưỡng nào) lên verified-exact: nay đã có Thông báo số 2752/TB-HĐTSĐH2026 ngày 11/8/2026 (`ulsa.edu.vn`, PDF gốc 5 trang có chữ ký + con dấu, đọc bằng vision) công bố điểm trúng tuyển CHÍNH THỨC cho ĐỦ 42/42 dòng: 28/28 chương trình Trụ sở chính Hà Nội (mã DLX, 16,50–24,78/30) và 14/14 chương trình Cơ sở II TP. Hồ Chí Minh (mã DLS, 16,00–25,05/30) — hai địa điểm có ĐIỂM CHUẨN RIÊNG cho cùng một chương trình nên module khoá ngành theo `<mã ngành>-<mã cơ sở>`. Chính thông báo này in luôn cột "Tổ hợp xét" theo từng cụm mã ngành và gán nhãn cột điểm nguyên văn "Điểm chuẩn Thi TN THPT (PT 100, PT gốc, thang 30)" — xác nhận TRỰC TIẾP thang 30, không hệ số môn, và xác nhận PT 100 là phương thức gốc (các cột còn lại chỉ là điểm quy đổi tương đương cho PT 200 học bạ và PT 402 HSA/TSA/V-ACT). Công thức lấy từ cổng tuyển sinh chính chủ tuyensinh.ulsa.edu.vn mục 4.1.3: "Từ tổng điểm cao đến thấp, bao gồm cả điểm ưu tiên (nếu có)". Bảng tổ hợp được đối chiếu chéo với ảnh bảng ngành/tổ hợp/chỉ tiêu trên cùng cổng (ghi tổ hợp theo TÊN MÔN kèm mã, vd. "Toán - GD KTPL - Tiếng Anh (X25)") — khớp tuyệt đối, đồng thời giải quyết được 1 ô gộp bị cắt ngang trang trong PDF (dòng 7340201B Công nghệ tài chính). Toàn bộ 14 mã tổ hợp (A01, C00, C01, C03, C04, D01, D07, D09, D14, D15, X01, X05, X06, X17, X21, X25, X70, X74) đã có sẵn trong danh mục dùng chung, không cần thêm mã mới. Điểm ưu tiên dùng khung quốc gia hiện hành (Điều 7 Thông tư 06/2026/TT-BGDĐT) vì trường chỉ dẫn chiếu Quy chế tuyển sinh nội bộ (Quyết định 783/QĐ-ĐHLĐXH ngày 11/4/2025) mà không in lại bảng mức (judgment call, cùng tiền lệ EPU/HVU/HBU/VTTU). Loại trừ: bảng quy đổi chứng chỉ tiếng Anh quốc tế cho PT 100 (trường ghi rõ "Điểm quy đổi cụ thể sẽ được thông báo sau" — THIẾU NGUỒN, không phải thiếu implement), các phương thức 200/402/301/500, và ngưỡng đảm bảo chất lượng đầu vào riêng theo tổ hợp/cơ sở (nêu có nhưng không in bảng) — đưa tổng lên 137. Batch tiếp theo cùng ngày: **HUPH** (Trường Đại học Y tế Công cộng, mã trường YTC, Hà Nội, trực thuộc Bộ Y tế) mới — cả 2 nguồn đều CHÍNH CHỦ và tải trực tiếp: Thông tin tuyển sinh đại học chính quy năm 2026 ban hành kèm Quyết định 314/QĐ-ĐHYTCC (PDF gốc 25 trang trên tuyensinh.huph.edu.vn, đọc bằng vision) cho công thức mục 5.3.5 — "Điểm xét tuyển = [Điểm Môn 1 + Điểm Môn 2 + Điểm Môn 3 + Điểm khuyến khích (nếu có)] + Điểm ưu tiên (nếu có)", thang 30, biểu thức TRONG NGOẶC bị chặn trần 30 TRƯỚC khi cộng điểm ưu tiên và mốc giảm điểm ưu tiên 22,5 cũng áp cho chính biểu thức đó (khác các module trước vốn áp mốc lên tổng thô) — cùng Bảng 1 "Số lượng tuyển sinh năm 2026" cho tổ hợp môn theo từng ngành (chú giải đủ tên môn cho mọi mã tổ hợp); và Thông báo số 743/TB-ĐHYTCC ngày 09/8/2026 (PDF gốc có chữ ký Hiệu trưởng kiêm Chủ tịch Hội đồng tuyển sinh, text layer đọc trực tiếp) cho điểm trúng tuyển đợt 1 CHÍNH THỨC cả 6/6 ngành (18,80–22,90/30). Điểm thuận lợi hiếm gặp: trường TỰ XÁC NHẬN "không quy định chênh lệch điểm xét tuyển giữa các tổ hợp đối với các thí sinh đăng ký xét tuyển cùng một ngành học", nên mỗi ngành chỉ có đúng 1 mức điểm chuẩn dùng chung cho mọi tổ hợp — không phải suy luận. Toàn bộ 18 mã tổ hợp dùng tới (A00, A01, B00, B03, B08, C00, C01, C02, C20, D01, D07, D13, D14, D15, D66, X26, X74, X78) đã có sẵn trong danh mục dùng chung. Điểm ưu tiên dùng khung quốc gia hiện hành (Điều 7 Thông tư 06/2026/TT-BGDĐT) vì trường mô tả ĐÚNG cơ chế giảm dần nhưng không in lại bảng mức (judgment call, cùng tiền lệ ULSA/EPU/HVU). Loại trừ: điểm khuyến khích / quy đổi chứng chỉ tiếng Anh quốc tế (Bảng 2 — IELTS 5.0→0,3 ... 7.0-9.0→1,5 thang 30, hoặc quy đổi thẳng thành điểm môn Tiếng Anh; giá trị đã đọc đủ, chưa wired), 4 phương thức còn lại (tuyển thẳng, dự bị đại học, học bạ, ĐGNL ĐHQG Hà Nội thang 150 — thông báo điểm chuẩn ghi rõ các phương thức này chỉ là điểm QUY ĐỔI TƯƠNG ĐƯƠNG về phương thức gốc là thi TN THPT), và tiêu chí phụ khi bằng điểm (gồm TTNV <= 2 riêng ngành Kỹ thuật phục hồi chức năng) — đưa tổng lên 138. Batch tiếp theo cùng ngày: **VUTM** (Học viện Y Dược học cổ truyền Việt Nam, mã trường HYD, Hà Nội, Bộ Y tế) mới — trường hợp gọn nhất của campaign: TOÀN BỘ dữ liệu cần thiết nằm trong MỘT văn bản chính chủ duy nhất, Thông báo số 3036/TB-HVYDCT ngày 10/8/2026 (PDF gốc trên vutm.edu.vn, chữ ký Giám đốc Nguyễn Quốc Huy + con dấu, đọc bằng vision). Bảng "I. Điểm chuẩn" gồm đủ 4 cột Tên ngành / Mã ngành / TỔ HỢP XÉT TUYỂN / "Điểm chuẩn Phương thức xét kết quả thi tốt nghiệp THPT năm 2026" cho cả 3/3 ngành (Y khoa 7720101 = 24,50; Y học cổ truyền 7720115 = 22,30; Dược học 7720201 = 22,00), và công thức nằm ngay dưới bảng: "Điểm xét tuyển của thí sinh là tổng điểm các bài thi/môn thi theo thang điểm 10 đối với từng bài thi/môn thi của tổ hợp xét tuyển cộng với điểm cộng, điểm ưu tiên đối tượng, khu vực theo quy định hiện hành và được làm tròn đến hai chữ số thập phân" — không hệ số môn, điểm chuẩn không phân biệt theo tổ hợp. Điểm ưu tiên dùng khung quốc gia hiện hành (Điều 7 Thông tư 06/2026/TT-BGDĐT, judgment call cùng tiền lệ HUPH/ULSA/EPU). Loại trừ: thành phần "điểm cộng" (văn bản NÊU trong công thức nhưng KHÔNG in bảng giá trị, và không tìm được bảng này ở nguồn chính chủ nào khác — đây là thiếu NGUỒN, ghi rõ trong knowledgeGaps.ts thay vì đoán), tổ hợp D35 của ngành Y học cổ truyền (chưa có trong danh mục dùng chung, văn bản không chú giải thành phần môn — 5/6 tổ hợp còn lại vẫn tính được), phương thức xét tuyển thẳng, và ngưỡng đảm bảo chất lượng đầu vào khối ngành sức khỏe theo quy định Bộ Y tế (điểm chuẩn cuối của cả 3 ngành đều cao hơn ngưỡng nên phép so với điểm chuẩn đã bao hàm). Lưu ý: VUTM 2026 chỉ có 2 phương thức (tuyển thẳng + thi TN THPT), KHÔNG có nhánh học bạ — nên rào "học lực lớp 12" của khối ngành sức khỏe (từng là lý do dừng research BMTU) không áp cho nhánh đã mô hình hoá — đưa tổng lên 139. Batch tiếp theo (2026-09-11): **HMTU** (Trường Đại học Kỹ thuật Y tế Hải Dương, mã trường DKY, Bộ Y tế) mới — trường thứ hai của roadmap này có CÔNG THỨC HỆ SỐ (sau UNETI), nhưng kiểu khác: nhân đôi ĐÚNG MỘT MÔN CỐ ĐỊNH rồi quy thang — "Điểm xét tuyển = (2*Điểm A + Điểm B + Điểm C)*3/4 + ƯT + KK" với Điểm A LUÔN là môn Toán học và Điểm B/C là 2 môn còn lại của tổ hợp (cùng hệ số 1 nên thứ tự giữa chúng không ảnh hưởng), trần 30 — trích nguyên văn Thông tin tuyển sinh trình độ Đại học (Chính quy) năm 2026 (PDF gốc 11 trang nhúng Google Drive trên cổng chính chủ tuyensinh.hmtu.edu.vn, tải trực tiếp file gốc và đọc bằng vision). Tổ hợp xét tuyển dùng CHUNG cho cả 5 ngành (B00, A00, D07, B08/D08) và trường xác nhận nguyên văn điểm xét tuyển "không phụ thuộc vào tổ hợp môn xét tuyển", nên mỗi ngành đúng 1 mức điểm chuẩn. Điểm trúng tuyển CHÍNH THỨC cả 5/5 ngành (22,50–25,00/30) từ Thông báo số 706/TB-ĐHKTYTHD ngày 10/8/2026 (ảnh scan văn bản gốc có con dấu trên cùng cổng, đọc bằng vision), cột "THPT". Điểm ưu tiên dùng khung quốc gia hiện hành (Điều 7 Thông tư 06/2026/TT-BGDĐT, judgment call cùng tiền lệ VUTM/HUPH/ULSA/EPU). PHÁT HIỆN QUAN TRỌNG VỀ PHẠM VI (giải toả tiền lệ BMTU): mục 5.1 của đề án đặt rào HỌC LỰC xếp loại khá/giỏi của khối ngành sức khỏe CHỈ ở 5.1.1 (dự bị đại học), 5.1.3 (học bạ) và 5.1.4 (ĐGNL/ĐGTD) — mục 5.1.2 dành riêng cho nhánh thi TN THPT KHÔNG có rào học lực, chỉ có ngưỡng điểm số công bố sau; nên nhánh đã mô hình hoá không bị chặn bởi trường "học lực" mà `ApplicantProfile` không có (khác BMTU, nơi rào học lực áp cho chính nhánh thi TN THPT nên batch trước phải dừng). Loại trừ: thành phần KK (điểm cộng khuyến khích — công thức có nêu nhưng đề án KHÔNG in bảng giá trị, thiếu nguồn), ngưỡng đảm bảo chất lượng đầu vào (Thông báo 594/TB-ĐHKTYTHD, chưa đọc nội dung), và 3 phương thức còn lại (tuyển thẳng, học bạ — đã có đủ công thức lẫn cột điểm chuẩn "200" nhưng vướng rào học lực, ĐGNL/ĐGTD) — đưa tổng lên 140. Batch tiếp theo cùng ngày: **NDUN** (Trường Đại học Điều dưỡng Nam Định, mã trường YDD, Bộ Y tế) mới — 3 nguồn CHÍNH CHỦ, trong đó nguồn quyết định là một loại văn bản chưa từng khai thác trong campaign: THÔNG BÁO "ĐỘ CHÊNH GIỮA CÁC TỔ HỢP XÉT TUYỂN". Cổng ndun.edu.vn nhúng văn bản qua iframe pdf.js nên WebFetch chỉ thấy tiêu đề — lấy URL file thật trong thuộc tính `file=` của iframe rồi tải thẳng từ hệ thống văn bản tcvb.ndun.edu.vn. (1) Thông tin tuyển sinh đại học năm 2026 (Quyết định 1155/QĐ-ĐDN, 15/5/2026, PDF 15 trang, đọc bằng vision) mục 2.2.2 cho công thức "ĐXT = (ĐPT2 + KK) + UT" với "ĐPT2 = (M1 + M2 + M3)", trần bằng điểm tối đa của thang xét (30), và mục 1 cho nguồn tuyển (tổng thô tối thiểu 16,50 với Điều dưỡng/Hộ sinh, 15,0 với Dinh dưỡng). (2) Thông báo ngày 09/7/2026 về ngưỡng đảm bảo chất lượng + độ chênh tổ hợp + quy đổi (PDF có text layer) mục 2 liệt kê tổ hợp THEO TỪNG NGÀNH kèm độ chênh so với tổ hợp gốc B00: Điều dưỡng và Hộ sinh dùng B00/A00/A01/B03/B08/C02/D01/D07, Dinh dưỡng dùng thêm B04 và C20, và ĐỘ CHÊNH = 0 cho TẤT CẢ — vừa cho danh mục tổ hợp vừa chứng minh mỗi ngành chỉ cần 1 mức điểm chuẩn (không phải suy luận); mục 1 cùng văn bản cho ngưỡng đảm bảo chất lượng theo ngành (18,0/18,0/15,0 tính trên tổng thô, không tính điểm cộng). (3) Thông báo số 2058/TB-ĐDN ngày 10/8/2026 (ảnh scan có chữ ký Hiệu trưởng Trương Tuấn Anh + con dấu, Cổng thông tin điện tử Chính phủ đăng lại nguyên trang ở độ phân giải đầy đủ) cho điểm chuẩn cả 3/3 ngành (Điều dưỡng 21,10; Hộ sinh 18,30; Dinh dưỡng 16,25/30), niêm yết theo nhóm quy chiếu HSPT-KV3. Module mô hình hoá CẢ BA điều kiện số (điểm chuẩn + ngưỡng đảm bảo chất lượng theo ngành + nguồn tuyển) — hiếm gặp, vì cả ba đều được công bố bằng con số rõ ràng. Điểm ưu tiên dùng khung quốc gia hiện hành (Điều 7 Thông tư 06/2026/TT-BGDĐT, judgment call cùng tiền lệ HMTU/VUTM/HUPH/ULSA/EPU). Loại trừ: thành phần KK (điểm xét thưởng thành tích/năng khiếu + khuyến khích chứng chỉ ngoại ngữ — công thức có nêu nhưng phần đã đọc không in bảng giá trị) và 3 phương thức còn lại (tuyển thẳng, học bạ — đã có đủ công thức lẫn cột điểm chuẩn, ĐGNL HSA thang 150) — đưa tổng lên 141. Batch tiếp theo cùng ngày: **VMU-Vinh** (Trường Đại học Y khoa Vinh, mã trường YKV, Nghệ An, trực thuộc UBND tỉnh) — nâng từ "Đã research, chưa đủ để tính" (batch expand-16 dừng vì chưa trích được ngưỡng/điểm chuẩn theo ngành) lên verified-exact. Công thức lấy từ Thông tin tuyển sinh đại học năm 2026 chính chủ (PDF gốc 14 trang trên vmu.edu.vn; lớp text là OCR HỎNG DẤU nên phải đọc bằng vision thay vì tin pdftotext), mục IV.4.1.a: "Điểm xét tuyển ... là tổng điểm thi tốt nghiệp THPT năm 2026 của các môn theo tổ hợp môn đăng ký xét tuyển cộng với điểm ưu tiên, điểm cộng (nếu có) và được làm tròn đến 2 chữ số thập phân", kèm 2 khẳng định chốt được phạm vi: "Điểm xét tuyển tối đa là 30 điểm, các môn trong tổ hợp môn xét tuyển có trọng số ngang nhau" và "Không quy định điểm chênh lệch giữa các tổ hợp môn xét tuyển". Điểm trúng tuyển đợt 1 CHÍNH THỨC cả 5/5 chương trình đại học chính quy (Y khoa 23,50; Kỹ thuật xét nghiệm y học 23,25; Dược học 20,00; Điều dưỡng 19,00; Y học dự phòng 18,00/30) từ Thông báo số 809/TB-ĐHYKV ngày 10/8/2026 (PDF gốc có chữ ký Hiệu trưởng Nguyễn Văn Tuấn + con dấu) — thông báo này in LUÔN cột tổ hợp xét tuyển, khớp tuyệt đối với mục III.3.1 của Thông tin tuyển sinh, nên 2 nguồn tự kiểm chứng lẫn nhau. Loại trừ dòng "Điều dưỡng liên thông" (LT7720301) vì cột thi TN THPT ghi "–" (chỉ tuyển bằng học bạ). Điểm ưu tiên dùng khung quốc gia hiện hành (Điều 7 Thông tư 06/2026/TT-BGDĐT, judgment call cùng tiền lệ NDUN/HMTU/VUTM/HUPH). Giống HMTU, rào HỌC LỰC giỏi/khá của khối ngành sức khỏe chỉ đặt ở mục II.2.2.6 (xét học bạ) — nhánh thi TN THPT (mục II.2.2.5) chỉ yêu cầu đạt ngưỡng điểm số, nên nhánh đã mô hình hoá không cần trường "học lực". Loại trừ thêm: thành phần "điểm cộng" (nêu trong công thức nhưng không có bảng giá trị), ngưỡng đảm bảo chất lượng đầu vào (thông báo riêng 10/7/2026, chưa đọc nội dung), 3 phương thức còn lại và tiêu chí phụ "thí sinh có điểm cộng thấp hơn" — đưa tổng lên 142. **Kết thúc đợt 2026-09-09/11 ở mốc 142** (134 -> 142, +8 trường: EPU, UNETI, ULSA, HUPH, VUTM, HMTU, NDUN, VMU-Vinh). Ba ứng viên được research sâu nhưng CHỦ ĐỘNG TỪ CHỐI vì thiếu đúng mảnh bằng chứng bắt buộc, ghi lại để batch sau không lặp công: (1) **TUU** (Trường Đại học Công đoàn) — có đủ điểm trúng tuyển CHÍNH THỨC 25/25 ngành (Thông báo 10/8/2026, ảnh scan có chữ ký + con dấu Hiệu trưởng, Cổng TTĐT Chính phủ đăng lại) VÀ đủ bảng tổ hợp theo ngành (ảnh thông báo điểm sàn gốc, VietNamNet đăng lại), nhưng domain daihoccongdoan.edu.vn timeout hoàn toàn từ môi trường research nên không lấy được đề án gốc; chú thích điểm sàn ghi "Tổng điểm 03 môn thi theo thang điểm 10, CHƯA NHÂN HỆ SỐ" và một nguồn thứ cấp khẳng định ngành Ngôn ngữ Anh nhân hệ số 2 môn Tiếng Anh rồi quy về thang 30 — công thức thực có thể khác tổng thô, không đủ căn cứ chính chủ để chốt (unsupported > guessed). (2) **VNKGU** (Trường Đại học Kiên Giang) — ĐÃ GIẢI QUYẾT ở batch 2026-09-22 (xem mục "Calculator đã xác minh" bên dưới): tìm thêm 2 nguồn không có trong lần research này — Đề án tuyển sinh 2026 chính thức nói rõ "Điểm xét tuyển = [(ĐM1+ĐM2+ĐM3) + Điểm cộng (nếu có)] + Điểm ưu tiên (nếu có)" (trang "chi-tiet-tin"/PDF Đề án, KHÁC trang "Chính sách ưu tiên trong tuyển sinh" cũ đã đọc ở lần research này) và trang "Điểm cộng và điểm Ưu tiên trong tuyển sinh" công bố đầy đủ bảng mức điểm ưu tiên KV/ĐT — giải quyết đúng gap đã ghi nhận trước đó. (3) **NAUE** (Trường Đại học Nghệ An) — ngược lại, CÓ công thức chính chủ rõ ràng (Thông báo 877/TB-ĐHNA, 10/7/2026: "Điểm xét tuyển = Điểm môn 1 + Điểm môn 2 + Điểm môn 3 + ƯT (nếu có)", "Điểm xét tuyển giữa các tổ hợp là tương đương (không có chênh lệch giữa các tổ hợp)", trần 30) và đủ tổ hợp + ngưỡng điểm sàn theo 15 ngành, nhưng trường CHỈ công bố DANH SÁCH THÍ SINH trúng tuyển (Quyết định 729/ĐHNA, 74 trang ảnh) chứ không công bố bảng ĐIỂM TRÚNG TUYỂN theo ngành — mà điểm sàn (15-20) thấp hơn hẳn điểm thực tế của thí sinh trúng tuyển nên không thể dùng thay điểm chuẩn. Cả ba đều được giữ nguyên trạng thái cũ thay vì hạ chuẩn bằng chứng.
 
+- **ACTVN** — Học viện Kỹ thuật Mật mã
 - **AJC** — Học viện Báo chí và Tuyên truyền
 - **AOF** — Học viện Tài chính
 - **APD** — Hoc vien Chinh sach va Phat trien
+- **BAFU** — Trường Đại học Nông - Lâm Bắc Giang
 - **BAV** — Học viện Ngân hàng
+- **BDU** — Truong Dai hoc Binh Duong
 - **BLU** — Trường Đại học Bạc Liêu
 - **BMTU** — Trường Đại học Y Dược Buôn Ma Thuột
-- **BDU** — Truong Dai hoc Binh Duong
 - **BVU** — Truong Dai hoc Ba Ria - Vung Tau
 - **CMCU** — Trường Đại học CMC
 - **CTU** — Trường Đại học Cần Thơ
 - **CTUET** — Trường Đại học Kỹ thuật - Công nghệ Cần Thơ
 - **CTUMP** — Trường Đại học Y Dược Cần Thơ
+- **DAU** — Trường Đại học Kiến trúc Đà Nẵng
+- **DAV** — Hoc vien Ngoai giao
+- **DHV** — Trường Đại học Hùng Vương TP.HCM
 - **DLA** — Trường Đại học Kinh tế Công nghiệp Long An
 - **DLU** — Truong Dai hoc Da Lat
-- **DNU** — Trường Đại học Đồng Nai
+- **DNTU** — Trường Đại học Công nghệ Đồng Nai
 - **DNU-HN** — Trường Đại học Đại Nam
+- **DNU** — Trường Đại học Đồng Nai
 - **DPD** — Trường Đại học Phương Đông
 - **DSU** — Trường Đại học Thể dục Thể thao Đà Nẵng
 - **DTHU** — Trường Đại học Đồng Tháp
 - **DTU** — Truong Dai hoc Duy Tan
+- **DUE** — Trường Đại học Kinh tế - Đại học Đà Nẵng
 - **DUMTP** — Trường Đại học Kỹ thuật Y Dược Đà Nẵng
+- **DUT** — Trường Đại học Bách khoa - Đại học Đà Nẵng
+- **EAUT** — Trường Đại học Công nghệ Đông Á
+- **EIU** — Trường Đại học Quốc tế Miền Đông
 - **EPU** — Trường Đại học Điện lực
 - **FBU** — Trường Đại học Tài chính - Ngân hàng Hà Nội
 - **FPFU** — Trường Đại học Phòng cháy Chữa cháy
@@ -34,17 +44,17 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **FTU** — Trường Đại học Ngoại thương
 - **GDU** — Trường Đại học Gia Định
 - **HALONGU** — Trường Đại học Hạ Long
+- **HANU** — Trường Đại học Hà Nội
 - **HAT** — Trường Du lịch - Đại học Huế
-- **HLUV** — Trường Đại học Hoa Lư
 - **HAU** — Trường Đại học Kiến trúc Hà Nội
-- **HBU** — Trường Đại học Hòa Bình
-- **HVU** — Trường Đại học Hùng Vương
-- **HCA** — Học viện Cán bộ Thành phố Hồ Chí Minh
 - **HaUI** — Trường Đại học Công nghiệp Hà Nội
+- **HBU** — Trường Đại học Hòa Bình
+- **HCA** — Học viện Cán bộ Thành phố Hồ Chí Minh
 - **HCE** — Trường Đại học Kinh tế, Đại học Huế
 - **HCMUE** — Trường Đại học Sư phạm Thành phố Hồ Chí Minh (HCMUE, TPHCM)
 - **HCMULAW** — Trường Đại học Luật Thành phố Hồ Chí Minh
-- **HCMUPES** — Trường Đại học Sư phạm Thể dục Thể thao TP.HCM
+- **HCMUNRE** — Trường Đại học Tài nguyên và Môi trường TP. Hồ Chí Minh
+- **HCMUPES** — Trường Đại học Sư phạm Thể dục Thể thao Thành phố Hồ Chí Minh
 - **HCMUS** — Trường Đại học Khoa học Tự nhiên - ĐHQG TP.HCM
 - **HCMUT** — Trường Đại học Bách khoa – ĐHQG TP.HCM
 - **HCMUTE** — Trường Đại học Công nghệ Kỹ thuật TP. Hồ Chí Minh
@@ -52,11 +62,15 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HDU** — Trường Đại học Hồng Đức
 - **HIU** — Trường Đại học Quốc tế Hồng Bàng
 - **HLU** — Trường Đại học Luật Hà Nội
+- **HLUV** — Trường Đại học Hoa Lư
 - **HMTU** — Trường Đại học Kỹ thuật Y tế Hải Dương
 - **HMU** — Trường Đại học Y Hà Nội
 - **HNMU** — Trường Đại học Thủ đô Hà Nội
+- **HNUE** — Trường Đại học Sư phạm Hà Nội
 - **HOU** — Trường Đại học Mở Hà Nội
 - **HPMU** — Trường Đại học Y Dược Hải Phòng
+- **HPU** — Trường Đại học Quản lý và Công nghệ Hải Phòng
+- **HPU2** — Truong Dai hoc Su pham Ha Noi 2
 - **HSU** — Trường Đại học Hoa Sen
 - **HTU** — Trường Đại học Hà Tĩnh
 - **HUAF** — Trường Đại học Nông Lâm, Đại học Huế
@@ -65,40 +79,55 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **HUC** — Trường Đại học Văn hóa Hà Nội
 - **HUCE** — Truong Dai hoc Xay dung Ha Noi
 - **HUED** — Trường Đại học Sư phạm, Đại học Huế
-- **HUFL** — Trường Đại học Ngoại ngữ, Đại học Huế (2026-09-22: nâng cấp từ identity-only lên exact — công thức Phương thức 1 (thi TN THPT) trích nguyên văn Đề án tuyển sinh chính chủ (tổng thô 3 môn + điểm ưu tiên theo quy chế Bộ GD&ĐT) + ảnh điểm chuẩn chính chủ (đợt 1, 9/8/2026) cho đủ 13/13 ngành; chỉ hỗ trợ tổ hợp dùng môn đã có trong hệ thống (D01/D14/D15/C00/X78) — nhiều tổ hợp dùng ngoại ngữ Pháp/Trung/Nhật/Nga/Hàn làm môn thi chưa mô hình hoá được; điểm cộng thành tích chưa tính (app chưa thu thập input này) — đưa tổng lên 182)
+- **HUFL** — Trường Đại học Ngoại ngữ, Đại học Huế
 - **HUFLIT** — Trường Đại học Ngoại ngữ - Tin học TP. Hồ Chí Minh
+- **HUIT** — Trường Đại học Công Thương TP.HCM
 - **HUL** — Trường Đại học Luật, Đại học Huế
 - **HUMG** — Trường Đại học Mỏ - Địa chất
 - **HUMP** — Trường Đại học Y - Dược, Đại học Huế
 - **HUNRE** — Trường Đại học Tài nguyên và Môi trường Hà Nội
 - **HUP** — Trường Đại học Dược Hà Nội
-- **HUSC** — Trường Đại học Khoa học, Đại học Huế
 - **HUPH** — Trường Đại học Y tế Công cộng
+- **HUSC** — Trường Đại học Khoa học, Đại học Huế
 - **HUST** — Đại học Bách khoa Hà Nội
 - **HUTECH** — Trường Đại học Công nghệ TP. Hồ Chí Minh
+- **HVTA** — Học viện Tòa án
+- **HVU** — Trường Đại học Hùng Vương
+- **Intracom** — Trường Đại học Intracom
 - **IU** — Trường Đại học Quốc tế – ĐHQG TP.HCM
 - **IUH** — Trường Đại học Công nghiệp Thành phố Hồ Chí Minh
 - **LHU** — Trường Đại học Lạc Hồng
 - **LTVUni** — Trường Đại học Lương Thế Vinh
+- **MDU/MIT** — Truong Dai hoc Cong nghe Mien Dong
 - **MKU** — Trường Đại học Cửu Long
+- **MTU** — Trường Đại học Xây dựng Miền Tây
 - **NAEM** — Học viện Quản lý giáo dục
-- **NAPA** — Học viện Hành chính và Quản trị công (2026-09-26: nâng cấp từ researched lên exact trong phạm vi hẹp D01 — nguồn CHÍNH CHỦ apaghcm.edu.vn/apag.edu.vn: Thông báo 1738-TB/HĐTS ngày 10/8/2026, ảnh gốc có chữ ký + con dấu, công bố điểm trúng tuyển 2026 đã quy đổi về phương thức gốc/tổ hợp môn gốc D01, thang 30, cho Hà Nội/Đà Nẵng/TP.HCM/Đắk Lắk; trang thông tin tuyển sinh 2026 xác nhận phương thức xét kết quả thi TN THPT; điều kiện riêng Luật/Thanh tra lấy từ thông báo ngưỡng ngành Luật 10/7/2026; các tổ hợp khác D01 chưa mô hình hoá vì cần bảng quy đổi đọc sạch)
+- **NAPA** — Hoc vien Hanh chinh va Quan tri cong
 - **NCTU** — Truong Dai hoc Nam Can Tho
 - **NDUN** — Trường Đại học Điều dưỡng Nam Định
+- **NEU** — Trường Đại học Kinh tế Quốc dân
 - **NLU** — Trường Đại học Nông Lâm TP.HCM
+- **NTTU** — Trường Đại học Nguyễn Tất Thành
 - **NTU-HN** — Truong Dai hoc Nguyen Trai
+- **NTU** — Trường Đại học Nha Trang
 - **OU** — Trường Đại học Mở Thành phố Hồ Chí Minh
 - **PCTU** — Trường Đại học Phan Châu Trinh
+- **PDU** — Trường Đại học Phạm Văn Đồng
 - **Phenikaa** — Trường Đại học Phenikaa
 - **PNTU** — Trường Đại học Y khoa Phạm Ngọc Thạch
 - **PTIT** — Học viện Công nghệ Bưu chính Viễn thông
 - **PVU** — Trường Đại học Dầu khí Việt Nam
 - **PXU** — Trường Đại học Phú Xuân
+- **PYU** — Trường Đại học Phú Yên
 - **QBU** — Trường Đại học Quảng Bình
 - **QNamU** — Trường Đại học Quảng Nam
 - **QNU** — Trường Đại học Quy Nhơn
+- **QTU** — Trường Đại học Quang Trung
+- **QUI** — Trường Đại học Công nghiệp Quảng Ninh
+- **SDU** — Trường Đại học Sao Đỏ
 - **SGU** — Trường Đại học Sài Gòn
-- **STU** — Trường Đại học Công nghệ Sài Gòn (2026-09-26: nâng cấp từ researched lên exact — nguồn CHÍNH CHỦ tuyensinhdaihoc.stu.edu.vn cho công thức PT02 "ĐXT = Điểm môn 01 + Điểm môn 02 + Điểm môn 03", thang 30, và điều kiện môn theo nhóm ngành; trang điểm chuẩn đợt 1 căn cứ Quyết định 614/QĐ-DSG-ĐT ngày 09/08/2026 cho đủ 20/20 ngành, PT02 = 15,0/30 cho 19 ngành và 20,0/30 cho Luật kinh tế; điểm ưu tiên KV/ĐT dùng judgment call khung quốc gia hiện hành; chỉ mô hình hoá PT02, chưa mô hình hoá PT01/PT03/PT04)
+- **SIU** — Trường Đại học Quốc tế Sài Gòn
+- **STU** — Truong Dai hoc Cong nghe Sai Gon
 - **TBDU** — Truong Dai hoc Thai Binh Duong
 - **TBU** — Trường Đại học Thái Bình
 - **TDMU** — Trường Đại học Thủ Dầu Một
@@ -106,16 +135,21 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **TDU** — Truong Dai hoc Tay Do
 - **TGU** — Truong Dai hoc Tien Giang
 - **ThanhDo** — Truong Dai hoc Thanh Do
-- **TLU** — Trường Đại học Thủy lợi
+- **THUV** — Trường Đại học Y khoa Tokyo Việt Nam
+- **TKS** — Trường Đại học Kiểm sát Hà Nội
 - **TLU-HN** — Trường Đại học Thăng Long
+- **TLU** — Trường Đại học Thủy lợi
 - **TMU** — Trường Đại học Thương mại
+- **TNUE** — Truong Dai hoc Su pham - Dai hoc Thai Nguyen
+- **TNUFL** — Truong Ngoai ngu - Dai hoc Thai Nguyen
+- **TNUS** — Truong Dai hoc Khoa hoc - Dai hoc Thai Nguyen
+- **TNUT** — Trường Đại học Kỹ thuật Công nghiệp - Đại học Thái Nguyên
 - **TTN** — Truong Dai hoc Tay Nguyen
 - **TTU** — Truong Dai hoc Tan Tao
-- **TNUT** — Trường Đại học Kỹ thuật Công nghiệp - Đại học Thái Nguyên
 - **TUAF** — Truong Dai hoc Nong Lam - Dai hoc Thai Nguyen
 - **TUEBA** — Trường Đại học Kinh tế và Quản trị kinh doanh - Đại học Thái Nguyên
 - **TUMP** — Trường Đại học Y - Dược, Đại học Thái Nguyên
-- **TUU** — Trường Đại học Công đoàn (2026-09-22: nâng cấp từ researched lên exact — ảnh thông báo điểm trúng tuyển chính chủ có chữ ký + con dấu (Cổng TTĐT Chính phủ đăng lại, 10/8/2026) cho đủ 25/25 ngành; công thức ĐXT = tổng thô 3 môn + điểm ưu tiên trích từ Đề án tuyển sinh (nêu rõ cho phương thức học bạ/ĐGNL chị em trong cùng đề án, không lặp lại nhưng cũng không loại trừ cho phương thức thi THPT — điểm ưu tiên dùng judgment call khung quốc gia); loại 4/25 ngành có điều kiện phụ (Luật/Luật kinh tế: Toán+Văn ≥6, tổng ≥18; Ngôn ngữ Anh/QTKD-IPOP: Tiếng Anh ≥7,0) — đưa tổng lên 183)
+- **TUU** — Trường Đại học Công đoàn
 - **TVU** — Trường Đại học Trà Vinh
 - **TVUni** — Trường Đại học Trưng Vương
 - **UAH** — Truong Dai hoc Kien truc TP.HCM
@@ -127,93 +161,59 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **UFLS** — Trường Đại học Ngoại ngữ - Đại học Đà Nẵng
 - **UFM** — Trường Đại học Tài chính – Marketing
 - **UHD** — Trường Đại học Hải Dương
-- **UNETI** — Trường Đại học Kinh tế - Kỹ thuật Công nghiệp
+- **UKH** — Trường Đại học Khánh Hòa
 - **ULSA** — Trường Đại học Lao động - Xã hội
 - **UMP** — Trường Đại học Y Dược Thành phố Hồ Chí Minh
 - **UMT** — Trường Đại học Quản lý và Công nghệ TP.HCM
-- **USH** — Trường Đại học Thể dục Thể thao TP.HCM
+- **UNETI** — Trường Đại học Kinh tế - Kỹ thuật Công nghiệp
+- **USH** — Trường Đại học Thể dục Thể thao Thành phố Hồ Chí Minh
 - **USSH** — Trường Đại học Khoa học Xã hội và Nhân văn – ĐHQG TP.HCM
+- **USTH** — Trường Đại học Khoa học và Công nghệ Hà Nội
 - **UTC** — Trường Đại học Giao thông vận tải
+- **UTE** — Trường Đại học Sư phạm Kỹ thuật - Đại học Đà Nẵng
 - **UTM** — Trường Đại học Công nghệ và Quản lý hữu nghị
 - **UTT** — Trường Đại học Công nghệ Giao thông vận tải
+- **VAA** — Học viện Hàng không Việt Nam
+- **VGU** — Truong Dai hoc Viet Duc
 - **VHS** — Trường Đại học Văn hóa Thành phố Hồ Chí Minh
 - **VHU** — Trường Đại học Văn Hiến
-- **VKU** — Trường Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn
 - **VinhUni** — Trường Đại học Vinh
-- **VMU** — Trường Đại học Hàng hải Việt Nam
+- **VIU** — Trường Đại học Công nghiệp Việt-Hưng
+- **VJU** — Trường Đại học Việt Nhật - Đại học Quốc gia Hà Nội
+- **VKU** — Trường Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn
 - **VMU-Vinh** — Trường Đại học Y khoa Vinh
-- **VNU-HUS** — Trường Đại học Khoa học Tự nhiên - ĐHQG Hà Nội
-- **VNU-UEB** — Trường Đại học Kinh tế - ĐHQG Hà Nội
-- **VNU-UED** — Trường Đại học Giáo dục - ĐHQG Hà Nội
-- **VNU-UET** — Trường Đại học Công nghệ - ĐHQG Hà Nội
+- **VMU** — Trường Đại học Hàng hải Việt Nam
+- **VNKGU** — Trường Đại học Kiên Giang
+- **VNU-HSB** — Trường Quản trị và Kinh doanh - Đại học Quốc gia Hà Nội
+- **VNU-HUS** — Trường Đại học Khoa học Tự nhiên - ĐHQGHN
+- **VNU-IS** — Trường Quốc tế - Đại học Quốc gia Hà Nội
+- **VNU-LS** — Truong Dai hoc Luat - Dai hoc Quoc gia Ha Noi
+- **VNU-UEB** — Trường Đại học Kinh tế - ĐHQGHN
+- **VNU-UED** — Trường Đại học Giáo dục - ĐHQGHN
+- **VNU-UET** — Trường Đại học Công nghệ - ĐHQGHN
 - **VNU-ULIS** — Truong Dai hoc Ngoai ngu - Dai hoc Quoc gia Ha Noi
 - **VNU-UMP** — Truong Dai hoc Y Duoc - Dai hoc Quoc gia Ha Noi
-- **THUV** — Trường Đại học Y khoa Tokyo Việt Nam (2026-09-16: PT2 thi TN THPT, không chứng chỉ JLPT — điểm chuẩn 18,0/30 đồng nhất 4 ngành)
-- **HVTA** — Học viện Tòa án (2026-09-16: ngành Luật duy nhất, thi TN THPT — ngưỡng 18,0/30 + Toán/Văn≥6/10; LƯU Ý còn điều kiện "Đạt sơ tuyển" tại TAND/Học viện ngoài phạm vi điểm số, chưa model)
-- **DAV** — Hoc vien Ngoai giao (2026-09-21: PT4 thi TN THPT, 9 ngành không phải Luật, tổ hợp A00/A01/C00/D01/D07/D09/D10/D14/D15 — điểm xét = tổng 3 môn + ưu tiên giảm dần, ngưỡng 22/C00 23 đã gồm ưu tiên; LƯU Ý chưa tính điểm xét thưởng HSG, ngành Luật, tổ hợp Pháp/Trung/Nhật/Hàn)
-- **VGU** — Truong Dai hoc Viet Duc (2026-09-21: PT5 thi TN THPT, 12 ngành trừ Kiến trúc, tổ hợp A00/A01/A02/B00/D01/D07 theo ngành — điểm 3 môn + ưu tiên ≥ điểm sàn 17–22/30 (bảng chính thức đọc từ ảnh) + tổng thô ≥ 15 + yêu cầu tiếng Anh; LƯU Ý chưa xét bài thi tiếng Anh VGU, TOEFL, IELTS 5,5, Kiến trúc)
-- **UTE** — Trường Đại học Sư phạm Kỹ thuật - Đại học Đà Nẵng (2026-09-21: xét điểm thi THPT kết hợp học bạ, 23/25 ngành — ĐXT = THPT×hệ số + học bạ TB 3 năm×hệ số + ưu tiên giảm dần, ngưỡng 15–20/30 theo ngành từ ảnh chính thức; LƯU Ý chưa tính điểm cộng thành tích, ngoài phạm vi Thiết kế vi mạch bán dẫn và Kiến trúc)
-- **HNUE** — Trường Đại học Sư phạm Hà Nội (2026-09-21: kiểm tra điểm sàn thi TN THPT theo ngành, 51/57 ngành từ bảng chính thức 9 lĩnh vực — tổng 3 môn không hệ số/không cộng, khu vực 3; LƯU Ý vùng ưu tiên trả chưa kết luận, không có điểm xét cuối/điểm chuẩn, 6 ngành năng khiếu ngoài phạm vi)
-- **EAUT** — Trường Đại học Công nghệ Đông Á (2026-09-21: phương thức 1 học bạ 6 học kỳ ≥ 18 + điểm thi TN THPT ≥ 15 theo tổ hợp hợp lệ của 24/26 mã ngành; LƯU Ý dùng đúng dữ liệu 6 học kỳ, khối Sức khỏe ngoài phạm vi, chưa có phương thức 2-4)
-- **HUIT** — Trường Đại học Công Thương TP.HCM (2026-09-21: kiểm tra ngưỡng thi TN THPT theo 39 ngành chính quy + tổ hợp — Luật/Luật kinh tế ≥ 20 kèm Toán, Văn ≥ 6, ngành còn lại ≥ 16; LƯU Ý vùng ưu tiên trả chưa kết luận, không có điểm xét cuối/điểm chuẩn, chưa hỗ trợ liên kết quốc tế/học bạ/ĐGNL)
-- **EIU** — Trường Đại học Quốc tế Miền Đông (2026-09-21: 9/10 ngành trừ Điều dưỡng, thi TN THPT ≥ 15 hoặc học bạ 6 học kỳ ≥ 18 kèm điểm thi ≥ 15 theo tổ hợp hợp lệ của ngành; LƯU Ý không cộng ưu tiên, chưa có ĐGNL/điểm chuẩn)
-- **BAFU** — Trường Đại học Nông - Lâm Bắc Giang (2026-09-16: PT2 thi TN THPT, ĐXT=ĐM1+ĐM2+ĐM3+ĐƯT, so RAW 15/30 đồng nhất 20 ngành)
-- **QTU** — Trường Đại học Quang Trung (2026-09-16: thi TN THPT, ĐXT gồm ưu tiên, Điều dưỡng ≥18/30, 10 ngành còn lại ≥15/30)
-- **DNTU** — Trường Đại học Công nghệ Đồng Nai (2026-09-16: thi TN THPT, so RAW, 20 ngành ≥15/30, Điều dưỡng/Xét nghiệm y học ≥18/30)
-- **SIU** — Trường Đại học Quốc tế Sài Gòn (2026-09-16: thi TN THPT, so RAW 15/30 đồng nhất, trừ Luật kinh tế ngoài phạm vi)
-- **MTU** — Trường Đại học Xây dựng Miền Tây (2026-09-16: PT1 thi TN THPT, so RAW 15/30 đồng nhất 28 ngành, ĐXT gồm ưu tiên+điểm cộng)
-- **DAU** — Trường Đại học Kiến trúc Đà Nẵng (2026-09-16: thi TN THPT thuần, so RAW sàn 15/30 ghi rõ không gồm ưu tiên; LƯU Ý điểm chuẩn thật theo ngành 16,5-18/30 cao hơn sàn)
-- **HPU** — Trường Đại học Quản lý và Công nghệ Hải Phòng (2026-09-16: thi TN THPT, so RAW theo mã ngành 15,0-18,5/30, điểm chuẩn thật)
-- **Intracom** — Trường Đại học Intracom, tiền thân Chu Văn An (2026-09-16: thi TN THPT, so RAW, 12 ngành ≥15/30, Luật Kinh tế ≥20/30)
-- **SDU** — Trường Đại học Sao Đỏ (2026-09-17: điểm chuẩn thật đọc qua ảnh chụp màn hình, so RAW, 18 ngành ≥15/30, Luật ≥20/30)
-- **VIU** — Trường Đại học Công nghiệp Việt-Hưng (2026-09-17: điểm sàn đọc qua ảnh scan, so RAW 15/30 đồng nhất 21 ngành)
-- **VUI** — Trường Đại học Công nghiệp Việt Trì (2026-09-17: điểm chuẩn thật qua báo Công Thương — cơ quan chủ quản, so RAW 15/30 đồng nhất 18 ngành)
-- **QUI** — Trường Đại học Công nghiệp Quảng Ninh (2026-09-17: ngưỡng sàn, so RAW 15/30 đồng nhất 12 ngành)
-- **TKS** — Trường Đại học Kiểm sát Hà Nội (2026-09-17: nhóm Luật/Luật kinh tế/Ngôn ngữ Anh — không gồm chuyên ngành Kiểm sát vì cutoff theo giới tính; ĐXT quy đổi tổ hợp về D01 + độ lệch + ưu tiên)
-- **VNU-USSH** — Trường Đại học Khoa học Xã hội và Nhân văn - ĐHQG Hà Nội
-- **TNUS** — Trường Đại học Khoa học - Đại học Thái Nguyên (2026-09-22: nâng lên exact — Điểm xét tuyển = tổng thô 3 môn + điểm ưu tiên, so với điểm chuẩn thật theo 39/40 mã xét tuyển; nguồn Thông báo 517/TB-ĐHKH (ngưỡng+công thức) + infographic điểm chuẩn chính chủ, cùng năm 2026; Luật/Luật kinh tế kèm điều kiện Toán hoặc Văn ≥6, Công nghệ bán dẫn kèm Toán ≥7,5; loại Ngôn ngữ Anh định hướng giảng dạy do điều kiện IELTS/học bạ riêng — đưa tổng lên 173)
-- **VNUF** — Trường Đại học Lâm nghiệp (2026-09-22: nâng lên exact — điểm chuẩn thật (công bố 13/8/2026) đồng nhất 15,00/30 cho mọi ngành/cơ sở (Hà Nội/Đồng Nai/Gia Lai), khớp đúng ngưỡng nguồn xét tuyển đầu vào (Thông báo điểm sàn 16/7/2026, "không tính điểm ưu tiên, điểm cộng") — so tổng thô, đưa tổng lên 174)
-- **USTH** — Trường Đại học Khoa học và Công nghệ Hà Nội (2026-09-22: mới, nâng thẳng lên exact — Quyết định 171/QĐ-ĐHKHCN (công thức: tổng 3 môn + điểm ưu tiên, điểm khuyến khích) + trang điểm chuẩn chính chủ, cùng năm 2026, 16/17 mã ngành PT4 (thi TN THPT); loại Kỹ thuật Hàng không và 3 chương trình song bằng (chỉ xét thang 100) — đưa tổng lên 175)
-- **HANU** — Trường Đại học Hà Nội (2026-09-22: mới, nâng thẳng lên exact — công thức nhân hệ số (Toán hoặc Văn + Ngoại ngữ ×2, tổng tối đa 50 quy đổi thang 40) từ trang thông tin tuyển sinh chính chủ + Quyết định 3222/QĐ-ĐHHN (điểm chuẩn thật, ký/đóng dấu, đọc bằng vision), cùng năm 2026, 29/30 mã ngành; chỉ hỗ trợ tổ hợp dùng tiếng Anh làm Ngoại ngữ (taxonomy chưa có Nga/Pháp/Trung/Đức/Nhật/Hàn), điểm ưu tiên quy đổi ×4/3 theo tiền lệ AJC — đưa tổng lên 176)
-- **NTTU** — Trường Đại học Nguyễn Tất Thành (2026-09-22: thêm phương thức thi TN THPT lên exact — điểm chuẩn thật (công bố 09/8/2026) theo 6 nhóm ngành (Y khoa/RHM 22, Dược/YHCT 20, Điều dưỡng nhóm 18, Luật 20, còn lại 15, thang 30), so tổng thô; nguồn không có anchor điểm ưu tiên nên KHÔNG hiển thị kể cả dạng tham khảo (khác precedent QUI/HPU) — phương thức học bạ (eligibility-only, đã có từ trước) giữ nguyên — đưa tổng lên 177)
-- **NEU** — Trường Đại học Kinh tế Quốc dân (2026-09-22: thêm PTXT5 (thi TN THPT thuần) lên exact — công thức + điểm ưu tiên trích nguyên văn chính chủ (KHÔNG judgment call, hiếm gặp), tổ hợp A00/A01/D01/D07 hệ số 1; điểm chuẩn thật Thông báo 1890/TB-ĐHKTQD (09/8/2026) cho 42/88 mã ngành CHUẨN, loại chương trình tiên tiến/chất lượng cao/POHE/xét kết hợp riêng (EPxx); bảng quy đổi HSA/SAT/V-ACT/TSA (method cũ) giữ nguyên partial — đưa tổng lên 178)
-- **PDU** — Trường Đại học Phạm Văn Đồng (2026-09-22: mới, nâng thẳng lên exact — Phương thức 1 (thi TN THPT), điểm trúng tuyển thật theo mã ngành (Thông báo 997/TB-ĐHPVĐ, 10/8/2026, ký tên + đóng dấu) 13/14 chương trình (15,00-22,30/30, loại Giáo dục Mầm non cao đẳng — tổ hợp năng khiếu); công thức Tổng điểm xét tuyển = M1+M2+M3+điểm ưu tiên trích nguyên văn "Thông tin tuyển sinh năm 2026" (Quyết định 131/QĐ-ĐHPVĐ), điểm ưu tiên dẫn chiếu TT 06/2026/TT-BGDĐT (khung quốc gia) — đưa tổng lên 181)
-- **UKH** — Trường Đại học Khánh Hòa (2026-09-22: mới, nâng thẳng lên exact — điểm trúng tuyển thật theo 21/21 mã xét tuyển (Thông báo 07/TB-HĐTS, 09/8/2026, ký tên + đóng dấu) 15,00-24,88/30, tổ hợp môn + Phụ lục IV bảng điểm ưu tiên ĐẦY ĐỦ (khớp khung quốc gia) từ "Thông tin tuyển sinh năm 2026 (cập nhật)"; điểm cộng thành tích (tối đa 3,00) KHÔNG mô hình hoá — kết quả "chưa đạt" là cận dưới cho thí sinh có thành tích; loại tổ hợp có môn Tiếng Trung (D04/D45/D65, chưa có SubjectId) — đưa tổng lên 182)
-- **VNKGU** — Trường Đại học Kiên Giang (2026-09-22: mới, nâng thẳng lên exact — GIẢI QUYẾT gap đã ghi nhận ở research trước (xem đầu file): Đề án tuyển sinh 2026 chính thức nói rõ "Điểm xét tuyển = [(ĐM1+ĐM2+ĐM3) + Điểm cộng (nếu có)] + Điểm ưu tiên (nếu có)" + trang "Điểm cộng và điểm Ưu tiên" công bố đầy đủ bảng KV/ĐT (khớp khung quốc gia); điểm trúng tuyển thật theo 28/28 mã xét tuyển (Số 04/TB-HĐTS, 10/8/2026, ký tên + đóng dấu) 15,00-28,55/30; điểm cộng thành tích (tối đa 3,00) KHÔNG mô hình hoá — đưa tổng lên 183)
-- **MDU/MIT** — Trường Đại học Công nghệ Miền Đông (2026-09-26: nâng từ researched lên exact — trang chính chủ mit.vn công bố PT xét kết quả thi TN THPT 2026 theo tổng 3 môn/tổ hợp; bảng điểm chuẩn 2026 cross-check qua nguồn tổng hợp, mô hình hoá 17 chương trình ngưỡng 15/30, loại trừ Dược học và Luật kinh tế do cần thêm điều kiện/chính sách ngành đặc thù; điểm ưu tiên chỉ hiển thị tham khảo, eligibility so ngưỡng raw theo nguồn — đưa tổng lên 186)
-- **HCMUNRE** — Trường Đại học Tài nguyên và Môi trường TP. Hồ Chí Minh (2026-09-27: nâng từ researched lên exact — nguồn CHÍNH CHỦ tuyensinh.hcmunre.edu.vn: Quyết định về điểm trúng tuyển đại học chính quy đợt 1 năm 2026 kèm file đính kèm PT1.pdf (đọc trực tiếp bằng vision từ PDF gốc) cho Phương thức 1 (thi TN THPT), đủ 20/20 ngành, 15,00-21,00/30; trang "Thông báo ngưỡng chất lượng đầu vào..." xác nhận công thức Điểm xét tuyển = tổng thô 3 môn + điểm ưu tiên (nếu có); điểm ưu tiên dùng judgment call khung quốc gia hiện hành (trường không tự công bố bảng riêng); loại tổ hợp X03/X04 (không có SubjectId tương ứng). LƯU Ý: lần thử trước (Codex) từng lấy nhầm số liệu của HUNRE (Hà Nội, trường khác hoàn toàn) gán vào schoolId này — batch này đã đối chiếu lại đúng domain/tiêu đề trang trước khi nâng, xem sources.ts — đưa tổng lên 189)
-- **VNU-IS** — Trường Quốc tế - ĐHQG Hà Nội (2026-09-27: nâng từ researched lên exact — nguồn kết hợp CHÍNH THỨC: thông báo tổng hợp điểm chuẩn của ĐHQGHN (vnu.edu.vn, mục 10) + thông báo chi tiết công thức/tổ hợp của chính Trường Quốc tế (is.vnu.edu.vn), công bố nguyên văn "Điểm xét tuyển = Tổng điểm 03 môn + Điểm cộng (nếu có) + Điểm ưu tiên (nếu có)"; đủ 14/14 chương trình, 19,00-21,25/30; bảng điểm ưu tiên khu vực/đối tượng ĐẦY ĐỦ do trường tự công bố (không phải judgment call), khớp khung quốc gia hiện hành; 4 chương trình (QHQ04/08/10/12) có điều kiện phụ Toán >= 6,0/10 nếu dùng D01 — đã mô hình hoá. VNU-VJU (cùng đợt tìm hiểu) KHÔNG nâng được vì trang chính thức tự ghi "Công thức tính Điểm quy đổi sẽ cập nhật SAU KHI có kết quả thi TN THPT 2026" — trường chưa công bố công thức, không đoán. Điểm cộng thành tích và 2 phương thức khác (CCTA+THPT, HSA) chưa mô hình hoá — đưa tổng lên 190)
-- **VNU-HSB** — Trường Quản trị và Kinh doanh - ĐHQG Hà Nội (2026-09-28: nâng từ researched lên exact — nguồn kết hợp CHÍNH THỨC: thông báo tổng hợp điểm chuẩn của ĐHQGHN (vnu.edu.vn, mục 11) + thông báo chi tiết tổ hợp của chính HSB (hsb.edu.vn), xác nhận CẢ 6 chương trình dùng chung 1 bộ tổ hợp (A01/D01/D07/D08/D09/D10/X25/X26, loại X27/X28 không có SubjectId), "Chênh lệch điểm xét tuyển: Không quy định"; đủ 6/7 chương trình, 19,00-20,75/30 (BBNS thông báo riêng, chưa có điểm chuẩn xác nhận). GHI CHÚ QUAN TRỌNG: một lần giao Codex (gpt-5.6-luna) trước đó cho trường này ĐÃ THẤT BẠI NẶNG — Codex bỏ qua toàn bộ dữ kiện thật được cung cấp, tự bịa ngưỡng chung "15" và tổ hợp hoàn toàn khác không khớp nguồn nào, không có sources.ts — đã huỷ bỏ hoàn toàn, không merge. Batch này Claude tự viết trực tiếp từ nguồn đã tự xác minh. Cùng đợt tìm hiểu, VNU-SIS KHÔNG nâng được vì phát hiện hệ thống hệ số (môn chung nhân hệ số 2 hoặc 1 tuỳ vị trí) và bảng dự kiến (tháng 1)/chính thức (tháng 8) không khớp tổ hợp — không đủ tin cậy để mô hình hoá — đưa tổng lên 191)
-- **VJU** — Trường Đại học Việt Nhật - ĐHQG Hà Nội (2026-10-01: nâng từ researched lên exact — nguồn kết hợp CHÍNH THỨC: thông báo tổng hợp điểm chuẩn của ĐHQGHN (vnu.edu.vn, mục Trường Đại học Việt Nhật) + thông tin tuyển sinh chi tiết của chính VJU (vju.ac.vn, PDF 37 trang, đọc bằng vision), xác nhận "không có độ chênh lệch điểm chuẩn giữa các tổ hợp" và không hệ số môn; đủ 9/9 chương trình, điểm trúng tuyển 20,00-21,25/30 (Phương thức 100). Điều kiện ngoại ngữ đầu vào và điểm thưởng/khuyến khích chưa mô hình hoá; 2026-10-01 bổ sung quy đổi IELTS/TOEFL iBT thay môn Tiếng Anh và JLPT (N3/N2/N1 -> 9/9,5/10) thay môn Tiếng Nhật theo Phụ lục I (lấy điểm cao hơn), và đủ các tổ hợp Tiếng Nhật (D06, D28, D23, D33, D18, D43, D53, D63, X98) sau khi thêm SubjectId japanese — xem knowledgeGaps.ts)
-- **VAA** — Học viện Hàng không Việt Nam (2026-10-01: nâng từ eligibility-only lên exact — nguồn CHÍNH THỨC vau.edu.vn (vaa.edu.vn chuyển hướng): thông báo điểm trúng tuyển (2 ảnh bảng, đọc bằng vision) 36 mã xét tuyển, 18-27,5/30 (Phương thức 1, thi TN THPT) + Thông tin tuyển sinh 2026 (19 trang ảnh): công thức (môn1 x3 + môn2 x2 + môn3)/2 + ưu tiên, nhóm THXT TA01/TA02/DT01/DT02, không độ lệch giữa tổ hợp, bảng mức và công thức giảm ưu tiên của chính trường. Điểm cộng giải thưởng, và điều kiện phụ ngoại ngữ chưa mô hình hoá; 2026-10-01 bổ sung môn Tiếng Hàn/Tiếng Trung làm ngoại ngữ nhân 3 của ngành Ngôn ngữ Hàn/Trung kèm quy đổi TOPIK/HSK (cấp 4 -> 10, cấp 3 -> 8) — xem knowledgeGaps.ts; 2026-10-01 bổ sung quy đổi IELTS/TOEFL iBT thay môn Tiếng Anh theo mục 2.5, TOEIC chưa dùng; 2026-10-01 bổ sung Phương thức 2 xét học bạ: TB3N từng môn (TB cả năm lớp 10/11/12), cùng công thức hệ số 3/2/1, điểm trúng tuyển học bạ 20-28,13/30 theo mã xét tuyển, chưa kiểm tra điều kiện điểm thi THPT tối thiểu 15/30)
-- **ACTVN** — Học viện Kỹ thuật Mật mã (2026-10-01: nâng từ researched lên exact — nguồn CHÍNH THỨC tuyensinh.actvn.edu.vn: Quyết định 44/QĐ-HĐTS ngày 13/08/2026 (phụ lục điểm chuẩn, đọc bằng vision từ ảnh scan) cho 4 mã xét tuyển hệ kinh tế - xã hội, 23,96-25,8/30, + Thông báo tuyển sinh 2026: các môn trong tổ hợp hệ số 1, không chênh lệch giữa các tổ hợp (A00/A01/X26/X06/C01; Điện tử - Viễn thông: A00/A01/X06/X07). Ưu tiên dùng khung quốc gia làm judgment call — xem knowledgeGaps.ts; 2026-10-01 bổ sung điểm cộng chứng chỉ tiếng Anh IELTS/TOEIC/TOEFL iBT +0,5/+1/+1,5, chưa phân biệt TOEFL iBT Home Edition)
-- **NTU** — Trường Đại học Nha Trang (2026-10-01: nâng từ researched lên exact, chốt mốc 195 — nguồn CHÍNH THỨC tuyensinh.ntu.edu.vn: Thông báo điểm chuẩn trúng tuyển 2026 (Bảng 1: 53 chương trình x điểm riêng từng mã tổ hợp, 19,62-27,66; Bảng 2: diễn giải 24 mã tổ hợp) + Bảng quy đổi 30/07/2026 xác nhận THANG 40, tổ hợp 4 vị trí điểm (Toán*2...). Mô hình tính mọi tổ hợp thí sinh đủ điểm và chọn tổ hợp chênh lệch tốt nhất so với điểm trúng tuyển của chính nó. Ưu tiên dùng khung quốc gia x4/3 (judgment call như HANU/AJC); điều kiện tiếng Anh, điểm cộng chưa mô hình hoá; đủ 24 mã tổ hợp kể cả T2VN (Tiếng Nhật) và T2VP (Tiếng Pháp) từ 2026-10-01 — xem knowledgeGaps.ts)
+- **VNU-USSH** — Trường Đại học Khoa học Xã hội và Nhân văn - ĐHQGHN
 - **VNUA** — Hoc vien Nong nghiep Viet Nam
+- **VNUF** — Truong Dai hoc Lam nghiep
 - **VTTU** — Trường Đại học Võ Trường Toản
+- **VUI** — Trường Đại học Công nghiệp Việt Trì
 - **VUTM** — Học viện Y Dược học cổ truyền Việt Nam
 - **VWA** — Học viện Phụ nữ Việt Nam
 - **VYA** — Học viện Thanh thiếu niên Việt Nam
 
-## Calculator một phần (2)
+## Calculator một phần (1)
 
 - **UHS** — Trường Đại học Khoa học Sức khỏe - ĐHQG TP.HCM
 
-## Chỉ kiểm tra điều kiện/ngưỡng (15)
+## Chỉ kiểm tra điều kiện/ngưỡng (4)
 
 - **AGU** — Trường Đại học An Giang – ĐHQG TP.HCM
-- **DHV** — Trường Đại học Hùng Vương TP.HCM
-- **DUE** — Trường Đại học Kinh tế - Đại học Đà Nẵng
-- **DUT** — Trường Đại học Bách khoa - Đại học Đà Nẵng
-- **HPU2** — Truong Dai hoc Su pham Ha Noi 2
-- **PYU** — Trường Đại học Phú Yên
 - **TNU** — Dai hoc Thai Nguyen
-- **TNUE** — Truong Dai hoc Su pham - Dai hoc Thai Nguyen
-- **TNUFL** — Truong Ngoai ngu - Dai hoc Thai Nguyen
 - **UIT** — Trường Đại học Công nghệ Thông tin – ĐHQG TP.HCM
 - **VLU** — Trường Đại học Văn Lang
-- **VNU-LS** — Truong Dai hoc Luat - Dai hoc Quoc gia Ha Noi
 
-## Đã research, chưa đủ để tính (57)
+## Đã research, chưa đủ để tính (49)
 
 - **AADAA** — Học viện Phòng không - Không quân
 - **AOC** — Trường Đại học Sĩ quan Pháo binh
@@ -251,6 +251,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **SKDAHCM** — Trường Đại học Sân khấu - Điện ảnh TP.HCM
 - **TQT** — Trường Đại học Trần Quốc Tuấn - Sĩ quan Lục quân 1
 - **TQU** — Trường Đại học Tân Trào
+- **TUCST** — Trường Đại học Văn hóa, Thể thao và Du lịch Thanh Hóa
 - **UAD** — Trường Đại học Mỹ thuật Công nghiệp
 - **UDN** — Đại học Đà Nẵng
 - **UPES1** — Trường Đại học Thể dục Thể thao Bắc Ninh
@@ -264,7 +265,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **VNU-SIS** — Trường Khoa học liên ngành và Nghệ thuật - ĐHQG Hà Nội
 - **VNUFA** — Trường Đại học Mỹ thuật Việt Nam
 
-## Chỉ có trong danh mục (87)
+## Chỉ có trong danh mục (106)
 
 Batch catalog-expansion (2026-09-04): +6 cơ sở đại học/học viện công lập độc lập bị thiếu khỏi danh mục — phát hiện qua đối chiếu toàn bộ registry hiện có với danh sách trường đại học/học viện Việt Nam (Wikipedia dùng làm manh mối, KHÔNG làm bằng chứng danh tính duy nhất) rồi xác minh từng website chính thức riêng lẻ trước khi thêm: **EPU** (Trường Đại học Điện lực, Hà Nội, epu.edu.vn, trực thuộc Bộ Công Thương — KHÁC "Trường Cao đẳng Điện lực TP.HCM"/HEPC đã có sẵn trong danh mục), **VUTM** (Học viện Y Dược học cổ truyền Việt Nam, Hà Nội, vutm.edu.vn, trực thuộc Bộ Y tế), **HUPH** (Trường Đại học Y tế Công cộng, Hà Nội, huph.edu.vn, trực thuộc Bộ Y tế), **HMTU** (Trường Đại học Kỹ thuật Y tế Hải Dương, Hải Dương, hmtu.edu.vn, trực thuộc Bộ Y tế), **NDUN** (Trường Đại học Điều dưỡng Nam Định, Nam Định, ndun.edu.vn, trực thuộc Bộ Y tế), **HUArt** (Trường Đại học Nghệ thuật, Đại học Huế, huế, nghethuathue.edu.vn — trường thành viên Đại học Huế, cùng convention với husc/hce/hul/huaf/hueedu/hump/hufl/hat đã có; KHÁC Học viện Âm nhạc Huế/`ham` đã có sẵn, 2 cơ sở đã tách từ 1994). Catalog-only — chưa research nguồn tuyển sinh, KHÔNG bật bất kỳ capability nào. Xem `docs/catalog-expansion-report.md` cho nguồn chi tiết.
 
@@ -350,46 +351,70 @@ whose domain (uad.edu.vn) briefly caused confusion during this batch's research.
 `docs/catalog-expansion-report.md` for full detail.
 
 - **AIU** — Trường Đại học Quốc tế Á Châu
+- **AURORA** — Trường Cao đẳng Bình Minh Sài Gòn
+- **BÁCH VIỆT** — Trường Cao đẳng Bách khoa Bách Việt
+- **BCTECH** — Trường Cao đẳng Kỹ thuật Công nghệ Bà Rịa - Vũng Tàu
 - **BHU** — Trường Đại học Quốc tế Bắc Hà
+- **BKC** — Trường Cao đẳng Bách Khoa Sài Gòn
+- **CAO THẮNG** — Trường Cao đẳng Kỹ thuật Cao Thắng
 - **CCO** — Trường Đại học Sĩ quan Phòng hóa
 - **CCST** — Trường Cao đẳng Xây dựng và Công nghệ - Xã hội
-- **CĐ Huế** — Trường Cao đẳng Huế
-- **CĐ Đà Lạt** — Trường Cao đẳng Đà Lạt
-- **CĐ Lạng Sơn** — Trường Cao đẳng Lạng Sơn
-- **CĐPĐ** — Trường Cao đẳng Phương Đông Đà Nẵng
 - **CDCT** — Trường Cao đẳng Cần Thơ
+- **CĐ DU LỊCH SG** — Trường Cao đẳng Du lịch Sài Gòn
+- **CĐ Đà Lạt** — Trường Cao đẳng Đà Lạt
+- **CĐ Huế** — Trường Cao đẳng Huế
+- **CĐ Lạng Sơn** — Trường Cao đẳng Lạng Sơn
+- **CĐ MIỀN NAM** — Trường Cao đẳng Miền Nam
+- **CĐ SÀI GÒN** — Trường Cao đẳng Sài Gòn
+- **CĐN TP.HCM** — Trường Cao đẳng nghề Thành phố Hồ Chí Minh
+- **CĐPĐ** — Trường Cao đẳng Phương Đông Đà Nẵng
 - **CĐSPBN** — Trường Cao đẳng Sư phạm Bắc Ninh
+- **CĐSPBRVT** — Trường Cao đẳng Sư phạm Bà Rịa - Vũng Tàu
 - **CĐSPHB** — Trường Cao đẳng Sư phạm Hòa Bình
+- **CĐSPKG** — Trường Cao đẳng Sư phạm Kiên Giang
 - **CĐSPND** — Trường Cao đẳng Sư phạm Nam Định
+- **CĐSPTB** — Trường Cao đẳng Sư phạm Thái Bình
+- **CĐYT BD** — Trường Cao đẳng Y tế Bình Dương
+- **CĐYT BRVT** — Trường Cao đẳng Y tế tỉnh BRVT
 - **CEP** — Trường Cao đẳng Kinh tế - Kế hoạch Đà Nẵng
 - **CFI** — Trường Cao đẳng Lương thực - Thực phẩm
 - **CIC1** — Trường Cao đẳng Xây dựng số 1
 - **CMC-CĐ** — Trường Cao đẳng Cơ giới Xây dựng
+- **CNNT** — Trường Cao đẳng Công nghệ - Ngoại thương
 - **CNYD-VN** — Trường Cao đẳng Công nghệ Y - Dược Việt Nam
 - **COC** — Trường Cao đẳng Thương mại
+- **COFER** — Trường Cao đẳng Kinh tế đối ngoại
 - **CTD-TĐ** — Trường Cao đẳng Kinh tế - Kỹ thuật Thủ Đức
 - **CTIM** — Trường Cao đẳng Bán công Công nghệ và Quản trị doanh nghiệp
 - **CUWC** — Trường Cao đẳng Xây dựng Công trình đô thị
-- **CĐSPBRVT** — Trường Cao đẳng Sư phạm Bà Rịa - Vũng Tàu
-- **CĐSPKG** — Trường Cao đẳng Sư phạm Kiên Giang
-- **CĐSPTB** — Trường Cao đẳng Sư phạm Thái Bình
 - **DNC** — Trường Cao đẳng Đà Nẵng
 - **DPC** — Trường Cao đẳng Bách khoa Đà Nẵng
 - **DQC** — Trường Cao đẳng Kỹ nghệ Dung Quất
 - **DVTC** — Trường Cao đẳng Du lịch Đà Nẵng
+- **ĐẠI VIỆT SG** — Trường Cao đẳng Đại Việt Sài Gòn
+- **ĐỒNG AN** — Trường Cao đẳng Công nghệ cao Đồng An
 - **ĐVC-ĐN** — Trường Cao đẳng Đại Việt Đà Nẵng
 - **GTVT TW V** — Trường Cao đẳng Giao thông vận tải Trung ương V
+- **GTVT TW3** — Trường Cao đẳng Giao thông Vận tải Trung ương III
+- **HÀNG HẢI II** — Trường Cao đẳng Hàng Hải và Đường thủy II
+- **HCC2** — Trường Cao đẳng Xây dựng TP.HCM
 - **HCE-CĐ** — Trường Cao đẳng Kinh tế Thành phố Hồ Chí Minh
 - **HCMCC** — Trường Cao đẳng Xây dựng Thành phố Hồ Chí Minh
 - **HCMCT** — Trường Cao đẳng Giao thông Vận tải TP.HCM
+- **HCST** — Trường Cao đẳng Khoa học - Công nghệ TP.HCM
 - **HCTB** — Trường Cao đẳng Kỹ thuật và Nghiệp vụ Hà Nội
 - **HEPC** — Trường Cao đẳng Điện lực TP.HCM
 - **HHT** — Trường Đại học Hà Hoa Tiên
+- **HITU** — Trường Cao đẳng Công thương TP.HCM
 - **HOTEC** — Trường Cao đẳng Kinh tế - Kỹ thuật Thành phố Hồ Chí Minh
 - **HSC** — Trường Cao đẳng nghề Hoa Sen (cơ sở Đà Nẵng)
 - **HUArt** — Trường Đại học Nghệ thuật, Đại học Huế
 - **HVCT** — Trường Cao đẳng Kỹ nghệ II
+- **ICH** — Trường Cao đẳng Quốc tế Thành phố Hồ Chí Minh
+- **iSPACE** — Trường Cao đẳng An ninh mạng iSPACE
+- **ITC** — Trường Cao đẳng Công nghệ Thông tin TP.HCM
 - **IUV** — Trường Đại học Công nghiệp Vinh
+- **KENT** — Trường Cao đẳng Quốc tế Kent
 - **KTXD-HCM** — Trường Cao đẳng Kiến trúc - Xây dựng Thành phố Hồ Chí Minh
 - **Lilama 2** — Trường Cao đẳng Công nghệ Quốc tế Lilama 2
 - **LTTC** — Trường Cao đẳng Lý Tự Trọng TP.HCM
@@ -399,13 +424,19 @@ whose domain (uad.edu.vn) briefly caused confusion during this batch's research.
 - **NH-SQLQ2** — Trường Đại học Nguyễn Huệ (Trường Sĩ quan Lục quân 2)
 - **NQU-SQCB** — Trường Sĩ quan Công binh - Đại học Ngô Quyền
 - **NSPC** — Trường Cao đẳng Bách khoa Nam Sài Gòn
+- **NTT** — Trường Cao đẳng Kỹ thuật Nguyễn Trường Tộ
 - **NVTC** — Trường Cao đẳng Nguyễn Văn Trỗi
+- **PTTH II** — Trường Cao đẳng Phát thanh - Truyền hình II
+- **PVC** — Trường Cao đẳng Dầu khí
 - **SCLS** — Trường Hóa và Khoa học sự sống - Đại học Bách khoa Hà Nội
 - **SEEE** — Trường Điện - Điện tử - Đại học Bách khoa Hà Nội
 - **SEM-HUST** — Trường Kinh tế - Đại học Bách khoa Hà Nội
+- **SGC** — Trường Cao đẳng Sài Gòn Gia Định
 - **SME-HUST** — Trường Cơ khí - Đại học Bách khoa Hà Nội
 - **SMS-HUST** — Trường Vật liệu - Đại học Bách khoa Hà Nội
 - **SoICT** — Trường Công nghệ Thông tin và Truyền thông - Đại học Bách khoa Hà Nội
+- **SPMET** — Trường Cao đẳng Kỹ thuật Thiết bị Y tế Miền Nam
+- **STC** — Trường Cao đẳng Kỹ thuật - Du lịch Sài Gòn
 - **TDC** — Trường Cao đẳng Công nghệ Thủ Đức
 - **TDNU** — Trường Đại học Trần Đại Nghĩa (Trường Sĩ quan Kỹ thuật Quân sự)
 - **TGH** — Trường Sĩ quan Tăng - Thiết giáp
@@ -415,43 +446,13 @@ whose domain (uad.edu.vn) briefly caused confusion during this batch's research.
 - **TTC** — Trường Cao đẳng Thủ Thiêm Thành phố Hồ Chí Minh
 - **VAVC** — Trường Cao đẳng nghề Việt - Úc
 - **VCTE** — Trường Cao đẳng nghề Kỹ thuật công nghệ
+- **VETC** — Trường Cao đẳng Công nghệ TP. Hồ Chí Minh
 - **VHNT-HCM** — Trường Cao đẳng Văn hóa Nghệ thuật TP.HCM
+- **VIỄN ĐÔNG** — Trường Cao đẳng Viễn Đông
+- **VIỆT MỸ** — Trường Cao đẳng Việt Mỹ
 - **Việt-Xô 1** — Trường Cao đẳng nghề Việt - Xô số 1
+- **VKC** — Trường Cao đẳng Việt Nam - Hàn Quốc Bình Dương
+- **VLSC** — Trường Cao đẳng Văn Lang Sài Gòn
+- **VTVC** — Trường Cao đẳng Du lịch Vũng Tàu
 - **VXUT** — Trường Đại học Công nghệ Vạn Xuân
 - **YDLU** — Trường Đại học Yersin Đà Lạt
-- **CNNT** — Trường Cao đẳng Công nghệ - Ngoại thương
-- **HCC2** — Trường Cao đẳng Xây dựng TP.HCM
-- **CĐN TP.HCM** — Trường Cao đẳng nghề Thành phố Hồ Chí Minh
-- **NTT** — Trường Cao đẳng Kỹ thuật Nguyễn Trường Tộ
-- **CĐYT BD** — Trường Cao đẳng Y tế Bình Dương
-- **VKC** — Trường Cao đẳng Việt Nam - Hàn Quốc Bình Dương
-- **BCTECH** — Trường Cao đẳng Kỹ thuật Công nghệ Bà Rịa - Vũng Tàu
-- **CĐYT BRVT** — Trường Cao đẳng Y tế tỉnh BRVT
-- **PVC** — Trường Cao đẳng Dầu khí
-- **COFER** — Trường Cao đẳng Kinh tế đối ngoại
-- **PTTH II** — Trường Cao đẳng Phát thanh - Truyền hình II
-- **CAO THẮNG** — Trường Cao đẳng Kỹ thuật Cao Thắng
-- **HITU** — Trường Cao đẳng Công thương TP.HCM
-- **HÀNG HẢI II** — Trường Cao đẳng Hàng Hải và Đường thủy II
-- **GTVT TW3** — Trường Cao đẳng Giao thông Vận tải Trung ương III
-- **VETC** — Trường Cao đẳng Công nghệ TP. Hồ Chí Minh
-- **AURORA** — Trường Cao đẳng Bình Minh Sài Gòn
-- **BKC** — Trường Cao đẳng Bách Khoa Sài Gòn
-- **VIỄN ĐÔNG** — Trường Cao đẳng Viễn Đông
-- **iSPACE** — Trường Cao đẳng An ninh mạng iSPACE
-- **VIỆT MỸ** — Trường Cao đẳng Việt Mỹ
-- **KENT** — Trường Cao đẳng Quốc tế Kent
-- **BÁCH VIỆT** — Trường Cao đẳng Bách khoa Bách Việt
-- **ĐỒNG AN** — Trường Cao đẳng Công nghệ cao Đồng An
-- **CĐ MIỀN NAM** — Trường Cao đẳng Miền Nam
-- **CĐ SÀI GÒN** — Trường Cao đẳng Sài Gòn
-- **SGC** — Trường Cao đẳng Sài Gòn Gia Định
-- **ĐẠI VIỆT SG** — Trường Cao đẳng Đại Việt Sài Gòn
-- **VLSC** — Trường Cao đẳng Văn Lang Sài Gòn
-- **ICH** — Trường Cao đẳng Quốc tế Thành phố Hồ Chí Minh
-- **STC** — Trường Cao đẳng Kỹ thuật - Du lịch Sài Gòn
-- **HCST** — Trường Cao đẳng Khoa học - Công nghệ TP.HCM
-- **CĐ DU LỊCH SG** — Trường Cao đẳng Du lịch Sài Gòn
-- **ITC** — Trường Cao đẳng Công nghệ Thông tin TP.HCM
-- **VTVC** — Trường Cao đẳng Du lịch Vũng Tàu
-- **SPMET** — Trường Cao đẳng Kỹ thuật Thiết bị Y tế Miền Nam
