@@ -9,6 +9,7 @@ import { getHupProgramThreshold, type HupProgramId } from './thresholds';
 import { calculateHupAcademicScore30, calculateHupFinalScore30 } from './calculator';
 import { calculateHupCertificateBonus30, calculateHupBonus30 } from './bonus';
 import { calculateHupEffectivePriority30, lookupHupStandardPriority30 } from './priority';
+import { checkHupDuocTranscriptCondition, HUP_DUOC_PROGRAM_ID } from './transcriptCondition';
 import { hupFormulaEvidence, hupBonusEvidence, hupPriorityEvidence, hupThptExamThresholdEvidence } from './evidence';
 
 export interface HupThptExamEvaluationContext extends ThresholdOnlyEvaluationContext {
@@ -80,8 +81,21 @@ export function evaluateHupThptExamExactAdmission(profile: ApplicantProfile, con
   }
 
   const academicScore30 = calculateHupAcademicScore30(scores);
-  const eligibilityStatus: 'eligible' | 'ineligible' = academicScore30 >= threshold.thptMin30 ? 'eligible' : 'ineligible';
+  let eligibilityStatus: 'eligible' | 'ineligible' | 'unknown' = academicScore30 >= threshold.thptMin30 ? 'eligible' : 'ineligible';
   const eligibilityReason = `Tổng 3 môn ${academicScore30}/30 ${eligibilityStatus === 'eligible' ? 'đạt' : 'dưới'} ngưỡng PT4 ${threshold.thptMin30}/30 của ngành ${threshold.programName} (khu vực 3, không cộng điểm). Điểm chuẩn trúng tuyển có thể cao hơn.`;
+
+  const missingInputs: string[] = [];
+  let transcriptReason: string | undefined;
+  if (context.programId === HUP_DUOC_PROGRAM_ID && eligibilityStatus === 'eligible') {
+    const transcript = checkHupDuocTranscriptCondition(profile);
+    transcriptReason = transcript.detail;
+    if (transcript.status === 'fail') eligibilityStatus = 'ineligible';
+    else if (transcript.status === 'missing') {
+      eligibilityStatus = 'unknown';
+      missingInputs.push(transcript.detail);
+      missingRequirements.push({ kind: 'profile-input', code: 'hup-duoc-transcript', label: 'Học bạ lớp 10-12: điểm TB Toán và Lý/Hoá/Sinh (điều kiện PT4 ngành Dược học).' });
+    }
+  }
 
   const certificateBonus30 = calculateHupCertificateBonus30(profile.certificates);
   const bonus30 = calculateHupBonus30({ certificateBonus30 });
@@ -108,10 +122,10 @@ export function evaluateHupThptExamExactAdmission(profile: ApplicantProfile, con
     schoolId: 'hup',
     year: EXACT_METHOD.year,
     methodId: EXACT_METHOD.id,
-    confidence: 'exact-verified',
-    eligibility: { status: eligibilityStatus, reasons: [eligibilityReason] },
+    confidence: missingInputs.length > 0 ? 'partial' : 'exact-verified',
+    eligibility: { status: eligibilityStatus, reasons: transcriptReason ? [eligibilityReason, transcriptReason] : [eligibilityReason] },
     score: { value: finalScore, scale: 30 },
-    missingInputs: [],
+    missingInputs,
     missingRules: [],
     missingRequirements,
     explanation,
@@ -188,6 +202,16 @@ export function evaluateHupThptExamAdmission(profile: ApplicantProfile, context:
           } else {
             status = 'eligible';
             reasons.push(`Tổng ${total30}/30 đạt ngưỡng ngành ${threshold.programName} đã công bố (${threshold.thptMin30}/30).`);
+            if (context.programId === HUP_DUOC_PROGRAM_ID) {
+              const transcript = checkHupDuocTranscriptCondition(profile);
+              reasons.push(transcript.detail);
+              if (transcript.status === 'fail') status = 'ineligible';
+              else if (transcript.status === 'missing') {
+                status = 'unknown';
+                missingInputs.push(transcript.detail);
+                missingRequirements.push({ kind: 'profile-input', code: 'hup-duoc-transcript', label: 'Học bạ lớp 10-12: điểm TB Toán và Lý/Hoá/Sinh (điều kiện PT4 ngành Dược học).' });
+              }
+            }
           }
         }
       }

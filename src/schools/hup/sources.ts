@@ -12,7 +12,7 @@ export const hupSources: (Omit<AdmissionSource, 'schoolId'> & { note?: string })
     verification: 'verified',
     lifecycle: { effectiveYear: 2026, status: 'current' },
     note:
-      'Nguồn dự phòng trên domain chính hup.edu.vn khi cổng tuyensinh.hup.edu.vn trả 503 (2026-10-05). PDF scan 14 trang đọc bằng vision: bảng điểm cộng IELTS (5.5=0,25 ... >=8=1,50), giải HSG, trần cộng 03 điểm khớp `bonus.ts`. PT4 ngành Dược học có thêm điều kiện học bạ (Toán và 2 trong 3 môn Lý/Hóa/Sinh từng năm >= 7,0) và điểm cộng giải KH-KT/ISEF chưa mô hình hoá — xem knowledgeGaps.',
+      'Nguồn dự phòng trên domain chính hup.edu.vn khi cổng tuyensinh.hup.edu.vn trả 503 (2026-10-05). PDF scan 14 trang đọc bằng vision: bảng điểm cộng IELTS (5.5=0,25 ... >=8=1,50), giải HSG, trần cộng 03 điểm khớp `bonus.ts`. PT4 ngành Dược học có thêm điều kiện học bạ (Toán và 2 trong 3 môn Lý/Hóa/Sinh từng năm >= 7,0) — đã mô hình hoá trong `transcriptCondition.ts`; điểm cộng giải KH-KT/ISEF chưa mô hình hoá — xem knowledgeGaps.',
   },
   {
     id: 'hup-admission-2026',

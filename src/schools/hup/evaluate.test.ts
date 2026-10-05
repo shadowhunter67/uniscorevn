@@ -113,3 +113,43 @@ describe('HUP PT4 exact — Điểm xét tuyển', () => {
     expect(r.missingRequirements).toContainEqual(expect.objectContaining({ code: 'hup-hsg-prize-out-of-scope' }));
   });
 });
+
+describe('HUP PT4 Dược học — điều kiện học bạ >= 7,0', () => {
+  const thpt = { scores: { math: 8, physics: 7.5, chemistry: 7.5 } }; // 23 >= 22
+  const year = { math: 8, physics: 7.5, chemistry: 7, biology: 6 };
+  const duoc = { ...a00Context, programId: '7720201' as const };
+
+  it('đủ điều kiện khi cả 3 năm Toán và 2/3 môn khoa học >= 7,0', () => {
+    const r = evaluateHupThptExamAdmission({ thpt, transcript: { grade10: year, grade11: year, grade12: year } }, duoc);
+    expect(r.eligibility?.status).toBe('eligible');
+  });
+
+  it('không đủ điều kiện khi một năm có Toán < 7,0', () => {
+    const r = evaluateHupThptExamAdmission({ thpt, transcript: { grade10: year, grade11: { ...year, math: 6.9 }, grade12: year } }, duoc);
+    expect(r.eligibility?.status).toBe('ineligible');
+  });
+
+  it('không đủ điều kiện khi chỉ 1/3 môn Lý/Hoá/Sinh >= 7,0', () => {
+    const weak = { math: 8, physics: 7, chemistry: 6, biology: 6 };
+    const r = evaluateHupThptExamAdmission({ thpt, transcript: { grade10: year, grade11: year, grade12: weak } }, duoc);
+    expect(r.eligibility?.status).toBe('ineligible');
+  });
+
+  it('báo thiếu học bạ (unknown), không coi là đạt', () => {
+    const r = evaluateHupThptExamAdmission({ thpt }, duoc);
+    expect(r.eligibility?.status).toBe('unknown');
+    expect(r.missingRequirements).toContainEqual(expect.objectContaining({ code: 'hup-duoc-transcript' }));
+  });
+
+  it('exact evaluator: thiếu học bạ => partial nhưng vẫn trả điểm', () => {
+    const r = evaluateHupThptExamExactAdmission({ thpt }, duoc);
+    expect(r.confidence).toBe('partial');
+    expect(r.eligibility?.status).toBe('unknown');
+    expect(r.score?.scale).toBe(30);
+  });
+
+  it('ngành khác Dược học không bị ảnh hưởng', () => {
+    const r = evaluateHupThptExamAdmission({ thpt: { scores: { math: 7, physics: 6.5, chemistry: 6.5 } } }, { ...a00Context, programId: '7440112' });
+    expect(r.eligibility?.status).toBe('eligible'); // 20 >= 19
+  });
+});
