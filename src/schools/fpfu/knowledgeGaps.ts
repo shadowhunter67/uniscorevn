@@ -4,12 +4,12 @@ export const fpfuKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'fpfu-primary-source-unverified',
     label:
-      'FPFU 2026 (hệ dân sự) có ngưỡng chung 15,00/30 (thi TN THPT, 4 tổ hợp A00/A01/D07/D01) và công thức Điểm xét tuyển = Môn1+Môn2+Môn3+điểm ưu tiên (Điều 7 TT 06/2026/TT-BGDĐT) xác nhận qua 2 báo nhà nước độc lập + 2 lượt tra cứu độc lập trang tuyển sinh chính thức; trang gốc daihocpccc.bocongan.gov.vn vẫn không fetch trực tiếp được (DNS/mạng bị chặn trong môi trường research, xác nhận lại 2026-08-28).',
+      'FPFU 2026 (hệ dân sự): ngưỡng/điểm chuẩn 15,00/30, 4 tổ hợp A00/A01/D07/D01, 250 chỉ tiêu và việc tổng 3 môn đã gồm điểm ưu tiên ĐÃ xác nhận trực tiếp từ trang chính thức mới (hocvienpccc.bocongan.gov.vn, 10/08/2026). Chưa đọc trang thông tin tuyển sinh gốc (domain cũ daihocpccc.bocongan.gov.vn đã gỡ) nên công thức chi tiết Điểm xét tuyển = Môn1+Môn2+Môn3+điểm ưu tiên (Điều 7 TT 06/2026/TT-BGDĐT) vẫn dựa vào đối chiếu báo chí.',
     status: 'official-but-unparsed',
-    sourceId: 'fpfu-quality-threshold-2026',
+    sourceId: 'fpfu-cutoff-notice-hocvien-2026',
     scoreAffecting: false,
-    knownData: ['Ngưỡng thi TN THPT hệ dân sự: 15,00/30 điểm, 4 tổ hợp A00/A01/D07/D01, chỉ tiêu 250'],
-    impact: 'Runtime kiểm tra được ngưỡng và điểm ưu tiên (mức chuẩn toàn quốc, judgment call), nhưng chưa xác nhận trực tiếp từ văn bản gốc; cần re-fetch daihocpccc.bocongan.gov.vn từ môi trường mạng khác để nâng độ tin cậy.',
+    knownData: ['Điểm chuẩn hệ dân sự: 15,00/30 điểm, 4 tổ hợp A00/A01/D07/D01, chỉ tiêu 250 (nguồn chính thức, 10/08/2026)'],
+    impact: 'Ngưỡng và tổ hợp đã khớp nguồn chính thức; chỉ còn công thức điểm ưu tiên chi tiết chưa đọc trực tiếp từ văn bản gốc.',
   },
   {
     id: 'fpfu-additional-criteria-not-modeled',
