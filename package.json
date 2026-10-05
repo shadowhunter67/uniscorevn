@@ -10,6 +10,7 @@
     "scaffold:school": "jiti scripts/scaffold-school.ts",
     "validate:generated": "jiti scripts/validate-generated-artifacts.ts",
     "stats:coverage": "jiti scripts/stats-coverage.ts",
+    "list:verified": "jiti scripts/list-verified-schools.ts",
     "check:docs": "jiti scripts/stats-coverage.ts --check",
     "stats:taxonomy": "jiti scripts/stats-taxonomy.ts",
     "stats:ranking-coverage": "jiti scripts/stats-ranking-coverage.ts",
