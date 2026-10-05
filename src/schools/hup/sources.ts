@@ -2,6 +2,19 @@ import type { AdmissionSource } from '../../core/sourceRegistry';
 
 export const hupSources: (Omit<AdmissionSource, 'schoolId'> & { note?: string })[] = [
   {
+    id: 'hup-decision-352-2026',
+    publisher: 'Trường Đại học Dược Hà Nội',
+    title: 'Quyết định 352/QĐ-ĐHN ban hành Thông tin tuyển sinh đại học năm 2026 (PDF đính kèm)',
+    url: 'https://www.hup.edu.vn/thong-bao/ban-hanh-thong-tin-tuyen-sinh-dai-hoc-nam-2026-cua-truong-dai-hoc-duoc-ha-noi-6500',
+    accessedAt: '2026-10-05',
+    publishedAt: '2026-04-07',
+    sourceType: 'official-admission',
+    verification: 'verified',
+    lifecycle: { effectiveYear: 2026, status: 'current' },
+    note:
+      'Nguồn dự phòng trên domain chính hup.edu.vn khi cổng tuyensinh.hup.edu.vn trả 503 (2026-10-05). PDF scan 14 trang đọc bằng vision: bảng điểm cộng IELTS (5.5=0,25 ... >=8=1,50), giải HSG, trần cộng 03 điểm khớp `bonus.ts`. PT4 ngành Dược học có thêm điều kiện học bạ (Toán và 2 trong 3 môn Lý/Hóa/Sinh từng năm >= 7,0) và điểm cộng giải KH-KT/ISEF chưa mô hình hoá — xem knowledgeGaps.',
+  },
+  {
     id: 'hup-admission-2026',
     publisher: 'Trường Đại học Dược Hà Nội',
     title: 'Phương thức tuyển sinh đại học dự kiến năm 2026',

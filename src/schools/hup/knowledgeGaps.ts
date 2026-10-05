@@ -25,4 +25,20 @@ export const hupKnowledgeGaps: KnowledgeGap[] = [
     impact: 'Thí sinh có giải HSG => evaluator trả partial thay vì exact.',
     sourceId: 'hup-admission-2026',
   },
+  {
+    id: 'hup-pt4-duoc-transcript-condition-not-modeled',
+    label:
+      'PT4 ngành Dược học còn yêu cầu học bạ: kết quả học tập THPT từng năm của môn Toán và hai trong ba môn Vật lý, Hóa học, Sinh học không dưới 7,0 (Quyết định 352/QĐ-ĐHN, mục 6.2). Runtime chỉ kiểm ngưỡng điểm thi TN THPT.',
+    status: 'incomplete',
+    impact: 'Thí sinh đủ ngưỡng điểm thi nhưng học bạ dưới 7,0 vẫn có thể được báo đủ điều kiện ngành Dược học.',
+    sourceId: 'hup-decision-352-2026',
+  },
+  {
+    id: 'hup-khkt-isef-bonus-not-modeled',
+    label:
+      'Điểm cộng giải Cuộc thi KH-KT cấp quốc gia (Ba 0,5 / Nhì 0,75 / Nhất 1,0) và ISEF (1,5) chưa được mô hình hoá; hồ sơ dùng chung không có field này.',
+    status: 'incomplete',
+    impact: 'Thí sinh có giải KH-KT/ISEF bị thiếu điểm cộng.',
+    sourceId: 'hup-decision-352-2026',
+  },
 ];
