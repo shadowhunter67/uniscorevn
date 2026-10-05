@@ -65,7 +65,7 @@ export const vnkguSources: (Omit<AdmissionSource, 'schoolId'> & { note?: string 
     id: 'vnkgu-priority-2026',
     publisher: 'Trường Đại học Kiên Giang (Hội đồng tuyển sinh)',
     title: 'Điểm cộng và điểm Ưu tiên trong tuyển sinh',
-    url: 'https://tuyensinh.vnkgu.edu.vn/bai-viet/diem-cong-va-diem-uu-tien-trong-tuyen-sinh',
+    url: 'https://tuyensinh.vnkgu.edu.vn/bai-viet/cac-thong-tin-can-thiet-de-thi-sinh-dang-ky-xet-tuyen-nguyen-tac-dieu-kien-so-tuyen-cac-loai-diem-cong-diem-uu-tien-cac-tieu-chi-xet-tuyen-va-nguyen-tac-xac-nhan-nhap-hoc-bao-luu-ket-qua',
     accessedAt: '2026-09-22',
     sourceType: 'official-school',
     verification: 'verified',
