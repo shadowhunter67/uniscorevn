@@ -39,7 +39,7 @@ File này được sinh từ `schoolRegistry` (`npm run stats:coverage` in số 
 - **EIU** — Trường Đại học Quốc tế Miền Đông
 - **EPU** — Trường Đại học Điện lực
 - **FBU** — Trường Đại học Tài chính - Ngân hàng Hà Nội
-- **FPFU** — Trường Đại học Phòng cháy Chữa cháy
+- **FPFU** — Học viện Phòng cháy, chữa cháy và Cứu nạn, cứu hộ
 - **FPTU** — Trường Đại học FPT
 - **FTU** — Trường Đại học Ngoại thương
 - **GDU** — Trường Đại học Gia Định

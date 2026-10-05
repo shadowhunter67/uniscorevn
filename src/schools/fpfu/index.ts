@@ -4,9 +4,9 @@ import { fpfuAdmissionMethods } from './methods';
 
 export const fpfuModule: SchoolModule = {
   id: 'fpfu',
-  name: 'Trường Đại học Phòng cháy Chữa cháy',
+  name: 'Học viện Phòng cháy, chữa cháy và Cứu nạn, cứu hộ',
   shortName: 'FPFU',
-  about: 'Trường đại học công lập thuộc Bộ Công an tại Hà Nội, tuyển sinh hệ dân sự (ngoài ngành Công an) ngành Phòng cháy chữa cháy và Cứu nạn cứu hộ.',
+  about: 'Học viện công lập thuộc Bộ Công an (trước đây là Trường Đại học Phòng cháy Chữa cháy) tại Hà Nội, tuyển sinh hệ dân sự (ngoài ngành Công an) ngành Phòng cháy chữa cháy và Cứu nạn cứu hộ.',
   year: 2026,
   status: 'researching',
   ownership: 'public',

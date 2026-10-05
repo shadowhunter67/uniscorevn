@@ -24,7 +24,7 @@ export const bvuSources: BvuSource[] = [
     accessedAt: '2026-08-24',
     sourceType: 'official-admission',
     verification: 'verified',
-    lifecycle: { effectiveYear: 2026, status: 'current' },
+    lifecycle: { effectiveYear: 2026, status: 'historical' },
     note:
       'Official BVU admission-portal page (tuyensinh.bvu.edu.vn) fetched live twice (homepage + phuong-thuc-tuyen-sinh page): confirms 5 independent admission methods, and for the hoc ba (transcript) method a computation formula of diem trung binh lop 12 cua 3 mon to hop + diem uu tien, with a general floor of 18,0/30 for most majors/programs, excluding Duoc hoc, Dieu duong, and the Cu nhan tai nang track. Per-exception numbers (Duoc hoc 24,0/30, Dieu duong 19,5/30, Cu nhan tai nang 22,0/30) are marked du kien (provisional) by the source and cross-checked via secondary aggregator coverage of the same page content. NOTE (2026-08-28): tuyensinh.bvu.edu.vn/phuong-thuc-tuyen-sinh/ now returns HTTP 404 (superseded by `bvu-diem-trung-tuyen-2026` below) — kept for historical/audit trail only, do not treat as current for 2026.',
   },
