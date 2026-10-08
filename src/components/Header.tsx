@@ -1,7 +1,5 @@
 import { RotateCcw } from 'lucide-react';
 import { ShareButton } from './ShareButton';
-import { siteConfig } from '../config/site';
-import { BrandWordmark } from './BrandLogo';
 
 interface HeaderProps {
   /** Thông tin trường đang active — Header không tự biết, nhận từ page gọi nó (mỗi trường 1 page riêng). */
@@ -14,46 +12,31 @@ interface HeaderProps {
 
 export function Header({ school, onReset, buildShareUrl, onChangeSchool }: HeaderProps) {
   return (
-    <header className="flex flex-col gap-4 py-8 sm:flex-row sm:items-start sm:justify-between">
-      <div>
-        {/* Wordmark thay chữ — vẫn nằm trong <h1> và `alt` = tên brand nên cấu trúc heading/SEO
-            không đổi (16 trang trường "nặng" dùng Header này, không dùng SiteHeader). */}
-        <h1>
-          <BrandWordmark className="h-8 w-auto sm:h-9" />
-        </h1>
-        <p className="mt-1.5 text-sm text-muted sm:text-base">{siteConfig.tagline}</p>
-
-        <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1">
-          <span className="rounded-full bg-accent/10 px-2.5 py-0.5 text-xs font-semibold text-accent">
-            {school.shortName}
-          </span>
-          <span className="text-sm text-ink">{school.name}</span>
-          <button
-            type="button"
-            onClick={onChangeSchool}
-            className="rounded-sm text-xs font-medium text-accent underline-offset-2 transition hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
-          >
-            Đổi trường
-          </button>
-        </div>
-        <p className="mt-0.5 text-xs text-muted">Xét tuyển tổng hợp {school.year}</p>
+    <header className="flex flex-col gap-3 py-6 sm:py-8">
+      <div className="max-w-4xl">
+        <h1 className="text-2xl font-semibold leading-tight text-primary sm:text-3xl">{school.name}</h1>
       </div>
 
-      <div className="flex flex-wrap items-center gap-2">
-        <a
-          href="/compare"
-          className="inline-flex items-center rounded-md border border-accent/30 bg-accent/10 px-3 py-1.5 text-xs font-medium text-accent transition hover:bg-accent/20 focus:outline-none focus:ring-2 focus:ring-accent/30"
+      <div className="flex flex-wrap items-center gap-2 text-sm text-ink-soft">
+        <span className="inline-flex min-h-(--ui-tap-min) items-center rounded-full bg-accent/10 px-3 text-xs font-semibold text-accent">
+          {school.shortName}
+        </span>
+        <span className="inline-flex min-h-(--ui-tap-min) items-center text-sm text-muted">Xét tuyển tổng hợp {school.year}</span>
+        <button
+          type="button"
+          onClick={onChangeSchool}
+          className="inline-flex min-h-(--ui-tap-min) items-center rounded-md px-2 text-sm font-medium text-accent underline-offset-2 transition hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
         >
-          Xem tất cả trường
-        </a>
+          Đổi trường
+        </button>
         <ShareButton buildShareUrl={buildShareUrl} />
         {onReset && (
           <button
             type="button"
             onClick={onReset}
-            className="inline-flex items-center gap-1.5 rounded-md border border-ink/10 px-3 py-1.5 text-xs font-medium text-muted transition hover:bg-surface-soft hover:text-ink focus:outline-none focus:ring-2 focus:ring-accent/30"
+            className="inline-flex min-h-(--ui-tap-min) items-center gap-1.5 rounded-md border border-border px-3 text-sm font-medium text-ink-soft transition hover:bg-surface-soft hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
           >
-            <RotateCcw size={14} aria-hidden="true" />
+            <RotateCcw size={16} aria-hidden="true" />
             Đặt lại
           </button>
         )}

@@ -30,18 +30,18 @@ export function CurrentScoreCard({ result, config }: CurrentScoreCardProps) {
         </div>
       ) : (
         <>
-          <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-6xl font-extrabold tracking-tight text-primary sm:text-7xl">
+          <div className="mt-2 flex flex-wrap items-baseline gap-x-2">
+            <span className="font-display text-5xl font-extrabold tracking-tight text-primary sm:text-6xl">
               {result.finalScore.toFixed(2)}
             </span>
-            <span className="text-lg font-medium text-muted">/ {config.scoreScale}</span>
+            <span className="whitespace-nowrap text-lg font-medium text-muted">/ {config.scoreScale}</span>
           </div>
 
           <dl className="mt-6 flex flex-col gap-2 text-sm">
             <div className="flex items-center justify-between">
               <dt className="text-muted">
                 Điểm năng lực
-                {abilitySourceLabel && <span className="ml-1.5 text-xs text-muted/70">({abilitySourceLabel})</span>}
+                {abilitySourceLabel && <span className="ml-1.5 text-xs text-muted">({abilitySourceLabel})</span>}
               </dt>
               <dd className="font-medium text-ink">{signed(result.academic.dgnlContribution)}</dd>
             </div>

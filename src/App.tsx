@@ -149,18 +149,12 @@ function AppShell() {
     );
   }
 
-  // 16 trường "nặng" (school.Page thật, không phải lazy generic) đã có Header riêng của mình
-  // (site name + nav tương đương) — không chèn thêm SiteHeader ở đó để tránh 2 header/2 dòng brand
-  // trên cùng 1 trang. Landing/compare/trang trường thường (generic) chưa từng có header nào,
-  // dùng SiteHeader chung.
-  const showSiteHeader = !school?.Page;
-
   // `key={pathname}` (P3): đổi route tạo boundary instance mới -> tự reset hasError, tránh 1 lỗi ở
   // route trước dính mãi sau khi user bấm "Về trang chủ"/điều hướng sang route khác.
   return (
     <>
       <SkipLink />
-      {showSiteHeader && <SiteHeader pathname={pathname} onNavigate={navigate} />}
+      <SiteHeader pathname={pathname} onNavigate={navigate} />
       <ErrorBoundary key={pathname} onGoHome={() => navigate('/')}>
         <main id="main-content" tabIndex={-1} className="outline-none">
           {content}

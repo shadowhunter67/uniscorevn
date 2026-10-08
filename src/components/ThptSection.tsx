@@ -4,6 +4,7 @@ import type { ThptFormState } from '../schools/hcmut/types/form';
 import type { FieldValidationResult } from '../schools/hcmut/validation';
 import { ScoreInput } from './ScoreInput';
 import { SectionHeader } from './SectionHeader';
+import { countFilledFields } from './sectionProgress';
 
 interface ThptSectionProps {
   config: AdmissionConfig;
@@ -193,7 +194,7 @@ export function ThptSection({
 
   return (
     <section className="rounded-card bg-surface p-6 shadow-card sm:p-8">
-      <SectionHeader index="03" title="Thi THPT" />
+      <SectionHeader index="03" title="Thi THPT" progress={countFilledFields(values)} />
 
       <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
         <ScoreInput

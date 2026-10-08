@@ -687,7 +687,7 @@ export function HcmutCalculatorPage({ onChangeSchool }: HcmutCalculatorPageProps
     <div className="min-h-svh bg-bg">
       <StickySummaryBar result={result} selectedProgram={selectedProgram} gap={programGap} />
 
-      <div className="mx-auto max-w-7xl px-4 pb-16">
+      <div className="mx-auto max-w-6xl px-4 pb-16">
         <Header
           school={{
             shortName: 'HCMUT',
@@ -707,7 +707,7 @@ export function HcmutCalculatorPage({ onChangeSchool }: HcmutCalculatorPageProps
             thức xác minh từ HCMUT 2026.
           </p>
         ) : (
-        <main className="mt-5 flex flex-col gap-5 lg:grid lg:grid-cols-[1fr_340px] lg:items-stretch lg:gap-6">
+        <div className="mt-5 flex flex-col gap-5 lg:grid lg:grid-cols-[1fr_340px] lg:items-stretch lg:gap-6">
           <div className="flex flex-col gap-5 lg:order-2 lg:sticky lg:top-5 lg:h-fit">{heroElement}</div>
 
           <div className="flex flex-col gap-5 lg:order-1">
@@ -818,7 +818,7 @@ export function HcmutCalculatorPage({ onChangeSchool }: HcmutCalculatorPageProps
 
             <FormulaExplanation steps={hasCoreInput ? liveEvaluation.explanation : []} />
           </div>
-        </main>
+        </div>
         )}
 
         <Footer />

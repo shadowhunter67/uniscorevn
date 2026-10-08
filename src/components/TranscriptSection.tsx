@@ -6,6 +6,7 @@ import type { FieldValidationResult } from '../schools/hcmut/validation';
 import { SELECTABLE_SUBJECT_IDS, SUBJECT_LABELS, type SubjectId } from '../core/subjects';
 import { ScoreInput } from './ScoreInput';
 import { SectionHeader } from './SectionHeader';
+import { countFilledFields } from './sectionProgress';
 
 type GradeKey = keyof TranscriptFormState;
 type SubjectKey = keyof TranscriptYearFormState;
@@ -107,14 +108,16 @@ export function TranscriptSection({
 
   return (
     <section className="rounded-card bg-surface p-6 shadow-card sm:p-8">
-      <SectionHeader index="02" title="Học bạ" subtitle={`${maxHint} mỗi môn, mỗi năm`} />
+      <SectionHeader index="02" title="Học bạ" subtitle={`${maxHint} mỗi môn, mỗi năm`} progress={countFilledFields(values)} />
       <SubjectIdentityPicker subjectContext={subjectContext} onSubjectContextChange={onSubjectContextChange} />
 
-      <div className="mt-6 overflow-x-auto">
+      <div className="mt-6 overflow-x-auto" tabIndex={0} role="region" aria-label="Bảng dữ liệu, cuộn ngang để xem hết">
         <table className="w-full min-w-[420px] border-separate border-spacing-x-3 border-spacing-y-3">
           <thead>
             <tr>
-              <th className="text-left text-xs font-medium text-muted" />
+              <th className="text-left text-xs font-medium text-muted">
+              <span className="sr-only">Môn học</span>
+            </th>
               {grades.map((grade) => (
                 <th key={grade.key} className="text-center text-xs font-medium text-muted">
                   {grade.label}

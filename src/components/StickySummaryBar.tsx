@@ -17,24 +17,23 @@ interface StickySummaryBarProps {
 export function StickySummaryBar({ result, selectedProgram, gap }: StickySummaryBarProps) {
   if (result === null) return null;
 
+  const statusText = gap === null ? null : gap >= 0 ? 'đạt mức tham khảo' : `còn thiếu ${Math.abs(gap).toFixed(2)} điểm`;
+
   return (
-    <div className="sticky top-0 z-10 border-b border-ink/10 bg-surface/95 backdrop-blur lg:hidden">
+    <div className="sticky top-0 z-10 border-b border-border bg-surface lg:hidden">
       <button
         type="button"
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="mx-auto flex w-full max-w-5xl items-center gap-3 px-4 py-2 text-left text-sm"
+        className="mx-auto flex min-h-(--ui-tap-min) w-full max-w-5xl items-center gap-3 px-4 py-2 text-left"
       >
-        <span className="font-bold text-primary">
+        <span className="shrink-0 font-display text-lg font-bold leading-none text-primary">
           {result.finalScore.toFixed(2)}
-          <span className="ml-0.5 text-xs font-normal text-muted">/100</span>
+          <span className="ml-0.5 align-baseline text-xs font-medium text-muted">/100</span>
         </span>
-        {selectedProgram && gap !== null && (
-          <span className="truncate text-xs text-muted">
-            {selectedProgram.name} ·{' '}
-            <span className={gap >= 0 ? 'text-success' : 'text-warning'}>
-              {gap >= 0 ? '+' : ''}
-              {gap.toFixed(2)}
-            </span>
+        {selectedProgram && statusText && (
+          <span className="min-w-0 text-sm leading-tight text-ink-soft">
+            <span className="block truncate">{selectedProgram.name}</span>
+            <span className={gap !== null && gap >= 0 ? 'text-success' : 'text-warning'}>{statusText}</span>
           </span>
         )}
       </button>

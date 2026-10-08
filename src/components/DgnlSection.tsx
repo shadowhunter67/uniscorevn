@@ -4,6 +4,7 @@ import type { FieldValidationResult } from '../schools/hcmut/validation';
 import type { HcmutApplicantType } from '../schools/hcmut/types/applicantType';
 import { ScoreInput } from './ScoreInput';
 import { SectionHeader } from './SectionHeader';
+import { countFilledFields } from './sectionProgress';
 
 export type DgnlInputMode = 'detail' | 'total';
 
@@ -65,7 +66,7 @@ export function DgnlSection({
   return (
     <section className="rounded-card bg-surface p-6 shadow-card sm:p-8">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <SectionHeader index="01" title="Đánh giá năng lực" />
+        <SectionHeader index="01" title="Đánh giá năng lực" progress={mode === 'total' ? countFilledFields(totalValue) : countFilledFields(values)} />
 
         <div role="group" aria-label="Cách nhập điểm ĐGNL" className="inline-flex rounded-lg bg-surface-soft p-1 text-xs">
           <button

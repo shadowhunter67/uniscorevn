@@ -1,3 +1,4 @@
+import { userFacingText } from '../../core/userFacingText';
 import { useState } from 'react';
 import { Calculator, CheckCircle2, XCircle } from 'lucide-react';
 import { Header } from '../../components/Header';
@@ -124,11 +125,11 @@ export function IuPage({ onChangeSchool }: IuPageProps) {
 
           <fieldset className="mt-4 rounded-xl bg-surface p-4">
             <legend className="px-1 text-xs font-semibold uppercase tracking-wide text-muted">Điểm xét thưởng (tối đa 5)</legend>
-            <label className="mt-1.5 flex items-center gap-2 text-sm text-ink">
+            <label className="mt-1.5 flex items-center gap-2 text-sm text-ink [overflow-wrap:anywhere]">
               <input type="checkbox" checked={hasPrioritySchool} onChange={(e) => setHasPrioritySchool(e.target.checked)} />
               Học ≥2 năm tại 1 trong 149 trường ưu tiên + học lực 3 năm Tốt trở lên (+3)
             </label>
-            <label className="mt-2 flex items-center gap-2 text-sm text-ink">
+            <label className="mt-2 flex items-center gap-2 text-sm text-ink [overflow-wrap:anywhere]">
               Số giải thưởng đặc biệt (HSG khuyến khích QG/VISEF/VIFOTEC/Euréka/...)
               <input
                 id="iu-special-achievement-count"
@@ -149,7 +150,7 @@ export function IuPage({ onChangeSchool }: IuPageProps) {
               Chứng chỉ ngoại ngữ (IELTS/TOEFL iBT/TOEIC) đọc từ hồ sơ chung —
               {detectedCertificate !== undefined ? ' đã phát hiện điểm chứng chỉ trong hồ sơ.' : ' chưa có trong hồ sơ.'}
             </p>
-            <label className="mt-2 flex items-center gap-2 text-sm text-ink">
+            <label className="mt-2 flex items-center gap-2 text-sm text-ink [overflow-wrap:anywhere]">
               <input
                 type="checkbox"
                 checked={certificateUsedForExemption}
@@ -253,8 +254,8 @@ export function IuPage({ onChangeSchool }: IuPageProps) {
           <ul className="mt-2 flex flex-col gap-1.5 text-xs">
             {iuSources.map((source) => (
               <li key={source.id}>
-                <a href={source.url} target="_blank" rel="noopener noreferrer" className="text-accent underline-offset-2 hover:underline">
-                  {source.title}
+                <a href={source.url} target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-2 hover:no-underline">
+                  {userFacingText(source.title)}
                 </a>
                 <span className="text-muted"> — {source.publisher} </span>
                 <span className="rounded-full bg-ink/5 px-1.5 py-0.5 text-muted">{verificationLabel(source.verification)}</span>

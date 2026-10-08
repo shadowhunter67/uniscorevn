@@ -20,7 +20,7 @@ export function ScoreBreakdownDetails({ result, config }: ScoreBreakdownDetailsP
             <dd className="font-medium text-ink">{result.dgnl.normalizedScore.toFixed(2)}</dd>
           </div>
           <div className="flex items-center justify-between pl-3">
-            <dt className="text-muted/70">Đóng góp {toPercent(config.weights.dgnl)}</dt>
+            <dt className="text-muted">Đóng góp {toPercent(config.weights.dgnl)}</dt>
             <dd className="font-medium text-ink/80">+{result.academic.dgnlContribution.toFixed(2)}</dd>
           </div>
           <div className="flex items-center justify-between">
@@ -28,7 +28,7 @@ export function ScoreBreakdownDetails({ result, config }: ScoreBreakdownDetailsP
             <dd className="font-medium text-ink">{result.thpt.normalizedScore.toFixed(2)}</dd>
           </div>
           <div className="flex items-center justify-between pl-3">
-            <dt className="text-muted/70">Đóng góp {toPercent(config.weights.thpt)}</dt>
+            <dt className="text-muted">Đóng góp {toPercent(config.weights.thpt)}</dt>
             <dd className="font-medium text-ink/80">+{result.academic.thptContribution.toFixed(2)}</dd>
           </div>
           <div className="flex items-center justify-between">
@@ -36,7 +36,7 @@ export function ScoreBreakdownDetails({ result, config }: ScoreBreakdownDetailsP
             <dd className="font-medium text-ink">{result.transcript.normalizedScore.toFixed(2)}</dd>
           </div>
           <div className="flex items-center justify-between pl-3">
-            <dt className="text-muted/70">Đóng góp {toPercent(config.weights.transcript)}</dt>
+            <dt className="text-muted">Đóng góp {toPercent(config.weights.transcript)}</dt>
             <dd className="font-medium text-ink/80">+{result.academic.transcriptContribution.toFixed(2)}</dd>
           </div>
           <div className="mt-1 flex items-center justify-between border-t border-ink/10 pt-1.5">

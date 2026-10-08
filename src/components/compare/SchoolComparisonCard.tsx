@@ -304,7 +304,7 @@ export function SchoolComparisonCard({
         <div>
           <h2 className="text-base font-semibold text-ink">{summary.shortName}</h2>
           <p className="text-xs text-muted">{summary.schoolName}</p>
-          {school && <p className="mt-1 text-[11px] text-muted">{getEntityLevelLabel(school)}</p>}
+          {school && <p className="mt-1 text-xs text-muted">{getEntityLevelLabel(school)}</p>}
         </div>
         <ComparisonStatusBadge confidence={summary.evaluation.confidence} />
       </div>

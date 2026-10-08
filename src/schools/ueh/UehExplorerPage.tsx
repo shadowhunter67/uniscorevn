@@ -1,3 +1,4 @@
+import { userFacingText } from '../../core/userFacingText';
 import { useMemo, useState } from 'react';
 import { ArrowRightLeft, Calculator, GraduationCap, ShieldCheck } from 'lucide-react';
 import { Header } from '../../components/Header';
@@ -126,7 +127,7 @@ export function UehExplorerPage({ onChangeSchool }: UehExplorerPageProps) {
 
   function renderCutoffTable(programs: typeof ksaPrograms, caption: string) {
     return (
-      <div className="mt-4 overflow-x-auto">
+      <div className="mt-4 overflow-x-auto" tabIndex={0} role="region" aria-label={`${caption} (cuộn ngang)`}>
         <table className="w-full min-w-[480px] border-collapse text-sm">
           <caption className="sr-only">{caption}</caption>
           <thead>
@@ -379,7 +380,7 @@ export function UehExplorerPage({ onChangeSchool }: UehExplorerPageProps) {
                   setDgnlInput(String(profileDgnlTotal));
                   setManualOverride(true);
                 }}
-                className="rounded-md px-2 py-1 text-xs font-medium text-accent underline-offset-2 hover:underline"
+                className="rounded-md px-2 py-1 text-xs font-medium text-accent underline underline-offset-2 hover:no-underline"
               >
                 Thay đổi
               </button>
@@ -414,7 +415,7 @@ export function UehExplorerPage({ onChangeSchool }: UehExplorerPageProps) {
                     setDgnlInput('');
                     setComponentsClearedNotice(false);
                   }}
-                  className="mt-1 text-xs font-medium text-accent underline-offset-2 hover:underline"
+                  className="mt-1 text-xs font-medium text-accent underline underline-offset-2 hover:no-underline"
                 >
                   Dùng lại điểm từ hồ sơ ({profileDgnlTotal})
                 </button>
@@ -516,9 +517,9 @@ export function UehExplorerPage({ onChangeSchool }: UehExplorerPageProps) {
                   href={source.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-accent underline-offset-2 hover:underline"
+                  className="text-accent underline underline-offset-2 hover:no-underline"
                 >
-                  {source.title}
+                  {userFacingText(source.title)}
                 </a>
                 <span className="text-muted"> — {source.publisher} </span>
                 <span className="rounded-full bg-ink/5 px-1.5 py-0.5 text-muted">{verificationLabel(source.verification)}</span>

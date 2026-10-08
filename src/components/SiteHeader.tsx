@@ -44,9 +44,50 @@ function NavLink({ item, active, onNavigate }: { item: NavItem; active: boolean;
   );
 }
 
+/**
+ * Menu điều hướng dạng dialog cho điện thoại. Tách riêng và CHỈ mount khi đang mở vì `useFocusTrap`
+ * gắn bộ bắt phím lên `document` (chặn Tab để giữ focus trong dialog) — gọi nó vô điều kiện ở
+ * SiteHeader làm phím Tab bị chặn trên toàn site kể cả khi menu đang đóng.
+ */
+function MobileMenu({ pathname, onNavigate, onClose }: { pathname: string; onNavigate: (path: string) => void; onClose: () => void }) {
+  const menuRef = useFocusTrap<HTMLDivElement>(onClose);
+
+  return (
+    <div
+      id="site-mobile-menu"
+      ref={menuRef}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu điều hướng"
+      className="border-t border-border bg-surface px-4 py-3 sm:hidden"
+    >
+      <nav aria-label="Điều hướng chính (di động)" className="flex flex-col gap-1">
+        {NAV_ITEMS.map((item) => (
+          <a
+            key={item.path}
+            href={item.path}
+            aria-current={pathname === item.path ? 'page' : undefined}
+            onClick={(event) => {
+              event.preventDefault();
+              onNavigate(item.path);
+            }}
+            className={`min-h-(--ui-tap-min) rounded-md px-2 py-2.5 text-base font-medium ${
+              pathname === item.path ? 'bg-accent/10 text-accent' : 'text-ink-soft'
+            }`}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+      <div className="mt-3 border-t border-border pt-3">
+        <TextSizeControl />
+      </div>
+    </div>
+  );
+}
+
 export function SiteHeader({ pathname, onNavigate }: SiteHeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const menuRef = useFocusTrap<HTMLDivElement>(() => setMobileMenuOpen(false));
 
   function navigate(path: string) {
     setMobileMenuOpen(false);
@@ -94,36 +135,7 @@ export function SiteHeader({ pathname, onNavigate }: SiteHeaderProps) {
       </div>
 
       {mobileMenuOpen && (
-        <div
-          id="site-mobile-menu"
-          ref={menuRef}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Menu điều hướng"
-          className="border-t border-border bg-surface px-4 py-3 sm:hidden"
-        >
-          <nav aria-label="Điều hướng chính (di động)" className="flex flex-col gap-1">
-            {NAV_ITEMS.map((item) => (
-              <a
-                key={item.path}
-                href={item.path}
-                aria-current={pathname === item.path ? 'page' : undefined}
-                onClick={(event) => {
-                  event.preventDefault();
-                  navigate(item.path);
-                }}
-                className={`min-h-(--ui-tap-min) rounded-md px-2 py-2.5 text-base font-medium ${
-                  pathname === item.path ? 'bg-accent/10 text-accent' : 'text-ink-soft'
-                }`}
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-          <div className="mt-3 border-t border-border pt-3">
-            <TextSizeControl />
-          </div>
-        </div>
+        <MobileMenu pathname={pathname} onNavigate={navigate} onClose={() => setMobileMenuOpen(false)} />
       )}
     </header>
   );

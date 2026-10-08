@@ -1,3 +1,4 @@
+import { userFacingText } from '../core/userFacingText';
 import { useState } from 'react';
 import { AlertTriangle, X } from 'lucide-react';
 import {
@@ -67,7 +68,7 @@ export function ProgramHistoryCompare({
           {historicalCutoffs.length === 0 ? (
             <p className="mt-2 text-sm text-muted">Chưa có dữ liệu điểm chuẩn xác minh cho ngành này.</p>
           ) : (
-            <div className="mt-3 overflow-x-auto">
+            <div className="mt-3 overflow-x-auto" tabIndex={0} role="region" aria-label="Bảng lịch sử điểm chuẩn các năm">
               <table className="w-full min-w-[420px] border-collapse text-sm">
                 <caption className="sr-only">Lịch sử điểm chuẩn ngành {selectedProgram.name}</caption>
                 <thead>
@@ -175,7 +176,7 @@ export function ProgramHistoryCompare({
             Chưa pin ngành nào. Bấm "Thêm vào so sánh" ở mục Chọn ngành để so sánh tối đa {MAX_COMPARISON_PINS} ngành.
           </p>
         ) : (
-          <div className="mt-2 overflow-x-auto">
+          <div className="mt-2 overflow-x-auto" tabIndex={0} role="region" aria-label="Bảng so sánh ngành đã chọn">
             <table className="w-full min-w-[480px] border-collapse text-sm">
               <caption className="sr-only">Bảng so sánh điểm chuẩn các ngành đã pin</caption>
               <thead>
@@ -241,9 +242,9 @@ export function ProgramHistoryCompare({
                 href={source.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent underline-offset-2 hover:underline"
+                className="text-accent underline underline-offset-2 hover:no-underline"
               >
-                {source.title}
+                {userFacingText(source.title)}
               </a>
               <span className="text-muted"> — {source.publisher}</span>
               <span className="ml-1.5 rounded-full bg-ink/5 px-1.5 py-0.5 text-muted">

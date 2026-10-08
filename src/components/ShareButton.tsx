@@ -37,11 +37,15 @@ export function ShareButton({ buildShareUrl }: ShareButtonProps) {
       <button
         type="button"
         onClick={handleShare}
-        className="inline-flex items-center gap-1.5 rounded-md border border-ink/10 px-3 py-1.5 text-xs font-medium text-ink transition hover:bg-surface-soft focus:outline-none focus:ring-2 focus:ring-accent/30"
+        className="inline-flex min-h-(--ui-tap-min) items-center gap-1.5 rounded-md border border-border px-3 text-sm font-medium text-ink transition hover:bg-surface-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
       >
-        {copied ? <Check size={14} aria-hidden="true" /> : <Share2 size={14} aria-hidden="true" />}
-        {copied ? 'Đã copy' : 'Chia sẻ'}
+        {copied ? <Check size={16} aria-hidden="true" /> : <Share2 size={16} aria-hidden="true" />}
+        {copied ? 'Đã sao chép' : 'Chia sẻ'}
       </button>
+      {/* Thông báo cho trình đọc màn hình: nhãn nút đổi chữ nhưng focus không đổi nên không tự được đọc. */}
+      <span role="status" aria-live="polite" className="sr-only">
+        {copied ? 'Đã sao chép liên kết vào bộ nhớ tạm' : ''}
+      </span>
 
       {manualUrl && (
         <div className="absolute right-0 top-full z-10 mt-2 w-72 rounded-lg border border-ink/10 bg-surface p-3 shadow-card">
