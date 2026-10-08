@@ -64,7 +64,7 @@ function evaluateExamMethod(profile: ApplicantProfile, context: VnuulisEvaluatio
     return buildResult({
       methodId: 'vnuulis-thpt-exam-2026',
       status: 'unknown',
-      reasons: ['VNU-ULIS needs a selected subject combination before the THPT threshold can be checked.'],
+      reasons: ['VNU-ULIS needs a selected subject combination before the THPT threshold cần be checked.'],
       missingRequirements: [{ kind: 'school-context', code: 'vnuulis-subject-combination', label: 'Select a VNU-ULIS subject combination.' }],
     });
   }
@@ -167,7 +167,7 @@ function evaluateTranscriptMethod(profile: ApplicantProfile, context: VnuulisEva
     return buildResult({
       methodId: 'vnuulis-transcript-2026',
       status: 'unknown',
-      reasons: ['VNU-ULIS needs a selected subject combination before the transcript threshold can be checked.'],
+      reasons: ['VNU-ULIS needs a selected subject combination before the transcript threshold cần be checked.'],
       missingRequirements: [{ kind: 'school-context', code: 'vnuulis-subject-combination', label: 'Select a VNU-ULIS subject combination.' }],
     });
   }

@@ -91,12 +91,13 @@ export function buildComparisonMatrixColumn(
   };
 }
 
-/** Các hàng của bảng, theo đúng thứ tự ưu tiên đọc: đánh giá -> chênh lệch -> điểm -> mốc -> tin cậy. */
+/** Các hàng của bảng quyết định, theo thứ tự đọc: trạng thái -> đánh giá -> chênh lệch -> điểm -> mốc -> tin cậy. */
 export const COMPARISON_MATRIX_ROWS = [
+  { id: 'status', label: 'Trạng thái' },
   { id: 'assessment', label: 'Đánh giá' },
   { id: 'margin', label: 'Chênh lệch' },
   { id: 'score', label: 'Điểm của bạn' },
-  { id: 'benchmark', label: 'Mốc tham khảo' },
+  { id: 'benchmark', label: 'Mốc đối chiếu' },
   { id: 'confidence', label: 'Độ tin cậy' },
 ] as const;
 
@@ -107,6 +108,8 @@ export const MATRIX_EMPTY_CELL = '—';
 
 export function getMatrixCellText(column: ComparisonMatrixColumn, rowId: ComparisonMatrixRowId): string {
   switch (rowId) {
+    case 'status':
+      return column.statusLabel;
     case 'assessment':
       return column.assessmentLabel;
     case 'margin':

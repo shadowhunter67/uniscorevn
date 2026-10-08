@@ -4,7 +4,7 @@ import { dtuAdmissionMethods } from './methods';
 
 export const dtuModule: SchoolModule = {
   id: 'dtu',
-  name: 'Truong Dai hoc Duy Tan',
+  name: 'Trường Đại học Duy Tân',
   shortName: 'DTU',
   about: 'Large private multidisciplinary university based in Da Nang.',
   year: 2026,

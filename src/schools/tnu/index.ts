@@ -4,7 +4,7 @@ import { tnuAdmissionMethods } from './methods';
 
 export const tnuModule: SchoolModule = {
   id: 'tnu',
-  name: 'Dai hoc Thai Nguyen',
+  name: 'Đại học Thái Nguyên',
   shortName: 'TNU',
   about: 'Public multi-member university system based in Thai Nguyen, with member universities/schools and branch campuses in Lao Cai, Ha Giang, and Dien Bien.',
   year: 2026,

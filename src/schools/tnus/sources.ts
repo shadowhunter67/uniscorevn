@@ -18,15 +18,15 @@ export interface TnusSource {
 export const tnusSources: TnusSource[] = [
   {
     id: 'tnus-cutoff-2026',
-    publisher: 'Dai hoc Thai Nguyen (Thai Nguyen University) - Truong Dai hoc Khoa hoc',
-    title: 'Truong Dai hoc Khoa hoc - Dai hoc Thai Nguyen cong bo diem chuan trung tuyen dai hoc chinh quy nam 2026',
+    publisher: 'Đại học Thái Nguyên (Thai Nguyen University) - Truong Dai hoc Khoa hoc',
+    title: 'Trường Đại học Khoa học - Đại học Thái Nguyên công bố điểm chuẩn trúng tuyển đại học chính quy năm 2026',
     url: 'https://tnu.edu.vn/dao-tao/truong-dai-hoc-khoa-hoc-dai-hoc-thai-nguyen-cong-bo-diem-chuan-trung-tuyen-dai-hoc-chinh-quy-nam-2026.html',
     accessedAt: '2026-08-24',
     sourceType: 'official-admission',
     verification: 'verified',
     lifecycle: { effectiveYear: 2026, status: 'superseded', supersededBy: 'tnus-cutoff-image-2026' },
     note:
-      'Trang tin tuc chinh thuc tnu.edu.vn cong bo bang so tay diem chuan 2026, dao dong 16,35-22,50/30, nhung khong co bang day du 40 nganh. Bi thay the boi `tnus-cutoff-image-2026` (anh infographic chinh chu day du) — giu lam nguon lich su.',
+      'Trang tin tức chính thức tnu.edu.vn công bố bằng sổ tay điểm chuẩn 2026, dao động 16,35-22,50/30, nhung không có bằng day du 40 ngành. Bi thay the boi `tnus-cutoff-image-2026` (ảnh infographic chính chủ day du) — giu lam nguồn lich su.',
   },
   {
     id: 'tnus-methods-2026',

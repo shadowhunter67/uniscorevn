@@ -18,15 +18,15 @@ export interface UahSource {
 export const uahSources: UahSource[] = [
   {
     id: 'uah-official-notice-2026',
-    publisher: 'University of Architecture Ho Chi Minh City (Truong Dai hoc Kien truc TP.HCM)',
-    title: 'Official 2026 undergraduate admission page (confirms Thong bao 975/TB-HDTS floor-score notice)',
+    publisher: 'University of Architecture Ho Chi Minh City (Trường Đại học Kiến trúc TP.HCM)',
+    title: 'Official 2026 undergraduate admission page (confirms Thông báo 975/TB-HDTS floor-score notice)',
     url: 'https://uah.edu.vn/tuyen-sinh-dai-hoc-chinh-quy-nam-2026',
     accessedAt: '2026-08-24',
     sourceType: 'official-admission',
     verification: 'incomplete',
     lifecycle: { effectiveYear: 2026, status: 'current' },
     note:
-      'Official UAH page confirms Thong bao 975/TB-HDTS (posted 08/07/2026, "Ngưỡng đảm bảo chất lượng đầu vào") and a score-equivalence conversion document exist, but their PDF content is not directly readable via fetch. See uah-floor-score-press-2026 for the cross-checked numeric table.',
+      'Official UAH page confirms Thông báo 975/TB-HDTS (posted 08/07/2026, "Ngưỡng đảm bảo chất lượng đầu vào") and a score-equivalence conversion document exist, but their PDF content is not directly readable via fetch. See uah-floor-score-press-2026 for the cross-checked numeric table.',
   },
   {
     id: 'uah-floor-score-press-2026',

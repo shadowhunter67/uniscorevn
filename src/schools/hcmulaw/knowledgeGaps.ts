@@ -41,7 +41,7 @@ export const hcmulawKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'hcmulaw-foreign-language-combinations-not-modeled',
     label:
-      'Nhiều tổ hợp môn chính thức của ngành Luật/Luật thương mại quốc tế/Ngôn ngữ Trung Quốc dùng ngoại ngữ Pháp/Nhật/Trung thay cho Tiếng Anh (cùng 1 vị trí "Ngoại ngữ" trong tổ hợp, khác mã tổ hợp) — module này CHỈ model nhánh Tiếng Anh (`programs.ts`), vì core `SubjectId` hiện chưa có taxonomy cho tiếng Pháp/Nhật/Trung như môn thi độc lập.',
+      'Một số tổ hợp chính thức của ngành Luật, Luật thương mại quốc tế và Ngôn ngữ Trung Quốc dùng tiếng Pháp, tiếng Nhật hoặc tiếng Trung thay cho tiếng Anh ở vị trí "Ngoại ngữ". UniscoreVN hiện chỉ hỗ trợ nhánh Tiếng Anh, nên chưa kiểm tra được các tổ hợp ngoại ngữ còn lại.',
     status: 'incomplete',
     sourceId: 'hcmulaw-method-notice-2026',
     scoreAffecting: false,
@@ -52,7 +52,7 @@ export const hcmulawKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'hcmulaw-quang-tri-campus-not-modeled',
     label:
-      'Phân hiệu tại tỉnh Quảng Trị (mã tuyển sinh LPQ) chỉ tuyển ngành Luật, cùng tổ hợp/ngưỡng đầu vào (20,00/30) với ngành Luật tại trụ sở chính (LPS) — module này KHÔNG phân biệt campus (mặc định phục vụ LPS), vì công thức/ngưỡng giống hệt nhau nên không ảnh hưởng kết quả tính, chỉ ảnh hưởng lựa chọn mã trường lúc đăng ký (nằm ngoài phạm vi tính điểm).',
+      'Phân hiệu tại tỉnh Quảng Trị (mã tuyển sinh LPQ) chỉ tuyển ngành Luật, cùng tổ hợp và ngưỡng đầu vào 20,00/30 với ngành Luật tại trụ sở chính (LPS). UniscoreVN hiện không tách cơ sở vì công thức và ngưỡng giống nhau; điều này không đổi kết quả tính điểm, chỉ ảnh hưởng mã trường khi đăng ký.',
     status: 'incomplete',
     sourceId: 'hcmulaw-quality-threshold-2026',
     scoreAffecting: false,
@@ -61,7 +61,7 @@ export const hcmulawKnowledgeGaps: KnowledgeGap[] = [
   },
   {
     id: 'hcmulaw-priority-table-not-school-specific',
-    label: 'Bảng điểm ưu tiên khu vực/đối tượng dùng bảng chuẩn quốc gia — không tìm được trang HCMULAW tự công bố bảng số riêng.',
+    label: 'Điểm ưu tiên khu vực/đối tượng đang dùng bảng chuẩn quốc gia. Chưa tìm được trang HCMULAW tự công bố bảng số riêng.',
     status: 'official-but-unparsed',
     sourceId: 'hcmulaw-quality-threshold-2026',
     scoreAffecting: true,
@@ -72,7 +72,7 @@ export const hcmulawKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'hcmulaw-method1-not-scored',
     label:
-      'Phương thức 1 (mã 301, tuyển thẳng/xét tuyển thẳng/ưu tiên xét tuyển) không có công thức điểm — quyết định theo diện đặc thù (giải HSG quốc gia/quốc tế, người nước ngoài, dân tộc thiểu số rất ít người, người khuyết tật nặng...), không đưa vào `methods.ts` (cùng quy ước UFM/HUFLIT/HUTECH với các phương thức xét thẳng không công thức điểm).',
+      'Phương thức 1 (mã 301: tuyển thẳng, xét tuyển thẳng, ưu tiên xét tuyển) không có công thức điểm. Kết quả phụ thuộc diện đặc thù như giải HSG quốc gia/quốc tế, người nước ngoài, dân tộc thiểu số rất ít người, người khuyết tật nặng..., nên UniscoreVN không tính điểm cho phương thức này.',
     status: 'verified',
     sourceId: 'hcmulaw-method-notice-2026',
     scoreAffecting: false,

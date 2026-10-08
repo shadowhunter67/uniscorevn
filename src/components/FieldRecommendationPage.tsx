@@ -17,13 +17,6 @@ interface FieldRecommendationPageProps {
   onOpenSchool: (schoolId: string) => void;
 }
 
-/**
- * Một lựa chọn trường/ngành trong lĩnh vực.
- *
- * Thứ bậc CỐ Ý theo spec UX: tên NGÀNH nổi nhất (thí sinh đang chọn ngành, trường là bối cảnh) ->
- * band đánh giá -> câu chênh lệch dễ hiểu -> năm tham chiếu + độ tin cậy -> hành động.
- * Số kỹ thuật (chênh lệch thô/thang điểm) nằm sau, trong "Xem cách tính" — không bỏ, chỉ hạ lớp.
- */
 function MatchRow({ match, onOpenSchool }: { match: FieldMatch; onOpenSchool: (schoolId: string) => void }) {
   const { competitiveness } = match;
   const band = competitiveness.band === 'insufficient-data' ? undefined : competitiveness.band;
@@ -102,10 +95,13 @@ export function FieldRecommendationPage({ fieldId, onBackToFields, onOpenSchool 
   const assessedCount = result.groups.thuSuc.length + result.groups.vuaSuc.length + result.groups.anToanHon.length;
   const totalFound = assessedCount + result.insufficientData.length;
   const insufficientGroups = useMemo(() => groupInsufficientMatches(result.insufficientData), [result.insufficientData]);
+  const needsUserInputCount = insufficientGroups.find((group) => group.reason === 'needs-user-input')?.matches.length ?? 0;
+  const blockedByDataCount = result.insufficientData.length - needsUserInputCount;
+  const shouldPromptForInput = assessedCount === 0 && needsUserInputCount > 0;
 
   return (
     <div className="min-h-svh bg-bg">
-      <main className="mx-auto max-w-3xl px-4 py-8 sm:py-10">
+      <div className="mx-auto max-w-6xl px-4 py-8 sm:py-10">
         <button
           type="button"
           onClick={onBackToFields}
@@ -114,11 +110,34 @@ export function FieldRecommendationPage({ fieldId, onBackToFields, onOpenSchool 
           ← Về danh sách lĩnh vực
         </button>
 
-        <h1 className="mt-4 text-2xl font-bold text-ink sm:text-3xl">{field?.name ?? fieldId}</h1>
-        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">{COMPETITIVENESS_DISCLAIMER}</p>
+        <header className="mt-4 max-w-3xl">
+          <h1 className="text-3xl font-bold text-ink sm:text-4xl">{field?.name ?? fieldId}</h1>
+          <p className="mt-2 text-sm leading-relaxed text-muted">{COMPETITIVENESS_DISCLAIMER}</p>
+        </header>
 
-        <details open={!profileSummary.hasData} className="mt-4 rounded-md border border-accent/20 bg-accent/5 px-3 py-2.5">
-          <summary className="min-h-9 cursor-pointer py-1 text-sm font-medium text-ink">
+        <section className="mt-5 rounded-md border border-border bg-surface p-4" aria-label="Tóm tắt kết quả theo lĩnh vực">
+          <dl className="grid gap-3 text-sm sm:grid-cols-4">
+            <div>
+              <dt className="text-muted">Lựa chọn</dt>
+              <dd className="font-display text-2xl font-semibold text-ink">{totalFound}</dd>
+            </div>
+            <div>
+              <dt className="text-muted">Đánh giá được</dt>
+              <dd className="font-display text-2xl font-semibold text-ink">{assessedCount}</dd>
+            </div>
+            <div>
+              <dt className="text-muted">Cần bổ sung</dt>
+              <dd className="font-display text-2xl font-semibold text-ink">{needsUserInputCount}</dd>
+            </div>
+            <div>
+              <dt className="text-muted">Chưa đủ dữ liệu</dt>
+              <dd className="font-display text-2xl font-semibold text-ink">{blockedByDataCount}</dd>
+            </div>
+          </dl>
+        </section>
+
+        <details id="field-profile-editor" className="mt-4 rounded-md border border-accent/25 bg-accent/5 px-3 py-2.5 scroll-mt-20">
+          <summary className="min-h-(--ui-tap-min) cursor-pointer py-1 text-sm font-medium text-ink">
             {profileSummary.hasData ? 'Hồ sơ dùng chung (đã có dữ liệu)' : 'Nhập hồ sơ để xem kết quả phù hợp với bạn'}
           </summary>
           <SharedProfileEditor profile={profile} updateProfile={updateProfile} updateVactTotal={updateVactTotal} />
@@ -129,6 +148,19 @@ export function FieldRecommendationPage({ fieldId, onBackToFields, onOpenSchool 
             ? 'Chưa có trường/ngành nào trong lĩnh vực này có dữ liệu để đối chiếu.'
             : `Tìm thấy ${totalFound} lựa chọn, trong đó ${assessedCount} lựa chọn đánh giá được với hồ sơ hiện tại.`}
         </p>
+
+        {shouldPromptForInput && (
+          <section className="mt-5 rounded-md border border-border bg-surface p-4">
+            <h2 className="text-lg font-semibold text-ink">Chưa có lựa chọn đánh giá được</h2>
+            <p className="mt-1 text-sm text-muted">Nhập điểm thi THPT để xem trường nào đánh giá được cho lĩnh vực này.</p>
+            <a
+              href="#field-profile-editor"
+              className="mt-3 inline-flex min-h-(--ui-tap-min) items-center rounded-md bg-primary px-4 text-sm font-semibold text-white transition-colors duration-150 hover:bg-primary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+            >
+              Nhập điểm thi THPT
+            </a>
+          </section>
+        )}
 
         <GroupSection
           title="Thử sức"
@@ -149,9 +181,6 @@ export function FieldRecommendationPage({ fieldId, onBackToFields, onOpenSchool 
           onOpenSchool={onOpenSchool}
         />
 
-        {/* Trước đây danh sách này luôn xổ hết, dài hơn cả 3 nhóm có ích ở trên và không nói được
-            vì sao. Nay: gấp mặc định, và chia theo LÝ DO — tách rõ phần thí sinh tự bổ sung được
-            với phần chính UniScoreVN còn thiếu. */}
         {result.insufficientData.length > 0 && (
           <section className="mt-7">
             <h2 className="text-lg font-semibold text-ink">
@@ -193,7 +222,7 @@ export function FieldRecommendationPage({ fieldId, onBackToFields, onOpenSchool 
             </Disclosure>
           </section>
         )}
-      </main>
+      </div>
     </div>
   );
 }

@@ -18,7 +18,7 @@ export interface Hpu2Source {
 export const hpu2Sources: Hpu2Source[] = [
   {
     id: 'hpu2-admission-info-2026',
-    publisher: 'Hanoi Pedagogical University 2 (Truong Dai hoc Su pham Ha Noi 2)',
+    publisher: 'Hanoi Pedagogical University 2 (Trường Đại học Sư phạm Hà Nội 2)',
     title: 'Official 2026 undergraduate admission information',
     url: 'https://tuyensinh.hpu2.edu.vn/chi-tiet/tuyen-sinh-dai-hoc-chinh-quy-nam-2026.html',
     accessedAt: '2026-08-24',

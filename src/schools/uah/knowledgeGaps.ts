@@ -4,16 +4,16 @@ export const uahKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'uah-program-threshold-table-not-imported',
     label:
-      'UAH 2026 cong bo nguong theo tung nganh cu the (Thong bao 975/TB-HDTS). Batch 2026-08-26 da doc truc tiep ban PDF goc (khong con chi qua bao chi Tuoi Tre) va xac nhan dung so cho ngành Kỹ thuật cơ sở hạ tầng (16,00/30, xem `uah-thpt-exam-ktcsht-2026` — exact calculator riêng). Các ngành còn lại (Kiến trúc, Quy hoạch, Thiết kế...) vẫn chỉ dừng ở mức đã có số ngưỡng (đọc được từ cùng PDF) nhưng CHƯA đóng thành exact calculator vì đa số dùng tổ hợp có môn năng khiếu (V00/V01/V02/H01/H06 — xem gap `uah-talent-subject-coefficient-not-modeled`).',
+      'UAH 2026 công bố ngưỡng theo từng ngành cụ thể (Thông báo 975/TB-HDTS). Batch 2026-08-26 đã đọc truc tiep bản PDF gốc (không cón chi qua báo chí Tuoi Tre) va xác nhận dung so cho ngành Kỹ thuật cơ sở hạ tầng (16,00/30, xem `uah-thpt-exam-ktcsht-2026` — exact calculator riêng). Các ngành còn lại (Kiến trúc, Quy hoạch, Thiết kế...) vẫn chỉ dừng ở mức đã có số ngưỡng (đọc được từ cùng PDF) nhưng CHƯA đóng thành exact calculator vì đa số dùng tổ hợp có môn năng khiếu (V00/V01/V02/H01/H06 — xem gap `uah-talent-subject-coefficient-not-modeled`).',
     status: 'official-but-unparsed',
     sourceId: 'uah-notice-975-pdf-2026',
     scoreAffecting: true,
     knownData: [
-      '21/30: thiet ke cong nghiep, thiet ke do hoa, thiet ke thoi trang (chuong trinh chuan va dinh huong quoc te)',
-      '20/30: kien truc, thiet ke noi that (co so TPHCM, Can Tho, Da Lat, va chuong trinh dinh huong quoc te)',
+      '21/30: thiết kế cong nghiep, thiết kế đồ họa, thiết kế thời trang (chương trình chuẩn va định hướng quốc tế)',
+      '20/30: kien truc, thiet ke noi that (co so TPHCM, Cần Tho, Da Lat, va chuong trinh dinh huong quoc te)',
       '18/30: quy hoach vung va do thi, kien truc canh quan, my thuat do thi',
-      '17/30: ky thuat xay dung, quan ly xay dung',
-      '16/30: ky thuat co so ha tang (đã lên exact calculator)',
+      '17/30: kỹ thuật xây dựng, quản lý xây dựng',
+      '16/30: kỹ thuật cơ sở hạ tầng (đã lên exact calculator)',
       '15/30: thiet ke do thi (chuong trinh tien tien, yeu cau tieng Anh)',
     ],
     impact: 'Runtime tính exact cho ngành Kỹ thuật cơ sở hạ tầng; các ngành khác vẫn chỉ kiểm tra được ngưỡng (không tính điểm xét tuyển cuối) do thiếu công thức hệ số môn năng khiếu.',
@@ -31,7 +31,7 @@ export const uahKnowledgeGaps: KnowledgeGap[] = [
   },
   {
     id: 'uah-ability-assessment-not-modeled',
-    label: 'UAH con xet tuyen theo ket qua ky thi danh gia nang luc DHQG TPHCM va cac phuong thuc khac (hoc ba, ...); chi phuong thuc thi TN THPT duoc mo hinh hoa.',
+    label: 'UAH con xét tuyển theo kết quả ky thi danh gia năng lực DHQG TP.HCM va các phương thức khác (học bạ, ...); chi phương thức thi TN THPT được mô hình hóa.',
     status: 'official-but-unparsed',
     sourceId: 'uah-notice-391-2026',
   },

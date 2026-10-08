@@ -55,25 +55,25 @@ export function evaluateMduThptExamExactAdmission(
     missingRequirements.push({
       kind: 'school-context',
       code: 'mdu-program-code',
-      label: `Chon nganh MDU/MIT (${MDU_SUPPORTED_PROGRAM_THRESHOLDS_2026.length} nganh trong pham vi exact).`,
+      label: `Chọn ngành MDU/MIT (${MDU_SUPPORTED_PROGRAM_THRESHOLDS_2026.length} ngành trong phạm vi exact).`,
     });
-    return partial('Can chon nganh MDU/MIT de ap nguong diem chuan.');
+    return partial('Cần chọn ngành MDU/MIT để áp ngưỡng điểm chuẩn.');
   }
   if (program.outOfScopeReason) {
     missingRequirements.push({ kind: 'official-rule', code: 'mdu-program-out-of-exact-scope', label: program.outOfScopeReason });
-    return partial(`Nganh ${program.name} cua MDU/MIT chua nam trong pham vi exact.`);
+    return partial(`Ngành ${program.name} của MDU/MIT chưa năm trong phạm vi exact.`);
   }
   if (!context.subjectContext || context.subjectContext.subjects.length !== 3) {
-    missingRequirements.push({ kind: 'school-context', code: 'mdu-subject-combination', label: 'Chon to hop 3 mon xet tuyen MDU/MIT.' });
-    return partial('Can chon to hop 3 mon de tinh diem xet tuyen MDU/MIT.');
+    missingRequirements.push({ kind: 'school-context', code: 'mdu-subject-combination', label: 'Chọn tổ hợp 3 môn xét tuyển MDU/MIT.' });
+    return partial('Cần chọn tổ hợp 3 môn để tính điểm xét tuyển MDU/MIT.');
   }
   if (!context.subjectContext.combinationId || !program.combinationIds.includes(context.subjectContext.combinationId)) {
     missingRequirements.push({
       kind: 'school-context',
       code: 'mdu-combination-not-modeled',
-      label: `To hop chua duoc ho tro cho nganh ${program.name} (ho tro: ${program.combinationIds.join(', ')}).`,
+      label: `Tổ hợp chưa được hỗ trợ cho ngành ${program.name} (hỗ trợ: ${program.combinationIds.join(', ')}).`,
     });
-    return partial('To hop da chon khong nam trong danh sach to hop cua nganh MDU/MIT nay.');
+    return partial('Tổ hợp đã chọn không nằm trong danh sách tổ hợp của ngành MDU/MIT này.');
   }
 
   let total = 0;
@@ -88,10 +88,10 @@ export function evaluateMduThptExamExactAdmission(
       ...missing.map((subjectId) => ({
         kind: 'profile-input' as const,
         code: `mdu-thpt-${subjectId}`,
-        label: `Diem thi TN THPT mon ${SUBJECT_LABELS[subjectId]} cho to hop MDU/MIT.`,
+        label: `Điểm thi TN THPT môn ${SUBJECT_LABELS[subjectId]} cho tổ hợp MDU/MIT.`,
       }))
     );
-    return partial('Can du diem 3 mon thi TN THPT de tinh diem xet tuyen MDU/MIT.', ['Chua du diem 3 mon thi TN THPT trong to hop da chon.']);
+    return partial('Cần đủ điểm 3 môn thi TN THPT để tính điểm xét tuyển MDU/MIT.', ['Chưa đủ điểm 3 môn thi TN THPT trong tổ hợp đã chọn.']);
   }
 
   const raw30 = round2(total);
@@ -101,13 +101,13 @@ export function evaluateMduThptExamExactAdmission(
   const eligible = raw30 >= program.threshold30;
 
   const reasons = [
-    `Diem chuan MDU/MIT 2026 (thi TN THPT, ${program.name}): tong tho 3 mon >= ${program.threshold30}/30.`,
-    `Tong tho 3 mon = ${raw30}/30 -> ${eligible ? 'dat' : 'chua dat'} nguong. Diem xet tham khao (tho + uu tien) = ${dxt30}/30.`,
+    `Điểm chuẩn MDU/MIT 2026 (thi TN THPT, ${program.name}): tổng thô 3 môn >= ${program.threshold30}/30.`,
+    `Tổng thô 3 môn = ${raw30}/30 -> ${eligible ? 'dat' : 'chưa đạt'} ngưỡng. Điểm xét tham khảo (tho + ưu tiên) = ${dxt30}/30.`,
   ];
 
   explanation.push({
     id: 'mdu-exact-raw',
-    label: 'Tong diem 3 mon thi (tho)',
+    label: 'Tổng điểm 3 môn thi (thô)',
     output: raw30,
     scale: 30,
     formula: context.subjectContext.subjects.map((subjectId) => SUBJECT_LABELS[subjectId]).join(' + '),
@@ -115,18 +115,18 @@ export function evaluateMduThptExamExactAdmission(
   });
   explanation.push({
     id: 'mdu-exact-priority',
-    label: priority.reduced ? 'Diem uu tien (da giam, tham khao)' : 'Diem uu tien (tham khao)',
+    label: priority.reduced ? 'Điểm ưu tiên (đã giảm, tham khảo)' : 'Điểm ưu tiên (tham khảo)',
     output: priority.effectivePriority30,
     scale: 30,
-    formula: priority.reduced ? '[(30 - tong tho)/7,5] x Muc uu tien KV/DT (TT 06/2026)' : 'Muc uu tien KV/DT (TT 06/2026)',
+    formula: priority.reduced ? '[(30 - tổng thô)/7,5] × Mức ưu tiên KV/ĐT (TT 06/2026)' : 'Mức ưu tiên KV/ĐT (TT 06/2026)',
     evidence: mduThptExamExactEvidence.evidence,
   });
   explanation.push({
     id: 'mdu-exact-dxt',
-    label: 'Diem xet tham khao (khong dung de so nguong)',
+    label: 'Điểm xét tham khảo (không dùng để so ngưỡng)',
     output: dxt30,
     scale: 30,
-    formula: 'round2(tong tho 3 mon + diem uu tien)',
+    formula: 'round2(tổng thô 3 môn + điểm ưu tiên)',
     evidence: mduThptExamExactEvidence.evidence,
   });
 
@@ -134,7 +134,7 @@ export function evaluateMduThptExamExactAdmission(
     missingRequirements.push({
       kind: 'profile-input',
       code: 'mdu-priority-region-category',
-      label: 'Khu vuc / doi tuong uu tien (chua nhap - diem xet tham khao dang tinh voi diem uu tien = 0).',
+      label: 'Khu vực / đối tượng ưu tiên (chưa nhập - điểm xét tham khảo đang tính với điểm ưu tiên = 0).',
     });
   }
 

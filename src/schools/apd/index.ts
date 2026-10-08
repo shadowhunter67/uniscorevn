@@ -4,7 +4,7 @@ import { apdAdmissionMethods } from './methods';
 
 export const apdModule: SchoolModule = {
   id: 'apd',
-  name: 'Hoc vien Chinh sach va Phat trien',
+  name: 'Học viện Chính sách và Phát triển',
   shortName: 'APD',
   about: 'Public policy-and-development academy headquartered in Hanoi, with new 2026 branch campuses in Bac Ninh and Da Nang.',
   year: 2026,
@@ -23,7 +23,7 @@ export const apdModule: SchoolModule = {
   },
   catalogSources: [
     {
-      title: 'Du kien diem san, diem chuan Hoc vien Chinh sach va Phat trien (APD) nam 2026',
+      title: 'Dự kiến điểm sàn, điểm chuẩn Học viện Chính sách và Phát triển (APD) năm 2026',
       url: 'https://xaydungchinhsach.chinhphu.vn/du-kien-diem-san-diem-chuan-hoc-vien-chinh-sach-va-phat-trien-apd-nam-2026-11926070213145361.htm',
       type: 'official-institution',
       checkedAt: '2026-08-24',

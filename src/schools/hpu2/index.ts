@@ -4,7 +4,7 @@ import { hpu2AdmissionMethods } from './methods';
 
 export const hpu2Module: SchoolModule = {
   id: 'hpu2',
-  name: 'Truong Dai hoc Su pham Ha Noi 2',
+  name: 'Trường Đại học Sư phạm Hà Nội 2',
   shortName: 'HPU2',
   about: 'Public teacher-training university based in Xuan Hoa, Phu Tho (formerly Vinh Phuc).',
   year: 2026,

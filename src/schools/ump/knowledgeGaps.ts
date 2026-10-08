@@ -12,7 +12,7 @@ export const umpKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'ump-gender-restriction-not-modeled',
     label:
-      'Ngành Hộ sinh (7720302) chỉ tuyển Nữ (Thông báo 2415/TB-ĐHYD mục 5.4) — `ApplicantProfile` dùng chung không có field giới tính, nên UniscoreVN KHÔNG kiểm tra được điều kiện này, chỉ hiển thị eligibility theo điểm số.',
+      'Ngành Hộ sinh (7720302) chỉ tuyển Nữ theo Thông báo 2415/TB-ĐHYD mục 5.4. UniscoreVN chưa có mục nhập giới tính, nên không kiểm tra được điều kiện này và chỉ đánh giá theo điểm số.',
     status: 'incomplete',
     sourceId: 'ump-admission-notice-2415-2026',
     scoreAffecting: false,
@@ -23,7 +23,7 @@ export const umpKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'ump-cutoffs-2026-not-imported',
     label:
-      'Điểm trúng tuyển thật 2026 theo từng ngành × tổ hợp (Thông báo 3557/TB-ĐHYD, 10/8/2026, đã lọc ảo xong) đã có nguồn đọc được (3 ảnh PNG) nhưng CHƯA transcribe vào `data/cutoffs.ts` — UMP hiện chưa có cutoff comparison ở `/compare`.',
+      'Điểm trúng tuyển chính thức 2026 theo từng ngành và tổ hợp đã có trong Thông báo 3557/TB-ĐHYD ngày 10/8/2026 sau khi lọc ảo. UniscoreVN chưa nhập bảng này, nên UMP hiện chưa có phần so sánh với điểm chuẩn.',
     status: 'official-but-unparsed',
     sourceId: 'ump-cutoff-notice-3557-2026',
     scoreAffecting: false,

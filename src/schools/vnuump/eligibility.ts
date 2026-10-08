@@ -1,5 +1,5 @@
 export const VNUUMP_THPT_THRESHOLD = {
   min30: 15,
   requiredText:
-    'VNU-UMP 2026 (phuong thuc thi TN THPT, 96% chi tieu): tong diem 3 mon thi trong to hop xet tuyen phai dat toi thieu 15,00/30. Ap dung dong nhat cho ca 6 nganh (Y khoa, Duoc hoc, Rang Ham Mat, Ky thuat xet nghiem y hoc, Ky thuat hinh anh y hoc, Dieu duong) - chua bao gom dieu kien nguong chat luong dau vao rieng theo Bo GDDT cho khoi nganh suc khoe (neu khac 15/30).',
+    'VNU-UMP 2026 (phương thức thi TN THPT, 96% chỉ tiêu): tổng điểm 3 môn thi trong tổ hợp xét tuyển phải đạt tối thiểu 15,00/30. Áp dụng đồng nhất cho cả 6 ngành (Y khoa, Dược học, Răng Hàm Mặt, Kỹ thuật xét nghiệm y học, Kỹ thuật hình ảnh y học, Điều dưỡng) - chưa bao gồm điều kiện ngưỡng chất lượng đầu vào riêng theo Bộ GDĐT cho khối ngành sức khỏe (nếu khác 15/30).',
 };

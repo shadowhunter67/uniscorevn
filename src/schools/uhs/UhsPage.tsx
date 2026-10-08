@@ -1,3 +1,4 @@
+import { userFacingText } from '../../core/userFacingText';
 import { useState } from 'react';
 import { AlertTriangle, Award, Calculator, ShieldCheck } from 'lucide-react';
 import { Header } from '../../components/Header';
@@ -116,10 +117,10 @@ export function UhsPage({ onChangeSchool }: UhsPageProps) {
         <section className="mt-5 flex items-start gap-3 rounded-card border border-warning/30 bg-warning/10 p-6 text-sm text-warning sm:p-8">
           <AlertTriangle size={20} className="mt-0.5 shrink-0" />
           <div>
-            <p className="font-semibold">UHS vẫn chưa exact</p>
+            <p className="font-semibold">UHS vẫn chưa tính chính xác được</p>
             <ul className="mt-2 list-disc space-y-1 pl-5">
               {uhsKnowledgeGaps.map((gap) => (
-                <li key={gap.id}>{gap.label}</li>
+                <li key={gap.id}>{userFacingText(gap.label)}</li>
               ))}
             </ul>
           </div>
@@ -182,7 +183,7 @@ export function UhsPage({ onChangeSchool }: UhsPageProps) {
                 ))}
               </div>
               <SharedProfileNotice className="mt-2" />
-              <div className="mt-4 overflow-x-auto">
+              <div className="mt-4 overflow-x-auto" tabIndex={0} role="region" aria-label="Bảng dữ liệu, cuộn ngang để xem hết">
                 <table className="w-full min-w-[420px] border-separate border-spacing-1 text-xs">
                   <thead><tr><th className="text-left text-muted">Môn</th>{GRADES.map((g) => <th key={g} className="text-left text-muted">{GRADE_LABELS[g]}</th>)}</tr></thead>
                   <tbody>
@@ -250,7 +251,7 @@ export function UhsPage({ onChangeSchool }: UhsPageProps) {
           <h2 className="text-xs font-semibold uppercase tracking-wide text-muted">Nguồn dữ liệu</h2>
           <ul className="mt-2 flex flex-col gap-1.5 text-xs">
             {uhsSources.map((source) => (
-              <li key={source.id}><a href={source.url} target="_blank" rel="noopener noreferrer" className="text-accent underline-offset-2 hover:underline">{source.title}</a><span className="text-muted"> - {source.publisher} </span><span className="rounded-full bg-ink/5 px-1.5 py-0.5 text-muted">{verificationLabel(source.verification)}</span></li>
+              <li key={source.id}><a href={source.url} target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-2 hover:no-underline">{userFacingText(source.title)}</a><span className="text-muted"> - {source.publisher} </span><span className="rounded-full bg-ink/5 px-1.5 py-0.5 text-muted">{verificationLabel(source.verification)}</span></li>
             ))}
           </ul>
         </section>

@@ -4,7 +4,7 @@ import { vnulawAdmissionMethods } from './methods';
 
 export const vnulawModule: SchoolModule = {
   id: 'vnulaw',
-  name: 'Truong Dai hoc Luat - Dai hoc Quoc gia Ha Noi',
+  name: 'Trường Đại học Luật - Đại học Quốc gia Hà Nội',
   shortName: 'VNU-LS',
   about: 'Public law school under Vietnam National University, Hanoi (VNU-UL), based in Hanoi.',
   year: 2026,
@@ -23,7 +23,7 @@ export const vnulawModule: SchoolModule = {
   },
   catalogSources: [
     {
-      title: 'Thong tin tuyen sinh Dai hoc chinh quy nam 2026 - VNU-UL',
+      title: 'Thông tin tuyển sinh Đại học chính quy năm 2026 - VNU-UL',
       url: 'https://law.vnu.edu.vn/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026/',
       type: 'official-institution',
       checkedAt: '2026-08-25',

@@ -4,7 +4,7 @@ import { tnueAdmissionMethods } from './methods';
 
 export const tnueModule: SchoolModule = {
   id: 'tnue',
-  name: 'Truong Dai hoc Su pham - Dai hoc Thai Nguyen',
+  name: 'Trường Đại học Sư phạm - Đại học Thái Nguyên',
   shortName: 'TNUE',
   about: 'Public teacher-training member school of Thai Nguyen University.',
   year: 2026,
@@ -22,7 +22,7 @@ export const tnueModule: SchoolModule = {
   },
   catalogSources: [
     {
-      title: 'Truong Dai hoc Su pham - Dai hoc Thai Nguyen cong bo nguong dam bao chat luong dau vao nam 2026',
+      title: 'Trường Đại học Sư phạm - Đại học Thái Nguyên công bố ngưỡng đảm bảo chất lượng đầu vào năm 2026',
       url: 'https://tnu.edu.vn/dao-tao/thong-tin-tuyen-sinh/thong-tin-tuyen-sinh-dh-cd/truong-dai-hoc-su-pham-dai-hoc-thai-nguyen-cong-bo-nguong-dam-bao-chat-luong-dau-vao-nam-2026.html',
       type: 'official-institution',
       checkedAt: '2026-08-24',

@@ -1,3 +1,4 @@
+import { userFacingText } from '../../core/userFacingText';
 import { AlertTriangle, GraduationCap } from 'lucide-react';
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
@@ -54,7 +55,7 @@ export function UitInfoPage({ onChangeSchool }: UitInfoPageProps) {
 
         <section className="mt-5 flex items-start gap-3 rounded-card border border-warning/30 bg-warning/10 p-6 text-sm text-warning sm:p-8">
           <AlertTriangle size={20} className="mt-0.5 shrink-0" aria-hidden="true" />
-          <div>
+          <div className="min-w-0">
             <p className="font-semibold">UniscoreVN chưa tính được điểm xét tuyển chính xác cho UIT</p>
             <p className="mt-1 leading-relaxed">
               Trọng số tổng và bảng điểm cộng đã xác minh (dùng được ở dưới), nhưng cách quy đổi bách phân vị và một
@@ -62,7 +63,7 @@ export function UitInfoPage({ onChangeSchool }: UitInfoPageProps) {
             </p>
             <ul className="mt-2 list-disc space-y-1 pl-5 leading-relaxed">
               {uitKnowledgeGaps.map((gap) => (
-                <li key={gap.id}>{gap.label}</li>
+                <li key={gap.id}>{userFacingText(gap.label)}</li>
               ))}
             </ul>
             <p className="mt-2 leading-relaxed">
@@ -88,7 +89,7 @@ export function UitInfoPage({ onChangeSchool }: UitInfoPageProps) {
             Thang 100, đã bao gồm điểm cộng và điểm ưu tiên — theo đúng công bố gốc.
           </p>
 
-          <div className="mt-4 overflow-x-auto">
+          <div className="mt-4 overflow-x-auto" tabIndex={0} role="region" aria-label="Bảng dữ liệu, cuộn ngang để xem hết">
             <table className="w-full min-w-[480px] border-collapse text-sm">
               <caption className="sr-only">Điểm chuẩn trúng tuyển UIT {YEAR}</caption>
               <thead>
@@ -133,9 +134,9 @@ export function UitInfoPage({ onChangeSchool }: UitInfoPageProps) {
                   href={source.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-accent underline-offset-2 hover:underline"
+                  className="text-accent underline underline-offset-2 hover:no-underline"
                 >
-                  {source.title}
+                  {userFacingText(source.title)}
                 </a>
                 <span className="text-muted"> — {source.publisher} </span>
                 <span className="rounded-full bg-ink/5 px-1.5 py-0.5 text-muted">

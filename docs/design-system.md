@@ -53,6 +53,14 @@ thêm màu/nền pastel mới, luôn tự kiểm contrast — đừng tin defaul
 comment trong `ComparisonEntryCard.tsx`). Đừng dùng `rounded-card`/`shadow-card` cho code mới trừ
 khi đang sửa trực tiếp 1 trong 16 trang đó.
 
+## Chữ & tiêu đề (cập nhật 2026-10-07)
+
+- **Font:** thân bài giữ font hệ thống; tiêu đề `h1-h3` và số điểm lớn dùng **Be Vietnam Pro** (`--font-display`, class `font-display`, tự host qua `@fontsource`, không gọi CDN ngoài). Chọn vì thiết kế riêng cho tiếng Việt (dấu không chồng nhau).
+- **Sàn cỡ chữ:** `--text-xs` = 13px (không dùng `text-[10px]`/`text-[11px]`), không làm nhạt chữ phụ bằng `text-muted/70`; đã sửa vì phụ huynh/điện thoại đọc không nổi.
+- **Một header cho mọi trang:** `SiteHeader` luôn hiện; trang trường dùng `Header.tsx` làm khối định danh (h1 = tên trường), không lặp wordmark.
+- **Trạng thái mục form:** `SectionHeader progress` hiện ký hiệu + chữ (✓/!/○), không chỉ màu.
+- **Không hover-only:** hành động chính/phụ trên danh sách phải luôn thấy được (người dùng chủ yếu dùng điện thoại).
+
 ## Kích thước chạm & focus
 
 - `--ui-tap-min` = 40px (48px ở chế độ chữ lớn) — mọi control tương tác chính (nút, checkbox row,

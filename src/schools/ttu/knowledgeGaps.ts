@@ -4,22 +4,22 @@ export const ttuKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'ttu-program-threshold-table-not-imported',
     label:
-      'TTU 2026 cong bo nguong THPT theo 4 nhom nganh (da so nganh, Dieu duong/KTXN, Luat, Y khoa); chua chon duoc nganh cu the de ap dung dung nhom.',
+      'TTU 2026 công bố ngưỡng THPT theo 4 nhóm ngành (đa số ngành, Điều dưỡng/KTXN, Luật, Y khoa); chưa chọn được ngành cụ thể để áp dụng dung nhom.',
     status: 'official-but-unparsed',
     sourceId: 'ttu-floor-score-2026',
     scoreAffecting: true,
     knownData: [
-      'Da so nganh (ky thuat, cong nghe, kinh te, ngon ngu): >= 15,0/30',
-      'Dieu duong, Ky thuat Xet nghiem Y hoc: >= 18,0/30',
+      'Đa số ngành (kỹ thuật, công nghệ, kinh tế, ngon ngu): >= 15,0/30',
+      'Điều dưỡng, Kỹ thuật Xét nghiệm Y học: >= 18,0/30',
       'Luat: >= 20,0/30',
       'Y khoa: >= 22,0/30',
     ],
-    impact: 'Runtime chi loai duoc ho so duoi 15/30 va xac nhan dat tren 22/30 (moi nganh); giua 15/30 va 22/30 can chon nganh de ket luan chinh xac.',
+    impact: 'Runtime chi loai được hồ sơ dưới 15/30 va xác nhận dat tren 22/30 (moi ngành); giữa 15/30 va 22/30 cần chọn ngành để kết luận chính xác.',
   },
   {
     id: 'ttu-formula-and-groups-resolved',
     label:
-      'Batch 2026-08-28: doc lai truc tiep thong bao chinh thuc qua chrome-devtools, xac nhan 3 nhom nguong (standard 15 / nursingMedtech 18 / law 20) khong co dieu kien phu → mo nhanh exact `ttu-thpt-exam-exact-2026`. Nganh Y khoa (22, dieu kien kep to hop A00/D07 >=22 VA Sinh hoc bap TB >=6,5) van ngoai pham vi (cau truc khac cac nhom con lai).',
+      'Batch 2026-08-28: doc lai truc tiep thông báo chính thức qua chrome-devtools, xác nhận 3 nhom ngưỡng (standard 15 / nursingMedtech 18 / law 20) không có điều kiện phu → mo nhanh exact `ttu-thpt-exam-exact-2026`. Ngành Y khoa (22, điều kiện kep tổ hợp A00/D07 >=22 VA Sinh học bạp TB >=6,5) van ngoai phạm vi (cau truc khác các nhom con lai).',
     status: 'official-but-unparsed',
     sourceId: 'ttu-floor-score-2026',
     scoreAffecting: false,
@@ -28,7 +28,7 @@ export const ttuKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'ttu-other-methods-not-modeled',
     label:
-      'TTU 2026 con cac phuong thuc khac ngoai thi TN THPT (xet tuyen thang/uu tien theo quy dinh Bo GD&DT, va cac phuong thuc khac neu co); chi phuong thuc thi TN THPT duoc mo hinh hoa.',
+      'TTU 2026 con các phương thức khác ngoai thi TN THPT (xét tuyển thẳng/ưu tiên theo quy dinh Bộ GD&ĐT, va các phương thức khác nêu co); chi phương thức thi TN THPT được mô hình hóa.',
     status: 'official-but-unparsed',
     sourceId: 'ttu-floor-score-2026',
   },

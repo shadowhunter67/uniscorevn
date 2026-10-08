@@ -51,7 +51,7 @@ export const huceAdmissionMethods: AdmissionMethodDescriptor[] = [
    * Narrow exact branch, THPT-exam method only, covering all 51 programs already in
    * `thresholds.ts` (OCR'd from the official per-program table). The notice does not state a
    * formula, so eligibility compares the raw 3-subject total to the published threshold; priority
-   * points are a documented judgment call (Dieu 7 TT 06/2026, `priority.ts`) applied only to the
+   * points are a documented judgment call (Điều 7 TT 06/2026, `priority.ts`) applied only to the
    * informational reference score. No `knowledgeGaps` attached.
    */
   {

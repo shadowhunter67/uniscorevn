@@ -4,16 +4,16 @@ import { nctuAdmissionMethods } from './methods';
 
 export const nctuModule: SchoolModule = {
   id: 'nctu',
-  name: 'Truong Dai hoc Nam Can Tho',
+  name: 'Trường Đại học Nam Cần Thơ',
   shortName: 'NCTU',
-  about: 'Truong dai hoc tu thuc da nganh tai Can Tho, dao tao 48 nganh trinh do dai hoc chinh quy.',
+  about: 'Trường đại học tư thục đa ngành tại Cần Thơ, đào tạo 48 ngành trình độ đại học chính quy.',
   year: 2026,
   status: 'researching',
   ownership: 'private',
   region: 'other',
   vnuhcm: false,
   summary:
-    'Tinh chinh xac diem xet tuyen NCTU 2026 theo thi TN THPT cho nhom nganh ngoai Suc khoe/Luat (nguong 15/30, khong he so mon, cong diem uu tien theo Dieu 7 — bai huong dan tu dang tren tuyensinh.nctu.edu.vn). Nhom Suc khoe/Luat gate theo hoc luc lop 12 (chua co truong ho so tuong ung) va bang nguong theo hoc ba/V-SAT van chi o muc kiem tra nguong.',
+    'Tinh chính xác điểm xét tuyển NCTU 2026 theo thi TN THPT cho nhóm ngành ngoai Sức khỏe/Luật (ngưỡng 15/30, không hệ số mon, cộng điểm ưu tiên theo Điều 7 — bài hướng dẫn tu dang tren tuyensinh.nctu.edu.vn). Nhom Sức khỏe/Luật gate theo học lực lớp 12 (chưa có trường hồ sơ tuong ung) va bảng ngưỡng theo học bạ/V-SAT van chi o mức kiểm tra ngưỡng.',
   capabilities: {
     admissionInfo: true,
     programs: false,
@@ -22,7 +22,7 @@ export const nctuModule: SchoolModule = {
   },
   catalogSources: [
     {
-      title: 'Thong bao nguong dam bao chat luong dau vao (diem san) xet tuyen dai hoc chinh quy nam 2026',
+      title: 'Thông báo ngưỡng đảm bảo chất lượng đầu vào (điểm sàn) xét tuyển đại học chính quy năm 2026',
       url: 'https://nctu.edu.vn/truong-dai-hoc-nam-can-tho-cong-bo-diem-san-xet-tuyen-dai-hoc-chinh-quy-nam-2026',
       type: 'official-institution',
       checkedAt: '2026-08-24',

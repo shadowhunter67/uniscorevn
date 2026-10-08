@@ -4,7 +4,7 @@ import { vnuaAdmissionMethods } from './methods';
 
 export const vnuaModule: SchoolModule = {
   id: 'vnua',
-  name: 'Hoc vien Nong nghiep Viet Nam',
+  name: 'Học viện Nông nghiệp Việt Nam',
   shortName: 'VNUA',
   about: 'Public agriculture-focused academy in Hanoi.',
   year: 2026,

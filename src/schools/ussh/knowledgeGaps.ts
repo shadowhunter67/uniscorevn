@@ -20,7 +20,7 @@ export const usshKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'ussh-bonus-exact-amount-per-criterion',
     label:
-      'Mức cộng cụ thể cho từng tiêu chí trong mỗi Nhóm thành tích (Nhóm 1≤3đ/Nhóm 2≤4đ/Nhóm 3≤3đ, tổng≤10đ) chưa công bố — trường tự nói "công bố cùng kết quả xét tuyển". UniscoreVN chỉ tính chính xác cho thí sinh KHÔNG có thành tích được cộng điểm (ĐC=0).',
+      'Mức điểm cộng cho từng tiêu chí trong các Nhóm thành tích chưa được công bố; trường cho biết sẽ "công bố cùng kết quả xét tuyển". Hiện chỉ biết mức tối đa: Nhóm 1≤3đ, Nhóm 2≤4đ, Nhóm 3≤3đ, tổng≤10đ. UniscoreVN chỉ tính chính xác khi thí sinh không có thành tích được cộng điểm (ĐC=0).',
     status: 'official-but-unparsed',
     sourceId: 'ussh-info-pdf-2026',
     scoreAffecting: false,

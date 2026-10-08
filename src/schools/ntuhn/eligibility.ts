@@ -1,5 +1,5 @@
 export const NTUHN_THPT_THRESHOLD = {
   min30: 15,
   requiredText:
-    'NTU-HN (Dai hoc Nguyen Trai) 2026 dot 1: nguong diem trung tuyen theo phuong thuc xet ket qua thi tot nghiep THPT la 15/30, ap dung dong nhat cho toan bo 11 nganh dao tao (khong phan biet nganh trong cung phuong thuc), khong nhan he so, khong tinh diem uu tien/khuyen khich rieng.',
+    'NTU-HN (Đại học Nguyễn Trãi) 2026 dot 1: ngưỡng điểm trúng tuyển theo phương thức xét kết quả thi tốt nghiệp THPT la 15/30, áp dụng đồng nhất cho toan bo 11 ngành đào tạo (không phân biệt ngành trong cung phương thức), không nhân hệ số, không tính điểm ưu tiên/khuyen khich riêng.',
 };

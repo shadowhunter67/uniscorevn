@@ -4,7 +4,7 @@ import { tuafAdmissionMethods } from './methods';
 
 export const tuafModule: SchoolModule = {
   id: 'tuaf',
-  name: 'Truong Dai hoc Nong Lam - Dai hoc Thai Nguyen',
+  name: 'Trường Đại học Nông Lâm - Đại học Thái Nguyên',
   shortName: 'TUAF',
   about: 'Public agriculture and forestry member school of Thai Nguyen University.',
   year: 2026,

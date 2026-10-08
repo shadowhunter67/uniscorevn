@@ -38,7 +38,7 @@ export function ComparisonOverview({ selectionCount, uniqueSchoolCount, statusCo
   return (
     <>
       <header className="mt-4">
-        <h1 className="text-2xl font-bold text-ink sm:text-3xl">So sánh nguyện vọng</h1>
+        <h1 className="text-3xl font-bold text-ink sm:text-4xl">So sánh nguyện vọng</h1>
         {/* Disclaimer đặt MỘT LẦN ở đầu trang (trước đây lặp trong từng card) — trong card chỉ còn
             năm tham chiếu, độ tin cậy và nguồn. */}
         <p className="mt-2 max-w-3xl text-sm text-muted">

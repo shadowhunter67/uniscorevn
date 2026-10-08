@@ -2,7 +2,7 @@ export const UAH_THPT_THRESHOLD = {
   min30: 15,
   max30: 21,
   requiredText:
-    'UAH 2026 (Thong bao 975/TB-HDTS, 08/07/2026): nguong dam bao chat luong dau vao (thi TN THPT) thay doi theo nganh: 21 (thiet ke cong nghiep, thiet ke do hoa, thiet ke thoi trang), 20 (kien truc, thiet ke noi that), 18 (quy hoach vung va do thi, kien truc canh quan, my thuat do thi), 17 (ky thuat xay dung, quan ly xay dung), 16 (ky thuat co so ha tang), 15 (thiet ke do thi - chuong trinh tien tien).',
+    'UAH 2026 (Thông báo 975/TB-HDTS, 08/07/2026): ngưỡng đảm bảo chất lượng đầu vào (thi TN THPT) thay doi theo ngành: 21 (thiết kế cong nghiep, thiết kế đồ họa, thiết kế thời trang), 20 (kien truc, thiết kế nội thất), 18 (quy hoặch vung va đô thị, kien truc cảnh quan, my thuat đô thị), 17 (kỹ thuật xây dựng, quản lý xây dựng), 16 (kỹ thuật cơ sở hạ tầng), 15 (thiết kế đô thị - chương trình tiên tiến).',
 };
 
 /** Ngành Kỹ thuật cơ sở hạ tầng (mã 7580210, khối A/D — không môn năng khiếu) — đọc trực tiếp bản

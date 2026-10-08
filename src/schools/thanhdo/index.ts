@@ -4,7 +4,7 @@ import { thanhdoAdmissionMethods } from './methods';
 
 export const thanhdoModule: SchoolModule = {
   id: 'thanhdo',
-  name: 'Truong Dai hoc Thanh Do',
+  name: 'Trường Đại học Thành Đô',
   shortName: 'ThanhDo',
   about: 'Private multidisciplinary university based in Hanoi.',
   year: 2026,
@@ -22,7 +22,7 @@ export const thanhdoModule: SchoolModule = {
   },
   catalogSources: [
     {
-      title: 'Truong Dai hoc Thanh Do chinh thuc cong bo diem chuan trung tuyen dai hoc chinh quy nam 2026',
+      title: 'Trường Đại học Thành Đô chính thức công bố điểm chuẩn trúng tuyển đại học chính quy năm 2026',
       url: 'https://thanhdo.edu.vn/truong-dai-hoc-thanh-do-chinh-thuc-cong-bo-diem-chuan-trung-tuyen-dai-hoc-chinh-quy-nam-2026',
       type: 'official-institution',
       checkedAt: '2026-08-24',

@@ -69,10 +69,11 @@ describe('comparisonMatrix', () => {
     expect(systemMissing.blockedBySystemData).toBe(true);
   });
 
-  it('hàng của bảng theo đúng thứ tự ưu tiên đọc, đánh giá trước điểm số', () => {
+  it('hàng của bảng quyết định theo đúng thứ tự đọc mới', () => {
     const ids = COMPARISON_MATRIX_ROWS.map((row) => row.id);
-    expect(ids).toEqual(['assessment', 'margin', 'score', 'benchmark', 'confidence']);
-    expect(ids.indexOf('assessment')).toBeLessThan(ids.indexOf('score'));
+    expect(ids).toEqual(['status', 'assessment', 'margin', 'score', 'benchmark', 'confidence']);
+    expect(ids.indexOf('status')).toBeLessThan(ids.indexOf('score'));
+    expect(ids.indexOf('margin')).toBeLessThan(ids.indexOf('score'));
   });
 
   it('mọi hàng đều trả về chuỗi (không bao giờ undefined) cho cột bất kỳ', () => {

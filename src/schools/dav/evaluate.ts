@@ -90,7 +90,7 @@ function thptTotal(profile: ApplicantProfile, subjects: readonly SubjectId[], op
         code: `dav-thpt-${subjectId}`,
         label: `THPT score for ${SUBJECT_LABELS[subjectId]}.`,
       })),
-      reasons: ['DAV needs all three subject scores before this threshold can be checked.'],
+      reasons: ['DAV needs all three subject scores before this threshold cần be checked.'],
     };
   }
   return { total: round2(total) };
@@ -148,7 +148,7 @@ function languageCertificateRequirement(profile: ApplicantProfile): ScoreResult 
     return {
       missingInputs: ['Missing DAV-supported language certificate score.'],
       missingRequirements: [{ kind: 'profile-input', code: 'dav-language-certificate', label: 'IELTS 6.0+ or TOEFL iBT 60+ for DAV language-certificate methods.' }],
-      reasons: ['DAV methods 2 and 3 need a valid language certificate before threshold eligibility can be checked.'],
+      reasons: ['DAV methods 2 and 3 need a valid language certificate before threshold eligibility cần be checked.'],
     };
   }
   return { total: converted.convertedScore };
@@ -202,7 +202,7 @@ function thresholdFor(context: DavEvaluationContext): number {
 function evaluateThptThreshold(profile: ApplicantProfile, context: DavEvaluationContext): ScoreResult {
   if (!context.subjectContext) {
     return {
-      reasons: ['DAV needs a selected subject combination before this threshold can be checked.'],
+      reasons: ['DAV needs a selected subject combination before this threshold cần be checked.'],
       missingRequirements: [{ kind: 'school-context', code: 'dav-subject-combination', label: 'Select a DAV subject combination.' }],
     };
   }
@@ -233,7 +233,7 @@ function evaluateMethod3(profile: ApplicantProfile): ScoreResult {
     return {
       missingInputs: ['Missing DAV-supported SAT/ACT score.'],
       missingRequirements: [{ kind: 'profile-input', code: 'dav-sat-act', label: 'SAT 1330+ or ACT 29+ for DAV method 3.' }],
-      reasons: ['DAV method 3 needs a SAT or ACT score before threshold eligibility can be checked.'],
+      reasons: ['DAV method 3 needs a SAT or ACT score before threshold eligibility cần be checked.'],
     };
   }
   const total = round2(language.total + international.convertedScore);

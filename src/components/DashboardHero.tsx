@@ -7,7 +7,7 @@ interface DashboardHeroProps {
 
 export function DashboardHero({ scoreCard, programCard }: DashboardHeroProps) {
   return (
-    <div className="grid grid-cols-1 items-start gap-5 sm:grid-cols-2 lg:grid-cols-1">
+    <div className="grid grid-cols-1 items-start gap-5 md:grid-cols-2 lg:grid-cols-1">
       {scoreCard}
       {programCard}
     </div>

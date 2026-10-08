@@ -55,7 +55,7 @@ export const hcmutSources: DataSource[] = [
   },
   {
     id: 'hcmut-cutoffs-cross-check',
-    publisher: 'Báo chí (nhiều nguồn, cross-check)',
+    publisher: 'Báo chí (nhiều nguồn, đã đối chiếu chéo)',
     title: 'Điểm chuẩn HCMUT các năm — xem chi tiết từng cutoff trong data/cutoffs.ts (sourceLabel/sourceUrl riêng từng dòng)',
     url: 'https://hcmut.edu.vn',
     accessedAt: '2026-08-10',

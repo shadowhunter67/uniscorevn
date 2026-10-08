@@ -43,12 +43,12 @@ export function evaluateNapaThptExamExactAdmission(
 
   const threshold = context.programCode !== undefined ? NAPA_THPT_EXAM_D01_THRESHOLD_30_BY_PROGRAM_CODE[context.programCode] : undefined;
   if (context.programCode === undefined || threshold === undefined) {
-    missingRequirements.push({ kind: 'school-context', code: 'napa-program-code', label: 'Chon ma xet tuyen NAPA.' });
-    return partial('Can chon ma xet tuyen NAPA de ap dung diem trung tuyen.');
+    missingRequirements.push({ kind: 'school-context', code: 'napa-program-code', label: 'Chọn ma xét tuyển NAPA.' });
+    return partial('Cần chọn ma xét tuyển NAPA để áp dụng điểm trúng tuyển.');
   }
   if (!context.subjectContext || context.subjectContext.subjects.length !== 3) {
-    missingRequirements.push({ kind: 'school-context', code: 'napa-subject-combination', label: 'Chon to hop D01 cho NAPA.' });
-    return partial('Can chon to hop D01 de tinh diem xet tuyen NAPA trong pham vi da xac minh.');
+    missingRequirements.push({ kind: 'school-context', code: 'napa-subject-combination', label: 'Chọn tổ hợp D01 cho NAPA.' });
+    return partial('Cần chọn tổ hợp D01 để tính điểm xét tuyển NAPA trong phạm vi đã xac minh.');
   }
 
   const modeledCombos = NAPA_MODELED_COMBINATIONS_BY_PROGRAM_CODE[context.programCode] ?? [];
@@ -56,9 +56,9 @@ export function evaluateNapaThptExamExactAdmission(
     missingRequirements.push({
       kind: 'school-context',
       code: 'napa-combination-not-modeled',
-      label: 'Batch nay chi ho tro to hop goc D01 vi diem trung tuyen chinh thuc da quy doi ve D01.',
+      label: 'Batch nay chi hỗ trợ tổ hợp gốc D01 vi điểm trúng tuyển chính thức đã quy đổi về D01.',
     });
-    return partial('To hop da chon chua duoc ho tro cho NAPA; chi tinh nhanh to hop goc D01.');
+    return partial('Tổ hợp đã chọn chưa được hỗ trợ cho NAPA; chỉ tính nhanh tổ hợp gốc D01.');
   }
 
   let total = 0;
@@ -69,8 +69,8 @@ export function evaluateNapaThptExamExactAdmission(
     else total += v;
   }
   if (missing.length > 0) {
-    missingRequirements.push(...missing.map((s) => ({ kind: 'profile-input' as const, code: `napa-thpt-${s}`, label: `Diem thi TN THPT mon ${SUBJECT_LABELS[s]} cho to hop D01.` })));
-    return partial('Can du diem Toan, Ngu van va Tieng Anh de tinh diem xet tuyen NAPA D01.');
+    missingRequirements.push(...missing.map((s) => ({ kind: 'profile-input' as const, code: `napa-thpt-${s}`, label: `Điểm thi TN THPT môn ${SUBJECT_LABELS[s]} cho tổ hợp D01.` })));
+    return partial('Cần đủ điểm Toán, Ngữ văn va Tiếng Anh để tính điểm xét tuyển NAPA D01.');
   }
 
   const raw30 = round2(total);
@@ -85,7 +85,7 @@ export function evaluateNapaThptExamExactAdmission(
         confidence: 'exact-verified',
         eligibility: {
           status: 'ineligible',
-          reasons: ['Nganh Luat/Thanh tra cua NAPA yeu cau Toan va Ngu van trong to hop D01 moi mon toi thieu 6,0.'],
+          reasons: ['Ngành Luật/Thanh tra của NAPA yeu cau Toán va Ngữ văn trong tổ hợp D01 moi môn tối thiểu 6,0.'],
         },
         score: { value: raw30, scale: 30 },
         missingInputs: [],
@@ -103,12 +103,12 @@ export function evaluateNapaThptExamExactAdmission(
   const programLabel = NAPA_PROGRAM_LABELS[context.programCode] ?? context.programCode;
   const eligible = dxt30 >= threshold;
 
-  explanation.push({ id: 'napa-exact-raw', label: 'Tong diem 3 mon D01', output: raw30, scale: 30, formula: 'Toan + Ngu van + Tieng Anh', evidence: napaThptExamExactEvidence.evidence });
-  explanation.push({ id: 'napa-exact-priority', label: priority.reduced ? 'Diem uu tien da giam' : 'Diem uu tien', output: priority.effectivePriority30, scale: 30, formula: priority.reduced ? '[(30 - tong diem)/7,5] x muc uu tien KV/DT' : 'Muc uu tien KV/DT theo Dieu 7 TT 06/2026', evidence: napaThptExamExactEvidence.evidence });
-  explanation.push({ id: 'napa-exact-dxt', label: 'Diem xet tuyen', output: dxt30, scale: 30, formula: 'round2(Toan + Ngu van + Tieng Anh + diem uu tien)', evidence: napaThptExamExactEvidence.evidence });
+  explanation.push({ id: 'napa-exact-raw', label: 'Tổng điểm 3 môn D01', output: raw30, scale: 30, formula: 'Toán + Ngữ văn + Tiếng Anh', evidence: napaThptExamExactEvidence.evidence });
+  explanation.push({ id: 'napa-exact-priority', label: priority.reduced ? 'Điểm ưu tiên đã giam' : 'Điểm ưu tiên', output: priority.effectivePriority30, scale: 30, formula: priority.reduced ? '[(30 - tổng điểm)/7,5] × mức ưu tiên KV/ĐT' : 'Mức ưu tiên KV/ĐT theo Điều 7 TT 06/2026', evidence: napaThptExamExactEvidence.evidence });
+  explanation.push({ id: 'napa-exact-dxt', label: 'Điểm xét tuyển', output: dxt30, scale: 30, formula: 'round2(Toán + Ngữ văn + Tiếng Anh + điểm ưu tiên)', evidence: napaThptExamExactEvidence.evidence });
 
   if (profile.priority?.region === undefined && profile.priority?.category === undefined) {
-    missingRequirements.push({ kind: 'profile-input', code: 'napa-priority-region-category', label: 'Khu vuc / doi tuong uu tien chua nhap; diem dang tinh voi uu tien = 0.' });
+    missingRequirements.push({ kind: 'profile-input', code: 'napa-priority-region-category', label: 'Khu vực / đối tượng ưu tiên chưa nhập; điểm đang tính với ưu tiên = 0.' });
   }
 
   return {
@@ -119,8 +119,8 @@ export function evaluateNapaThptExamExactAdmission(
     eligibility: {
       status: eligible ? 'eligible' : 'ineligible',
       reasons: [
-        `Diem trung tuyen NAPA 2026 (${programLabel}, to hop goc D01): ${threshold}/30.`,
-        `Diem xet tuyen = ${raw30} + ${priority.effectivePriority30} = ${dxt30}/30 -> ${eligible ? 'dat' : 'chua dat'} nguong.`,
+        `Điểm trúng tuyển NAPA 2026 (${programLabel}, tổ hợp gốc D01): ${threshold}/30.`,
+        `Điểm xét tuyển = ${raw30} + ${priority.effectivePriority30} = ${dxt30}/30 -> ${eligible ? 'dat' : 'chưa đạt'} ngưỡng.`,
       ],
     },
     score: { value: dxt30, scale: 30 },

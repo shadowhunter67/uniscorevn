@@ -6,19 +6,12 @@ import {
   type ComparisonMatrixRowId,
 } from '../../compare/comparisonMatrix';
 
-/**
- * Bảng so sánh ngang — MỘT bảng duy nhất ở đầu trang, hàng = tiêu chí, cột = nguyện vọng.
- *
- * Vì sao cần: các card bên dưới đặt cạnh nhau là "nhiều báo cáo cạnh nhau", muốn biết nguyện vọng
- * nào chênh lệch tốt hơn phải đọc hết card A rồi nhớ số để so với card B. Bảng cho đọc một hàng
- * là so được hết.
- *
- * Mobile KHÔNG stack thành từng khối riêng (làm mất luôn khả năng so sánh — chính thứ bảng này
- * sinh ra để giải quyết): giữ nguyên dạng bảng, cột tiêu chí dính trái (`sticky left-0`) và cuộn
- * ngang. Mỗi cột nguyện vọng có bề rộng tối thiểu để không bị bóp thành chữ 1 ký tự/dòng.
- *
- * Thuần trình bày — mọi chuỗi đã được `compare/comparisonMatrix.ts` dựng sẵn.
- */
+function nextActionText(column: ComparisonMatrixColumn): string {
+  if (column.needsUserInput) return 'Bổ sung hồ sơ hoặc chọn ngữ cảnh xét tuyển còn thiếu.';
+  if (column.blockedBySystemData) return 'Chờ UniScoreVN bổ sung công thức, quy định hoặc mốc đối chiếu.';
+  return 'Không cần bổ sung gì.';
+}
+
 function CellContent({ column, rowId }: { column: ComparisonMatrixColumn; rowId: ComparisonMatrixRowId }) {
   const text = getMatrixCellText(column, rowId);
   if (text === MATRIX_EMPTY_CELL) {
@@ -32,13 +25,49 @@ function CellContent({ column, rowId }: { column: ComparisonMatrixColumn; rowId:
     );
   }
 
-  if (rowId === 'assessment') return <span className="font-medium text-ink">{text}</span>;
-  if (rowId === 'margin') {
-    // Hướng chênh lệch đã nằm trong chữ ("+3.8 điểm" / "−1.2 điểm" / "ngang mức") — màu chỉ để
-    // quét nhanh, không phải tín hiệu duy nhất.
-    return <span className={`font-medium ${column.marginPositive ? 'text-success' : 'text-warning'}`}>{text}</span>;
-  }
+  if (rowId === 'status' || rowId === 'assessment') return <span className="font-medium text-ink">{text}</span>;
+  if (rowId === 'margin') return <span className={`font-medium ${column.marginPositive ? 'text-success' : 'text-warning'}`}>{text}</span>;
   return <span className="text-ink-soft">{text}</span>;
+}
+
+function MobileDecisionCard({ column, onFocusEntry }: { column: ComparisonMatrixColumn; onFocusEntry?: (selectionId: string) => void }) {
+  const heading = (
+    <>
+      <span className="block text-xs font-semibold tracking-wide text-accent">NV{column.preferenceRank}</span>
+      <span className="mt-0.5 block font-semibold text-ink">{column.shortName}</span>
+      {column.programName && <span className="mt-0.5 block text-xs text-muted">{column.programName}</span>}
+    </>
+  );
+
+  return (
+    <article className="rounded-md border border-border bg-surface p-4">
+      {column.selectionId && onFocusEntry ? (
+        <button
+          type="button"
+          onClick={() => onFocusEntry(column.selectionId!)}
+          className="block min-h-(--ui-tap-min) w-full rounded-md text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+        >
+          {heading}
+        </button>
+      ) : (
+        <div>{heading}</div>
+      )}
+      <dl className="mt-3 divide-y divide-border text-sm">
+        {COMPARISON_MATRIX_ROWS.map((row) => (
+          <div key={row.id} className="grid grid-cols-[8.5rem_minmax(0,1fr)] gap-3 py-2">
+            <dt className="text-muted">{row.label}</dt>
+            <dd>
+              <CellContent column={column} rowId={row.id} />
+            </dd>
+          </div>
+        ))}
+        <div className="grid grid-cols-[8.5rem_minmax(0,1fr)] gap-3 py-2">
+          <dt className="text-muted">Việc cần làm</dt>
+          <dd className="text-ink-soft">{nextActionText(column)}</dd>
+        </div>
+      </dl>
+    </article>
+  );
 }
 
 export function ComparisonSummaryMatrix({
@@ -54,22 +83,28 @@ export function ComparisonSummaryMatrix({
   return (
     <section className="mt-5" aria-labelledby="comparison-matrix-title">
       <h2 id="comparison-matrix-title" className="text-lg font-semibold text-ink">
-        So sánh nhanh
+        Bảng quyết định
       </h2>
       <p className="mt-1 text-sm text-muted">
-        Đọc theo hàng để so cùng một tiêu chí giữa các nguyện vọng. Chi tiết từng nguyện vọng nằm ở phần bên dưới.
+        Mỗi nguyện vọng được đặt cạnh cùng một bộ tiêu chí: trạng thái, điểm của bạn, mốc đối chiếu, chênh lệch và việc cần làm tiếp.
       </p>
 
-      <div className="mt-3 overflow-x-auto rounded-md border border-border">
+      <div className="mt-3 space-y-3 md:hidden">
+        {columns.map((column) => (
+          <MobileDecisionCard key={column.selectionId ?? column.schoolId} column={column} onFocusEntry={onFocusEntry} />
+        ))}
+      </div>
+
+      <div className="mt-3 hidden overflow-x-auto rounded-md border border-border md:block" tabIndex={0} role="region" aria-label="Bảng dữ liệu, cuộn ngang để xem hết">
         <table className="w-full min-w-max border-collapse text-sm">
-          <caption className="sr-only">Bảng so sánh các nguyện vọng theo đánh giá, chênh lệch, điểm, mốc tham khảo và độ tin cậy</caption>
+          <caption className="sr-only">Bảng so sánh các nguyện vọng theo trạng thái, điểm, mốc đối chiếu, chênh lệch và việc cần làm</caption>
           <thead>
             <tr className="border-b border-border bg-surface-soft">
-              <th scope="col" className="sticky left-0 z-10 min-w-28 bg-surface-soft px-3 py-2.5 text-left font-medium text-muted">
+              <th scope="col" className="sticky left-0 z-10 min-w-32 bg-surface-soft px-3 py-2.5 text-left font-medium text-muted">
                 Tiêu chí
               </th>
               {columns.map((column) => (
-                <th key={column.selectionId ?? column.schoolId} scope="col" className="min-w-44 px-3 py-2.5 text-left align-top">
+                <th key={column.selectionId ?? column.schoolId} scope="col" className="min-w-52 px-3 py-2.5 text-left align-top">
                   <span className="block text-xs font-semibold tracking-wide text-accent">NV{column.preferenceRank}</span>
                   {column.selectionId && onFocusEntry ? (
                     <button
@@ -82,8 +117,7 @@ export function ComparisonSummaryMatrix({
                   ) : (
                     <span className="mt-0.5 block font-semibold text-ink">{column.shortName}</span>
                   )}
-                  {column.programName && <span className="mt-0.5 block max-w-56 text-xs font-normal text-muted">{column.programName}</span>}
-                  <span className="mt-1 block text-xs font-normal text-muted">{column.statusLabel}</span>
+                  {column.programName && <span className="mt-0.5 block max-w-64 text-xs font-normal text-muted">{column.programName}</span>}
                 </th>
               ))}
             </tr>
@@ -103,21 +137,11 @@ export function ComparisonSummaryMatrix({
             ))}
             <tr>
               <th scope="row" className="sticky left-0 z-10 bg-surface px-3 py-2.5 text-left font-medium text-muted">
-                Bước tiếp theo
+                Việc cần làm
               </th>
               {columns.map((column) => (
-                <td key={`${column.selectionId ?? column.schoolId}-next`} className="px-3 py-2.5 align-top text-[13px]">
-                  {/* Một nguyện vọng có thể vướng CẢ HAI phía cùng lúc — hiện cả hai dòng, không
-                      để dòng nào che dòng kia (đó chính là chỗ dễ nhầm "tôi thiếu" với "công cụ
-                      thiếu"). */}
-                  {!column.needsUserInput && !column.blockedBySystemData ? (
-                    <span className="text-muted">Không cần bổ sung gì</span>
-                  ) : (
-                    <>
-                      {column.needsUserInput && <span className="block text-ink-soft">Bạn cần bổ sung dữ liệu</span>}
-                      {column.blockedBySystemData && <span className="block text-muted">UniScoreVN chưa đủ dữ liệu</span>}
-                    </>
-                  )}
+                <td key={`${column.selectionId ?? column.schoolId}-next`} className="px-3 py-2.5 align-top text-[13px] text-ink-soft">
+                  {nextActionText(column)}
                 </td>
               ))}
             </tr>

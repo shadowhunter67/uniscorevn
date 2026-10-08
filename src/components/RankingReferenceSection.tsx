@@ -11,7 +11,7 @@ export function RankingReferenceSection({ schoolId }: { schoolId: string }) {
   if (ownRecords.length === 0 && parentSystemRecords.length === 0) return null;
 
   return (
-    <section className="mt-5 rounded-card border border-ink/10 bg-surface p-4">
+    <section className="mt-5 rounded-md border border-border bg-surface p-4">
       <h2 className="text-sm font-semibold text-ink">Xếp hạng tham khảo</h2>
       <p className="mt-1 text-xs text-muted">Chỉ mang tính tham khảo — KHÔNG dùng để đánh giá khả năng trúng tuyển.</p>
 

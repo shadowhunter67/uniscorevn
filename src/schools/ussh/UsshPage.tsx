@@ -1,3 +1,4 @@
+import { userFacingText } from '../../core/userFacingText';
 import { useState } from 'react';
 import { AlertTriangle, CheckCircle2, Layers, ShieldCheck, XCircle } from 'lucide-react';
 import { Header } from '../../components/Header';
@@ -151,11 +152,11 @@ export function UsshPage({ onChangeSchool }: UsshPageProps) {
         {usshKnowledgeGaps.length > 0 && (
           <section className="mt-5 flex items-start gap-3 rounded-card border border-warning/30 bg-warning/10 p-6 text-sm text-warning sm:p-8">
             <AlertTriangle size={20} className="mt-0.5 shrink-0" aria-hidden="true" />
-            <div>
+            <div className="min-w-0">
               <p className="font-semibold">Chưa thể tính điểm cuối / Trường chưa công bố:</p>
               <ul className="mt-2 list-disc space-y-1 pl-5 leading-relaxed">
                 {usshKnowledgeGaps.map((gap) => (
-                  <li key={gap.id}>{gap.label}</li>
+                  <li key={gap.id}>{userFacingText(gap.label)}</li>
                 ))}
               </ul>
             </div>
@@ -217,7 +218,7 @@ export function UsshPage({ onChangeSchool }: UsshPageProps) {
           {selectedCombination ? (
             <div className="mt-5">
               <p className="text-xs font-medium text-ink">Điểm học bạ theo tổ hợp {selectedCombination.id} (thang 10 mỗi năm)</p>
-              <div className="mt-2 overflow-x-auto">
+              <div className="mt-2 overflow-x-auto" tabIndex={0} role="region" aria-label="Bảng dữ liệu, cuộn ngang để xem hết">
                 <table className="w-full min-w-[420px] border-separate border-spacing-1 text-xs">
                   <thead>
                     <tr>
@@ -354,8 +355,8 @@ export function UsshPage({ onChangeSchool }: UsshPageProps) {
           <ul className="mt-2 flex flex-col gap-1.5 text-xs">
             {usshSources.map((source) => (
               <li key={source.id}>
-                <a href={source.url} target="_blank" rel="noopener noreferrer" className="text-accent underline-offset-2 hover:underline">
-                  {source.title}
+                <a href={source.url} target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-2 hover:no-underline">
+                  {userFacingText(source.title)}
                 </a>
                 <span className="text-muted"> — {source.publisher} </span>
                 <span className="rounded-full bg-ink/5 px-1.5 py-0.5 text-muted">{verificationLabel(source.verification)}</span>

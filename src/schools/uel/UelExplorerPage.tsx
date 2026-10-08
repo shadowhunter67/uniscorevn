@@ -1,3 +1,4 @@
+import { userFacingText } from '../../core/userFacingText';
 import { useState } from 'react';
 import { AlertTriangle, ArrowRightLeft, Award, CheckCircle2, GraduationCap, ShieldCheck, XCircle } from 'lucide-react';
 import { Header } from '../../components/Header';
@@ -181,7 +182,7 @@ export function UelExplorerPage({ onChangeSchool }: UelExplorerPageProps) {
 
         <section className="mt-5 flex items-start gap-3 rounded-card border border-warning/30 bg-warning/10 p-6 text-sm text-warning sm:p-8">
           <AlertTriangle size={20} className="mt-0.5 shrink-0" aria-hidden="true" />
-          <div>
+          <div className="min-w-0">
             <p className="font-semibold">UniscoreVN chưa tính được điểm xét tuyển chính xác cho UEL</p>
             <p className="mt-1 leading-relaxed">
               3 thành phần điểm học lực đã có công thức quy đổi rõ ràng, nhưng vẫn còn thiếu để ra một điểm cuối cùng
@@ -190,7 +191,7 @@ export function UelExplorerPage({ onChangeSchool }: UelExplorerPageProps) {
             <ul className="mt-2 list-disc space-y-1 pl-5 leading-relaxed">
               {uelKnowledgeGaps.map((gap) => (
                 <li key={gap.id}>
-                  {gap.label}
+                  {userFacingText(gap.label)}
                   {gap.impact ? <span className="block text-xs text-muted">Tác động: {gap.impact}</span> : null}
                   {gap.note ? <span className="block text-xs text-muted">{gap.note}</span> : null}
                 </li>
@@ -221,7 +222,7 @@ export function UelExplorerPage({ onChangeSchool }: UelExplorerPageProps) {
                   setDgnlInput(String(profileDgnlTotal));
                   setDgnlManualOverride(true);
                 }}
-                className="rounded-md px-2 py-1 text-xs font-medium text-accent underline-offset-2 hover:underline"
+                className="rounded-md px-2 py-1 text-xs font-medium text-accent underline underline-offset-2 hover:no-underline"
               >
                 Thay đổi
               </button>
@@ -256,7 +257,7 @@ export function UelExplorerPage({ onChangeSchool }: UelExplorerPageProps) {
                     setDgnlInput('');
                     setDgnlComponentsClearedNotice(false);
                   }}
-                  className="mt-1 text-xs font-medium text-accent underline-offset-2 hover:underline"
+                  className="mt-1 text-xs font-medium text-accent underline underline-offset-2 hover:no-underline"
                 >
                   Dùng lại điểm từ hồ sơ ({profileDgnlTotal})
                 </button>
@@ -516,7 +517,7 @@ export function UelExplorerPage({ onChangeSchool }: UelExplorerPageProps) {
           </div>
           <p className="mt-1 text-xs text-muted">Thang 100, đã bao gồm điểm cộng và điểm ưu tiên — theo đúng công bố gốc.</p>
 
-          <div className="mt-4 overflow-x-auto">
+          <div className="mt-4 overflow-x-auto" tabIndex={0} role="region" aria-label="Bảng dữ liệu, cuộn ngang để xem hết">
             <table className="w-full min-w-[480px] border-collapse text-sm">
               <caption className="sr-only">Điểm chuẩn trúng tuyển UEL {YEAR}</caption>
               <thead>
@@ -559,9 +560,9 @@ export function UelExplorerPage({ onChangeSchool }: UelExplorerPageProps) {
                   href={source.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-accent underline-offset-2 hover:underline"
+                  className="text-accent underline underline-offset-2 hover:no-underline"
                 >
-                  {source.title}
+                  {userFacingText(source.title)}
                 </a>
                 <span className="text-muted"> — {source.publisher} </span>
                 <span className="rounded-full bg-ink/5 px-1.5 py-0.5 text-muted">{verificationLabel(source.verification)}</span>

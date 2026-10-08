@@ -18,8 +18,8 @@ export interface BvuSource {
 export const bvuSources: BvuSource[] = [
   {
     id: 'bvu-admission-2026',
-    publisher: 'Truong Dai hoc Ba Ria - Vung Tau (BVU)',
-    title: 'Phuong thuc tuyen sinh - Thong tin tuyen sinh Truong Dai hoc Ba Ria - Vung Tau 2026',
+    publisher: 'Trường Đại học Bà Rịa - Vũng Tàu (BVU)',
+    title: 'Phương thức tuyển sinh - Thông tin tuyển sinh Trường Đại học Bà Rịa - Vũng Tàu 2026',
     url: 'https://tuyensinh.bvu.edu.vn/phuong-thuc-tuyen-sinh/',
     accessedAt: '2026-08-24',
     sourceType: 'official-admission',

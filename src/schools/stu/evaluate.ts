@@ -44,7 +44,7 @@ function stuPartial(input: { missingRequirements?: MissingRequirement[]; reason:
 }
 
 function subjectRequirementLabel(entry: StuFieldThreshold): string {
-  return entry.requirement === 'math' ? 'to hop phai co mon Toan' : 'to hop phai co mon Toan hoac Ngu van';
+  return entry.requirement === 'math' ? 'tổ hợp phải có môn Toán' : 'tổ hợp phải có môn Toán hoặc Ngữ văn';
 }
 
 export function evaluateStuThptExamAdmission(
@@ -55,8 +55,8 @@ export function evaluateStuThptExamAdmission(
   const missingRequirements: MissingRequirement[] = [];
 
   if (!context.fieldCode) {
-    missingRequirements.push({ kind: 'school-context', code: 'stu-field', label: 'Chon nganh STU de tra diem chuan PT02.' });
-    return stuPartial({ missingRequirements, reason: 'Can chon nganh STU de ap diem chuan PT02.' });
+    missingRequirements.push({ kind: 'school-context', code: 'stu-field', label: 'Chọn ngành STU để tra điểm chuẩn PT02.' });
+    return stuPartial({ missingRequirements, reason: 'Cần chọn ngành STU để áp điểm chuẩn PT02.' });
   }
 
   const entry = STU_FIELD_THRESHOLD_BY_CODE.get(context.fieldCode);
@@ -64,23 +64,23 @@ export function evaluateStuThptExamAdmission(
     missingRequirements.push({
       kind: 'school-context',
       code: 'stu-field',
-      label: `Nganh "${context.fieldCode}" khong co trong bang diem chuan STU 2026 da mo hinh hoa.`,
+      label: `Ngành "${context.fieldCode}" không có trong bảng điểm chuẩn STU 2026 đã mô hình hóa.`,
     });
-    return stuPartial({ missingRequirements, reason: `Nganh "${context.fieldCode}" khong co trong bang diem chuan STU 2026 da mo hinh hoa.` });
+    return stuPartial({ missingRequirements, reason: `Ngành "${context.fieldCode}" không có trong bảng điểm chuẩn STU 2026 đã mô hình hóa.` });
   }
 
   if (!context.subjectContext || context.subjectContext.subjects.length !== 3) {
-    missingRequirements.push({ kind: 'school-context', code: 'stu-subject-combination', label: `Chon to hop 3 mon xet tuyen cho ${entry.name}.` });
-    return stuPartial({ missingRequirements, reason: `Can chon to hop 3 mon xet tuyen cho ${entry.name}.` });
+    missingRequirements.push({ kind: 'school-context', code: 'stu-subject-combination', label: `Chọn tổ hợp 3 môn xét tuyển cho ${entry.name}.` });
+    return stuPartial({ missingRequirements, reason: `Cần chọn tổ hợp 3 môn xét tuyển cho ${entry.name}.` });
   }
 
   if (!subjectsMeetStuRequirement(context.subjectContext.subjects, entry.requirement)) {
     missingRequirements.push({
       kind: 'school-context',
       code: 'stu-subject-combination',
-      label: `${entry.name}: ${subjectRequirementLabel(entry)} theo dieu kien STU cong bo.`,
+      label: `${entry.name}: ${subjectRequirementLabel(entry)} theo điều kiện STU công bố.`,
     });
-    return stuPartial({ missingRequirements, reason: `To hop da chon khong dat dieu kien mon cua ${entry.name}.` });
+    return stuPartial({ missingRequirements, reason: `Tổ hợp đã chọn không đạt điều kiện môn của ${entry.name}.` });
   }
 
   const { total30, missingSubjects } = readSubjectTotal(profile, context.subjectContext.subjects);
@@ -89,10 +89,10 @@ export function evaluateStuThptExamAdmission(
       ...missingSubjects.map((subjectId) => ({
         kind: 'profile-input' as const,
         code: `stu-thpt-${subjectId}`,
-        label: `Diem thi TN THPT mon ${SUBJECT_LABELS[subjectId]} cho to hop da chon.`,
+        label: `Điểm thi TN THPT môn ${SUBJECT_LABELS[subjectId]} cho tổ hợp đã chọn.`,
       }))
     );
-    return stuPartial({ missingRequirements, reason: 'Can du diem 3 mon thi TN THPT de tinh diem xet STU.' });
+    return stuPartial({ missingRequirements, reason: 'Cần đủ điểm 3 môn thi TN THPT để tính điểm xét STU.' });
   }
 
   const raw30 = total30 as number;
@@ -110,22 +110,22 @@ export function evaluateStuThptExamAdmission(
     missingRequirements.push({
       kind: 'school-context',
       code: 'stu-subject-floor',
-      label: `${entry.name}: diem Toan/Van lien quan phai >= 1/3 diem chuan chua uu tien (${subjectFloor}/10).`,
+      label: `${entry.name}: điểm Toán/Văn liên quan phải >= 1/3 điểm chuẩn chưa ưu tiên (${subjectFloor}/10).`,
     });
   }
 
   const eligible = finalScore >= threshold30 && passesSubjectFloor;
   const reasons = [
-    `Diem chuan PT02 ${entry.name}: tong 3 mon + diem uu tien KV/DT >= ${threshold30}/30; tong cua ban = ${finalScore}/30.`,
+    `Điểm chuẩn PT02 ${entry.name}: tổng 3 môn + điểm ưu tiên KV/ĐT >= ${threshold30}/30; tổng của bạn = ${finalScore}/30.`,
     passesSubjectFloor
-      ? `Dat dieu kien diem Toan/Van lien quan >= 1/3 diem chuan chua uu tien (${subjectFloor}/10).`
-      : `Chua dat dieu kien diem Toan/Van lien quan >= 1/3 diem chuan chua uu tien (${subjectFloor}/10).`,
-    eligible ? 'Dat/vuot diem chuan STU PT02 nam 2026.' : 'Chua dat dieu kien hoac diem chuan STU PT02 nam 2026.',
+      ? `Đạt điều kiện điểm Toán/Văn liên quan >= 1/3 điểm chuẩn chưa ưu tiên (${subjectFloor}/10).`
+      : `Chưa đạt điều kiện điểm Toán/Văn liên quan >= 1/3 điểm chuẩn chưa ưu tiên (${subjectFloor}/10).`,
+    eligible ? 'Đạt/vượt điểm chuẩn STU PT02 năm 2026.' : 'Chưa đạt điều kiện hoặc điểm chuẩn STU PT02 năm 2026.',
   ];
 
   explanation.push({
     id: 'stu-exact-raw',
-    label: 'Tong diem 3 mon thi',
+    label: 'Tổng điểm 3 môn thi',
     output: raw30,
     scale: 30,
     formula: context.subjectContext.subjects.map((s) => SUBJECT_LABELS[s]).join(' + '),
@@ -133,25 +133,25 @@ export function evaluateStuThptExamAdmission(
   });
   explanation.push({
     id: 'stu-exact-priority',
-    label: priority.reduced ? 'Diem uu tien da giam' : 'Diem uu tien',
+    label: priority.reduced ? 'Điểm ưu tiên đã giam' : 'Điểm ưu tiên',
     output: priority.effectivePriority30,
     scale: 30,
     formula: priority.reduced
-      ? '[(30 - tong tho)/7,5] x muc diem uu tien KV/DT'
-      : 'Muc diem uu tien KV/DT theo khung quoc gia hien hanh',
+      ? '[(30 - tổng thô)/7,5] × mức điểm ưu tiên KV/ĐT'
+      : 'Mức điểm ưu tiên KV/ĐT theo khung quốc gia hiện hành',
     evidence: stuExactFormulaEvidence.evidence,
   });
   explanation.push({
     id: 'stu-exact-final',
-    label: 'Diem xet',
+    label: 'Điểm xét',
     output: finalScore,
     scale: 30,
-    formula: 'Tong 3 mon + diem uu tien',
+    formula: 'Tổng 3 môn + điểm ưu tiên',
     evidence: stuExactFormulaEvidence.evidence,
   });
   explanation.push({
     id: 'stu-exact-threshold',
-    label: `Diem chuan - ${entry.name}`,
+    label: `Điểm chuẩn - ${entry.name}`,
     output: threshold30,
     scale: 30,
     formula: reasons[0],
@@ -162,7 +162,7 @@ export function evaluateStuThptExamAdmission(
     label: 'Nguong Toan/Van',
     output: subjectFloor,
     scale: 10,
-    formula: '1/3 diem chuan chua uu tien',
+    formula: '1/3 điểm chuẩn chưa ưu tiên',
     evidence: stuSubjectRequirementEvidence.evidence,
   });
 
@@ -170,7 +170,7 @@ export function evaluateStuThptExamAdmission(
     missingRequirements.push({
       kind: 'profile-input',
       code: 'stu-priority-region-category',
-      label: 'Khu vuc / doi tuong uu tien (chua nhap - diem xet dang tinh voi diem uu tien = 0).',
+      label: 'Khu vực / đối tượng ưu tiên (chưa nhập - điểm xét đang tính với điểm ưu tiên = 0).',
     });
   }
 

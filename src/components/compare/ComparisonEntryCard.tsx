@@ -249,7 +249,7 @@ export function ComparisonEntryCard({
           </Disclosure>
         )}
 
-        {requirements.length > 0 && <DataMissingNotice requirements={requirements} />}
+        {requirements.length > 0 && <DataMissingNotice requirements={requirements} limit={2} />}
       </div>
 
       <div className="mt-4 flex flex-wrap gap-2">

@@ -4,7 +4,7 @@ import { davAdmissionMethods } from './methods';
 
 export const davModule: SchoolModule = {
   id: 'dav',
-  name: 'Hoc vien Ngoai giao',
+  name: 'Học viện Ngoại giao',
   shortName: 'DAV',
   about: 'Public academy under the Ministry of Foreign Affairs.',
   year: 2026,
