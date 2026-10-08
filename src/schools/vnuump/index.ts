@@ -4,7 +4,7 @@ import { vnuumpAdmissionMethods } from './methods';
 
 export const vnuumpModule: SchoolModule = {
   id: 'vnuump',
-  name: 'Truong Dai hoc Y Duoc - Dai hoc Quoc gia Ha Noi',
+  name: 'Trường Đại học Y Dược - Đại học Quốc gia Hà Nội',
   shortName: 'VNU-UMP',
   about: 'Public medicine and pharmacy school under Vietnam National University, Hanoi (VNU-UMP), based in Hanoi.',
   year: 2026,
@@ -14,7 +14,7 @@ export const vnuumpModule: SchoolModule = {
   entityLevel: 'school',
   vnuhcm: false,
   summary:
-    'Calculator exact cho phuong thuc thi TN THPT (96% chi tieu), theo tung nganh: Y khoa/Rang-Ham-Mat 22,0/30, Duoc hoc 20,0/30, Ky thuat xet nghiem/Ky thuat hinh anh/Dieu duong 19,0/30 - doc truc tiep Thong bao 2468/TB-DHYD (08/07/2026, PDF chinh thuc VNU-UMP, doc qua vision). Trang tuyen sinh chinh thuc xac nhan cong thuc CONG diem uu tien khu vuc/doi tuong theo Dieu 7 Quy che tuyen sinh cua Bo GD&DT vao tong truoc khi so nguong (khong tinh diem cong vao nguong). Muc diem uu tien KV/DT cu the dung chuan toan quoc (judgment call). Phuong thuc HSA, xet tuyen thang, du bi dan toc, va diem cong thanh tich chua duoc mo hinh hoa.',
+    'Calculator exact cho phương thức thi TN THPT (96% chỉ tiêu), theo từng ngành: Y khoa/Răng-Hàm-Mặt 22,0/30, Dược học 20,0/30, Kỹ thuật xét nghiệm/Kỹ thuật hình ảnh/Điều dưỡng 19,0/30 - doc truc tiep Thông báo 2468/TB-DHYD (08/07/2026, PDF chính thức VNU-UMP, đọc qua vision). Trang tuyen sinh chính thức xác nhận công thức CONG điểm ưu tiên khu vực/đối tượng theo Điều 7 Quy chế tuyen sinh của Bộ GD&ĐT vao tổng truoc khi so ngưỡng (không tính điểm cộng vao ngưỡng). Mức điểm ưu tiên KV/ĐT cụ thể dung chuẩn toan quoc (judgment call). Phương thức HSA, xét tuyển thẳng, du bi dan toc, va điểm cộng thanh tich chưa được mô hình hóa.',
   capabilities: {
     admissionInfo: true,
     programs: true,
@@ -23,13 +23,13 @@ export const vnuumpModule: SchoolModule = {
   },
   catalogSources: [
     {
-      title: 'Thong tin tuyen sinh dai hoc chinh quy nam 2026 - VNU-UMP',
+      title: 'Thông tin tuyển sinh đại học chính quy năm 2026 - VNU-UMP',
       url: 'https://ump.vnu.edu.vn/article-thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026-(hinh-thuc-dao-tao-chinh-quy)-19647-3439.html',
       type: 'official-institution',
       checkedAt: '2026-08-25',
     },
     {
-      title: 'Thong bao 2468/TB-DHYD (08/07/2026): Ve nguong dam bao chat luong dau vao va quy doi tuong duong 2026',
+      title: 'Thông báo 2468/TB-DHYD (08/07/2026): Ve ngưỡng đảm bảo chất lượng đầu vào va quy đối tượng duong 2026',
       url: 'https://ump.vnu.edu.vn/article-thong-bao-ve-nguong-bao-dam-chat-luong-dau-vao-va-quy-doi-tuong-duong-diem-trung-tuyen-giua-cac-phuong-thuc-xet-tuyen-dai-hoc-chinh-quy-nam-2026-19782-3490.html',
       type: 'official-institution',
       checkedAt: '2026-08-28',

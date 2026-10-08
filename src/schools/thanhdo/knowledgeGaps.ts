@@ -3,19 +3,19 @@ import type { KnowledgeGap } from '../../core/knowledgeStatus';
 export const thanhdoKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'thanhdo-program-threshold-table-not-imported',
-    label: 'ThanhDo 2026 cong bo diem chuan thi TN THPT rieng cho tung nganh (16,0-20,0/30, 14 nganh); chua chon duoc nganh cu the de ap dung dung muc.',
+    label: 'ThanhDo 2026 công bố điểm chuẩn thi TN THPT riêng cho từng ngành (16,0-20,0/30, 14 ngành); chưa chọn được ngành cụ thể để áp dụng dung mức.',
     status: 'official-but-unparsed',
     sourceId: 'thanhdo-cutoff-2026',
     scoreAffecting: true,
     knownData: [
-      'Muc thap nhat 16,0/30: Ke toan, Quan tri Van phong, Quan tri Khach san, Viet Nam hoc, Giao duc hoc',
-      'Muc 16,5/30: Quan tri kinh doanh',
-      'Muc 17,0/30: Cong nghe ky thuat O to, Ngon ngu Anh',
-      'Muc 17,5/30: CNTT, Cong nghe ky thuat Dien-Dien tu, Ngon ngu Trung Quoc',
-      'Muc 18,0/30: Dieu duong',
-      'Muc cao nhat 20,0/30: Luat, Duoc hoc',
+      'Mức thap nhat 16,0/30: Ke toan, Quan tri Van phong, Quan tri Khach san, Viet Nam hoc, Giao duc hoc',
+      'Mức 16,5/30: Quan tri kinh doanh',
+      'Mức 17,0/30: Công nghệ kỹ thuật O to, Ngon ngu Anh',
+      'Mức 17,5/30: CNTT, Công nghệ kỹ thuật Dien-Dien tu, Ngon ngu Trung Quoc',
+      'Mức 18,0/30: Điều dưỡng',
+      'Mức cao nhat 20,0/30: Luat, Duoc hoc',
     ],
-    impact: 'Runtime chi kiem tra duoc ngoai le duoi nguong thap nhat (16/30 = ineligible chac chan); tu 16/30 den 20/30 can chon nganh cu the de ket luan chinh xac.',
+    impact: 'Runtime chi kiểm tra được ngoai le dưới ngưỡng thấp nhất (16/30 = ineligible chac chan); tu 16/30 den 20/30 cần chọn ngành cụ thể để kết luận chính xác.',
   },
   {
     id: 'thanhdo-subject-combination-to-major-not-mapped',
@@ -34,7 +34,7 @@ export const thanhdoKnowledgeGaps: KnowledgeGap[] = [
   },
   {
     id: 'thanhdo-transcript-aptitude-not-modeled',
-    label: 'ThanhDo 2026 con co phuong thuc hoc ba (18,0-20,0/30), thi danh gia nang luc/tu duy (HSA >=75/150, TSA >=50/100), va xet tuyen thang; chi phuong thuc thi TN THPT duoc mo hinh hoa.',
+    label: 'ThanhDo 2026 con co phương thức học bạ (18,0-20,0/30), thi danh gia năng lực/tư duy (HSA >=75/150, TSA >=50/100), va xét tuyển thẳng; chi phương thức thi TN THPT được mô hình hóa.',
     status: 'official-but-unparsed',
     sourceId: 'thanhdo-cutoff-2026',
   },

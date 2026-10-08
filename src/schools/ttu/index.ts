@@ -4,7 +4,7 @@ import { ttuAdmissionMethods } from './methods';
 
 export const ttuModule: SchoolModule = {
   id: 'ttu',
-  name: 'Truong Dai hoc Tan Tao',
+  name: 'Trường Đại học Tân Tạo',
   shortName: 'TTU',
   about: 'Private university based in Duc Hoa, Long An, with a health-sciences focus.',
   year: 2026,
@@ -22,7 +22,7 @@ export const ttuModule: SchoolModule = {
   },
   catalogSources: [
     {
-      title: 'Official 2026 floor-score announcement (Cong bo diem san chinh thuc)',
+      title: 'Official 2026 floor-score announcement (Cong bo điểm sàn chính thức)',
       url: 'https://ttu.edu.vn/cong-bo-diem-san-chinh-thuc-cua-truong-dai-hoc-tan-tao-2026/',
       type: 'official-institution',
       checkedAt: '2026-08-24',

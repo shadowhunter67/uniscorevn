@@ -4,7 +4,7 @@ import { vguAdmissionMethods } from './methods';
 
 export const vguModule: SchoolModule = {
   id: 'vgu',
-  name: 'Truong Dai hoc Viet Duc',
+  name: 'Trường Đại học Việt Đức',
   shortName: 'VGU',
   about: 'Public transnational university based in Binh Duong, established as a joint Vietnam-Germany model university.',
   year: 2026,
@@ -22,7 +22,7 @@ export const vguModule: SchoolModule = {
   },
   catalogSources: [
     {
-      title: 'Official 2026 floor-score announcement (Diem san xet tuyen)',
+      title: 'Official 2026 floor-score announcement (Điểm sàn xét tuyển)',
       url: 'https://tuyensinh.vgu.edu.vn/post/tr%C6%B0%E1%BB%9Dng-%C4%91%E1%BA%A1i-h%E1%BB%8Dc-vi%E1%BB%87t-%C4%91%E1%BB%A9c-c%C3%B4ng-b%E1%BB%91-%C4%91i%E1%BB%83m-s%C3%A0n-x%C3%A9t-tuy%E1%BB%83n-v%C3%A0o-c%C3%A1c-ch%C6%B0%C6%A1ng-tr%C3%ACnh-%C4%91%C3%A0o-t%E1%BA%A1o-b%E1%BA%ADc-%C4%91%E1%BA%A1i-h%E1%BB%8Dc-n%C4%83m-2026',
       type: 'official-institution',
       checkedAt: '2026-08-24',

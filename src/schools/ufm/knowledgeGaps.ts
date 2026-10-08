@@ -13,7 +13,7 @@ import type { KnowledgeGap } from '../../core/knowledgeStatus';
 export const ufmKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'ufm-priority-table-not-ufm-specific',
-    label: 'Bảng điểm ưu tiên khu vực/đối tượng dùng bảng chuẩn quốc gia — không tìm được trang UFM tự công bố bảng số riêng.',
+    label: 'Điểm ưu tiên khu vực/đối tượng đang dùng bảng chuẩn quốc gia. Chưa tìm được trang UFM tự công bố bảng số riêng.',
     status: 'official-but-unparsed',
     sourceId: 'ufm-admission-plan-2026',
     scoreAffecting: true,
@@ -23,7 +23,7 @@ export const ufmKnowledgeGaps: KnowledgeGap[] = [
   },
   {
     id: 'ufm-program-catalog-not-imported',
-    label: 'Danh mục ngành/chương trình đào tạo 2026 (5 nhóm: Chuẩn/Định hướng đặc thù/Tích hợp/Tiếng Anh toàn phần/Tài năng, 8.000 chỉ tiêu) và mã ngành cụ thể chưa import — evaluator nhận `UfmThresholdGroup`/`programTrack` trực tiếp từ caller.',
+    label: 'Danh mục ngành/chương trình đào tạo 2026 của UFM gồm 5 nhóm: Chuẩn, Định hướng đặc thù, Tích hợp, Tiếng Anh toàn phần, Tài năng, với 8.000 chỉ tiêu. Mã ngành cụ thể chưa được đưa vào công cụ, nên người dùng cần chọn đúng nhóm ngưỡng và loại chương trình.',
     status: 'official-but-unparsed',
     sourceId: 'ufm-admission-plan-2026',
     scoreAffecting: false,
@@ -33,7 +33,7 @@ export const ufmKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'ufm-english-full-program-toan-coefficient-not-implemented',
     label:
-      'Chương trình Tiếng Anh toàn phần (định hướng quốc tế): hệ số Toán×2 trong tổ hợp xét tuyển (xác nhận verbatim, `evidence.ts`) + 3 công thức quy đổi riêng cho trường hợp này (mục 3.4, học bạ/V-SAT/thi TN THPT) đã đọc được nhưng CHƯA implement — `calculator.ts`/`evaluate.ts` hiện chỉ phục vụ chương trình Chuẩn (không nhân hệ số môn nào).',
+      'Chưa hỗ trợ Chương trình Tiếng Anh toàn phần (định hướng quốc tế), trong đó môn Toán nhân hệ số 2 và có 3 công thức quy đổi riêng ở mục 3.4 cho học bạ, V-SAT và thi TN THPT. Hiện UniscoreVN chỉ tính cho chương trình Chuẩn, không nhân hệ số môn nào.',
     status: 'official-but-unparsed',
     sourceId: 'ufm-quality-threshold-2026',
     scoreAffecting: true,

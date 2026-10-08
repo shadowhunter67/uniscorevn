@@ -13,7 +13,7 @@ export const tdtuKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'tdtu-program-catalog-not-imported',
     label:
-      'Batch 2026-08-19: danh mục TÊN/MÃ ngành (119/119, `data/programs.ts`) đã import đủ từ Phụ lục 2 (đọc qua `pdftotext -layout -enc UTF-8`, đối chiếu thủ công từng dòng). PHẦN CÒN THIẾU: tổ hợp xét tuyển cụ thể theo từng ngành, "môn điều kiện" riêng ngành (vd Tiếng Anh ≥ 6.0) và ngưỡng đầu vào riêng ngành do TDTU công bố (chỉ có ngưỡng chung 15/30 theo Bộ GDĐT) — bảng gốc có nhiều dòng/ô multi-combo bị ngắt trang giữa ô (rõ nhất ở cụm STT 15-19 Tài chính-Ngân hàng/Công nghệ tài chính/Kế toán và cụm STT 47-52 Bảo hộ lao động..Khoa học dữ liệu), khiến text-extraction xáo trộn tổ hợp giữa các dòng liền kề — không đủ tin cậy để gán tự động cho đúng ngành mà không rủi ro sai lệch. evaluator hiện vẫn nhận tổ hợp môn trực tiếp từ caller (giống HCMUT/HCMUTE).',
+      'Danh mục tên và mã ngành của TDTU đã có đủ 119/119 ngành. Phần còn thiếu là tổ hợp xét tuyển theo từng ngành, "môn điều kiện" riêng từng ngành (ví dụ Tiếng Anh ≥ 6.0) và ngưỡng đầu vào riêng; hiện mới có ngưỡng chung 15/30 theo Bộ GDĐT. Vì bảng gốc bị ngắt dòng ở nhiều cụm ngành như STT 15-19 và 47-52, UniscoreVN chưa tự gán tổ hợp cho từng ngành để tránh sai lệch.',
     status: 'official-but-unparsed',
     sourceId: 'tdtu-pl2-programs-pt1-2026',
     scoreAffecting: false,
@@ -24,7 +24,7 @@ export const tdtuKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'tdtu-pt1-other-applicant-types',
     label:
-      'Điểm năng lực Đối tượng 1.2 (tốt nghiệp trước 2026)/1.3 (SAT/ACT)/1.4 (bằng THPT nước ngoài)/1.5 (chương trình LKQT) — evaluator hiện CHỈ implement Đối tượng 1.1 (học sinh lớp 12, tốt nghiệp THPT 2026), dù công thức 4 đối tượng còn lại đã đọc được đầy đủ từ `tdtu-admission-plan-2026`.',
+      'Chưa hỗ trợ tính Điểm năng lực cho Đối tượng 1.2 (tốt nghiệp trước 2026), 1.3 (SAT/ACT), 1.4 (bằng THPT nước ngoài) và 1.5 (chương trình LKQT). Hiện UniscoreVN chỉ hỗ trợ Đối tượng 1.1: học sinh lớp 12, tốt nghiệp THPT 2026.',
     status: 'official-but-unparsed',
     sourceId: 'tdtu-admission-plan-2026',
     scoreAffecting: false,
@@ -35,7 +35,7 @@ export const tdtuKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'tdtu-law-pharmacy-alt-threshold',
     label:
-      'Ngưỡng đầu vào riêng ngành Luật/Dược học/Kế toán(Kiểm toán) có 3 nhánh OR (đạt ngưỡng Bộ GDĐT ≥20/30, HOẶC học lực Tốt + tổng ≥18/30, HOẶC điểm xét TN THPT ≥8.5) thay vì ngưỡng chung 15/30 — evaluator hiện chỉ áp ngưỡng chung, chưa phân biệt theo ngành (cần program catalog, xem `tdtu-program-catalog-not-imported`).',
+      'Các ngành Luật, Dược học và Kế toán (Kiểm toán) có ngưỡng đầu vào riêng: đạt ngưỡng Bộ GDĐT ≥20/30, hoặc học lực Tốt và tổng ≥18/30, hoặc điểm xét TN THPT ≥8.5. UniscoreVN hiện mới áp dụng ngưỡng chung 15/30, chưa phân biệt theo ngành.',
     status: 'official-but-unparsed',
     sourceId: 'tdtu-pl2-programs-pt1-2026',
     scoreAffecting: false,

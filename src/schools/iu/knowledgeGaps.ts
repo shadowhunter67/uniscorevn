@@ -9,7 +9,7 @@ export const iuKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'iu-object2-object3-out-of-scope',
     label:
-      'Công thức Điểm học lực cho "Thí sinh tốt nghiệp THPT 2025 trở về trước" (đối tượng 2) và "THPT nước ngoài" (đối tượng 3, cần điểm Phỏng vấn — chưa có field trong ApplicantProfile) đã verified nhưng CHƯA implement — chỉ hỗ trợ đối tượng 1 (tốt nghiệp THPT 2026)',
+      'Chưa hỗ trợ tính Điểm học lực cho "Thí sinh tốt nghiệp THPT 2025 trở về trước" (đối tượng 2) và "THPT nước ngoài" (đối tượng 3, cần điểm Phỏng vấn). Hiện UniscoreVN chỉ hỗ trợ đối tượng 1: thí sinh tốt nghiệp THPT 2026.',
     status: 'incomplete',
     sourceId: 'iu-admission-info-2026',
     scoreAffecting: false,
@@ -19,7 +19,7 @@ export const iuKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'iu-cambridge-certificate-not-supported',
     label:
-      'Bảng "Điểm khuyến khích" có mức quy đổi theo Cambridge — ApplicantProfile.certificates hiện chưa có field Cambridge (chỉ IELTS/TOEFL iBT/TOEIC) nên chưa tính được cho thí sinh chỉ có chứng chỉ Cambridge',
+      'Bảng "Điểm khuyến khích" có quy đổi cho chứng chỉ Cambridge. UniscoreVN hiện mới nhận IELTS/TOEFL iBT/TOEIC, nên chưa tính được điểm khuyến khích cho thí sinh chỉ có chứng chỉ Cambridge.',
     status: 'incomplete',
     sourceId: 'iu-admission-info-2026',
     scoreAffecting: false,

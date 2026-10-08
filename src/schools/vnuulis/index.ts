@@ -4,7 +4,7 @@ import { vnuulisAdmissionMethods } from './methods';
 
 export const vnuulisModule: SchoolModule = {
   id: 'vnuulis',
-  name: 'Truong Dai hoc Ngoai ngu - Dai hoc Quoc gia Ha Noi',
+  name: 'Trường Đại học Ngoại ngữ - Đại học Quốc gia Hà Nội',
   shortName: 'VNU-ULIS',
   about: 'Public member school of Vietnam National University, Hanoi, specializing in foreign languages and international studies.',
   year: 2026,

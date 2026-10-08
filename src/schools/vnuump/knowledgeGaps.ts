@@ -4,14 +4,14 @@ export const vnuumpKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'vnuump-hsa-method-not-modeled',
     label:
-      'VNU-UMP con xet tuyen bang ket qua thi Danh gia nang luc (HSA) cua DHQGHN voi dieu kien rieng: Y khoa/Rang Ham Mat can diem trung binh 3 nam mon Hoa/Sinh >=8,0 va tong diem thi TN THPT >=20,00/30; cac nganh HSA khac can diem trung binh mon lien quan >=7,0 va tong THPT >=16,50/30. Runtime chua mo hinh hoa phuong thuc nay.',
+      'VNU-UMP con xét tuyển bằng kết quả thi Danh gia năng lực (HSA) của DHQGHN voi điều kiện riêng: Y khoa/Răng Hàm Mặt cần điểm trung bình 3 năm môn Hóa/Sinh >=8,0 va tổng điểm thi TN THPT >=20,00/30; các ngành HSA khác cần điểm trung bình môn liên quan >=7,0 va tổng THPT >=16,50/30. Runtime chưa mô hình hóa phương thức nay.',
     status: 'official-but-unparsed',
     sourceId: 'vnuump-admission-notice-2026',
   },
   {
     id: 'vnuump-straight-admission-not-modeled',
     label:
-      'VNU-UMP danh 2% chi tieu cho xet tuyen thang/uu tien theo quy che Bo GDDT va 2% cho he du bi dan toc; runtime chi mo hinh hoa phuong thuc thi TN THPT (96% chi tieu).',
+      'VNU-UMP danh 2% chỉ tiêu cho xét tuyển thẳng/ưu tiên theo quy chế Bộ GDĐT va 2% cho he du bi dan toc; runtime chi mô hình hóa phương thức thi TN THPT (96% chỉ tiêu).',
     status: 'incomplete',
     sourceId: 'vnuump-admission-notice-2026',
   },

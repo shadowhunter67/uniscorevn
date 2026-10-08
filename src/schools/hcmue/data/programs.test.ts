@@ -6,12 +6,12 @@ describe('hcmueProgramThresholds', () => {
     const hcmcPrograms = hcmueProgramThresholds.filter((program) => program.campus === 'hcmc');
     expect(hcmcPrograms).toHaveLength(47);
     expect(hcmueProgramThresholds.find((program) => program.code === '7140209' && program.campus === 'hcmc')).toMatchObject({
-      name: 'Su pham Toan hoc',
+      name: 'Sư phạm Toán học',
       thptThreshold30: 24,
       dgnlcbThreshold30: 22,
     });
     expect(hcmueProgramThresholds.find((program) => program.code === '7480201' && program.campus === 'hcmc')).toMatchObject({
-      name: 'Cong nghe thong tin',
+      name: 'Công nghệ thông tin',
       thptThreshold30: 18,
       dgnlcbThreshold30: 17,
     });

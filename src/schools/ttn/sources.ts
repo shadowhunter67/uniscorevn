@@ -32,7 +32,7 @@ export const ttnSources: TtnSource[] = [
   {
     id: 'ttn-threshold-notice-2026',
     publisher: 'Tay Nguyen University',
-    title: 'Official 2026 application receipt threshold notice (muc diem nhan ho so xet tuyen)',
+    title: 'Official 2026 application receipt threshold notice (mức điểm nhan hồ sơ xét tuyển)',
     url: 'https://tuyensinh.ttn.edu.vn/2026/07/10/tbmdnhsxtdh2026/',
     accessedAt: '2026-08-27',
     publishedAt: '2026-07-10',

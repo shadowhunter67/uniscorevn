@@ -4,7 +4,7 @@ import { bvuAdmissionMethods } from './methods';
 
 export const bvuModule: SchoolModule = {
   id: 'bvu',
-  name: 'Truong Dai hoc Ba Ria - Vung Tau',
+  name: 'Trường Đại học Bà Rịa - Vũng Tàu',
   shortName: 'BVU',
   about: 'Private multidisciplinary university headquartered in Ba Ria - Vung Tau.',
   year: 2026,
@@ -22,7 +22,7 @@ export const bvuModule: SchoolModule = {
   },
   catalogSources: [
     {
-      title: 'Phuong thuc tuyen sinh - Thong tin tuyen sinh Truong Dai hoc Ba Ria - Vung Tau 2026',
+      title: 'Phương thức tuyển sinh - Thông tin tuyển sinh Trường Đại học Bà Rịa - Vũng Tàu 2026',
       url: 'https://tuyensinh.bvu.edu.vn/phuong-thuc-tuyen-sinh/',
       type: 'official-institution',
       checkedAt: '2026-08-24',

@@ -4,7 +4,7 @@ import { ttnAdmissionMethods } from './methods';
 
 export const ttnModule: SchoolModule = {
   id: 'ttn',
-  name: 'Truong Dai hoc Tay Nguyen',
+  name: 'Trường Đại học Tây Nguyên',
   shortName: 'TTN',
   about: 'Public multidisciplinary university based in Buon Ma Thuot, Dak Lak, serving the Central Highlands region.',
   year: 2026,

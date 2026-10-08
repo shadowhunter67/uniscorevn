@@ -4,7 +4,7 @@ import { dluAdmissionMethods } from './methods';
 
 export const dluModule: SchoolModule = {
   id: 'dlu',
-  name: 'Truong Dai hoc Da Lat',
+  name: 'Trường Đại học Đà Lạt',
   shortName: 'DLU',
   about: 'Public multidisciplinary university based in Da Lat, Lam Dong, serving the Central Highlands/South Central region.',
   year: 2026,

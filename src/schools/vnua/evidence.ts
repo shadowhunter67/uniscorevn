@@ -15,7 +15,7 @@ export const vnuaGroupThresholdEvidence = {
 
 export const vnuaPriorityFormulaEvidence = {
   value:
-    'Mức chênh lệch điểm trúng tuyển giữa các nhóm đối tượng là 1,0 điểm và giữa các khu vực kế tiếp là 0,25 điểm; Điểm ưu tiên = [(30 - Tổng điểm)/7,5] x Mức điểm ưu tiên quy định (áp dụng khi tổng điểm ≥ 22,5/30)',
+    'Mức chênh lệch điểm trúng tuyển giữa các nhóm đối tượng là 1,0 điểm và giữa các khu vực kế tiếp là 0,25 điểm; Điểm ưu tiên = [(30 - Tổng điểm)/7,5] × Mức điểm ưu tiên quy định (áp dụng khi tổng điểm ≥ 22,5/30)',
   evidence: [
     {
       sourceId: 'vnua-admission-notice-2026',

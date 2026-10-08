@@ -18,7 +18,7 @@ export interface DtuSource {
 export const dtuSources: DtuSource[] = [
   {
     id: 'dtu-admission-info-2026',
-    publisher: 'Duy Tan University (Truong Dai hoc Duy Tan)',
+    publisher: 'Duy Tan University (Trường Đại học Duy Tân)',
     title: 'Official 2026 undergraduate admission information',
     url: 'https://duytan.edu.vn/tuyen-sinh/page/EnrollArticleViewDetail.aspx?id=1010',
     accessedAt: '2026-08-24',

@@ -11,11 +11,11 @@ export interface UhsProgram {
 
 export const UHS_PROGRAMS: UhsProgram[] = [
   { id: 'uhs-7720101', code: '7720101', name: 'Y khoa', quota2026: 340, combinations: ['B00', 'A02'], group: 'medicine-like' },
-  { id: 'uhs-7720101DH', code: '7720101DH', name: 'Y khoa (dat hang)', quota2026: 120, combinations: ['B00', 'A02'], group: 'medicine-like' },
-  { id: 'uhs-7720201', code: '7720201', name: 'Duoc hoc', quota2026: 180, combinations: ['B00', 'A00', 'A02'], group: 'medicine-like' },
-  { id: 'uhs-7720501', code: '7720501', name: 'Rang - Ham - Mat', quota2026: 150, combinations: ['B00', 'A00', 'A02'], group: 'medicine-like' },
-  { id: 'uhs-7720301', code: '7720301', name: 'Dieu duong', quota2026: 150, combinations: ['B00', 'A00', 'A02'], group: 'nursing' },
-  { id: 'uhs-7720115', code: '7720115', name: 'Y hoc co truyen', quota2026: 120, combinations: ['B00', 'A00', 'A02'], group: 'medicine-like' },
+  { id: 'uhs-7720101DH', code: '7720101DH', name: 'Y khoa (đặt hàng)', quota2026: 120, combinations: ['B00', 'A02'], group: 'medicine-like' },
+  { id: 'uhs-7720201', code: '7720201', name: 'Dược học', quota2026: 180, combinations: ['B00', 'A00', 'A02'], group: 'medicine-like' },
+  { id: 'uhs-7720501', code: '7720501', name: 'Răng - Hàm - Mặt', quota2026: 150, combinations: ['B00', 'A00', 'A02'], group: 'medicine-like' },
+  { id: 'uhs-7720301', code: '7720301', name: 'Điều dưỡng', quota2026: 150, combinations: ['B00', 'A00', 'A02'], group: 'nursing' },
+  { id: 'uhs-7720115', code: '7720115', name: 'Y học cổ truyền', quota2026: 120, combinations: ['B00', 'A00', 'A02'], group: 'medicine-like' },
 ];
 
 export function findUhsProgram(programId: string | undefined): UhsProgram | undefined {

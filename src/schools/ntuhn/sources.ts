@@ -31,8 +31,8 @@ export const ntuhnSources: NtuhnSource[] = [
   },
   {
     id: 'ntuhn-admission-score-2026',
-    publisher: 'Bao Dau tu (Vietnam Investment Review) — dua tren cong bo cua Truong Dai hoc Nguyen Trai',
-    title: 'Dai hoc Nguyen Trai cong bo diem chuan 2026: Xet diem thi tu 15, hoc ba tu 18 diem',
+    publisher: 'Bao Dau tu (Vietnam Investment Review) — dua tren công bố của Trường Đại học Nguyễn Trãi',
+    title: 'Đại học Nguyễn Trãi công bố điểm chuẩn 2026: Xet điểm thi tu 15, học bạ tu 18 điểm',
     url: 'https://baodautu.vn/dai-hoc-nguyen-trai-cong-bo-diem-chuan-2026-xet-diem-thi-tu-15-hoc-ba-tu-18-diem-d668518.html',
     accessedAt: '2026-08-24',
     publishedAt: '2026-08-09',
@@ -40,6 +40,6 @@ export const ntuhnSources: NtuhnSource[] = [
     verification: 'verified',
     lifecycle: { effectiveYear: 2026, status: 'current' },
     note:
-      'Dai hoc Nguyen Trai (NTU-HN) cong bo diem trung tuyen dot 1 nam 2026 tren website chinh thuc daihocnguyentrai.edu.vn (truc tiep tai daihocnguyentrai.edu.vn/diem-chuan-he-dai-hoc-chinh-quy-truong-dai-hoc-nguyen-trai-2026, khong lay duoc noi dung so lieu qua WebFetch trong lan nay); so lieu duoc doi chieu qua bai bao chinh thuc cua Bao Dau tu (co quan bao chi nha nuoc), xac nhan nguong 15/30 (thi TN THPT) va 18/30 (hoc ba) ap dung dong nhat cho ca 11 nganh, khong co chenh lech giua cac nganh trong cung phuong thuc.',
+      'Đại học Nguyễn Trãi (NTU-HN) công bố điểm trúng tuyển dot 1 năm 2026 tren website chính thức daihocnguyentrai.edu.vn (truc tiep tai daihocnguyentrai.edu.vn/điểm-chuẩn-he-dai-hoc-chinh-quy-trường-dai-hoc-nguyen-trai-2026, không lay được noi dung so lieu qua WebFetch trong lan nay); so lieu được đối chiếu qua bai bao chính thức của Bao Dau tu (co quan báo chí nhà nước), xác nhận ngưỡng 15/30 (thi TN THPT) va 18/30 (học bạ) áp dụng đồng nhất cho ca 11 ngành, không có chênh lệch giữa các ngành trong cung phương thức.',
   },
 ];

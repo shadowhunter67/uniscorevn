@@ -31,8 +31,8 @@ export const tguSources: TguSource[] = [
   },
   {
     id: 'tgu-admission-info-2026',
-    publisher: 'Truong Dai hoc Tien Giang (Tien Giang University)',
-    title: 'Diem chuan / Nguong dam bao chat luong dau vao Truong Dai hoc Tien Giang nam 2026',
+    publisher: 'Trường Đại học Tiền Giang (Tien Giang University)',
+    title: 'Điểm chuẩn / Ngưỡng đảm bảo chất lượng đầu vào Trường Đại học Tiền Giang năm 2026',
     url: 'https://diemthi.tuyensinh247.com/diem-chuan/dai-hoc-tien-giang-TTG.html',
     accessedAt: '2026-08-24',
     publishedAt: '2026-08-10',
@@ -40,6 +40,6 @@ export const tguSources: TguSource[] = [
     verification: 'cross-checked',
     lifecycle: { effectiveYear: 2026, status: 'current' },
     note:
-      'Tong hop diem chuan cong bo 10/08/2026 cua TGU (2045 chi tieu, 5 phuong thuc). Cong thuc nguong duoc trich dan nhat quan giua nhieu nguon doc lap (bao gom bao dia phuong nha nuoc baodongthap.vn): tong 3 mon thi TN THPT >= 15,0/30 (kem dieu kien mon Toan/Van >= 1/3 diem xet tuyen); rieng nganh Luat >= 18,0/30 (Toan hoac Van >= 6,0). Da doi chieu voi de an tuyen sinh chinh thuc (`tgu-admission-scheme-2026`) — khop nhau.',
+      'Tổng hop điểm chuẩn công bố 10/08/2026 của TGU (2045 chỉ tiêu, 5 phương thức). Cong thuc ngưỡng được trích dẫn nhat quan giữa nhieu nguồn độc lập (bao gồm bao địa phương nhà nước baodongthap.vn): tổng 3 môn thi TN THPT >= 15,0/30 (kem điều kiện môn Toán/Văn >= 1/3 điểm xét tuyển); riêng ngành Luật >= 18,0/30 (Toán hoặc Văn >= 6,0). Da đối chiếu voi để an tuyen sinh chính thức (`tgu-admission-scheme-2026`) — khớp nhau.',
   },
 ];

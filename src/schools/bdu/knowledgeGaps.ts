@@ -9,7 +9,7 @@ export const bduKnowledgeGaps: KnowledgeGap[] = [
     sourceId: 'bdu-admission-2026',
     scoreAffecting: false,
     knownData: [
-      'Da so nganh: >= 15,0/30 (thi TN THPT)',
+      'Đa số ngành: >= 15,0/30 (thi TN THPT)',
       'Luat, Luat Kinh te: >= 20,0/30 (thi TN THPT)',
       'Duoc hoc: >= 20,0/30 (thi TN THPT)',
     ],
@@ -18,15 +18,15 @@ export const bduKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'bdu-transcript-method-not-modeled',
     label:
-      'BDU 2026 con co phuong thuc xet hoc ba THPT (hoc luc lop 12 loai Gioi + tong diem to hop >= 18,0/30 hoac diem xet tot nghiep >= 8,5/10 cho Luat/Luat Kinh te; >= 20,0/30 hoac >= 8,5/10 cho Duoc hoc); chi phuong thuc thi TN THPT duoc mo hinh hoa.',
+      'BDU 2026 con co phương thức xét học bạ THPT (học lực lớp 12 loai Giỏi + tổng điểm tổ hợp >= 18,0/30 hoặc điểm xét tot nghiep >= 8,5/10 cho Luật/Luật Kinh tế; >= 20,0/30 hoặc >= 8,5/10 cho Dược học); chi phương thức thi TN THPT được mô hình hóa.',
     status: 'official-but-unparsed',
     sourceId: 'bdu-admission-2026',
   },
   {
     id: 'bdu-bonus-priority-not-modeled',
-    label: 'Diem uu tien khu vuc/doi tuong theo Thong tu 06 duoc de cap nhung chua duoc trien khai trong bo tinh diem.',
+    label: 'Điểm ưu tiên khu vực/đối tượng theo Thong tu 06 được để cap nhung chưa được trien khai trong bo tính điểm.',
     status: 'incomplete',
     sourceId: 'bdu-admission-2026',
-    impact: 'Bo tinh diem chua tinh duoc diem xet tuyen cuoi cung, chi kiem tra nguong dau vao.',
+    impact: 'Bo tính điểm chưa tinh được điểm xét tuyển cuoi cung, chi kiểm tra ngưỡng đãu vao.',
   },
 ];

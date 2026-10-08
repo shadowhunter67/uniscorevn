@@ -2,7 +2,7 @@ export const NCTU_THPT_THRESHOLD = {
   min30: 15,
   max30: 20,
   requiredText:
-    'NCTU 2026: nguong THPT (ket qua thi tot nghiep THPT) thay doi theo nhom nganh; muc chung 15/30 cho da so 48 nganh, rieng nhom Suc khoe (Y khoa, RHM, Duoc) va Luat/Luat Kinh te theo ngung dam bao chat luong dau vao rieng cua Bo GD&DT, gan voi dieu kien hoc luc lop 12 xep loai Tot va tong diem tu 20/30 (hoac diem xet tot nghiep >= 8.5) — dieu kien hoc luc chua co truong du lieu ho so tuong ung nen khong mo hinh hoa.',
+    'NCTU 2026: ngưỡng THPT (kết quả thi tốt nghiệp THPT) thay doi theo nhóm ngành; mức chung 15/30 cho đa số 48 ngành, riêng nhom Sức khỏe (Y khoa, RHM, Dược) va Luật/Luật Kinh tế theo ngung dam bao chất lượng đầu vào riêng của Bộ GD&ĐT, gan voi điều kiện học lực lớp 12 xếp loại Tốt va tổng điểm từ 20/30 (hoặc điểm xét tot nghiep >= 8.5) — điều kiện học lực chưa có trường du lieu hồ sơ tuong ung nen không mô hình hóa.',
 };
 
 /** Ngưỡng chung 15/30 cho nhóm ngành ngoài Sức khỏe/Luật — dùng riêng cho exact calculator

@@ -18,8 +18,8 @@ export interface VnulawSource {
 export const vnulawSources: VnulawSource[] = [
   {
     id: 'vnulaw-admission-notice-2026',
-    publisher: 'Truong Dai hoc Luat - Dai hoc Quoc gia Ha Noi (VNU-Luat)',
-    title: 'Thong tin tuyen sinh Dai hoc chinh quy nam 2026 - VNU-UL',
+    publisher: 'Trường Đại học Luật - Đại học Quốc gia Hà Nội (VNU-Luat)',
+    title: 'Thông tin tuyển sinh Đại học chính quy năm 2026 - VNU-UL',
     url: 'https://law.vnu.edu.vn/thong-tin-tuyen-sinh-dai-hoc-chinh-quy-nam-2026/',
     accessedAt: '2026-08-25',
     sourceType: 'official-admission',

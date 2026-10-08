@@ -11,7 +11,7 @@ export const huflitKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'huflit-bonus-table-not-found',
     label:
-      'Bảng điểm thưởng (thành tích HSG/giải thưởng) và điểm khuyến khích (chứng chỉ ngoại ngữ) cụ thể — nhiều nguồn thứ cấp xác nhận HUFLIT CÓ "điểm cộng" (điểm thưởng + điểm khuyến khích, trần không quá 10% thang điểm xét tuyển = 3,00/30) và "nhiều thành tích chỉ cộng cao nhất", nhưng KHÔNG định vị được trang/PDF chính thức công bố bảng số cụ thể (bao nhiêu điểm mỗi loại giải/mỗi mức chứng chỉ).',
+      'Chưa có bảng chính thức nêu rõ điểm thưởng cho thành tích HSG/giải thưởng và điểm khuyến khích cho chứng chỉ ngoại ngữ. Các nguồn hiện có chỉ cho biết HUFLIT có điểm cộng, gồm điểm thưởng và điểm khuyến khích, tối đa 10% thang điểm xét tuyển = 3,00/30; nếu có nhiều thành tích thì chỉ cộng mức cao nhất.',
     status: 'incomplete',
     sourceId: 'huflit-admission-plan-2026',
     scoreAffecting: true,
@@ -22,7 +22,7 @@ export const huflitKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'huflit-priority-table-not-huflit-specific',
     label:
-      'Bảng điểm ưu tiên khu vực/đối tượng và công thức giảm dùng bảng chuẩn quốc gia (Quy chế tuyển sinh Bộ GDĐT: KV1=0,75/KV2-NT=0,5/KV2=0,25/KV3=0; ĐT01-03=2/ĐT04-06=1, thang 30; giảm khi tổng ≥22,5/30, chia 7,5) — KHÔNG tìm được trang HUFLIT tự công bố bảng này trực tiếp, chỉ có 1 nguồn thứ cấp trích lời HUFLIT "Điểm ưu tiên: áp dụng theo quy chế tuyển sinh của Bộ GDĐT" xác nhận rule TỒN TẠI nhưng không có bảng số riêng.',
+      'Điểm ưu tiên khu vực/đối tượng đang dùng bảng chuẩn quốc gia theo Quy chế tuyển sinh Bộ GDĐT: KV1=0,75; KV2-NT=0,5; KV2=0,25; KV3=0; ĐT01-03=2; ĐT04-06=1 trên thang 30, giảm khi tổng ≥22,5/30 và chia 7,5. Chưa tìm được trang HUFLIT tự công bố bảng số riêng.',
     status: 'official-but-unparsed',
     sourceId: 'huflit-admission-plan-2026',
     scoreAffecting: true,
@@ -33,7 +33,7 @@ export const huflitKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'huflit-program-catalog-not-imported',
     label:
-      'Danh mục đầy đủ 23 ngành + tổ hợp môn xét tuyển từng ngành chưa import — evaluator nhận tổ hợp trực tiếp từ caller (giống HCMUT/HCMUTE/TDTU); chỉ 2 ngành đặc thù (Luật, Luật kinh tế — ngưỡng riêng) có stable ID trong `eligibility.ts`.',
+      'Danh mục đầy đủ 23 ngành và tổ hợp môn xét tuyển theo từng ngành chưa được đưa vào công cụ. Người dùng vẫn cần chọn tổ hợp môn; hiện chỉ 2 ngành có ngưỡng riêng là Luật và Luật kinh tế được nhận diện riêng.',
     status: 'official-but-unparsed',
     sourceId: 'huflit-admission-plan-2026',
     scoreAffecting: false,

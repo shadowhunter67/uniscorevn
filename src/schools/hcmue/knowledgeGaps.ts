@@ -3,7 +3,7 @@ import type { KnowledgeGap } from '../../core/knowledgeStatus';
 export const hcmueKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'hcmue-program-combination-map-2026',
-    label: 'Danh sách tổ hợp xét tuyển theo từng ngành HCMUE 2026 chưa được transcribe vào runtime.',
+    label: 'Danh sách tổ hợp xét tuyển theo từng ngành HCMUE 2026 chưa được đưa vào công cụ. Vì vậy UniscoreVN chưa tự kiểm tra được tổ hợp theo ngành.',
     status: 'official-but-unparsed',
     sourceId: 'hcmue-methods-2026',
     scoreAffecting: false,
@@ -13,7 +13,7 @@ export const hcmueKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'hcmue-current-cutoffs-2026',
     label:
-      'Điểm trúng tuyển 2026 (cột "KQ thi TN THPT 2026") đã nhập đủ 47/47 ngành trụ sở chính TP.HCM + 10 ngành phân hiệu Long An + 5 ngành phân hiệu Gia Lai (`src/schools/hcmue/data/cutoffs.ts`) từ ảnh bảng gốc user cung cấp trực tiếp (2 file Drive đính kèm bài đăng vẫn khóa quyền tải, không dùng được). CHƯA nhập cột song song "KQ học tập THPT kết hợp ĐGNLCB / kết quả thi NK kết hợp ĐGNLCB" (cột phải trên bảng gốc) để tránh rủi ro lẫn cột khi nhập tay trong 1 lượt. Ngưỡng đầu vào (threshold) riêng cho Long An/Gia Lai KHÔNG có trong bảng công bố — `HcmueProgramThreshold.thptThreshold30/dgnlcbThreshold30` để `undefined` cho 15 ngành phân hiệu, không suy đoán bằng số trụ sở chính. Ngưỡng đầu vào (threshold) không được gán là điểm chuẩn (cutoff).',
+      'Điểm trúng tuyển 2026 ở cột "KQ thi TN THPT 2026" đã có đủ 47/47 ngành tại trụ sở chính TP.HCM, 10 ngành phân hiệu Long An và 5 ngành phân hiệu Gia Lai. Chưa nhập cột "KQ học tập THPT kết hợp ĐGNLCB / kết quả thi NK kết hợp ĐGNLCB". Bảng công bố cũng không có ngưỡng đầu vào riêng cho 15 ngành ở Long An/Gia Lai, nên không suy đoán theo số của trụ sở chính.',
     status: 'incomplete',
     sourceId: 'hcmue-cutoffs-2026',
     scoreAffecting: false,

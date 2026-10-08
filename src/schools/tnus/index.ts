@@ -4,7 +4,7 @@ import { tnusAdmissionMethods } from './methods';
 
 export const tnusModule: SchoolModule = {
   id: 'tnus',
-  name: 'Truong Dai hoc Khoa hoc - Dai hoc Thai Nguyen',
+  name: 'Trường Đại học Khoa học - Đại học Thái Nguyên',
   shortName: 'TNUS',
   about: 'Trường đại học thành viên Đại học Thái Nguyên, đào tạo 40 ngành/chương trình khối ngôn ngữ, xã hội, tự nhiên, kỹ thuật.',
   year: 2026,

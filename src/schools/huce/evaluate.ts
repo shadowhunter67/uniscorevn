@@ -96,7 +96,7 @@ function scoreFor(profile: ApplicantProfile, context: HuceEvaluationContext, met
     if (!context.subjectContext) {
       return {
         missingRequirements: [{ kind: 'school-context' as const, code: 'huce-subject-combination', label: 'Select a HUCE subject combination.' }],
-        reasons: ['HUCE needs a selected subject combination before this threshold can be checked.'],
+        reasons: ['HUCE needs a selected subject combination before this threshold cần be checked.'],
       };
     }
     const score = methodId === 'huce-thpt-exam-2026' ? sumThpt(profile, context.subjectContext.subjects) : sumTranscript(profile, context.subjectContext.subjects);
@@ -109,7 +109,7 @@ function scoreFor(profile: ApplicantProfile, context: HuceEvaluationContext, met
           code: `huce-${methodId}-${subjectId}`,
           label: `${inputKind} score for ${SUBJECT_LABELS[subjectId]}.`,
         })),
-        reasons: ['HUCE needs all three subject scores before this threshold can be checked.'],
+        reasons: ['HUCE needs all three subject scores before this threshold cần be checked.'],
       };
     }
     return { total: score.total };
@@ -119,7 +119,7 @@ function scoreFor(profile: ApplicantProfile, context: HuceEvaluationContext, met
     return {
       missingInputs: ['Missing external exam score for the selected HUCE method.'],
       missingRequirements: [{ kind: 'profile-input' as const, code: `huce-${methodId}-external-score`, label: 'External exam score for HUCE threshold checking.' }],
-      reasons: ['HUCE needs the selected external exam score before this threshold can be checked.'],
+      reasons: ['HUCE needs the selected external exam score before this threshold cần be checked.'],
     };
   }
   return { total: context.externalScore };
@@ -191,7 +191,7 @@ export function evaluateHuceThptExamExactAdmission(profile: ApplicantProfile, co
   ];
 
   explanation.push({ id: 'huce-exact-raw', label: 'Raw 3-subject THPT total', output: raw30, scale: 30, formula: subjects.map((s) => SUBJECT_LABELS[s]).join(' + '), evidence: huceThptExamExactThresholdEvidence.evidence });
-  explanation.push({ id: 'huce-exact-priority', label: priority.reduced ? 'Priority points (reduced, reference only)' : 'Priority points (reference only)', output: priority.effectivePriority30, scale: 30, formula: priority.reduced ? '[(30 − raw total)/7.5] × standard priority (Dieu 7 TT 06/2026)' : 'Standard priority (Dieu 7 TT 06/2026)', evidence: huceThptExamExactThresholdEvidence.evidence });
+  explanation.push({ id: 'huce-exact-priority', label: priority.reduced ? 'Priority points (reduced, reference only)' : 'Priority points (reference only)', output: priority.effectivePriority30, scale: 30, formula: priority.reduced ? '[(30 − raw total)/7.5] × standard priority (Điều 7 TT 06/2026)' : 'Standard priority (Điều 7 TT 06/2026)', evidence: huceThptExamExactThresholdEvidence.evidence });
   explanation.push({ id: 'huce-exact-reference', label: 'Reference score (not used for the threshold check)', output: referenceScore30, scale: 30, formula: 'round2(raw total + priority)', evidence: huceThptExamExactThresholdEvidence.evidence });
 
   if (profile.priority?.region === undefined && profile.priority?.category === undefined) {

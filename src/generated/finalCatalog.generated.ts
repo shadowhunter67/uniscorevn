@@ -120,7 +120,7 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
   },
   tqt: {
     sourceId: 'tqt-admission-2026',
-    title: 'Truong Dai hoc Tran Quoc Tuan (Si quan Luc quan 1) official site',
+    title: 'Trường Đại học Trần Quốc Tuấn (Sĩ quan Lục quân 1) official site',
     url: 'http://sqlq1.edu.vn/',
     checkedAt: '2026-08-24',
     note:
@@ -128,7 +128,7 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
   },
   tueba: {
     sourceId: 'tueba-admission-2026',
-    title: 'TUEBA official site (Truong Dai hoc Kinh te va Quan tri Kinh doanh - Dai hoc Thai Nguyen)',
+    title: 'TUEBA official site (Truong Dai hoc Kinh te va Quan tri Kinh doanh - Đại học Thái Nguyên)',
     url: 'https://tueba.edu.vn/',
     checkedAt: '2026-08-24',
     note:
@@ -588,7 +588,7 @@ const researchedAdmissionSources: Record<string, ResearchedAdmissionSource> = {
   },
   vnusis: {
     sourceId: 'vnusis-admission-2026',
-    title: 'VNU-SIS (Truong Khoa hoc lien nganh va Nghe thuat, DHQGHN) tuyen sinh dai hoc chinh quy nam 2026',
+    title: 'VNU-SIS (Trường Khoa học liên ngành và Nghệ thuật, ĐHQGHN) tuyển sinh đại học chính quy năm 2026',
     url: 'https://sis.vnu.edu.vn/chi-tiet-tin/Tuyen-sinh-dai-hoc-chinh-quy-nam-2026-Phuong-thuc-xet-tuyen-chuong-trinh-dao-tao-chi-tieu-va-to-hop-xet-tuyen-du-kien_1154.html',
     checkedAt: '2026-08-25',
     note:

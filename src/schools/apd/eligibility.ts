@@ -2,5 +2,5 @@ export const APD_THPT_THRESHOLD = {
   min30: 16,
   max30: 19,
   requiredText:
-    'APD 2026: nguong dam bao chat luong dau vao (phuong thuc thi TN THPT), tong 3 mon xet tuyen chua cong diem uu tien/diem cong. Tru so chinh (Ha Noi) >= 19,0/30; Phan hieu Bac Ninh va Phan hieu Da Nang >= 16,0/30 (ap dung dong nhat cho tat ca to hop, khong phan biet theo nganh).',
+    'APD 2026: ngưỡng đảm bảo chất lượng đầu vào (phương thức thi TN THPT), tổng 3 môn xét tuyển chưa cóng điểm ưu tiên/điểm cộng. Trụ sở chính (Hà Nội) >= 19,0/30; Phân hiệu Bắc Ninh va Phân hiệu Đà Nẵng >= 16,0/30 (áp dụng đồng nhất cho tat ca tổ hợp, không phân biệt theo ngành).',
 };

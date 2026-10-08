@@ -18,15 +18,15 @@ export interface TnueSource {
 export const tnueSources: TnueSource[] = [
   {
     id: 'tnue-threshold-2026',
-    publisher: 'Dai hoc Thai Nguyen (Thai Nguyen University) - Truong Dai hoc Su pham',
-    title: 'Truong Dai hoc Su pham - Dai hoc Thai Nguyen cong bo nguong dam bao chat luong dau vao nam 2026',
+    publisher: 'Đại học Thái Nguyên (Thai Nguyen University) - Truong Dai hoc Su pham',
+    title: 'Trường Đại học Sư phạm - Đại học Thái Nguyên công bố ngưỡng đảm bảo chất lượng đầu vào năm 2026',
     url: 'https://tnu.edu.vn/dao-tao/thong-tin-tuyen-sinh/thong-tin-tuyen-sinh-dh-cd/truong-dai-hoc-su-pham-dai-hoc-thai-nguyen-cong-bo-nguong-dam-bao-chat-luong-dau-vao-nam-2026.html',
     accessedAt: '2026-08-24',
     sourceType: 'official-admission',
     verification: 'verified',
     lifecycle: { effectiveYear: 2026, status: 'superseded', supersededBy: 'tnue-cutoff-2026' },
     note:
-      'Trang chinh thuc he thong Dai hoc Thai Nguyen (tnu.edu.vn) cong bo nguong dam bao chat luong dau vao 2026 cho truong thanh vien TNUE, theo diem thi TN THPT, phan hoa 17,00-22,50/30 theo nhom nganh. To hop mon cu the tung nganh va cong thuc tinh chi tiet (uu tien/cong diem) chua duoc trang nay neu ro. Bị thay thế bởi điểm chuẩn trúng tuyển chính thức theo NGÀNH `tnue-cutoff-2026` — giữ lại làm nguồn lịch sử điểm sàn (trước kỳ thi).',
+      'Trang chính thức he thong Đại học Thái Nguyên (tnu.edu.vn) công bố ngưỡng đảm bảo chất lượng đầu vào 2026 cho trường thành viên TNUE, theo điểm thi TN THPT, phân hóa 17,00-22,50/30 theo nhóm ngành. Tổ hợp môn cụ thể từng ngành và công thức tinh chi tiet (ưu tiên/cộng điểm) chưa được trang này nêu rõ. Bị thay thế bởi điểm chuẩn trúng tuyển chính thức theo NGÀNH `tnue-cutoff-2026` — giữ lại làm nguồn lịch sử điểm sàn (trước kỳ thi).',
   },
   {
     id: 'tnue-cutoff-2026',

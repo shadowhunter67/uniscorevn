@@ -18,19 +18,19 @@ export interface TnuflSource {
 export const tnuflSources: TnuflSource[] = [
   {
     id: 'tnufl-cutoff-2026',
-    publisher: 'Dai hoc Thai Nguyen (Thai Nguyen University) - Truong Ngoai ngu',
-    title: 'Truong Ngoai ngu - Dai hoc Thai Nguyen cong bo diem chuan trung tuyen dai hoc nam 2026',
+    publisher: 'Đại học Thái Nguyên (Thai Nguyen University) - Truong Ngoai ngu',
+    title: 'Trường Ngoại ngữ - Đại học Thái Nguyên công bố điểm chuẩn trúng tuyển đại học năm 2026',
     url: 'https://tnu.edu.vn/dao-tao/truong-ngoai-ngu-dai-hoc-thai-nguyen-cong-bo-diem-chuan-trung-tuyen-dai-hoc-nam-2026.html',
     accessedAt: '2026-08-24',
     sourceType: 'official-admission',
     verification: 'verified',
     lifecycle: { effectiveYear: 2026, status: 'current' },
     note:
-      'Trang chinh thuc he thong Dai hoc Thai Nguyen (tnu.edu.vn) cong bo diem chuan trung tuyen 2026 cho truong thanh vien TNUFL, dao dong 16,00-26,60/30 theo 5 nganh: Ngôn ngữ Hàn Quốc 16,00; Ngôn ngữ Anh 18,20; Ngôn ngữ Trung Quốc 20,60; Sư phạm Tiếng Anh 25,60; Sư phạm Tiếng Trung Quốc 26,60. Chỉ mô hình hoá 2/5 ngành (Ngôn ngữ Anh, Sư phạm Tiếng Anh) — 3 ngành còn lại dùng điểm ngoại ngữ Trung/Hàn không có SubjectId tương ứng.',
+      'Trang chính thức he thong Đại học Thái Nguyên (tnu.edu.vn) công bố điểm chuẩn trúng tuyển 2026 cho trường thành viên TNUFL, dao động 16,00-26,60/30 theo 5 ngành: Ngôn ngữ Hàn Quốc 16,00; Ngôn ngữ Anh 18,20; Ngôn ngữ Trung Quốc 20,60; Sư phạm Tiếng Anh 25,60; Sư phạm Tiếng Trung Quốc 26,60. Chỉ mô hình hoá 2/5 ngành (Ngôn ngữ Anh, Sư phạm Tiếng Anh) — 3 ngành còn lại dùng điểm ngoại ngữ Trung/Hàn không có SubjectId tương ứng.',
   },
   {
     id: 'tnufl-combinations-2026',
-    publisher: 'Dai hoc Thai Nguyen (Thai Nguyen University) - Truong Ngoai ngu',
+    publisher: 'Đại học Thái Nguyên (Thai Nguyen University) - Truong Ngoai ngu',
     title: 'Trường Ngoại ngữ – Đại học Thái Nguyên công bố phương thức xét tuyển theo kết quả thi tốt nghiệp THPT năm 2026',
     url: 'https://tnu.edu.vn/dao-tao/thong-tin-tuyen-sinh/truong-ngoai-ngu-dai-hoc-thai-nguyen-cong-bo-phuong-thuc-xet-tuyen-theo-ket-qua-thi-tot-nghiep-thpt-nam-2026.html',
     accessedAt: '2026-09-16',

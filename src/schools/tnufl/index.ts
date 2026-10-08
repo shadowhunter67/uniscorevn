@@ -4,7 +4,7 @@ import { tnuflAdmissionMethods } from './methods';
 
 export const tnuflModule: SchoolModule = {
   id: 'tnufl',
-  name: 'Truong Ngoai ngu - Dai hoc Thai Nguyen',
+  name: 'Trường Ngoại ngữ - Đại học Thái Nguyên',
   shortName: 'TNUFL',
   about: 'Public foreign-language member school of Thai Nguyen University.',
   year: 2026,
@@ -22,7 +22,7 @@ export const tnuflModule: SchoolModule = {
   },
   catalogSources: [
     {
-      title: 'Truong Ngoai ngu - Dai hoc Thai Nguyen cong bo diem chuan trung tuyen dai hoc nam 2026',
+      title: 'Trường Ngoại ngữ - Đại học Thái Nguyên công bố điểm chuẩn trúng tuyển đại học năm 2026',
       url: 'https://tnu.edu.vn/dao-tao/truong-ngoai-ngu-dai-hoc-thai-nguyen-cong-bo-diem-chuan-trung-tuyen-dai-hoc-nam-2026.html',
       type: 'official-institution',
       checkedAt: '2026-08-24',

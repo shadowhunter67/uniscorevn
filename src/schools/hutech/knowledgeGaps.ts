@@ -19,7 +19,7 @@ export const hutechKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'hutech-bonus-table-not-found',
     label:
-      'Bảng điểm thưởng/điểm khuyến khích (thành tích HSG, chứng chỉ quốc tế SAT/ACT/A-level/IB dùng xét tuyển thẳng) — nguồn xác nhận HUTECH CÓ chính sách học bổng 25/50/100% và xét thẳng bằng chứng chỉ quốc tế, nhưng KHÔNG định vị được bảng quy đổi điểm cộng cụ thể cho phương thức thi THPT/học bạ/ĐGNL.',
+      'Chưa có bảng quy đổi điểm cộng cụ thể cho thành tích HSG hoặc chứng chỉ quốc tế SAT/ACT/A-level/IB trong các phương thức thi THPT, học bạ và ĐGNL. Nguồn hiện có chỉ xác nhận HUTECH có chính sách học bổng 25/50/100% và xét thẳng bằng chứng chỉ quốc tế.',
     status: 'incomplete',
     sourceId: 'hutech-admission-plan-2026',
     scoreAffecting: true,
@@ -29,7 +29,7 @@ export const hutechKnowledgeGaps: KnowledgeGap[] = [
   },
   {
     id: 'hutech-priority-table-not-hutech-specific',
-    label: 'Bảng điểm ưu tiên khu vực/đối tượng dùng bảng chuẩn quốc gia (Quy chế tuyển sinh Bộ GDĐT) — không tìm được trang HUTECH tự công bố bảng số riêng.',
+    label: 'Điểm ưu tiên khu vực/đối tượng đang dùng bảng chuẩn quốc gia theo Quy chế tuyển sinh Bộ GDĐT. Chưa tìm được trang HUTECH tự công bố bảng số riêng.',
     status: 'official-but-unparsed',
     sourceId: 'hutech-admission-plan-2026',
     scoreAffecting: true,
@@ -40,7 +40,7 @@ export const hutechKnowledgeGaps: KnowledgeGap[] = [
   {
     id: 'hutech-vsat-scale-conflicting',
     label:
-      'Thang điểm tối đa của bài thi V-SAT 2026 và công thức quy đổi điểm xét tuyển từ V-SAT KHÔNG xác định được rõ ràng — 2 lần fetch trang chính thức cho số liệu ngưỡng khác nhau cho cùng 1 khái niệm (225/250 ở trang ngưỡng đảm bảo chất lượng 04/7/2026 so với 225/250/270/285 ở trang điểm chuẩn công bố sau, có thể lẫn giữa "ngưỡng" và "điểm chuẩn thật" của 2 mốc thời gian khác nhau). Ngưỡng dùng trong `eligibility.ts` lấy từ `hutech-quality-threshold-2026` (nguồn nhất quán hơn khi đọc verbatim) nhưng CHƯA xác nhận được thang điểm tối đa của bài thi V-SAT để làm scoreConversion.',
+      'Chưa xác định rõ thang điểm tối đa của bài thi V-SAT 2026 và công thức quy đổi điểm xét tuyển từ V-SAT. Hai trang chính thức nêu các mốc khác nhau cho cùng khái niệm: 225/250 ở trang ngưỡng đảm bảo chất lượng ngày 04/7/2026, so với 225/250/270/285 ở trang điểm chuẩn công bố sau. Vì vậy UniscoreVN chỉ kiểm tra điều kiện theo điểm V-SAT thô, chưa tính được điểm xét tuyển cuối.',
     status: 'conflicting-sources',
     sourceId: 'hutech-quality-threshold-2026',
     scoreAffecting: true,
@@ -50,7 +50,7 @@ export const hutechKnowledgeGaps: KnowledgeGap[] = [
   },
   {
     id: 'hutech-method-numbering-inconsistent',
-    label: 'Số hiệu "Phương thức 3"/"Phương thức 4" cho V-SAT/ĐGNL không nhất quán giữa 2 trang chính thức đã đọc — module này dùng tên mô tả (thpt/hocba/vsat/dgnl) thay vì số hiệu để tránh gán nhầm.',
+    label: 'Số hiệu "Phương thức 3"/"Phương thức 4" cho V-SAT và ĐGNL không nhất quán giữa 2 trang chính thức. UniscoreVN dùng tên phương thức thay vì số hiệu để tránh gán nhầm.',
     status: 'conflicting-sources',
     sourceId: 'hutech-admission-plan-2026',
     scoreAffecting: false,
@@ -59,7 +59,7 @@ export const hutechKnowledgeGaps: KnowledgeGap[] = [
   },
   {
     id: 'hutech-program-catalog-not-imported',
-    label: 'Danh mục đầy đủ 63 ngành + tổ hợp môn xét tuyển từng ngành, và bảng ánh xạ ngành → nhóm ngưỡng (Y khoa/Dược/Điều dưỡng-KTXNYH/Luật/còn lại) chưa import — evaluator nhận `HutechThresholdGroup` trực tiếp từ caller thay vì tự suy từ tên ngành.',
+    label: 'Danh mục đầy đủ 63 ngành, tổ hợp môn theo từng ngành và nhóm ngưỡng theo ngành (Y khoa/Dược/Điều dưỡng-KTXNYH/Luật/còn lại) chưa được đưa vào công cụ. Người dùng cần chọn đúng nhóm ngưỡng thay vì để UniscoreVN tự suy từ tên ngành.',
     status: 'official-but-unparsed',
     sourceId: 'hutech-admission-plan-2026',
     scoreAffecting: false,

@@ -3,20 +3,20 @@
 export const mduSources: (Omit<AdmissionSource, 'schoolId'> & { note?: string })[] = [
   {
     id: 'mdu-identity-2026',
-    publisher: 'Truong Dai hoc Cong nghe Mien Dong (MIT Uni.)',
-    title: 'Trang chu Truong Dai hoc Cong nghe Mien Dong',
+    publisher: 'Trường Đại học Công nghệ Miền Đông (MIT Uni.)',
+    title: 'Trang chu Trường Đại học Công nghệ Miền Đông',
     url: 'https://mit.vn/',
     accessedAt: '2026-09-26',
     sourceType: 'official-school',
     verification: 'verified',
     lifecycle: { effectiveYear: 2026, status: 'current' },
     note:
-      'Confirms the current MIT Uni. identity for the legacy MDU catalog entry (former Truong Dai hoc Mien Dong / Truong Dai hoc Cong nghe Mien Dong).',
+      'Confirms the current MIT Uni. identity for the legacy MDU catalog entry (former Truong Dai hoc Mien Dong / Trường Đại học Công nghệ Miền Đông).',
   },
   {
     id: 'mdu-admission-methods-2026',
-    publisher: 'Truong Dai hoc Cong nghe Mien Dong (MIT Uni.)',
-    title: 'Truong Dai hoc Cong nghe Mien Dong cong bo cac phuong thuc xet tuyen nam 2026',
+    publisher: 'Trường Đại học Công nghệ Miền Đông (MIT Uni.)',
+    title: 'Trường Đại học Công nghệ Miền Đông công bố các phương thức xét tuyển năm 2026',
     url: 'https://mit.vn/cong-bo-cac-phuong-thuc-xet-tuyen-nam-2026/',
     accessedAt: '2026-09-26',
     publishedAt: '2026-03-20',
@@ -29,7 +29,7 @@ export const mduSources: (Omit<AdmissionSource, 'schoolId'> & { note?: string })
   {
     id: 'mdu-cutoff-summary-2026',
     publisher: 'Du Lieu Phap Luat',
-    title: 'Diem chuan Truong Dai hoc Cong nghe Mien Dong 2026',
+    title: 'Điểm chuẩn Trường Đại học Công nghệ Miền Đông 2026',
     url: 'https://dulieuphapluat.vn/cong-cu/diem-chuan-dai-hoc/dai-hoc-cong-nghe-mien-dong-mit.html',
     accessedAt: '2026-09-26',
     sourceType: 'secondary',

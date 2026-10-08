@@ -49,7 +49,7 @@ export function evaluateVnuaThptExamAdmission(profile: ApplicantProfile, context
       code: 'vnua-subject-combination',
       label: 'Select a VNUA subject combination for THPT threshold checking.',
     });
-    reasons.push('VNUA needs a selected subject combination before the THPT threshold can be checked.');
+    reasons.push('VNUA needs a selected subject combination before the THPT threshold cần be checked.');
   } else {
     const { total30, missingSubjects } = sumThptTotal(profile, context.subjectContext.subjects);
 

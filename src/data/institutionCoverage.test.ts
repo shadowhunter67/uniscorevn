@@ -521,7 +521,7 @@ describe('institution coverage statistics', () => {
     // Batch (2026-09-26): STU graduated from researched to verified-calculator — official STU
     // admissions sources publish PT02 2026 formula and 20/20 major cutoffs.
     expect(deriveInstitutionSupportStatus(schoolRegistry.stu)).toBe('verified-calculator');
-    // Batch (2026-09-26): MDU/MIT (Truong Dai hoc Cong nghe Mien Dong) nang tu researched len exact.
+    // Batch (2026-09-26): MDU/MIT (Trường Đại học Công nghệ Miền Đông) nang tu researched len exact.
     // Nguon chinh chu mit.vn cong bo PT xet ket qua thi TN THPT 2026 theo tong 3 mon; bang diem
     // chuan 2026 duoc cross-check tu nguon tong hop. Chi mo hinh hoa 17 chuong trinh nguong 15/30,
     // loai tru Duoc hoc va Luat kinh te do can them dieu kien/chinh sach nganh dac thu.

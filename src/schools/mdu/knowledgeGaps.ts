@@ -6,7 +6,7 @@ export const mduKnowledgeGaps: KnowledgeGap[] = [
     label: 'MDU/MIT exact scope excludes Pharmacy and Economic Law.',
     status: 'official-but-unparsed',
     note:
-      'Pharmacy belongs to the health-profession field and Economic Law belongs to the legal field; both can carry ministry-level thresholds or auxiliary conditions. They are kept out of exact scope until the full official rule is modeled.',
+      'Pharmacy belongs to the health-profession field and Economic Law belongs to the legal field; both cần carry ministry-level thresholds or auxiliary conditions. They are kept out of exact scope until the full official rule is modeled.',
     impact: 'Applicants to Pharmacy or Economic Law are returned as partial/unknown instead of being assigned a potentially incomplete threshold.',
     sourceId: 'mdu-cutoff-summary-2026',
     scoreAffecting: true,

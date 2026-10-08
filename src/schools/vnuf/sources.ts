@@ -18,8 +18,8 @@ export interface VnufSource {
 export const vnufSources: VnufSource[] = [
   {
     id: 'vnuf-admission-scheme-2026',
-    publisher: 'Vietnam National University of Forestry (Truong Dai hoc Lam nghiep)',
-    title: 'Official 2026 admission scheme (De an tuyen sinh trinh do dai hoc nam 2026)',
+    publisher: 'Vietnam National University of Forestry (Trường Đại học Lâm nghiệp)',
+    title: 'Official 2026 admission scheme (De an tuyen sinh trình độ đại học năm 2026)',
     url: 'https://daotao.vnuf.edu.vn/thong-bao?_101_assetEntryId=211376951&_101_struts_action=%2Fasset_publisher%2Fview_content&_101_type=content&_101_urlTitle=thong-tin-%C4%91e-an-tuyen-sinh-trinh-%C4%91o-%C4%91ai-hoc-nam-2026',
     accessedAt: '2026-08-24',
     sourceType: 'official-admission',
@@ -51,7 +51,7 @@ export const vnufSources: VnufSource[] = [
     verification: 'verified',
     lifecycle: { effectiveYear: 2026, status: 'current' },
     note:
-      'Trang chính chủ tuyensinh.vnuf.edu.vn (SPA, đọc bằng chrome-devtools evaluate_script). Mục I nêu rõ công thức nguồn xét tuyển đầu vào áp dụng mọi phương thức: tổng 3 môn thi TN THPT theo tổ hợp ≥ 15,00/30, "không tính điểm ưu tiên, điểm cộng". Mục 2.1 liệt kê bảng ngưỡng theo từng ngành — cột thi TN THPT đồng nhất 15,00 cho toàn bộ ngành có tổ hợp thường (trừ 2 ngành tổ hợp năng khiếu Kiến trúc cảnh quan/Thiết kế nội thất, ngoài phạm vi).',
+      'Trang chính chủ tuyensinh.vnuf.edu.vn (SPA, đọc bằng chrome-devtools evaluậte_script). Mục I nêu rõ công thức nguồn xét tuyển đầu vào áp dụng mọi phương thức: tổng 3 môn thi TN THPT theo tổ hợp ≥ 15,00/30, "không tính điểm ưu tiên, điểm cộng". Mục 2.1 liệt kê bảng ngưỡng theo từng ngành — cột thi TN THPT đồng nhất 15,00 cho toàn bộ ngành có tổ hợp thường (trừ 2 ngành tổ hợp năng khiếu Kiến trúc cảnh quan/Thiết kế nội thất, ngoài phạm vi).',
   },
   {
     id: 'vnuf-cutoff-2026',

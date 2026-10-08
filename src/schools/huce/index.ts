@@ -4,7 +4,7 @@ import { huceAdmissionMethods } from './methods';
 
 export const huceModule: SchoolModule = {
   id: 'huce',
-  name: 'Truong Dai hoc Xay dung Ha Noi',
+  name: 'Trường Đại học Xây dựng Hà Nội',
   shortName: 'HUCE',
   about: 'Public civil engineering and built-environment university in Hanoi.',
   year: 2026,
@@ -13,7 +13,7 @@ export const huceModule: SchoolModule = {
   region: 'hanoi',
   vnuhcm: false,
   summary:
-    'Official HUCE 2026 sources are normalized for program-level threshold eligibility across THPT, transcript, TSA, SPT, and V-SAT methods (51 programs/campuses, OCR from PDF 227/TB-HDTSDH). An exact branch now covers the THPT-exam method for all 51 programs: eligibility compares the raw 3-subject total to the published per-program threshold, with a priority-adjusted reference score (judgment call, Dieu 7 TT 06/2026) shown for context. Full bonus points and subject-combination scope are not verified yet.',
+    'Official HUCE 2026 sources are normalized for program-level threshold eligibility across THPT, transcript, TSA, SPT, and V-SAT methods (51 programs/campuses, OCR from PDF 227/TB-HDTSDH). An exact branch now covers the THPT-exam method for all 51 programs: eligibility compares the raw 3-subject total to the published per-program threshold, with a priority-adjusted reference score (judgment call, Điều 7 TT 06/2026) shown for context. Full bonus points and subject-combination scope are not verified yet.',
   capabilities: {
     admissionInfo: true,
     programs: true,

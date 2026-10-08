@@ -2,11 +2,11 @@ import type { SourcedRule } from '../../core/evidence';
 
 export const stuExactFormulaEvidence = {
   value:
-    'PT02 STU 2026: Diem xet tuyen chua uu tien = diem 3 mon thi tot nghiep THPT trong to hop, thang 30. Module cong diem uu tien KV/DT theo khung quoc gia hien hanh (judgment call) roi so voi diem chuan PT02 chinh thuc.',
+    'PT02 STU 2026: Điểm xét tuyển chưa ưu tiên = điểm 3 môn thi tốt nghiệp THPT trong tổ hợp, thang 30. Module cộng điểm ưu tiên KV/ĐT theo khung quốc gia hiện hành (judgment call) roi so với điểm chuẩn PT02 chính thức.',
   evidence: [
     {
       sourceId: 'stu-admission-methods-2026',
-      location: 'Homepage tuyen sinh 2026, muc "Phuong thuc 02: Xet tuyen Diem thi tot nghiep THPT nam 2026".',
+      location: 'Homepage tuyen sinh 2026, mức "Phương thức 02: Xet tuyen Điểm thi tốt nghiệp THPT năm 2026".',
       verification: 'verified' as const,
       effectiveYear: 2026,
       verifiedAt: '2026-09-26',
@@ -19,7 +19,7 @@ export const stuFieldThresholdEvidence = {
   evidence: [
     {
       sourceId: 'stu-cutoff-2026',
-      location: 'Bang "Diem chuan trung tuyen theo tung nganh", cot PT02, 20 nganh.',
+      location: 'Bang "Điểm chuẩn trúng tuyển theo từng ngành", cot PT02, 20 ngành.',
       verification: 'verified' as const,
       effectiveYear: 2026,
       verifiedAt: '2026-09-26',
@@ -32,7 +32,7 @@ export const stuSubjectRequirementEvidence = {
   evidence: [
     {
       sourceId: 'stu-admission-methods-2026',
-      location: 'Homepage tuyen sinh 2026, PT02, muc "Dieu kien khac".',
+      location: 'Homepage tuyen sinh 2026, PT02, mức "Điều kiện khác".',
       verification: 'verified' as const,
       effectiveYear: 2026,
       verifiedAt: '2026-09-26',

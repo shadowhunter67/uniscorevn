@@ -4,7 +4,7 @@ import { vnufAdmissionMethods } from './methods';
 
 export const vnufModule: SchoolModule = {
   id: 'vnuf',
-  name: 'Truong Dai hoc Lam nghiep',
+  name: 'Trường Đại học Lâm nghiệp',
   shortName: 'VNUF',
   about: 'Public forestry-focused university headquartered in Xuan Mai, Hanoi.',
   year: 2026,

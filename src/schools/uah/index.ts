@@ -4,9 +4,9 @@ import { uahAdmissionMethods } from './methods';
 
 export const uahModule: SchoolModule = {
   id: 'uah',
-  name: 'Truong Dai hoc Kien truc TP.HCM',
+  name: 'Trường Đại học Kiến trúc TP.HCM',
   shortName: 'UAH',
-  about: 'Public architecture and design university headquartered in Ho Chi Minh City, with campuses in Can Tho and Da Lat.',
+  about: 'Public architecture and design university headquartered in Ho Chi Minh City, with campuses in Cần Tho and Da Lat.',
   year: 2026,
   status: 'researching',
   ownership: 'public',

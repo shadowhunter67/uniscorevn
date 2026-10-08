@@ -4,17 +4,17 @@ import { napaAdmissionMethods } from './methods';
 
 export const napaModule: SchoolModule = {
   id: 'napa',
-  name: 'Hoc vien Hanh chinh va Quan tri cong',
+  name: 'Học viện Hành chính và Quản trị công',
   shortName: 'NAPA',
   about:
-    'Hoc vien Hanh chinh va Quan tri cong (ma truong HCH), tuyen sinh tai Ha Noi, Da Nang, TP.HCM va Dak Lak; ke thua catalog NAPA cu sau thay doi ten goi.',
+    'Học viện Hành chính và Quản trị công (mã trường HCH), tuyển sinh tại Hà Nội, Đà Nẵng, TP.HCM và Đắk Lắk; kế thừa catalog NAPA cũ sau thay đổi tên gọi.',
   year: 2026,
   status: 'researching',
   ownership: 'public',
   region: 'hanoi',
   vnuhcm: false,
   summary:
-    'NAPA 2026: tinh nhanh phuong thuc xet ket qua thi tot nghiep THPT trong pham vi to hop goc D01. Diem trung tuyen theo thong bao chinh thuc 10/8/2026 da quy doi ve phuong thuc goc, to hop mon goc D01, thang 30; ap dung diem uu tien KV/DT theo TT 06/2026. Chua mo hinh hoa quy doi sang cac to hop khac D01.',
+    'NAPA 2026: tinh nhanh phương thức xét kết quả thi tốt nghiệp THPT trong phạm vi tổ hợp gốc D01. Điểm trúng tuyển theo thông báo chính thức 10/8/2026 đã quy đổi về phương thức gốc, tổ hợp môn gốc D01, thang 30; áp dụng điểm ưu tiên KV/ĐT theo TT 06/2026. Chưa mô hình hóa quy đổi sang các tổ hợp khác D01.',
   capabilities: {
     admissionInfo: true,
     programs: true,
@@ -23,7 +23,7 @@ export const napaModule: SchoolModule = {
   },
   catalogSources: [
     {
-      title: 'Thong bao diem trung tuyen dai hoc hinh thuc chinh quy dot 1 nam 2026',
+      title: 'Thông báo điểm trúng tuyển đại học hình thức chính quy đợt 1 năm 2026',
       url: 'https://apaghcm.edu.vn/hoc-vien-hanh-chinh-va-quan-tri-cong-thong-bao-diem-chuan-dai-hoc-hinh-thuc-chinh-quy-va-thu-tuc-thoi-gian-xac-nhan-nhap-hoc-dot-1-nam-2026',
       type: 'official-institution',
       checkedAt: '2026-09-26',
