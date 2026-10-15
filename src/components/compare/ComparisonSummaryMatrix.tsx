@@ -1,3 +1,4 @@
+import { AlertCircle, CheckCircle2, CircleHelp, TrendingDown } from 'lucide-react';
 import {
   COMPARISON_MATRIX_ROWS,
   getMatrixCellText,
@@ -10,6 +11,28 @@ function nextActionText(column: ComparisonMatrixColumn): string {
   if (column.needsUserInput) return 'Bổ sung hồ sơ hoặc chọn ngữ cảnh xét tuyển còn thiếu.';
   if (column.blockedBySystemData) return 'Chờ UniScoreVN bổ sung công thức, quy định hoặc mốc đối chiếu.';
   return 'Không cần bổ sung gì.';
+}
+
+function StatusPill({ text }: { text: string }) {
+  const t = text.toLowerCase();
+  let tone = 'bg-slate-500/10 text-slate-700';
+  let icon = <CircleHelp size={15} aria-hidden="true" />;
+  if (t.includes('thấp') || t.includes('khó')) {
+    tone = 'bg-red-500/10 text-red-800';
+    icon = <TrendingDown size={15} aria-hidden="true" />;
+  } else if (t.includes('một phần') || t.includes('cân nhắc') || t.includes('sát')) {
+    tone = 'bg-orange-500/10 text-orange-800';
+    icon = <AlertCircle size={15} aria-hidden="true" />;
+  } else if (t.includes('đầy đủ') || t.includes('an toàn') || t.includes('cạnh tranh')) {
+    tone = 'bg-emerald-500/10 text-emerald-800';
+    icon = <CheckCircle2 size={15} aria-hidden="true" />;
+  }
+  return (
+    <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-sm font-semibold ${tone}`}>
+      {icon}
+      {text}
+    </span>
+  );
 }
 
 function CellContent({ column, rowId }: { column: ComparisonMatrixColumn; rowId: ComparisonMatrixRowId }) {
@@ -25,7 +48,7 @@ function CellContent({ column, rowId }: { column: ComparisonMatrixColumn; rowId:
     );
   }
 
-  if (rowId === 'status' || rowId === 'assessment') return <span className="font-medium text-ink">{text}</span>;
+  if (rowId === 'status' || rowId === 'assessment') return <StatusPill text={text} />;
   if (rowId === 'margin') return <span className={`font-medium ${column.marginPositive ? 'text-success' : 'text-warning'}`}>{text}</span>;
   return <span className="text-ink-soft">{text}</span>;
 }
@@ -40,7 +63,7 @@ function MobileDecisionCard({ column, onFocusEntry }: { column: ComparisonMatrix
   );
 
   return (
-    <article className="rounded-md border border-border bg-surface p-4">
+    <article className="card p-4">
       {column.selectionId && onFocusEntry ? (
         <button
           type="button"
@@ -81,8 +104,8 @@ export function ComparisonSummaryMatrix({
   if (columns.length === 0) return null;
 
   return (
-    <section className="mt-5" aria-labelledby="comparison-matrix-title">
-      <h2 id="comparison-matrix-title" className="text-lg font-semibold text-ink">
+    <section className="card mt-5 px-5 py-5" aria-labelledby="comparison-matrix-title">
+      <h2 id="comparison-matrix-title" className="text-xl font-bold text-ink">
         Bảng quyết định
       </h2>
       <p className="mt-1 text-sm text-muted">
@@ -95,7 +118,7 @@ export function ComparisonSummaryMatrix({
         ))}
       </div>
 
-      <div className="mt-3 hidden overflow-x-auto rounded-md border border-border md:block" tabIndex={0} role="region" aria-label="Bảng dữ liệu, cuộn ngang để xem hết">
+      <div className="mt-3 hidden overflow-x-auto rounded-xl border border-border md:block" tabIndex={0} role="region" aria-label="Bảng dữ liệu, cuộn ngang để xem hết">
         <table className="w-full min-w-max border-collapse text-sm">
           <caption className="sr-only">Bảng so sánh các nguyện vọng theo trạng thái, điểm, mốc đối chiếu, chênh lệch và việc cần làm</caption>
           <thead>

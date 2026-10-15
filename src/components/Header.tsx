@@ -1,4 +1,5 @@
-import { RotateCcw } from 'lucide-react';
+import { ArrowLeftRight, RotateCcw } from 'lucide-react';
+import { HeroIllustration } from './HeroIllustration';
 import { ShareButton } from './ShareButton';
 
 interface HeaderProps {
@@ -12,13 +13,14 @@ interface HeaderProps {
 
 export function Header({ school, onReset, buildShareUrl, onChangeSchool }: HeaderProps) {
   return (
-    <header className="flex flex-col gap-3 py-6 sm:py-8">
-      <div className="max-w-4xl">
-        <h1 className="text-2xl font-semibold leading-tight text-primary sm:text-3xl">{school.name}</h1>
+    <header className="relative flex flex-col gap-3 py-6 sm:py-8">
+      <HeroIllustration className="pointer-events-none absolute right-0 top-2 hidden h-40 w-auto opacity-80 lg:block" />
+      <div className="relative max-w-3xl">
+        <h1 className="text-2xl font-extrabold leading-tight text-ink sm:text-3xl">{school.name}</h1>
       </div>
 
-      <div className="flex flex-wrap items-center gap-2 text-sm text-ink-soft">
-        <span className="inline-flex min-h-(--ui-tap-min) items-center rounded-full bg-accent/10 px-3 text-xs font-semibold text-accent">
+      <div className="relative flex flex-wrap items-center gap-2 text-sm text-ink-soft">
+        <span className="inline-flex min-h-(--ui-tap-min) items-center rounded-lg border border-accent/30 bg-surface px-3 text-xs font-bold text-accent">
           {school.shortName}
         </span>
         <span className="inline-flex min-h-(--ui-tap-min) items-center text-sm text-muted">Xét tuyển tổng hợp {school.year}</span>
@@ -27,6 +29,7 @@ export function Header({ school, onReset, buildShareUrl, onChangeSchool }: Heade
           onClick={onChangeSchool}
           className="inline-flex min-h-(--ui-tap-min) items-center rounded-md px-2 text-sm font-medium text-accent underline-offset-2 transition hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
         >
+          <ArrowLeftRight size={16} aria-hidden="true" className="mr-1.5" />
           Đổi trường
         </button>
         <ShareButton buildShareUrl={buildShareUrl} />

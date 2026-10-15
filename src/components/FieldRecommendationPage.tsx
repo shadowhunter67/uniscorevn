@@ -1,4 +1,7 @@
-import { useMemo } from 'react';
+import { useMemo, type ReactNode } from 'react';
+import { BarChart3, CheckCircle2, Clock, Database, FileText, GraduationCap, ShieldCheck, Target } from 'lucide-react';
+import { HeroIllustration } from './HeroIllustration';
+import { SchoolLogo } from './SchoolLogo';
 import { useApplicantProfile } from '../core/applicantProfileContextCore';
 import { summarizeApplicantProfile } from '../core/applicantProfileSummary';
 import type { FieldId } from '../taxonomy/fields';
@@ -17,29 +20,54 @@ interface FieldRecommendationPageProps {
   onOpenSchool: (schoolId: string) => void;
 }
 
+type BandTone = { pill: string; icon: ReactNode };
+const BAND_TONE: Record<string, BandTone> = {
+  hard: { pill: 'bg-orange-500/10 text-orange-800', icon: <BarChart3 size={14} aria-hidden="true" /> },
+  low: { pill: 'bg-orange-500/10 text-orange-800', icon: <BarChart3 size={14} aria-hidden="true" /> },
+  borderline: { pill: 'bg-accent/10 text-accent', icon: <BarChart3 size={14} aria-hidden="true" /> },
+  competitive: { pill: 'bg-accent/10 text-accent', icon: <BarChart3 size={14} aria-hidden="true" /> },
+  safer: { pill: 'bg-emerald-500/10 text-emerald-800', icon: <ShieldCheck size={14} aria-hidden="true" /> },
+};
+
 function MatchRow({ match, onOpenSchool }: { match: FieldMatch; onOpenSchool: (schoolId: string) => void }) {
   const { competitiveness } = match;
   const band = competitiveness.band === 'insufficient-data' ? undefined : competitiveness.band;
+  const tone = band ? BAND_TONE[band] : undefined;
 
   return (
-    <li className="py-4">
-      <p className="text-base font-semibold text-ink">{match.programName || match.shortName}</p>
-      <p className="mt-0.5 text-sm text-muted">{match.shortName}</p>
+    <li className="grid gap-3 py-4 md:grid-cols-[minmax(0,1.3fr)_auto_minmax(0,1.4fr)_auto] md:items-center md:gap-5">
+      <div className="flex min-w-0 items-center gap-3">
+        <SchoolLogo schoolId={match.schoolId} shortName={match.shortName} size="sm" />
+        <div className="min-w-0">
+          <p className="text-base font-semibold text-ink">{match.programName || match.shortName}</p>
+          <p className="mt-0.5 text-sm text-muted">{match.shortName}</p>
+        </div>
+      </div>
 
-      {band && <p className="mt-2 text-sm font-medium text-ink">{COMPETITIVENESS_BAND_LABELS[band]}</p>}
-      {competitiveness.rawMargin !== undefined && (
-        <p className="mt-0.5 text-sm text-ink-soft">
-          {describeMarginSentence(competitiveness.rawMargin, competitiveness.referenceType ?? 'current', competitiveness.referenceYear)}
+      <div>
+        {band && tone && (
+          <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-semibold ${tone.pill}`}>
+            {tone.icon}
+            {COMPETITIVENESS_BAND_LABELS[band]}
+          </span>
+        )}
+      </div>
+
+      <div className="text-sm">
+        {competitiveness.rawMargin !== undefined && (
+          <p className="font-medium text-ink">
+            {describeMarginSentence(competitiveness.rawMargin, competitiveness.referenceType ?? 'current', competitiveness.referenceYear)}
+          </p>
+        )}
+        <p className="mt-0.5 text-[13px] text-muted">
+          {competitiveness.referenceYear !== undefined
+            ? `Đối chiếu ${describeReferenceLabel(competitiveness.referenceType ?? 'current', competitiveness.referenceYear)}`
+            : 'Chưa có mốc đối chiếu'}
+          {band ? ` · Độ tin cậy: ${CONFIDENCE_LABELS[competitiveness.confidence]}` : ''}
         </p>
-      )}
-      <p className="mt-1 text-[13px] text-muted">
-        {competitiveness.referenceYear !== undefined
-          ? `Đối chiếu ${describeReferenceLabel(competitiveness.referenceType ?? 'current', competitiveness.referenceYear)}`
-          : 'Chưa có mốc đối chiếu'}
-        {band ? ` · Độ tin cậy: ${CONFIDENCE_LABELS[competitiveness.confidence]}` : ''}
-      </p>
+      </div>
 
-      <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm md:justify-end">
         {competitiveness.rawMargin !== undefined && competitiveness.scale !== undefined && (
           <Disclosure variant="inline" summary="Xem cách tính">
             <div className="space-y-1 text-[13px] text-muted">
@@ -61,7 +89,7 @@ function MatchRow({ match, onOpenSchool }: { match: FieldMatch; onOpenSchool: (s
         <button
           type="button"
           onClick={() => onOpenSchool(match.schoolId)}
-          className="inline-flex min-h-9 cursor-pointer items-center rounded-md px-1.5 text-sm font-medium text-accent underline-offset-2 transition-colors duration-150 hover:bg-accent/10 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+          className="inline-flex min-h-9 shrink-0 cursor-pointer items-center rounded-lg px-2 text-sm font-semibold text-accent underline-offset-2 transition-colors duration-150 hover:bg-accent/10 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
         >
           Xem {match.shortName} →
         </button>
@@ -70,20 +98,55 @@ function MatchRow({ match, onOpenSchool }: { match: FieldMatch; onOpenSchool: (s
   );
 }
 
-function GroupSection({ title, hint, matches, onOpenSchool }: { title: string; hint: string; matches: FieldMatch[]; onOpenSchool: (schoolId: string) => void }) {
+function GroupSection({
+  title,
+  hint,
+  icon,
+  tone,
+  matches,
+  onOpenSchool,
+}: {
+  title: string;
+  hint: string;
+  icon: ReactNode;
+  tone: string;
+  matches: FieldMatch[];
+  onOpenSchool: (schoolId: string) => void;
+}) {
   if (matches.length === 0) return null;
   return (
-    <section className="mt-7">
-      <h2 className="text-lg font-semibold text-ink">
-        {title} <span className="font-normal text-muted">({matches.length})</span>
-      </h2>
-      <p className="mt-0.5 text-sm text-muted">{hint}</p>
-      <ul className="mt-2 divide-y divide-border border-y border-border">
+    <section className="card mt-5 px-5 py-4">
+      <div className="flex items-center gap-3">
+        <span aria-hidden="true" className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${tone}`}>
+          {icon}
+        </span>
+        <div>
+          <h2 className="text-lg font-bold text-ink">
+            {title} <span className="font-normal text-muted">({matches.length})</span>
+          </h2>
+          <p className="text-sm text-muted">{hint}</p>
+        </div>
+      </div>
+      <ul className="mt-2 divide-y divide-border">
         {matches.map((match) => (
           <MatchRow key={`${match.schoolId}:${match.programId}`} match={match} onOpenSchool={onOpenSchool} />
         ))}
       </ul>
     </section>
+  );
+}
+
+function StatCard({ label, value, icon, tone, valueTone = 'text-ink' }: { label: string; value: number; icon: ReactNode; tone: string; valueTone?: string }) {
+  return (
+    <div className="card flex items-center gap-3 px-4 py-3">
+      <span aria-hidden="true" className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full ${tone}`}>
+        {icon}
+      </span>
+      <div>
+        <dt className="text-sm text-muted">{label}</dt>
+        <dd className={`font-display text-2xl font-bold leading-tight ${valueTone}`}>{value}</dd>
+      </div>
+    </div>
   );
 }
 
@@ -110,34 +173,23 @@ export function FieldRecommendationPage({ fieldId, onBackToFields, onOpenSchool 
           ← Về danh sách lĩnh vực
         </button>
 
-        <header className="mt-4 max-w-3xl">
-          <h1 className="text-3xl font-bold text-ink sm:text-4xl">{field?.name ?? fieldId}</h1>
-          <p className="mt-2 text-sm leading-relaxed text-muted">{COMPETITIVENESS_DISCLAIMER}</p>
+        <header className="relative mt-4">
+          <HeroIllustration className="pointer-events-none absolute right-0 -top-2 hidden h-32 w-auto opacity-80 xl:block" />
+          <h1 className="relative max-w-2xl text-3xl font-extrabold text-ink sm:text-4xl">{field?.name ?? fieldId}</h1>
+          <p className="relative mt-2 max-w-2xl text-sm leading-relaxed text-muted">{COMPETITIVENESS_DISCLAIMER}</p>
         </header>
 
-        <section className="mt-5 rounded-md border border-border bg-surface p-4" aria-label="Tóm tắt kết quả theo lĩnh vực">
-          <dl className="grid gap-3 text-sm sm:grid-cols-4">
-            <div>
-              <dt className="text-muted">Lựa chọn</dt>
-              <dd className="font-display text-2xl font-semibold text-ink">{totalFound}</dd>
-            </div>
-            <div>
-              <dt className="text-muted">Đánh giá được</dt>
-              <dd className="font-display text-2xl font-semibold text-ink">{assessedCount}</dd>
-            </div>
-            <div>
-              <dt className="text-muted">Cần bổ sung</dt>
-              <dd className="font-display text-2xl font-semibold text-ink">{needsUserInputCount}</dd>
-            </div>
-            <div>
-              <dt className="text-muted">Chưa đủ dữ liệu</dt>
-              <dd className="font-display text-2xl font-semibold text-ink">{blockedByDataCount}</dd>
-            </div>
+        <section className="mt-5" aria-label="Tóm tắt kết quả theo lĩnh vực">
+          <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <StatCard label="Lựa chọn" value={totalFound} icon={<GraduationCap size={20} />} tone="bg-accent/10 text-accent" valueTone="text-accent" />
+            <StatCard label="Đánh giá được" value={assessedCount} icon={<CheckCircle2 size={20} />} tone="bg-emerald-500/10 text-emerald-700" />
+            <StatCard label="Cần bổ sung" value={needsUserInputCount} icon={<Clock size={20} />} tone="bg-orange-500/10 text-orange-700" valueTone="text-orange-700" />
+            <StatCard label="Chưa đủ dữ liệu" value={blockedByDataCount} icon={<Database size={20} />} tone="bg-slate-500/10 text-slate-700" />
           </dl>
         </section>
 
-        <details id="field-profile-editor" className="mt-4 rounded-md border border-accent/25 bg-accent/5 px-3 py-2.5 scroll-mt-20">
-          <summary className="min-h-(--ui-tap-min) cursor-pointer py-1 text-sm font-medium text-ink">
+        <details id="field-profile-editor" className="card mt-4 px-4 py-2.5 scroll-mt-20">
+          <summary className="flex min-h-(--ui-tap-min) cursor-pointer items-center gap-3 py-1 text-sm font-semibold text-ink"><FileText size={18} className="text-accent" aria-hidden="true" />
             {profileSummary.hasData ? 'Hồ sơ dùng chung (đã có dữ liệu)' : 'Nhập hồ sơ để xem kết quả phù hợp với bạn'}
           </summary>
           <SharedProfileEditor profile={profile} updateProfile={updateProfile} updateVactTotal={updateVactTotal} />
@@ -150,7 +202,7 @@ export function FieldRecommendationPage({ fieldId, onBackToFields, onOpenSchool 
         </p>
 
         {shouldPromptForInput && (
-          <section className="mt-5 rounded-md border border-border bg-surface p-4">
+          <section className="card mt-5 p-5">
             <h2 className="text-lg font-semibold text-ink">Chưa có lựa chọn đánh giá được</h2>
             <p className="mt-1 text-sm text-muted">Nhập điểm thi THPT để xem trường nào đánh giá được cho lĩnh vực này.</p>
             <a
@@ -163,27 +215,27 @@ export function FieldRecommendationPage({ fieldId, onBackToFields, onOpenSchool 
         )}
 
         <GroupSection
-          title="Thử sức"
+          title="Thử sức" icon={<Target size={20} />} tone="bg-orange-500/10 text-orange-700"
           hint="Điểm của bạn đang thấp hơn mốc đối chiếu."
           matches={result.groups.thuSuc}
           onOpenSchool={onOpenSchool}
         />
         <GroupSection
-          title="Vừa sức"
+          title="Vừa sức" icon={<BarChart3 size={20} />} tone="bg-accent/10 text-accent"
           hint="Điểm của bạn đang quanh mốc đối chiếu."
           matches={result.groups.vuaSuc}
           onOpenSchool={onOpenSchool}
         />
         <GroupSection
-          title="An toàn hơn"
+          title="An toàn hơn" icon={<ShieldCheck size={20} />} tone="bg-emerald-500/10 text-emerald-700"
           hint="Điểm của bạn đang cao hơn mốc đối chiếu một khoảng rõ rệt."
           matches={result.groups.anToanHon}
           onOpenSchool={onOpenSchool}
         />
 
         {result.insufficientData.length > 0 && (
-          <section className="mt-7">
-            <h2 className="text-lg font-semibold text-ink">
+          <section className="card mt-5 px-5 py-4">
+            <h2 className="text-lg font-bold text-ink">
               Chưa đủ dữ liệu để đánh giá <span className="font-normal text-muted">({result.insufficientData.length})</span>
             </h2>
             <ul className="mt-2 space-y-1 text-sm">

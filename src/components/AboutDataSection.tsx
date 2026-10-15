@@ -9,7 +9,7 @@ export function AboutDataSection() {
   const collegeCount = institutionCoverage.pedagogicalColleges + institutionCoverage.vocationalColleges;
 
   return (
-    <section aria-labelledby="about-data-heading" className="mt-10 border-t border-border pt-6">
+    <section aria-labelledby="about-data-heading" className="card mt-10 px-5 py-5 sm:px-6">
       <h2 id="about-data-heading" className="text-lg font-semibold text-ink sm:text-xl">
         Về dữ liệu UniScoreVN
       </h2>
@@ -19,19 +19,19 @@ export function AboutDataSection() {
         {institutionCoverage.totalCatalogEntries} mục danh mục.
       </p>
       <dl className="mt-4 grid grid-cols-2 gap-3 text-sm sm:grid-cols-4">
-        <div className="rounded-md border border-border p-3">
+        <div className="rounded-xl bg-surface-soft p-3">
           <dt className="text-xs text-muted">Cơ sở & đơn vị</dt>
           <dd className="mt-1 text-lg font-semibold text-ink">{institutionCoverage.totalCatalogEntries}</dd>
         </div>
-        <div className="rounded-md border border-border p-3">
+        <div className="rounded-xl bg-surface-soft p-3">
           <dt className="text-xs text-muted">Cơ sở độc lập</dt>
           <dd className="mt-1 text-lg font-semibold text-ink">{institutionCoverage.independentEducationInstitutions}</dd>
         </div>
-        <div className="rounded-md border border-border p-3">
+        <div className="rounded-xl bg-surface-soft p-3">
           <dt className="text-xs text-muted">Có dữ liệu tuyển sinh</dt>
           <dd className="mt-1 text-lg font-semibold text-ink">{institutionCoverage.admissionDataAvailable}</dd>
         </div>
-        <div className="rounded-md border border-border p-3">
+        <div className="rounded-xl bg-surface-soft p-3">
           <dt className="text-xs text-muted">Tính được điểm xét tuyển</dt>
           <dd className="mt-1 text-lg font-semibold text-ink">{institutionCoverage.fullyVerified}</dd>
         </div>

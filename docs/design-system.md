@@ -11,7 +11,24 @@ Học sinh/phụ huynh tra cứu điểm chuẩn — quét nhanh nhiều dòng (
 nhiều người không rành công nghệ. Vì vậy toàn bộ nguyên tắc dưới đây phục vụ một mục tiêu duy nhất:
 **đọc nhanh, không đoán, không lag** — không phải "trông đẹp/hiện đại".
 
-## Nguyên tắc cốt lõi: rõ > đẹp, chữ > icon, danh sách > card
+## Cập nhật 2026-10-15: giao diện "card xanh nhạt" (thay thế một phần nguyên tắc cũ bên dưới)
+
+Theo yêu cầu chủ dự án, toàn site chuyển sang bản thiết kế mới: nền xanh nhạt có gradient (trên
+`body`), **card trắng bo tròn + bóng xanh nhạt** là đơn vị bố cục chính, ô thống kê có icon tròn,
+hình toà nhà (`HeroIllustration.tsx`, SVG, chỉ hiện ≥1280px ở trang chủ/ngành/so sánh), nhãn trạng
+thái dạng pill màu **kèm icon/chữ**. Hệ quả với các mục dưới đây:
+
+- Mục "Danh sách > card" **không còn đúng**: danh sách trường ở trang chủ là lưới card
+  (`SchoolListItem.tsx`, mặc định 4 trường + "Xem thêm 8"). Các nguyên tắc còn lại (chữ + ký hiệu,
+  không chỉ màu; không nhồi thông tin; tap target; contrast) vẫn giữ.
+- Dùng class `.card` (index.css) cho khối mới. Mọi `div/section/article/details/aside` có
+  `bg-surface border rounded-md|lg|xl` tự được nâng thành card bằng một luật CSS chung — không cần
+  sửa từng trang.
+- `--radius-card` giờ 18px, `--shadow-card` bóng xanh; `rounded-card`/`shadow-card` không còn là
+  "legacy" — dùng bình thường.
+- Không vẽ đồ thị/sóng trang trí hay con số không có dữ liệu thật phía sau (xem rule "Không bịa UI").
+
+## Nguyên tắc cốt lõi: rõ > đẹp, chữ > icon, danh sách > card (bản cũ, xem cập nhật trên)
 
 - **Danh sách > card.** Danh sách trường dùng `<li>` + divider/border (`SchoolListItem.tsx`), KHÔNG
   dùng card-grid. Card nổi kiểu "AI dashboard" (bo to + shadow lớn) chỉ tốn không gian và làm chậm

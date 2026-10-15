@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { Building2, FileCheck2, Search } from 'lucide-react';
+import { HeroIllustration } from './HeroIllustration';
 import { schoolRegistry } from '../schools';
 import { siteConfig } from '../config/site';
 import type { SchoolRegion } from '../core/schoolModule';
@@ -75,7 +77,7 @@ function FilterSelect<T extends string>({
       <select
         value={value}
         onChange={(event) => onChange(event.target.value as OptionalLandingFilter<T>)}
-        className="min-h-(--ui-tap-min) rounded-md border border-border bg-surface px-2.5 py-1.5 text-sm font-normal text-ink transition-colors duration-150 hover:border-border-strong focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+        className="min-h-(--ui-tap-min) rounded-lg border border-border bg-surface px-3 py-1.5 text-sm font-normal text-ink transition-colors duration-150 hover:border-border-strong focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
       >
         <option value="all">T&#7845;t c&#7843;</option>
         {options.map((option) => (
@@ -88,11 +90,16 @@ function FilterSelect<T extends string>({
   );
 }
 
-function CoverageStat({ value, children }: { value: number; children: ReactNode }) {
+function CoverageStat({ value, icon, tone, children }: { value: number; icon: ReactNode; tone: string; children: ReactNode }) {
   return (
-    <div>
-      <dt className="text-sm leading-snug text-muted">{children}</dt>
-      <dd className="mt-1 font-display text-2xl font-semibold leading-none text-ink sm:text-3xl">{value.toLocaleString('vi-VN')}</dd>
+    <div className="card flex items-center gap-4 px-5 py-4">
+      <span aria-hidden="true" className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full ${tone}`}>
+        {icon}
+      </span>
+      <div>
+        <dt className="text-sm leading-snug text-muted">{children}</dt>
+        <dd className="mt-0.5 font-display text-3xl font-bold leading-none text-ink">{value.toLocaleString('vi-VN')}</dd>
+      </div>
     </div>
   );
 }
@@ -154,35 +161,38 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
 
   return (
     <div className="py-6 sm:py-9">
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(320px,420px)] lg:items-start lg:gap-8">
-        <div className="text-left">
-          <h1 className="text-3xl font-bold text-ink sm:text-4xl">{siteConfig.name}</h1>
-          <p className="mt-2 max-w-2xl text-2xl font-semibold leading-tight text-ink sm:text-3xl">
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(340px,440px)] lg:items-start lg:gap-8">
+        <div className="relative text-left">
+          <HeroIllustration className="pointer-events-none absolute -top-4 right-0 hidden h-52 w-auto opacity-90 xl:block xl:right-0" />
+          <h1 className="relative text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">
+            UniScore<span className="text-accent">VN</span>
+          </h1>
+          <p className="relative mt-3 max-w-md text-2xl font-bold leading-tight text-ink sm:text-3xl">
             &#272;i&#7875;m c&#7911;a b&#7841;n ph&#249; h&#7907;p v&#7899;i tr&#432;&#7901;ng, ng&#224;nh n&#224;o?
           </p>
-          <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted">
+          <p className="relative mt-3 max-w-lg text-base leading-relaxed text-muted">
             Nh&#7853;p &#273;i&#7875;m m&#7897;t l&#7847;n, {siteConfig.name} &#225;p theo quy t&#7855;c tuy&#7875;n sinh ri&#234;ng c&#7911;a t&#7915;ng tr&#432;&#7901;ng r&#7891;i &#273;&#7889;i chi&#7871;u v&#7899;i &#273;i&#7875;m chu&#7849;n &#273;&#227; c&#244;ng b&#7889;.
           </p>
 
-          <div className="mt-5 flex flex-col gap-2 sm:flex-row">
+          <div className="relative mt-5 flex flex-col gap-2 sm:flex-row">
             <button
               type="button"
               onClick={() => setProfileEditorOpen(true)}
-              className="inline-flex min-h-(--ui-tap-min) w-full cursor-pointer items-center justify-center rounded-md bg-primary px-5 py-2 text-sm font-semibold text-white transition-colors duration-150 hover:bg-primary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 sm:w-auto"
+              className="inline-flex min-h-(--ui-tap-min) w-full cursor-pointer items-center justify-center rounded-lg bg-accent px-6 py-2 text-sm font-semibold text-white shadow-sm transition-colors duration-150 hover:bg-accent/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 sm:w-auto"
             >
               {profileSummary.hasData ? <>Ch&#7881;nh s&#7917;a &#273;i&#7875;m c&#7911;a b&#7841;n</> : <>Nh&#7853;p &#273;i&#7875;m c&#7911;a b&#7841;n</>}
             </button>
             <button
               type="button"
               onClick={onOpenFieldBrowse}
-              className="inline-flex min-h-(--ui-tap-min) w-full cursor-pointer items-center justify-center rounded-md border border-accent/40 bg-surface px-5 py-2 text-sm font-semibold text-accent transition-colors duration-150 hover:bg-accent/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 sm:w-auto"
+              className="inline-flex min-h-(--ui-tap-min) w-full cursor-pointer items-center justify-center rounded-lg border border-accent/40 bg-surface px-6 py-2 text-sm font-semibold text-accent transition-colors duration-150 hover:bg-accent/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 sm:w-auto"
             >
               Xem theo ng&#224;nh
             </button>
           </div>
         </div>
 
-        <div id="ho-so-diem" className="rounded-md border border-border bg-surface px-4 py-4 text-sm">
+        <div id="ho-so-diem" className="card relative z-10 px-5 py-5 text-sm">
           <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
             <p className="font-medium text-ink">H&#7891; s&#417; &#273;i&#7875;m d&#249;ng chung</p>
             <div className="flex flex-wrap items-center gap-x-2">
@@ -230,12 +240,19 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
           )}
         </div>
 
-        <dl className="grid grid-cols-1 gap-3 border-y border-border py-4 sm:grid-cols-3 lg:col-start-1">
-          <CoverageStat value={institutionCoverage.totalCatalogEntries}>m&#7909;c tra c&#7913;u</CoverageStat>
-          <CoverageStat value={institutionCoverage.independentEducationInstitutions}>c&#417; s&#7903; &#273;&#7897;c l&#7853;p</CoverageStat>
-          <CoverageStat value={institutionCoverage.fullyVerified}>t&#237;nh &#273;&#432;&#7907;c &#273;&#7847;y &#273;&#7911; &#273;i&#7875;m</CoverageStat>
-        </dl>
       </div>
+
+      <dl className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <CoverageStat value={institutionCoverage.totalCatalogEntries} tone="bg-accent/10 text-accent" icon={<Search size={22} />}>
+          M&#7909;c tra c&#7913;u
+        </CoverageStat>
+        <CoverageStat value={institutionCoverage.independentEducationInstitutions} tone="bg-indigo-500/10 text-indigo-700" icon={<Building2 size={22} />}>
+          C&#417; s&#7903; &#273;&#7897;c l&#7853;p
+        </CoverageStat>
+        <CoverageStat value={institutionCoverage.fullyVerified} tone="bg-emerald-500/10 text-emerald-700" icon={<FileCheck2 size={22} />}>
+          T&#237;nh &#273;&#432;&#7907;c &#273;&#7847;y &#273;&#7911; &#273;i&#7875;m
+        </CoverageStat>
+      </dl>
 
       <StickyProfileBar
         summary={profileSummary}
@@ -247,9 +264,10 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
       />
 
       <div className="mt-8">
-        <h2 className="text-lg font-semibold text-ink sm:text-xl">Ch&#7885;n c&#417; s&#7903; &#273;&#7875; b&#7855;t &#273;&#7847;u</h2>
+        <div className="card px-5 py-5 sm:px-6">
+        <h2 className="text-xl font-bold text-ink sm:text-2xl">Ch&#7885;n c&#417; s&#7903; &#273;&#7875; b&#7855;t &#273;&#7847;u</h2>
 
-        <div className="mt-3">
+        <div className="mt-4">
           <label htmlFor="school-search" className="sr-only">
             T&#236;m c&#417; s&#7903; theo t&#234;n, m&#227; tr&#432;&#7901;ng ho&#7863;c t&#234;n vi&#7871;t t&#7855;t
           </label>
@@ -259,11 +277,11 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder={'T\u00ecm theo t\u00ean, m\u00e3 tr\u01b0\u1eddng ho\u1eb7c t\u00ean vi\u1ebft t\u1eaft...'}
-            className="min-h-(--ui-tap-min) w-full rounded-md border border-border bg-surface px-4 py-2.5 text-base text-ink placeholder:text-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+            className="min-h-(--ui-tap-min) w-full rounded-lg border border-border bg-surface px-4 py-3 text-base text-ink placeholder:text-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
           />
         </div>
 
-        <div className="mt-3 rounded-md border border-border bg-surface px-3 py-3">
+        <div className="mt-3">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
             <FilterSelect
               label={FILTER_LABELS.region}
@@ -334,7 +352,7 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
                     <select
                       value={sortMode}
                       onChange={(event) => setSortMode(event.target.value as LandingSortMode)}
-                      className="min-h-(--ui-tap-min) rounded-md border border-border bg-surface px-2.5 py-1.5 text-sm font-normal text-ink transition-colors duration-150 hover:border-border-strong focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                      className="min-h-(--ui-tap-min) rounded-lg border border-border bg-surface px-3 py-1.5 text-sm font-normal text-ink transition-colors duration-150 hover:border-border-strong focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
                     >
                       {(Object.entries(SORT_LABELS) as [LandingSortMode, string][]).map(([value, label]) => (
                         <option key={value} value={value}>
@@ -359,7 +377,9 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
           </div>
         </div>
 
-        <div className="mt-4 text-sm text-muted" aria-live="polite">
+        </div>
+
+        <div className="mt-5 text-sm text-muted" aria-live="polite">
           {filteredSchools.length} k&#7871;t qu&#7843;
           {filteredSchools.length > 0 ? ' \u00b7 \u0110ang hi\u1ec3n th\u1ecb ' + visibleSchools.length : ''}
         </div>
@@ -379,7 +399,7 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
             )}
           </div>
         ) : (
-          <ul className="mt-4 divide-y divide-border border-y border-border">
+          <ul className="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {visibleSchools.map((school) => (
               <SchoolListItem key={school.id} school={school} onSelectSchool={onSelectSchool} onOpenCompare={onOpenCompare} />
             ))}
@@ -391,7 +411,7 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
             <button
               type="button"
               onClick={() => setVisibleCount((current) => Math.min(current + VISIBLE_SCHOOL_INCREMENT, filteredSchools.length))}
-              className="min-h-(--ui-tap-min) rounded-md border border-accent/30 bg-accent/10 px-4 py-2 text-sm font-medium text-accent transition hover:bg-accent/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+              className="min-h-(--ui-tap-min) rounded-lg border border-accent/30 bg-surface px-5 py-2 text-sm font-semibold text-accent shadow-sm transition hover:bg-accent/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
             >
               Xem th&#234;m {Math.min(VISIBLE_SCHOOL_INCREMENT, filteredSchools.length - visibleSchools.length)}
             </button>

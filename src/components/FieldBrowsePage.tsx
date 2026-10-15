@@ -35,7 +35,7 @@ export function FieldBrowsePage({ onOpenField, onBackHome }: FieldBrowsePageProp
           ← Về trang chủ
         </button>
 
-        <h1 className="mt-4 max-w-3xl text-3xl font-bold text-ink sm:text-4xl">Bạn quan tâm lĩnh vực nào?</h1>
+        <h1 className="mt-4 max-w-3xl text-3xl font-extrabold text-ink sm:text-4xl">Bạn quan tâm lĩnh vực nào?</h1>
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted">
           Chọn 1 lĩnh vực để xem các trường/ngành phù hợp với hồ sơ của bạn — dựa trên dữ liệu ngành và điểm chuẩn thật, không
           phải dự đoán khả năng trúng tuyển.
@@ -54,7 +54,7 @@ export function FieldBrowsePage({ onOpenField, onBackHome }: FieldBrowsePageProp
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Ví dụ: Công nghệ thông tin, Kinh tế, Luật..."
-            className="mt-1.5 min-h-(--ui-tap-min) w-full rounded-md border border-border bg-surface px-4 text-base text-ink transition-colors duration-150 placeholder:text-muted hover:border-border-strong focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/25"
+            className="mt-1.5 min-h-(--ui-tap-min) w-full rounded-lg border border-border bg-surface px-4 text-base text-ink transition-colors duration-150 placeholder:text-muted hover:border-border-strong focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/25"
           />
         </div>
 
@@ -67,19 +67,19 @@ export function FieldBrowsePage({ onOpenField, onBackHome }: FieldBrowsePageProp
             Không có lĩnh vực nào khớp "{query}". Thử từ khóa ngắn hơn.
           </p>
         ) : (
-          <ul className="mt-2 grid border-y border-border lg:grid-cols-2 lg:gap-x-8 lg:border-y-0">
-            {visibleFields.map(({ field, schoolCount }, index) => (
-              <li key={field.id} className={`border-b border-border ${index === 0 ? 'border-t' : ''} ${index < 2 ? 'lg:border-t' : ''}`}>
+          <ul className="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {visibleFields.map(({ field, schoolCount }) => (
+              <li key={field.id}>
                 <button
                   type="button"
                   onClick={() => onOpenField(field.id)}
-                  className="-mx-2 flex min-h-(--ui-tap-min) w-[calc(100%+1rem)] cursor-pointer items-center justify-between gap-4 rounded-md px-2 py-4 text-left transition-colors duration-150 hover:bg-surface-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                  className="card flex min-h-(--ui-tap-min) w-full cursor-pointer items-center justify-between gap-4 px-5 py-4 text-left transition-shadow duration-150 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
                 >
-                  <span className="min-w-0 text-base font-semibold text-ink">{field.name}</span>
+                  <span className="min-w-0 text-base font-bold text-ink">{field.name}</span>
                   <span className="flex shrink-0 items-center gap-3 text-right text-sm text-muted">
                     <span>
-                      <span className="font-display text-xl font-semibold leading-none text-ink">{schoolCount}</span>{' '}
-                      trường có dữ liệu
+                      <span className="font-display text-xl font-bold leading-none text-accent">{schoolCount}</span>{' '}
+                      trường
                     </span>
                     <span aria-hidden="true" className="text-base text-accent">
                       →
