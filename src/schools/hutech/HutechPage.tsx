@@ -147,7 +147,7 @@ export function HutechPage({ onChangeSchool }: HutechPageProps) {
           </div>
         </section>
 
-        <section id="calculator" className="mt-5 scroll-mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section id="calculator" className="mt-5 scroll-mt-5 card p-6 sm:p-7">
           <div className="flex items-center gap-2">
             <Calculator size={20} className="text-accent" aria-hidden="true" />
             <h2 className="text-lg font-semibold text-ink">Xét kết quả thi TN THPT 2026</h2>
@@ -269,7 +269,7 @@ export function HutechPage({ onChangeSchool }: HutechPageProps) {
           {renderResult(thptEvaluation, 30, 'Điểm xét tuyển (xét THPT)')}
         </section>
 
-        <section className="mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section className="mt-5 card p-6 sm:p-7">
           <h2 className="text-lg font-semibold text-ink">Xét kết quả ĐGNL ĐHQG TP.HCM 2026</h2>
           <div className="mt-3 max-w-xs">
             <label htmlFor="hutech-dgnl" className="text-xs font-medium text-ink">
@@ -294,7 +294,7 @@ export function HutechPage({ onChangeSchool }: HutechPageProps) {
           {renderResult(dgnlEvaluation, 1200, 'Điểm xét tuyển (xét ĐGNL)')}
         </section>
 
-        <section className="mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section className="mt-5 card p-6 sm:p-7">
           <h2 className="text-lg font-semibold text-ink">{hutechAdmissionMethods[1].name}</h2>
           <p className="mt-1 text-sm text-muted">
             Điểm học lực = tổng điểm trung bình 3 môn theo tổ hợp <strong>của 6 học kỳ</strong> (lớp 10/11/12). Nhập điểm
@@ -305,7 +305,7 @@ export function HutechPage({ onChangeSchool }: HutechPageProps) {
           {renderResult(hocbaEvaluation, 30, 'Điểm xét tuyển (xét học bạ)')}
         </section>
 
-        <section className="mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section className="mt-5 card p-6 sm:p-7">
           <h2 className="text-lg font-semibold text-ink">Xét kết quả V-SAT 2026 (chỉ kiểm tra ngưỡng)</h2>
           <p className="mt-1 text-sm text-muted">
             Thang điểm tối đa/công thức quy đổi V-SAT của HUTECH chưa xác định rõ từ nguồn — chỉ so được điểm thô với ngưỡng đầu vào.
@@ -335,7 +335,7 @@ export function HutechPage({ onChangeSchool }: HutechPageProps) {
           )}
         </section>
 
-        <section className="mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section className="mt-5 card p-6 sm:p-7">
           <h2 className="text-xs font-semibold uppercase tracking-wide text-muted">Nguồn dữ liệu</h2>
           <ul className="mt-2 flex flex-col gap-1.5 text-xs">
             {hutechSources.map((source) => (

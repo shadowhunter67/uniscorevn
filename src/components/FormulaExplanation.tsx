@@ -13,7 +13,7 @@ interface FormulaExplanationProps {
  */
 export function FormulaExplanation({ steps }: FormulaExplanationProps) {
   return (
-    <details id="formula-section" className="group rounded-2xl bg-surface-soft p-6 sm:p-8">
+    <details id="formula-section" className="group card p-6 sm:p-7">
       <summary className="cursor-pointer list-none text-lg font-semibold text-ink marker:content-none">
         <span className="inline-flex items-center gap-2">
           Xem cách tính

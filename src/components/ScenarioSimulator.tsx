@@ -38,7 +38,7 @@ export function ScenarioSimulator({
   }
 
   return (
-    <section id="simulator" className="rounded-2xl bg-surface-soft p-6 sm:p-8">
+    <section id="simulator" className="card p-6 sm:p-7">
       <div className="flex items-center gap-2">
         <SlidersHorizontal size={20} className="text-accent" aria-hidden="true" />
         <h2 className="text-xl font-semibold text-ink">Mô phỏng điểm ĐGNL</h2>

@@ -1,5 +1,4 @@
 import { FileText, Pencil } from 'lucide-react';
-import { HeroIllustration } from '../HeroIllustration';
 import type { summarizeApplicantProfile } from '../../core/applicantProfileSummary';
 import { COMPETITIVENESS_DISCLAIMER } from '../../evaluation/competitiveness/competitivenessLanguage';
 
@@ -40,7 +39,6 @@ export function ComparisonOverview({ selectionCount, uniqueSchoolCount, statusCo
   return (
     <>
       <header className="relative mt-4">
-        <HeroIllustration className="pointer-events-none absolute right-0 -top-2 hidden h-32 w-auto opacity-80 xl:block" />
         <h1 className="relative text-3xl font-extrabold text-ink sm:text-4xl">So sánh nguyện vọng</h1>
         {/* Disclaimer đặt MỘT LẦN ở đầu trang (trước đây lặp trong từng card) — trong card chỉ còn
             năm tham chiếu, độ tin cậy và nguồn. */}

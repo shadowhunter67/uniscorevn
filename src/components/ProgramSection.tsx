@@ -41,7 +41,7 @@ export function ProgramSection({
   const showPicker = isEditing || !selectedProgram;
 
   return (
-    <section id="program-picker" className="rounded-2xl bg-surface-soft p-6 sm:p-8">
+    <section id="program-picker" className="card p-6 sm:p-7">
       <div className="flex items-center gap-2">
         <GraduationCap size={20} className="text-accent" aria-hidden="true" />
         <h2 className="text-xl font-semibold text-ink">Chọn ngành</h2>

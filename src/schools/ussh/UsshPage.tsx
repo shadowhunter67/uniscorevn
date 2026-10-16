@@ -163,7 +163,7 @@ export function UsshPage({ onChangeSchool }: UsshPageProps) {
           </section>
         )}
 
-        <section id="dhl-calculator" className="mt-5 scroll-mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section id="dhl-calculator" className="mt-5 scroll-mt-5 card p-6 sm:p-7">
           <div className="flex items-center gap-2">
             <Layers size={20} className="text-accent" aria-hidden="true" />
             <h2 className="text-lg font-semibold text-ink">Tính điểm xét tuyển + xem điểm chuẩn 2026</h2>
@@ -280,7 +280,7 @@ export function UsshPage({ onChangeSchool }: UsshPageProps) {
           )}
         </section>
 
-        <section id="threshold" className="mt-5 scroll-mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section id="threshold" className="mt-5 scroll-mt-5 card p-6 sm:p-7">
           <div className="flex items-center gap-2">
             <ShieldCheck size={20} className="text-accent" aria-hidden="true" />
             <h2 className="text-lg font-semibold text-ink">Kiểm tra ngưỡng đầu vào</h2>
@@ -350,7 +350,7 @@ export function UsshPage({ onChangeSchool }: UsshPageProps) {
           )}
         </section>
 
-        <section className="mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section className="mt-5 card p-6 sm:p-7">
           <h2 className="text-xs font-semibold uppercase tracking-wide text-muted">Nguồn dữ liệu</h2>
           <ul className="mt-2 flex flex-col gap-1.5 text-xs">
             {usshSources.map((source) => (

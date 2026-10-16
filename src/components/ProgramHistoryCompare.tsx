@@ -59,7 +59,7 @@ export function ProgramHistoryCompare({
     });
 
   return (
-    <section id="data-sources" className="rounded-2xl bg-surface-soft p-6 sm:p-8">
+    <section id="data-sources" className="card p-6 sm:p-7">
       <h2 className="text-xl font-semibold text-ink">Lịch sử điểm chuẩn &amp; so sánh ngành</h2>
 
       {selectedProgram ? (

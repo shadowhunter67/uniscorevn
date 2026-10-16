@@ -15,12 +15,14 @@ export function ApplicantTypeSection({ value, onChange }: ApplicantTypeSectionPr
   const isSupported = SUPPORTED_APPLICANT_TYPES.includes(value);
 
   return (
-    <section className="rounded-card bg-surface p-6 shadow-card sm:p-8">
-      <div className="flex items-center gap-2">
-        <Users size={20} className="text-accent" aria-hidden="true" />
-        <h2 className="text-xl font-semibold text-ink">Bạn thuộc nhóm nào?</h2>
+    <section className="card p-6 sm:p-7">
+      <div className="flex items-center gap-3">
+        <span aria-hidden="true" className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent">
+          <Users size={22} />
+        </span>
+        <h2 className="text-xl font-bold text-ink">Bạn thuộc nhóm nào?</h2>
       </div>
-      <p className="mt-1 text-sm text-muted">
+      <p className="mt-1 text-sm text-muted sm:pl-14">
         HCMUT xét tuyển tổng hợp cho nhiều nhóm thí sinh khác nhau — chọn đúng nhóm để tính điểm chính xác.
       </p>
 
@@ -35,12 +37,20 @@ export function ApplicantTypeSection({ value, onChange }: ApplicantTypeSectionPr
               role="radio"
               aria-checked={selected}
               onClick={() => onChange(type)}
-              className={`rounded-lg border p-3 text-left text-sm transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 ${
-                selected ? 'border-accent/40 bg-accent/10' : 'border-ink/10 hover:bg-ink/5'
+              className={`flex items-start gap-3 rounded-xl border p-3.5 text-left text-sm transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 ${
+                selected ? 'border-accent bg-accent/10' : 'border-border bg-surface hover:bg-surface-soft'
               }`}
             >
-              <span className={`font-medium ${selected ? 'text-primary' : 'text-ink'}`}>{info.label}</span>
-              <span className="mt-0.5 block text-xs text-muted">{info.description}</span>
+              <span
+                aria-hidden="true"
+                className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 ${selected ? 'border-accent' : 'border-border-strong'}`}
+              >
+                {selected && <span className="h-2.5 w-2.5 rounded-full bg-accent" />}
+              </span>
+              <span className="min-w-0">
+                <span className={`block text-base font-semibold ${selected ? 'text-accent' : 'text-ink'}`}>{info.label}</span>
+                <span className="mt-0.5 block text-sm text-muted">{info.description}</span>
+              </span>
             </button>
           );
         })}

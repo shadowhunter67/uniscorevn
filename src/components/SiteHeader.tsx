@@ -96,7 +96,7 @@ export function SiteHeader({ pathname, onNavigate }: SiteHeaderProps) {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/70 bg-surface/90 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3">
         {/* Logo về trang chủ. Viewport hẹp dùng icon vuông thay wordmark ngang (wordmark 3:1 thu nhỏ
             tới mức đọc không ra thì vô nghĩa) — cùng 1 target, cùng hành vi. */}
         <a

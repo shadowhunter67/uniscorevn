@@ -193,7 +193,7 @@ export function UfmPage({ onChangeSchool }: UfmPageProps) {
           </div>
         </section>
 
-        <section id="calculator" className="mt-5 scroll-mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section id="calculator" className="mt-5 scroll-mt-5 card p-6 sm:p-7">
           <div className="flex items-center gap-2">
             <Calculator size={20} className="text-accent" aria-hidden="true" />
             <h2 className="text-lg font-semibold text-ink">Thiết lập chung</h2>
@@ -333,7 +333,7 @@ export function UfmPage({ onChangeSchool }: UfmPageProps) {
           </fieldset>
         </section>
 
-        <section className="mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section className="mt-5 card p-6 sm:p-7">
           <h2 className="text-lg font-semibold text-ink">Xét kết quả thi TN THPT 2026</h2>
           {combination && (
             <div className="mt-3 flex flex-wrap gap-3 rounded-xl bg-surface p-4">
@@ -359,7 +359,7 @@ export function UfmPage({ onChangeSchool }: UfmPageProps) {
           {renderResult(thptEvaluation, 'Điểm xét tuyển (thi TN THPT)')}
         </section>
 
-        <section className="mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section className="mt-5 card p-6 sm:p-7">
           <h2 className="text-lg font-semibold text-ink">Xét học bạ THPT</h2>
           {combination && (
             <div className="mt-3 overflow-x-auto rounded-xl bg-surface p-4" tabIndex={0} role="region" aria-label="Bảng dữ liệu, cuộn ngang để xem hết">
@@ -398,7 +398,7 @@ export function UfmPage({ onChangeSchool }: UfmPageProps) {
           {renderResult(hocbaEvaluation, 'Điểm xét tuyển (học bạ)')}
         </section>
 
-        <section className="mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section className="mt-5 card p-6 sm:p-7">
           <h2 className="text-lg font-semibold text-ink">Xét kết quả ĐGNL ĐHQG TP.HCM 2026</h2>
           <div className="mt-3 max-w-xs">
             <label htmlFor="ufm-dgnl" className="text-xs font-medium text-ink">
@@ -417,7 +417,7 @@ export function UfmPage({ onChangeSchool }: UfmPageProps) {
           {renderResult(dgnlEvaluation, 'Điểm xét tuyển (ĐGNL)')}
         </section>
 
-        <section className="mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section className="mt-5 card p-6 sm:p-7">
           <h2 className="text-lg font-semibold text-ink">Xét kết quả V-SAT 2026</h2>
           <div className="mt-3 max-w-xs">
             <label htmlFor="ufm-vsat" className="text-xs font-medium text-ink">
@@ -436,7 +436,7 @@ export function UfmPage({ onChangeSchool }: UfmPageProps) {
           {renderResult(vsatEvaluation, 'Điểm xét tuyển (V-SAT)')}
         </section>
 
-        <section className="mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section className="mt-5 card p-6 sm:p-7">
           <h2 className="text-xs font-semibold uppercase tracking-wide text-muted">Nguồn dữ liệu</h2>
           <ul className="mt-2 flex flex-col gap-1.5 text-xs">
             {ufmSources.map((source) => (

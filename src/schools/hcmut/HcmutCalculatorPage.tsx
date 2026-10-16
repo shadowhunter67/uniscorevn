@@ -687,9 +687,13 @@ export function HcmutCalculatorPage({ onChangeSchool }: HcmutCalculatorPageProps
     <div className="min-h-svh bg-bg">
       <StickySummaryBar result={result} selectedProgram={selectedProgram} gap={programGap} />
 
-      <div className="mx-auto max-w-6xl px-4 pb-16">
+      <div className="mx-auto max-w-7xl px-4 pb-10">
+        <div className={isSupportedApplicantType ? 'flex flex-col gap-5 lg:grid lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start lg:gap-6' : 'flex flex-col gap-5'}>
+        {isSupportedApplicantType && <aside className="lg:order-2 lg:sticky lg:top-20 lg:mt-6">{heroElement}</aside>}
+        <div className="flex min-w-0 flex-col gap-5 lg:order-1">
         <Header
           school={{
+            id: 'hcmut',
             shortName: 'HCMUT',
             name: 'Trường Đại học Bách khoa – ĐHQG TP.HCM',
             year: activeAdmissionConfig.year,
@@ -702,15 +706,12 @@ export function HcmutCalculatorPage({ onChangeSchool }: HcmutCalculatorPageProps
         <ApplicantTypeSection value={applicantType} onChange={handleApplicantTypeChange} />
 
         {!isSupportedApplicantType ? (
-          <p className="mt-5 rounded-card bg-surface p-6 text-sm text-muted shadow-card sm:p-8">
+          <p className="card p-6 text-sm text-muted sm:p-8">
             Chọn nhóm "Có kết quả ĐGNL" hoặc "Không dự thi ĐGNL" ở trên để bắt đầu tính điểm — 2 nhóm này đã có công
             thức xác minh từ HCMUT 2026.
           </p>
         ) : (
-        <div className="mt-5 flex flex-col gap-5 lg:grid lg:grid-cols-[1fr_340px] lg:items-stretch lg:gap-6">
-          <div className="flex flex-col gap-5 lg:order-2 lg:sticky lg:top-5 lg:h-fit">{heroElement}</div>
-
-          <div className="flex flex-col gap-5 lg:order-1">
+          <>
             <div id="programs" className="scroll-mt-5">
             <ProgramSection
               programs={hcmutPrograms}
@@ -817,9 +818,10 @@ export function HcmutCalculatorPage({ onChangeSchool }: HcmutCalculatorPageProps
             />
 
             <FormulaExplanation steps={hasCoreInput ? liveEvaluation.explanation : []} />
-          </div>
-        </div>
+          </>
         )}
+        </div>
+        </div>
 
         <Footer />
       </div>

@@ -1,53 +1,60 @@
+import type { ReactNode } from 'react';
+import { Building2, Database, FileText, BarChart3, Users } from 'lucide-react';
 import { institutionCoverage } from '../data/institutionCoverage';
 
+function DataTile({ icon, value, label, tone }: { icon: ReactNode; value: number; label: string; tone: string }) {
+  return (
+    <div className="flex items-center gap-3 rounded-xl border border-border bg-surface px-4 py-3">
+      <span aria-hidden="true" className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${tone}`}>
+        {icon}
+      </span>
+      <div>
+        <dd className="font-display text-xl font-bold leading-tight text-ink">{value}</dd>
+        <dt className="text-xs text-muted">{label}</dt>
+      </div>
+    </div>
+  );
+}
+
 /**
- * KPI (tổng catalog/independent/researched/verified) chuyển từ hero xuống đây — số liệu vẫn lấy
- * từ `institutionCoverage` (generated live từ `schoolRegistry`, xem `npm run stats:coverage`),
- * không hardcode. Hero chỉ còn 1 câu ngắn tham chiếu `institutionCoverage.fullyVerified`.
+ * KPI (tổng catalog/independent/researched/verified) — số liệu lấy từ `institutionCoverage`
+ * (generated live từ `schoolRegistry`, xem `npm run stats:coverage`), không hardcode.
  */
 export function AboutDataSection() {
   const collegeCount = institutionCoverage.pedagogicalColleges + institutionCoverage.vocationalColleges;
 
   return (
-    <section aria-labelledby="about-data-heading" className="card mt-10 px-5 py-5 sm:px-6">
-      <h2 id="about-data-heading" className="text-lg font-semibold text-ink sm:text-xl">
-        Về dữ liệu UniScoreVN
-      </h2>
-      <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
-        Danh mục gồm {institutionCoverage.independentEducationInstitutions} cơ sở giáo dục độc lập ({institutionCoverage.universityInstitutions} đại học ·{' '}
-        {institutionCoverage.academies} học viện · {collegeCount} cao đẳng) và {institutionCoverage.internalUnitEntries} đơn vị nội bộ, tổng{' '}
-        {institutionCoverage.totalCatalogEntries} mục danh mục.
-      </p>
-      <dl className="mt-4 grid grid-cols-2 gap-3 text-sm sm:grid-cols-4">
-        <div className="rounded-xl bg-surface-soft p-3">
-          <dt className="text-xs text-muted">Cơ sở & đơn vị</dt>
-          <dd className="mt-1 text-lg font-semibold text-ink">{institutionCoverage.totalCatalogEntries}</dd>
+    <section aria-labelledby="about-data-heading" className="card mt-10 grid gap-5 px-6 py-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] lg:items-center">
+      <div className="flex items-start gap-4">
+        <span aria-hidden="true" className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent">
+          <Database size={26} />
+        </span>
+        <div>
+          <h2 id="about-data-heading" className="text-xl font-bold text-ink">
+            Về dữ liệu UniScoreVN
+          </h2>
+          <p className="mt-1 text-sm leading-relaxed text-muted">
+            Danh mục gồm {institutionCoverage.independentEducationInstitutions} cơ sở giáo dục độc lập ({institutionCoverage.universityInstitutions} đại học ·{' '}
+            {institutionCoverage.academies} học viện · {collegeCount} cao đẳng) và {institutionCoverage.internalUnitEntries} đơn vị nội bộ, tổng{' '}
+            {institutionCoverage.totalCatalogEntries} mục danh mục. Xem nguồn &amp; phương pháp dữ liệu tuyển sinh tại{' '}
+            <a
+              href="https://github.com/shadowhunter67/uniscorevn/blob/main/docs/data-methodology.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-accent underline underline-offset-2"
+            >
+              tài liệu dữ liệu
+            </a>
+            .
+          </p>
         </div>
-        <div className="rounded-xl bg-surface-soft p-3">
-          <dt className="text-xs text-muted">Cơ sở độc lập</dt>
-          <dd className="mt-1 text-lg font-semibold text-ink">{institutionCoverage.independentEducationInstitutions}</dd>
-        </div>
-        <div className="rounded-xl bg-surface-soft p-3">
-          <dt className="text-xs text-muted">Có dữ liệu tuyển sinh</dt>
-          <dd className="mt-1 text-lg font-semibold text-ink">{institutionCoverage.admissionDataAvailable}</dd>
-        </div>
-        <div className="rounded-xl bg-surface-soft p-3">
-          <dt className="text-xs text-muted">Tính được điểm xét tuyển</dt>
-          <dd className="mt-1 text-lg font-semibold text-ink">{institutionCoverage.fullyVerified}</dd>
-        </div>
+      </div>
+      <dl className="grid grid-cols-2 gap-3 xl:grid-cols-4">
+        <DataTile icon={<Building2 size={20} />} value={institutionCoverage.totalCatalogEntries} label="Cơ sở & đơn vị" tone="bg-accent/10 text-accent" />
+        <DataTile icon={<Users size={20} />} value={institutionCoverage.independentEducationInstitutions} label="Cơ sở độc lập" tone="bg-indigo-500/10 text-indigo-700" />
+        <DataTile icon={<FileText size={20} />} value={institutionCoverage.admissionDataAvailable} label="Có dữ liệu tuyển sinh" tone="bg-sky-500/10 text-sky-700" />
+        <DataTile icon={<BarChart3 size={20} />} value={institutionCoverage.fullyVerified} label="Tính được điểm xét tuyển" tone="bg-emerald-500/10 text-emerald-700" />
       </dl>
-      <p className="mt-4 text-sm leading-relaxed text-muted">
-        Xem nguồn &amp; phương pháp dữ liệu tuyển sinh tại{' '}
-        <a
-          href="https://github.com/shadowhunter67/uniscorevn/blob/main/docs/data-methodology.md"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline underline-offset-2"
-        >
-          tài liệu dữ liệu
-        </a>
-        .
-      </p>
     </section>
   );
 }

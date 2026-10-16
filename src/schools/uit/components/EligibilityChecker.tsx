@@ -52,7 +52,7 @@ export function EligibilityChecker() {
   const hasAnyInput = thptResult !== null || dgnlResult !== null || certQualityResult !== null;
 
   return (
-    <section className="mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+    <section className="mt-5 card p-6 sm:p-7">
       <div className="flex items-center gap-2">
         <ShieldCheck size={20} className="text-accent" aria-hidden="true" />
         <h2 className="text-lg font-semibold text-ink">Kiểm tra điều kiện tham gia xét tuyển</h2>

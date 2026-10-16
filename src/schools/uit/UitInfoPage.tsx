@@ -80,7 +80,7 @@ export function UitInfoPage({ onChangeSchool }: UitInfoPageProps) {
 
         <BonusChecker />
 
-        <section id="programs" className="mt-5 scroll-mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section id="programs" className="mt-5 scroll-mt-5 card p-6 sm:p-7">
           <div className="flex items-center gap-2">
             <GraduationCap size={20} className="text-accent" aria-hidden="true" />
             <h2 className="text-lg font-semibold text-ink">Điểm chuẩn trúng tuyển {YEAR} (19 ngành)</h2>
@@ -125,7 +125,7 @@ export function UitInfoPage({ onChangeSchool }: UitInfoPageProps) {
 
         <DirectAdmissionSection />
 
-        <section className="mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section className="mt-5 card p-6 sm:p-7">
           <h2 className="text-xs font-semibold uppercase tracking-wide text-muted">Nguồn dữ liệu</h2>
           <ul className="mt-2 flex flex-col gap-1.5 text-xs">
             {uitSources.map((source) => (

@@ -126,7 +126,7 @@ export function UhsPage({ onChangeSchool }: UhsPageProps) {
           </div>
         </section>
 
-        <section id="programs" className="mt-5 scroll-mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section id="programs" className="mt-5 scroll-mt-5 card p-6 sm:p-7">
           <div className="flex items-center gap-2">
             <ShieldCheck size={20} className="text-accent" />
             <h2 className="text-lg font-semibold text-ink">Ngành và điều kiện đầu vào</h2>
@@ -167,7 +167,7 @@ export function UhsPage({ onChangeSchool }: UhsPageProps) {
           </div>
         </section>
 
-        <section id="components" className="mt-5 scroll-mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section id="components" className="mt-5 scroll-mt-5 card p-6 sm:p-7">
           <div className="flex items-center gap-2">
             <Calculator size={20} className="text-accent" />
             <h2 className="text-lg font-semibold text-ink">THPT, ĐGNL và học bạ</h2>
@@ -206,7 +206,7 @@ export function UhsPage({ onChangeSchool }: UhsPageProps) {
           </label>
         </section>
 
-        <section id="bonus" className="mt-5 scroll-mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section id="bonus" className="mt-5 scroll-mt-5 card p-6 sm:p-7">
           <div className="flex items-center gap-2">
             <Award size={20} className="text-accent" />
             <h2 className="text-lg font-semibold text-ink">Điểm cộng</h2>
@@ -237,7 +237,7 @@ export function UhsPage({ onChangeSchool }: UhsPageProps) {
           </div>
         </section>
 
-        <section className="mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section className="mt-5 card p-6 sm:p-7">
           <h2 className="text-lg font-semibold text-ink">Các thành phần đã tính được</h2>
           <ul className="mt-3 space-y-2 text-sm text-muted">
             {evaluation.explanation.map((step) => (
@@ -247,7 +247,7 @@ export function UhsPage({ onChangeSchool }: UhsPageProps) {
           <p className="mt-3 text-xs text-muted">Chưa thể ra điểm xét tuyển cuối vì trường chưa công bố giá trị w1/w2 cố định.</p>
         </section>
 
-        <section className="mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section className="mt-5 card p-6 sm:p-7">
           <h2 className="text-xs font-semibold uppercase tracking-wide text-muted">Nguồn dữ liệu</h2>
           <ul className="mt-2 flex flex-col gap-1.5 text-xs">
             {uhsSources.map((source) => (

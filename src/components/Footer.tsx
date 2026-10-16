@@ -6,31 +6,25 @@ const LINK_CLASS =
 
 export function Footer() {
   return (
-    <footer className="mt-10 border-t border-border pt-6 pb-8 text-sm">
-      <div className="flex flex-col gap-6 sm:flex-row sm:justify-between">
-        <div className="max-w-md text-muted">
-          {/* Wordmark thay dòng chữ tên brand — nền footer sáng nên dùng bản màu, không phải bản trắng. */}
-          <BrandWordmark className="h-7 w-auto" />
-          <p className="mt-2 leading-relaxed">{siteConfig.tagline}</p>
-          <p className="mt-2 leading-relaxed">
-            {siteConfig.name} là công cụ độc lập, không thuộc Bộ GD&ĐT hay bất kỳ cơ sở đào tạo nào.
-          </p>
-        </div>
-
-        <nav aria-label={`Liên kết ${siteConfig.name}`} className="flex flex-col gap-1 sm:items-end">
-          <a href={siteConfig.githubUrl} target="_blank" rel="noopener noreferrer" className={LINK_CLASS}>
-            GitHub
-          </a>
-          <a href={siteConfig.issuesUrl} target="_blank" rel="noopener noreferrer" className={LINK_CLASS}>
-            Báo lỗi &amp; góp ý
-          </a>
-          <a href="#data-sources" className={LINK_CLASS}>
-            Nguồn dữ liệu
-          </a>
-        </nav>
-      </div>
-
-      <p className="mt-6 border-t border-border pt-4 text-sm text-muted">© 2026 {siteConfig.name}</p>
+    <footer className="mt-8 flex flex-col gap-3 border-t border-border/70 pt-4 pb-8 text-sm text-muted lg:flex-row lg:items-center lg:gap-4">
+      <BrandWordmark className="h-7 w-auto shrink-0" />
+      <span className="lg:max-w-[16rem]">{siteConfig.tagline}</span>
+      <span aria-hidden="true" className="hidden text-border-strong lg:inline">
+        |
+      </span>
+      <span className="flex-1">{siteConfig.name} là công cụ độc lập, không thuộc Bộ GD&ĐT hay bất kỳ cơ sở đào tạo nào.</span>
+      <nav aria-label={`Liên kết ${siteConfig.name}`} className="flex flex-wrap items-center gap-x-4">
+        <a href={siteConfig.githubUrl} target="_blank" rel="noopener noreferrer" className={LINK_CLASS}>
+          GitHub
+        </a>
+        <a href={siteConfig.issuesUrl} target="_blank" rel="noopener noreferrer" className={LINK_CLASS}>
+          Báo lỗi &amp; góp ý
+        </a>
+        <a href="#data-sources" className={LINK_CLASS}>
+          Nguồn dữ liệu
+        </a>
+        <span>© 2026 {siteConfig.name}</span>
+      </nav>
     </footer>
   );
 }

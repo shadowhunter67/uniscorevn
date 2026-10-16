@@ -196,7 +196,7 @@ export function HcmusPage({ onChangeSchool }: HcmusPageProps) {
           </div>
         </section>
 
-        <section id="academic-score" className="mt-5 scroll-mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section id="academic-score" className="mt-5 scroll-mt-5 card p-6 sm:p-7">
           <div className="flex items-center gap-2">
             <Layers size={20} className="text-accent" aria-hidden="true" />
             <h2 className="text-lg font-semibold text-ink">Tính Điểm học lực</h2>
@@ -308,7 +308,7 @@ export function HcmusPage({ onChangeSchool }: HcmusPageProps) {
           )}
         </section>
 
-        <section id="programs" className="mt-5 scroll-mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section id="programs" className="mt-5 scroll-mt-5 card p-6 sm:p-7">
           <div className="flex items-center gap-2">
             <ShieldCheck size={20} className="text-accent" aria-hidden="true" />
             <h2 className="text-lg font-semibold text-ink">Ngưỡng đăng ký xét tuyển 2026</h2>
@@ -395,7 +395,7 @@ export function HcmusPage({ onChangeSchool }: HcmusPageProps) {
           </div>
         </section>
 
-        <section id="threshold" className="mt-5 scroll-mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section id="threshold" className="mt-5 scroll-mt-5 card p-6 sm:p-7">
           <div className="flex items-center gap-2">
             <ShieldCheck size={20} className="text-accent" aria-hidden="true" />
             <h2 className="text-lg font-semibold text-ink">Kiểm tra ngưỡng đầu vào THPT</h2>
@@ -489,7 +489,7 @@ export function HcmusPage({ onChangeSchool }: HcmusPageProps) {
             ))}
         </section>
 
-        <section className="mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section className="mt-5 card p-6 sm:p-7">
           <h2 className="text-xs font-semibold uppercase tracking-wide text-muted">Nguồn dữ liệu</h2>
           <ul className="mt-2 flex flex-col gap-1.5 text-xs">
             {hcmusSources.map((source) => (

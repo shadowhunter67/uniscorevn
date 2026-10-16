@@ -28,7 +28,7 @@ export function TargetSection({
   const hasValidTarget = targetValue.trim() !== '' && targetError === null;
 
   return (
-    <section className="rounded-2xl bg-surface-soft p-6 sm:p-8">
+    <section className="card p-6 sm:p-7">
       <div className="flex items-center gap-2">
         <Target size={20} className="text-accent" aria-hidden="true" />
         <h2 className="text-xl font-semibold text-ink">Mục tiêu của bạn</h2>

@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect } from 'react';
 import { Footer } from './components/Footer';
 import { LandingPage } from './components/LandingPage';
 import { SiteHeader } from './components/SiteHeader';
+import { PageBackdrop, type PageBackdropVariant } from './components/PageBackdrop';
 import { SkipLink } from './components/SkipLink';
 import { useRoute } from './hooks/useRoute';
 import { schoolRegistry } from './schools';
@@ -137,7 +138,7 @@ function AppShell() {
   } else {
     content = (
       <div className="min-h-svh bg-bg">
-        <div className="mx-auto max-w-6xl px-4 pb-16">
+        <div className="mx-auto max-w-7xl px-4 pb-10">
           <LandingPage
             onSelectSchool={(id) => navigate(`/${id}`)}
             onOpenCompare={() => navigate('/compare')}
@@ -151,12 +152,16 @@ function AppShell() {
 
   // `key={pathname}` (P3): đổi route tạo boundary instance mới -> tự reset hasError, tránh 1 lỗi ở
   // route trước dính mãi sau khi user bấm "Về trang chủ"/điều hướng sang route khác.
+  const backdropVariant: PageBackdropVariant =
+    pathname === '/compare' ? 'compare' : fieldRoute.isFieldRoute ? 'fields' : school && (school.Page || schoolAction.kind !== 'none') ? 'school' : 'home';
+
   return (
     <>
       <SkipLink />
       <SiteHeader pathname={pathname} onNavigate={navigate} />
       <ErrorBoundary key={pathname} onGoHome={() => navigate('/')}>
-        <main id="main-content" tabIndex={-1} className="outline-none">
+        <main id="main-content" tabIndex={-1} className="relative isolate outline-none">
+          <PageBackdrop variant={backdropVariant} />
           {content}
         </main>
       </ErrorBoundary>

@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
-import { Building2, FileCheck2, Search } from 'lucide-react';
-import { HeroIllustration } from './HeroIllustration';
+import { ArrowRight, Building2, ChevronDown, FileCheck2, FileText, GraduationCap, Globe2, Map as MapIcon, MapPin, Pencil, Search, SlidersHorizontal, Target, Trash2 } from 'lucide-react';
+import { StatWave } from './StatWave';
+import { FIELDS } from '../taxonomy/fields';
+import { getSchoolIdsForField } from '../taxonomy/taxonomyQueries';
 import { schoolRegistry } from '../schools';
 import { siteConfig } from '../config/site';
 import type { SchoolRegion } from '../core/schoolModule';
@@ -13,9 +15,7 @@ import {
   type InstitutionSupportStatus,
 } from '../data/institutionCoverage';
 import { UNIVERSITY_SYSTEMS } from '../data/universitySystems';
-import { Disclosure } from './Disclosure';
 import { SharedProfileEditor } from './SharedProfileEditor';
-import { ProfileSummary } from './ProfileSummary';
 import { StickyProfileBar } from './StickyProfileBar';
 import { AboutDataSection } from './AboutDataSection';
 import { SchoolListItem } from './SchoolListItem';
@@ -61,11 +61,13 @@ const FILTER_LABELS = {
 };
 
 function FilterSelect<T extends string>({
+  icon,
   label,
   value,
   onChange,
   options,
 }: {
+  icon?: ReactNode;
   label: string;
   value: OptionalLandingFilter<T>;
   onChange: (value: OptionalLandingFilter<T>) => void;
@@ -73,6 +75,7 @@ function FilterSelect<T extends string>({
 }) {
   return (
     <label className="flex min-h-(--ui-tap-min) items-center gap-1.5 text-sm font-medium text-ink-soft">
+      {icon && <span aria-hidden="true" className="text-accent">{icon}</span>}
       <span className="shrink-0">{label}</span>
       <select
         value={value}
@@ -90,16 +93,31 @@ function FilterSelect<T extends string>({
   );
 }
 
-function CoverageStat({ value, icon, tone, children }: { value: number; icon: ReactNode; tone: string; children: ReactNode }) {
+const FIELD_COUNT_WITH_DATA = FIELDS.filter((field) => getSchoolIdsForField(field.id).length > 0).length;
+
+function CoverageStat({ value, icon, tone, wave, valueTone, children }: { value: number; icon: ReactNode; tone: string; wave: string; valueTone: string; children: ReactNode }) {
   return (
-    <div className="card flex items-center gap-4 px-5 py-4">
-      <span aria-hidden="true" className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full ${tone}`}>
+    <div className="card relative flex items-center gap-4 overflow-hidden px-5 py-4">
+      <span aria-hidden="true" className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-full ${tone}`}>
         {icon}
       </span>
-      <div>
+      <div className="relative z-10">
         <dt className="text-sm leading-snug text-muted">{children}</dt>
-        <dd className="mt-0.5 font-display text-3xl font-bold leading-none text-ink">{value.toLocaleString('vi-VN')}</dd>
+        <dd className={`mt-0.5 font-display text-4xl font-bold leading-none ${valueTone}`}>{value.toLocaleString('vi-VN')}</dd>
       </div>
+      <StatWave color={wave} />
+    </div>
+  );
+}
+
+function ProfileTile({ icon, label, value }: { icon: ReactNode; label: string; value?: string }) {
+  return (
+    <div className="flex items-center gap-3 rounded-xl border border-border bg-surface px-3 py-2.5">
+      <span aria-hidden="true" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent">
+        {icon}
+      </span>
+      <span className="min-w-0 flex-1 text-sm text-ink-soft">{label}</span>
+      <span className={`text-right text-sm ${value ? 'font-bold text-ink' : 'text-muted'}`}>{value ?? 'chưa nhập'}</span>
     </div>
   );
 }
@@ -114,6 +132,7 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
   const [onlyEvaluable, setOnlyEvaluable] = useState(false);
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_SCHOOL_COUNT);
   const [profileEditorOpen, setProfileEditorOpen] = useState(false);
+  const [advancedOpen, setAdvancedOpen] = useState(false);
   const schools = useMemo(() => Object.values(schoolRegistry), []);
   const filters = useMemo(
     () => ({ query, entityFilter, regionFilter, tierFilter, systemFilter, sortMode, onlyEvaluable }),
@@ -161,56 +180,59 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
 
   return (
     <div className="py-6 sm:py-9">
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(340px,440px)] lg:items-start lg:gap-8">
-        <div className="relative text-left">
-          <HeroIllustration className="pointer-events-none absolute -top-4 right-0 hidden h-52 w-auto opacity-90 xl:block xl:right-0" />
-          <h1 className="relative text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(440px,480px)] lg:items-start lg:gap-8">
+        <div className="text-left lg:pt-1">
+          <h1 className="text-5xl font-extrabold tracking-tight text-ink sm:text-6xl">
             UniScore<span className="text-accent">VN</span>
           </h1>
-          <p className="relative mt-3 max-w-md text-2xl font-bold leading-tight text-ink sm:text-3xl">
+          <p className="mt-3 max-w-lg text-3xl font-extrabold leading-tight text-ink sm:text-4xl">
             &#272;i&#7875;m c&#7911;a b&#7841;n ph&#249; h&#7907;p v&#7899;i tr&#432;&#7901;ng, ng&#224;nh n&#224;o?
           </p>
-          <p className="relative mt-3 max-w-lg text-base leading-relaxed text-muted">
+          <p className="mt-4 max-w-lg text-lg leading-relaxed text-muted">
             Nh&#7853;p &#273;i&#7875;m m&#7897;t l&#7847;n, {siteConfig.name} &#225;p theo quy t&#7855;c tuy&#7875;n sinh ri&#234;ng c&#7911;a t&#7915;ng tr&#432;&#7901;ng r&#7891;i &#273;&#7889;i chi&#7871;u v&#7899;i &#273;i&#7875;m chu&#7849;n &#273;&#227; c&#244;ng b&#7889;.
           </p>
 
-          <div className="relative mt-5 flex flex-col gap-2 sm:flex-row">
-            <button
-              type="button"
-              onClick={() => setProfileEditorOpen(true)}
-              className="inline-flex min-h-(--ui-tap-min) w-full cursor-pointer items-center justify-center rounded-lg bg-accent px-6 py-2 text-sm font-semibold text-white shadow-sm transition-colors duration-150 hover:bg-accent/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 sm:w-auto"
-            >
-              {profileSummary.hasData ? <>Ch&#7881;nh s&#7917;a &#273;i&#7875;m c&#7911;a b&#7841;n</> : <>Nh&#7853;p &#273;i&#7875;m c&#7911;a b&#7841;n</>}
-            </button>
-            <button
-              type="button"
-              onClick={onOpenFieldBrowse}
-              className="inline-flex min-h-(--ui-tap-min) w-full cursor-pointer items-center justify-center rounded-lg border border-accent/40 bg-surface px-6 py-2 text-sm font-semibold text-accent transition-colors duration-150 hover:bg-accent/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 sm:w-auto"
-            >
-              Xem theo ng&#224;nh
-            </button>
-          </div>
+          {!profileSummary.hasData && (
+            <div className="mt-6 flex flex-col gap-2 sm:flex-row">
+              <button
+                type="button"
+                onClick={() => setProfileEditorOpen(true)}
+                className="inline-flex min-h-(--ui-tap-min) w-full cursor-pointer items-center justify-center rounded-xl bg-accent px-6 py-2 text-sm font-semibold text-white shadow-sm transition-colors duration-150 hover:bg-accent/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 sm:w-auto"
+              >
+                Nh&#7853;p &#273;i&#7875;m c&#7911;a b&#7841;n
+              </button>
+              <button
+                type="button"
+                onClick={onOpenFieldBrowse}
+                className="inline-flex min-h-(--ui-tap-min) w-full cursor-pointer items-center justify-center rounded-xl border border-accent/40 bg-surface px-6 py-2 text-sm font-semibold text-accent transition-colors duration-150 hover:bg-accent/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 sm:w-auto"
+              >
+                Xem theo ng&#224;nh
+              </button>
+            </div>
+          )}
         </div>
 
-        <div id="ho-so-diem" className="card relative z-10 px-5 py-5 text-sm">
-          <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-            <p className="font-medium text-ink">H&#7891; s&#417; &#273;i&#7875;m d&#249;ng chung</p>
-            <div className="flex flex-wrap items-center gap-x-2">
+        <div id="ho-so-diem" className="card relative z-10 px-6 py-5 text-sm">
+          <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
+            <p className="whitespace-nowrap text-lg font-bold text-ink">H&#7891; s&#417; &#273;i&#7875;m d&#249;ng chung</p>
+            <div className="flex flex-wrap items-center gap-x-1">
               <button
                 type="button"
                 onClick={() => setProfileEditorOpen((current) => !current)}
                 aria-expanded={profileEditorOpen}
                 aria-controls="ho-so-diem-editor"
-                className="inline-flex min-h-(--ui-tap-min) cursor-pointer items-center rounded-md px-2 text-sm font-medium text-accent underline-offset-2 transition-colors duration-150 hover:bg-accent/10 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                className="inline-flex min-h-(--ui-tap-min) cursor-pointer items-center gap-1.5 rounded-lg px-2 text-sm font-medium text-accent hover:bg-accent/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
               >
+                <Pencil size={16} aria-hidden="true" />
                 {profileEditorOpen ? <>Thu g&#7885;n</> : profileSummary.hasData ? <>Ch&#7881;nh s&#7917;a</> : <>Nh&#7853;p &#273;i&#7875;m</>}
               </button>
               {profileSummary.hasData && (
                 <button
                   type="button"
                   onClick={handleClearProfile}
-                  className="inline-flex min-h-(--ui-tap-min) shrink-0 cursor-pointer items-center rounded-md px-2 text-sm font-medium text-muted underline-offset-2 hover:text-danger hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                  className="inline-flex min-h-(--ui-tap-min) shrink-0 cursor-pointer items-center gap-1.5 rounded-lg px-2 text-sm font-medium text-danger hover:bg-danger/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
                 >
+                  <Trash2 size={16} aria-hidden="true" />
                   X&#243;a h&#7891; s&#417;
                 </button>
               )}
@@ -218,7 +240,16 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
           </div>
 
           {profileSummary.hasData ? (
-            <ProfileSummary summary={profileSummary} profile={profile} />
+            <div className="mt-3 grid gap-2.5 sm:grid-cols-2">
+              <ProfileTile icon={<Globe2 size={18} />} label="&#272;GNL" value={profileSummary.vactTotal !== undefined ? String(profileSummary.vactTotal) : undefined} />
+              <ProfileTile icon={<GraduationCap size={18} />} label="THPT" value={profileSummary.thptSubjectCount > 0 ? `${profileSummary.thptSubjectCount} môn` : undefined} />
+              <ProfileTile icon={<FileText size={18} />} label="H&#7885;c b&#7841;" value={profileSummary.transcriptSubjectCount > 0 ? `${profileSummary.transcriptSubjectCount} môn` : undefined} />
+              <ProfileTile
+                icon={<MapIcon size={18} />}
+                label="Khu v&#7921;c / &#432;u ti&#234;n"
+                value={profileSummary.hasPriority ? [profile.priority?.region, profile.priority?.category].filter(Boolean).join(' · ') : undefined}
+              />
+            </div>
           ) : (
             <p className="mt-2 text-muted">Ch&#432;a c&#243; &#273;i&#7875;m n&#224;o. Nh&#7853;p m&#7897;t l&#7847;n &#7903; &#273;&#226;y, {siteConfig.name} &#225;p cho t&#7915;ng c&#417; s&#7903;; thi&#7871;u g&#236; s&#7869; b&#225;o khi so s&#225;nh.</p>
           )}
@@ -233,24 +264,27 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
             <button
               type="button"
               onClick={onOpenCompare}
-              className="mt-3 min-h-(--ui-tap-min) rounded-md border border-accent/40 bg-surface px-3 py-1.5 text-sm font-medium text-accent transition hover:bg-accent/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+              className="mt-4 inline-flex min-h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-accent px-4 py-2 text-base font-semibold text-white shadow-sm transition hover:bg-accent/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
             >
               So s&#225;nh nguy&#7879;n v&#7885;ng v&#7899;i h&#7891; s&#417; n&#224;y
+              <ArrowRight size={18} aria-hidden="true" />
             </button>
           )}
         </div>
-
       </div>
 
-      <dl className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <CoverageStat value={institutionCoverage.totalCatalogEntries} tone="bg-accent/10 text-accent" icon={<Search size={22} />}>
+      <dl className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <CoverageStat value={institutionCoverage.totalCatalogEntries} tone="bg-accent/10 text-accent" wave="#2563eb" valueTone="text-accent" icon={<Search size={26} />}>
           M&#7909;c tra c&#7913;u
         </CoverageStat>
-        <CoverageStat value={institutionCoverage.independentEducationInstitutions} tone="bg-indigo-500/10 text-indigo-700" icon={<Building2 size={22} />}>
+        <CoverageStat value={institutionCoverage.independentEducationInstitutions} tone="bg-indigo-500/10 text-indigo-700" wave="#6366f1" valueTone="text-indigo-700" icon={<Building2 size={26} />}>
           C&#417; s&#7903; &#273;&#7897;c l&#7853;p
         </CoverageStat>
-        <CoverageStat value={institutionCoverage.fullyVerified} tone="bg-emerald-500/10 text-emerald-700" icon={<FileCheck2 size={22} />}>
+        <CoverageStat value={institutionCoverage.fullyVerified} tone="bg-emerald-500/10 text-emerald-700" wave="#10b981" valueTone="text-emerald-700" icon={<FileCheck2 size={26} />}>
           T&#237;nh &#273;&#432;&#7907;c &#273;&#7847;y &#273;&#7911; &#273;i&#7875;m
+        </CoverageStat>
+        <CoverageStat value={FIELD_COUNT_WITH_DATA} tone="bg-orange-500/10 text-orange-600" wave="#f97316" valueTone="text-orange-600" icon={<Target size={26} />}>
+          L&#297;nh v&#7921;c &#273;&#7889;i chi&#7871;u
         </CoverageStat>
       </dl>
 
@@ -267,23 +301,25 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
         <div className="card px-5 py-5 sm:px-6">
         <h2 className="text-xl font-bold text-ink sm:text-2xl">Ch&#7885;n c&#417; s&#7903; &#273;&#7875; b&#7855;t &#273;&#7847;u</h2>
 
-        <div className="mt-4">
+        <div className="relative mt-4">
           <label htmlFor="school-search" className="sr-only">
             T&#236;m c&#417; s&#7903; theo t&#234;n, m&#227; tr&#432;&#7901;ng ho&#7863;c t&#234;n vi&#7871;t t&#7855;t
           </label>
+          <Search size={20} aria-hidden="true" className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-muted" />
           <input
             id="school-search"
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder={'T\u00ecm theo t\u00ean, m\u00e3 tr\u01b0\u1eddng ho\u1eb7c t\u00ean vi\u1ebft t\u1eaft...'}
-            className="min-h-(--ui-tap-min) w-full rounded-lg border border-border bg-surface px-4 py-3 text-base text-ink placeholder:text-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+            className="min-h-(--ui-tap-min) w-full rounded-xl border border-border bg-surface py-3 pl-12 pr-4 text-base text-ink placeholder:text-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
           />
         </div>
 
         <div className="mt-3">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
             <FilterSelect
+              icon={<MapPin size={18} />}
               label={FILTER_LABELS.region}
               value={regionFilter}
               onChange={setRegionFilter}
@@ -293,6 +329,7 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
               }))}
             />
             <FilterSelect
+              icon={<Building2 size={18} />}
               label={FILTER_LABELS.entity}
               value={entityFilter}
               onChange={setEntityFilter}
@@ -311,7 +348,18 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
               Ch&#7881; hi&#7879;n tr&#432;&#7901;ng t&#244;i c&#243; th&#7875; &#273;&#225;nh gi&#225;
             </label>
 
-            <Disclosure summary="B&#7897; l&#7885;c n&#226;ng cao" className="basis-full">
+            <button
+              type="button"
+              onClick={() => setAdvancedOpen((open) => !open)}
+              aria-expanded={advancedOpen}
+              className="ml-auto inline-flex min-h-(--ui-tap-min) cursor-pointer items-center gap-2 rounded-xl border border-accent/30 bg-accent/5 px-4 text-sm font-semibold text-accent transition-colors hover:bg-accent/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+            >
+              <SlidersHorizontal size={17} aria-hidden="true" />
+              B&#7897; l&#7885;c n&#226;ng cao
+              <ChevronDown size={16} aria-hidden="true" className={`transition-transform ${advancedOpen ? 'rotate-180' : ''}`} />
+            </button>
+            {advancedOpen && (
+              <div className="basis-full">
               <div className="space-y-3">
                 <div className="flex flex-wrap gap-2" role="group" aria-label={'L\u1ecdc theo m\u1ee9c h\u1ed7 tr\u1ee3'}>
                   <button
@@ -363,7 +411,8 @@ export function LandingPage({ onSelectSchool, onOpenCompare, onOpenFieldBrowse }
                   </label>
                 </div>
               </div>
-            </Disclosure>
+            </div>
+            )}
 
             {filtersActive && (
               <button

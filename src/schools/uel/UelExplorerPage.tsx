@@ -204,7 +204,7 @@ export function UelExplorerPage({ onChangeSchool }: UelExplorerPageProps) {
           </div>
         </section>
 
-        <section id="dgnl" className="mt-5 scroll-mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section id="dgnl" className="mt-5 scroll-mt-5 card p-6 sm:p-7">
           <div className="flex items-center gap-2">
             <ArrowRightLeft size={20} className="text-accent" aria-hidden="true" />
             <h2 className="text-lg font-semibold text-ink">Quy đổi điểm ĐGNL-HCM → thang 100 (điểm học lực)</h2>
@@ -278,7 +278,7 @@ export function UelExplorerPage({ onChangeSchool }: UelExplorerPageProps) {
           )}
         </section>
 
-        <section id="subject-combination" className="mt-5 scroll-mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section id="subject-combination" className="mt-5 scroll-mt-5 card p-6 sm:p-7">
           <div className="flex items-center gap-2">
             <ShieldCheck size={20} className="text-accent" aria-hidden="true" />
             <h2 className="text-lg font-semibold text-ink">Kiểm tra ngưỡng đầu vào</h2>
@@ -388,7 +388,7 @@ export function UelExplorerPage({ onChangeSchool }: UelExplorerPageProps) {
           )}
         </section>
 
-        <section id="programs" className="mt-5 scroll-mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section id="programs" className="mt-5 scroll-mt-5 card p-6 sm:p-7">
           <div className="flex items-center gap-2">
             <Award size={20} className="text-accent" aria-hidden="true" />
             <h2 className="text-lg font-semibold text-ink">Điều kiện được xét điểm cộng</h2>
@@ -432,7 +432,7 @@ export function UelExplorerPage({ onChangeSchool }: UelExplorerPageProps) {
           )}
         </section>
 
-        <section className="mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section className="mt-5 card p-6 sm:p-7">
           <h2 className="text-lg font-semibold text-ink">Điểm ưu tiên khu vực</h2>
           <p className="mt-1 text-xs text-muted">
             Thang 100. Khi tổng điểm học lực + điểm cộng ≥ 75/100, điểm ưu tiên giảm dần theo công thức chính thức
@@ -510,7 +510,7 @@ export function UelExplorerPage({ onChangeSchool }: UelExplorerPageProps) {
           </details>
         </section>
 
-        <section className="mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section className="mt-5 card p-6 sm:p-7">
           <div className="flex items-center gap-2">
             <GraduationCap size={20} className="text-accent" aria-hidden="true" />
             <h2 className="text-lg font-semibold text-ink">Điểm chuẩn trúng tuyển {YEAR} (38 ngành/chuyên ngành)</h2>
@@ -551,7 +551,7 @@ export function UelExplorerPage({ onChangeSchool }: UelExplorerPageProps) {
           </div>
         </section>
 
-        <section className="mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section className="mt-5 card p-6 sm:p-7">
           <h2 className="text-xs font-semibold uppercase tracking-wide text-muted">Nguồn dữ liệu</h2>
           <ul className="mt-2 flex flex-col gap-1.5 text-xs">
             {uelSources.map((source) => (

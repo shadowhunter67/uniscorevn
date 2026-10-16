@@ -1,7 +1,7 @@
 import { useMemo, type ReactNode } from 'react';
-import { BarChart3, CheckCircle2, Clock, Database, FileText, GraduationCap, ShieldCheck, Target } from 'lucide-react';
-import { HeroIllustration } from './HeroIllustration';
+import { BarChart3, CheckCircle2, ChevronDown, Clock, Database, FileText, GraduationCap, ShieldCheck, Target } from 'lucide-react';
 import { SchoolLogo } from './SchoolLogo';
+import { StatWave } from './StatWave';
 import { useApplicantProfile } from '../core/applicantProfileContextCore';
 import { summarizeApplicantProfile } from '../core/applicantProfileSummary';
 import type { FieldId } from '../taxonomy/fields';
@@ -136,16 +136,17 @@ function GroupSection({
   );
 }
 
-function StatCard({ label, value, icon, tone, valueTone = 'text-ink' }: { label: string; value: number; icon: ReactNode; tone: string; valueTone?: string }) {
+function StatCard({ label, value, icon, tone, wave, valueTone = 'text-ink' }: { label: string; value: number; icon: ReactNode; tone: string; wave: string; valueTone?: string }) {
   return (
-    <div className="card flex items-center gap-3 px-4 py-3">
-      <span aria-hidden="true" className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full ${tone}`}>
+    <div className="card relative flex items-center gap-3 overflow-hidden px-4 py-3">
+      <span aria-hidden="true" className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full ${tone}`}>
         {icon}
       </span>
-      <div>
+      <div className="relative z-10">
         <dt className="text-sm text-muted">{label}</dt>
-        <dd className={`font-display text-2xl font-bold leading-tight ${valueTone}`}>{value}</dd>
+        <dd className={`font-display text-3xl font-bold leading-tight ${valueTone}`}>{value}</dd>
       </div>
+      <StatWave color={wave} />
     </div>
   );
 }
@@ -164,7 +165,7 @@ export function FieldRecommendationPage({ fieldId, onBackToFields, onOpenSchool 
 
   return (
     <div className="min-h-svh bg-bg">
-      <div className="mx-auto max-w-6xl px-4 py-8 sm:py-10">
+      <div className="mx-auto max-w-5xl px-4 py-8 sm:py-10">
         <button
           type="button"
           onClick={onBackToFields}
@@ -174,23 +175,36 @@ export function FieldRecommendationPage({ fieldId, onBackToFields, onOpenSchool 
         </button>
 
         <header className="relative mt-4">
-          <HeroIllustration className="pointer-events-none absolute right-0 -top-2 hidden h-32 w-auto opacity-80 xl:block" />
           <h1 className="relative max-w-2xl text-3xl font-extrabold text-ink sm:text-4xl">{field?.name ?? fieldId}</h1>
           <p className="relative mt-2 max-w-2xl text-sm leading-relaxed text-muted">{COMPETITIVENESS_DISCLAIMER}</p>
         </header>
 
         <section className="mt-5" aria-label="Tóm tắt kết quả theo lĩnh vực">
           <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard label="Lựa chọn" value={totalFound} icon={<GraduationCap size={20} />} tone="bg-accent/10 text-accent" valueTone="text-accent" />
-            <StatCard label="Đánh giá được" value={assessedCount} icon={<CheckCircle2 size={20} />} tone="bg-emerald-500/10 text-emerald-700" />
-            <StatCard label="Cần bổ sung" value={needsUserInputCount} icon={<Clock size={20} />} tone="bg-orange-500/10 text-orange-700" valueTone="text-orange-700" />
-            <StatCard label="Chưa đủ dữ liệu" value={blockedByDataCount} icon={<Database size={20} />} tone="bg-slate-500/10 text-slate-700" />
+            <StatCard label="Lựa chọn" value={totalFound} icon={<GraduationCap size={20} />} tone="bg-accent/10 text-accent" wave="#2563eb" valueTone="text-accent" />
+            <StatCard label="Đánh giá được" value={assessedCount} icon={<CheckCircle2 size={20} />} tone="bg-emerald-500/10 text-emerald-700" wave="#10b981" valueTone="text-emerald-700" />
+            <StatCard label="Cần bổ sung" value={needsUserInputCount} icon={<Clock size={20} />} tone="bg-orange-500/10 text-orange-700" wave="#f97316" valueTone="text-orange-600" />
+            <StatCard label="Chưa đủ dữ liệu" value={blockedByDataCount} icon={<Database size={20} />} tone="bg-slate-500/10 text-slate-700" wave="#64748b" />
           </dl>
         </section>
 
         <details id="field-profile-editor" className="card mt-4 px-4 py-2.5 scroll-mt-20">
-          <summary className="flex min-h-(--ui-tap-min) cursor-pointer items-center gap-3 py-1 text-sm font-semibold text-ink"><FileText size={18} className="text-accent" aria-hidden="true" />
-            {profileSummary.hasData ? 'Hồ sơ dùng chung (đã có dữ liệu)' : 'Nhập hồ sơ để xem kết quả phù hợp với bạn'}
+          <summary className="flex min-h-(--ui-tap-min) cursor-pointer list-none items-center gap-3 py-1 [&::-webkit-details-marker]:hidden">
+            <span aria-hidden="true" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent/10 text-accent">
+              <FileText size={20} />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block text-base font-bold text-ink">
+                {profileSummary.hasData ? 'Hồ sơ dùng chung (đã có dữ liệu)' : 'Nhập hồ sơ để xem kết quả phù hợp với bạn'}
+              </span>
+              <span className="block text-sm text-muted">
+                {profileSummary.hasData ? 'Đang sử dụng hồ sơ từ trang chủ để đánh giá mức độ phù hợp.' : 'Nhập điểm một lần, kết quả sẽ hiện theo từng lựa chọn.'}
+              </span>
+            </span>
+            <span className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-border bg-surface-soft px-3 py-2 text-sm font-medium text-accent">
+              {profileSummary.hasData ? 'Xem chi tiết hồ sơ' : 'Nhập hồ sơ'}
+              <ChevronDown size={16} aria-hidden="true" />
+            </span>
           </summary>
           <SharedProfileEditor profile={profile} updateProfile={updateProfile} updateVactTotal={updateVactTotal} />
         </details>

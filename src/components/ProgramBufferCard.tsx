@@ -24,7 +24,7 @@ export function ProgramBufferCard({
   if (!selectedProgram || !latestCutoff) return null;
 
   return (
-    <section className="rounded-2xl bg-surface-soft p-6 sm:p-8">
+    <section className="card p-6 sm:p-7">
       <label htmlFor={bufferId} className="text-sm font-medium text-ink">
         Biên mục tiêu
       </label>

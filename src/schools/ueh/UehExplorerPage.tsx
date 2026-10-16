@@ -362,7 +362,7 @@ export function UehExplorerPage({ onChangeSchool }: UehExplorerPageProps) {
           </div>
         </section>
 
-        <section id="dgnl" className="mt-5 scroll-mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section id="dgnl" className="mt-5 scroll-mt-5 card p-6 sm:p-7">
           <div className="flex items-center gap-2">
             <ArrowRightLeft size={20} className="text-accent" aria-hidden="true" />
             <h2 className="text-lg font-semibold text-ink">Quy đổi điểm ĐGNL-HCM → thang THPT</h2>
@@ -437,7 +437,7 @@ export function UehExplorerPage({ onChangeSchool }: UehExplorerPageProps) {
           )}
         </section>
 
-        <section id="programs" className="mt-5 scroll-mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section id="programs" className="mt-5 scroll-mt-5 card p-6 sm:p-7">
           <div className="flex items-center gap-2">
             <ShieldCheck size={20} className="text-accent" aria-hidden="true" />
             <h2 className="text-lg font-semibold text-ink">Ngưỡng đầu vào chính thức</h2>
@@ -495,7 +495,7 @@ export function UehExplorerPage({ onChangeSchool }: UehExplorerPageProps) {
           </details>
         </section>
 
-        <section className="mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section className="mt-5 card p-6 sm:p-7">
           <div className="flex items-center gap-2">
             <GraduationCap size={20} className="text-accent" aria-hidden="true" />
             <h2 className="text-lg font-semibold text-ink">Điểm chuẩn trúng tuyển {YEAR} — TP.HCM (KSA, {ksaPrograms.length} chương trình)</h2>
@@ -503,12 +503,12 @@ export function UehExplorerPage({ onChangeSchool }: UehExplorerPageProps) {
           {renderCutoffTable(ksaPrograms, `Điểm chuẩn UEH KSA ${YEAR}`)}
         </section>
 
-        <section className="mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section className="mt-5 card p-6 sm:p-7">
           <h2 className="text-lg font-semibold text-ink">Điểm chuẩn trúng tuyển {YEAR} — UEH Mekong (KSV, {ksvPrograms.length} chương trình)</h2>
           {renderCutoffTable(ksvPrograms, `Điểm chuẩn UEH KSV ${YEAR}`)}
         </section>
 
-        <section className="mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section className="mt-5 card p-6 sm:p-7">
           <h2 className="text-xs font-semibold uppercase tracking-wide text-muted">Nguồn dữ liệu</h2>
           <ul className="mt-2 flex flex-col gap-1.5 text-xs">
             {uehSources.map((source) => (

@@ -78,7 +78,7 @@ export function IuPage({ onChangeSchool }: IuPageProps) {
           </p>
         </section>
 
-        <section id="calculator" className="mt-5 scroll-mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section id="calculator" className="mt-5 scroll-mt-5 card p-6 sm:p-7">
           <div className="flex items-center gap-2">
             <Calculator size={20} className="text-accent" aria-hidden="true" />
             <h2 className="text-lg font-semibold text-ink">Tính Điểm xét tuyển</h2>
@@ -249,7 +249,7 @@ export function IuPage({ onChangeSchool }: IuPageProps) {
           )}
         </section>
 
-        <section className="mt-5 rounded-2xl bg-surface-soft p-6 sm:p-8">
+        <section className="mt-5 card p-6 sm:p-7">
           <h2 className="text-xs font-semibold uppercase tracking-wide text-muted">Nguồn dữ liệu</h2>
           <ul className="mt-2 flex flex-col gap-1.5 text-xs">
             {iuSources.map((source) => (
