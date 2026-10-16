@@ -10,7 +10,7 @@ function DataTile({ icon, value, label, tone }: { icon: ReactNode; value: number
       </span>
       <div>
         <dd className="font-display text-xl font-bold leading-tight text-ink">{value}</dd>
-        <dt className="text-xs text-muted">{label}</dt>
+        <dt className="text-xs leading-tight text-muted">{label}</dt>
       </div>
     </div>
   );
@@ -24,7 +24,7 @@ export function AboutDataSection() {
   const collegeCount = institutionCoverage.pedagogicalColleges + institutionCoverage.vocationalColleges;
 
   return (
-    <section aria-labelledby="about-data-heading" className="card mt-10 grid gap-5 px-6 py-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] lg:items-center">
+    <section aria-labelledby="about-data-heading" className="card mt-10 grid gap-5 px-6 py-5 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.5fr)] lg:items-center">
       <div className="flex items-start gap-4">
         <span aria-hidden="true" className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent">
           <Database size={26} />
@@ -49,7 +49,7 @@ export function AboutDataSection() {
           </p>
         </div>
       </div>
-      <dl className="grid grid-cols-2 gap-3 xl:grid-cols-4">
+      <dl className="grid grid-cols-2 gap-3 grid-cols-2 xl:grid-cols-4">
         <DataTile icon={<Building2 size={20} />} value={institutionCoverage.totalCatalogEntries} label="Cơ sở & đơn vị" tone="bg-accent/10 text-accent" />
         <DataTile icon={<Users size={20} />} value={institutionCoverage.independentEducationInstitutions} label="Cơ sở độc lập" tone="bg-indigo-500/10 text-indigo-700" />
         <DataTile icon={<FileText size={20} />} value={institutionCoverage.admissionDataAvailable} label="Có dữ liệu tuyển sinh" tone="bg-sky-500/10 text-sky-700" />

@@ -160,7 +160,7 @@ function AppShell() {
       <SkipLink />
       <SiteHeader pathname={pathname} onNavigate={navigate} />
       <ErrorBoundary key={pathname} onGoHome={() => navigate('/')}>
-        <main id="main-content" tabIndex={-1} className="relative isolate outline-none">
+        <main id="main-content" tabIndex={-1} className="relative outline-none">
           <PageBackdrop variant={backdropVariant} />
           {content}
         </main>

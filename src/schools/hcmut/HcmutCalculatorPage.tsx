@@ -689,8 +689,10 @@ export function HcmutCalculatorPage({ onChangeSchool }: HcmutCalculatorPageProps
 
       <div className="mx-auto max-w-7xl px-4 pb-10">
         <div className={isSupportedApplicantType ? 'flex flex-col gap-5 lg:grid lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start lg:gap-6' : 'flex flex-col gap-5'}>
-        {isSupportedApplicantType && <aside className="lg:order-2 lg:sticky lg:top-20 lg:mt-6">{heroElement}</aside>}
-        <div className="flex min-w-0 flex-col gap-5 lg:order-1">
+        {isSupportedApplicantType && <aside className="max-lg:order-3 lg:order-2 lg:sticky lg:top-20 lg:mt-6">{heroElement}</aside>}
+        {/* Điện thoại: `contents` + `order` để thứ tự là tiêu đề → nhóm thí sinh → điểm hiện tại → form. */}
+        <div className="flex min-w-0 flex-col gap-5 max-lg:contents lg:order-1">
+        <div className="max-lg:order-1">
         <Header
           school={{
             id: 'hcmut',
@@ -703,7 +705,11 @@ export function HcmutCalculatorPage({ onChangeSchool }: HcmutCalculatorPageProps
           onChangeSchool={onChangeSchool}
         />
 
+        </div>
+        <div className="max-lg:order-2">
         <ApplicantTypeSection value={applicantType} onChange={handleApplicantTypeChange} />
+        </div>
+        <div className="flex min-w-0 flex-col gap-5 max-lg:order-4">
 
         {!isSupportedApplicantType ? (
           <p className="card p-6 text-sm text-muted sm:p-8">
@@ -820,6 +826,7 @@ export function HcmutCalculatorPage({ onChangeSchool }: HcmutCalculatorPageProps
             <FormulaExplanation steps={hasCoreInput ? liveEvaluation.explanation : []} />
           </>
         )}
+        </div>
         </div>
         </div>
 
