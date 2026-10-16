@@ -8,26 +8,26 @@
  * shadow-card, để tránh cảm giác "card nổi" kiểu AI dashboard.
  */
 @theme {
-  --color-bg: #f6f7f9;
+  --color-bg: #eef4fb;
   --color-surface: #ffffff;
-  --color-surface-soft: #f1f4f8;
+  --color-surface-soft: #eaf1fa;
   --color-ink: #111827;
   --color-ink-soft: #374151;
   --color-muted: #55606e;
-  --color-border: #d7dce3;
+  --color-border: #dbe4f0;
   --color-border-strong: #b7bfc9;
-  --color-primary: #183153;
+  --color-primary: #15366b;
   /* Đổi từ #2f6bff — Lighthouse a11y audit phát hiện text-accent trên bg-accent/10 (pattern CTA
    * dùng khắp app) chỉ đạt ~3.9:1, dưới ngưỡng WCAG AA (4.5:1). #1d4ed8 đạt ~5.9:1 trên cùng nền,
    * vẫn rõ ràng là "xanh accent", không đổi brand identity. */
-  --color-accent: #1d4ed8;
+  --color-accent: #1f56d6;
   --color-success: #16805c;
   --color-warning: #9a3b07;
   --color-danger: #b42318;
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-card: 20px;
-  --shadow-card: 0 1px 2px rgba(17, 24, 39, 0.04), 0 12px 24px -12px rgba(17, 24, 39, 0.12);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-card: 18px;
+  --shadow-card: 0 1px 2px rgba(21, 54, 107, 0.05), 0 10px 28px -12px rgba(21, 54, 107, 0.18);
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   /* Chỉ cho tiêu đề/số điểm lớn — Be Vietnam Pro thiết kế riêng cho tiếng Việt (dấu không chồng),
    * tự host qua @fontsource (không gọi Google Fonts). Thân bài giữ font hệ thống để không tải thêm. */
@@ -44,9 +44,35 @@ html {
 
 body {
   @apply bg-bg text-ink antialiased;
+  /* Nền xanh nhạt có vệt sáng mềm ở hai góc — khớp bản thiết kế mới. Gradient nằm trên body nên
+   * mọi trang (kể cả trang trường dùng bg-bg riêng) đều thừa hưởng. */
+  background-image:
+    radial-gradient(900px 480px at -8% 6%, rgba(147, 197, 253, 0.35), transparent 70%),
+    radial-gradient(700px 420px at 108% 28%, rgba(165, 180, 252, 0.22), transparent 70%);
+  background-attachment: fixed;
   /* Chuỗi dài không có khoảng trắng (mã, URL, id) không được làm tràn ngang trên điện thoại.
    * `break-word` (không phải `anywhere`) để không đổi min-content của cột bảng/flex. */
   overflow-wrap: break-word;
+}
+
+/* Các trang đã tự bọc `bg-bg` toàn màn hình — để nền gradient của body lộ ra thay vì bị đè phẳng. */
+.min-h-svh.bg-bg {
+  background-color: transparent;
+}
+
+/* Khối trắng có viền dùng khắp trang trường/so sánh/ngành (div, section, details) nâng thành card
+ * mới: bo tròn hơn + bóng nhẹ. Không áp cho button/input/select (giữ dạng control). */
+:is(div, section, article, details, aside).bg-surface.border:is(.rounded-md, .rounded-lg, .rounded-xl) {
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+/* Card chuẩn của thiết kế mới: trắng, bo tròn, bóng xanh nhạt. */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
 }
 
 /* <fieldset> mặc định có min-inline-size: min-content nên KHÔNG thu nhỏ theo khung chứa -> select/label

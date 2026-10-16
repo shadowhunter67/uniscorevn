@@ -23,10 +23,12 @@ export function SelectedProgramCard({
   onUseAsTarget,
 }: SelectedProgramCardProps) {
   return (
-    <section className="rounded-card bg-surface p-6 shadow-card sm:p-8">
-      <div className="flex items-center gap-2">
-        <GraduationCap size={18} className="text-accent" aria-hidden="true" />
-        <span className="text-xs font-semibold uppercase tracking-wide text-muted">Ngành mục tiêu</span>
+    <section className="card p-6 sm:p-7">
+      <div className="flex items-center gap-3">
+        <span aria-hidden="true" className="flex h-10 w-10 items-center justify-center rounded-full bg-accent/10 text-accent">
+          <GraduationCap size={20} />
+        </span>
+        <span className="text-sm font-bold uppercase tracking-wide text-accent">Ngành mục tiêu</span>
       </div>
 
       {!selectedProgram ? (
@@ -56,7 +58,7 @@ export function SelectedProgramCard({
               <div className="flex items-center justify-between border-t border-ink/10 pt-2">
                 <dt className="font-semibold text-ink">Chênh lệch</dt>
                 <dd
-                  className={`font-semibold ${gap >= 0 ? 'text-success' : 'text-warning'}`}
+                  className={`font-bold ${gap >= 0 ? 'text-success' : 'text-danger'}`}
                 >
                   {gap >= 0 ? '+' : ''}
                   {gap.toFixed(2)}
@@ -73,14 +75,14 @@ export function SelectedProgramCard({
               <button
                 type="button"
                 onClick={() => onUseAsTarget(latestCutoff.score)}
-                className="rounded-md border border-accent/30 bg-accent/10 px-3 py-1.5 text-xs font-medium text-accent transition hover:bg-accent/20 focus:outline-none focus:ring-2 focus:ring-accent/30"
+                className="rounded-lg border border-accent/40 bg-accent/10 px-3.5 py-2 text-sm font-semibold text-accent transition hover:bg-accent/20 focus:outline-none focus:ring-2 focus:ring-accent/30"
               >
                 Dùng {latestCutoff.score.toFixed(2)} làm mục tiêu
               </button>
             )}
             <a
               href="#program-picker"
-              className="rounded-md border border-ink/10 px-3 py-1.5 text-xs font-medium text-muted transition hover:bg-surface-soft"
+              className="rounded-lg border border-border px-3.5 py-2 text-sm font-medium text-ink-soft transition hover:bg-surface-soft"
             >
               Đổi ngành
             </a>

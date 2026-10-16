@@ -35,8 +35,8 @@ export function isEvaluableSchool(school: SchoolModule): boolean {
   return EVALUABLE_STATUSES.has(deriveInstitutionSupportStatus(school));
 }
 
-export const INITIAL_VISIBLE_SCHOOL_COUNT = 30;
-export const VISIBLE_SCHOOL_INCREMENT = 24;
+export const INITIAL_VISIBLE_SCHOOL_COUNT = 4;
+export const VISIBLE_SCHOOL_INCREMENT = 8;
 
 export const SUPPORT_TIER_ORDER: readonly InstitutionSupportStatus[] = [
   'verified-calculator',

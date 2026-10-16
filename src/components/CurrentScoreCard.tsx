@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { BarChart3, ChevronDown } from 'lucide-react';
 import type { AdmissionConfig, AdmissionResult } from '../schools/hcmut/types/admission';
 import { getAbilityScoreSourceCaption } from '../schools/hcmut/abilityScoreLabel';
 import { ScoreBreakdownDetails } from './ScoreBreakdownDetails';
@@ -20,8 +20,13 @@ export function CurrentScoreCard({ result, config }: CurrentScoreCardProps) {
   const abilitySourceLabel = result ? getAbilityScoreSourceCaption(result) : null;
 
   return (
-    <section className="rounded-card bg-surface p-6 shadow-card sm:p-8">
-      <span className="text-xs font-semibold uppercase tracking-wide text-muted">Điểm xét tuyển hiện tại</span>
+    <section className="card p-6 sm:p-7">
+      <div className="flex items-center gap-3">
+        <span aria-hidden="true" className="flex h-10 w-10 items-center justify-center rounded-full bg-accent/10 text-accent">
+          <BarChart3 size={20} />
+        </span>
+        <span className="text-base font-bold text-ink">Điểm xét tuyển hiện tại</span>
+      </div>
 
       {result === null ? (
         <div className="mt-3 flex min-h-[140px] flex-col justify-center gap-1">
@@ -31,13 +36,13 @@ export function CurrentScoreCard({ result, config }: CurrentScoreCardProps) {
       ) : (
         <>
           <div className="mt-2 flex flex-wrap items-baseline gap-x-2">
-            <span className="font-display text-5xl font-extrabold tracking-tight text-primary sm:text-6xl">
+            <span className="font-display text-5xl font-extrabold tracking-tight text-ink sm:text-6xl">
               {result.finalScore.toFixed(2)}
             </span>
             <span className="whitespace-nowrap text-lg font-medium text-muted">/ {config.scoreScale}</span>
           </div>
 
-          <dl className="mt-6 flex flex-col gap-2 text-sm">
+          <dl className="mt-5 flex flex-col gap-2.5 text-sm">
             <div className="flex items-center justify-between">
               <dt className="text-muted">
                 Điểm năng lực

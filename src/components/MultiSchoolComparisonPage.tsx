@@ -106,7 +106,7 @@ function PickerSearchField({
       <label className="text-sm font-medium text-ink" htmlFor={id}>
         {label}
       </label>
-      <div className="mt-1.5 flex h-10 items-center gap-2 rounded-md border border-border bg-surface px-3 focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/25">
+      <div className="mt-1.5 flex h-10 items-center gap-2 rounded-lg border border-border bg-surface px-3 focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/25">
         <Search size={15} className="shrink-0 text-muted" aria-hidden="true" />
         <input
           id={id}
@@ -177,7 +177,7 @@ function ComparePicker({
       aria-labelledby="compare-picker-title"
     >
       {/* max-h-full + flex-col: phần thân cuộn được, header và footer luôn nằm trong khung nhìn. */}
-      <div className="m-auto flex max-h-full w-full max-w-4xl flex-col overflow-hidden rounded-md border border-border bg-surface shadow-card">
+      <div className="m-auto flex max-h-full w-full max-w-4xl flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-card">
         <div className="flex shrink-0 items-start justify-between gap-3 border-b border-border p-4">
           <div>
             <h2 id="compare-picker-title" className="text-base font-semibold text-ink sm:text-lg">
@@ -212,7 +212,7 @@ function ComparePicker({
                   type="button"
                   onClick={() => selectSchool(school.schoolId)}
                   aria-pressed={draft.schoolId === school.schoolId}
-                  className={`w-full cursor-pointer rounded-md border p-3 text-left transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 ${
+                  className={`w-full cursor-pointer rounded-xl border p-3 text-left transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 ${
                     draft.schoolId === school.schoolId
                       ? 'border-accent bg-accent/5 ring-1 ring-accent/30'
                       : 'border-border hover:border-border-strong hover:bg-surface-soft'
@@ -271,7 +271,7 @@ function ComparePicker({
                     <select
                       value={draft.combinationId}
                       onChange={(event) => onDraftChange({ ...draft, combinationId: event.target.value })}
-                      className="mt-1 h-10 w-full rounded-md border border-border bg-surface px-2.5 text-sm text-ink outline-none transition-colors duration-150 hover:border-border-strong focus:border-accent focus:ring-2 focus:ring-accent/25"
+                      className="mt-1 h-10 w-full rounded-lg border border-border bg-surface px-2.5 text-sm text-ink outline-none transition-colors duration-150 hover:border-border-strong focus:border-accent focus:ring-2 focus:ring-accent/25"
                     >
                       <option value="">Chưa chọn</option>
                       {COMMON_SUBJECT_COMBINATIONS.map((combination) => (
@@ -334,7 +334,7 @@ function ComparePicker({
                       <select
                         value={draft.ushPairId}
                         onChange={(event) => onDraftChange({ ...draft, ushPairId: event.target.value })}
-                        className="mt-1 h-10 w-full rounded-md border border-border bg-surface px-2.5 text-sm text-ink outline-none transition-colors duration-150 hover:border-border-strong focus:border-accent focus:ring-2 focus:ring-accent/25"
+                        className="mt-1 h-10 w-full rounded-lg border border-border bg-surface px-2.5 text-sm text-ink outline-none transition-colors duration-150 hover:border-border-strong focus:border-accent focus:ring-2 focus:ring-accent/25"
                       >
                         <option value="">Chưa chọn</option>
                         {USH_SUBJECT_PAIRS.map((pair) => (
@@ -363,7 +363,7 @@ function ComparePicker({
                       <select
                         value={draft.hcmupesPairId}
                         onChange={(event) => onDraftChange({ ...draft, hcmupesPairId: event.target.value })}
-                        className="mt-1 h-10 w-full rounded-md border border-border bg-surface px-2.5 text-sm text-ink outline-none transition-colors duration-150 hover:border-border-strong focus:border-accent focus:ring-2 focus:ring-accent/25"
+                        className="mt-1 h-10 w-full rounded-lg border border-border bg-surface px-2.5 text-sm text-ink outline-none transition-colors duration-150 hover:border-border-strong focus:border-accent focus:ring-2 focus:ring-accent/25"
                       >
                         <option value="">Chưa chọn</option>
                         {HCMUPES_SUBJECT_PAIRS.map((pair) => (
@@ -435,7 +435,7 @@ function ComparePicker({
               <button
                 type="button"
                 onClick={onClose}
-                className="min-h-(--ui-tap-min) cursor-pointer rounded-md border border-border px-4 text-sm font-medium text-ink-soft transition-colors duration-150 hover:bg-surface-soft hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                className="min-h-(--ui-tap-min) cursor-pointer rounded-lg border border-border px-4 text-sm font-medium text-ink-soft transition-colors duration-150 hover:bg-surface-soft hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
               >
                 Hủy
               </button>
@@ -443,7 +443,7 @@ function ComparePicker({
                 type="button"
                 onClick={onSubmit}
                 disabled={!canSubmit}
-                className="min-h-(--ui-tap-min) cursor-pointer rounded-md bg-primary px-4 text-sm font-semibold text-white transition-colors duration-150 hover:bg-primary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 disabled:cursor-not-allowed disabled:bg-border-strong disabled:text-surface"
+                className="min-h-(--ui-tap-min) cursor-pointer rounded-lg bg-primary px-5 text-sm font-semibold text-white transition-colors duration-150 hover:bg-primary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 disabled:cursor-not-allowed disabled:bg-border-strong disabled:text-surface"
               >
                 {editingSelectionId ? 'Lưu thay đổi' : 'Thêm vào so sánh'}
               </button>
@@ -582,7 +582,7 @@ export function MultiSchoolComparisonPage({ onBackHome, onOpenSchool }: MultiSch
           type="button"
           onClick={openAddPicker}
           disabled={selections.length >= COMPARE_SELECTION_HARD_LIMIT}
-          className="inline-flex min-h-(--ui-tap-min) cursor-pointer items-center justify-center gap-2 rounded-md bg-primary px-4 text-sm font-semibold text-white transition-colors duration-150 hover:bg-primary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 disabled:cursor-not-allowed disabled:bg-border-strong disabled:text-surface"
+          className="inline-flex min-h-(--ui-tap-min) cursor-pointer items-center justify-center gap-2 rounded-lg bg-primary px-5 text-sm font-semibold text-white transition-colors duration-150 hover:bg-primary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 disabled:cursor-not-allowed disabled:bg-border-strong disabled:text-surface"
         >
           <Plus size={16} aria-hidden="true" />
           Thêm nguyện vọng
@@ -593,13 +593,13 @@ export function MultiSchoolComparisonPage({ onBackHome, onOpenSchool }: MultiSch
       </div>
 
       {selections.length === 0 ? (
-        <section className="mt-6 rounded-md border border-dashed border-border-strong bg-surface p-8 text-center">
+        <section className="card mt-6 border-dashed p-8 text-center">
           <h2 className="text-lg font-semibold text-ink sm:text-xl">Chưa có nguyện vọng nào</h2>
           <p className="mx-auto mt-2 max-w-xl text-sm text-muted">Chọn trường và ngành bạn muốn so sánh. Dữ liệu hồ sơ chỉ cần nhập một lần.</p>
           <button
             type="button"
             onClick={openAddPicker}
-            className="mt-5 inline-flex min-h-(--ui-tap-min) cursor-pointer items-center gap-2 rounded-md bg-primary px-4 text-sm font-semibold text-white transition-colors duration-150 hover:bg-primary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+            className="mt-5 inline-flex min-h-(--ui-tap-min) cursor-pointer items-center gap-2 rounded-md bg-primary px-5 text-sm font-semibold text-white transition-colors duration-150 hover:bg-primary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
           >
             <Plus size={16} aria-hidden="true" />
             Thêm nguyện vọng

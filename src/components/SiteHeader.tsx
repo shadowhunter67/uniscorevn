@@ -35,7 +35,7 @@ function NavLink({ item, active, onNavigate }: { item: NavItem; active: boolean;
         event.preventDefault();
         onNavigate(item.path);
       }}
-      className={`flex min-h-(--ui-tap-min) items-center rounded-md px-2.5 text-sm font-medium transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 ${
+      className={`flex min-h-(--ui-tap-min) items-center rounded-lg px-4 text-sm font-medium transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 ${
         active ? 'bg-accent/10 text-accent' : 'text-ink-soft hover:bg-surface-soft hover:text-ink'
       }`}
     >
@@ -95,8 +95,8 @@ export function SiteHeader({ pathname, onNavigate }: SiteHeaderProps) {
   }
 
   return (
-    <header className="border-b border-border bg-surface">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-2.5">
+    <header className="sticky top-0 z-40 border-b border-border/70 bg-surface/90 backdrop-blur">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
         {/* Logo về trang chủ. Viewport hẹp dùng icon vuông thay wordmark ngang (wordmark 3:1 thu nhỏ
             tới mức đọc không ra thì vô nghĩa) — cùng 1 target, cùng hành vi. */}
         <a
